@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Field component Should Exists 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "Body": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Label": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "defaultProps": Object {
+    "children": null,
+    "horizontal": false,
+    "multiline": false,
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Field component Should export Label and Body as static properties 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "children": null,
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Field component Should export Label and Body as static properties 2`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "children": null,
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Field component Should have field classname 1`] = `
+<div
+  className="field"
+>
+  <p
+    className="bd-notification is-success"
+  >
+    <p>
+      Default
+    </p>
+    <p>
+      Container
+    </p>
+  </p>
+</div>
+`;
+
+exports[`Field component Should have field classname with addons classname 1`] = `
+<div
+  className="field has-addons"
+>
+  <p
+    className="bd-notification is-success"
+  >
+    <p>
+      Default
+    </p>
+    <p>
+      Container
+    </p>
+  </p>
+</div>
+`;
+
+exports[`Field component Should have field classname with grouped classname 1`] = `
+<div
+  className="field is-grouped"
+>
+  <p
+    className="bd-notification is-success"
+  >
+    <p>
+      Default
+    </p>
+    <p>
+      Container
+    </p>
+  </p>
+</div>
+`;
+
+exports[`Field component Should have field-body classname 1`] = `
+<div
+  className="field-body"
+>
+  <p
+    className="bd-notification is-success"
+  >
+    <p>
+      Default
+    </p>
+    <p>
+      Container
+    </p>
+  </p>
+</div>
+`;
+
+exports[`Field component Should have field-label classname 1`] = `
+<div
+  className="field-label"
+>
+  <p
+    className="bd-notification is-success"
+  >
+    <p>
+      Default
+    </p>
+    <p>
+      Container
+    </p>
+  </p>
+</div>
+`;

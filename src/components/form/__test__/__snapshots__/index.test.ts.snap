@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form component Should expose all Form elements 1`] = `
+Object {
+  "Checkbox": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "checked": false,
+      "children": null,
+      "disabled": false,
+    },
+    "render": [Function],
+  },
+  "Control": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "fullwidth": false,
+      "iconLeft": false,
+      "iconRight": false,
+      "loading": false,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Field": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Label": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "children": null,
+      "horizontal": false,
+      "multiline": false,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Help": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "p",
+    },
+    "render": [Function],
+  },
+  "Input": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "InputFile": [Function],
+  "Label": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+    },
+    "render": [Function],
+  },
+  "Radio": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "checked": false,
+      "children": null,
+      "disabled": false,
+    },
+    "render": [Function],
+  },
+  "Select": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "disabled": false,
+      "loading": false,
+      "multiple": false,
+      "readOnly": false,
+    },
+    "render": [Function],
+  },
+  "Textarea": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "disabled": false,
+      "readOnly": false,
+      "rows": 4,
+    },
+    "render": [Function],
+  },
+}
+`;

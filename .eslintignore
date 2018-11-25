@@ -1,7 +1,0 @@
-dist/**
-**.min.js
-full/**
-lib/**
-node_modules
-reports
-*.story.js

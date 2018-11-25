@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Columns component Should have columns classname 1`] = `
+<div
+  className="columns is-multiline"
+>
+  <div
+    className="column"
+  >
+    1
+  </div>
+  <div
+    className="column"
+  >
+    2
+  </div>
+  <div
+    className="column"
+  >
+    3
+  </div>
+</div>
+`;
+
+exports[`Columns component Should have columns one column half width and 3 other as default 1`] = `
+<div
+  className="columns is-multiline"
+>
+  <div
+    className="column is-half"
+  >
+    1
+  </div>
+  <div
+    className="column"
+  >
+    2
+  </div>
+  <div
+    className="column"
+  >
+    3
+  </div>
+  <div
+    className="column"
+  >
+    4
+  </div>
+</div>
+`;
+
+exports[`Columns component Should have columns one column half width, other narrow and 2 other as default 1`] = `
+<div
+  className="columns is-multiline"
+>
+  <div
+    className="column is-half"
+  >
+    1
+  </div>
+  <div
+    className="column is-narrow"
+  >
+    2
+  </div>
+  <div
+    className="column"
+  >
+    3
+  </div>
+  <div
+    className="column"
+  >
+    4
+  </div>
+</div>
+`;
+
+exports[`Columns component Should render as paragraph 1`] = `
+<p
+  className="columns is-multiline"
+>
+  <p
+    className="column is-half"
+  >
+    1
+  </p>
+  <p
+    className="column"
+  >
+    2
+  </p>
+  <p
+    className="column"
+  >
+    3
+  </p>
+  <p
+    className="column"
+  >
+    4
+  </p>
+</p>
+`;

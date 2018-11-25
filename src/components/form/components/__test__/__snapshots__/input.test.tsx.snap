@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component Should be disabled with placeholder and value 1`] = `
+<input
+  className="input"
+  disabled={true}
+  placeholder="hello tests"
+  readOnly={false}
+  type="text"
+  value="TEST"
+/>
+`;
+
+exports[`Input component Should be large and readOnly 1`] = `
+<input
+  className="input is-large"
+  disabled={false}
+  readOnly={true}
+  type="text"
+/>
+`;
+
+exports[`Input component Should be type email and a with success colors 1`] = `
+<input
+  className="input is-success"
+  disabled={false}
+  readOnly={false}
+  type="email"
+/>
+`;
+
+exports[`Input component Should concat classname in props with Bulma classname 1`] = `
+<input
+  className="input other-class this-is-a-test"
+  disabled={false}
+  readOnly={false}
+  type="text"
+/>
+`;
+
+exports[`Input component Should exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "render": [Function],
+}
+`;
+
+exports[`Input component Should have input classname 1`] = `
+<input
+  className="input"
+  disabled={false}
+  readOnly={false}
+  type="text"
+/>
+`;
+
+exports[`Input component Should use inline styles 1`] = `
+<input
+  className="input"
+  disabled={false}
+  readOnly={false}
+  style={
+    Object {
+      "height": 250,
+    }
+  }
+  type="text"
+/>
+`;

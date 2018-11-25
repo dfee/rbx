@@ -3,48 +3,38 @@
   "version": "2.3.0",
   "description": "React components for Bulma framework",
   "main": "dist",
-  "types": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "test:cov": "eslint . && jest --coverage",
-    "eslint": "eslint .",
+    "test:cov": "tslint --project . && jest --coverage",
+    "tslint": "tslint --project .",
     "coveralls": "cat ./.coverage/lcov.info | coveralls",
-    "storybook": "start-storybook -p 6006",
     "clean:build": "rm -rf dist && rm -rf lib && rm -rf full",
-    "build-storybook-static": "build-storybook -c .storybook -o .out",
-    "prepare": "yarn clean:build && npm run build && yarn clean:test",
-    "deploy-storybook": "storybook-to-ghpages",
-    "build": "WEBPACK_ENV=INCLUDE_CSS webpack --progress --color --mode=production && webpack --progress --color --mode=production && yarn create:lib",
+    "build": "WEBPACK_ENV=INCLUDE_CSS webpack --progress --color --mode=production && webpack --progress --color --mode=production && npm create:lib",
     "create:lib": "babel ./src --out-dir ./lib --copy-files --source-maps",
-    "clean:test": "rm -rf $(find ./lib -name \"__test__\")"
-  },
-  "storybook-deployer": {
-    "gitUsername": "Couds",
-    "gitEmail": "john.elric@gmail.com",
-    "commitMessage": "Deploy Storybook [skip ci]"
+    "clean:test": "rm -rf $(find ./lib -name \"__test__\")",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/couds/react-bulma-components.git"
+    "url": "git+https://github.com/dfee/react-bulma-components.git"
   },
   "keywords": [
     "react",
     "bulma",
     "bulma.io",
-    "css",
-    "bootstrap",
-    "modal",
-    "layout"
+    "typescript"
   ],
-  "author": "John Benavides",
+  "author": "Devin Fee",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/couds/react-bulma-components/issues"
+    "url": "https://github.com/dfee/react-bulma-components/issues"
   },
-  "homepage": "https://github.com/couds/react-bulma-components#readme",
+  "homepage": "https://github.com/dfee/react-bulma-components#readme",
   "dependencies": {
     "bulma": "0.7.1",
-    "classnames": "2.2.6"
+    "hoist-non-react-statics": "^3.1.0",
+    "tslib": "^1.9.3"
   },
   "peerDependencies": {
     "prop-types": ">=15.6.0",
@@ -54,9 +44,11 @@
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "7.1.5",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0",
     "@babel/preset-env": "7.1.5",
     "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
     "@storybook/addon-a11y": "4.0.4",
     "@storybook/addon-actions": "4.0.4",
     "@storybook/addon-centered": "4.0.4",
@@ -76,7 +68,15 @@
     "@storybook/node-logger": "4.0.4",
     "@storybook/react": "^4.0.0-alpha.23",
     "@storybook/storybook-deployer": "^2.3.0",
+    "@types/enzyme": "^3.1.15",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/hoist-non-react-statics": "^3.0.1",
+    "@types/jest": "^23.3.9",
+    "@types/jsdom": "^12.2.0",
     "@types/react": "^16.7.6",
+    "@types/react-dom": "^16.0.10",
+    "@types/react-test-renderer": "^16.0.3",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "23.6.0",
@@ -87,7 +87,7 @@
     "chai": "4.2.0",
     "coveralls": "3.0.2",
     "css-loader": "1.0.1",
-    "emotion": "9.2.12",
+    "emotion": "^9.2.12",
     "emotion-theming": "9.2.9",
     "enzyme": "3.7.0",
     "enzyme-adapter-react-16": "1.7.0",
@@ -111,15 +111,24 @@
     "progress-bar-webpack-plugin": "1.11.0",
     "prop-types": "15.6.2",
     "react": "16.6.3",
+    "react-docgen": "^2.21.0",
+    "react-docgen-typescript": "^1.12.2",
     "react-dom": "16.6.3",
+    "react-styleguidist": "^8.0.5",
     "react-test-renderer": "16.6.3",
     "resolve-url-loader": "3.0.0",
     "sass-loader": "7.1.0",
+    "source-map-loader": "^0.2.4",
     "source-map-support": "0.5.9",
     "storybook-addon-themes": "0.0.4",
     "style-loader": "0.23.1",
     "toolbox-loader": "0.0.3",
-    "typescript": "^3.1.6",
+    "ts-jest": "^23.10.4",
+    "ts-loader": "^5.3.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.16.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.0-dev.20181117",
     "webpack": "4.25.1",
     "webpack-bundle-analyzer": "3.0.3",
     "webpack-cli": "3.1.2"

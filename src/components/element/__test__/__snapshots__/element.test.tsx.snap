@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Element component Should Exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Element component Should accept a react Element as renderAs prop 1`] = `
+<p>
+  Custom
+  This should be a p element
+</p>
+`;
+
+exports[`Element component Should have helpers classnames 1`] = `
+<div
+  className="has-text-white is-pulled-left"
+>
+  Facebook
+</div>
+`;

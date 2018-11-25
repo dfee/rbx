@@ -1,0 +1,670 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReactBulmaComponents component Should Exports all components 1`] = `
+Object {
+  "Box": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Breadcrumb": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "renderAs": "a",
+    },
+    "render": [Function],
+  },
+  "Button": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Group": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "disabled": false,
+      "fullwidth": false,
+      "inverted": false,
+      "isSelected": false,
+      "isStatic": false,
+      "loading": false,
+      "onClick": [Function],
+      "outlined": false,
+      "remove": false,
+      "renderAs": "button",
+      "reset": false,
+      "rounded": false,
+      "submit": false,
+      "text": false,
+    },
+    "render": [Function],
+  },
+  "Card": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Content": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Footer": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Item": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "renderAs": "div",
+        },
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Header": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Icon": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "renderAs": "div",
+        },
+        "render": [Function],
+      },
+      "Title": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "renderAs": "div",
+        },
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Image": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Columns": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Column": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "desktop": Object {
+          "narrow": false,
+        },
+        "fullhd": Object {
+          "narrow": false,
+        },
+        "mobile": Object {
+          "narrow": false,
+        },
+        "narrow": false,
+        "tablet": Object {
+          "narrow": false,
+        },
+        "widescreen": Object {
+          "narrow": false,
+        },
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "centered": false,
+      "children": null,
+      "gapless": false,
+      "multiline": true,
+    },
+    "render": [Function],
+  },
+  "Container": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "fluid": false,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Content": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Dropdown": [Function],
+  "Element": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Footer": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Form": Object {
+    "Checkbox": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "checked": false,
+        "children": null,
+        "disabled": false,
+      },
+      "render": [Function],
+    },
+    "Control": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "fullwidth": false,
+        "iconLeft": false,
+        "iconRight": false,
+        "loading": false,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Field": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Body": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "children": null,
+          "renderAs": "div",
+        },
+        "render": [Function],
+      },
+      "Label": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "children": null,
+          "renderAs": "div",
+        },
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "children": null,
+        "horizontal": false,
+        "multiline": false,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Help": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "p",
+      },
+      "render": [Function],
+    },
+    "Input": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "InputFile": [Function],
+    "Label": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+      },
+      "render": [Function],
+    },
+    "Radio": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "checked": false,
+        "children": null,
+        "disabled": false,
+      },
+      "render": [Function],
+    },
+    "Select": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "disabled": false,
+        "loading": false,
+        "multiple": false,
+        "readOnly": false,
+      },
+      "render": [Function],
+    },
+    "Textarea": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "disabled": false,
+        "readOnly": false,
+        "rows": 4,
+      },
+      "render": [Function],
+    },
+  },
+  "Heading": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "heading": false,
+      "renderAs": "h1",
+      "spaced": false,
+      "subtitle": false,
+    },
+    "render": [Function],
+  },
+  "Hero": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Footer": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Head": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "children": null,
+      "gradient": false,
+      "renderAs": "section",
+    },
+    "render": [Function],
+  },
+  "Icon": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+    },
+    "render": [Function],
+  },
+  "Image": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "renderAs": "figure",
+    },
+    "render": [Function],
+  },
+  "Level": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Item": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Side": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "align": "left",
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Loader": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Media": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Content": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Item": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "position": "center",
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "article",
+    },
+    "render": [Function],
+  },
+  "Menu": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "List": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Item": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "active": false,
+          "children": null,
+          "renderAs": "a",
+        },
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "renderAs": "aside",
+    },
+    "render": [Function],
+  },
+  "Message": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Header": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "article",
+    },
+    "render": [Function],
+  },
+  "Modal": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Card": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Body": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "children": null,
+          "renderAs": "section",
+        },
+        "render": [Function],
+      },
+      "Foot": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "children": null,
+          "renderAs": "footer",
+        },
+        "render": [Function],
+      },
+      "Head": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "children": null,
+          "renderAs": "header",
+          "showClose": true,
+        },
+        "render": [Function],
+      },
+      "Title": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "children": null,
+          "renderAs": "p",
+        },
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "children": null,
+      },
+      "render": [Function],
+    },
+    "Content": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "render": [Function],
+  },
+  "Navbar": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Brand": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+      },
+      "render": [Function],
+    },
+    "Burger": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "onClick": [Function],
+      },
+      "render": [Function],
+    },
+    "Container": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "position": "start",
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Divider": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "Dropdown": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "boxed": false,
+        "children": null,
+        "renderAs": "span",
+        "right": false,
+      },
+      "render": [Function],
+    },
+    "Item": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "active": false,
+        "children": null,
+        "dropdown": false,
+        "dropdownUp": false,
+        "hoverable": false,
+        "renderAs": "a",
+      },
+      "render": [Function],
+    },
+    "Link": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+        "renderAs": "span",
+      },
+      "render": [Function],
+    },
+    "Menu": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "children": null,
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "renderAs": "nav",
+    },
+    "render": [Function],
+  },
+  "Notification": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Pagination": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "Panel": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Block": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "active": false,
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Header": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "Icon": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "renderAs": "span",
+      },
+      "render": [Function],
+    },
+    "Tabs": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Tab": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "active": false,
+          "renderAs": "a",
+        },
+        "render": [Function],
+      },
+      "defaultProps": Object {
+        "renderAs": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "renderAs": "nav",
+    },
+    "render": [Function],
+  },
+  "Progress": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "Section": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "section",
+    },
+    "render": [Function],
+  },
+  "Table": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "bordered": false,
+      "children": null,
+      "size": "fullwidth",
+      "striped": true,
+    },
+    "render": [Function],
+  },
+  "Tabs": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Tab": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "active": false,
+        "children": null,
+        "renderAs": "a",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "fullwidth": false,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Tag": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Group": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "gapless": false,
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "children": null,
+      "remove": false,
+      "renderAs": "span",
+      "rounded": false,
+    },
+    "render": [Function],
+  },
+  "Tile": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "notification": false,
+      "renderAs": "div",
+      "vertical": false,
+    },
+    "render": [Function],
+  },
+}
+`;

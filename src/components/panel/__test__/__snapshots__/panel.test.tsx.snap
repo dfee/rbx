@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Panel component Should Exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "Block": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "active": false,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Header": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Icon": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "renderAs": "span",
+    },
+    "render": [Function],
+  },
+  "Tabs": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Tab": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "active": false,
+        "renderAs": "a",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "defaultProps": Object {
+    "renderAs": "nav",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Panel component Should have box classname 1`] = `
+<nav
+  className="panel"
+>
+  <div
+    className="panel-heading"
+  >
+    repositories
+  </div>
+  <div
+    className="panel-block"
+  >
+    <div>
+      Control
+    </div>
+  </div>
+  <div
+    className="panel-tabs panel-tabs"
+  >
+    <a
+      className="is-active"
+    >
+      all
+    </a>
+    <a>
+      public
+    </a>
+    <a>
+      private
+    </a>
+    <a>
+      sources
+    </a>
+    <a>
+      forks
+    </a>
+  </div>
+  <a
+    className="panel-block is-active"
+  >
+    <span
+      className="panel-icon"
+    >
+      <i
+        className="fa fa-bars"
+      />
+    </span>
+    bulma
+  </a>
+  <label
+    className="panel-block panel-block"
+  >
+    <input
+      type="checkbox"
+    />
+    remember me
+  </label>
+  <div
+    className="panel-block"
+  >
+    <button
+      type="button"
+    >
+      reset all filters
+    </button>
+  </div>
+</nav>
+`;

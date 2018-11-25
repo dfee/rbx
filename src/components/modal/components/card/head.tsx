@@ -1,0 +1,35 @@
+import { cx } from "emotion";
+import React from "react";
+
+import Button from "components/button";
+import Element from "components/element";
+import renderAsExoticComponent from "components/render-as-exotic-component";
+import { ModifierProps } from "modifiers";
+
+export type ModalCardHeadModifierProps = Partial<{
+  children: React.ReactNode;
+  onClose: () => void;
+  showClose: boolean;
+  style: {};
+}>;
+
+export type ModalCardHeadProps = ModifierProps & ModalCardHeadModifierProps;
+
+const ModalCardHead = renderAsExoticComponent<ModalCardHeadProps, "header">(
+  ({ children, className, showClose, onClose, ...props }, ref) => (
+    <Element {...props} ref={ref} className={cx("modal-card-head", className)}>
+      {children}
+      {showClose && <Button remove onClick={onClose} />}
+    </Element>
+  ),
+  "header",
+);
+ModalCardHead.defaultProps = Object.assign(
+  {
+    children: null,
+    showClose: true,
+  },
+  ModalCardHead.defaultProps,
+);
+
+export default ModalCardHead;

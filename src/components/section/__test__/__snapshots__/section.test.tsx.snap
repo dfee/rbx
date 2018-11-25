@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section component Should be Large 1`] = `
+<section
+  className="section is-large"
+>
+  <p>
+    Default
+  </p>
+</section>
+`;
+
+exports[`Section component Should concat classname in props with Bulma classname 1`] = `
+<section
+  className="section other-class this-is-a-test"
+>
+  <p>
+    Default
+  </p>
+</section>
+`;
+
+exports[`Section component Should exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "children": null,
+    "renderAs": "section",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Section component Should have section classname 1`] = `
+<section
+  className="section"
+>
+  Test 
+  <a
+    href="/"
+  >
+    Give me
+  </a>
+</section>
+`;
+
+exports[`Section component Should render as nav element 1`] = `
+<nav
+  className="section"
+>
+  <p>
+    Default
+  </p>
+</nav>
+`;
+
+exports[`Section component Should use inline styles 1`] = `
+<section
+  className="section"
+  style={
+    Object {
+      "height": 250,
+    }
+  }
+>
+  <p>
+    Default
+  </p>
+</section>
+`;

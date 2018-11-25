@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tag component Should be Large 1`] = `
+<span
+  className="tag is-large"
+>
+  Tag Large
+</span>
+`;
+
+exports[`Tag component Should be group tags 1`] = `
+<span
+  className="tags has-addons"
+>
+  <span
+    className="tag"
+  >
+    Tag 1
+  </span>
+  <span
+    className="tag"
+  >
+    Tag 2
+  </span>
+</span>
+`;
+
+exports[`Tag component Should concat classname in props with Bulma classname 1`] = `
+<span
+  className="tag other-class this-is-a-test"
+>
+  Tag name
+</span>
+`;
+
+exports[`Tag component Should exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "Group": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "gapless": false,
+    },
+    "render": [Function],
+  },
+  "defaultProps": Object {
+    "children": null,
+    "remove": false,
+    "renderAs": "span",
+    "rounded": false,
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Tag component Should expose Tag Group 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "gapless": false,
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Tag component Should have tag classname 1`] = `
+<span
+  className="tag"
+>
+  Tag name
+</span>
+`;
+
+exports[`Tag component Should use inline styles 1`] = `
+<span
+  className="tag"
+  style={
+    Object {
+      "width": 250,
+    }
+  }
+>
+  Tag name
+</span>
+`;
+
+exports[`Tag component Should use use color black 1`] = `
+<span
+  className="tag is-black"
+>
+  tag black
+</span>
+`;

@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component Button Group component Should align to the right 1`] = `
+<div
+  className="buttons is-right"
+>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 0
+  </button>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 1
+  </button>
+</div>
+`;
+
+exports[`Button component Button Group component Should be a default list of buttons 1`] = `
+<div
+  className="buttons"
+>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 0
+  </button>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 1
+  </button>
+</div>
+`;
+
+exports[`Button component Button Group component Should be centered 1`] = `
+<div
+  className="buttons is-centered"
+>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 0
+  </button>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 1
+  </button>
+</div>
+`;
+
+exports[`Button component Button Group component Should concat class names in props with Bulma class name 1`] = `
+<div
+  className="buttons super-class-1 dope-class-2"
+>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 0
+  </button>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 1
+  </button>
+</div>
+`;
+
+exports[`Button component Button Group component Should group buttons together 1`] = `
+<div
+  className="buttons has-addons"
+>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 1
+  </button>
+  <button
+    className="button"
+    disabled={false}
+    onClick={[Function]}
+    tabIndex={0}
+  >
+    test 2
+  </button>
+</div>
+`;
+
+exports[`Button component Should be a Large Primary Button 1`] = `
+<button
+  className="button is-primary is-large"
+  disabled={false}
+  onClick={[Function]}
+  tabIndex={0}
+/>
+`;
+
+exports[`Button component Should be a Primary Button 1`] = `
+<button
+  className="button is-primary"
+  disabled={false}
+  onClick={[Function]}
+  tabIndex={0}
+/>
+`;
+
+exports[`Button component Should be a default Button 1`] = `
+<button
+  className="button"
+  disabled={false}
+  onClick={[Function]}
+  tabIndex={0}
+/>
+`;
+
+exports[`Button component Should be a reset form button 1`] = `
+<button
+  className="button"
+  disabled={false}
+  onClick={[Function]}
+  tabIndex={0}
+  type="reset"
+/>
+`;
+
+exports[`Button component Should be a submit form button 1`] = `
+<button
+  className="button"
+  disabled={false}
+  onClick={[Function]}
+  tabIndex={0}
+  type="submit"
+/>
+`;
+
+exports[`Button component Should be an anchor button 1`] = `
+<a
+  className="button"
+  disabled={false}
+  href="https://github.com/couds/react-bulma-components"
+  onClick={[Function]}
+  tabIndex={0}
+/>
+`;
+
+exports[`Button component Should exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "Group": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "defaultProps": Object {
+    "disabled": false,
+    "fullwidth": false,
+    "inverted": false,
+    "isSelected": false,
+    "isStatic": false,
+    "loading": false,
+    "onClick": [Function],
+    "outlined": false,
+    "remove": false,
+    "renderAs": "button",
+    "reset": false,
+    "rounded": false,
+    "submit": false,
+    "text": false,
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Button component Should expose Button Group 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Button component Should render as a React element link with to prop 1`] = `
+<a
+  href="http://google.com"
+>
+  TEST
+</a>
+`;
+
+exports[`Button component Should render as a html button 1`] = `
+<button
+  className="button is-danger"
+  disabled={false}
+  onClick={[Function]}
+  tabIndex={0}
+/>
+`;
+
+exports[`Button component Should render as a static Button 1`] = `
+<span
+  className="button is-primary is-static"
+  disabled={false}
+  onClick={[Function]}
+  tabIndex={0}
+/>
+`;
+
+exports[`Button component Should render be disabled 1`] = `
+<button
+  className="button"
+  disabled={true}
+  tabIndex={-1}
+/>
+`;

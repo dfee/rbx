@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Box component Should Exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Box component Should accept a react Element as renderAs prop 1`] = `
+<p
+  className="box"
+>
+  Custom
+  This should be a p element
+</p>
+`;
+
+exports[`Box component Should concat Bulma class with classes in props 1`] = `
+<div
+  className="box other-class test"
+>
+  Facebook
+</div>
+`;
+
+exports[`Box component Should have box classname 1`] = `
+<div
+  className="box"
+>
+  Facebook
+</div>
+`;
+
+exports[`Box component Should have custom inline styles 1`] = `
+<section
+  className="box"
+  style={
+    Object {
+      "width": 200,
+      "zIndex": 1,
+    }
+  }
+>
+  This should be a section with custom styles
+</section>
+`;
+
+exports[`Box component Should render as an html section 1`] = `
+<section
+  className="box"
+>
+  This should be a section
+</section>
+`;

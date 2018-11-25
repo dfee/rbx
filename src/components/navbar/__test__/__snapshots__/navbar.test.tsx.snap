@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar component Should Exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "Brand": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+    },
+    "render": [Function],
+  },
+  "Burger": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "onClick": [Function],
+    },
+    "render": [Function],
+  },
+  "Container": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "position": "start",
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Divider": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "Dropdown": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "boxed": false,
+      "children": null,
+      "renderAs": "span",
+      "right": false,
+    },
+    "render": [Function],
+  },
+  "Item": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "active": false,
+      "children": null,
+      "dropdown": false,
+      "dropdownUp": false,
+      "hoverable": false,
+      "renderAs": "a",
+    },
+    "render": [Function],
+  },
+  "Link": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "span",
+    },
+    "render": [Function],
+  },
+  "Menu": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+    },
+    "render": [Function],
+  },
+  "defaultProps": Object {
+    "renderAs": "nav",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Navbar component Should be fixed on top 1`] = `
+<nav
+  className="navbar is-fixed-top"
+  role="navigation"
+/>
+`;
+
+exports[`Navbar component Should concat Bulma class with classes in props 1`] = `
+<nav
+  className="navbar other-class test"
+  role="navigation"
+/>
+`;
+
+exports[`Navbar component Should have Navbar classname 1`] = `
+<nav
+  className="navbar"
+  role="navigation"
+>
+  <div
+    className="navbar-brand"
+  >
+    <a
+      className="navbar-item"
+      href="#"
+    >
+      <img
+        alt=""
+        src="/"
+      />
+    </a>
+    <div
+      className="navbar-burger trigger-menu"
+      onClick={[Function]}
+      role="button"
+      style={
+        Object {
+          "outline": "none",
+        }
+      }
+      tabIndex="0"
+    >
+      <span />
+      <span />
+      <span />
+    </div>
+  </div>
+  <div>
+    TEST
+  </div>
+  <div
+    className="navbar-menu"
+  >
+    <div
+      className="navbar-start"
+    >
+      <span
+        className="navbar-item has-dropdown is-hoverable"
+      >
+        <span
+          className="navbar-link"
+        >
+          Docs
+        </span>
+        <span
+          className="navbar-dropdown is-boxed"
+        >
+          <a
+            className="navbar-item"
+            href="#"
+          >
+            Home
+          </a>
+          <div
+            className="navbar-divider"
+          />
+          <a
+            className="navbar-item"
+            href="#"
+          >
+            Home
+          </a>
+        </span>
+      </span>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`Navbar component Should have custom inline styles 1`] = `
+<nav
+  className="navbar"
+  role="navigation"
+  style={
+    Object {
+      "width": 200,
+      "zIndex": 1,
+    }
+  }
+/>
+`;
+
+exports[`Navbar component Should render as an html section 1`] = `
+<section
+  className="navbar"
+  role="navigation"
+/>
+`;
+
+exports[`Navbar component Should render on server side 1`] = `"<nav class=\\"navbar is-fixed-top\\" role=\\"navigation\\"></nav>"`;
+
+exports[`Navbar component Should render on server side: top 1`] = `"has-navbar-fixed-top"`;

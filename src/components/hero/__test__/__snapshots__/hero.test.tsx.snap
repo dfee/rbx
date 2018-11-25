@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hero component Should concat classname in props with Bulma classname 1`] = `
+<section
+  className="hero other-class this-is-a-test"
+>
+  <p>
+    Default
+  </p>
+</section>
+`;
+
+exports[`Hero component Should exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "Body": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Footer": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "Head": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "renderAs": "div",
+    },
+    "render": [Function],
+  },
+  "defaultProps": Object {
+    "children": null,
+    "gradient": false,
+    "renderAs": "section",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Hero component Should expose Hero head, body and footer 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "children": null,
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Hero component Should expose Hero head, body and footer 2`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "children": null,
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Hero component Should expose Hero head, body and footer 3`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "children": null,
+    "renderAs": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Hero component Should have hero classname 1`] = `
+<section
+  className="hero"
+>
+  Test 
+  <a>
+    Give me
+  </a>
+</section>
+`;
+
+exports[`Hero component Should render Hero with hero head, body and footer 1`] = `
+<section
+  className="hero is-primary is-fullheight"
+>
+  <header
+    className="hero-head"
+  >
+    <div
+      className="bd-notification is-info"
+    >
+      Header
+    </div>
+  </header>
+  <div
+    className="hero-body"
+  >
+    Body
+  </div>
+  <footer
+    className="hero-foot"
+  >
+    <div
+      className="bd-notification is-danger"
+    >
+      Footer
+    </div>
+  </footer>
+</section>
+`;
+
+exports[`Hero component Should use gradient style 1`] = `
+<section
+  className="hero is-primary is-bold"
+>
+  <p>
+    Default
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use inline styles 1`] = `
+<section
+  className="hero"
+  style={
+    Object {
+      "height": 250,
+    }
+  }
+>
+  <p>
+    Default
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color black 1`] = `
+<section
+  className="hero is-black"
+>
+  <p>
+    Default
+  </p>
+</section>
+`;
