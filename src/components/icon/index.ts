@@ -1,3 +1,3 @@
 import "./icon.sass";
 
-export { default } from "./icon";
+export { default } from "./Icon";

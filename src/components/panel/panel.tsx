@@ -6,10 +6,10 @@ import renderAsExoticComponent, {
   RenderAsExoticComponent,
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import PanelBlock from "./components/block";
-import PanelHeader from "./components/header";
-import PanelIcon from "./components/icon";
-import PanelTabs from "./components/tabs";
+import PanelBlock from "./PanelBlock";
+import PanelHeader from "./PanelHeader";
+import PanelIcon from "./PanelIcon";
+import PanelTabs from "./PanelTabs";
 
 export type PanelProps = ModifierProps;
 

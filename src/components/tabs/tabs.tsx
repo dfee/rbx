@@ -6,14 +6,14 @@ import renderAsExoticComponent, {
   RenderAsExoticComponent,
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import TabsTab from "./components/tab";
+import TabsTab from "./TabsTab";
 
 export type TabsModifierProps = Partial<{
   align: "centered" | "right";
   children: React.ReactNode;
   fullwidth: "boolean";
   size: "small" | "medium" | "large";
-  style: {};
+  style: React.CSSProperties;
   /** This is called style on Bulma documentation */
   type: "toggle" | "boxed" | "toggle-rounded";
 }>;

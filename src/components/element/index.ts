@@ -1,1 +1,1 @@
-export { default } from "./element";
+export { default } from "./Element";

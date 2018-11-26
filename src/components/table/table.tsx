@@ -10,7 +10,7 @@ export type TableModifierProps = Partial<{
   className: string;
   size: "fullwidth" | "narrow";
   striped: boolean;
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type TableProps = ModifierProps &

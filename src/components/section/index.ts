@@ -1,3 +1,3 @@
 import "./section.sass";
 
-export { default } from "./section";
+export { default } from "./Section";

@@ -1,28 +1,33 @@
 import { cx } from "emotion";
 import { ComponentProps } from "react";
+import { tuple } from "utils";
 
-export type Colors =
-  | "primary"
-  | "success"
-  | "info"
-  | "warning"
-  | "danger"
-  | "light"
-  | "dark"
-  | "white"
-  | "black"
-  | "link";
+export const COLORS = tuple(
+  "primary",
+  "success",
+  "info",
+  "warning",
+  "danger",
+  "light",
+  "dark",
+  "white",
+  "black",
+  "link",
+);
+export type Colors = (typeof COLORS)[number];
 
-export type GreyColors =
-  | "black-bis"
-  | "black-ter"
-  | "grey-darker"
-  | "grey-dark"
-  | "grey"
-  | "grey-light"
-  | "grey-lighter"
-  | "white-ter"
-  | "white-bis";
+export const GREY_COLORS = tuple(
+  "black-bis",
+  "black-ter",
+  "grey-darker",
+  "grey-dark",
+  "grey",
+  "grey-light",
+  "grey-lighter",
+  "white-ter",
+  "white-bis",
+);
+export type GreyColors = (typeof GREY_COLORS)[number];
 
 export type ColorsProps = Partial<{
   textColor: Colors | GreyColors;

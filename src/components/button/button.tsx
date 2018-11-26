@@ -6,7 +6,7 @@ import renderAsExoticComponent, {
 } from "components/render-as-exotic-component";
 import modifiers, { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import ButtonGroup from "./components/button-group";
+import ButtonGroup from "./ButtonGroup";
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 

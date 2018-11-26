@@ -65,10 +65,11 @@ typings/
 .out
 out*
 
-/reports
-/dist
-/lib
-/full
+reports
+build
+dist
+lib
+full
 .coverage
 .vscode
 .cache

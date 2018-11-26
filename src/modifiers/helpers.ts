@@ -10,8 +10,6 @@ export type HelpersProps = Partial<{
   clipped: boolean;
   radiusless: boolean;
   shadowless: boolean;
-  // https://github.com/couds/react-bulma-components/issues/112
-  // unselectable?: "on" | "off"; // todo
   unselectable: boolean;
   invisible: boolean;
   hidden: boolean;

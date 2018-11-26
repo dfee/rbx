@@ -9,9 +9,8 @@ export type ProgressModifierProps = Partial<{
   className: string;
   color: Colors;
   size: "small" | "medium" | "large";
-  style: {};
+  style: React.CSSProperties;
 }> & {
-  // todo: https://github.com/couds/react-bulma-components/issues/112
   max: number;
   value: number;
 };

@@ -6,3 +6,5 @@ export const canUseDOM = () =>
     window.document &&
     window.document.createElement
   );
+
+export const tuple = <T extends Lit[]>(...args: T) => args;

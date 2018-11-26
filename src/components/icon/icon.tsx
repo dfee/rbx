@@ -7,7 +7,7 @@ import { Colors } from "modifiers/colors";
 export type IconModifierProps = Partial<{
   children: React.ReactNode;
   className: string;
-  style: {};
+  style: React.CSSProperties;
   icon: string;
   size: "small" | "medium" | "large" | "auto";
   align: "left" | "right";

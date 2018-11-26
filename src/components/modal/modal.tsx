@@ -2,9 +2,8 @@ import { cx } from "emotion";
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 
-import ModalCard from "./components/card";
-import { ModalCardProps } from "./components/card/card";
-import ModalContent from "./components/content";
+import ModalCard, { ModalCardProps } from "./ModalCard";
+import ModalContent from "./ModalContent";
 
 export interface ModalProps {
   children: React.ReactNode;

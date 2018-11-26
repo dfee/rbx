@@ -1,19 +1,24 @@
 import { cx } from "emotion";
 import { ComponentProps } from "react";
+import { tuple } from "utils";
 
-export type Breakpoints =
-  | "desktop"
-  | "tablet"
-  | "mobile"
-  | "widescreen"
-  | "fullhd";
+export const BREAKPOINTS = tuple(
+  "mobile",
+  "desktop",
+  "tablet",
+  "widescreen",
+  "fullhd",
+);
+export type Breakpoints = (typeof BREAKPOINTS)[number];
 
-export type Displays =
-  | "block"
-  | "flex"
-  | "inline"
-  | "inline-block"
-  | "inline-flex";
+export const DISPLAYS = tuple(
+  "block",
+  "flex",
+  "inline",
+  "inline-block",
+  "inline-flex",
+);
+export type Displays = (typeof DISPLAYS)[number];
 
 export type ResponsiveSizeProps = Partial<{
   display: Partial<{

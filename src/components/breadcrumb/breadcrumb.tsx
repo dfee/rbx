@@ -4,9 +4,7 @@ import * as React from "react";
 import renderAsExoticComponent from "components/render-as-exotic-component";
 import modifiers, { ModifierProps } from "modifiers";
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
-type BreadcrumbModifierProps = Partial<{
+export type BreadcrumbModifierProps = Partial<{
   separator: "arrow" | "bullet" | "dot" | "succeeds";
   size: "small" | "medium" | "large";
   align: "right" | "center";
@@ -14,7 +12,7 @@ type BreadcrumbModifierProps = Partial<{
   hrefAttr: string;
 }>;
 
-type BreadcrumbProps = ModifierProps &
+export type BreadcrumbProps = ModifierProps &
   BreadcrumbModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"a">, "unselectable">>;
 

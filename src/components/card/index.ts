@@ -1,3 +1,3 @@
 import "./card.sass";
 
-export { default } from "./card";
+export { default } from "./Card";

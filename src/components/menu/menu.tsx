@@ -6,7 +6,7 @@ import renderAsExoticComponent, {
   RenderAsExoticComponent,
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import MenuList from "./components/list";
+import MenuList from "./MenuList";
 
 export type MenuProps = ModifierProps;
 

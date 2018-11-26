@@ -29,29 +29,37 @@ module.exports = {
         loader: "file-loader?name=images/[name].[ext]"
       },
       {
-        test: /\.s?[ca]ss$/,
+        test: /\.sass$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              // If you are having trouble with urls not resolving add this setting.
-              // See https://github.com/webpack-contrib/css-loader#url
-              minimize: false,
-              sourceMap: true
-            }
-          },
-          {
-            loader: "resolve-url-loader"
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true
-            }
-          }
+          "style-loader", // creates style nodes from JS strings
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader" // compiles Sass to CSS, using Node Sass by default
         ]
       }
+      // {
+      //   test: /\.s?[ca]ss$/,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     {
+      //       loader: "css-loader",
+      //       options: {
+      //         // If you are having trouble with urls not resolving add this setting.
+      //         // See https://github.com/webpack-contrib/css-loader#url
+      //         minimize: false,
+      //         sourceMap: true
+      //       }
+      //     },
+      //     {
+      //       loader: "resolve-url-loader"
+      //     },
+      //     {
+      //       loader: "sass-loader",
+      //       options: {
+      //         sourceMap: true
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
   output: {

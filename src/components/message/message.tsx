@@ -7,14 +7,14 @@ import renderAsExoticComponent, {
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import MessageBody from "./components/body";
-import MessageHeader from "./components/header";
+import MessageBody from "./MessageBody";
+import MessageHeader from "./MessageHeader";
 
 export type MessageModifierProps = Partial<{
   children: React.ReactNode;
   color: Colors;
   size: "small" | "medium" | "large";
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type MessageProps = ModifierProps & MessageModifierProps;

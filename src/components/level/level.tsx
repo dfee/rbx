@@ -7,13 +7,13 @@ import renderAsExoticComponent, {
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Breakpoints } from "modifiers/responsives";
-import LevelItem from "./components/level-item";
-import LevelSide from "./components/level-side";
+import LevelItem from "./LevelItem";
+import LevelSide from "./LevelSide";
 
 export type LevelModifierProps = Partial<{
   breakpoint: Breakpoints;
   children: React.ReactNode;
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type LevelProps = ModifierProps & LevelModifierProps;

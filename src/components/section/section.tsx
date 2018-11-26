@@ -8,7 +8,7 @@ import { ModifierProps } from "modifiers";
 export type SectionModifierProps = Partial<{
   children: React.ReactNode;
   size: "medium" | "large";
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type SectionProps = ModifierProps & SectionModifierProps;

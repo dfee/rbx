@@ -5,8 +5,8 @@ import Button from "components/button";
 import Icon from "components/icon";
 import modifiers, { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import DropdownDivider from "./components/divider";
-import DropdownItem from "./components/item";
+import DropdownDivider from "./DropdownDivider";
+import DropdownItem from "./DropdownItem";
 
 export type DropdownModifierProps = Partial<{
   align: "right";
@@ -16,7 +16,7 @@ export type DropdownModifierProps = Partial<{
   hoverable: boolean;
   onChange: (value: string) => void;
   ref: React.RefObject<HTMLDivElement>;
-  style: {};
+  style: React.CSSProperties;
   value: any;
 }>;
 
@@ -49,6 +49,7 @@ export default class Dropdown extends PureComponent<
   public readonly state: DropdownState = initialState;
 
   private htmlElement: React.RefObject<HTMLDivElement>;
+  private listener: (() => void) | null = null;
 
   constructor(props: DropdownProps) {
     super(props);
@@ -58,11 +59,13 @@ export default class Dropdown extends PureComponent<
   }
 
   public componentDidMount() {
-    document.addEventListener("click", this.close);
+    this.listener = () => this.close;
+    document.addEventListener("click", this.listener);
   }
 
   public componentWillUnmount() {
-    document.removeEventListener("click", this.close);
+    document.removeEventListener("click", this.listener!);
+    this.listener = null;
   }
 
   public toggle = (evt: React.MouseEvent<HTMLDivElement>) => {

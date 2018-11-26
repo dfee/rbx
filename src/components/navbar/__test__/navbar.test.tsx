@@ -4,7 +4,7 @@ import { renderToString } from "react-dom/server";
 import renderer, { ReactTestRenderer } from "react-test-renderer";
 
 import Navbar from "..";
-import { getHtmlClasses } from "../navbar";
+import { getHtmlClasses } from "../Navbar";
 
 type GlobalWithWindow = NodeJS.Global &
   Partial<{

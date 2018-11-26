@@ -7,7 +7,7 @@ import { ModifierProps } from "modifiers";
 
 export type LoaderModifierProps = Partial<{
   children: React.ReactNode;
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type LoaderProps = ModifierProps & LoaderModifierProps;

@@ -8,6 +8,7 @@ import { ModifierProps } from "modifiers";
 export type ContentModifierProps = Partial<{
   children: React.ReactNode;
   size: "small" | "medium" | "large";
+  style: React.CSSProperties;
 }>;
 
 export type ContentProps = ModifierProps & ContentModifierProps;

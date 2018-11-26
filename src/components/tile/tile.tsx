@@ -12,7 +12,7 @@ export type TileModifierProps = Partial<{
   kind: "ancestor" | "parent" | "child";
   notification: boolean;
   size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  style: {};
+  style: React.CSSProperties;
   vertical: boolean;
 }>;
 

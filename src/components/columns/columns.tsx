@@ -7,7 +7,7 @@ import renderAsExoticComponent, {
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Breakpoints } from "modifiers/responsives";
-import Column from "./components/column";
+import Column from "./ColumnsColumn";
 
 type ColumnsModifierProps = Partial<{
   // Breakpoint where columns become stacked.

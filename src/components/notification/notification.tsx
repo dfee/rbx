@@ -9,7 +9,7 @@ import { Colors } from "modifiers/colors";
 export type NotificationModifierProps = Partial<{
   children: React.ReactNode;
   color: Colors;
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type NotificationProps = ModifierProps & NotificationModifierProps;

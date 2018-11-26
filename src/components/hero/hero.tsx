@@ -7,16 +7,16 @@ import renderAsExoticComponent, {
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import HeroBody from "./components/hero-body";
-import HeroFooter from "./components/hero-footer";
-import HeroHead from "./components/hero-head";
+import HeroBody from "./HeroBody";
+import HeroFooter from "./HeroFooter";
+import HeroHead from "./HeroHead";
 
 export type HeroModifierProps = Partial<{
   children: React.ReactNode;
   color: Colors;
   gradient: boolean;
   size: "medium" | "large" | "fullheight";
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type HeroProps = ModifierProps & HeroModifierProps;

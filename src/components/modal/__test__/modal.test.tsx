@@ -5,7 +5,7 @@ import { renderToString } from "react-dom/server";
 
 import { noop } from "utils";
 import Modal from "..";
-import { ModalRefProps } from "../modal";
+import { ModalRefProps } from "../Modal";
 
 type GlobalWithWindow = NodeJS.Global & { window?: JSDOM["window"] };
 
@@ -75,7 +75,6 @@ describe("Modal component", () => {
   });
 
   it("Should close the modal", () => {
-    // todo
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -100,7 +99,6 @@ describe("Modal component", () => {
   });
 
   it("Should close the modal on ESC key press", () => {
-    // todo
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -202,7 +200,6 @@ describe("Modal component", () => {
   });
 
   it("Should close the modal if clicked on background", () => {
-    // todo
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });

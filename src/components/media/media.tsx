@@ -6,12 +6,12 @@ import renderAsExoticComponent, {
   RenderAsExoticComponent,
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import MediaContent from "./components/media-content";
-import MediaItem from "./components/media-item";
+import MediaContent from "./MediaContent";
+import MediaItem from "./MediaItem";
 
 export type MediaModifierProps = Partial<{
   children: React.ReactNode;
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type MediaProps = ModifierProps & MediaModifierProps;

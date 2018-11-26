@@ -7,7 +7,7 @@ import renderAsExoticComponent, {
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import TagGroup from "./components/tag-group";
+import TagGroup from "./TagGroup";
 
 export type TagModifierProps = Partial<{
   children: React.ReactNode;
@@ -15,7 +15,7 @@ export type TagModifierProps = Partial<{
   remove: boolean;
   rounded: boolean;
   size: "medium" | "large";
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 export type TagProps = ModifierProps & TagModifierProps;

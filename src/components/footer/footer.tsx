@@ -7,7 +7,7 @@ import { ModifierProps } from "modifiers";
 
 export type FooterModifierProps = Partial<{
   children: React.ReactNode;
-  style: {};
+  style: React.CSSProperties;
 }>;
 
 type FooterProps = ModifierProps & FooterModifierProps;

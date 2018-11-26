@@ -8,15 +8,15 @@ import renderAsExoticComponent, {
 import modifiers, { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 import { canUseDOM } from "utils";
-import NavbarBrand from "./components/brand";
-import NavbarBurger from "./components/burger";
-import NavbarContainer from "./components/container";
-import NavbarDivider from "./components/divider";
-import NavbarDropdown from "./components/dropdown";
-import NavbarItem from "./components/item";
-import NavbarLink from "./components/link";
-import NavbarMenu from "./components/menu";
 import { ShowContext } from "./context";
+import NavbarBrand from "./NavbarBrand";
+import NavbarBurger from "./NavbarBurger";
+import NavbarContainer from "./NavbarContainer";
+import NavbarDivider from "./NavbarDivider";
+import NavbarDropdown from "./NavbarDropdown";
+import NavbarItem from "./NavbarItem";
+import NavbarLink from "./NavbarLink";
+import NavbarMenu from "./NavbarMenu";
 
 let htmlClass = "";
 
@@ -28,7 +28,7 @@ export type NavbarModifierProps = Partial<{
   className: string;
   color: Colors;
   fixed: "top" | "bottom";
-  style: {};
+  style: React.CSSProperties;
   transparent: boolean;
 }> & {
   innerRef: React.Ref<HTMLDivElement>;

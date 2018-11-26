@@ -6,10 +6,10 @@ import renderAsExoticComponent, {
   RenderAsExoticComponent,
 } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import CardContent from "./components/content";
-import CardFooter from "./components/footer";
-import CardHeader from "./components/header";
-import CardImage from "./components/image";
+import CardContent from "./CardContent";
+import CardFooter from "./CardFooter";
+import CardHeader from "./CardHeader";
+import CardImage from "./CardImage";
 
 export type CardModifierProps = Partial<{
   children?: React.ReactNode;
