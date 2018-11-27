@@ -3,12 +3,10 @@ import React from "react";
 
 import { Element } from "components/element";
 import { classNames, clean, ModifierProps } from "modifiers";
-import { noop } from "utils";
-import { ShowContext } from "./context";
+import { NavbarContext } from "./navbar-context";
 
 export type NavbarBurgerModifierProps = Partial<{
   className: string;
-  onClick: React.MouseEventHandler<any>;
   style: React.CSSProperties;
 }>;
 
@@ -17,11 +15,11 @@ export type NavbarBurgerProps = ModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"div">, "unselectable">>;
 
 export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
-  ({ style, className, ...allProps }, ref) => {
+  ({ style, className, onClick, ...allProps }, ref) => {
     const props = clean(allProps);
     return (
-      <ShowContext.Consumer>
-        {({ active }) => (
+      <NavbarContext.Consumer>
+        {({ active, setActive }) => (
           <Element
             ref={ref}
             role="button"
@@ -30,6 +28,7 @@ export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
             className={cx("navbar-burger", classNames(allProps), className, {
               "is-active": active,
             })}
+            onClick={() => setActive(!active)}
             {...props}
           >
             <span />
@@ -37,10 +36,7 @@ export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
             <span />
           </Element>
         )}
-      </ShowContext.Consumer>
+      </NavbarContext.Consumer>
     );
   },
 );
-NavbarBurger.defaultProps = {
-  onClick: noop,
-};

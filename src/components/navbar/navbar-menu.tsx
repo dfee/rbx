@@ -3,7 +3,7 @@ import React from "react";
 
 import { Element } from "components/element";
 import { ModifierProps } from "modifiers";
-import { ShowContext } from "./context";
+import { NavbarContext } from "./navbar-context";
 
 export type NavbarMenuModifierProps = Partial<{
   children: React.ReactNode;
@@ -17,7 +17,7 @@ export type NavbarMenuProps = ModifierProps &
 
 export const NavbarMenu = React.forwardRef<HTMLDivElement, NavbarMenuProps>(
   ({ className, children, ...props }, ref) => (
-    <ShowContext.Consumer>
+    <NavbarContext.Consumer>
       {({ active }) => (
         <Element
           {...props}
@@ -29,7 +29,7 @@ export const NavbarMenu = React.forwardRef<HTMLDivElement, NavbarMenuProps>(
           {children}
         </Element>
       )}
-    </ShowContext.Consumer>
+    </NavbarContext.Consumer>
   ),
 );
 NavbarMenu.defaultProps = {

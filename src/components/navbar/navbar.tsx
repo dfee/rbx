@@ -6,10 +6,10 @@ import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { classNames, ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 import { canUseDOM } from "utils";
-import { ShowContext } from "./context";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
 import { NavbarContainer } from "./navbar-container";
+import { NavbarContext } from "./navbar-context";
 import { NavbarDivider } from "./navbar-divider";
 import { NavbarDropdown } from "./navbar-dropdown";
 import { NavbarItem } from "./navbar-item";
@@ -36,12 +36,30 @@ type NavbarControllerProps = NavbarProps & {
   innerRef: React.Ref<HTMLDivElement>;
 };
 
-class NavbarController extends React.PureComponent<NavbarControllerProps> {
+interface NavbarControllerState {
+  active: boolean;
+}
+
+class NavbarController extends React.PureComponent<
+  NavbarControllerProps,
+  NavbarControllerState
+> {
   public static defaultProps = {
     active: false,
     children: null,
     transparent: false,
   };
+
+  public readonly state: NavbarControllerState;
+
+  constructor(props: NavbarControllerProps) {
+    super(props);
+    this.state = { active: props.active! };
+  }
+
+  public setActive = (value: boolean) => {
+    this.setState({ active: value });
+  }
 
   public componentWillUnmount() {
     if (canUseDOM()) {
@@ -55,19 +73,21 @@ class NavbarController extends React.PureComponent<NavbarControllerProps> {
 
   public render() {
     const {
-      innerRef,
+      active, // only used for initialState (in constructor)
       children,
       className,
-      fixed,
-      transparent,
       color,
-      active,
+      fixed,
+      innerRef,
+      transparent,
       ...props
     } = this.props;
 
     this.manageHtmlAttributes();
     return (
-      <ShowContext.Provider value={{ active: active! }}>
+      <NavbarContext.Provider
+        value={{ active: this.state.active, setActive: this.setActive }}
+      >
         <Element
           {...props}
           ref={innerRef}
@@ -80,7 +100,7 @@ class NavbarController extends React.PureComponent<NavbarControllerProps> {
         >
           {children}
         </Element>
-      </ShowContext.Provider>
+      </NavbarContext.Provider>
     );
   }
 

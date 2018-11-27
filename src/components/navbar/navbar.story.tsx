@@ -44,17 +44,8 @@ storiesOf("Navbar", module).add("Default", () => {
             height="28"
           />
         </Navbar.Item>
-        <Navbar.Burger
-        // TODO:
-        // active={open}
-        // onClick={() =>
-        //   this.setState(state => {
-        //     open: !state.open;
-        //   })
-        // }
-        />
+        <Navbar.Burger />
       </Navbar.Brand>
-      {/* <Navbar.Menu active={open}> */}
       <Navbar.Menu>
         <Navbar.Container>
           <Navbar.Item href="#">Second</Navbar.Item>
