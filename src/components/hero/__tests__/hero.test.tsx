@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import { COLORS } from "@/modifiers/colors";
-import { Hero } from "../Hero";
+import { Hero } from "../hero";
 
 describe("Hero component", () => {
   it("Should exist", () => {
