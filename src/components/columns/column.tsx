@@ -81,13 +81,11 @@ export const Column = renderAsExoticComponent<ColumnProps, "div">(
     };
     Object.keys(dimmensions).forEach(key => {
       const dimmension = dimmensions[key];
-      if (dimmension) {
-        Object.assign(sizeClassNames, {
-          [`is-${dimmension.size}-${key}`]: !!dimmension.size,
-          [`is-offset-${dimmension.offset}-${key}`]: !!dimmension.offset,
-          "is-narrow-${key}": !!dimmension.narrow,
-        });
-      }
+      Object.assign(sizeClassNames, {
+        [`is-${dimmension.size}-${key}`]: !!dimmension.size,
+        [`is-offset-${dimmension.offset}-${key}`]: !!dimmension.offset,
+        "is-narrow-${key}": !!dimmension.narrow,
+      });
     });
     return (
       <Element

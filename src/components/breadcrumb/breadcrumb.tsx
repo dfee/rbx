@@ -47,7 +47,7 @@ export const Breadcrumb = renderAsExoticComponent<BreadcrumbProps, "a">(
             if (renderAs === "a") {
               p = { href: item.url };
             } else if (typeof hrefAttr === "string") {
-              p = { hrefAttr: item.url };
+              p = { [hrefAttr]: item.url };
             }
             return (
               <li

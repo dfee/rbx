@@ -27,6 +27,44 @@ describe("Breadcrumb component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
+  [undefined, "identifier"].map(hrefAttr =>
+    it(`Should ${
+      hrefAttr ? "" : "not "
+    }pass along item.url as hrefAttr prop on renderAs component when hrefAttr is ${
+      hrefAttr ? "" : "not "
+    }supplied`, () => {
+      interface CustomProps {
+        identifier?: string;
+      }
+      const Custom: React.FC<CustomProps> = ({ identifier }) => (
+        <div>{identifier}</div>
+      );
+
+      const component = renderer.create(
+        <Breadcrumb
+          renderAs={Custom}
+          hrefAttr={hrefAttr}
+          items={[
+            {
+              name: "Storybook",
+              url: "#1",
+            },
+            {
+              name: "Breadcrumb",
+              url: "#2",
+            },
+            {
+              active: true,
+              name: "Breadcrumb Types",
+              url: "#3",
+            },
+          ]}
+        />,
+      );
+      expect(component.toJSON()).toMatchSnapshot();
+    }),
+  );
+
   [null, "arrow", "dot", "bullet", "succeeds"].map(separator =>
     it(`should use separator ${separator}`, () => {
       const component = renderer.create(

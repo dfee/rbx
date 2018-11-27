@@ -36,6 +36,60 @@ exports[`Breadcrumb component Should be a Breadcrumb 1`] = `
 </nav>
 `;
 
+exports[`Breadcrumb component Should not pass along item.url as hrefAttr prop on renderAs component when hrefAttr is not supplied 1`] = `
+<nav
+  className="breadcrumb"
+>
+  <ul>
+    <li
+      className=""
+    >
+      <div />
+    </li>
+    <li
+      className=""
+    >
+      <div />
+    </li>
+    <li
+      className="is-active"
+    >
+      <div />
+    </li>
+  </ul>
+</nav>
+`;
+
+exports[`Breadcrumb component Should pass along item.url as hrefAttr prop on renderAs component when hrefAttr is supplied 1`] = `
+<nav
+  className="breadcrumb"
+>
+  <ul>
+    <li
+      className=""
+    >
+      <div>
+        #1
+      </div>
+    </li>
+    <li
+      className=""
+    >
+      <div>
+        #2
+      </div>
+    </li>
+    <li
+      className="is-active"
+    >
+      <div>
+        #3
+      </div>
+    </li>
+  </ul>
+</nav>
+`;
+
 exports[`Breadcrumb component Should use inline style and custom size 1`] = `
 <nav
   className="breadcrumb is-large"

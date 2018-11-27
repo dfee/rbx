@@ -13,11 +13,17 @@
     "clean:build": "rimraf dist/* && rollup -c",
     "clean": "rimraf dist/*",
     "coveralls": "cat ./.coverage/lcov.info | coveralls",
+    "lint": "tslint --project .",
+    "storybook:deploy": "storybook-to-ghpages",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "test:cov": "tslint --project . && jest --coverage",
     "test": "jest",
-    "tslint": "tslint --project .",
     "watch": "rollup -cw"
+  },
+  "storybook-deployer": {
+    "gitUsername": "dfee",
+    "gitEmail": "devin@devinfee.com",
+    "commitMessage": "Deploy Storybook [skip ci]"
   },
   "repository": {
     "type": "git",
