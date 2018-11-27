@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { classNames, clean, ModifierProps } from "modifiers";
+import { classNames, clean, ModifierProps } from "@/modifiers";
 
 export type CheckboxModifierProps = Partial<{
   checked: boolean;

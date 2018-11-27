@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Table } from "components/table";
+import { Table } from "@/components/table";
 
 storiesOf("Table", module).add("Default", () => (
   <Table>

@@ -1,10 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { ModifierProps } from "modifiers";
-import { Colors } from "modifiers/colors";
-import { noop } from "utils";
+import { Element } from "@/components/element";
+import { ModifierProps } from "@/modifiers";
+import { Colors } from "@/modifiers/colors";
+import { noop } from "@/utils";
 
 export type InputFileModifierProps = Partial<{
   boxed: boolean;

@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Button } from "components/button";
-import { Notification } from "components/notification";
-import { Section } from "components/section";
+import { Button } from "@/components/button";
+import { Notification } from "@/components/notification";
+import { Section } from "@/components/section";
 
 storiesOf("Notification", module).add("Default", () => (
   <Section>

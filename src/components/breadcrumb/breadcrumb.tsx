@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import * as React from "react";
 
-import { renderAsExoticComponent } from "components/render-as-exotic-component";
-import { classNames, clean, ModifierProps } from "modifiers";
+import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { classNames, clean, ModifierProps } from "@/modifiers";
 
 export type BreadcrumbModifierProps = Partial<{
   separator: "arrow" | "bullet" | "dot" | "succeeds";

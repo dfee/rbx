@@ -2,9 +2,9 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Container } from "components/container";
-import { Heading } from "components/heading";
-import { Section } from "components/section";
+import { Container } from "@/components/container";
+import { Heading } from "@/components/heading";
+import { Section } from "@/components/section";
 
 storiesOf("Container", module).add("Default", () => (
   <div>

@@ -1,4 +1,4 @@
-import { tuple } from "utils";
+import { tuple } from "@/utils";
 
 export const COLUMN_SIZES = tuple(
   1,

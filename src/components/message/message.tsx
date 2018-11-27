@@ -1,10 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { renderAsExoticComponent } from "components/render-as-exotic-component";
-import { ModifierProps } from "modifiers";
-import { Colors } from "modifiers/colors";
+import { Element } from "@/components/element";
+import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { ModifierProps } from "@/modifiers";
+import { Colors } from "@/modifiers/colors";
 import { MessageBody } from "./message-body";
 import { MessageHeader } from "./message-header";
 

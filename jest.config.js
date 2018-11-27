@@ -28,7 +28,7 @@ module.exports = {
   },
   moduleNameMapper: {
     "\\.(css|less|s(c|a)ss)$": "<rootDir>/../__mocks__/style.ts",
-    "services(.*)$": "<rootDir>/services$1"
+    "@/(.*)": "<rootDir>/$1"
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"]
 };

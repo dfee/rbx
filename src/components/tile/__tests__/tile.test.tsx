@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { COLORS } from "modifiers/colors";
+import { COLORS } from "@/modifiers/colors";
 import { Tile } from "../tile";
 
 describe("Tile component", () => {

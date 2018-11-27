@@ -1,10 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Button } from "components/button";
-import { Element } from "components/element";
-import { renderAsExoticComponent } from "components/render-as-exotic-component";
-import { ModifierProps } from "modifiers";
+import { Button } from "@/components/button";
+import { Element } from "@/components/element";
+import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { ModifierProps } from "@/modifiers";
 
 export type ModalCardHeadModifierProps = Partial<{
   children: React.ReactNode;

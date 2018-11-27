@@ -2,7 +2,7 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Loader } from "components/loader";
+import { Loader } from "@/components/loader";
 import "./loader.story.sass";
 
 storiesOf("Loader", module)

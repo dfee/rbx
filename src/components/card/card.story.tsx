@@ -2,11 +2,11 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Card } from "components/card";
-import { Content } from "components/content";
-import { Heading } from "components/heading";
-import { Image } from "components/image";
-import { Media } from "components/media";
+import { Card } from "@/components/card";
+import { Content } from "@/components/content";
+import { Heading } from "@/components/heading";
+import { Image } from "@/components/image";
+import { Media } from "@/components/media";
 
 storiesOf("Card", module)
   .addDecorator(story => (

@@ -2,10 +2,10 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Box } from "components/box";
-import { Content } from "components/content";
-import { Image } from "components/image";
-import { Media } from "components/media";
+import { Box } from "@/components/box";
+import { Content } from "@/components/content";
+import { Image } from "@/components/image";
+import { Media } from "@/components/media";
 
 storiesOf("Box", module).add("Default", () => (
   <Box

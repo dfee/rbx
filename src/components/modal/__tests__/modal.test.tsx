@@ -3,7 +3,7 @@ import { JSDOM } from "jsdom";
 import React from "react";
 import { renderToString } from "react-dom/server";
 
-import { noop } from "utils";
+import { noop } from "@/utils";
 import { Modal, ModalProps } from "../modal";
 
 type GlobalWithWindow = NodeJS.Global & { window?: JSDOM["window"] };

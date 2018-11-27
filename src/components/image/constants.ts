@@ -1,4 +1,4 @@
-import { tuple } from "utils";
+import { tuple } from "@/utils";
 
 export const IMAGE_SIZES = tuple(
   16,

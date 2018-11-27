@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { classNames, clean, ModifierProps } from "modifiers";
+import { Element } from "@/components/element";
+import { classNames, clean, ModifierProps } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 
 export type NavbarBurgerModifierProps = Partial<{

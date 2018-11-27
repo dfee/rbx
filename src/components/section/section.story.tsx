@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Container } from "components/container";
-import { Heading } from "components/heading";
+import { Container } from "@/components/container";
+import { Heading } from "@/components/heading";
 import { Section } from "../section";
 
 storiesOf("Section", module)

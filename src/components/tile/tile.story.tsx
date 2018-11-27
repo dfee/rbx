@@ -1,11 +1,11 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Box } from "components/box";
-import { Heading } from "components/heading";
-import { Image } from "components/image";
-import { Section } from "components/section";
-import { Tile } from "components/tile";
+import { Box } from "@/components/box";
+import { Heading } from "@/components/heading";
+import { Image } from "@/components/image";
+import { Section } from "@/components/section";
+import { Tile } from "@/components/tile";
 
 storiesOf("Tile", module).add("Default", () => (
   <Section>

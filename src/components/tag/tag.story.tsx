@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Field } from "components/form";
-import { Tag } from "components/tag";
+import { Control, Field } from "@/components/form";
+import { Tag } from "@/components/tag";
 
 storiesOf("Tag", module)
   .addDecorator(story => <div style={{ margin: 10 }}>{story()}</div>)

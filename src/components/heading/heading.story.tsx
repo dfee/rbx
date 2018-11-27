@@ -2,8 +2,8 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Box } from "components/box";
-import { Heading } from "components/heading";
+import { Box } from "@/components/box";
+import { Heading } from "@/components/heading";
 
 storiesOf("Heading", module).add("Default", () => (
   <div>

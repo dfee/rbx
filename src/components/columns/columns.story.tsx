@@ -2,9 +2,9 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Box } from "components/box";
-import { Columns } from "components/columns";
-import { Heading } from "components/heading";
+import { Box } from "@/components/box";
+import { Columns } from "@/components/columns";
+import { Heading } from "@/components/heading";
 import { ColumnSizeModifierProps } from "./column";
 import { COLUMN_SIZES } from "./constants";
 

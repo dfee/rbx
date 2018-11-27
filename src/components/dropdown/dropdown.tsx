@@ -1,10 +1,10 @@
 import { cx } from "emotion";
 import React, { PureComponent } from "react";
 
-import { Button } from "components/button";
-import { Icon } from "components/icon";
-import { classNames, clean, ModifierProps } from "modifiers";
-import { Colors } from "modifiers/colors";
+import { Button } from "@/components/button";
+import { Icon } from "@/components/icon";
+import { classNames, clean, ModifierProps } from "@/modifiers";
+import { Colors } from "@/modifiers/colors";
 import { DropdownDivider } from "./dropdown-divider";
 import { DropdownItem } from "./dropdown-item";
 

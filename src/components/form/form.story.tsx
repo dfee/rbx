@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Button } from "components/button";
+import { Button } from "@/components/button";
 import {
   Checkbox,
   Control,
@@ -13,8 +13,8 @@ import {
   Radio,
   Select,
   Textarea,
-} from "components/form";
-import { Icon } from "components/icon";
+} from "@/components/form";
+import { Icon } from "@/components/icon";
 
 // tslint:disable:max-classes-per-file
 

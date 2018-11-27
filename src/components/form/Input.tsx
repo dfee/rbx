@@ -1,9 +1,9 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { ModifierProps } from "modifiers";
-import { Colors } from "modifiers/colors";
+import { Element } from "@/components/element";
+import { ModifierProps } from "@/modifiers";
+import { Colors } from "@/modifiers/colors";
 
 export type InputModifierProps = Partial<{
   className: string;

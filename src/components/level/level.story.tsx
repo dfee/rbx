@@ -2,14 +2,14 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Box } from "components/box";
-import { Button } from "components/button";
-import { Container } from "components/container";
-import { Control, Field, Input } from "components/form";
-import { Heading } from "components/heading";
-import { Hero } from "components/hero";
-import { Level } from "components/level";
-import { Section } from "components/section";
+import { Box } from "@/components/box";
+import { Button } from "@/components/button";
+import { Container } from "@/components/container";
+import { Control, Field, Input } from "@/components/form";
+import { Heading } from "@/components/heading";
+import { Hero } from "@/components/hero";
+import { Level } from "@/components/level";
+import { Section } from "@/components/section";
 
 const style = { textAlign: "center" };
 

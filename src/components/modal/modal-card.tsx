@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { ModifierProps } from "modifiers";
+import { Element } from "@/components/element";
+import { ModifierProps } from "@/modifiers";
 import { ModalCardBody } from "./modal-card-body";
 import { ModalCardFoot } from "./modal-card-foot";
 import { ModalCardHead } from "./modal-card-head";

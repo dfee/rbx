@@ -2,7 +2,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Tabs } from "components/tabs";
+import { Tabs } from "@/components/tabs";
 
 // https://github.com/storybooks/storybook/issues/4865
 const alignSelectOptions = ({

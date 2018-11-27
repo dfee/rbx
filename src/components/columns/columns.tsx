@@ -1,10 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { renderAsExoticComponent } from "components/render-as-exotic-component";
-import { ModifierProps } from "modifiers";
-import { Breakpoints } from "modifiers/responsives";
+import { Element } from "@/components/element";
+import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { ModifierProps } from "@/modifiers";
+import { Breakpoints } from "@/modifiers/responsives";
 import { Column } from "./column";
 
 type ColumnsModifierProps = Partial<{

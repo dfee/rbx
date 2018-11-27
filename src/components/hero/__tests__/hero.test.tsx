@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { COLORS } from "modifiers/colors";
+import { COLORS } from "@/modifiers/colors";
 import { Hero } from "../Hero";
 
 describe("Hero component", () => {

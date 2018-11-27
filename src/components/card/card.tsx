@@ -1,9 +1,9 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { renderAsExoticComponent } from "components/render-as-exotic-component";
-import { ModifierProps } from "modifiers";
+import { Element } from "@/components/element";
+import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { ModifierProps } from "@/modifiers";
 import { CardContent } from "./card-content";
 import { CardFooter } from "./card-footer";
 import { CardHeader } from "./card-header";

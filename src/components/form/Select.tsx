@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { classNames, clean, ModifierProps } from "modifiers";
-import { Colors } from "modifiers/colors";
+import { classNames, clean, ModifierProps } from "@/modifiers";
+import { Colors } from "@/modifiers/colors";
 
 export type SelectModifierProps = Partial<{
   children: React.ReactNode;

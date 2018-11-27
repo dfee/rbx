@@ -1,6 +1,6 @@
+import { tuple } from "@/utils";
 import { cx } from "emotion";
 import { ComponentProps } from "react";
-import { tuple } from "utils";
 
 export const BREAKPOINTS = tuple(
   "mobile",

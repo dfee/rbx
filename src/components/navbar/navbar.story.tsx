@@ -2,8 +2,8 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Navbar } from "components/navbar";
-import { COLORS } from "modifiers/colors";
+import { Navbar } from "@/components/navbar";
+import { COLORS } from "@/modifiers/colors";
 
 const makeColorSelect = () =>
   select(

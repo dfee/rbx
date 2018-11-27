@@ -2,14 +2,14 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Box } from "components/box";
-import { Button } from "components/button";
-import { Content } from "components/content";
-import { Control, Field, Textarea } from "components/form";
-import { Image } from "components/image";
-import { Level } from "components/level";
-import { Media } from "components/media";
-import { Section } from "components/section";
+import { Box } from "@/components/box";
+import { Button } from "@/components/button";
+import { Content } from "@/components/content";
+import { Control, Field, Textarea } from "@/components/form";
+import { Image } from "@/components/image";
+import { Level } from "@/components/level";
+import { Media } from "@/components/media";
+import { Section } from "@/components/section";
 
 const style = { background: "#e6e6e6", width: 64, height: 64 };
 

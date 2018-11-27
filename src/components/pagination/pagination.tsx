@@ -1,9 +1,9 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "components/element";
-import { ModifierProps } from "modifiers";
-import { noop } from "utils";
+import { Element } from "@/components/element";
+import { ModifierProps } from "@/modifiers";
+import { noop } from "@/utils";
 
 export type PaginationModifierProps = Partial<{
   autoHide: boolean;

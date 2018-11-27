@@ -1,10 +1,10 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Container } from "components/container";
-import { Content } from "components/content";
-import { Footer } from "components/footer";
-import { Hero } from "components/hero";
+import { Container } from "@/components/container";
+import { Content } from "@/components/content";
+import { Footer } from "@/components/footer";
+import { Hero } from "@/components/hero";
 
 storiesOf("Footer", module).add("Default", () => (
   <Hero size={"fullheight" as "fullheignt"}>

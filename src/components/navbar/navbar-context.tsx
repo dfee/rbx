@@ -1,5 +1,5 @@
+import { noop } from "@/utils";
 import React from "react";
-import { noop } from "utils";
 
 export interface NavbarContextState {
   active: boolean;
