@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { renderAsExoticComponent } from "@/components/element";
 import { classNames, clean, ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/colors";
 import { ButtonGroup } from "./button-group";

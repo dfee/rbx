@@ -1,3 +1,3 @@
-import "./container.sass";
+import "./container.module.sass";
 
 export { Container } from "./container";

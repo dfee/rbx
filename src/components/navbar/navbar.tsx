@@ -1,8 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
-import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { Element, renderAsExoticComponent } from "@/components/element";
 import { classNames, ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/colors";
 import { canUseDOM } from "@/utils";

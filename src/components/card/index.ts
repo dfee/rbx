@@ -1,3 +1,3 @@
-import "./card.sass";
+import "./card.module.sass";
 
 export { Card } from "./card";

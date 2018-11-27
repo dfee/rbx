@@ -1,3 +1,3 @@
-import "./panel.sass";
+import "./panel.module.sass";
 
 export { Panel } from "./panel";

@@ -1,8 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
-import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { Element, renderAsExoticComponent } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type LevelSideModifierProps = Partial<{

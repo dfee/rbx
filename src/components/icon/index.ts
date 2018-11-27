@@ -1,3 +1,3 @@
-import "./icon.sass";
+import "./icon.module.sass";
 
 export { Icon } from "./icon";

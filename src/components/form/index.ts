@@ -1,4 +1,4 @@
-import "./form.sass";
+import "./form.module.sass";
 
 export { Checkbox } from "./checkbox";
 export { Control } from "./control";

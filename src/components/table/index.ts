@@ -1,3 +1,3 @@
-import "./table.sass";
+import "./table.module.sass";
 
 export { Table } from "./table";

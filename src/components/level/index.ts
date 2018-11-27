@@ -1,3 +1,3 @@
-import "./level.sass";
+import "./level.module.sass";
 
 export { Level } from "./level";

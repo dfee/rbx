@@ -1,2 +1,2 @@
-import "./navbar.sass";
+import "./navbar.module.sass";
 export { Navbar } from "./navbar";

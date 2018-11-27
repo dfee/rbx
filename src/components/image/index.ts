@@ -1,3 +1,3 @@
-import "./image.sass";
+import "./image.module.sass";
 
 export { Image } from "./image";

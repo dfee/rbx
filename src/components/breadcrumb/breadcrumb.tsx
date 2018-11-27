@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import * as React from "react";
 
-import { renderAsExoticComponent } from "@/components/render-as-exotic-component";
+import { renderAsExoticComponent } from "@/components/element";
 import { classNames, clean, ModifierProps } from "@/modifiers";
 
 export type BreadcrumbModifierProps = Partial<{

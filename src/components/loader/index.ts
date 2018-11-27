@@ -1,3 +1,3 @@
-import "./loader.sass";
+import "./loader.module.sass";
 
 export { Loader } from "./loader";

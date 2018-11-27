@@ -1,3 +1,3 @@
-import "./box.sass";
+import "./box.module.sass";
 
 export { Box } from "./box";

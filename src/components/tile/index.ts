@@ -1,3 +1,3 @@
-import "./tile.sass";
+import "./tile.module.sass";
 
 export { Tile } from "./tile";

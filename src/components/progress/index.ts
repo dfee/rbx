@@ -1,3 +1,3 @@
-import "./progress.sass";
+import "./progress.module.sass";
 
 export { Progress } from "./progress";

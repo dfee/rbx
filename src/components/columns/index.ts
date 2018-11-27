@@ -1,3 +1,3 @@
-import "./columns.sass";
+import "./columns.module.sass";
 
 export { Columns } from "./columns";

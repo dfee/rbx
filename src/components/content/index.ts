@@ -1,3 +1,3 @@
-import "./content.sass";
+import "./content.module.sass";
 
 export { Content } from "./content";

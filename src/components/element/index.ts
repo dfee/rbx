@@ -1,1 +1,1 @@
-export { Element } from "./element";
+export { Element, renderAsExoticComponent } from "./element";

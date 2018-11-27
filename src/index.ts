@@ -1,5 +1,4 @@
-import "~bulma/bulma.sass";
-import "./index.sass";
+import "./index.module.sass";
 
 import * as Form from "./components/form";
 
