@@ -484,9 +484,6 @@ Object {
     },
     "Burger": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "onClick": [Function],
-      },
       "render": [Function],
     },
     "Container": Object {
