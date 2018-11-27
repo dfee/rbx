@@ -29,7 +29,7 @@ storiesOf("Panel", module)
       </Panel.Block>
       <Panel.Block>
         <Panel.Icon renderAs={Icon} icon="angle-down" />
-        rbc
+        rbx
       </Panel.Block>
       <Panel.Block>
         <Panel.Icon renderAs={Icon} icon="angle-down" />

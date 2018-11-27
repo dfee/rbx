@@ -31,8 +31,8 @@ export const Icon = React.forwardRef<HTMLElement, IconProps>(
         {children || (
           <i
             ref={ref}
-            className={cx("rbc", {
-              [`rbc-${icon}`]: icon,
+            className={cx("rbx", {
+              [`rbx-${icon}`]: icon,
             })}
           />
         )}

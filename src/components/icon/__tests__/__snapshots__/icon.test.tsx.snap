@@ -15,7 +15,7 @@ exports[`Icon component Should concat Bulma class with classes in props 1`] = `
   className="icon other-class"
 >
   <i
-    className="rbc rbc-bars"
+    className="rbx rbx-bars"
   />
 </span>
 `;
@@ -25,7 +25,7 @@ exports[`Icon component Should have box classname 1`] = `
   className="icon"
 >
   <i
-    className="rbc rbc-bars"
+    className="rbx rbx-bars"
   />
 </span>
 `;

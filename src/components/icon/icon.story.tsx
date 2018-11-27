@@ -13,7 +13,7 @@ storiesOf("Icon", module)
   .add("Custom Icon", () => (
     <div>
       <Icon>
-        <span className="rbc rbc-bars" />
+        <span className="rbx rbx-bars" />
       </Icon>
     </div>
   ));

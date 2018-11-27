@@ -1,3 +1,4 @@
+import resolve from "rollup-plugin-node-resolve";
 import sass from "rollup-plugin-sass";
 import typescript from "rollup-plugin-typescript2";
 
@@ -20,6 +21,9 @@ export default {
     ...Object.keys(pkg.peerDependencies || {})
   ],
   plugins: [
+    resolve({
+      only: ["emotion"]
+    }),
     sass({
       output: true
     }),
