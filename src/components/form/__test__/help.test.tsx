@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Help from "../Help";
+import { Help } from "../help";
 
 describe("Help component", () => {
   it("Should exist", () => {

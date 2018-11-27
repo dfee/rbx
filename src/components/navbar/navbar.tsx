@@ -1,22 +1,20 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
-import modifiers, { ModifierProps } from "modifiers";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
+import { classNames, ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 import { canUseDOM } from "utils";
 import { ShowContext } from "./context";
-import NavbarBrand from "./NavbarBrand";
-import NavbarBurger from "./NavbarBurger";
-import NavbarContainer from "./NavbarContainer";
-import NavbarDivider from "./NavbarDivider";
-import NavbarDropdown from "./NavbarDropdown";
-import NavbarItem from "./NavbarItem";
-import NavbarLink from "./NavbarLink";
-import NavbarMenu from "./NavbarMenu";
+import { NavbarBrand } from "./navbar-brand";
+import { NavbarBurger } from "./navbar-burger";
+import { NavbarContainer } from "./navbar-container";
+import { NavbarDivider } from "./navbar-divider";
+import { NavbarDropdown } from "./navbar-dropdown";
+import { NavbarItem } from "./navbar-item";
+import { NavbarLink } from "./navbar-link";
+import { NavbarMenu } from "./navbar-menu";
 
 let htmlClass = "";
 
@@ -30,13 +28,15 @@ export type NavbarModifierProps = Partial<{
   fixed: "top" | "bottom";
   style: React.CSSProperties;
   transparent: boolean;
-}> & {
-  innerRef: React.Ref<HTMLDivElement>;
-};
+}>;
 
 export type NavbarProps = ModifierProps & NavbarModifierProps;
 
-class Navbar extends React.PureComponent<NavbarProps> {
+type NavbarControllerProps = NavbarProps & {
+  innerRef: React.Ref<HTMLDivElement>;
+};
+
+class NavbarController extends React.PureComponent<NavbarControllerProps> {
   public static defaultProps = {
     active: false,
     children: null,
@@ -72,7 +72,7 @@ class Navbar extends React.PureComponent<NavbarProps> {
           {...props}
           ref={innerRef}
           role="navigation"
-          className={cx("navbar", modifiers.classNames(props), className, {
+          className={cx("navbar", classNames(props), className, {
             "is-transparent": transparent,
             [`is-fixed-${fixed}`]: fixed,
             [`is-${color}`]: color,
@@ -99,31 +99,19 @@ class Navbar extends React.PureComponent<NavbarProps> {
   }
 }
 
-export type NavbarRefProps = Omit<NavbarProps, "innerRef">;
-
-type NavbarRef = RenderAsExoticComponent<NavbarRefProps, "nav"> & {
-  Brand: typeof NavbarBrand;
-  Burger: typeof NavbarBurger;
-  Container: typeof NavbarContainer;
-  Divider: typeof NavbarDivider;
-  Dropdown: typeof NavbarDropdown;
-  Item: typeof NavbarItem;
-  Link: typeof NavbarLink;
-  Menu: typeof NavbarMenu;
-};
-
-const NavbarRef: Partial<NavbarRef> = renderAsExoticComponent<
-  NavbarRefProps,
-  "nav"
->((props, ref) => <Navbar innerRef={ref} {...props} />, "nav");
-
-NavbarRef.Brand = NavbarBrand;
-NavbarRef.Burger = NavbarBurger;
-NavbarRef.Menu = NavbarMenu;
-NavbarRef.Item = NavbarItem;
-NavbarRef.Dropdown = NavbarDropdown;
-NavbarRef.Link = NavbarLink;
-NavbarRef.Divider = NavbarDivider;
-NavbarRef.Container = NavbarContainer;
-
-export default NavbarRef as NavbarRef;
+export const Navbar = Object.assign(
+  renderAsExoticComponent<NavbarProps, "nav">(
+    (props, ref) => <NavbarController innerRef={ref} {...props} />,
+    "nav",
+  ),
+  {
+    Brand: NavbarBrand,
+    Burger: NavbarBurger,
+    Container: NavbarContainer,
+    Divider: NavbarDivider,
+    Dropdown: NavbarDropdown,
+    Item: NavbarItem,
+    Link: NavbarLink,
+    Menu: NavbarMenu,
+  },
+);

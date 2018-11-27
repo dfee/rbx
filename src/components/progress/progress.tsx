@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
+import { Element } from "components/element";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
@@ -24,7 +24,7 @@ export type ProgressProps = ModifierProps &
     >
   >;
 
-const Progress = React.forwardRef<HTMLProgressElement, ProgressProps>(
+export const Progress = React.forwardRef<HTMLProgressElement, ProgressProps>(
   ({ className, value, max, color, size, ...props }, ref) => (
     <Element
       ref={ref}
@@ -39,5 +39,3 @@ const Progress = React.forwardRef<HTMLProgressElement, ProgressProps>(
     />
   ),
 );
-
-export default Progress;

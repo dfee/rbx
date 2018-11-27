@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Breadcrumb from "..";
+
+import { Breadcrumb } from "../breadcrumb";
 
 describe("Breadcrumb component", () => {
   it("Should be a Breadcrumb", () => {

@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import Menu from "components/menu";
+import { Menu } from "components/menu";
 
 storiesOf("Menu", module).add("Default", () => (
   <Menu>

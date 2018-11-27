@@ -34,12 +34,17 @@ export type ColorsProps = Partial<{
   backgroundColor: Colors | GreyColors;
 }>;
 
-export default {
-  classNames: (props: ComponentProps<any>) =>
-    cx({
-      [`has-text-${props.textColor}`]: props.textColor,
-      [`has-background-${props.backgroundColor}`]: props.backgroundColor,
-    }),
-  clean: ({ textColor, backgroundColor, ...props }: ComponentProps<any>) =>
-    props,
-};
+export function classNames(props: ComponentProps<any>) {
+  return cx({
+    [`has-text-${props.textColor}`]: props.textColor,
+    [`has-background-${props.backgroundColor}`]: props.backgroundColor,
+  });
+}
+
+export function clean({
+  textColor,
+  backgroundColor,
+  ...props
+}: ComponentProps<any>) {
+  return props;
+}

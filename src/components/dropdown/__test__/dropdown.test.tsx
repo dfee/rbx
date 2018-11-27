@@ -4,7 +4,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import { noop } from "utils";
-import Dropdown from "..";
+import { Dropdown } from "../dropdown";
 
 interface GlobalWithWindow extends NodeJS.Global {
   window: JSDOM["window"];

@@ -1,12 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
-import modifiers, { ModifierProps } from "modifiers";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
+import { classNames, clean, ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import ButtonGroup from "./ButtonGroup";
+import { ButtonGroup } from "./button-group";
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -42,78 +40,78 @@ interface ButtonProps
   onClick?: React.MouseEventHandler<any>;
 }
 
-type Button = RenderAsExoticComponent<ButtonProps, "button"> & {
-  Group: typeof ButtonGroup;
-};
-
-const Button: Partial<Button> = renderAsExoticComponent<ButtonProps, "button">(
-  (
-    {
-      children,
-      className,
-      renderAs,
-      color,
-      size,
-      outlined,
-      inverted,
-      state,
-      submit,
-      reset,
-      fullwidth,
-      loading,
-      disabled,
-      remove,
-      isSelected,
-      isStatic,
-      rounded,
-      onClick,
-      text,
-      ...allProps
-    },
-    ref,
-  ) => {
-    let element = isStatic ? "span" : renderAs!;
-    let type: string | undefined;
-
-    if (submit) {
-      element = "button";
-      type = "submit";
-    }
-    if (reset) {
-      element = "button";
-      type = "reset";
-    }
-
-    return React.createElement(
-      element,
+export const Button = Object.assign(
+  renderAsExoticComponent<ButtonProps, "button">(
+    (
       {
-        ref,
-        tabIndex: disabled ? -1 : 0,
-        ...modifiers.clean(allProps),
-        className: cx(className, modifiers.classNames(allProps), {
-          button: !remove,
-          delete: remove,
-          [`is-${color}`]: color,
-          [`is-${size}`]: size,
-          [`is-${state}`]: state,
-          "is-fullwidth": fullwidth,
-          "is-inverted": inverted,
-          "is-loading": loading,
-          "is-outlined": outlined,
-          "is-rounded": rounded,
-          "is-selected": isSelected,
-          "is-static": isStatic,
-          "is-text": text,
-        }),
+        children,
+        className,
+        renderAs,
+        color,
+        size,
+        outlined,
+        inverted,
+        state,
+        submit,
+        reset,
+        fullwidth,
+        loading,
         disabled,
-        onClick: disabled ? undefined : onClick,
-        type,
+        remove,
+        isSelected,
+        isStatic,
+        rounded,
+        onClick,
+        text,
+        ...allProps
       },
-      children,
-    );
-  },
-  "button",
+      ref,
+    ) => {
+      let element = isStatic ? "span" : renderAs!;
+      let type: string | undefined;
+
+      if (submit) {
+        element = "button";
+        type = "submit";
+      }
+      if (reset) {
+        element = "button";
+        type = "reset";
+      }
+
+      return React.createElement(
+        element,
+        {
+          ref,
+          tabIndex: disabled ? -1 : 0,
+          ...clean(allProps),
+          className: cx(className, classNames(allProps), {
+            button: !remove,
+            delete: remove,
+            [`is-${color}`]: color,
+            [`is-${size}`]: size,
+            [`is-${state}`]: state,
+            "is-fullwidth": fullwidth,
+            "is-inverted": inverted,
+            "is-loading": loading,
+            "is-outlined": outlined,
+            "is-rounded": rounded,
+            "is-selected": isSelected,
+            "is-static": isStatic,
+            "is-text": text,
+          }),
+          disabled,
+          onClick: disabled ? undefined : onClick,
+          type,
+        },
+        children,
+      );
+    },
+    "button",
+  ),
+  { Group: ButtonGroup },
 );
+
 Button.defaultProps = Object.assign(
   {
     disabled: false,
@@ -132,6 +130,3 @@ Button.defaultProps = Object.assign(
   },
   Button.defaultProps,
 );
-
-Button.Group = ButtonGroup;
-export default Button as Button;

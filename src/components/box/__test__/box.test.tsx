@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Box from "..";
+
+import { Box } from "../box";
 
 describe("Box component", () => {
   it("Should Exist", () => {

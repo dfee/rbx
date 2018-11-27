@@ -1,3 +1,3 @@
 import "./box.sass";
 
-export { default } from "./Box";
+export { Box } from "./box";

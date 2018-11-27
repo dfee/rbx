@@ -1,12 +1,11 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
+import { Element } from "components/element";
 import { ModifierProps } from "modifiers";
 import { noop } from "utils";
 
 export type PaginationModifierProps = Partial<{
-  // todo: https://github.com/couds/react-bulma-components/issues/110
   autoHide: boolean;
   /**
    * Classname of the container of the pagination, this could be used to
@@ -28,7 +27,7 @@ export type PaginationModifierProps = Partial<{
   showPrevNext: boolean;
   /** Total pages in total */
   total: number;
-}> & { innerRef: React.Ref<HTMLElement> };
+}>;
 
 export type PaginationProps = ModifierProps &
   PaginationModifierProps &
@@ -36,7 +35,13 @@ export type PaginationProps = ModifierProps &
     Omit<React.ComponentPropsWithoutRef<"nav">, "onChange" | "unselectable">
   >;
 
-class Pagination extends React.PureComponent<PaginationProps> {
+type PaginationControllerProps = PaginationProps & {
+  innerRef: React.Ref<HTMLElement>;
+};
+
+class PaginationController extends React.PureComponent<
+  PaginationControllerProps
+> {
   public static defaultProps = {
     autoHide: true,
     current: 1,
@@ -162,8 +167,6 @@ class Pagination extends React.PureComponent<PaginationProps> {
   }
 }
 
-export type PaginationRefProps = Omit<PaginationProps, "innerRef">;
-
-export default React.forwardRef<HTMLElement, PaginationRefProps>(
-  (props, ref) => <Pagination innerRef={ref} {...props} />,
+export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(
+  (props, ref) => <PaginationController innerRef={ref} {...props} />,
 );

@@ -1,14 +1,12 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import MessageBody from "./MessageBody";
-import MessageHeader from "./MessageHeader";
+import { MessageBody } from "./message-body";
+import { MessageHeader } from "./message-header";
 
 export type MessageModifierProps = Partial<{
   children: React.ReactNode;
@@ -19,28 +17,23 @@ export type MessageModifierProps = Partial<{
 
 export type MessageProps = ModifierProps & MessageModifierProps;
 
-type Message = RenderAsExoticComponent<MessageProps, "article"> & {
-  Body: typeof MessageBody;
-  Header: typeof MessageHeader;
-};
-
-const Message: Partial<Message> = renderAsExoticComponent<
-  MessageProps,
-  "article"
->(
-  ({ children, className, color, size, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("message", className, {
-        [`is-${color}`]: color,
-        [`is-${size}`]: size,
-      })}
-    >
-      {children}
-    </Element>
+export const Message = Object.assign(
+  renderAsExoticComponent<MessageProps, "article">(
+    ({ children, className, color, size, ...props }, ref) => (
+      <Element
+        {...props}
+        ref={ref}
+        className={cx("message", className, {
+          [`is-${color}`]: color,
+          [`is-${size}`]: size,
+        })}
+      >
+        {children}
+      </Element>
+    ),
+    "article",
   ),
-  "article",
+  { Body: MessageBody, Header: MessageHeader },
 );
 Message.defaultProps = Object.assign(
   {
@@ -48,8 +41,3 @@ Message.defaultProps = Object.assign(
   },
   Message.defaultProps,
 );
-
-Message.Body = MessageBody;
-Message.Header = MessageHeader;
-
-export default Message as Message;

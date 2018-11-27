@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Tile from "..";
+import { Tile } from "../tile";
 
 describe("Tile component", () => {
   it("Should exist", () => {

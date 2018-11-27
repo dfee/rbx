@@ -2,10 +2,10 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import Container from "components/container";
-import Heading from "components/heading";
-import Hero from "components/hero";
-import Section from "components/section";
+import { Container } from "components/container";
+import { Heading } from "components/heading";
+import { Hero } from "components/hero";
+import { Section } from "components/section";
 
 storiesOf("Hero", module)
   .add("Default with color", () => (

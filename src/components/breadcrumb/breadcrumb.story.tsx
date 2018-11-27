@@ -2,9 +2,9 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import Box from "components/box";
-import Breadcrumb from "components/breadcrumb";
-import { BreadcrumbProps } from "components/breadcrumb/Breadcrumb";
+import { Box } from "components/box";
+import { Breadcrumb } from "components/breadcrumb";
+import { BreadcrumbProps } from "components/breadcrumb/breadcrumb";
 
 const makeSeparator = () =>
   select(

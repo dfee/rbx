@@ -2,7 +2,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import Navbar from "components/navbar";
+import { Navbar } from "components/navbar";
 import { COLORS } from "modifiers/colors";
 
 const makeColorSelect = () =>
@@ -18,19 +18,20 @@ const makeColorSelect = () =>
     "Default",
   );
 
-const items = ({
+// https://github.com/storybooks/storybook/issues/4865
+const fixedSelectOptions = ({
   Default: null,
   bottom: "bottom",
   top: "top",
-} as unknown) as { [k: string]: string }; // todo
+} as unknown) as { [k: string]: string };
 
-const makeFixedSelector = () => select("Fixed", items, "Default");
+const makeFixedSelect = () => select("Fixed", fixedSelectOptions, "Default");
 
 storiesOf("Navbar", module).add("Default", () => {
   return (
     <Navbar
       color={makeColorSelect()}
-      fixed={makeFixedSelector()}
+      fixed={makeFixedSelect()}
       active={boolean("Active", false)}
       transparent={boolean("Transparent", false)}
     >

@@ -1,12 +1,12 @@
 import { cx } from "emotion";
 import React, { PureComponent } from "react";
 
-import Button from "components/button";
-import Icon from "components/icon";
-import modifiers, { ModifierProps } from "modifiers";
+import { Button } from "components/button";
+import { Icon } from "components/icon";
+import { classNames, clean, ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import DropdownDivider from "./DropdownDivider";
-import DropdownItem from "./DropdownItem";
+import { DropdownDivider } from "./dropdown-divider";
+import { DropdownItem } from "./dropdown-item";
 
 export type DropdownModifierProps = Partial<{
   align: "right";
@@ -35,10 +35,7 @@ const initialState = {
 
 export type DropdownState = typeof initialState;
 
-export default class Dropdown extends PureComponent<
-  DropdownProps,
-  DropdownState
-> {
+export class Dropdown extends PureComponent<DropdownProps, DropdownState> {
   public static Item = DropdownItem;
   public static Divider = DropdownDivider;
 
@@ -98,7 +95,7 @@ export default class Dropdown extends PureComponent<
     } = this.props;
 
     let current = null;
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
 
     const childrenArray = React.Children.map(children, (child, i) => {
       if (typeof child !== "string" && typeof child !== "number") {
@@ -122,7 +119,7 @@ export default class Dropdown extends PureComponent<
       <div
         {...props}
         ref={this.htmlElement}
-        className={cx("dropdown", modifiers.classNames(allProps), className, {
+        className={cx("dropdown", classNames(allProps), className, {
           "is-active": this.state.open,
           [`is-,${align}`]: align,
           "is-hoverable": hoverable,

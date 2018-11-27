@@ -1,3 +1,3 @@
 import "./notification.sass";
 
-export { default } from "./Notification";
+export { Notification } from "./notification";

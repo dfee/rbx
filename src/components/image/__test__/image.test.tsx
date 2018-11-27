@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Image from "..";
+import { Image } from "../image";
 
 describe("Image component", () => {
   it("Should exist", () => {

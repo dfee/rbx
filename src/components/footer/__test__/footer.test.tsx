@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Footer from "..";
+import { Footer } from "..";
 
 describe("Footer component", () => {
   it("Should have footer classname", () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Element from "..";
+import { Element } from "..";
 
 describe("Element component", () => {
   it("Should Exist", () => {

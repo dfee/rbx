@@ -1,21 +1,19 @@
 import { cx } from "emotion";
 import * as React from "react";
 
-import renderAsExoticComponent from "components/render-as-exotic-component";
-import modifiers, { ModifierProps } from "modifiers";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
+import { classNames, clean, ModifierProps } from "modifiers";
 
 export type ElementProps = ModifierProps;
 
-const Element = renderAsExoticComponent<ElementProps, "div">(
+export const Element = renderAsExoticComponent<ElementProps, "div">(
   ({ className, renderAs, ...allProps }, ref) => {
     const props = {
-      className: cx(className, modifiers.classNames(allProps)) || undefined,
+      className: cx(className, classNames(allProps)) || undefined,
       ref,
-      ...modifiers.clean(allProps),
+      ...clean(allProps),
     };
     return React.createElement(renderAs!, props);
   },
   "div",
 );
-
-export default Element;

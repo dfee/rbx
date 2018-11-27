@@ -1,13 +1,11 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Breakpoints } from "modifiers/responsives";
-import Column from "./ColumnsColumn";
+import { Column } from "./column";
 
 type ColumnsModifierProps = Partial<{
   // Breakpoint where columns become stacked.
@@ -24,24 +22,26 @@ type ColumnsModifierProps = Partial<{
 
 export type ColumnsProps = ModifierProps & ColumnsModifierProps;
 
-type Columns = RenderAsExoticComponent<ColumnsProps, "div"> & {
-  Column: typeof Column;
-};
-
-const Columns: Partial<Columns> = renderAsExoticComponent<ColumnsProps, "div">(
-  ({ className, breakpoint, gapless, multiline, centered, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx(className, "columns", {
-        [`is-${breakpoint}`]: breakpoint,
-        "is-centered": centered,
-        "is-gapless": gapless,
-        "is-multiline": multiline,
-      })}
-    />
+export const Columns = Object.assign(
+  renderAsExoticComponent<ColumnsProps, "div">(
+    (
+      { className, breakpoint, gapless, multiline, centered, ...props },
+      ref,
+    ) => (
+      <Element
+        {...props}
+        ref={ref}
+        className={cx(className, "columns", {
+          [`is-${breakpoint}`]: breakpoint,
+          "is-centered": centered,
+          "is-gapless": gapless,
+          "is-multiline": multiline,
+        })}
+      />
+    ),
+    "div",
   ),
-  "div",
+  { Column },
 );
 Columns.defaultProps = {
   centered: false,
@@ -49,7 +49,3 @@ Columns.defaultProps = {
   gapless: false,
   multiline: true,
 };
-
-Columns.Column = Column;
-
-export default Columns as Columns;

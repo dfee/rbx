@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
+import { Element } from "components/element";
 import { ModifierProps } from "modifiers";
 
 export type TableModifierProps = Partial<{
@@ -17,7 +17,7 @@ export type TableProps = ModifierProps &
   TableModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"table">, "unselectable">>;
 
-const Table = React.forwardRef<HTMLTableElement, TableProps>(
+export const Table = React.forwardRef<HTMLTableElement, TableProps>(
   ({ children, className, size, striped, bordered, ...props }, ref) => (
     <Element
       renderAs="table"
@@ -39,5 +39,3 @@ Table.defaultProps = {
   size: "fullwidth",
   striped: true,
 };
-
-export default Table;

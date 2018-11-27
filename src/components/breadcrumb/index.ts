@@ -1,3 +1,3 @@
 import "./breadcrumb.sass";
 
-export { default } from "./Breadcrumb";
+export { Breadcrumb } from "./breadcrumb";

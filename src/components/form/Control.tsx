@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 
 export type ControlModifierProps = Partial<{
@@ -17,7 +17,7 @@ export type ControlModifierProps = Partial<{
 
 export type ControlProps = ModifierProps & ControlModifierProps;
 
-const Control = renderAsExoticComponent<ControlProps, "div">(
+export const Control = renderAsExoticComponent<ControlProps, "div">(
   (
     {
       children,
@@ -57,5 +57,3 @@ Control.defaultProps = Object.assign(
   },
   Control.defaultProps,
 );
-
-export default Control;

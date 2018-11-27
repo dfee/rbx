@@ -1,2 +1,2 @@
 import "./navbar.sass";
-export { default } from "./Navbar";
+export { Navbar } from "./navbar";

@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
@@ -14,7 +14,7 @@ export type NotificationModifierProps = Partial<{
 
 export type NotificationProps = ModifierProps & NotificationModifierProps;
 
-const Notification = renderAsExoticComponent<NotificationProps, "div">(
+export const Notification = renderAsExoticComponent<NotificationProps, "div">(
   ({ children, className, color, ...props }, ref) => (
     <Element
       {...props}
@@ -38,5 +38,3 @@ Notification.defaultProps = Object.assign(
   },
   Notification.defaultProps,
 );
-
-export default Notification;

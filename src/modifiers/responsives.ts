@@ -76,10 +76,12 @@ const getSizeClassFromProp = (sizes: ResponsivesProps["responsive"]) => {
     : {};
 };
 
-export default {
-  classNames: (props: ComponentProps<any>) =>
-    cx({
-      ...getSizeClassFromProp(props.responsive || {}),
-    }),
-  clean: ({ responsive, hide, ...props }: ComponentProps<any>) => props,
-};
+export function classNames(props: ComponentProps<any>) {
+  return cx({
+    ...getSizeClassFromProp(props.responsive || {}),
+  });
+}
+
+export function clean({ responsive, hide, ...props }: ComponentProps<any>) {
+  return props;
+}

@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import Button from "components/button";
+import { Button } from "components/button";
 import {
   Checkbox,
   Control,
@@ -12,9 +12,9 @@ import {
   Label,
   Radio,
   Select,
-  TextArea,
+  Textarea,
 } from "components/form";
-import Icon from "components/icon";
+import { Icon } from "components/icon";
 
 // tslint:disable:max-classes-per-file
 
@@ -180,7 +180,7 @@ storiesOf("Form", module)
       <Field>
         <Label>Message</Label>
         <Control>
-          <TextArea placeholder="Textarea" />
+          <Textarea placeholder="Textarea" />
         </Control>
       </Field>
 
@@ -308,7 +308,7 @@ storiesOf("Form", module)
             <Field>
               <Label>Comment</Label>
               <Control>
-                <TextArea
+                <Textarea
                   name="comment"
                   value={comment}
                   onChange={this.setComment}

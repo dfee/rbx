@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Content from "..";
+import { Content } from "../Content";
 
 describe("Content component", () => {
   it("Should have content classname", () => {

@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 
 export type FooterModifierProps = Partial<{
@@ -12,7 +12,7 @@ export type FooterModifierProps = Partial<{
 
 type FooterProps = ModifierProps & FooterModifierProps;
 
-const Footer = renderAsExoticComponent<FooterProps, "div">(
+export const Footer = renderAsExoticComponent<FooterProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("footer", className)}>
       {children}
@@ -26,5 +26,3 @@ Footer.defaultProps = Object.assign(
   },
   Footer.defaultProps,
 );
-
-export default Footer;

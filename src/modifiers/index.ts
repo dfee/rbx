@@ -1,35 +1,44 @@
 import { cx } from "emotion";
 import { ComponentProps } from "react";
 
-import colors, { ColorsProps } from "./colors";
-import helpers, { HelpersProps } from "./helpers";
-import responsives, { ResponsivesProps } from "./responsives";
-import typography, { TypographyProps } from "./typography";
-
-// const compose = (...fns) => args => fns.reduce((arg, fn) => fn(arg), args);
+import {
+  classNames as colorsClassNames,
+  clean as colorsClean,
+  ColorsProps,
+} from "./colors";
+import {
+  classNames as helpersClassNames,
+  clean as helpersClean,
+  HelpersProps,
+} from "./helpers";
+import {
+  classNames as responsivesClassNames,
+  clean as responsivesClean,
+  ResponsivesProps,
+} from "./responsives";
+import {
+  classNames as typographyClassNames,
+  clean as typographyClean,
+  TypographyProps,
+} from "./typography";
 
 export type ModifierProps = ColorsProps &
   HelpersProps &
   ResponsivesProps &
   TypographyProps;
 
-export default {
-  classNames: (props: ComponentProps<any>) =>
-    cx(
-      colors.classNames(props),
-      helpers.classNames(props),
-      responsives.classNames(props),
-      typography.classNames(props),
-    ),
-  clean: (props: ComponentProps<any>) =>
-    [colors.clean, helpers.clean, responsives.clean, typography.clean].reduce(
-      (arg, fn) => fn(arg),
-      props,
-    ),
-  // compose(
-  //   colors.clean,
-  //   helpers.clean,
-  //   responsives.clean,
-  //   typography.clean,
-  // )(props),
-};
+export function classNames(props: ComponentProps<any>) {
+  return cx(
+    colorsClassNames(props),
+    helpersClassNames(props),
+    responsivesClassNames(props),
+    typographyClassNames(props),
+  );
+}
+
+export function clean(props: ComponentProps<any>) {
+  return [colorsClean, helpersClean, responsivesClean, typographyClean].reduce(
+    (arg, fn) => fn(arg),
+    props,
+  );
+}

@@ -1,3 +1,3 @@
 import "./menu.sass";
 
-export { default } from "./Menu";
+export { Menu } from "./menu";

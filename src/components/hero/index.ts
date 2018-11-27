@@ -1,3 +1,3 @@
 import "./hero.sass";
 
-export { default } from "./Hero";
+export { Hero } from "./hero";

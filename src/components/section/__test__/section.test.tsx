@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Section from "..";
+import { Section } from "..";
 
 describe("Section component", () => {
   it("Should exist", () => {

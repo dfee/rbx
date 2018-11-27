@@ -9,22 +9,23 @@ export type TypographyProps = Partial<{
   italic: boolean;
 }>;
 
-export default {
-  classNames: (props: ComponentProps<any>) =>
-    cx({
-      [`has-text-${props.textAlignment}`]: props.textAlignment,
-      [`has-text-weight-${props.textWeight}`]: props.textWeight,
-      [`is-size-${props.textSize}`]: props.textSize,
-      [`is-${props.textTransform}`]: props.textTransform,
-      "is-italic": props.italic,
-    }),
+export function classNames(props: ComponentProps<any>) {
+  return cx({
+    [`has-text-${props.textAlignment}`]: props.textAlignment,
+    [`has-text-weight-${props.textWeight}`]: props.textWeight,
+    [`is-size-${props.textSize}`]: props.textSize,
+    [`is-${props.textTransform}`]: props.textTransform,
+    "is-italic": props.italic,
+  });
+}
 
-  clean: ({
-    textWeight,
-    textTransform,
-    italic,
-    textSize,
-    textAlignment,
-    ...props
-  }: ComponentProps<any>) => props,
-};
+export function clean({
+  textWeight,
+  textTransform,
+  italic,
+  textSize,
+  textAlignment,
+  ...props
+}: ComponentProps<any>) {
+  return props;
+}

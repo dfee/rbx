@@ -4,7 +4,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import { noop } from "utils";
-import InputFile from "../InputFile";
+import { InputFile } from "../input-file";
 
 interface GlobalWithWindow extends NodeJS.Global {
   window?: JSDOM["window"];

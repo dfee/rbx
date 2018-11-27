@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Message from "..";
+import { Message } from "../message";
 
 describe("Message component", () => {
   it("Should Exist", () => {

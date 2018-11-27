@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Label from "../Label";
+import { Label } from "../label";
 
 describe("Label component", () => {
   it("Should exist", () => {

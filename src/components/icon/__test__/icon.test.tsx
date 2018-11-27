@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Icon from "..";
+import { Icon } from "../icon";
 
 describe("Icon component", () => {
   it("Should Exist", () => {

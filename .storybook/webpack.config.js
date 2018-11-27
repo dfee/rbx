@@ -14,7 +14,6 @@ module.exports = (baseConfig, env, config) => {
   });
   config.plugins.push(new TSDocgenPlugin());
   config.resolve.extensions.push(".ts", ".tsx");
-  console.log(config.resolve.plugins);
   config.resolve.plugins = [
     new TsconfigPathsPlugin({ configFile: "tsconfig.json" })
   ];

@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import { ResponsiveSizeProps } from "modifiers/responsives";
-import Container from "..";
+import { Container } from "../Container";
 
 describe("Container component", () => {
   it("Should have container classname", () => {

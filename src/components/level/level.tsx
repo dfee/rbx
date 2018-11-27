@@ -1,14 +1,12 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Breakpoints } from "modifiers/responsives";
-import LevelItem from "./LevelItem";
-import LevelSide from "./LevelSide";
+import { LevelItem } from "./level-item";
+import { LevelSide } from "./level-side";
 
 export type LevelModifierProps = Partial<{
   breakpoint: Breakpoints;
@@ -18,24 +16,25 @@ export type LevelModifierProps = Partial<{
 
 export type LevelProps = ModifierProps & LevelModifierProps;
 
-type Level = RenderAsExoticComponent<LevelProps, "div"> & {
-  Item: typeof LevelItem;
-  Side: typeof LevelSide;
-};
-
-const Level: Partial<Level> = renderAsExoticComponent<LevelProps, "div">(
-  ({ children, className, breakpoint, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("level", className, {
-        [`is-${breakpoint}`]: breakpoint,
-      })}
-    >
-      {children}
-    </Element>
+export const Level = Object.assign(
+  renderAsExoticComponent<LevelProps, "div">(
+    ({ children, className, breakpoint, ...props }, ref) => (
+      <Element
+        {...props}
+        ref={ref}
+        className={cx("level", className, {
+          [`is-${breakpoint}`]: breakpoint,
+        })}
+      >
+        {children}
+      </Element>
+    ),
+    "div",
   ),
-  "div",
+  {
+    Item: LevelItem,
+    Side: LevelSide,
+  },
 );
 Level.defaultProps = Object.assign(
   {
@@ -43,8 +42,3 @@ Level.defaultProps = Object.assign(
   },
   Level.defaultProps,
 );
-
-Level.Item = LevelItem;
-Level.Side = LevelSide;
-
-export default Level as Level;

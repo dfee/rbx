@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 
 export type HeadingModifierProps = Partial<{
@@ -16,7 +16,7 @@ export type HeadingModifierProps = Partial<{
 
 export type HeadingProps = ModifierProps & HeadingModifierProps;
 
-const Heading = renderAsExoticComponent<HeadingProps, "h1">(
+export const Heading = renderAsExoticComponent<HeadingProps, "h1">(
   (
     { children, className, size, subtitle, weight, spaced, heading, ...props },
     ref,
@@ -47,5 +47,3 @@ Heading.defaultProps = Object.assign(
   },
   Heading.defaultProps,
 );
-
-export default Heading;

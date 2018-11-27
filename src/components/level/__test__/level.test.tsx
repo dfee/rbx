@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Level from "..";
+import { Level } from "../level";
 
 describe("Level component", () => {
   it("Should exist", () => {

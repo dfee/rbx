@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 
 export type ContentModifierProps = Partial<{
@@ -13,7 +13,7 @@ export type ContentModifierProps = Partial<{
 
 export type ContentProps = ModifierProps & ContentModifierProps;
 
-const Content = renderAsExoticComponent<ContentProps, "div">(
+export const Content = renderAsExoticComponent<ContentProps, "div">(
   ({ children, className, size, ...props }, ref) => (
     <Element
       {...props}
@@ -28,5 +28,3 @@ const Content = renderAsExoticComponent<ContentProps, "div">(
   "div",
 );
 Content.defaultProps = Object.assign({ children: null }, Content.defaultProps);
-
-export default Content;

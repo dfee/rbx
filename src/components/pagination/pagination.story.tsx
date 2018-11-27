@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import Pagination from "components/pagination";
+import { Pagination } from "../pagination";
 
 storiesOf("Pagination", module)
   .addDecorator(story => <div style={{ margin: 50 }}>{story()}</div>)

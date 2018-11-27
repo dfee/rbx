@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Field from "../field";
+import { Field } from "../field";
 
 describe("Field component", () => {
   it("Should Exists", () => {

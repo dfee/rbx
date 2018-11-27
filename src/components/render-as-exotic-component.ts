@@ -20,7 +20,7 @@ export interface RenderAsExoticComponent<
   ): JSX.Element | null;
 }
 
-export default function renderAsExoticComponent<
+export function renderAsExoticComponent<
   TOwnProps,
   TDefaultElement extends React.ComponentType<any> | keyof JSX.IntrinsicElements
 >(
@@ -34,7 +34,8 @@ export default function renderAsExoticComponent<
   defaultElement: TDefaultElement,
 ) {
   const forward = React.forwardRef(factory);
-  // todo: apparently a bug, use workaround
+  // https://github.com/Microsoft/TypeScript/issues/28614
+  // apparently a bug, use workaround
   // forward.defaultProps = { renderAs: defaultElement };
   forward.defaultProps = {};
   forward.defaultProps.renderAs = defaultElement;

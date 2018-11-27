@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Media from "..";
+
+import { Media } from "../media";
 
 describe("Media component", () => {
   it("Should exist", () => {

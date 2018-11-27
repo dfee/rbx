@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import * as React from "react";
 
-import renderAsExoticComponent from "components/render-as-exotic-component";
-import modifiers, { ModifierProps } from "modifiers";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
+import { classNames, clean, ModifierProps } from "modifiers";
 
 export type BreadcrumbModifierProps = Partial<{
   separator: "arrow" | "bullet" | "dot" | "succeeds";
@@ -16,7 +16,7 @@ export type BreadcrumbProps = ModifierProps &
   BreadcrumbModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"a">, "unselectable">>;
 
-const Breadcrumb = renderAsExoticComponent<BreadcrumbProps, "a">(
+export const Breadcrumb = renderAsExoticComponent<BreadcrumbProps, "a">(
   (
     {
       className,
@@ -30,12 +30,12 @@ const Breadcrumb = renderAsExoticComponent<BreadcrumbProps, "a">(
     },
     ref,
   ) => {
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
     return (
       <nav
         {...props}
         ref={ref}
-        className={cx("breadcrumb", className, modifiers.classNames(allProps), {
+        className={cx("breadcrumb", className, classNames(allProps), {
           [`has-${separator}-separator`]: separator,
           [`is-${size}`]: size,
           [`is-${align}`]: align,
@@ -66,5 +66,3 @@ const Breadcrumb = renderAsExoticComponent<BreadcrumbProps, "a">(
   },
   "a",
 );
-
-export default Breadcrumb;

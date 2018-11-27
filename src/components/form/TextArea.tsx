@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import modifiers, { ModifierProps } from "modifiers";
+import { classNames, clean, ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
 export type TextareaModifierProps = Partial<{
@@ -23,7 +23,7 @@ export type TextareaProps = ModifierProps &
     Omit<React.ComponentPropsWithoutRef<"textarea">, "color" | "unselectable">
   >;
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       className,
@@ -39,7 +39,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     },
     ref,
   ) => {
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
     return (
       <textarea
         name={name}
@@ -50,7 +50,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         placeholder={placeholder}
         readOnly={readOnly}
         disabled={disabled}
-        className={cx("textarea", modifiers.classNames(allProps), className, {
+        className={cx("textarea", classNames(allProps), className, {
           [`is-${size}`]: size,
           [`is-${color}`]: color,
         })}
@@ -63,5 +63,3 @@ Textarea.defaultProps = {
   readOnly: false,
   rows: 4,
 };
-
-export default Textarea;

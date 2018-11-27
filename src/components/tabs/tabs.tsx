@@ -1,17 +1,15 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import TabsTab from "./TabsTab";
+import { Tab } from "./tab";
 
 export type TabsModifierProps = Partial<{
   align: "centered" | "right";
   children: React.ReactNode;
-  fullwidth: "boolean";
+  fullwidth: boolean;
   size: "small" | "medium" | "large";
   style: React.CSSProperties;
   /** This is called style on Bulma documentation */
@@ -20,28 +18,27 @@ export type TabsModifierProps = Partial<{
 
 export type TabsProps = ModifierProps & TabsModifierProps;
 
-type Tabs = RenderAsExoticComponent<TabsProps, "div"> & {
-  Tab: typeof TabsTab;
-};
-
-const Tabs: Partial<Tabs> = renderAsExoticComponent<TabsProps, "div">(
-  ({ children, className, align, size, type, fullwidth, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("tabs", className, {
-        [`is-${align}`]: align,
-        [`is-${size}`]: size,
-        "is-fullwidth": fullwidth,
-        // todo: Bulma 0.6.2 is not releaset ATM
-        "is-toggle": type === "toggle-rounded",
-        [`is-${type}`]: type,
-      })}
-    >
-      <ul>{children}</ul>
-    </Element>
+export const Tabs = Object.assign(
+  renderAsExoticComponent<TabsProps, "div">(
+    ({ children, className, align, size, type, fullwidth, ...props }, ref) => (
+      <Element
+        {...props}
+        ref={ref}
+        className={cx("tabs", className, {
+          [`is-${align}`]: align,
+          [`is-${size}`]: size,
+          "is-fullwidth": fullwidth,
+          // todo: Bulma 0.6.2 is not releaset ATM
+          "is-toggle": type === "toggle-rounded",
+          [`is-${type}`]: type,
+        })}
+      >
+        <ul>{children}</ul>
+      </Element>
+    ),
+    "div",
   ),
-  "div",
+  { Tab },
 );
 Tabs.defaultProps = Object.assign(
   {
@@ -49,7 +46,3 @@ Tabs.defaultProps = Object.assign(
   },
   Tabs.defaultProps,
 );
-
-Tabs.Tab = TabsTab;
-
-export default Tabs as Tabs;

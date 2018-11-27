@@ -4,13 +4,12 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 
 import { noop } from "utils";
-import Modal from "..";
-import { ModalRefProps } from "../Modal";
+import { Modal, ModalProps } from "../modal";
 
 type GlobalWithWindow = NodeJS.Global & { window?: JSDOM["window"] };
 
 describe("Modal component", () => {
-  let component: ReactWrapper<ModalRefProps>;
+  let component: ReactWrapper<ModalProps>;
 
   function getWindow() {
     return (global as GlobalWithWindow).window!;

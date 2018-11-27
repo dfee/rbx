@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Menu from "..";
+import { Menu } from "../menu";
 
 describe("Menu component", () => {
   it("Should Exist", () => {

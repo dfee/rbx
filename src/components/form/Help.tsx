@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
@@ -14,7 +14,7 @@ export type HelpModifierProps = Partial<{
 
 export type HelpProps = ModifierProps & HelpModifierProps;
 
-const Help = renderAsExoticComponent<HelpProps, "p">(
+export const Help = renderAsExoticComponent<HelpProps, "p">(
   ({ className, children, color, ...props }, ref) => (
     <Element
       {...props}
@@ -34,5 +34,3 @@ Help.defaultProps = Object.assign(
   },
   Help.defaultProps,
 );
-
-export default Help;

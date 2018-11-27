@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Hero from "..";
+import { Hero } from "../Hero";
 
 describe("Hero component", () => {
   it("Should exist", () => {

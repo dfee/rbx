@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import modifiers, { ModifierProps } from "modifiers";
+import { classNames, clean, ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
 export type SelectModifierProps = Partial<{
@@ -27,7 +27,7 @@ export type SelectProps = ModifierProps &
     >
   >;
 
-const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       className,
@@ -45,10 +45,10 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     },
     ref,
   ) => {
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
     return (
       <div
-        className={cx("select", modifiers.classNames(allProps), className, {
+        className={cx("select", classNames(allProps), className, {
           [`is-${size}`]: size,
           [`is-${color}`]: color,
           "is-loading": loading,
@@ -78,5 +78,3 @@ Select.defaultProps = {
   multiple: false,
   readOnly: false,
 };
-
-export default Select;

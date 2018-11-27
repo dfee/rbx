@@ -251,7 +251,7 @@ Object {
       },
       "render": [Function],
     },
-    "TextArea": Object {
+    "Textarea": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "disabled": false,

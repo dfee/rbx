@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import modifiers, { ModifierProps } from "modifiers";
+import { classNames, clean, ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
 export type IconModifierProps = Partial<{
@@ -16,13 +16,13 @@ export type IconModifierProps = Partial<{
 
 export type IconProps = ModifierProps & IconModifierProps;
 
-const Icon = React.forwardRef<HTMLElement, IconProps>(
+export const Icon = React.forwardRef<HTMLElement, IconProps>(
   ({ icon, size, color, className, align, children, ...allProps }, ref) => {
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
     return (
       <span
         {...props}
-        className={cx("icon", modifiers.classNames(allProps), className, {
+        className={cx("icon", classNames(allProps), className, {
           [`is-${size}`]: size,
           [`is-${align}`]: align,
           [`has-text-${color}`]: color,
@@ -43,5 +43,3 @@ const Icon = React.forwardRef<HTMLElement, IconProps>(
 Icon.defaultProps = {
   children: null,
 };
-
-export default Icon;

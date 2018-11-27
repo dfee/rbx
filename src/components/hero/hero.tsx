@@ -1,15 +1,13 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import HeroBody from "./HeroBody";
-import HeroFooter from "./HeroFooter";
-import HeroHead from "./HeroHead";
+import { HeroBody } from "./hero-body";
+import { HeroFooter } from "./hero-footer";
+import { HeroHead } from "./hero-head";
 
 export type HeroModifierProps = Partial<{
   children: React.ReactNode;
@@ -21,27 +19,28 @@ export type HeroModifierProps = Partial<{
 
 export type HeroProps = ModifierProps & HeroModifierProps;
 
-type Hero = RenderAsExoticComponent<HeroProps, "section"> & {
-  Body: typeof HeroBody;
-  Footer: typeof HeroFooter;
-  Head: typeof HeroHead;
-};
-
-const Hero: Partial<Hero> = renderAsExoticComponent<HeroProps, "section">(
-  ({ children, className, color, gradient, size, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("hero", className, {
-        [`is-${color}`]: color,
-        [`is-${size}`]: size,
-        "is-bold": gradient,
-      })}
-    >
-      {children}
-    </Element>
+export const Hero = Object.assign(
+  renderAsExoticComponent<HeroProps, "section">(
+    ({ children, className, color, gradient, size, ...props }, ref) => (
+      <Element
+        {...props}
+        ref={ref}
+        className={cx("hero", className, {
+          [`is-${color}`]: color,
+          [`is-${size}`]: size,
+          "is-bold": gradient,
+        })}
+      >
+        {children}
+      </Element>
+    ),
+    "section",
   ),
-  "section",
+  {
+    Body: HeroBody,
+    Footer: HeroFooter,
+    Head: HeroHead,
+  },
 );
 Hero.defaultProps = Object.assign(
   {
@@ -50,9 +49,3 @@ Hero.defaultProps = Object.assign(
   },
   Hero.defaultProps,
 );
-
-Hero.Body = HeroBody;
-Hero.Footer = HeroFooter;
-Hero.Head = HeroHead;
-
-export default Hero as Hero;

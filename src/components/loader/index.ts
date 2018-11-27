@@ -1,3 +1,3 @@
 import "./loader.sass";
 
-export { default } from "./Loader";
+export { Loader } from "./loader";

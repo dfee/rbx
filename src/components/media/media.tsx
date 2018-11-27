@@ -1,13 +1,11 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import MediaContent from "./MediaContent";
-import MediaItem from "./MediaItem";
+import { MediaContent } from "./media-content";
+import { MediaItem } from "./media-item";
 
 export type MediaModifierProps = Partial<{
   children: React.ReactNode;
@@ -16,18 +14,19 @@ export type MediaModifierProps = Partial<{
 
 export type MediaProps = ModifierProps & MediaModifierProps;
 
-type Media = RenderAsExoticComponent<MediaProps, "article"> & {
-  Content: typeof MediaContent;
-  Item: typeof MediaItem;
-};
-
-const Media: Partial<Media> = renderAsExoticComponent(
-  ({ children, className, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("media", className, {})}>
-      {children}
-    </Element>
+export const Media = Object.assign(
+  renderAsExoticComponent(
+    ({ children, className, ...props }, ref) => (
+      <Element {...props} ref={ref} className={cx("media", className, {})}>
+        {children}
+      </Element>
+    ),
+    "article",
   ),
-  "article",
+  {
+    Content: MediaContent,
+    Item: MediaItem,
+  },
 );
 Media.defaultProps = Object.assign(
   {
@@ -35,8 +34,3 @@ Media.defaultProps = Object.assign(
   },
   Media.defaultProps,
 );
-
-Media.Content = MediaContent;
-Media.Item = MediaItem;
-
-export default Media as Media;

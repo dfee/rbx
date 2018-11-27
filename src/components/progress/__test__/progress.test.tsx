@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Progress from "..";
+import { Progress } from "../progress";
 
 describe("Progress component", () => {
   it("Should exist", () => {

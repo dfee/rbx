@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import { Colors } from "modifiers/colors";
-import Dropdown from "./index";
+import { Dropdown } from ".";
 
 interface DropdownControllerProps {
   hoverable?: boolean;

@@ -3,8 +3,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import renderer, { ReactTestRenderer } from "react-test-renderer";
 
-import Navbar from "..";
-import { getHtmlClasses } from "../Navbar";
+import { getHtmlClasses, Navbar } from "../navbar";
 
 type GlobalWithWindow = NodeJS.Global &
   Partial<{

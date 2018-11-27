@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { ImageSizes } from "./constants";
 
@@ -15,7 +15,7 @@ export type ImageModifierProps = Partial<{
 
 export type ImageProps = ModifierProps & ImageModifierProps;
 
-const Image = renderAsExoticComponent<ImageProps, "figure">(
+export const Image = renderAsExoticComponent<ImageProps, "figure">(
   ({ alt, className, onError, size, src, ...props }, ref) => {
     let s: string | undefined;
     if (typeof size === "string") {
@@ -37,4 +37,3 @@ const Image = renderAsExoticComponent<ImageProps, "figure">(
   },
   "figure",
 );
-export default Image;

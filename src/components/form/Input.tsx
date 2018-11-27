@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
+import { Element } from "components/element";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
@@ -29,9 +29,7 @@ export type InputModifierProps = Partial<{
     | "date"
     | "time";
   value: string;
-}> & {
-  innerRef: React.Ref<HTMLInputElement>;
-};
+}>;
 
 export type InputProps = ModifierProps &
   InputModifierProps &
@@ -42,7 +40,11 @@ export type InputProps = ModifierProps &
     >
   >;
 
-class Input extends React.PureComponent<InputProps> {
+type InputControllerProps = InputProps & {
+  innerRef: React.Ref<HTMLInputElement>;
+};
+
+class InputController extends React.PureComponent<InputControllerProps> {
   public static defaultProps = {
     disabled: false,
     isStatic: false,
@@ -86,10 +88,6 @@ class Input extends React.PureComponent<InputProps> {
   }
 }
 
-export type InputRefProps = Omit<InputProps, "innerRef">;
-
-const InputRef = React.forwardRef<HTMLInputElement, InputRefProps>(
-  (props, ref) => <Input innerRef={ref} {...props} />,
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (props, ref) => <InputController innerRef={ref} {...props} />,
 );
-
-export default InputRef;

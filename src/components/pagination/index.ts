@@ -1,3 +1,3 @@
 import "./pagination.sass";
 
-export { default } from "./Pagination";
+export { Pagination } from "./pagination";

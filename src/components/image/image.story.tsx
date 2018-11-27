@@ -2,8 +2,8 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import Image from "components/image";
-import Table from "components/table";
+import { Image } from "components/image";
+import { Table } from "components/table";
 import { IMAGE_SIZES } from "./constants";
 
 storiesOf("Image", module)

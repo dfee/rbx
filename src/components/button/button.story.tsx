@@ -3,9 +3,9 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import Box from "components/box";
-import Button from "components/button";
-import Section from "components/section";
+import { Box } from "components/box";
+import { Button } from "components/button";
+import { Section } from "components/section";
 
 const makeColorSelect = () =>
   select(
@@ -66,7 +66,7 @@ storiesOf("Button", module)
     interface CustomComponentProps {
       customProp: string;
       children: React.ReactNode;
-      className?: string; // todo: is provided by Button... shouldn't be opt.
+      className?: string;
     }
 
     const CustomComponent: React.FC<CustomComponentProps> = ({

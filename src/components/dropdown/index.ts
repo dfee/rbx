@@ -1,3 +1,3 @@
 import "./dropdown.sass";
 
-export { default } from "./Dropdown";
+export { Dropdown } from "./dropdown";

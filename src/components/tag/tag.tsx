@@ -1,13 +1,11 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
-import TagGroup from "./TagGroup";
+import { TagGroup } from "./tag-group";
 
 export type TagModifierProps = Partial<{
   children: React.ReactNode;
@@ -20,26 +18,25 @@ export type TagModifierProps = Partial<{
 
 export type TagProps = ModifierProps & TagModifierProps;
 
-type Tag = RenderAsExoticComponent<TagProps, "span"> & {
-  Group: typeof TagGroup;
-};
-
-const Tag: Partial<Tag> = renderAsExoticComponent<TagProps, "span">(
-  ({ children, className, color, size, rounded, remove, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("tag", className, {
-        [`is-${size}`]: size,
-        [`is-${color}`]: color,
-        "is-delete": remove,
-        "is-rounded": rounded,
-      })}
-    >
-      {!remove && children}
-    </Element>
+export const Tag = Object.assign(
+  renderAsExoticComponent<TagProps, "span">(
+    ({ children, className, color, size, rounded, remove, ...props }, ref) => (
+      <Element
+        {...props}
+        ref={ref}
+        className={cx("tag", className, {
+          [`is-${size}`]: size,
+          [`is-${color}`]: color,
+          "is-delete": remove,
+          "is-rounded": rounded,
+        })}
+      >
+        {!remove && children}
+      </Element>
+    ),
+    "span",
   ),
-  "span",
+  { Group: TagGroup },
 );
 Tag.defaultProps = Object.assign(
   {
@@ -49,7 +46,3 @@ Tag.defaultProps = Object.assign(
   },
   Tag.defaultProps,
 );
-
-Tag.Group = TagGroup;
-
-export default Tag as Tag;

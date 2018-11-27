@@ -1,3 +1,3 @@
 import "./message.sass";
 
-export { default } from "./Message";
+export { Message } from "./message";

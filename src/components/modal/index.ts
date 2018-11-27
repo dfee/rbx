@@ -1,3 +1,3 @@
 import "./modal.sass";
 
-export { default } from "./Modal";
+export { Modal } from "./modal";

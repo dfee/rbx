@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import modifiers, { ModifierProps } from "modifiers";
+import { classNames, clean, ModifierProps } from "modifiers";
 
 export type RadioModifierProps = Partial<{
   children: React.ReactNode;
@@ -21,15 +21,15 @@ export type RadioProps = ModifierProps &
   RadioModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"input">, "unselectable">>;
 
-const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
+export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   (
     { className, style, disabled, checked, value, name, children, ...allProps },
     ref,
   ) => {
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
     return (
       <label
-        className={cx("radio", modifiers.classNames(allProps), className)}
+        className={cx("radio", classNames(allProps), className)}
         style={style}
       >
         <input
@@ -51,5 +51,3 @@ Radio.defaultProps = {
   children: null,
   disabled: false,
 };
-
-export default Radio;

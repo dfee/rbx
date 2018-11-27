@@ -1,0 +1,61 @@
+---
+name: Breadcrumb
+menu: Components
+---
+
+import { Playground, PropsTable } from "docz";
+
+import { Box } from "components/box";
+import { Breadcrumb } from "components/breadcrumb";
+import { Content } from "components/content";
+import { Image } from "components/image";
+import { Media } from "components/media";
+
+# Breadcrumb
+
+## Basic usage
+
+export const meta = {
+  items: [
+    {
+      name: "Storybook",
+      url: "#1"
+    },
+    {
+      name: "Breadcrumb",
+      url: "#2"
+    },
+    {
+      active: true,
+      name: "Breadcrumb Types",
+      url: "#3"
+    }
+  ]
+};
+
+<Playground>
+  <Box>
+    <Breadcrumb separator="arrow" items={
+      [
+        {
+          name: "Storybook",
+          url: "#1"
+        },
+        {
+          name: "Breadcrumb",
+          url: "#2"
+        },
+        {
+          active: true,
+          name: "Breadcrumb Types",
+          url: "#3"
+        }
+      ]
+    } />
+
+  </Box>
+</Playground>
+
+## Properties
+
+<PropsTable of={Box} />

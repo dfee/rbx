@@ -1,13 +1,13 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import Button from "components/button";
-import Content from "components/content";
-import Image from "components/image";
-import Level from "components/level";
-import Media from "components/media";
-import Modal from "components/modal";
-import Section from "components/section";
+import { Button } from "components/button";
+import { Content } from "components/content";
+import { Image } from "components/image";
+import { Level } from "components/level";
+import { Media } from "components/media";
+import { Modal } from "components/modal";
+import { Section } from "components/section";
 
 interface OpenModalProps {
   modal?: {};

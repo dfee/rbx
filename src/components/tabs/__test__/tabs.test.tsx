@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Tabs from "..";
+import { Tabs } from "../tabs";
 
 describe("Tabs component", () => {
   it("Should Exist", () => {

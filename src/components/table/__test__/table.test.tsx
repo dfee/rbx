@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Table from "..";
+import { Table } from "../table";
 
 describe("Table component", () => {
   it("Should exist", () => {

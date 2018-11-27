@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 
 export type LoaderModifierProps = Partial<{
@@ -12,7 +12,7 @@ export type LoaderModifierProps = Partial<{
 
 export type LoaderProps = ModifierProps & LoaderModifierProps;
 
-const Loader = renderAsExoticComponent<LoaderProps, "div">(
+export const Loader = renderAsExoticComponent<LoaderProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("loader", className)}>
       {children}
@@ -26,5 +26,3 @@ Loader.defaultProps = Object.assign(
   },
   Loader.defaultProps,
 );
-
-export default Loader;

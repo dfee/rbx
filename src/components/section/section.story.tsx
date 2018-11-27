@@ -1,12 +1,10 @@
+import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { storiesOf } from "@storybook/react";
+import { Container } from "components/container";
+import { Heading } from "components/heading";
+import { Section } from "../section";
 
-import Container from "components/container";
-import Heading from "components/heading";
-import Section from "components/section";
-
-// TODO: doesn't seem to differentiate on sizes
 storiesOf("Section", module)
   .add("Default", () => (
     <div>

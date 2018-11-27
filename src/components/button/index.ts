@@ -1,3 +1,3 @@
 import "./button.sass";
 
-export { default } from "./Button";
+export { Button } from "./button";

@@ -2,8 +2,8 @@ import { cx } from "emotion";
 import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 
-import ModalCard, { ModalCardProps } from "./ModalCard";
-import ModalContent from "./ModalContent";
+import { ModalCard, ModalCardProps } from "./modal-card";
+import { ModalContent } from "./modal-content";
 
 export interface ModalProps {
   children: React.ReactNode;
@@ -11,24 +11,30 @@ export interface ModalProps {
   closeOnBlur?: boolean;
   closeOnEsc?: boolean;
   document?: Document;
-  innerRef: React.Ref<HTMLDivElement>;
   onClose: () => void;
   show: boolean;
   showClose?: boolean;
 }
 
-export interface ModalState {
+type ModalControllerProps = ModalProps & {
+  innerRef: React.Ref<HTMLDivElement>;
+};
+
+interface ModalControllerState {
   document: Document | null;
 }
 
-class Modal extends PureComponent<ModalProps, ModalState> {
+class ModalController extends PureComponent<
+  ModalControllerProps,
+  ModalControllerState
+> {
   public static defaultProps = {
     closeOnBlur: false,
     closeOnEsc: true,
     document: null, // Expose mount point for testing
     showClose: true,
   };
-  public readonly state: ModalState = { document: null };
+  public readonly state: ModalControllerState = { document: null };
 
   private portalElement: HTMLElement | null = null;
 
@@ -128,19 +134,12 @@ class Modal extends PureComponent<ModalProps, ModalState> {
   }
 }
 
-export type ModalRefProps = Omit<ModalProps, "innerRef">;
-
-interface ModalRef extends React.ForwardRefExoticComponent<ModalRefProps> {
-  Content: typeof ModalContent;
-  Card: typeof ModalCard;
-}
-
-const ModalRef: Partial<ModalRef> = React.forwardRef<
-  HTMLDivElement,
-  ModalRefProps
->((props, ref) => <Modal innerRef={ref} {...props} />);
-
-ModalRef.Content = ModalContent;
-ModalRef.Card = ModalCard;
-
-export default ModalRef as ModalRef;
+export const Modal = Object.assign(
+  React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => (
+    <ModalController innerRef={ref} {...props} />
+  )),
+  {
+    Card: ModalCard,
+    Content: ModalContent,
+  },
+);

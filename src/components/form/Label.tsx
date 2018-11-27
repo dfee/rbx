@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import modifiers, { ModifierProps } from "modifiers";
+import { classNames, clean, ModifierProps } from "modifiers";
 
 export type LabelModifierProps = Partial<{
   children: React.ReactNode;
@@ -15,14 +15,14 @@ export type LabelProps = ModifierProps &
   LabelModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"label">, "unselectable">>;
 
-const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ children, className, size, ...allProps }, ref) => {
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
     return (
       <label
         {...props}
         ref={ref}
-        className={cx("label", modifiers.classNames(allProps), className, {
+        className={cx("label", classNames(allProps), className, {
           [`is-${size}`]: size,
         })}
       >
@@ -34,5 +34,3 @@ const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
 Label.defaultProps = {
   children: null,
 };
-
-export default Label;

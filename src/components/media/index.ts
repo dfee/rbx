@@ -1,3 +1,3 @@
 import "./media.sass";
 
-export { default } from "./Media";
+export { Media } from "./media";

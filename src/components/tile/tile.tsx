@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
 import { Colors } from "modifiers/colors";
 
@@ -18,7 +18,7 @@ export type TileModifierProps = Partial<{
 
 export type TileProps = ModifierProps & TileModifierProps;
 
-const Tile = renderAsExoticComponent<TileProps, "div">(
+export const Tile = renderAsExoticComponent<TileProps, "div">(
   (
     {
       children,
@@ -56,5 +56,3 @@ Tile.defaultProps = Object.assign(
   },
   Tile.defaultProps,
 );
-
-export default Tile;

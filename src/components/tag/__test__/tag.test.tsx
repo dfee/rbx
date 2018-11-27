@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Tag from "..";
+import { Tag } from "../tag";
 
 describe("Tag component", () => {
   it("Should exist", () => {

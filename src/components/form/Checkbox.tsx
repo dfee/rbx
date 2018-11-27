@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import modifiers, { ModifierProps } from "modifiers";
+import { classNames, clean, ModifierProps } from "modifiers";
 
 export type CheckboxModifierProps = Partial<{
   checked: boolean;
@@ -20,15 +20,15 @@ export type CheckboxProps = ModifierProps &
   CheckboxModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"input">, "unselectable">>;
 
-const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
     { className, style, disabled, value, children, checked, name, ...allProps },
     ref,
   ) => {
-    const props = modifiers.clean(allProps);
+    const props = clean(allProps);
     return (
       <label
-        className={cx("checkbox", modifiers.classNames(allProps), className)}
+        className={cx("checkbox", classNames(allProps), className)}
         style={style}
       >
         <input
@@ -50,5 +50,3 @@ Checkbox.defaultProps = {
   children: null,
   disabled: false,
 };
-
-export default Checkbox;

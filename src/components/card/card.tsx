@@ -1,15 +1,13 @@
 import { cx } from "emotion";
 import React from "react";
 
-import Element from "components/element";
-import renderAsExoticComponent, {
-  RenderAsExoticComponent,
-} from "components/render-as-exotic-component";
+import { Element } from "components/element";
+import { renderAsExoticComponent } from "components/render-as-exotic-component";
 import { ModifierProps } from "modifiers";
-import CardContent from "./CardContent";
-import CardFooter from "./CardFooter";
-import CardHeader from "./CardHeader";
-import CardImage from "./CardImage";
+import { CardContent } from "./card-content";
+import { CardFooter } from "./card-footer";
+import { CardHeader } from "./card-header";
+import { CardImage } from "./card-image";
 
 export type CardModifierProps = Partial<{
   children?: React.ReactNode;
@@ -17,26 +15,20 @@ export type CardModifierProps = Partial<{
 
 export type CardProps = ModifierProps & CardModifierProps;
 
-interface Card extends RenderAsExoticComponent<CardProps, "div"> {
-  Content: typeof CardContent;
-  Image: typeof CardImage;
-  Header: typeof CardHeader;
-  Footer: typeof CardFooter;
-}
-
-const Card: Partial<Card> = renderAsExoticComponent<CardProps, "div">(
-  ({ className, children, ...props }, ref) => (
-    <Element ref={ref} className={cx("card", className)} {...props}>
-      {children}
-    </Element>
+export const Card = Object.assign(
+  renderAsExoticComponent<CardProps, "div">(
+    ({ className, children, ...props }, ref) => (
+      <Element ref={ref} className={cx("card", className)} {...props}>
+        {children}
+      </Element>
+    ),
+    "div",
   ),
-  "div",
+  {
+    Content: CardContent,
+    Footer: CardFooter,
+    Header: CardHeader,
+    Image: CardImage,
+  },
 );
 Card.defaultProps = Object.assign({ children: null }, Card.defaultProps);
-
-Card.Content = CardContent;
-Card.Footer = CardFooter;
-Card.Header = CardHeader;
-Card.Image = CardImage;
-
-export default Card as Card;
