@@ -6,22 +6,17 @@ import React from "react";
 import { Box } from "@/components/box";
 import { Button } from "@/components/button";
 import { Section } from "@/components/section";
+import { COLORS } from "@/modifiers/colors";
 
 const makeColorSelect = () =>
   select(
-    "Color",
+    "Colors",
     {
       Default: "",
-      black: "black",
-      danger: "danger",
-      dark: "dark",
-      info: "info",
-      light: "light",
-      link: "link",
-      primary: "primary",
-      success: "success",
-      warning: "warning",
-      white: "white",
+      ...Object.assign(
+        {},
+        ...COLORS.map((color: string) => ({ [color]: color })),
+      ),
     },
     "Default",
   );
@@ -84,7 +79,7 @@ storiesOf("Button", module)
         <Button
           color="info"
           renderAs={CustomComponent}
-          customProp="https://github.com/couds/react-bulma-components"
+          customProp="https://github.com/dfee/rbx"
         >
           Button rendered using another React Component with props
         </Button>

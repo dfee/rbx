@@ -29,9 +29,9 @@ storiesOf("Card", module)
             />
           </Media.Item>
           <Media.Item>
-            <Heading size={4 as 4}>John Smith</Heading>
+            <Heading size={4 as 4}>Devin Fee</Heading>
             <Heading subtitle size={6 as 6}>
-              @johnsmith
+              @dfee
             </Heading>
           </Media.Item>
         </Media>
@@ -61,9 +61,9 @@ storiesOf("Card", module)
             />
           </Media.Item>
           <Media.Item>
-            <Heading size={4 as 4}>John Smith</Heading>
+            <Heading size={4 as 4}>Devin Fee</Heading>
             <Heading subtitle size={6 as 6}>
-              @johnsmith
+              @dfee
             </Heading>
           </Media.Item>
         </Media>

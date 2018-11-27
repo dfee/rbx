@@ -25,10 +25,7 @@ describe("Button component", () => {
 
   it("Should be an anchor button", () => {
     const component = renderer.create(
-      <Button
-        renderAs="a"
-        href="https://github.com/couds/react-bulma-components"
-      />,
+      <Button renderAs="a" href="https://github.com/dfee/rbx" />,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });

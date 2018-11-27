@@ -1,17 +1,15 @@
-# <div style="display: flex; align-items: center"><img src="https://raw.githubusercontent.com/couds/react-bulma-components/master/docs/images/logo.png" width="40" style="margin-top: 3px" /><span>React-bulma-components</span></div>
+# <div style="display: flex; align-items: center"><img src="https://raw.githubusercontent.com/dfee/rbx/master/docs/images/logo.png" width="40" style="margin-top: 3px" /><span>rbx</span></div>
 
-
-[![Build Status](https://travis-ci.org/couds/react-bulma-components.svg?branch=master)](https://travis-ci.org/couds/react-bulma-components)
-[![Coverage Status](https://coveralls.io/repos/github/couds/react-bulma-components/badge.svg?branch=master)](https://coveralls.io/github/couds/react-bulma-components?branch=master)
-[![Release Version](https://img.shields.io/github/release/couds/react-bulma-components.svg)](https://github.com/couds/react-bulma-components)
-[![Npm Downloads](https://img.shields.io/npm/dm/react-bulma-components.svg)](https://www.npmjs.com/package/react-bulma-components)
-
+[![Build Status](https://travis-ci.org/dfee/rbx.svg?branch=master)](https://travis-ci.org/dfee/rbx)
+[![Coverage Status](https://coveralls.io/repos/github/dfee/rbx/badge.svg?branch=master)](https://coveralls.io/github/dfee/rbx?branch=master)
+[![Release Version](https://img.shields.io/github/release/dfee/rbx.svg)](https://github.com/dfee/rbx)
+[![Npm Downloads](https://img.shields.io/npm/dm/rbx.svg)](https://www.npmjs.com/package/rbx)
 
 React components for Bulma (v0.7.1) framework
 
 This is an implementation of the [Bulma](http://bulma.io/) Framework Component in React by Jeremy Thomas.
 
-You can find the Storybook stories of all components [here](https://couds.github.io/react-bulma-components/)
+You can find the Storybook stories of all components [here](https://dfee.github.io/rbx/)
 
 ### BREAKING CHANGES:
 
@@ -20,45 +18,37 @@ You can find the Storybook stories of all components [here](https://couds.github
 
 ### To Install
 
-```npm install react-bulma-components``` or ```yarn add -E react-bulma-components```
+`npm install rbx` or `yarn add -E rbx`
 
 ### To Use
 
 Follow the instructions for creating a `_variables.sass` for your project, then:
 
 ```javascript
-import React from 'react';
-// You can import from the global component (you will need to include the css file dist/react-bulma-components.min.css)
-import { Columns } from 'react-bulma-components';
+import React from "react";
+// You can import from the global component (you will need to include the css file dist/rbx.min.css)
+import { Columns } from "rbx";
 
 // You can also include the js that also bundles the css (do not work with server-side rendering)
-import { Columns } from 'react-bulma-components/full';
+import { Columns } from "rbx/full";
 
 // [RECOMENDED] Or import only the components you will use (this will reduce the total bundle size)
-// If you use this approach and want to use the global Bulma styles, import react-bulma-components/src/index.sass and configure webpack to handle sass files
-import Columns from 'react-bulma-components/lib/components/columns';
+// If you use this approach and want to use the global Bulma styles, import rbx/src/index.sass and configure webpack to handle sass files
+import Columns from "rbx/lib/components/columns";
 
 export default () => (
   <Columns>
-      <Columns.Column>
-        First Column
-      </Columns.Column>
-      <Columns.Column>
-        Second Column
-      </Columns.Column>
-      <Columns.Column>
-        Third Column
-      </Columns.Column>
-      <Columns.Column>
-        Fourth Column
-      </Columns.Column>
-    </Columns>
+    <Columns.Column>First Column</Columns.Column>
+    <Columns.Column>Second Column</Columns.Column>
+    <Columns.Column>Third Column</Columns.Column>
+    <Columns.Column>Fourth Column</Columns.Column>
+  </Columns>
 );
 ```
 
 ### Documentation
 
-You can find the documentation in https://couds.github.io/react-bulma-components
+You can find the documentation in https://dfee.github.io/rbx
 
 Each component imports their own sass file. Thus, you can reduce your css total file size by only including the styles that you will use. To enable this, please configure your [Webpack](https://webpack.github.io/) to handle sass files. You can use the webpack.config.js on the root folder of this repository.
 
@@ -66,40 +56,40 @@ Some components may vary the api/naming convention with the Bulma Docs. Please r
 
 The following components were ported:
 
-- Box ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Box)) ([Docs](http://bulma.io/documentation/elements/box/))
-- Breadcrumb ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Breadcrumb)) ([Docs](http://bulma.io/documentation/components/breadcrumb/))
-- Button ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Button)) ([Docs](http://bulma.io/documentation/elements/button/))
-- Card ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Card)) ([Docs](http://bulma.io/documentation/components/card/))
-- Column ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Columns)) ([Docs](http://bulma.io/documentation/columns/basics/))
-- Container ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Container)) ([Docs](http://bulma.io/documentation/layout/container/))
-- Content ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Content)) ([Docs](http://bulma.io/documentation/elements/content/))
-- Dropdown ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Dropdown)) ([Docs](http://bulma.io/documentation/components/dropdown/))
-- Footer ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Footer)) ([Docs](http://bulma.io/documentation/layout/footer/))
-- Form ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Form)) ([Docs](http://bulma.io/documentation/form/general/))
-- Heading (Title, Subtitle and heading on Bulma) ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Heading)) ([Docs](http://bulma.io/documentation/elements/title/))
-- Hero ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Hero)) ([Docs](http://bulma.io/documentation/layout/hero/))
-- Icon ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Icon)) ([Docs](http://bulma.io/documentation/elements/icon/))
-- Image ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Image)) ([Docs](http://bulma.io/documentation/elements/image/))
-- Level ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Level)) ([Docs](http://bulma.io/documentation/layout/level/))
-- Loader ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Loader))
-- Media ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Media)) ([Docs](http://bulma.io/documentation/layout/media-object/))
-- Message ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Message)) ([Docs](http://bulma.io/documentation/components/message/))
-- Menu ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Menu)) ([Docs](http://bulma.io/documentation/components/menu/))
-- Modal ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Modal)) ([Docs](http://bulma.io/documentation/components/modal/))
-- Navbar ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Navbar)) ([Docs](https://bulma.io/documentation/components/navbar/))
-- Notification ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Notification)) ([Docs](http://bulma.io/documentation/elements/notification/))
-- Pagination ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Pagination)) ([Docs](https://bulma.io/documentation/components/pagination/))
-- Panel ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Panel)) ([Docs](https://bulma.io/documentation/components/panel/))
-- Progress ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Progress)) ([Docs](http://bulma.io/documentation/elements/progress/))
-- Section ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Section)) ([Docs](http://bulma.io/documentation/layout/section/))
-- Tabs ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Tabs)) ([Docs](https://bulma.io/documentation/components/tabs/))
-- Table ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Table)) ([Docs](http://bulma.io/documentation/elements/table/))
-- Tag ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Tag)) ([Docs](http://bulma.io/documentation/elements/tag/))
-- Tile ([Storybook](https://couds.github.io/react-bulma-components/?selectedKind=Tile)) ([Docs](http://bulma.io/documentation/layout/tiles/))
+- Box ([Storybook](https://dfee.github.io/rbx/?selectedKind=Box)) ([Docs](http://bulma.io/documentation/elements/box/))
+- Breadcrumb ([Storybook](https://dfee.github.io/rbx/?selectedKind=Breadcrumb)) ([Docs](http://bulma.io/documentation/components/breadcrumb/))
+- Button ([Storybook](https://dfee.github.io/rbx/?selectedKind=Button)) ([Docs](http://bulma.io/documentation/elements/button/))
+- Card ([Storybook](https://dfee.github.io/rbx/?selectedKind=Card)) ([Docs](http://bulma.io/documentation/components/card/))
+- Column ([Storybook](https://dfee.github.io/rbx/?selectedKind=Columns)) ([Docs](http://bulma.io/documentation/columns/basics/))
+- Container ([Storybook](https://dfee.github.io/rbx/?selectedKind=Container)) ([Docs](http://bulma.io/documentation/layout/container/))
+- Content ([Storybook](https://dfee.github.io/rbx/?selectedKind=Content)) ([Docs](http://bulma.io/documentation/elements/content/))
+- Dropdown ([Storybook](https://dfee.github.io/rbx/?selectedKind=Dropdown)) ([Docs](http://bulma.io/documentation/components/dropdown/))
+- Footer ([Storybook](https://dfee.github.io/rbx/?selectedKind=Footer)) ([Docs](http://bulma.io/documentation/layout/footer/))
+- Form ([Storybook](https://dfee.github.io/rbx/?selectedKind=Form)) ([Docs](http://bulma.io/documentation/form/general/))
+- Heading (Title, Subtitle and heading on Bulma) ([Storybook](https://dfee.github.io/rbx/?selectedKind=Heading)) ([Docs](http://bulma.io/documentation/elements/title/))
+- Hero ([Storybook](https://dfee.github.io/rbx/?selectedKind=Hero)) ([Docs](http://bulma.io/documentation/layout/hero/))
+- Icon ([Storybook](https://dfee.github.io/rbx/?selectedKind=Icon)) ([Docs](http://bulma.io/documentation/elements/icon/))
+- Image ([Storybook](https://dfee.github.io/rbx/?selectedKind=Image)) ([Docs](http://bulma.io/documentation/elements/image/))
+- Level ([Storybook](https://dfee.github.io/rbx/?selectedKind=Level)) ([Docs](http://bulma.io/documentation/layout/level/))
+- Loader ([Storybook](https://dfee.github.io/rbx/?selectedKind=Loader))
+- Media ([Storybook](https://dfee.github.io/rbx/?selectedKind=Media)) ([Docs](http://bulma.io/documentation/layout/media-object/))
+- Message ([Storybook](https://dfee.github.io/rbx/?selectedKind=Message)) ([Docs](http://bulma.io/documentation/components/message/))
+- Menu ([Storybook](https://dfee.github.io/rbx/?selectedKind=Menu)) ([Docs](http://bulma.io/documentation/components/menu/))
+- Modal ([Storybook](https://dfee.github.io/rbx/?selectedKind=Modal)) ([Docs](http://bulma.io/documentation/components/modal/))
+- Navbar ([Storybook](https://dfee.github.io/rbx/?selectedKind=Navbar)) ([Docs](https://bulma.io/documentation/components/navbar/))
+- Notification ([Storybook](https://dfee.github.io/rbx/?selectedKind=Notification)) ([Docs](http://bulma.io/documentation/elements/notification/))
+- Pagination ([Storybook](https://dfee.github.io/rbx/?selectedKind=Pagination)) ([Docs](https://bulma.io/documentation/components/pagination/))
+- Panel ([Storybook](https://dfee.github.io/rbx/?selectedKind=Panel)) ([Docs](https://bulma.io/documentation/components/panel/))
+- Progress ([Storybook](https://dfee.github.io/rbx/?selectedKind=Progress)) ([Docs](http://bulma.io/documentation/elements/progress/))
+- Section ([Storybook](https://dfee.github.io/rbx/?selectedKind=Section)) ([Docs](http://bulma.io/documentation/layout/section/))
+- Tabs ([Storybook](https://dfee.github.io/rbx/?selectedKind=Tabs)) ([Docs](https://bulma.io/documentation/components/tabs/))
+- Table ([Storybook](https://dfee.github.io/rbx/?selectedKind=Table)) ([Docs](http://bulma.io/documentation/elements/table/))
+- Tag ([Storybook](https://dfee.github.io/rbx/?selectedKind=Tag)) ([Docs](http://bulma.io/documentation/elements/tag/))
+- Tile ([Storybook](https://dfee.github.io/rbx/?selectedKind=Tile)) ([Docs](http://bulma.io/documentation/layout/tiles/))
 
 ### Override Bulma variables
 
-To override the variables set by Bulma you will need to create a sass file like this one (_variable.sass):
+To override the variables set by Bulma you will need to create a sass file like this one (\_variable.sass):
 
 ```sass
 @import '~bulma/sass/utilities/initial-variables.sass'
@@ -170,11 +160,11 @@ Create React App 2 now supports automatic SASS compilation, meaning that all you
 // Any Bulma variables I want to override go here...
 $family-sans-serif: 'Overpass', sans-serif
 
-@import '~react-bulma-components/src/index'
+@import '~rbx/src/index'
 ```
 
 Of course, as per the CRA team's instructions, make sure to import this stylesheet somewhere in your CRA app:
 
 ```js
-import './App.sass';
+import "./App.sass";
 ```

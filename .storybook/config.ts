@@ -7,9 +7,9 @@ import { addDecorator, configure } from "@storybook/react";
 import "../src/index.sass";
 
 setOptions({
-  name: "React Bulma Components",
+  name: "RBX",
   showAddonPanel: true,
-  url: "https://github.com/couds/react-bulma-components",
+  url: "https://github.com/dfee/rbx",
 });
 
 addDecorator(

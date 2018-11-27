@@ -166,7 +166,7 @@ exports[`Button component Should be an anchor button 1`] = `
 <a
   className="button"
   disabled={false}
-  href="https://github.com/couds/react-bulma-components"
+  href="https://github.com/dfee/rbx"
   onClick={[Function]}
   tabIndex={0}
 />

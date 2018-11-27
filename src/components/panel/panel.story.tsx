@@ -29,7 +29,7 @@ storiesOf("Panel", module)
       </Panel.Block>
       <Panel.Block>
         <Panel.Icon renderAs={Icon} icon="angle-down" />
-        react-bulma-components
+        rbc
       </Panel.Block>
       <Panel.Block>
         <Panel.Icon renderAs={Icon} icon="angle-down" />
@@ -41,7 +41,7 @@ storiesOf("Panel", module)
       </Panel.Block>
       <Panel.Block>
         <Panel.Icon renderAs={Icon} icon="angle-down" />
-        couds.gidhub.io
+        dfee.github.io
       </Panel.Block>
       <Panel.Block>
         <Panel.Icon renderAs={Icon} icon="angle-down" />

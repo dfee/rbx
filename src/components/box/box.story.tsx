@@ -46,8 +46,7 @@ storiesOf("Box", module).add("Default", () => (
       <Media.Item>
         <Content>
           <p>
-            <strong>John Smith</strong> <small>@johnsmith</small>{" "}
-            <small>31m</small>
+            <strong>Devin Fee</strong> <small>@dfee</small> <small>31m</small>
             <br />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
             ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas

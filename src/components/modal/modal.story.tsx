@@ -95,7 +95,7 @@ storiesOf("Modal", module)
             <Media.Item>
               <Content>
                 <p>
-                  <strong>John Smith</strong> <small>@johnsmith</small>{" "}
+                  <strong>Devin Fee</strong> <small>@dfee</small>{" "}
                   <small>31m</small>
                   <br />
                   If the children of the Modal is a card, the close button will
