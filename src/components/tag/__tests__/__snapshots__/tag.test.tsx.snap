@@ -88,6 +88,88 @@ exports[`Tag component Should use use color black 1`] = `
 <span
   className="tag is-black"
 >
-  tag black
+  tag 
+  black
+</span>
+`;
+
+exports[`Tag component Should use use color danger 1`] = `
+<span
+  className="tag is-danger"
+>
+  tag 
+  danger
+</span>
+`;
+
+exports[`Tag component Should use use color dark 1`] = `
+<span
+  className="tag is-dark"
+>
+  tag 
+  dark
+</span>
+`;
+
+exports[`Tag component Should use use color info 1`] = `
+<span
+  className="tag is-info"
+>
+  tag 
+  info
+</span>
+`;
+
+exports[`Tag component Should use use color light 1`] = `
+<span
+  className="tag is-light"
+>
+  tag 
+  light
+</span>
+`;
+
+exports[`Tag component Should use use color link 1`] = `
+<span
+  className="tag is-link"
+>
+  tag 
+  link
+</span>
+`;
+
+exports[`Tag component Should use use color primary 1`] = `
+<span
+  className="tag is-primary"
+>
+  tag 
+  primary
+</span>
+`;
+
+exports[`Tag component Should use use color success 1`] = `
+<span
+  className="tag is-success"
+>
+  tag 
+  success
+</span>
+`;
+
+exports[`Tag component Should use use color warning 1`] = `
+<span
+  className="tag is-warning"
+>
+  tag 
+  warning
+</span>
+`;
+
+exports[`Tag component Should use use color white 1`] = `
+<span
+  className="tag is-white"
+>
+  tag 
+  white
 </span>
 `;

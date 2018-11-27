@@ -47,7 +47,107 @@ exports[`Notification component Should use color black 1`] = `
   className="notification is-black"
 >
   <p>
-    Default
+    Default 
+    black
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color danger 1`] = `
+<div
+  className="notification is-danger"
+>
+  <p>
+    Default 
+    danger
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color dark 1`] = `
+<div
+  className="notification is-dark"
+>
+  <p>
+    Default 
+    dark
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color info 1`] = `
+<div
+  className="notification is-info"
+>
+  <p>
+    Default 
+    info
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color light 1`] = `
+<div
+  className="notification is-light"
+>
+  <p>
+    Default 
+    light
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color link 1`] = `
+<div
+  className="notification is-link"
+>
+  <p>
+    Default 
+    link
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color primary 1`] = `
+<div
+  className="notification is-primary"
+>
+  <p>
+    Default 
+    primary
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color success 1`] = `
+<div
+  className="notification is-success"
+>
+  <p>
+    Default 
+    success
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color warning 1`] = `
+<div
+  className="notification is-warning"
+>
+  <p>
+    Default 
+    warning
+  </p>
+</div>
+`;
+
+exports[`Notification component Should use color white 1`] = `
+<div
+  className="notification is-white"
+>
+  <p>
+    Default 
+    white
   </p>
 </div>
 `;

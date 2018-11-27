@@ -51,3 +51,75 @@ exports[`Progress component Should use use color black 1`] = `
   value={30}
 />
 `;
+
+exports[`Progress component Should use use color danger 1`] = `
+<progress
+  className="progress is-danger"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color dark 1`] = `
+<progress
+  className="progress is-dark"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color info 1`] = `
+<progress
+  className="progress is-info"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color light 1`] = `
+<progress
+  className="progress is-light"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color link 1`] = `
+<progress
+  className="progress is-link"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color primary 1`] = `
+<progress
+  className="progress is-primary"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color success 1`] = `
+<progress
+  className="progress is-success"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color warning 1`] = `
+<progress
+  className="progress is-warning"
+  max={100}
+  value={30}
+/>
+`;
+
+exports[`Progress component Should use use color white 1`] = `
+<progress
+  className="progress is-white"
+  max={100}
+  value={30}
+/>
+`;

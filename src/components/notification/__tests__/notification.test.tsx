@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { COLORS } from "modifiers/colors";
 import { Notification } from "../notification";
 
 describe("Notification component", () => {
@@ -47,12 +48,14 @@ describe("Notification component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use color black", () => {
-    const component = renderer.create(
-      <Notification color={"black" as "black"}>
-        <p>Default</p>
-      </Notification>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  COLORS.map(color =>
+    it(`Should use color ${color}`, () => {
+      const component = renderer.create(
+        <Notification color={color}>
+          <p>Default {color}</p>
+        </Notification>,
+      );
+      expect(component.toJSON()).toMatchSnapshot();
+    }),
+  );
 });

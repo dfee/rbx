@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { COLORS } from "modifiers/colors";
 import { Tag } from "../tag";
 
 describe("Tag component", () => {
@@ -48,10 +49,10 @@ describe("Tag component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use use color black", () => {
-    const component = renderer.create(
-      <Tag color={"black" as "black"}>tag black</Tag>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  COLORS.map(color =>
+    it(`Should use use color ${color}`, () => {
+      const component = renderer.create(<Tag color={color}>tag {color}</Tag>);
+      expect(component.toJSON()).toMatchSnapshot();
+    }),
+  );
 });

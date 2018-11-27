@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { COLORS } from "modifiers/colors";
 import { Progress } from "../progress";
 
 describe("Progress component", () => {
@@ -34,10 +35,12 @@ describe("Progress component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use use color black", () => {
-    const component = renderer.create(
-      <Progress value={30} max={100} color="black" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  COLORS.map(color =>
+    it(`Should use use color ${color}`, () => {
+      const component = renderer.create(
+        <Progress value={30} max={100} color={color} />,
+      );
+      expect(component.toJSON()).toMatchSnapshot();
+    }),
+  );
 });

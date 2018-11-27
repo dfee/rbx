@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { COLORS } from "modifiers/colors";
 import { Hero } from "../Hero";
 
 describe("Hero component", () => {
@@ -65,25 +66,14 @@ describe("Hero component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use use color black", () => {
-    const component = renderer.create(
-      <Hero color={"black" as "black"}>
-        <p>Default</p>
-      </Hero>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  // [null]
-  //   .concat(Object.keys(CONSTANTS.COLORS).map(key => CONSTANTS.COLORS[key]))
-  //   .map(color =>
-  //     it(`Should use use color ${color}`, () => {
-  //       const component = renderer.create(
-  //         <Hero color={color}>
-  //           <p>Default</p>
-  //         </Hero>,
-  //       );
-  //       expect(component.toJSON()).toMatchSnapshot();
-  //     }),
-  //   );
+  COLORS.map(color =>
+    it(`Should use use color ${color}`, () => {
+      const component = renderer.create(
+        <Hero color={color}>
+          <p>Default {color}</p>
+        </Hero>,
+      );
+      expect(component.toJSON()).toMatchSnapshot();
+    }),
+  );
 });

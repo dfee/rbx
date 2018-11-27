@@ -1,6 +1,6 @@
 module.exports = {
   setupFiles: ["raf/polyfill"],
-  setupTestFrameworkScriptFile: "./__test__/setup.ts",
+  setupTestFrameworkScriptFile: "./__tests__/setup.ts",
   rootDir: "src",
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
   coverageDirectory: "<rootDir>/../.coverage",

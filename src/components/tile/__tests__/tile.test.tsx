@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { COLORS } from "modifiers/colors";
 import { Tile } from "../tile";
 
 describe("Tile component", () => {
@@ -47,12 +48,14 @@ describe("Tile component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use use color black", () => {
-    const component = renderer.create(
-      <Tile notification color={"black" as "black"}>
-        <p>Default</p>
-      </Tile>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  COLORS.map(color =>
+    it(`Should use use color ${color}`, () => {
+      const component = renderer.create(
+        <Tile notification color={color}>
+          <p>Default {color}</p>
+        </Tile>,
+      );
+      expect(component.toJSON()).toMatchSnapshot();
+    }),
+  );
 });

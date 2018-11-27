@@ -150,7 +150,107 @@ exports[`Hero component Should use use color black 1`] = `
   className="hero is-black"
 >
   <p>
-    Default
+    Default 
+    black
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color danger 1`] = `
+<section
+  className="hero is-danger"
+>
+  <p>
+    Default 
+    danger
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color dark 1`] = `
+<section
+  className="hero is-dark"
+>
+  <p>
+    Default 
+    dark
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color info 1`] = `
+<section
+  className="hero is-info"
+>
+  <p>
+    Default 
+    info
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color light 1`] = `
+<section
+  className="hero is-light"
+>
+  <p>
+    Default 
+    light
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color link 1`] = `
+<section
+  className="hero is-link"
+>
+  <p>
+    Default 
+    link
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color primary 1`] = `
+<section
+  className="hero is-primary"
+>
+  <p>
+    Default 
+    primary
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color success 1`] = `
+<section
+  className="hero is-success"
+>
+  <p>
+    Default 
+    success
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color warning 1`] = `
+<section
+  className="hero is-warning"
+>
+  <p>
+    Default 
+    warning
+  </p>
+</section>
+`;
+
+exports[`Hero component Should use use color white 1`] = `
+<section
+  className="hero is-white"
+>
+  <p>
+    Default 
+    white
   </p>
 </section>
 `;
