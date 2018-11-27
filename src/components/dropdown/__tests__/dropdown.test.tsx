@@ -1,20 +1,18 @@
 import { mount, shallow } from "enzyme";
-import { JSDOM } from "jsdom";
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { getWindow, setupWindow, teardownWindow } from "@/__tests__/helpers";
 import { noop } from "@/utils";
 import { Dropdown } from "../dropdown";
 
-interface GlobalWithWindow extends NodeJS.Global {
-  window: JSDOM["window"];
-}
-
 describe("Dropdown component", () => {
   beforeEach(() => {
-    (global as GlobalWithWindow).window = new JSDOM(
-      '<body><div id="app-root"></div></body>',
-    ).window;
+    setupWindow();
+  });
+
+  afterEach(() => {
+    teardownWindow();
   });
 
   it("Should Exist", () => {
@@ -31,8 +29,8 @@ describe("Dropdown component", () => {
   });
 
   it("Should add listener do document on mount", () => {
-    const document = (global as GlobalWithWindow).window.document;
-    const app = document.querySelector<HTMLElement>("#app-root");
+    const window = getWindow();
+    const app = window.document.querySelector<HTMLElement>("#app-root");
     document.addEventListener = jest.fn();
     const component = mount(
       <Dropdown value="value" onChange={noop}>

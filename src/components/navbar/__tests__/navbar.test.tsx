@@ -1,34 +1,22 @@
-import { JSDOM } from "jsdom";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import renderer, { ReactTestRenderer } from "react-test-renderer";
 
+import { setupWindow, teardownWindow } from "@/__tests__/helpers";
 import { getHtmlClasses, Navbar } from "../navbar";
-
-type GlobalWithWindow = NodeJS.Global &
-  Partial<{
-    window?: JSDOM["window"];
-    navigator: { userAgent: string };
-  }>;
 
 describe("Navbar component", () => {
   let component: ReactTestRenderer;
 
   beforeEach(() => {
-    (global as GlobalWithWindow).window = new JSDOM(
-      '<!doctype html><html><body><div id="app-root"></div></body></html>',
-    ).window;
-    (global as GlobalWithWindow).navigator = {
-      userAgent: "node.js",
-    };
+    setupWindow();
   });
 
   afterEach(() => {
     if (component && component.unmount) {
       component.unmount();
     }
-    (global as GlobalWithWindow).window = undefined;
-    (global as GlobalWithWindow).navigator = undefined;
+    teardownWindow();
   });
 
   it("Should Exist", () => {

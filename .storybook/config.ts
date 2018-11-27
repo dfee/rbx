@@ -1,3 +1,4 @@
+import { checkA11y } from "@storybook/addon-a11y";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
@@ -11,14 +12,14 @@ setOptions({
   url: "https://github.com/couds/react-bulma-components",
 });
 
-addDecorator(withKnobs);
-
 addDecorator(
   withInfo({
     // propTables: false,
     source: false,
   }),
 );
+addDecorator(withKnobs);
+addDecorator(checkA11y);
 
 function loadStories() {
   const req = require.context("../src", true, /\.story\.tsx$/);

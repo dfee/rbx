@@ -1,24 +1,18 @@
 import { shallow } from "enzyme";
-import { JSDOM } from "jsdom";
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { setupWindow, teardownWindow } from "@/__tests__/helpers";
 import { noop } from "@/utils";
 import { InputFile } from "../input-file";
 
-interface GlobalWithWindow extends NodeJS.Global {
-  window?: JSDOM["window"];
-}
-
 describe("Dropdown component", () => {
   beforeEach(() => {
-    (global as GlobalWithWindow).window = new JSDOM(
-      '<body><div id="app-root"></div></body>',
-    ).window;
+    setupWindow();
   });
 
   afterEach(() => {
-    (global as GlobalWithWindow).window = undefined;
+    teardownWindow();
   });
 
   it("Should Exist", () => {

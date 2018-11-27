@@ -1,29 +1,23 @@
 import { mount, ReactWrapper } from "enzyme";
-import { JSDOM } from "jsdom";
 import React from "react";
 import { renderToString } from "react-dom/server";
 
+import { getWindow, setupWindow, teardownWindow } from "@/__tests__/helpers";
 import { noop } from "@/utils";
 import { Modal, ModalProps } from "../modal";
-
-type GlobalWithWindow = NodeJS.Global & { window?: JSDOM["window"] };
 
 describe("Modal component", () => {
   let component: ReactWrapper<ModalProps>;
 
-  function getWindow() {
-    return (global as GlobalWithWindow).window!;
-  }
-
   beforeEach(() => {
-    (global as GlobalWithWindow).window = new JSDOM().window;
+    setupWindow();
   });
 
   afterEach(() => {
     if (component && component.exists() && component.unmount) {
       component.unmount();
     }
-    (global as GlobalWithWindow).window = undefined;
+    teardownWindow();
   });
 
   it("Should Exist", () => {
