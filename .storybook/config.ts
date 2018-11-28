@@ -4,7 +4,7 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import { addDecorator, configure } from "@storybook/react";
 
-import "../src/index.sass";
+import "../src/index.module.sass";
 
 setOptions({
   name: "RBX",
