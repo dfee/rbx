@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type ModalContentModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type ModalContentModifierProps = Partial<{
 
 export type ModalContentProps = ModifierProps & ModalContentModifierProps;
 
-export const ModalContent = renderAsExoticComponent<ModalContentProps, "div">(
+export const ModalContent = extendedForwardRef<ModalContentProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("modal-content", className)}>
       {children}

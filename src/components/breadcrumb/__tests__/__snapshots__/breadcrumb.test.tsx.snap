@@ -36,7 +36,7 @@ exports[`Breadcrumb component Should be a Breadcrumb 1`] = `
 </nav>
 `;
 
-exports[`Breadcrumb component Should not pass along item.url as hrefAttr prop on renderAs component when hrefAttr is not supplied 1`] = `
+exports[`Breadcrumb component Should not pass along item.url as hrefAttr prop on 'as' component when hrefAttr is not supplied 1`] = `
 <nav
   className="breadcrumb"
 >
@@ -60,7 +60,7 @@ exports[`Breadcrumb component Should not pass along item.url as hrefAttr prop on
 </nav>
 `;
 
-exports[`Breadcrumb component Should pass along item.url as hrefAttr prop on renderAs component when hrefAttr is supplied 1`] = `
+exports[`Breadcrumb component Should pass along item.url as hrefAttr prop on 'as' component when hrefAttr is supplied 1`] = `
 <nav
   className="breadcrumb"
 >

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type LevelSideModifierProps = Partial<{
@@ -12,7 +12,7 @@ export type LevelSideModifierProps = Partial<{
 
 export type LevelSideProps = ModifierProps & LevelSideModifierProps;
 
-export const LevelSide = renderAsExoticComponent<LevelSideProps, "div">(
+export const LevelSide = extendedForwardRef<LevelSideProps, "div">(
   ({ children, className, align, ...props }, ref) => (
     <Element
       {...props}

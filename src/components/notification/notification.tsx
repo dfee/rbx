@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/colors";
 
@@ -13,7 +13,7 @@ export type NotificationModifierProps = Partial<{
 
 export type NotificationProps = ModifierProps & NotificationModifierProps;
 
-export const Notification = renderAsExoticComponent<NotificationProps, "div">(
+export const Notification = extendedForwardRef<NotificationProps, "div">(
   ({ children, className, color, ...props }, ref) => (
     <Element
       {...props}

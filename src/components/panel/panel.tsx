@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { PanelBlock } from "./panel-block";
 import { PanelHeader } from "./panel-header";
@@ -11,7 +11,7 @@ import { PanelTabs } from "./panel-tabs";
 export type PanelProps = ModifierProps;
 
 export const Panel = Object.assign(
-  renderAsExoticComponent<PanelProps, "nav">(
+  extendedForwardRef<PanelProps, "nav">(
     ({ className, ...props }, ref) => (
       <Element {...props} ref={ref} className={cx("panel", className)} />
     ),

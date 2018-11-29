@@ -1,5 +1,6 @@
 import { cx } from "emotion";
-import { ComponentProps } from "react";
+
+import { makeModify } from "./utils";
 
 export type HelpersProps = Partial<{
   clearfix: boolean;
@@ -15,35 +16,32 @@ export type HelpersProps = Partial<{
   hidden: boolean;
 }>;
 
-export function classNames(props: ComponentProps<any>) {
-  return cx({
-    "is-clearfix": props.clearfix,
-    "is-clipped": props.clipped,
-    "is-hidden": props.hidden,
-    "is-invisible": props.invisible,
-    "is-marginless": props.marginless,
-    "is-overlay": props.overlay,
-    "is-paddingless": props.paddingless,
-    [`is-pulled-${props.pull}`]: props.pull,
-    "is-radiusless": props.radiusless,
-    "is-shadowless": props.shadowless,
-    "is-unselectable": props.unselectable,
-  });
-}
-
-export function clean({
-  hidden,
-  clearfix,
-  paddingless,
-  pull,
-  marginless,
-  overlay,
-  clipped,
-  radiusless,
-  shadowless,
-  unselectable,
-  invisible,
-  ...props
-}: ComponentProps<any>) {
-  return props;
-}
+export const modify = makeModify<HelpersProps>(
+  props =>
+    cx(props.className, {
+      "is-clearfix": props.clearfix,
+      "is-clipped": props.clipped,
+      "is-hidden": props.hidden,
+      "is-invisible": props.invisible,
+      "is-marginless": props.marginless,
+      "is-overlay": props.overlay,
+      "is-paddingless": props.paddingless,
+      [`is-pulled-${props.pull}`]: props.pull,
+      "is-radiusless": props.radiusless,
+      "is-shadowless": props.shadowless,
+      "is-unselectable": props.unselectable,
+    }),
+  [
+    "clearfix",
+    "clipped",
+    "hidden",
+    "invisible",
+    "marginless",
+    "overlay",
+    "paddingless",
+    "pull",
+    "radiusless",
+    "shadowless",
+    "unselectable",
+  ],
+);

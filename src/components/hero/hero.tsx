@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/colors";
 import { HeroBody } from "./hero-body";
@@ -19,7 +19,7 @@ export type HeroModifierProps = Partial<{
 export type HeroProps = ModifierProps & HeroModifierProps;
 
 export const Hero = Object.assign(
-  renderAsExoticComponent<HeroProps, "section">(
+  extendedForwardRef<HeroProps, "section">(
     ({ children, className, color, gradient, size, ...props }, ref) => (
       <Element
         {...props}

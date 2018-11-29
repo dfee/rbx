@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type MediaItemModifierProps = Partial<{
@@ -12,7 +12,7 @@ export type MediaItemModifierProps = Partial<{
 
 export type MediaItemProps = ModifierProps & MediaItemModifierProps;
 
-export const MediaItem = renderAsExoticComponent<MediaItemProps, "div">(
+export const MediaItem = extendedForwardRef<MediaItemProps, "div">(
   ({ children, className, position, ...props }, ref) => {
     const p = position === "center" ? "content" : position;
     return (

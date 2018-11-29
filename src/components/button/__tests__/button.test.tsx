@@ -25,42 +25,36 @@ describe("Button component", () => {
 
   it("Should be an anchor button", () => {
     const component = renderer.create(
-      <Button renderAs="a" href="https://github.com/dfee/rbx" />,
+      <Button<"a"> as="a" href="https://github.com/dfee/rbx" />,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("Should be a Primary Button", () => {
-    const component = renderer.create(
-      <Button color={"primary" as "primary"} />,
-    );
+    const component = renderer.create(<Button color="primary" />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("Should be a Large Primary Button", () => {
-    const component = renderer.create(
-      <Button color={"primary" as "primary"} size={"large" as "large"} />,
-    );
+    const component = renderer.create(<Button color="primary" size="large" />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("Should render as a static Button", () => {
-    const component = renderer.create(
-      <Button isStatic color={"primary" as "primary"} />,
-    );
+    const component = renderer.create(<Button isStatic color="primary" />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("Should render as a html button", () => {
     const component = renderer.create(
-      <Button renderAs="button" color="danger" />,
+      <Button<"button"> as="button" color="danger" />,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("Should render as a React element link with to prop", () => {
     const component = renderer.create(
-      <Button renderAs={Link} to="http://google.com" color="danger">
+      <Button<typeof Link> as={Link} to="http://google.com" color="danger">
         TEST
       </Button>,
     );
@@ -102,11 +96,11 @@ describe("Button component", () => {
     component.simulate("click");
     component.simulate("click");
     expect(spy).toHaveBeenCalledTimes(2);
-    Button.defaultProps!.onClick.mockRestore();
+    spy.mockRestore();
   });
 
   it("Should forward ref", () => {
-    const testRef = React.createRef();
+    const testRef = React.createRef<HTMLButtonElement>();
     mount(<Button ref={testRef} />);
     expect(testRef.current).not.toBeNull();
   });
@@ -144,7 +138,7 @@ describe("Button component", () => {
 
     it("Should be centered", () => {
       const component = renderer.create(
-        <Button.Group position={"centered" as "centered"}>
+        <Button.Group position="centered">
           <Button>test 0</Button>
           <Button>test 1</Button>
         </Button.Group>,
@@ -154,7 +148,7 @@ describe("Button component", () => {
 
     it("Should align to the right", () => {
       const component = renderer.create(
-        <Button.Group position={"right" as "right"}>
+        <Button.Group position="right">
           <Button>test 0</Button>
           <Button>test 1</Button>
         </Button.Group>,

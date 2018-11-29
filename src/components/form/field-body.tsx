@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type FieldBodyModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type FieldBodyModifierProps = Partial<{
 
 export type FieldBodyProps = ModifierProps & FieldBodyModifierProps;
 
-export const FieldBody = renderAsExoticComponent<FieldBodyProps, "div">(
+export const FieldBody = extendedForwardRef<FieldBodyProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("field-body", className, {})}>
       {children}

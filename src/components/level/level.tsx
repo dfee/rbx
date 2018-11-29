@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { Breakpoints } from "@/modifiers/responsives";
 import { LevelItem } from "./level-item";
@@ -16,7 +16,7 @@ export type LevelModifierProps = Partial<{
 export type LevelProps = ModifierProps & LevelModifierProps;
 
 export const Level = Object.assign(
-  renderAsExoticComponent<LevelProps, "div">(
+  extendedForwardRef<LevelProps, "div">(
     ({ children, className, breakpoint, ...props }, ref) => (
       <Element
         {...props}

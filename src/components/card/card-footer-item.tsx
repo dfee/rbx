@@ -1,15 +1,12 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type CardFooterItemProps = ModifierProps;
 
-export const CardFooterItem = renderAsExoticComponent<
-  CardFooterItemProps,
-  "div"
->(
+export const CardFooterItem = extendedForwardRef<CardFooterItemProps, "div">(
   ({ className, ...props }, ref) => (
     <Element
       {...props}

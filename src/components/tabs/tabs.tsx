@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { Tab } from "./tab";
 
@@ -18,7 +18,7 @@ export type TabsModifierProps = Partial<{
 export type TabsProps = ModifierProps & TabsModifierProps;
 
 export const Tabs = Object.assign(
-  renderAsExoticComponent<TabsProps, "div">(
+  extendedForwardRef<TabsProps, "div">(
     ({ children, className, align, size, type, fullwidth, ...props }, ref) => (
       <Element
         {...props}

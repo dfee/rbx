@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type PanelBlockModifierProps = Partial<{
@@ -10,7 +10,7 @@ export type PanelBlockModifierProps = Partial<{
 
 export type PanelBlockProps = ModifierProps & PanelBlockModifierProps;
 
-export const PanelBlock = renderAsExoticComponent<PanelBlockProps, "div">(
+export const PanelBlock = extendedForwardRef<PanelBlockProps, "div">(
   ({ className, active, ...props }, ref) => (
     <Element
       {...props}

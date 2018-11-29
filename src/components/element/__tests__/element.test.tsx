@@ -1,22 +1,22 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Element } from "..";
+import { Element } from "../element";
 
 describe("Element component", () => {
   it("Should Exist", () => {
     expect(Element).toMatchSnapshot();
   });
 
-  it("Should have helpers classnames", () => {
+  it("should have helpers classnames", () => {
     const component = renderer.create(
-      <Element textColor={"white" as "white"} pull={"left" as "left"}>
+      <Element textColor="white" pull="left">
         Facebook
       </Element>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should accept a react Element as renderAs prop", () => {
+  it("should accept a react component as 'as' prop", () => {
     const Custom = (
       props: React.ComponentProps<"p"> & { children: React.ReactNode },
     ) => (
@@ -27,7 +27,7 @@ describe("Element component", () => {
     );
 
     const component = renderer.create(
-      <Element renderAs={Custom}>This should be a p element</Element>,
+      <Element<typeof Custom> as={Custom}>This should be a p element</Element>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });

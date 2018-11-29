@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type ModalCardBodyModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type ModalCardBodyModifierProps = Partial<{
 
 export type ModalCardBodyProps = ModifierProps & ModalCardBodyModifierProps;
 
-export const ModalCardBody = renderAsExoticComponent<
+export const ModalCardBody = extendedForwardRef<
   ModalCardBodyProps,
   "section"
 >(

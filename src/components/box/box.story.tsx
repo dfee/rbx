@@ -36,7 +36,7 @@ storiesOf("Box", module).add("Default", () => (
     }}
   >
     <Media>
-      <Media.Item renderAs="figure" position="left">
+      <Media.Item<"figure"> as="figure" position="left">
         <Image
           size={64 as 64}
           alt="64x64"

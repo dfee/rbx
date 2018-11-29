@@ -22,14 +22,14 @@ describe("Box component", () => {
 
   it("Should render as an html section", () => {
     const component = renderer.create(
-      <Box renderAs="section">This should be a section</Box>,
+      <Box<"section"> as="section">This should be a section</Box>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("Should have custom inline styles", () => {
     const component = renderer.create(
-      <Box renderAs="section" style={{ width: 200, zIndex: 1 }}>
+      <Box<"section"> as="section" style={{ width: 200, zIndex: 1 }}>
         This should be a section with custom styles
       </Box>,
     );
@@ -50,7 +50,7 @@ describe("Box component", () => {
     // Custom.propTypes = { children: PropTypes.node.isRequired };
 
     const component = renderer.create(
-      <Box renderAs={Custom}>This should be a p element</Box>,
+      <Box<typeof Custom> as={Custom}>This should be a p element</Box>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });

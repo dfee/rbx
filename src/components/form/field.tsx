@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
@@ -18,7 +18,7 @@ export type FieldModifierProps = Partial<{
 export type FieldProps = ModifierProps & FieldModifierProps;
 
 export const Field = Object.assign(
-  renderAsExoticComponent<FieldProps, "div">(
+  extendedForwardRef<FieldProps, "div">(
     ({ className, align, multiline, horizontal, kind, ...props }, ref) => {
       let k = null;
 

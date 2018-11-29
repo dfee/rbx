@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { Breakpoints } from "@/modifiers/responsives";
 
@@ -13,7 +13,7 @@ export type ContainerModifierProps = Partial<{
 
 export type ContainerProps = ModifierProps & ContainerModifierProps;
 
-export const Container = renderAsExoticComponent<ContainerProps, "div">(
+export const Container = extendedForwardRef<ContainerProps, "div">(
   ({ children, fluid, breakpoint, className, ...props }, ref) => (
     <Element
       {...props}

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { MediaContent } from "./media-content";
 import { MediaItem } from "./media-item";
@@ -14,7 +14,7 @@ export type MediaModifierProps = Partial<{
 export type MediaProps = ModifierProps & MediaModifierProps;
 
 export const Media = Object.assign(
-  renderAsExoticComponent(
+  extendedForwardRef(
     ({ children, className, ...props }, ref) => (
       <Element {...props} ref={ref} className={cx("media", className, {})}>
         {children}

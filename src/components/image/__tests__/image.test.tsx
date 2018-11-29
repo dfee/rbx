@@ -18,14 +18,14 @@ describe("Image component", () => {
 
   it("Should be square", () => {
     const component = renderer.create(
-      <Image size={"square" as "square"} src="http://mydomain.com/image" />,
+      <Image size="square" src="http://mydomain.com/image" />,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("Should be 32x32", () => {
     const component = renderer.create(
-      <Image size={32 as number} src="http://mydomain.com/image" />,
+      <Image size={32} src="http://mydomain.com/image" />,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });

@@ -1,6 +1,7 @@
 import { tuple } from "@/utils";
 import { cx } from "emotion";
-import { ComponentProps } from "react";
+
+import { makeModify } from "./utils";
 
 export const BREAKPOINTS = tuple(
   "mobile",
@@ -50,38 +51,36 @@ export type ResponsivesProps = Partial<{
   }>;
 }>;
 
-const getSizeClassFromProp = (sizes: ResponsivesProps["responsive"]) => {
-  return sizes
-    ? Object.keys(sizes).reduce((classes, size) => {
-        const display = sizes[size]!.display || {};
-        const hide = sizes[size]!.hide || {};
-        const textSize = sizes[size]!.textSize || {};
-        const textAlignment = sizes[size]!.textAlignment || {};
-
-        const obj = {
-          ...classes,
-          [`is-${display.value}-${size}${
-            display.only ? "-only" : ""
-          }`]: display.value,
-          [`is-hidden-${size}${hide.only ? "-only" : ""}`]: hide.value,
-          [`has-text-${textAlignment.value}-${size}${
-            textAlignment.only ? "-only" : ""
-          }`]: textAlignment.value,
-          [`is-size-${textSize.value}-${size}`]:
-            textSize.value !== undefined && textSize.value > 0,
-        };
-
-        return obj;
-      }, {})
-    : {};
-};
-
-export function classNames(props: ComponentProps<any>) {
-  return cx({
-    ...getSizeClassFromProp(props.responsive || {}),
-  });
-}
-
-export function clean({ responsive, hide, ...props }: ComponentProps<any>) {
-  return props;
-}
+export const modify = makeModify<ResponsivesProps>(
+  props =>
+    cx(
+      props.className,
+      Object.entries(props.responsive || {})
+        .filter(([size, value]) => value)
+        .map(([size, value]) => {
+          const display = value!.display || {};
+          const hide = value!.hide || {};
+          const textSize = value!.textSize || {};
+          const textAlignment = value!.textAlignment || {};
+          return {
+            [`is-${display.value}-${size}${
+              display.only ? "-only" : ""
+            }`]: display.value,
+            [`is-hidden-${size}${hide.only ? "-only" : ""}`]: hide.value,
+            [`has-text-${textAlignment.value}-${size}${
+              textAlignment.only ? "-only" : ""
+            }`]: textAlignment.value,
+            [`is-size-${textSize.value}-${size}`]:
+              textSize.value !== undefined && textSize.value > 0,
+          };
+        })
+        .reduce(
+          (accumulator, currentValue) => ({
+            ...accumulator,
+            ...currentValue,
+          }),
+          {},
+        ),
+    ),
+  ["responsive"],
+);

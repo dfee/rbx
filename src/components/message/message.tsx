@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/colors";
 import { MessageBody } from "./message-body";
@@ -17,7 +17,7 @@ export type MessageModifierProps = Partial<{
 export type MessageProps = ModifierProps & MessageModifierProps;
 
 export const Message = Object.assign(
-  renderAsExoticComponent<MessageProps, "article">(
+  extendedForwardRef<MessageProps, "article">(
     ({ children, className, color, size, ...props }, ref) => (
       <Element
         {...props}

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { MenuList } from "./menu-list";
 
@@ -12,7 +12,7 @@ export type MenuListItemModifierProps = Partial<{
 
 export type MenuListItemProps = ModifierProps & MenuListItemModifierProps;
 
-export const MenuListItem = renderAsExoticComponent<MenuListItemProps, "a">(
+export const MenuListItem = extendedForwardRef<MenuListItemProps, "a">(
   ({ children, active, className, ...props }, ref) => {
     if (typeof children === "string") {
       return (

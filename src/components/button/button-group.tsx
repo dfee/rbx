@@ -1,17 +1,18 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type ButtonGroupModifierProps = Partial<{
+  className: string;
   hasAddons: boolean;
   position: "centered" | "right";
 }>;
 
 export type ButtonGroupProps = ModifierProps & ButtonGroupModifierProps;
 
-export const ButtonGroup = renderAsExoticComponent<ButtonGroupProps, "div">(
+export const ButtonGroup = extendedForwardRef<ButtonGroupProps, "div">(
   ({ children, className, hasAddons, position, ...props }, ref) => (
     <Element
       {...props}

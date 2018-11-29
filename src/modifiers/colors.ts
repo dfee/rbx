@@ -1,6 +1,7 @@
 import { tuple } from "@/utils";
 import { cx } from "emotion";
-import { ComponentProps } from "react";
+
+import { makeModify } from "./utils";
 
 export const COLORS = tuple(
   "primary",
@@ -34,17 +35,11 @@ export type ColorsProps = Partial<{
   backgroundColor: Colors | GreyColors;
 }>;
 
-export function classNames(props: ComponentProps<any>) {
-  return cx({
-    [`has-text-${props.textColor}`]: props.textColor,
-    [`has-background-${props.backgroundColor}`]: props.backgroundColor,
-  });
-}
-
-export function clean({
-  textColor,
-  backgroundColor,
-  ...props
-}: ComponentProps<any>) {
-  return props;
-}
+export const modify = makeModify<ColorsProps>(
+  props =>
+    cx(props.className, {
+      [`has-text-${props.textColor}`]: props.textColor,
+      [`has-background-${props.backgroundColor}`]: props.backgroundColor,
+    }),
+  ["backgroundColor", "textColor"],
+);

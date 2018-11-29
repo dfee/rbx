@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type SectionModifierProps = Partial<{
@@ -12,7 +12,7 @@ export type SectionModifierProps = Partial<{
 
 export type SectionProps = ModifierProps & SectionModifierProps;
 
-export const Section = renderAsExoticComponent<SectionProps, "section">(
+export const Section = extendedForwardRef<SectionProps, "section">(
   ({ children, className, size, ...props }, ref) => (
     <Element
       ref={ref}

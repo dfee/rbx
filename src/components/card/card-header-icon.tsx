@@ -1,12 +1,12 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type CardHeaderIconProps = ModifierProps;
 
-export const CardHeaderIcon = renderAsExoticComponent<
+export const CardHeaderIcon = extendedForwardRef<
   CardHeaderIconProps,
   "div"
 >(

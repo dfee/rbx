@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type ModalCardTitleModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type ModalCardTitleModifierProps = Partial<{
 
 export type ModalCardTitleProps = ModifierProps & ModalCardTitleModifierProps;
 
-export const ModalCardTitle = renderAsExoticComponent<ModalCardTitleProps, "p">(
+export const ModalCardTitle = extendedForwardRef<ModalCardTitleProps, "p">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("modal-card-title", className)}>
       {children}

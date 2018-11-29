@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type NavbarLinkModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type NavbarLinkModifierProps = Partial<{
 
 export type NavbarLinkProps = ModifierProps & NavbarLinkModifierProps;
 
-export const NavbarLink = renderAsExoticComponent<NavbarLinkProps, "span">(
+export const NavbarLink = extendedForwardRef<NavbarLinkProps, "span">(
   ({ className, children, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("navbar-link", className)}>
       {children}

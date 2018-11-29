@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type MediaContentModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type MediaContentModifierProps = Partial<{
 
 export type MediaContentProps = ModifierProps & MediaContentModifierProps;
 
-export const MediaContent = renderAsExoticComponent<MediaContentProps, "div">(
+export const MediaContent = extendedForwardRef<MediaContentProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx(className, "content")}>
       {children}

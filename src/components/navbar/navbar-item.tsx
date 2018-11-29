@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type NavbarItemModifierProps = Partial<{
@@ -15,7 +15,7 @@ export type NavbarItemModifierProps = Partial<{
 
 export type NavbarItemProps = ModifierProps & NavbarItemModifierProps;
 
-export const NavbarItem = renderAsExoticComponent<NavbarItemProps, "a">(
+export const NavbarItem = extendedForwardRef<NavbarItemProps, "a">(
   (
     {
       className,

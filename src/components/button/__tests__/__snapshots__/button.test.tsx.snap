@@ -178,11 +178,12 @@ Object {
   "Group": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "defaultProps": Object {
+    "as": "button",
     "disabled": false,
     "fullwidth": false,
     "inverted": false,
@@ -192,7 +193,6 @@ Object {
     "onClick": [Function],
     "outlined": false,
     "remove": false,
-    "renderAs": "button",
     "reset": false,
     "rounded": false,
     "submit": false,
@@ -206,7 +206,7 @@ exports[`Button component Should expose Button Group 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "renderAs": "div",
+    "as": "div",
   },
   "render": [Function],
 }

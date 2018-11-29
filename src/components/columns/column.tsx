@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { ColumnSizes } from "./constants";
 
@@ -55,7 +55,7 @@ export type ColumnProps = ModifierProps &
   ColumnModifierProps &
   ColumnSizeModifierProps;
 
-export const Column = renderAsExoticComponent<ColumnProps, "div">(
+export const Column = extendedForwardRef<ColumnProps, "div">(
   (
     {
       children,
@@ -68,7 +68,7 @@ export const Column = renderAsExoticComponent<ColumnProps, "div">(
       desktop,
       widescreen,
       fullhd,
-      ...props
+      ...rest
     },
     ref,
   ) => {
@@ -88,7 +88,7 @@ export const Column = renderAsExoticComponent<ColumnProps, "div">(
     });
     return (
       <Element
-        {...props}
+        {...rest}
         ref={ref}
         className={cx(className, "column", sizeClassNames)}
       >
@@ -98,22 +98,15 @@ export const Column = renderAsExoticComponent<ColumnProps, "div">(
   },
   "div",
 );
-Column.defaultProps = {
-  children: null,
-  desktop: {
+Column.defaultProps = Object.assign(
+  {
+    children: null,
+    desktop: { narrow: false },
+    fullhd: { narrow: false },
+    mobile: { narrow: false },
     narrow: false,
+    tablet: { narrow: false },
+    widescreen: { narrow: false },
   },
-  fullhd: {
-    narrow: false,
-  },
-  mobile: {
-    narrow: false,
-  },
-  narrow: false,
-  tablet: {
-    narrow: false,
-  },
-  widescreen: {
-    narrow: false,
-  },
-};
+  Column.defaultProps,
+);

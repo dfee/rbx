@@ -1,60 +1,64 @@
-import { cx } from "emotion";
 import * as React from "react";
 
-import { classNames, clean, ModifierProps } from "@/modifiers";
+import { ModifierProps, modify } from "@/modifiers";
 
-export interface RenderAsExoticComponent<
+export type ForwardRefExoticComponentProps<
   TOwnProps,
-  TDefaultComponent extends
-    | keyof JSX.IntrinsicElements
-    | React.ComponentType<any>
->
-  extends Pick<
-    React.ForwardRefExoticComponent<any>,
-    keyof React.ForwardRefExoticComponent<any>
-  > {
-  (
-    props: React.ComponentPropsWithRef<TDefaultComponent> &
-      TOwnProps & { renderAs?: never },
-  ): JSX.Element | null;
-  <TAsComponent extends keyof JSX.IntrinsicElements | React.ComponentType<any>>(
-    props: React.ComponentPropsWithRef<TAsComponent> &
-      TOwnProps & { renderAs: TAsComponent },
-  ): JSX.Element | null;
-}
+  TRenderAs extends React.ComponentType<any> | keyof JSX.IntrinsicElements
+> = TOwnProps &
+  Omit<React.ComponentPropsWithRef<TRenderAs>, keyof TOwnProps> & {
+    as?: TRenderAs;
+  };
 
-export function renderAsExoticComponent<
+export type ExtendedForwardRefExoticComponent<
+  TOwnProps,
+  TDefaultElement extends React.ComponentType<any> | keyof JSX.IntrinsicElements
+> = React.ForwardRefExoticComponent<
+  ForwardRefExoticComponentProps<TOwnProps, TDefaultElement>
+> &
+  React.RefAttributes<any> &
+  (<
+    TAsElement extends
+      | React.ComponentType<any>
+      | keyof JSX.IntrinsicElements = TDefaultElement
+  >(
+    props: React.PropsWithoutRef<
+      ForwardRefExoticComponentProps<TOwnProps, TAsElement> &
+        React.RefAttributes<any>
+    >,
+  ) => JSX.Element | null);
+
+export function extendedForwardRef<
   TOwnProps,
   TDefaultElement extends React.ComponentType<any> | keyof JSX.IntrinsicElements
 >(
   factory: React.RefForwardingComponent<
     any,
-    TOwnProps & {
-      renderAs?: React.ComponentType<any> | keyof JSX.IntrinsicElements;
-      className?: string;
-    }
+    ForwardRefExoticComponentProps<TOwnProps, TDefaultElement>
   >,
   defaultElement: TDefaultElement,
 ) {
   const forward = React.forwardRef(factory);
   // https://github.com/Microsoft/TypeScript/issues/28614
   // apparently a bug, use workaround
-  // forward.defaultProps = { renderAs: defaultElement };
+  // forward.defaultProps = { as: defaultElement };
   forward.defaultProps = {};
-  forward.defaultProps.renderAs = defaultElement;
-  return forward as RenderAsExoticComponent<TOwnProps, TDefaultElement>;
+  forward.defaultProps.as = defaultElement;
+  return forward as ExtendedForwardRefExoticComponent<
+    TOwnProps,
+    TDefaultElement
+  >;
 }
 
 export type ElementProps = ModifierProps;
 
-export const Element = renderAsExoticComponent<ElementProps, "div">(
-  ({ className, renderAs, ...allProps }, ref) => {
-    const props = {
-      className: cx(className, classNames(allProps)) || undefined,
-      ref,
-      ...clean(allProps),
-    };
-    return React.createElement(renderAs!, props);
+export const Element = extendedForwardRef<ElementProps, "div">(
+  ({ as, ...props }, ref) => {
+    const x = props.ref; // todo!
+    return React.createElement(as!, { ref, ...modify(props) });
   },
   "div",
 );
+
+const myRef = React.createRef<HTMLDivElement>();
+const E = <Element ref={myRef} />;

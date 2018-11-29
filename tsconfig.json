@@ -26,12 +26,12 @@
     "node_modules",
     "lib",
     "dist",
-    "__mocks__",
-    "**/*.story.ts",
-    "**/*.story.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/__tests__"
+    "__mocks__"
+    // "**/*.story.ts",
+    // "**/*.story.tsx",
+    // "**/*.test.ts",
+    // "**/*.test.tsx",
+    // "**/__tests__"
   ],
   "include": ["src"]
 }

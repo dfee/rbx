@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type HeadingModifierProps = Partial<{
@@ -15,7 +15,7 @@ export type HeadingModifierProps = Partial<{
 
 export type HeadingProps = ModifierProps & HeadingModifierProps;
 
-export const Heading = renderAsExoticComponent<HeadingProps, "h1">(
+export const Heading = extendedForwardRef<HeadingProps, "h1">(
   (
     { children, className, size, subtitle, weight, spaced, heading, ...props },
     ref,

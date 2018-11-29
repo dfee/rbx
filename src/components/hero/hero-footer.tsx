@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type HeroFooterModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type HeroFooterModifierProps = Partial<{
 
 export type HeroFooterProps = ModifierProps & HeroFooterModifierProps;
 
-export const HeroFooter = renderAsExoticComponent<HeroFooterProps, "div">(
+export const HeroFooter = extendedForwardRef<HeroFooterProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element ref={ref} {...props} className={cx(className, "hero-foot")}>
       {children}

@@ -1,1 +1,1 @@
-export { Element, renderAsExoticComponent } from "./element";
+export { Element, extendedForwardRef } from "./element";

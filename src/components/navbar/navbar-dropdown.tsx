@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type NavbarDropdownModifierProps = Partial<{
@@ -13,7 +13,7 @@ export type NavbarDropdownModifierProps = Partial<{
 
 export type NavbarDropdownProps = ModifierProps & NavbarDropdownModifierProps;
 
-export const NavbarDropdown = renderAsExoticComponent<
+export const NavbarDropdown = extendedForwardRef<
   NavbarDropdownProps,
   "span"
 >(

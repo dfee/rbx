@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type LevelItemModifierProps = Partial<{
@@ -11,7 +11,7 @@ export type LevelItemModifierProps = Partial<{
 
 export type LevelItemProps = ModifierProps & LevelItemModifierProps;
 
-export const LevelItem = renderAsExoticComponent<LevelItemProps, "div">(
+export const LevelItem = extendedForwardRef<LevelItemProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("level-item", className, {})}>
       {children}

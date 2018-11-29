@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { Breadcrumb } from "../breadcrumb";
+import { Breadcrumb, BreadcrumbProps } from "../breadcrumb";
 
 describe("Breadcrumb component", () => {
   it("Should be a Breadcrumb", () => {
@@ -30,7 +30,7 @@ describe("Breadcrumb component", () => {
   [undefined, "identifier"].map(hrefAttr =>
     it(`Should ${
       hrefAttr ? "" : "not "
-    }pass along item.url as hrefAttr prop on renderAs component when hrefAttr is ${
+    }pass along item.url as hrefAttr prop on 'as' component when hrefAttr is ${
       hrefAttr ? "" : "not "
     }supplied`, () => {
       interface CustomProps {
@@ -41,8 +41,8 @@ describe("Breadcrumb component", () => {
       );
 
       const component = renderer.create(
-        <Breadcrumb
-          renderAs={Custom}
+        <Breadcrumb<typeof Custom>
+          as={Custom}
           hrefAttr={hrefAttr}
           items={[
             {
@@ -69,7 +69,7 @@ describe("Breadcrumb component", () => {
     it(`should use separator ${separator}`, () => {
       const component = renderer.create(
         <Breadcrumb
-          separator={separator}
+          separator={separator as BreadcrumbProps["separator"]}
           items={[
             {
               name: "Storybook",
@@ -95,7 +95,7 @@ describe("Breadcrumb component", () => {
     const component = renderer.create(
       <Breadcrumb
         style={{ marginTop: 10 }}
-        size={"large" as "large"}
+        size="large"
         items={[
           {
             name: "Home",

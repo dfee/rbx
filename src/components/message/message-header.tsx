@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type MessageHeaderModifierProps = Partial<{
@@ -10,7 +10,7 @@ export type MessageHeaderModifierProps = Partial<{
 
 export type MessageHeaderProps = ModifierProps & MessageHeaderModifierProps;
 
-export const MessageHeader = renderAsExoticComponent<MessageHeaderProps, "div">(
+export const MessageHeader = extendedForwardRef<MessageHeaderProps, "div">(
   ({ children, className, ...props }, ref) => (
     <Element {...props} ref={ref} className={cx("message-header", className)}>
       {children}

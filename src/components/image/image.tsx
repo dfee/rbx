@@ -1,38 +1,34 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { extendedForwardRef } from "@/components/element";
+import { ModifierProps, modify } from "@/modifiers";
 import { ImageSizes } from "./constants";
 
 export type ImageModifierProps = Partial<{
-  src: string;
   alt: string;
-  size: ImageSizes;
   onError: React.DOMAttributes<HTMLImageElement>["onError"];
+  size: ImageSizes;
+  src: string;
 }>;
 
 export type ImageProps = ModifierProps & ImageModifierProps;
 
-export const Image = renderAsExoticComponent<ImageProps, "figure">(
-  ({ alt, className, onError, size, src, ...props }, ref) => {
-    let s: string | undefined;
-    if (typeof size === "string") {
-      s = size;
-    } else if (typeof size === "number") {
-      s = `${size}x${size}`;
-    }
-    return (
-      <Element
-        {...props}
-        className={cx("image", className, {
-          [`is-${s}`]: s,
-        })}
-        ref={ref}
-      >
-        <img onError={onError} src={src} alt={alt} />
-      </Element>
-    );
-  },
-  "figure",
-);
+export const Image = extendedForwardRef<ImageProps, "figure">((props, ref) => {
+  const { as, alt, onError, size, src, ...rest } = modify(props);
+  let s: string | undefined;
+  if (typeof size === "string") {
+    s = size;
+  } else if (typeof size === "number") {
+    s = `${size}x${size}`;
+  }
+  rest.className = cx("image", rest.className, {
+    [`is-${s}`]: s,
+  });
+
+  return React.createElement(as!, {
+    children: <img onError={onError} src={src} alt={alt} />,
+    ref,
+    ...rest,
+  });
+}, "figure");

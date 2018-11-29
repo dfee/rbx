@@ -1,62 +1,52 @@
 import { cx } from "emotion";
 import * as React from "react";
 
-import { renderAsExoticComponent } from "@/components/element";
-import { classNames, clean, ModifierProps } from "@/modifiers";
+import { extendedForwardRef } from "@/components/element";
+import { ModifierProps, modify } from "@/modifiers";
+
+export interface BreadcrumbItemProps {
+  url: string;
+  active?: boolean;
+  name?: React.ReactNode;
+}
 
 export type BreadcrumbModifierProps = Partial<{
+  align: "right" | "center";
+  className: string;
+  hrefAttr: string;
+  items: BreadcrumbItemProps[];
   separator: "arrow" | "bullet" | "dot" | "succeeds";
   size: "small" | "medium" | "large";
-  align: "right" | "center";
-  items: Array<{ url: string; active?: boolean; name?: React.ReactNode }>;
-  hrefAttr: string;
 }>;
 
 export type BreadcrumbProps = ModifierProps &
   BreadcrumbModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"a">, "unselectable">>;
 
-export const Breadcrumb = renderAsExoticComponent<BreadcrumbProps, "a">(
-  (
-    {
-      className,
-      items = [],
-      renderAs,
-      hrefAttr,
-      separator,
-      size,
-      align,
-      ...allProps
-    },
-    ref,
-  ) => {
-    const props = clean(allProps);
+export const Breadcrumb = extendedForwardRef<BreadcrumbProps, "a">(
+  (props, ref) => {
+    const { align, as, hrefAttr, items, separator, size, ...rest } = modify(
+      props,
+    );
+    rest.className = cx("breadcrumb", rest.className, {
+      [`has-${separator}-separator`]: separator,
+      [`is-${align}`]: align,
+      [`is-${size}`]: size,
+    });
+
     return (
-      <nav
-        {...props}
-        ref={ref}
-        className={cx("breadcrumb", className, classNames(allProps), {
-          [`has-${separator}-separator`]: separator,
-          [`is-${size}`]: size,
-          [`is-${align}`]: align,
-        })}
-      >
+      <nav {...rest} ref={ref}>
         <ul>
-          {items.map(item => {
-            let p = {};
-            if (renderAs === "a") {
-              p = { href: item.url };
+          {items!.map(item => {
+            const itemProps: { [s: string]: BreadcrumbItemProps["url"] } = {};
+            if (as === "a") {
+              itemProps.href = item.url;
             } else if (typeof hrefAttr === "string") {
-              p = { [hrefAttr]: item.url };
+              itemProps[hrefAttr] = item.url;
             }
             return (
-              <li
-                key={item.url}
-                className={cx({
-                  "is-active": item.active,
-                })}
-              >
-                {React.createElement(renderAs!, p, item.name)}
+              <li key={item.url} className={cx({ "is-active": item.active })}>
+                {React.createElement(as!, itemProps, item.name)}
               </li>
             );
           })}
@@ -66,3 +56,4 @@ export const Breadcrumb = renderAsExoticComponent<BreadcrumbProps, "a">(
   },
   "a",
 );
+Breadcrumb.defaultProps = Object.assign({ items: [] }, Breadcrumb.defaultProps);

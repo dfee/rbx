@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/colors";
 
@@ -13,7 +13,7 @@ export type HelpModifierProps = Partial<{
 
 export type HelpProps = ModifierProps & HelpModifierProps;
 
-export const Help = renderAsExoticComponent<HelpProps, "p">(
+export const Help = extendedForwardRef<HelpProps, "p">(
   ({ className, children, color, ...props }, ref) => (
     <Element
       {...props}

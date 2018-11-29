@@ -24,7 +24,7 @@ exports[`Image component Should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "renderAs": "figure",
+    "as": "figure",
   },
   "render": [Function],
 }

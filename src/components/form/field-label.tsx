@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, renderAsExoticComponent } from "@/components/element";
+import { Element, extendedForwardRef } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
 export type FieldLabelModifierProps = Partial<{
@@ -12,7 +12,7 @@ export type FieldLabelModifierProps = Partial<{
 
 export type FieldLabelProps = ModifierProps & FieldLabelModifierProps;
 
-export const FieldLabel = renderAsExoticComponent<FieldLabelProps, "div">(
+export const FieldLabel = extendedForwardRef<FieldLabelProps, "div">(
   ({ children, className, size, ...props }, ref) => (
     <Element
       {...props}
