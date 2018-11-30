@@ -15,7 +15,7 @@ storiesOf("Notification", module).add("Default", () => (
       consectetur adipiscing elit
       <Button remove />
     </Notification>
-    <Notification color={"success" as "success"}>
+    <Notification color="success">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum dolor.{" "}
       <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec
       nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
@@ -23,7 +23,7 @@ storiesOf("Notification", module).add("Default", () => (
       consectetur adipiscing elit
       <Button remove />
     </Notification>
-    <Notification color={"danger" as "danger"}>
+    <Notification color="danger">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum dolor.{" "}
       <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec
       nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus

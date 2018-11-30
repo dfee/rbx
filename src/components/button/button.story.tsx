@@ -5,8 +5,9 @@ import React from "react";
 
 import { Box } from "@/components/box";
 import { Button } from "@/components/button";
+import { ButtonGroupProps } from "@/components/button/button-group";
 import { Section } from "@/components/section";
-import { COLORS } from "@/modifiers/color";
+import { COLORS, Colors } from "@/modifiers/color";
 
 const makeColorSelect = () =>
   select(
@@ -40,18 +41,18 @@ storiesOf("Button", module)
         Play with the button props using the knobs addon panel at the bottom
       </Box>
       <Button
-        fullwidth={boolean("Full width", false)}
-        color={makeColorSelect()}
-        loading={boolean("Loading", false)}
-        outlined={boolean("Outlined", false)}
-        inverted={boolean("Inverted", false)}
+        color={makeColorSelect() as Colors}
         disabled={boolean("Disabled", false)}
-        text={boolean("Text", false)}
-        remove={boolean("Remove", false)}
+        fullwidth={boolean("Full width", false)}
+        inverted={boolean("Inverted", false)}
         isStatic={boolean("Static", false)}
-        rounded={boolean("Rounded", false)}
+        loading={boolean("Loading", false)}
         onClick={action("Button Click")}
         onMouseEnter={action("Hover")}
+        outlined={boolean("Outlined", false)}
+        remove={boolean("Remove", false)}
+        rounded={boolean("Rounded", false)}
+        text={boolean("Text", false)}
       >
         Button
       </Button>
@@ -76,9 +77,9 @@ storiesOf("Button", module)
 
     return (
       <Section>
-        <Button
+        <Button<typeof CustomComponent>
+          as={CustomComponent}
           color="info"
-          renderAs={CustomComponent}
           customProp="https://github.com/dfee/rbx"
         >
           Button rendered using another React Component with props
@@ -90,22 +91,22 @@ storiesOf("Button", module)
     <Section>
       <Button.Group
         hasAddons={boolean("hasAddons", false)}
-        position={makePositionSelect}
+        position={makePositionSelect() as ButtonGroupProps["position"]}
       >
-        <Button renderAs="span" color="success">
+        <Button<"span"> as="span" color="success">
           Save changes
         </Button>
-        <Button renderAs="span" color="info">
+        <Button<"span"> as="span" color="info">
           Save and continue
         </Button>
-        <Button renderAs="span" color="danger">
+        <Button<"span"> as="span" color="danger">
           Cancel
         </Button>
       </Button.Group>
     </Section>
   ))
   .add("Ref forwarding", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
+    const ref = React.createRef<HTMLButtonElement>();
 
     return (
       <Section>

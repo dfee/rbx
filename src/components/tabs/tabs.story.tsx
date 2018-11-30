@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Tabs } from "@/components/tabs";
+import { TabsProps } from "@/components/tabs/tabs";
 
 // https://github.com/storybooks/storybook/issues/4865
 const alignSelectOptions = ({
@@ -27,7 +28,7 @@ storiesOf("Tabs", module)
         "boxed",
       )}
       fullwidth={boolean("Full width", false)}
-      align={makeAlignSelect()}
+      align={makeAlignSelect() as TabsProps["align"]}
     >
       <Tabs.Tab active>Test</Tabs.Tab>
       <Tabs.Tab>Test</Tabs.Tab>

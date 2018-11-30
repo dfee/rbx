@@ -141,7 +141,7 @@ storiesOf("Form", module)
             value="bulma"
           />
         </Control>
-        <Help color={"success" as "success"}>This username is available</Help>
+        <Help color="success">This username is available</Help>
       </Field>
 
       <Field>
@@ -154,7 +154,7 @@ storiesOf("Form", module)
             value="hello@"
           />
         </Control>
-        <Help color={"danger" as "danger"}>This email is invalid</Help>
+        <Help color="danger">This email is invalid</Help>
       </Field>
 
       <Field>
@@ -164,7 +164,7 @@ storiesOf("Form", module)
           <Icon align="left" icon="bars" />
           <Icon align="right" icon="bars" />
         </Control>
-        <Help color={"danger" as "danger"}>This email is invalid</Help>
+        <Help color="danger">This email is invalid</Help>
       </Field>
 
       <Field>
@@ -207,12 +207,12 @@ storiesOf("Form", module)
         <RadioGroup />
       </Field>
 
-      <Field kind={"group" as "group"}>
+      <Field kind="group">
         <Control>
           <Button type="primary">Submit</Button>
         </Control>
         <Control>
-          <Button color={"link" as "link"}>Cancel</Button>
+          <Button color="link">Cancel</Button>
         </Control>
       </Field>
     </div>

@@ -11,11 +11,11 @@ storiesOf("Hero", module)
   .add("Default with color", () => (
     <div>
       <Section>
-        <Hero color={"primary" as "primary"}>
+        <Hero color="primary">
           <Hero.Body>
             <Container>
               <Heading>Hero title Primary</Heading>
-              <Heading subtitle size={3 as 3}>
+              <Heading subtitle size={3}>
                 Subtitle
               </Heading>
             </Container>
@@ -24,11 +24,11 @@ storiesOf("Hero", module)
       </Section>
 
       <Section>
-        <Hero color={"danger" as "danger"}>
+        <Hero color="danger">
           <Hero.Body>
             <Container>
               <Heading>Hero title Danger</Heading>
-              <Heading subtitle size={3 as 3}>
+              <Heading subtitle size={3}>
                 Subtitle
               </Heading>
             </Container>
@@ -36,11 +36,11 @@ storiesOf("Hero", module)
         </Hero>
       </Section>
       <Section>
-        <Hero color={"info" as "info"}>
+        <Hero color="info">
           <Hero.Body>
             <Container>
               <Heading>Hero title Info</Heading>
-              <Heading subtitle size={3 as 3}>
+              <Heading subtitle size={3}>
                 Subtitle
               </Heading>
             </Container>
@@ -52,11 +52,11 @@ storiesOf("Hero", module)
   .add("Gradient (EXPERIMENTAL)", () => (
     <div>
       <Section>
-        <Hero color={"primary" as "primary"} gradient>
+        <Hero color="primary" gradient>
           <Hero.Body>
             <Container>
               <Heading>Hero title Primary</Heading>
-              <Heading subtitle size={3 as 3}>
+              <Heading subtitle size={3}>
                 Subtitle
               </Heading>
             </Container>
@@ -65,11 +65,11 @@ storiesOf("Hero", module)
       </Section>
 
       <Section>
-        <Hero color={"danger" as "danger"} gradient>
+        <Hero color="danger" gradient>
           <Hero.Body>
             <Container>
               <Heading>Hero title Danger</Heading>
-              <Heading subtitle size={3 as 3}>
+              <Heading subtitle size={3}>
                 Subtitle
               </Heading>
             </Container>
@@ -77,11 +77,11 @@ storiesOf("Hero", module)
         </Hero>
       </Section>
       <Section>
-        <Hero color={"info" as "info"} gradient>
+        <Hero color="info" gradient>
           <Hero.Body>
             <Container>
               <Heading>Hero title Info</Heading>
-              <Heading subtitle size={3 as 3}>
+              <Heading subtitle size={3}>
                 Subtitle
               </Heading>
             </Container>
@@ -92,20 +92,20 @@ storiesOf("Hero", module)
   ))
   .add("Differents Sizes", () => (
     <div>
-      <Hero color={"primary" as "primary"} size={"medium" as "medium"}>
+      <Hero color="primary" size="medium">
         <Hero.Body>Medium</Hero.Body>
       </Hero>
-      <Hero color={"info" as "info"} size={"large" as "large"}>
+      <Hero color="info" size="large">
         <Hero.Body>Large</Hero.Body>
       </Hero>
-      <Hero color={"danger" as "danger"} size={"fullheight" as "fullheight"}>
+      <Hero color="danger" size="fullheight">
         <Hero.Body>FULL HEIGHT</Hero.Body>
       </Hero>
     </div>
   ))
   .add("Vertical Alignments", () => (
-    <Hero size={"fullheight" as "fullheight"} color={"primary" as "primary"}>
-      <Hero.Head renderAs="header">
+    <Hero size="fullheight" color="primary">
+      <Hero.Head<"header"> as="header">
         <div className="bd-notification is-info">Header</div>
       </Hero.Head>
       <Hero.Body>Body</Hero.Body>

@@ -24,7 +24,7 @@ storiesOf("Message", module)
   ))
   .add("Color", () => (
     <React.Fragment>
-      <Message color={"info" as "info"}>
+      <Message color="info">
         <Message.Header>
           Title
           <Button remove />
@@ -40,7 +40,7 @@ storiesOf("Message", module)
           sem.
         </Message.Body>
       </Message>
-      <Message color={"danger" as "danger"}>
+      <Message color="danger">
         <Message.Header>
           Title
           <Button remove />

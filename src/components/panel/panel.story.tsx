@@ -23,36 +23,36 @@ storiesOf("Panel", module)
         <Panel.Tabs.Tab>sources</Panel.Tabs.Tab>
         <Panel.Tabs.Tab>forks</Panel.Tabs.Tab>
       </Panel.Tabs>
-      <Panel.Block renderAs="a" active>
-        <Panel.Icon renderAs={Icon} icon="angle-down" />
+      <Panel.Block<"a"> as="a" active>
+        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
         bulma
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon renderAs={Icon} icon="angle-down" />
+        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
         rbx
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon renderAs={Icon} icon="angle-down" />
+        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
         minireset.css
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon renderAs={Icon} icon="angle-down" />
+        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
         jgthms.github.io
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon renderAs={Icon} icon="angle-down" />
+        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
         dfee.github.io
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon renderAs={Icon} icon="angle-down" />
+        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
         mojs
       </Panel.Block>
-      <Panel.Block renderAs="label" className="panel-block">
+      <Panel.Block<"label"> as="label" className="panel-block">
         <Checkbox />
         remember me
       </Panel.Block>
       <Panel.Block>
-        <Button fullwidth color={"link" as "link"} outlined>
+        <Button fullwidth color="link" outlined>
           reset all filters
         </Button>
       </Panel.Block>

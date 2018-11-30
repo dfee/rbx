@@ -160,7 +160,7 @@ storiesOf("Content", module)
     </Content>
   ))
   .add("Size Small", () => (
-    <Content size={"small" as "small"}>
+    <Content size="small">
       <h1>Hello World</h1>
       <p>
         Lorem ipsum

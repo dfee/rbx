@@ -84,9 +84,9 @@ storiesOf("Modal", module)
         </Modal.Card.Head>
         <Modal.Card.Body>
           <Media>
-            <Media.Item renderAs="figure" position="left">
+            <Media.Item<"figure"> as="figure" position="left">
               <Image
-                renderAs="p"
+                as="p"
                 size={64}
                 alt="64x64"
                 src="http://bulma.io/images/placeholders/128x128.png"
@@ -104,10 +104,10 @@ storiesOf("Modal", module)
                   button
                 </p>
               </Content>
-              <Level breakpoint={"mobile" as "mobile"}>
+              <Level breakpoint="mobile">
                 <Level.Side align="left">
-                  <Button link>Like</Button>
-                  <Button link>Share</Button>
+                  <Button color="link">Like</Button>
+                  <Button color="link">Share</Button>
                 </Level.Side>
               </Level>
             </Media.Item>

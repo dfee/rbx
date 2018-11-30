@@ -52,8 +52,8 @@ storiesOf("Breadcrumb", module)
     return (
       <div>
         <Box>
-          <Breadcrumb
-            renderAs={Anchor}
+          <Breadcrumb<typeof Anchor>
+            as={Anchor}
             hrefAttr="href"
             separator={makeSeparator()}
             items={items}

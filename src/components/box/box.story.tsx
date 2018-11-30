@@ -12,33 +12,26 @@ storiesOf("Box", module).add("Default", () => (
     paddingless={boolean("paddingless", false)}
     responsive={{
       desktop: {
-        display: "inline-flex",
-        only: true,
+        display: {
+          only: true,
+          value: "inline-flex",
+        },
       },
       mobile: {
-        display: "block",
+        display: { value: "block" },
       },
       tablet: {
-        display: "flex",
+        display: { value: "flex" },
       },
       widescreen: {
-        display: "inline-block",
-      },
-    }}
-    hide={{
-      tablet: {
-        hide: true,
-        only: true,
-      },
-      widescreen: {
-        hide: true,
+        display: { value: "inline-block" },
       },
     }}
   >
     <Media>
       <Media.Item<"figure"> as="figure" position="left">
         <Image
-          size={64 as 64}
+          size={64}
           alt="64x64"
           src="http://bulma.io/images/placeholders/128x128.png"
         />

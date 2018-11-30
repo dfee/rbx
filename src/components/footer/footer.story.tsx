@@ -7,13 +7,13 @@ import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
 
 storiesOf("Footer", module).add("Default", () => (
-  <Hero size={"fullheight" as "fullheignt"}>
-    <Hero.Head renderAs="header" />
+  <Hero size="fullheight">
+    <Hero.Head<"header"> as="header" />
     <Hero.Body />
     <Hero.Footer>
       <Footer>
         <Container>
-          <Content style={{ textAlign: "center" } as React.CSSProperties}>
+          <Content style={{ textAlign: "center" }}>
             <p>
               <strong>Bulma</strong> by{" "}
               <a href="http://jgthms.com">Jeremy Thomas</a>. The source code is

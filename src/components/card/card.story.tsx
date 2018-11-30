@@ -20,17 +20,17 @@ storiesOf("Card", module)
       />
       <Card.Content>
         <Media>
-          <Media.Item renderAs="figure" position="left">
-            <Image
-              renderAs="p"
+          <Media.Item<"figure"> as="figure" position="left">
+            <Image<"p">
+              as="p"
               size={64}
               alt="64x64"
               src="http://bulma.io/images/placeholders/128x128.png"
             />
           </Media.Item>
           <Media.Item>
-            <Heading size={4 as 4}>Devin Fee</Heading>
-            <Heading subtitle size={6 as 6}>
+            <Heading size={4}>Devin Fee</Heading>
+            <Heading subtitle size={6}>
               @dfee
             </Heading>
           </Media.Item>
@@ -52,17 +52,17 @@ storiesOf("Card", module)
       </Card.Header>
       <Card.Content>
         <Media>
-          <Media.Item renderAs="figure" position="left">
+          <Media.Item<"figure"> as="figure" position="left">
             <Image
-              renderAs="p"
+              as="p"
               size={64}
               alt="64x64"
               src="http://bulma.io/images/placeholders/128x128.png"
             />
           </Media.Item>
           <Media.Item>
-            <Heading size={4 as 4}>Devin Fee</Heading>
-            <Heading subtitle size={6 as 6}>
+            <Heading size={4}>Devin Fee</Heading>
+            <Heading subtitle size={6}>
               @dfee
             </Heading>
           </Media.Item>
@@ -76,13 +76,13 @@ storiesOf("Card", module)
         </Content>
       </Card.Content>
       <Card.Footer>
-        <Card.Footer.Item renderAs="a" href="#Yes">
+        <Card.Footer.Item<"a"> as="a" href="#Yes">
           Yes
         </Card.Footer.Item>
-        <Card.Footer.Item renderAs="a" href="#No">
+        <Card.Footer.Item<"a"> as="a" href="#No">
           No
         </Card.Footer.Item>
-        <Card.Footer.Item renderAs="a" href="#Maybe">
+        <Card.Footer.Item<"a"> as="a" href="#Maybe">
           Maybe
         </Card.Footer.Item>
       </Card.Footer>

@@ -11,7 +11,7 @@ storiesOf("Image", module)
     <div style={{ width: 320 }}>
       <Image
         src="http://bulma.io/images/placeholders/640x480.png"
-        size={"3by2" as "3by2"}
+        size="3by2"
       />
     </div>
   ))

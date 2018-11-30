@@ -18,9 +18,9 @@ storiesOf("Media", module)
     <Section>
       <Box>
         <Media>
-          <Media.Item renderAs="figure" position="left">
-            <Image
-              renderAs="p"
+          <Media.Item<"figure"> as="figure" position="left">
+            <Image<"p">
+              as="p"
               size={64}
               alt="64x64"
               src="http://bulma.io/images/placeholders/128x128.png"
@@ -38,10 +38,10 @@ storiesOf("Media", module)
                 facilisis.
               </p>
             </Content>
-            <Level breakpoint={"mobile" as "mobile"}>
+            <Level breakpoint="mobile">
               <Level.Side align="left">
-                <Button link>Like</Button>
-                <Button link>Share</Button>
+                <Button color="link">Like</Button>
+                <Button color="link">Share</Button>
               </Level.Side>
             </Level>
           </Media.Item>
@@ -56,7 +56,7 @@ storiesOf("Media", module)
           <Media.Item>
             <p>Lorem Ipsum</p>
           </Media.Item>
-          <Media.Item renderAs="figure" position="right">
+          <Media.Item<"figure"> as="figure" position="right">
             <img
               style={style}
               alt="64x64"
@@ -70,15 +70,15 @@ storiesOf("Media", module)
   .add("Nested", () => (
     <Section>
       <Box>
-        <Media renderAs="article">
-          <Media.Item position={"left" as "left"}>
-            <Image
+        <Media<"article"> as="article">
+          <Media.Item position="left">
+            <Image<"p">
               src="http://bulma.io/images/placeholders/128x128.png"
               size={64}
-              renderAs="p"
+              as="p"
             />
           </Media.Item>
-          <Media.Item position={"center" as "center"}>
+          <Media.Item position="center">
             <Content>
               <p>
                 <strong>Barbara Middleton</strong>
@@ -95,14 +95,14 @@ storiesOf("Media", module)
             </Content>
 
             <Media>
-              <Media.Item position={"left" as "left"}>
-                <Image
+              <Media.Item position="left">
+                <Image<"p">
                   src="http://bulma.io/images/placeholders/128x128.png"
                   size={48}
-                  renderAs="p"
+                  as="p"
                 />
               </Media.Item>
-              <Media.Item position={"center" as "center"}>
+              <Media.Item position="center">
                 <Content>
                   <p>
                     <strong>Sean Brown</strong>
@@ -132,14 +132,14 @@ storiesOf("Media", module)
             </Media>
 
             <Media>
-              <Media.Item position={"left" as "left"}>
-                <Image
+              <Media.Item position="left">
+                <Image<"p">
                   src="http://bulma.io/images/placeholders/96x96.png"
                   size={48}
-                  renderAs="p"
+                  as="p"
                 />
               </Media.Item>
-              <Media.Item position={"center" as "center"}>
+              <Media.Item position="center">
                 <Content>
                   <p>
                     <strong>Kayli Eunice </strong>
@@ -159,22 +159,22 @@ storiesOf("Media", module)
             </Media>
           </Media.Item>
         </Media>
-        <Media renderAs="article">
-          <Media.Item position={"left" as "left"}>
-            <Image
+        <Media<"article"> as="article">
+          <Media.Item position="left">
+            <Image<"p">
               src="http://bulma.io/images/placeholders/128x128.png"
               size={64}
-              renderAs="p"
+              as="p"
             />
           </Media.Item>
-          <Media.Item position={"center" as "center"}>
+          <Media.Item position="center">
             <Field>
-              <Control renderAs="p">
+              <Control<"p"> as="p">
                 <Textarea placeholder="Add a comment..." />
               </Control>
             </Field>
             <Field>
-              <Control renderAs="p">
+              <Control<"p"> as="p">
                 <Button>Post comment</Button>
               </Control>
             </Field>

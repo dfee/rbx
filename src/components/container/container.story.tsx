@@ -11,10 +11,10 @@ storiesOf("Container", module).add("Default", () => (
     <Section>
       <Container>
         <p className="bd-notification is-success">
-          <Heading size={5} renderAs="p">
+          <Heading<"p"> size={5} as="p">
             Default
           </Heading>
-          <Heading subtitle renderAs="p">
+          <Heading<"p"> subtitle as="p">
             Container
           </Heading>
         </p>
@@ -23,34 +23,34 @@ storiesOf("Container", module).add("Default", () => (
     <Section>
       <Container fluid>
         <p className="bd-notification is-info">
-          <Heading size={5} renderAs="p">
+          <Heading<"p"> size={5} as="p">
             Fluid
           </Heading>
-          <Heading subtitle renderAs="p">
+          <Heading<"p"> subtitle as="p">
             Container
           </Heading>
         </p>
       </Container>
     </Section>
     <Section>
-      <Container breakpoint={"widescreen" as "widescreen"}>
+      <Container breakpoint="widescreen">
         <p className="bd-notification is-warning">
-          <Heading size={5} renderAs="p">
+          <Heading<"p"> size={5} as="p">
             Breakpoint Widescreen
           </Heading>
-          <Heading subtitle renderAs="p">
+          <Heading<"p"> subtitle as="p">
             Container
           </Heading>
         </p>
       </Container>
     </Section>
     <Section>
-      <Container breakpoint={"fullhd" as "fullhd"}>
+      <Container breakpoint="fullhd">
         <p className="bd-notification is-danger">
-          <Heading size={5} renderAs="p">
+          <Heading<"p"> size={5} as="p">
             Breakpoint Fullhd
           </Heading>
-          <Heading subtitle renderAs="p">
+          <Heading<"p"> subtitle as="p">
             Container
           </Heading>
         </p>

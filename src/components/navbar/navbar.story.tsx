@@ -3,7 +3,8 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Navbar } from "@/components/navbar";
-import { COLORS } from "@/modifiers/color";
+import { NavbarProps } from "@/components/navbar/navbar";
+import { COLORS, Colors } from "@/modifiers/color";
 
 const makeColorSelect = () =>
   select(
@@ -20,7 +21,7 @@ const makeColorSelect = () =>
 
 // https://github.com/storybooks/storybook/issues/4865
 const fixedSelectOptions = ({
-  Default: null,
+  Default: undefined,
   bottom: "bottom",
   top: "top",
 } as unknown) as { [k: string]: string };
@@ -30,13 +31,13 @@ const makeFixedSelect = () => select("Fixed", fixedSelectOptions, "Default");
 storiesOf("Navbar", module).add("Default", () => {
   return (
     <Navbar
-      color={makeColorSelect()}
-      fixed={makeFixedSelect()}
+      color={makeColorSelect() as Colors}
+      fixed={makeFixedSelect() as NavbarProps["fixed"]}
       active={boolean("Active", false)}
       transparent={boolean("Transparent", false)}
     >
       <Navbar.Brand>
-        <Navbar.Item renderAs="a" href="#">
+        <Navbar.Item<"a"> as="a" href="#">
           <img
             src="https://bulma.io/images/bulma-logo.png"
             alt="Bulma: a modern CSS framework based on Flexbox"
@@ -50,7 +51,7 @@ storiesOf("Navbar", module).add("Default", () => {
         <Navbar.Container>
           <Navbar.Item href="#">Second</Navbar.Item>
         </Navbar.Container>
-        <Navbar.Container position={"end" as "end"}>
+        <Navbar.Container position="end">
           <Navbar.Item href="#">At the end</Navbar.Item>
         </Navbar.Container>
       </Navbar.Menu>

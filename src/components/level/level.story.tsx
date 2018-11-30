@@ -11,12 +11,12 @@ import { Hero } from "@/components/hero";
 import { Level } from "@/components/level";
 import { Section } from "@/components/section";
 
-const style = { textAlign: "center" };
+const style: React.CSSProperties = { textAlign: "center" };
 
 storiesOf("Level", module)
   .addDecorator(story => (
-    <Hero size={"fullheight" as "fullheight"}>
-      <Hero.Head renderAs="header">
+    <Hero size="fullheight">
+      <Hero.Head<"header"> as="header">
         <Container>{story()}</Container>
       </Hero.Head>
     </Hero>
@@ -24,20 +24,20 @@ storiesOf("Level", module)
   .add("Default", () => (
     <Section>
       <Box>
-        <Level renderAs="nav">
+        <Level<"nav"> as="nav">
           <Level.Side align="left">
             <Level.Item>
-              <Heading size={5 as 5} subtitle>
+              <Heading size={5} subtitle>
                 <strong>123</strong> posts
               </Heading>
             </Level.Item>
             <Level.Item>
-              <Field kind={"addons" as "addons"}>
+              <Field kind="addons">
                 <Control>
                   <Input placeholder="Find a post" />
                 </Control>
                 <Control>
-                  <Button renderAs="button">Search</Button>
+                  <Button<"button"> as="button">Search</Button>
                 </Control>
               </Field>
             </Level.Item>
@@ -57,7 +57,7 @@ storiesOf("Level", module)
               <a>Deleted</a>
             </Level.Item>
             <Level.Item>
-              <Button renderAs="a" color="success">
+              <Button<"a"> as="a" color="success">
                 New
               </Button>
             </Level.Item>
@@ -69,37 +69,45 @@ storiesOf("Level", module)
   .add("Items Centered", () => (
     <Section>
       <Box>
-        <Level renderAs="nav">
+        <Level<"nav"> as="nav">
           <Level.Item style={style}>
             <div>
-              <Heading renderAs="p" heading>
+              <Heading<"p"> as="p" heading>
                 Tweets
               </Heading>
-              <Heading renderAs="p">3,210</Heading>
+              <Heading<"p"> as="p" heading>
+                3,210
+              </Heading>
             </div>
           </Level.Item>
           <Level.Item style={style}>
             <div>
-              <Heading renderAs="p" heading>
+              <Heading<"p"> as="p" heading>
                 Following
               </Heading>
-              <Heading renderAs="p">210</Heading>
+              <Heading<"p"> as="p" heading>
+                210
+              </Heading>
             </div>
           </Level.Item>
           <Level.Item style={style}>
             <div>
-              <Heading renderAs="p" heading>
+              <Heading<"p"> as="p" heading>
                 Followers
               </Heading>
-              <Heading renderAs="p">321</Heading>
+              <Heading<"p"> as="p" heading>
+                321
+              </Heading>
             </div>
           </Level.Item>
           <Level.Item style={style}>
             <div>
-              <Heading renderAs="p" heading>
+              <Heading<"p"> as="p" heading>
                 Likes
               </Heading>
-              <Heading renderAs="p">321K</Heading>
+              <Heading<"p"> as="p" heading>
+                321K
+              </Heading>
             </div>
           </Level.Item>
         </Level>
@@ -107,43 +115,51 @@ storiesOf("Level", module)
     </Section>
   ))
   .add("With breakpoint", () =>
-    ["Mobile", null].map(breakpoint => {
-      const title = breakpoint || "Without breakpoint";
+    ["Mobile", "Without breakpoint"].map(title => {
+      const breakpoint = title === "Mobile" ? "mobile" : undefined;
       return (
         <Section key={title}>
           <Heading>{title}</Heading>
           <Box>
-            <Level renderAs="nav" breakpoint={breakpoint}>
+            <Level<"nav"> as="nav" breakpoint={breakpoint}>
               <Level.Item style={style}>
                 <div>
-                  <Heading renderAs="p" heading>
+                  <Heading<"p"> as="p" heading>
                     Tweets
                   </Heading>
-                  <Heading renderAs="p">3,210</Heading>
+                  <Heading<"p"> as="p" heading>
+                    3,210
+                  </Heading>
                 </div>
               </Level.Item>
               <Level.Item style={style}>
                 <div>
-                  <Heading renderAs="p" heading>
+                  <Heading<"p"> as="p" heading>
                     Following
                   </Heading>
-                  <Heading renderAs="p">210</Heading>
+                  <Heading<"p"> as="p" heading>
+                    210
+                  </Heading>
                 </div>
               </Level.Item>
               <Level.Item style={style}>
                 <div>
-                  <Heading renderAs="p" heading>
+                  <Heading<"p"> as="p" heading>
                     Followers
                   </Heading>
-                  <Heading renderAs="p">321</Heading>
+                  <Heading<"p"> as="p" heading>
+                    321
+                  </Heading>
                 </div>
               </Level.Item>
               <Level.Item style={style}>
                 <div>
-                  <Heading renderAs="p" heading>
+                  <Heading<"p"> as="p" heading>
                     Likes
                   </Heading>
-                  <Heading renderAs="p">321K</Heading>
+                  <Heading<"p"> as="p" heading>
+                    321K
+                  </Heading>
                 </div>
               </Level.Item>
             </Level>

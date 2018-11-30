@@ -48,7 +48,7 @@ storiesOf("Section", module)
   ))
   .add("Medium", () => (
     <div>
-      <Section size={"medium" as "medium"}>
+      <Section size="medium">
         <Container>
           <Heading>Section</Heading>
           <Heading subtitle>
@@ -57,7 +57,7 @@ storiesOf("Section", module)
           </Heading>
         </Container>
       </Section>
-      <Section size={"medium" as "medium"}>
+      <Section size="medium">
         <Container>
           <Heading>Section</Heading>
           <Heading subtitle>
@@ -66,7 +66,7 @@ storiesOf("Section", module)
           </Heading>
         </Container>
       </Section>
-      <Section size={"medium" as "medium"}>
+      <Section size="medium">
         <Container>
           <Heading>Section</Heading>
           <Heading subtitle>
@@ -79,7 +79,7 @@ storiesOf("Section", module)
   ))
   .add("Large", () => (
     <div>
-      <Section size={"large" as "large"}>
+      <Section size="large">
         <Container>
           <Heading>Section</Heading>
           <Heading subtitle>
@@ -88,7 +88,7 @@ storiesOf("Section", module)
           </Heading>
         </Container>
       </Section>
-      <Section size={"large" as "large"}>
+      <Section size="large">
         <Container>
           <Heading>Section</Heading>
           <Heading subtitle>
@@ -97,7 +97,7 @@ storiesOf("Section", module)
           </Heading>
         </Container>
       </Section>
-      <Section size={"large" as "large"}>
+      <Section size="large">
         <Container>
           <Heading>Section</Heading>
           <Heading subtitle>
