@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 
 export type IconModifierProps = Partial<{
@@ -15,7 +15,9 @@ export type IconModifierProps = Partial<{
 export type IconProps = ModifierProps & IconModifierProps;
 
 export const Icon = React.forwardRef<HTMLElement, IconProps>((props, ref) => {
-  const { align, children, color, icon, size, ...rest } = modify(props);
+  const { align, children, color, icon, size, ...rest } = transformModifiers(
+    props,
+  );
   rest.className = cx("icon", rest.className, {
     [`is-${size}`]: size,
     [`is-${align}`]: align,

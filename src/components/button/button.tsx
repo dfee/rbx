@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { ButtonGroup } from "./button-group";
 
@@ -51,7 +51,7 @@ export const Button = Object.assign(
       onClick,
       text,
       ...rest
-    } = modify(props);
+    } = transformModifiers(props);
     rest.className = cx(rest.className, {
       button: !remove,
       delete: remove,

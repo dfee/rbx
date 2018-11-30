@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type NavbarDropdownModifierProps = Partial<{
   boxed: boolean;
@@ -13,7 +13,7 @@ export type NavbarDropdownProps = ModifierProps & NavbarDropdownModifierProps;
 
 export const NavbarDropdown = asExoticComponent<NavbarDropdownProps, "span">(
   (props, ref) => {
-    const { as, boxed, right, ...rest } = modify(props);
+    const { as, boxed, right, ...rest } = transformModifiers(props);
     rest.className = cx("navbar-dropdown", rest.className, {
       "is-boxed": boxed,
       "is-right": right,

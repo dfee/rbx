@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type HeadingModifierProps = Partial<{
   heading: boolean;
@@ -15,9 +15,15 @@ export type HeadingModifierProps = Partial<{
 export type HeadingProps = ModifierProps & HeadingModifierProps;
 
 export const Heading = asExoticComponent<HeadingProps, "h1">((props, ref) => {
-  const { as, heading, size, spaced, subtitle, weight, ...rest } = modify(
-    props,
-  );
+  const {
+    as,
+    heading,
+    size,
+    spaced,
+    subtitle,
+    weight,
+    ...rest
+  } = transformModifiers(props);
   rest.className = cx(rest.className, {
     [`has-text-weight-${weight}`]: weight,
     heading,

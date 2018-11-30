@@ -1,6 +1,6 @@
 import { cx } from "emotion";
 
-import { makeModify } from "./utils";
+import { makeTransform } from "./utils";
 
 export type TypographyProps = Partial<{
   italic: boolean;
@@ -10,7 +10,7 @@ export type TypographyProps = Partial<{
   textWeight: "light" | "normal" | "semibold" | "bold";
 }>;
 
-export const modify = makeModify<TypographyProps>(
+export const transformTypographyModifiers = makeTransform<TypographyProps>(
   props =>
     cx(props.className, {
       [`has-text-${props.textAlignment}`]: props.textAlignment,

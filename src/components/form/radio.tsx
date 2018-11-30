@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export interface RadioModifierProps {
   checked?: boolean;
@@ -29,7 +29,7 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       style,
       value,
       ...rest
-    } = modify(props);
+    } = transformModifiers(props);
     return (
       <label className={cx("radio", className)} style={style}>
         <input

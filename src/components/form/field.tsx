@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
 
@@ -17,7 +17,14 @@ export type FieldProps = ModifierProps & FieldModifierProps;
 
 export const Field = Object.assign(
   asExoticComponent<FieldProps, "div">((props, ref) => {
-    const { as, align, multiline, horizontal, kind, ...rest } = modify(props);
+    const {
+      as,
+      align,
+      multiline,
+      horizontal,
+      kind,
+      ...rest
+    } = transformModifiers(props);
 
     let k = null;
     if (kind === "addons") {

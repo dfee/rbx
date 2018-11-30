@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Tab } from "./tab";
 
 export type TabsModifierProps = Partial<{
@@ -17,9 +17,15 @@ export type TabsProps = ModifierProps & TabsModifierProps;
 
 export const Tabs = Object.assign(
   asExoticComponent<TabsProps, "div">((props, ref) => {
-    const { align, as, children, fullwidth, size, type, ...rest } = modify(
-      props,
-    );
+    const {
+      align,
+      as,
+      children,
+      fullwidth,
+      size,
+      type,
+      ...rest
+    } = transformModifiers(props);
     rest.className = cx("tabs", rest.className, {
       [`is-${align}`]: align,
       [`is-${size}`]: size,

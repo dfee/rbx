@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { ColumnSizes } from "./constants";
 
 export type ColumnSizeModifierProps = Partial<{
@@ -67,7 +67,7 @@ export const Column = asExoticComponent<ColumnProps, "div">((props, ref) => {
     tablet,
     widescreen,
     ...rest
-  } = modify(props);
+  } = transformModifiers(props);
 
   const dimmensions = { mobile, tablet, desktop, widescreen, fullhd };
   const sizeClassNames = {

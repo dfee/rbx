@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import * as React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export interface BreadcrumbItemProps {
   url: string;
@@ -31,9 +31,15 @@ export type BreadcrumbProps = ModifierProps &
 // a<nav>)
 export const Breadcrumb = asExoticComponent<BreadcrumbProps, "a">(
   (props, ref) => {
-    const { align, as, hrefAttr, items, separator, size, ...rest } = modify(
-      props,
-    );
+    const {
+      align,
+      as,
+      hrefAttr,
+      items,
+      separator,
+      size,
+      ...rest
+    } = transformModifiers(props);
     rest.className = cx("breadcrumb", rest.className, {
       [`has-${separator}-separator`]: separator,
       [`is-${align}`]: align,

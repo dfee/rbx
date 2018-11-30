@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type LabelModifierProps = Partial<{
   htmlFor: string;
@@ -15,7 +15,7 @@ export type LabelProps = Prefer<
 
 export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   (props, ref) => {
-    const { size, ...rest } = modify(props);
+    const { size, ...rest } = transformModifiers(props);
     rest.className = cx("label", rest.className, {
       [`is-${size}`]: size,
     });

@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ButtonGroupModifierProps = Partial<{
   className: string;
@@ -14,7 +14,9 @@ export type ButtonGroupProps = ModifierProps & ButtonGroupModifierProps;
 
 export const ButtonGroup = asExoticComponent<ButtonGroupProps, "div">(
   (props, ref) => {
-    const { as, children, hasAddons, position, ...rest } = modify(props);
+    const { as, children, hasAddons, position, ...rest } = transformModifiers(
+      props,
+    );
     rest.className = cx("buttons", rest.className, {
       "has-addons": hasAddons,
       [`is-${[position]}`]: position,

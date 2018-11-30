@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 
 export type TileModifierProps = Partial<{
@@ -18,9 +18,15 @@ export type TileModifierProps = Partial<{
 export type TileProps = ModifierProps & TileModifierProps;
 
 export const Tile = asExoticComponent<TileProps, "div">((props, ref) => {
-  const { as, color, kind, notification, size, vertical, ...rest } = modify(
-    props,
-  );
+  const {
+    as,
+    color,
+    kind,
+    notification,
+    size,
+    vertical,
+    ...rest
+  } = transformModifiers(props);
   rest.className = cx("tile", rest.className, {
     "is-vertical": vertical,
     [`is-${kind}`]: kind,

@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import * as React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type BoxModifierProps = Partial<{
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export type BoxModifierProps = Partial<{
 export type BoxProps = ModifierProps & BoxModifierProps;
 
 export const Box = asExoticComponent<BoxProps, "div">((props, ref) => {
-  const { as, children, ...rest } = modify(props);
+  const { as, children, ...rest } = transformModifiers(props);
   rest.className = cx("box", rest.className);
   return React.createElement(as!, { children, ref, ...rest });
 }, "div");

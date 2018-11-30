@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { HeroBody } from "./hero-body";
 import { HeroFooter } from "./hero-footer";
@@ -20,7 +20,7 @@ export type HeroProps = ModifierProps & HeroModifierProps;
 
 export const Hero = Object.assign(
   asExoticComponent<HeroProps, "section">((props, ref) => {
-    const { as, color, gradient, size, ...rest } = modify(props);
+    const { as, color, gradient, size, ...rest } = transformModifiers(props);
     rest.className = cx("hero", rest.className, {
       [`is-${color}`]: color,
       [`is-${size}`]: size,

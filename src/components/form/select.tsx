@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 
 export type SelectModifierProps = Partial<{
@@ -34,7 +34,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       style,
       value,
       ...rest
-    } = modify(props);
+    } = transformModifiers(props);
     return (
       <div
         className={cx("select", className, {

@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { PanelBlock } from "./panel-block";
 import { PanelHeader } from "./panel-header";
 import { PanelIcon } from "./panel-icon";
@@ -12,7 +12,7 @@ export type PanelProps = ModifierProps;
 
 export const Panel = Object.assign(
   asExoticComponent<PanelProps, "nav">((props, ref) => {
-    const { as, ...rest } = modify(props);
+    const { as, ...rest } = transformModifiers(props);
     rest.className = cx("panel", rest.className);
     return React.createElement(as!, { ref, ...rest });
   }, "nav"),

@@ -1,6 +1,6 @@
 import { cx } from "emotion";
 
-import { makeModify } from "./utils";
+import { makeTransform } from "./utils";
 
 export type HelpersProps = Partial<{
   clearfix: boolean;
@@ -16,7 +16,7 @@ export type HelpersProps = Partial<{
   unselectable: boolean;
 }>;
 
-export const modify = makeModify<HelpersProps>(
+export const transformHelpersModifiers = makeTransform<HelpersProps>(
   props =>
     cx(props.className, {
       "is-clearfix": props.clearfix,

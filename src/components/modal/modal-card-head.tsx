@@ -3,7 +3,7 @@ import React from "react";
 
 import { Button } from "@/components/button";
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ModalCardHeadModifierProps = Partial<{
   children: React.ReactNode;
@@ -16,7 +16,9 @@ export type ModalCardHeadProps = ModifierProps & ModalCardHeadModifierProps;
 
 export const ModalCardHead = asExoticComponent<ModalCardHeadProps, "header">(
   (props, ref) => {
-    const { as, children, onClose, showClose, ...rest } = modify(props);
+    const { as, children, onClose, showClose, ...rest } = transformModifiers(
+      props,
+    );
     rest.className = cx("modal-card-head", rest.className);
     return React.createElement(as!, {
       children: (

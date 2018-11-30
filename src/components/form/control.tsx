@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ControlModifierProps = Partial<{
   fullwidth: boolean;
@@ -15,9 +15,15 @@ export type ControlModifierProps = Partial<{
 export type ControlProps = ModifierProps & ControlModifierProps;
 
 export const Control = asExoticComponent<ControlProps, "div">((props, ref) => {
-  const { as, fullwidth, iconLeft, iconRight, loading, size, ...rest } = modify(
-    props,
-  );
+  const {
+    as,
+    fullwidth,
+    iconLeft,
+    iconRight,
+    loading,
+    size,
+    ...rest
+  } = transformModifiers(props);
   rest.className = cx("control", rest.className, {
     "has-icons-left": iconLeft,
     "has-icons-right": iconRight,

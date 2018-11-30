@@ -3,7 +3,7 @@ import React from "react";
 
 import { Element } from "@/components/element";
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { canUseDOM } from "@/utils";
 import { NavbarBrand } from "./navbar-brand";
@@ -81,7 +81,7 @@ class NavbarController extends React.PureComponent<
       innerRef,
       transparent,
       ...rest
-    } = modify(this.props);
+    } = transformModifiers(this.props);
 
     rest.className = cx("navbar", rest.className, {
       "is-transparent": transparent,

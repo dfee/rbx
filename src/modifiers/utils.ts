@@ -1,6 +1,6 @@
-type ModifiedProps<T, V> = Omit<V, keyof T> & { className: string };
+type TransformedProps<T, V> = Omit<V, keyof T> & { className: string };
 
-export function makeModify<T>(
+export function makeTransform<T>(
   classNameTransformer: <U extends T & { className?: string }>(
     props: U,
   ) => string,
@@ -16,7 +16,7 @@ export function makeModify<T>(
           ...currentValue,
         }),
         {},
-      ) as ModifiedProps<T, V>;
+      ) as TransformedProps<T, V>;
     // todo
     // obj.className = classNameTransformer(props);
     const className = classNameTransformer(props);

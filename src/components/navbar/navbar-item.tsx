@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type NavbarItemModifierProps = Partial<{
   active: boolean;
@@ -15,9 +15,14 @@ export type NavbarItemProps = ModifierProps & NavbarItemModifierProps;
 
 export const NavbarItem = asExoticComponent<NavbarItemProps, "a">(
   (props, ref) => {
-    const { as, active, dropdown, dropdownUp, hoverable, ...rest } = modify(
-      props,
-    );
+    const {
+      as,
+      active,
+      dropdown,
+      dropdownUp,
+      hoverable,
+      ...rest
+    } = transformModifiers(props);
     rest.className = cx("navbar-item", rest.className, {
       "has-dropdown": dropdown,
       "has-dropdown-up": dropdownUp,

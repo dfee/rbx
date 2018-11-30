@@ -1,7 +1,7 @@
 import { tuple } from "@/utils";
 import { cx } from "emotion";
 
-import { makeModify } from "./utils";
+import { makeTransform } from "./utils";
 
 export const BREAKPOINTS = tuple(
   "mobile",
@@ -51,7 +51,7 @@ export type ResponsiveProps = Partial<{
   }>;
 }>;
 
-export const modify = makeModify<ResponsiveProps>(
+export const transformResponsiveModifiers = makeTransform<ResponsiveProps>(
   props =>
     cx(
       props.className,

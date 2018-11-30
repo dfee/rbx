@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 
 export type TextareaModifierProps = Partial<{
@@ -21,7 +21,7 @@ export type TextareaProps = Prefer<
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
-    const { color, size, ...rest } = modify(props);
+    const { color, size, ...rest } = transformModifiers(props);
     rest.className = cx("textarea", rest.className, {
       [`is-${size}`]: size,
       [`is-${color}`]: color,

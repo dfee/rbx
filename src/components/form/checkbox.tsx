@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type CheckboxModifierProps = Partial<{
   checked: boolean;
@@ -31,7 +31,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       style,
       value,
       ...rest
-    } = modify(props);
+    } = transformModifiers(props);
     return (
       <label className={cx("checkbox", className)} style={style}>
         <input

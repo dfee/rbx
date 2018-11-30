@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { DropdownDivider } from "./dropdown-divider";
 import { DropdownItem } from "./dropdown-item";
@@ -83,7 +83,7 @@ export class Dropdown extends PureComponent<DropdownProps, DropdownState> {
       hoverable,
       onChange,
       ...rest
-    } = modify(this.props);
+    } = transformModifiers(this.props);
     rest.className = cx("dropdown", rest.className, {
       "is-active": this.state.open,
       [`is-,${align}`]: align,

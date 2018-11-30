@@ -8,5 +8,11 @@ export type ModifierProps = color.ColorsProps &
   responsive.ResponsiveProps &
   typography.TypographyProps;
 
-export const modify = <T extends object & { className?: string }>(props: T) =>
-  typography.modify(responsive.modify(helpers.modify(color.modify(props))));
+export const transformModifiers = <T extends object & { className?: string }>(
+  props: T,
+) =>
+  typography.transformTypographyModifiers(
+    responsive.transformResponsiveModifiers(
+      helpers.transformHelpersModifiers(color.transformColorModifiers(props)),
+    ),
+  );

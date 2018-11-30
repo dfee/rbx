@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Breakpoints } from "@/modifiers/responsive";
 import { Column } from "./column";
 
@@ -32,9 +32,14 @@ export type ColumnsProps = ModifierProps & ColumnsModifierProps;
 
 export const Columns = Object.assign(
   asExoticComponent<ColumnsProps, "div">((props, ref) => {
-    const { as, breakpoint, centered, gapless, multiline, ...rest } = modify(
-      props,
-    );
+    const {
+      as,
+      breakpoint,
+      centered,
+      gapless,
+      multiline,
+      ...rest
+    } = transformModifiers(props);
     rest.className = cx("columns", rest.className, {
       [`is-${breakpoint}`]: breakpoint,
       "is-centered": centered,

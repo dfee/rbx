@@ -1,17 +1,17 @@
-import { modify } from "..";
-import { modify as colorModify } from "../color";
-import { modify as helpersModify } from "../helpers";
-// import { modify as responsiveModify } from "../responsives";
-import { modify as typographyModify } from "../typography";
+import { transformModifiers } from "..";
+import { transformColorModifiers } from "../color";
+import { transformHelpersModifiers } from "../helpers";
+// import { transformResponsiveModifiers } from "../responsive";
+import { transformTypographyModifiers } from "../typography";
 
-describe("Root modify", () => {
+describe("Transform modifiers", () => {
   test("should work on empty props", () => {
-    expect(modify({})).toStrictEqual({});
+    expect(transformModifiers({})).toStrictEqual({});
   });
 
   test("should run all sub-modifiers", () => {
     expect(
-      modify({
+      transformModifiers({
         backgroundColor: "info", // color
         clearfix: true, // helpers
         italic: true, // typography
@@ -21,14 +21,14 @@ describe("Root modify", () => {
   });
 
   test("should not clear out unknown props", () => {
-    expect(modify({ unknowwn: true })).toMatchSnapshot();
+    expect(transformModifiers({ unknowwn: true })).toMatchSnapshot();
   });
 });
 
-describe("Color modify", () => {
+describe("Transform color modifiers", () => {
   test("should have class names applied", () => {
     expect(
-      colorModify({
+      transformColorModifiers({
         backgroundColor: "info",
         textColor: "success",
       }),
@@ -36,10 +36,10 @@ describe("Color modify", () => {
   });
 });
 
-describe("Helpers modify", () => {
+describe("Transform helpers modifiers", () => {
   test("should have class names applied", () => {
     expect(
-      helpersModify({
+      transformHelpersModifiers({
         clearfix: true,
         clipped: true,
         hidden: true,
@@ -57,7 +57,7 @@ describe("Helpers modify", () => {
 });
 
 // todo
-// describe("Responsive modify", () => {
+// describe("Transform responsive modifiers", () => {
 //   test("should have class names applied", () => {
 //     expect(
 //       responsiveModify({
@@ -67,10 +67,10 @@ describe("Helpers modify", () => {
 //   });
 // });
 
-describe("Typography modify", () => {
+describe("Transform typography modifiers", () => {
   test("should have class names applied", () => {
     expect(
-      typographyModify({
+      transformTypographyModifiers({
         italic: true,
         textAlignment: "centered",
         textSize: 1,

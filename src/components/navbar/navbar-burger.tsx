@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { Element } from "@/components/element";
-import { ModifierProps, modify } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 
 export type NavbarBurgerProps = Prefer<
@@ -12,7 +12,7 @@ export type NavbarBurgerProps = Prefer<
 
 export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
   (props, ref) => {
-    const { className, style, onClick, ...rest } = modify(props);
+    const { className, style, onClick, ...rest } = transformModifiers(props);
     return (
       <NavbarContext.Consumer>
         {({ active, setActive }) => (
