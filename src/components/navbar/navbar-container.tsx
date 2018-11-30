@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type NavbarContainerModifierProps = Partial<{
@@ -10,7 +10,7 @@ export type NavbarContainerModifierProps = Partial<{
 
 export type NavbarContainerProps = ModifierProps & NavbarContainerModifierProps;
 
-export const NavbarContainer = asExoticComponent<NavbarContainerProps, "div">(
+export const NavbarContainer = forwardRefAs<NavbarContainerProps, "div">(
   (props, ref) => {
     const { as, position, ...rest } = transformModifiers(props);
     rest.className = cx(rest.className, {

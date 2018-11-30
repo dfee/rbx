@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ControlModifierProps = Partial<{
@@ -14,7 +14,7 @@ export type ControlModifierProps = Partial<{
 
 export type ControlProps = ModifierProps & ControlModifierProps;
 
-export const Control = asExoticComponent<ControlProps, "div">((props, ref) => {
+export const Control = forwardRefAs<ControlProps, "div">((props, ref) => {
   const {
     as,
     fullwidth,

@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { Element } from "@/components/element";
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { canUseDOM } from "@/utils";
@@ -114,7 +114,7 @@ class NavbarController extends React.PureComponent<
 }
 
 export const Navbar = Object.assign(
-  asExoticComponent<NavbarProps, "nav">(
+  forwardRefAs<NavbarProps, "nav">(
     (props, ref) => <NavbarController innerRef={ref} {...props} />,
     "nav",
   ),

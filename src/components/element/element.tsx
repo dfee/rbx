@@ -1,12 +1,11 @@
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ElementProps = ModifierProps;
 
-export const Element = asExoticComponent<ElementProps, "div">(
-  ({ as, ...props }, ref) =>
-    React.createElement(as!, { ref, ...transformModifiers(props) }),
-  "div",
-);
+export const Element = forwardRefAs<ElementProps, "div">((props, ref) => {
+  const { as, ...rest } = transformModifiers(props);
+  return React.createElement(as!, { ref, ...rest });
+}, "div");

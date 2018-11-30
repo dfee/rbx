@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { MessageBody } from "./message-body";
@@ -15,7 +15,7 @@ export type MessageModifierProps = Partial<{
 export type MessageProps = ModifierProps & MessageModifierProps;
 
 export const Message = Object.assign(
-  asExoticComponent<MessageProps, "article">((props, ref) => {
+  forwardRefAs<MessageProps, "article">((props, ref) => {
     const { as, color, size, ...rest } = transformModifiers(props);
     rest.className = cx("message", rest.className, {
       [`is-${color}`]: color,

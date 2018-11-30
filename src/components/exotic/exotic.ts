@@ -1,44 +1,52 @@
 import React from "react";
 
-export type AsExoticComponentProps<
+export type ForwardRefAsExoticComponentProps<
   TOwnProps,
-  TRenderAs extends React.ComponentType<any> | keyof JSX.IntrinsicElements
-> = TOwnProps &
-  Omit<React.ComponentPropsWithRef<TRenderAs>, keyof TOwnProps> & {
-    as?: TRenderAs;
-  };
+  TAsComponent extends React.ComponentType<any> | keyof JSX.IntrinsicElements
+> = Prefer<TOwnProps, React.ComponentPropsWithRef<TAsComponent>> & {
+  as?: TAsComponent;
+};
 
-export type AsExoticComponent<
+export type ForwardRefAsExoticComponent<
   TOwnProps,
-  TDefaultElement extends React.ComponentType<any> | keyof JSX.IntrinsicElements
+  TDefaultAsComponent extends
+    | React.ComponentType<any>
+    | keyof JSX.IntrinsicElements
 > = React.ForwardRefExoticComponent<
-  AsExoticComponentProps<TOwnProps, TDefaultElement>
+  React.PropsWithoutRef<
+    ForwardRefAsExoticComponentProps<TOwnProps, TDefaultAsComponent>
+  >
 > &
   (<
-    TAsElement extends
+    TAsComponent extends
       | React.ComponentType<any>
-      | keyof JSX.IntrinsicElements = TDefaultElement
+      | keyof JSX.IntrinsicElements = TDefaultAsComponent
   >(
-    props: AsExoticComponentProps<TOwnProps, TAsElement>,
-  ) => JSX.Element | null);
+    props: ForwardRefAsExoticComponentProps<TOwnProps, TAsComponent>,
+  ) => React.ReactElement<any> | null);
 
-export function asExoticComponent<
+export function forwardRefAs<
   TOwnProps,
-  TDefaultElement extends React.ComponentType<any> | keyof JSX.IntrinsicElements
+  TDefaultAsComponent extends
+    | React.ComponentType<any>
+    | keyof JSX.IntrinsicElements
 >(
   factory: React.RefForwardingComponent<
     any,
-    Omit<AsExoticComponentProps<TOwnProps, TDefaultElement>, "ref">
+    React.PropsWithoutRef<
+      ForwardRefAsExoticComponentProps<TOwnProps, TDefaultAsComponent>
+    >
   >,
-  defaultElement: TDefaultElement,
+  defaultElement: TDefaultAsComponent,
 ) {
-  const forward = React.forwardRef(factory);
+  const forward = React.forwardRef(factory) as ForwardRefAsExoticComponent<
+    TOwnProps,
+    TDefaultAsComponent
+  >;
   // https://github.com/Microsoft/TypeScript/issues/28614
   // apparently a bug, use workaround
   // forward.defaultProps = { as: defaultElement };
   forward.defaultProps = {};
   forward.defaultProps.as = defaultElement;
-  // React.RefForwardingComponent is mistyped:
-  // it doesn't exclude `ref` from `props`.
-  return (forward as unknown) as AsExoticComponent<TOwnProps, TDefaultElement>;
+  return forward;
 }

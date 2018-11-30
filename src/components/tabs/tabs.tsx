@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Tab } from "./tab";
 
@@ -16,7 +16,7 @@ export type TabsModifierProps = Partial<{
 export type TabsProps = ModifierProps & TabsModifierProps;
 
 export const Tabs = Object.assign(
-  asExoticComponent<TabsProps, "div">((props, ref) => {
+  forwardRefAs<TabsProps, "div">((props, ref) => {
     const {
       align,
       as,

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { CardContent } from "./card-content";
 import { CardFooter } from "./card-footer";
@@ -15,7 +15,7 @@ export type CardModifierProps = Partial<{
 export type CardProps = ModifierProps & CardModifierProps;
 
 export const Card = Object.assign(
-  asExoticComponent<CardProps, "div">((props, ref) => {
+  forwardRefAs<CardProps, "div">((props, ref) => {
     const { as, ...rest } = transformModifiers(props);
     rest.className = cx("card", rest.className);
     return React.createElement(as!, { ref, ...rest });

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { ImageSizes } from "./constants";
 
@@ -14,7 +14,7 @@ export type ImageModifierProps = Partial<{
 
 export type ImageProps = ModifierProps & ImageModifierProps;
 
-export const Image = asExoticComponent<ImageProps, "figure">((props, ref) => {
+export const Image = forwardRefAs<ImageProps, "figure">((props, ref) => {
   const { as, alt, onError, size, src, ...rest } = transformModifiers(props);
   let s: string | undefined;
   if (typeof size === "string") {

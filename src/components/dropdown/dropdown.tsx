@@ -15,13 +15,12 @@ export type DropdownModifierProps = Partial<{
   innerRef: React.RefObject<HTMLDivElement>;
   onChange: (value: string) => void;
   value: string;
-}> &
-  Omit<
-    React.HTMLAttributes<HTMLDivElement>,
-    "color" | "onChange" | "unselectable"
-  >;
+}>;
 
-export type DropdownProps = ModifierProps & DropdownModifierProps;
+export type DropdownProps = Prefer<
+  ModifierProps & DropdownModifierProps,
+  React.HTMLAttributes<HTMLDivElement>
+>;
 
 const initialState = {
   open: false,

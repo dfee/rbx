@@ -3,12 +3,10 @@ import React from "react";
 
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type DropdownDividerModifierProps = Omit<
-  React.HTMLAttributes<HTMLHRElement>,
-  "unselectable"
+export type DropdownDividerProps = Prefer<
+  ModifierProps,
+  React.HTMLAttributes<HTMLHRElement>
 >;
-
-export type DropdownDividerProps = ModifierProps & DropdownDividerModifierProps;
 
 export const DropdownDivider = React.forwardRef<
   HTMLHRElement,

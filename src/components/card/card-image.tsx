@@ -9,7 +9,10 @@ export type CardImageModifierProps = Partial<{
   className: string;
 }>;
 
-export type CardImageProps = ImageProps & CardImageModifierProps;
+export type CardImageProps = Prefer<
+  ImageProps & CardImageModifierProps,
+  React.HTMLAttributes<HTMLElement>
+>;
 
 export const CardImage = React.forwardRef<HTMLElement, CardImageProps>(
   ({ className, ...rest }, ref) => (

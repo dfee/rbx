@@ -7,7 +7,9 @@ export interface RadioModifierProps {
   checked?: boolean;
   disabled?: boolean;
   /**
-   * The name of the input field Commonly used for [multi-input handling](https://reactjs.org/docs/forms.html#handling-multiple-inputs)
+   * The name of the input field Commonly used for
+   * [multi-input handling]
+   * (https://reactjs.org/docs/forms.html#handling-multiple-inputs)
    */
   name: string;
   value?: string;

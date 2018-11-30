@@ -1,15 +1,18 @@
-type TransformedProps<T, V> = Omit<V, keyof T> & { className: string };
+type TransformedProps<T, V> = Omit<V, keyof T>;
 
 export function makeTransform<T>(
-  classNameTransformer: <U extends T & { className?: string }>(
+  classNameTransform: <U extends T & { className?: string }>(
     props: U,
-  ) => string,
-  omitKeys: string[],
+  ) => string | undefined,
+  removeKeys: string[],
 ) {
   return <V extends T & object & { className?: string }>(props: V) => {
-    const obj = Object.keys(props)
-      .filter(key => !omitKeys.includes(key) && key !== "className")
-      .map(key => ({ [key]: props[key] }))
+    const className = classNameTransform(props);
+
+    // removeKeys
+    return Object.entries(Object.assign({}, props, { className }))
+      .filter(([key, value]) => !removeKeys.includes(key))
+      .map(([key, value]) => ({ [key]: value }))
       .reduce(
         (accumulator, currentValue) => ({
           ...accumulator,
@@ -17,12 +20,5 @@ export function makeTransform<T>(
         }),
         {},
       ) as TransformedProps<T, V>;
-    // todo
-    // obj.className = classNameTransformer(props);
-    const className = classNameTransformer(props);
-    if (className) {
-      obj.className = classNameTransformer(props);
-    }
-    return obj;
   };
 }

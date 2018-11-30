@@ -2,7 +2,7 @@ import { cx } from "emotion";
 import React from "react";
 
 import { Button } from "@/components/button";
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ModalCardHeadModifierProps = Partial<{
@@ -14,7 +14,7 @@ export type ModalCardHeadModifierProps = Partial<{
 
 export type ModalCardHeadProps = ModifierProps & ModalCardHeadModifierProps;
 
-export const ModalCardHead = asExoticComponent<ModalCardHeadProps, "header">(
+export const ModalCardHead = forwardRefAs<ModalCardHeadProps, "header">(
   (props, ref) => {
     const { as, children, onClose, showClose, ...rest } = transformModifiers(
       props,

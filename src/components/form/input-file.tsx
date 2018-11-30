@@ -28,7 +28,7 @@ export type InputFileModifierProps = Partial<{
 
 export type InputFileProps = Prefer<
   ModifierProps & InputFileModifierProps,
-  Omit<React.HTMLAttributes<HTMLInputElement>, "children">
+  React.HTMLAttributes<HTMLInputElement>
 >;
 
 export interface InputFileState {
@@ -72,7 +72,7 @@ export class InputFile extends React.PureComponent<
       size,
       style,
       unselectable,
-      ...props
+      ...rest
     } = this.props;
 
     const { filename } = this.state;
@@ -92,12 +92,12 @@ export class InputFile extends React.PureComponent<
       >
         <label className="file-label">
           <input
-            {...props}
-            name={name}
-            value=""
-            type="file"
             className="file-input"
+            name={name}
             onChange={this.select}
+            type="file"
+            value=""
+            {...rest}
           />
           <span className="file-cta">
             {icon && <span className="file-icon">{icon}</span>}

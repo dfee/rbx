@@ -40,6 +40,6 @@ export const transformColorModifiers = makeTransform<ColorsProps>(
     cx(props.className, {
       [`has-background-${props.backgroundColor}`]: props.backgroundColor,
       [`has-text-${props.textColor}`]: props.textColor,
-    }),
+    }) || undefined,
   ["backgroundColor", "textColor"],
 );

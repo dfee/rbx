@@ -81,6 +81,6 @@ export const transformResponsiveModifiers = makeTransform<ResponsiveProps>(
           }),
           {},
         ),
-    ),
+    ) || undefined,
   ["responsive"],
 );

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 
@@ -17,7 +17,7 @@ export type TileModifierProps = Partial<{
 
 export type TileProps = ModifierProps & TileModifierProps;
 
-export const Tile = asExoticComponent<TileProps, "div">((props, ref) => {
+export const Tile = forwardRefAs<TileProps, "div">((props, ref) => {
   const {
     as,
     color,

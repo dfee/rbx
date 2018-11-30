@@ -30,7 +30,7 @@ export const transformHelpersModifiers = makeTransform<HelpersProps>(
       "is-radiusless": props.radiusless,
       "is-shadowless": props.shadowless,
       "is-unselectable": props.unselectable,
-    }),
+    }) || undefined,
   [
     "clearfix",
     "clipped",

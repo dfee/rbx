@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type TabModifierProps = Partial<{
@@ -13,7 +13,7 @@ export type TabModifierProps = Partial<{
 export type TabProps = ModifierProps & TabModifierProps;
 
 // TODO: ref passed to `li` but `as` passed to createElement (default as `a`)
-export const Tab = asExoticComponent<TabModifierProps, "a">((props, ref) => {
+export const Tab = forwardRefAs<TabModifierProps, "a">((props, ref) => {
   const { as, active, className, style, ...rest } = transformModifiers(props);
   return (
     <li

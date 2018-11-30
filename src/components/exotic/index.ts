@@ -1,1 +1,1 @@
-export { asExoticComponent } from "./exotic";
+export { forwardRefAs } from "./exotic";

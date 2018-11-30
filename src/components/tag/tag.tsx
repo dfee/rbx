@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { TagGroup } from "./tag-group";
@@ -18,7 +18,7 @@ export type TagModifierProps = Partial<{
 export type TagProps = ModifierProps & TagModifierProps;
 
 export const Tag = Object.assign(
-  asExoticComponent<TagProps, "span">((props, ref) => {
+  forwardRefAs<TagProps, "span">((props, ref) => {
     const {
       as,
       children,

@@ -1,14 +1,12 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { ButtonGroup } from "./button-group";
 
 export type ButtonModifierProps = Partial<{
-  as: "a" | "button" | "span" | React.ComponentType<any>;
-  children: React.ReactNode;
   color: Colors;
   disabled: boolean;
   fullwidth: boolean;
@@ -30,7 +28,7 @@ export type ButtonModifierProps = Partial<{
 export type ButtonProps = ModifierProps & ButtonModifierProps;
 
 export const Button = Object.assign(
-  asExoticComponent<ButtonProps, "button">((props, ref) => {
+  forwardRefAs<ButtonProps, "button">((props, ref) => {
     const {
       as,
       children,

@@ -4,12 +4,15 @@ import React from "react";
 import { Element } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
-export type DropdownItemModifierProps = {
+export interface DropdownItemModifierProps {
   active?: boolean;
   value: string;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, "unselectable">;
+}
 
-export type DropdownItemProps = ModifierProps & DropdownItemModifierProps;
+export type DropdownItemProps = Prefer<
+  ModifierProps & DropdownItemModifierProps,
+  React.HTMLAttributes<HTMLDivElement>
+>;
 
 export const DropdownItem = React.forwardRef<HTMLDivElement, DropdownItemProps>(
   (props, ref) => {

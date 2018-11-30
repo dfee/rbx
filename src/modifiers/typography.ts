@@ -18,6 +18,6 @@ export const transformTypographyModifiers = makeTransform<TypographyProps>(
       [`is-size-${props.textSize}`]: !!props.textSize,
       [`is-${props.textTransform}`]: props.textTransform,
       "is-italic": props.italic,
-    }),
+    }) || undefined,
   ["textWeight", "textTransform", "italic", "textSize", "textAlignment"],
 );

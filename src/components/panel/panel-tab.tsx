@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type PanelTabModifierProps = Partial<{
@@ -10,7 +10,7 @@ export type PanelTabModifierProps = Partial<{
 
 export type PanelTabProps = ModifierProps & PanelTabModifierProps;
 
-export const PanelTab = asExoticComponent<PanelTabProps, "a">((props, ref) => {
+export const PanelTab = forwardRefAs<PanelTabProps, "a">((props, ref) => {
   const { active, as, className: cn, ...rest } = transformModifiers(props);
   const className = cx(cn, { "is-active": active }) || undefined;
   return React.createElement(as!, { className, ref, ...rest });

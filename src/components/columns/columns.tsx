@@ -1,27 +1,27 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Breakpoints } from "@/modifiers/responsive";
 import { Column } from "./column";
 
 type ColumnsModifierProps = Partial<{
-  /*
+  /**
    * Breakpoint where columns become stacked.
    */
   breakpoint: Breakpoints;
-  /*
+  /**
    * `true` you want the columns inside to be horizontaly centered
    */
   centered: boolean;
   children: React.ReactNode;
   className: string;
-  /*
+  /**
    * `true` to remove space between columns
    */
   gapless: boolean;
-  /*
+  /**
    * `true` if you want to use more than one line if you add more column
    * elements that would fit in a single row.
    */
@@ -31,7 +31,7 @@ type ColumnsModifierProps = Partial<{
 export type ColumnsProps = ModifierProps & ColumnsModifierProps;
 
 export const Columns = Object.assign(
-  asExoticComponent<ColumnsProps, "div">((props, ref) => {
+  forwardRefAs<ColumnsProps, "div">((props, ref) => {
     const {
       as,
       breakpoint,

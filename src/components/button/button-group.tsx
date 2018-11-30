@@ -1,18 +1,17 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { asExoticComponent } from "@/components/exotic";
+import { forwardRefAs } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ButtonGroupModifierProps = Partial<{
-  className: string;
   hasAddons: boolean;
   position: "centered" | "right";
 }>;
 
 export type ButtonGroupProps = ModifierProps & ButtonGroupModifierProps;
 
-export const ButtonGroup = asExoticComponent<ButtonGroupProps, "div">(
+export const ButtonGroup = forwardRefAs<ButtonGroupProps, "div">(
   (props, ref) => {
     const { as, children, hasAddons, position, ...rest } = transformModifiers(
       props,
