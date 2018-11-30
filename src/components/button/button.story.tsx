@@ -6,7 +6,7 @@ import React from "react";
 import { Box } from "@/components/box";
 import { Button } from "@/components/button";
 import { Section } from "@/components/section";
-import { COLORS } from "@/modifiers/colors";
+import { COLORS } from "@/modifiers/color";
 
 const makeColorSelect = () =>
   select(

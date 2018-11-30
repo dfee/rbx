@@ -1,27 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type LevelItemModifierProps = Partial<{
-  children: React.ReactNode;
-  style: React.CSSProperties;
-}>;
+export type LevelItemProps = ModifierProps;
 
-export type LevelItemProps = ModifierProps & LevelItemModifierProps;
-
-export const LevelItem = extendedForwardRef<LevelItemProps, "div">(
-  ({ children, className, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("level-item", className, {})}>
-      {children}
-    </Element>
-  ),
-  "div",
-);
-LevelItem.defaultProps = Object.assign(
-  {
-    children: null,
+export const LevelItem = asExoticComponent<LevelItemProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("level-item", rest.className);
+    return React.createElement(as!, { ref, ...rest });
   },
-  LevelItem.defaultProps,
+  "div",
 );

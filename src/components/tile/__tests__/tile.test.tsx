@@ -1,15 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { COLORS } from "@/modifiers/colors";
+import { COLORS } from "@/modifiers/color";
 import { Tile } from "../tile";
 
 describe("Tile component", () => {
-  it("Should exist", () => {
+  it("should exist", () => {
     expect(Tile).toMatchSnapshot();
   });
 
-  it("Should have notification classname", () => {
+  it("should have notification classname", () => {
     const component = renderer.create(
       <Tile>
         <img
@@ -21,7 +21,7 @@ describe("Tile component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should concat classname in props with Bulma classname", () => {
+  it("should concat classname in props with Bulma classname", () => {
     const component = renderer.create(
       <Tile className="other-class this-is-a-test">
         <p>Default</p>
@@ -30,7 +30,7 @@ describe("Tile component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use inline styles", () => {
+  it("should use inline styles", () => {
     const component = renderer.create(
       <Tile style={{ height: 250 }}>
         <p>Default</p>
@@ -39,9 +39,9 @@ describe("Tile component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should render as Section", () => {
+  it("should render as Section", () => {
     const component = renderer.create(
-      <Tile renderAs="section">
+      <Tile<"section"> as="section">
         <p>Default</p>
       </Tile>,
     );
@@ -49,7 +49,7 @@ describe("Tile component", () => {
   });
 
   COLORS.map(color =>
-    it(`Should use use color ${color}`, () => {
+    it(`should use use color ${color}`, () => {
       const component = renderer.create(
         <Tile notification color={color}>
           <p>Default {color}</p>

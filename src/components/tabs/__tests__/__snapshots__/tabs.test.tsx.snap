@@ -1,26 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tabs component Should Exist 1`] = `
+exports[`Tabs component should Exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "Tab": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "active": false,
-      "children": null,
-      "renderAs": "a",
+      "as": "a",
     },
     "render": [Function],
   },
   "defaultProps": Object {
+    "as": "div",
     "fullwidth": false,
-    "renderAs": "div",
   },
   "render": [Function],
 }
 `;
 
-exports[`Tabs component Should accept a react Element as renderAs prop 1`] = `
+exports[`Tabs component should accept a react Element as renderAs prop 1`] = `
 <p
   className="tabs"
 >
@@ -31,7 +30,7 @@ exports[`Tabs component Should accept a react Element as renderAs prop 1`] = `
 </p>
 `;
 
-exports[`Tabs component Should concat Bulma class with classes in props 1`] = `
+exports[`Tabs component should concat Bulma class with classes in props 1`] = `
 <div
   className="tabs other-class test"
 >
@@ -41,19 +40,18 @@ exports[`Tabs component Should concat Bulma class with classes in props 1`] = `
 </div>
 `;
 
-exports[`Tabs component Should expose Tab 1`] = `
+exports[`Tabs component should expose Tab 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
     "active": false,
-    "children": null,
-    "renderAs": "a",
+    "as": "a",
   },
   "render": [Function],
 }
 `;
 
-exports[`Tabs component Should have Tabs classname 1`] = `
+exports[`Tabs component should have Tabs classname 1`] = `
 <div
   className="tabs"
 >
@@ -63,7 +61,7 @@ exports[`Tabs component Should have Tabs classname 1`] = `
 </div>
 `;
 
-exports[`Tabs component Should have custom inline styles 1`] = `
+exports[`Tabs component should have custom inline styles 1`] = `
 <section
   className="tabs"
   style={
@@ -79,7 +77,7 @@ exports[`Tabs component Should have custom inline styles 1`] = `
 </section>
 `;
 
-exports[`Tabs component Should render as an html section 1`] = `
+exports[`Tabs component should render as an html section 1`] = `
 <section
   className="tabs"
 >
@@ -89,7 +87,7 @@ exports[`Tabs component Should render as an html section 1`] = `
 </section>
 `;
 
-exports[`Tabs component Should render propertly Inside Tabs 1`] = `
+exports[`Tabs component should render propertly Inside Tabs 1`] = `
 <div
   className="tabs"
 >

@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Navbar } from "@/components/navbar";
-import { COLORS } from "@/modifiers/colors";
+import { COLORS } from "@/modifiers/color";
 
 const makeColorSelect = () =>
   select(

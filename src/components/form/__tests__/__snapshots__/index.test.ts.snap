@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form component Should expose all Form elements 1`] = `
+exports[`Form component should expose all Form elements 1`] = `
 Object {
   "Checkbox": Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -14,12 +14,11 @@ Object {
   "Control": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
+      "as": "div",
       "fullwidth": false,
       "iconLeft": false,
       "iconRight": false,
       "loading": false,
-      "renderAs": "div",
     },
     "render": [Function],
   },
@@ -28,32 +27,28 @@ Object {
     "Body": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "Label": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "children": null,
+      "as": "div",
       "horizontal": false,
       "multiline": false,
-      "renderAs": "div",
     },
     "render": [Function],
   },
   "Help": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "p",
+      "as": "p",
     },
     "render": [Function],
   },
@@ -64,9 +59,6 @@ Object {
   "InputFile": [Function],
   "Label": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "children": null,
-    },
     "render": [Function],
   },
   "Radio": Object {

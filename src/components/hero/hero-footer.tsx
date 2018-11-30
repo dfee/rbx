@@ -1,27 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type HeroFooterModifierProps = Partial<{
-  children: React.ReactNode;
-  style: React.CSSProperties;
-}>;
+export type HeroFooterProps = ModifierProps;
 
-export type HeroFooterProps = ModifierProps & HeroFooterModifierProps;
-
-export const HeroFooter = extendedForwardRef<HeroFooterProps, "div">(
-  ({ children, className, ...props }, ref) => (
-    <Element ref={ref} {...props} className={cx(className, "hero-foot")}>
-      {children}
-    </Element>
-  ),
-  "div",
-);
-HeroFooter.defaultProps = Object.assign(
-  {
-    children: null,
+export const HeroFooter = asExoticComponent<HeroFooterProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("hero-foot", rest.className);
+    return React.createElement(as!, { ref, ...rest });
   },
-  HeroFooter.defaultProps,
+  "div",
 );

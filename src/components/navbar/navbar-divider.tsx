@@ -4,14 +4,10 @@ import React from "react";
 import { Element } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
-export type NavbarDividerModifierProps = Partial<{
-  className: string;
-  style: React.CSSProperties;
-}>;
-
-export type NavbarDividerProps = ModifierProps &
-  NavbarDividerModifierProps &
-  Partial<Omit<React.ComponentPropsWithoutRef<"div">, "unselectable">>;
+export type NavbarDividerProps = Prefer<
+  ModifierProps,
+  React.HTMLAttributes<HTMLDivElement>
+>;
 
 export const NavbarDivider = React.forwardRef<
   HTMLDivElement,

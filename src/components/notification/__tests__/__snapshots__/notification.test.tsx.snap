@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Notification component Should concat classname in props with Bulma classname 1`] = `
+exports[`Notification component should concat classname in props with Bulma classname 1`] = `
 <div
   className="notification other-class this-is-a-test"
 >
@@ -10,18 +10,17 @@ exports[`Notification component Should concat classname in props with Bulma clas
 </div>
 `;
 
-exports[`Notification component Should exist 1`] = `
+exports[`Notification component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
-    "renderAs": "div",
+    "as": "div",
   },
   "render": [Function],
 }
 `;
 
-exports[`Notification component Should have notification classname 1`] = `
+exports[`Notification component should have notification classname 1`] = `
 <div
   className="notification"
 >
@@ -32,7 +31,7 @@ exports[`Notification component Should have notification classname 1`] = `
 </div>
 `;
 
-exports[`Notification component Should render as Section 1`] = `
+exports[`Notification component should render as Section 1`] = `
 <section
   className="notification"
 >
@@ -42,7 +41,7 @@ exports[`Notification component Should render as Section 1`] = `
 </section>
 `;
 
-exports[`Notification component Should use color black 1`] = `
+exports[`Notification component should use color black 1`] = `
 <div
   className="notification is-black"
 >
@@ -53,7 +52,7 @@ exports[`Notification component Should use color black 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color danger 1`] = `
+exports[`Notification component should use color danger 1`] = `
 <div
   className="notification is-danger"
 >
@@ -64,7 +63,7 @@ exports[`Notification component Should use color danger 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color dark 1`] = `
+exports[`Notification component should use color dark 1`] = `
 <div
   className="notification is-dark"
 >
@@ -75,7 +74,7 @@ exports[`Notification component Should use color dark 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color info 1`] = `
+exports[`Notification component should use color info 1`] = `
 <div
   className="notification is-info"
 >
@@ -86,7 +85,7 @@ exports[`Notification component Should use color info 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color light 1`] = `
+exports[`Notification component should use color light 1`] = `
 <div
   className="notification is-light"
 >
@@ -97,7 +96,7 @@ exports[`Notification component Should use color light 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color link 1`] = `
+exports[`Notification component should use color link 1`] = `
 <div
   className="notification is-link"
 >
@@ -108,7 +107,7 @@ exports[`Notification component Should use color link 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color primary 1`] = `
+exports[`Notification component should use color primary 1`] = `
 <div
   className="notification is-primary"
 >
@@ -119,7 +118,7 @@ exports[`Notification component Should use color primary 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color success 1`] = `
+exports[`Notification component should use color success 1`] = `
 <div
   className="notification is-success"
 >
@@ -130,7 +129,7 @@ exports[`Notification component Should use color success 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color warning 1`] = `
+exports[`Notification component should use color warning 1`] = `
 <div
   className="notification is-warning"
 >
@@ -141,7 +140,7 @@ exports[`Notification component Should use color warning 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use color white 1`] = `
+exports[`Notification component should use color white 1`] = `
 <div
   className="notification is-white"
 >
@@ -152,7 +151,7 @@ exports[`Notification component Should use color white 1`] = `
 </div>
 `;
 
-exports[`Notification component Should use inline styles 1`] = `
+exports[`Notification component should use inline styles 1`] = `
 <div
   className="notification"
   style={

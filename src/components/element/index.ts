@@ -1,1 +1,1 @@
-export { Element, extendedForwardRef } from "./element";
+export { Element } from "./element";

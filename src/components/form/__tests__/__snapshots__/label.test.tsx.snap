@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Label component Should concat classname in props with Bulma classname 1`] = `
+exports[`Label component should concat classname in props with Bulma classname 1`] = `
 <label
   className="label other-class this-is-a-test"
 >
@@ -10,17 +10,14 @@ exports[`Label component Should concat classname in props with Bulma classname 1
 </label>
 `;
 
-exports[`Label component Should exist 1`] = `
+exports[`Label component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
-  "defaultProps": Object {
-    "children": null,
-  },
   "render": [Function],
 }
 `;
 
-exports[`Label component Should have label classname 1`] = `
+exports[`Label component should have label classname 1`] = `
 <label
   className="label"
 >
@@ -31,7 +28,7 @@ exports[`Label component Should have label classname 1`] = `
 </label>
 `;
 
-exports[`Label component Should use inline styles 1`] = `
+exports[`Label component should use inline styles 1`] = `
 <label
   className="label"
   style={

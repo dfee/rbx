@@ -1,26 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type MessageHeaderModifierProps = Partial<{
-  children: React.ReactNode;
-}>;
+export type MessageHeaderProps = ModifierProps;
 
-export type MessageHeaderProps = ModifierProps & MessageHeaderModifierProps;
-
-export const MessageHeader = extendedForwardRef<MessageHeaderProps, "div">(
-  ({ children, className, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("message-header", className)}>
-      {children}
-    </Element>
-  ),
-  "div",
-);
-MessageHeader.defaultProps = Object.assign(
-  {
-    children: null,
+export const MessageHeader = asExoticComponent<MessageHeaderProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("message-header", rest.className);
+    return React.createElement(as!, { ref, ...rest });
   },
-  MessageHeader.defaultProps,
+  "div",
 );

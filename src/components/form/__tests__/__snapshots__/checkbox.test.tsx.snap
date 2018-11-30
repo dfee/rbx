@@ -12,7 +12,7 @@ Object {
 }
 `;
 
-exports[`Checkbox component Should have checkbox classname 1`] = `
+exports[`Checkbox component should have checkbox classname 1`] = `
 <label
   className="checkbox"
 >

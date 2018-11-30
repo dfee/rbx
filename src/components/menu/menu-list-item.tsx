@@ -1,28 +1,32 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
+import { Element } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 import { MenuList } from "./menu-list";
 
 export type MenuListItemModifierProps = Partial<{
   active: boolean;
-  children: React.ReactNode;
 }>;
 
-export type MenuListItemProps = ModifierProps & MenuListItemModifierProps;
+export type MenuListItemProps = Prefer<
+  ModifierProps & MenuListItemModifierProps,
+  React.HTMLAttributes<HTMLAnchorElement>
+>;
 
-export const MenuListItem = extendedForwardRef<MenuListItemProps, "a">(
-  ({ children, active, className, ...props }, ref) => {
+export const MenuListItem = React.forwardRef<HTMLLIElement, MenuListItemProps>(
+  (props, ref) => {
+    const { active, children, className, ...rest } = props;
+
     if (typeof children === "string") {
       return (
         <li ref={ref}>
-          <Element
+          <Element<"a">
+            as="a"
             className={cx(className, { "is-active": active })}
-            {...props}
-          >
-            {children}
-          </Element>
+            children={children}
+            {...rest}
+          />
         </li>
       );
     }
@@ -31,12 +35,12 @@ export const MenuListItem = extendedForwardRef<MenuListItemProps, "a">(
       const child = React.Children.only(children);
       return (
         <li ref={ref}>
-          <Element
+          <Element<"a">
+            as="a"
             className={cx(className, { "is-active": active })}
-            {...props}
-          >
-            {child.props.title}
-          </Element>
+            children={child.props.title}
+            {...rest}
+          />
           {React.cloneElement(child, { title: null })}
         </li>
       );
@@ -44,8 +48,8 @@ export const MenuListItem = extendedForwardRef<MenuListItemProps, "a">(
 
     return <li ref={ref}>{children}</li>;
   },
-  "a",
 );
+
 MenuListItem.defaultProps = Object.assign(
   {
     active: false,

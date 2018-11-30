@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type LevelSideModifierProps = Partial<{
   align: string;
@@ -12,24 +12,18 @@ export type LevelSideModifierProps = Partial<{
 
 export type LevelSideProps = ModifierProps & LevelSideModifierProps;
 
-export const LevelSide = extendedForwardRef<LevelSideProps, "div">(
-  ({ children, className, align, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx(className, {
-        [`level-${align}`]: align,
-      })}
-    >
-      {children}
-    </Element>
-  ),
+export const LevelSide = asExoticComponent<LevelSideProps, "div">(
+  (props, ref) => {
+    const { as, align, ...rest } = modify(props);
+    rest.className = cx(rest.className, {
+      [`level-${align}`]: align,
+    });
+    return React.createElement(as!, { ref, ...rest });
+  },
   "div",
 );
+
 LevelSide.defaultProps = Object.assign(
-  {
-    align: "left",
-    children: null,
-  },
+  { align: "left" },
   LevelSide.defaultProps,
 );

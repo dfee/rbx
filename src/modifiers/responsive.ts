@@ -39,7 +39,7 @@ export type ResponsiveSizeProps = Partial<{
   }>;
 }>;
 
-export type ResponsivesProps = Partial<{
+export type ResponsiveProps = Partial<{
   responsive: Partial<{
     [key: string]: ResponsiveSizeProps;
     mobile: ResponsiveSizeProps;
@@ -51,7 +51,7 @@ export type ResponsivesProps = Partial<{
   }>;
 }>;
 
-export const modify = makeModify<ResponsivesProps>(
+export const modify = makeModify<ResponsiveProps>(
   props =>
     cx(
       props.className,

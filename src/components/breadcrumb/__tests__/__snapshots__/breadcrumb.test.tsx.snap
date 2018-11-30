@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Breadcrumb component Should be a Breadcrumb 1`] = `
+exports[`Breadcrumb component should be a Breadcrumb 1`] = `
 <nav
   className="breadcrumb"
 >
@@ -36,7 +36,7 @@ exports[`Breadcrumb component Should be a Breadcrumb 1`] = `
 </nav>
 `;
 
-exports[`Breadcrumb component Should not pass along item.url as hrefAttr prop on 'as' component when hrefAttr is not supplied 1`] = `
+exports[`Breadcrumb component should not pass along item.url as hrefAttr prop on 'as' component when hrefAttr is not supplied 1`] = `
 <nav
   className="breadcrumb"
 >
@@ -60,7 +60,7 @@ exports[`Breadcrumb component Should not pass along item.url as hrefAttr prop on
 </nav>
 `;
 
-exports[`Breadcrumb component Should pass along item.url as hrefAttr prop on 'as' component when hrefAttr is supplied 1`] = `
+exports[`Breadcrumb component should pass along item.url as hrefAttr prop on 'as' component when hrefAttr is supplied 1`] = `
 <nav
   className="breadcrumb"
 >
@@ -90,7 +90,7 @@ exports[`Breadcrumb component Should pass along item.url as hrefAttr prop on 'as
 </nav>
 `;
 
-exports[`Breadcrumb component Should use inline style and custom size 1`] = `
+exports[`Breadcrumb component should use inline style and custom size 1`] = `
 <nav
   className="breadcrumb is-large"
   style={

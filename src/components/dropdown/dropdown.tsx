@@ -3,31 +3,25 @@ import React, { PureComponent } from "react";
 
 import { Button } from "@/components/button";
 import { Icon } from "@/components/icon";
-import { classNames, clean, ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { ModifierProps, modify } from "@/modifiers";
+import { Colors } from "@/modifiers/color";
 import { DropdownDivider } from "./dropdown-divider";
 import { DropdownItem } from "./dropdown-item";
 
 export type DropdownModifierProps = Partial<{
   align: "right";
-  children: React.ReactNode;
-  className: string;
   color: Colors;
   hoverable: boolean;
+  innerRef: React.RefObject<HTMLDivElement>;
   onChange: (value: string) => void;
-  ref: React.RefObject<HTMLDivElement>;
-  style: React.CSSProperties;
-  value: any;
-}>;
-
-export type DropdownProps = ModifierProps &
-  DropdownModifierProps &
-  Partial<
-    Omit<
-      React.ComponentPropsWithoutRef<"div">,
-      "color" | "onChange" | "unselectable"
-    >
+  value: string;
+}> &
+  Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "color" | "onChange" | "unselectable"
   >;
+
+export type DropdownProps = ModifierProps & DropdownModifierProps;
 
 const initialState = {
   open: false,
@@ -50,9 +44,7 @@ export class Dropdown extends PureComponent<DropdownProps, DropdownState> {
 
   constructor(props: DropdownProps) {
     super(props);
-    this.htmlElement = props.ref
-      ? props.ref
-      : React.createRef<HTMLDivElement>();
+    this.htmlElement = props.innerRef || React.createRef<HTMLDivElement>();
   }
 
   public componentDidMount() {
@@ -84,18 +76,21 @@ export class Dropdown extends PureComponent<DropdownProps, DropdownState> {
 
   public render() {
     const {
-      className,
       children,
       value,
       color,
       align,
       hoverable,
       onChange,
-      ...allProps
-    } = this.props;
+      ...rest
+    } = modify(this.props);
+    rest.className = cx("dropdown", rest.className, {
+      "is-active": this.state.open,
+      [`is-,${align}`]: align,
+      "is-hoverable": hoverable,
+    });
 
     let current = null;
-    const props = clean(allProps);
 
     const childrenArray = React.Children.map(children, (child, i) => {
       if (typeof child !== "string" && typeof child !== "number") {
@@ -116,15 +111,7 @@ export class Dropdown extends PureComponent<DropdownProps, DropdownState> {
     });
 
     return (
-      <div
-        {...props}
-        ref={this.htmlElement}
-        className={cx("dropdown", classNames(allProps), className, {
-          "is-active": this.state.open,
-          [`is-,${align}`]: align,
-          "is-hoverable": hoverable,
-        })}
-      >
+      <div {...rest} ref={this.htmlElement}>
         <div
           className="dropdown-trigger"
           role="presentation"

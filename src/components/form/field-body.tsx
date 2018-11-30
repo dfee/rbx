@@ -1,27 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type FieldBodyModifierProps = Partial<{
-  children: React.ReactNode;
-  style: React.CSSProperties;
-}>;
+export type FieldBodyProps = ModifierProps;
 
-export type FieldBodyProps = ModifierProps & FieldBodyModifierProps;
-
-export const FieldBody = extendedForwardRef<FieldBodyProps, "div">(
-  ({ children, className, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("field-body", className, {})}>
-      {children}
-    </Element>
-  ),
-  "div",
-);
-FieldBody.defaultProps = Object.assign(
-  {
-    children: null,
+export const FieldBody = asExoticComponent<FieldBodyProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("field-body", rest.className);
+    return React.createElement(as!, { ref, ...rest });
   },
-  FieldBody.defaultProps,
+  "div",
 );

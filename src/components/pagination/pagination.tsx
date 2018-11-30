@@ -7,11 +7,6 @@ import { noop } from "@/utils";
 
 export type PaginationModifierProps = Partial<{
   autoHide: boolean;
-  /**
-   * Classname of the container of the pagination, this could be used to
-   * customize the inner views
-   */
-  className: string;
   /** Current page */
   current: number;
   /** Amount of pages to display at the left and right of the current
@@ -29,11 +24,10 @@ export type PaginationModifierProps = Partial<{
   total: number;
 }>;
 
-export type PaginationProps = ModifierProps &
-  PaginationModifierProps &
-  Partial<
-    Omit<React.ComponentPropsWithoutRef<"nav">, "onChange" | "unselectable">
-  >;
+export type PaginationProps = Prefer<
+  ModifierProps & PaginationModifierProps,
+  React.HTMLAttributes<HTMLElement>
+>;
 
 type PaginationControllerProps = PaginationProps & {
   innerRef: React.Ref<HTMLElement>;
@@ -103,12 +97,12 @@ class PaginationController extends React.PureComponent<
     const lastPage = this.lastPage(current!, total!);
 
     return (
-      <Element
+      <Element<"nav">
         {...props}
-        renderAs="nav"
-        ref={innerRef}
-        className={cx("pagination", className)}
         aria-label="pagination"
+        as="nav"
+        className={cx("pagination", className)}
+        ref={innerRef}
       >
         {showPrevNext && (
           <React.Fragment>
@@ -139,7 +133,6 @@ class PaginationController extends React.PureComponent<
               {Array(lastPage - firstPage + 1)
                 .fill(0)
                 .map((_, i) => (
-                  // eslint-disable-next-line react/no-array-index-key
                   <li key={i + firstPage}>
                     <a
                       role="button"

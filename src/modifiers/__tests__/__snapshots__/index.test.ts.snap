@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Color modify should have class names applied 1`] = `
+Object {
+  "className": "has-background-info has-text-success",
+}
+`;
+
+exports[`Helpers modify should have class names applied 1`] = `
+Object {
+  "className": "is-clearfix is-clipped is-hidden is-invisible is-marginless is-overlay is-paddingless is-pulled-right is-radiusless is-shadowless is-unselectable",
+}
+`;
+
+exports[`Root modify should not clear out unknown props 1`] = `
+Object {
+  "unknowwn": true,
+}
+`;
+
+exports[`Root modify should run all sub-modifiers 1`] = `
+Object {
+  "className": "has-background-info is-clearfix is-italic",
+}
+`;
+
+exports[`Typography modify should have class names applied 1`] = `
+Object {
+  "className": "has-text-centered has-text-weight-light is-size-1 is-capitalized is-italic",
+}
+`;

@@ -3,7 +3,7 @@ import React from "react";
 
 import { Element } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { Colors } from "@/modifiers/color";
 import { noop } from "@/utils";
 
 export type InputFileModifierProps = Partial<{
@@ -15,7 +15,9 @@ export type InputFileModifierProps = Partial<{
   icon: React.ReactElement<any>;
   label: string;
   /**
-   * The name of the input field Commonly used for [multi-input handling](https://reactjs.org/docs/forms.html#handling-multiple-inputs)
+   * The name of the input field Commonly used for
+   * [multi-input handling]
+   * (https://reactjs.org/docs/forms.html#handling-multiple-inputs)
    */
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -24,14 +26,10 @@ export type InputFileModifierProps = Partial<{
   style: React.CSSProperties;
 }>;
 
-export type InputFileProps = ModifierProps &
-  InputFileModifierProps &
-  Partial<
-    Omit<
-      React.ComponentPropsWithoutRef<"input">,
-      "color" | "size" | "unselectable"
-    >
-  >;
+export type InputFileProps = Prefer<
+  ModifierProps & InputFileModifierProps,
+  Omit<React.HTMLAttributes<HTMLInputElement>, "children">
+>;
 
 export interface InputFileState {
   filename?: string;

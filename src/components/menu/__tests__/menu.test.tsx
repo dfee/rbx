@@ -4,11 +4,11 @@ import renderer from "react-test-renderer";
 import { Menu } from "../menu";
 
 describe("Menu component", () => {
-  it("Should Exist", () => {
+  it("should Exist", () => {
     expect(Menu).toMatchSnapshot();
   });
 
-  it("Should have menu classnames", () => {
+  it("should have menu classnames", () => {
     const component = renderer.create(
       <Menu>
         <Menu.List title="General">
@@ -20,7 +20,7 @@ describe("Menu component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should concat Menu.List to display as submenus", () => {
+  it("should concat Menu.List to display as submenus", () => {
     const component = renderer.create(
       <Menu>
         <Menu.List title="General">
@@ -40,29 +40,7 @@ describe("Menu component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should accept a react Element as renderAs prop", () => {
-    const Custom = (
-      props: React.ComponentProps<"span"> & { children: React.ReactNode },
-    ) => (
-      <span {...props}>
-        Custom
-        {props.children}
-      </span>
-    );
-
-    const component = renderer.create(
-      <Menu>
-        <Menu.List title="General">
-          <Menu.List.Item renderAs={Custom}>Dashboard</Menu.List.Item>
-          <Menu.List.Item renderAs={Custom}>Customer</Menu.List.Item>
-        </Menu.List>
-      </Menu>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("Should render custom item child", () => {
-    // eslint-disable-next-line react/prop-types
+  it("should render custom item child", () => {
     const component = renderer.create(
       <Menu>
         <Menu.List title="General">

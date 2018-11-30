@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dropdown component Should Exist 1`] = `[Function]`;
+exports[`Dropdown component should Exist 1`] = `[Function]`;
 
-exports[`Dropdown component Should render file input tree 1`] = `
+exports[`Dropdown component should render file input tree 1`] = `
 <div
   className="file"
 >

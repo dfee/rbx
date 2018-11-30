@@ -1,56 +1,48 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
 
 export type FieldModifierProps = Partial<{
   align: "centered" | "right";
-  children: React.ReactNode;
   horizontal: boolean;
   kind: "addons" | "group";
   multiline: boolean;
-  style: React.CSSProperties;
 }>;
 
 export type FieldProps = ModifierProps & FieldModifierProps;
 
 export const Field = Object.assign(
-  extendedForwardRef<FieldProps, "div">(
-    ({ className, align, multiline, horizontal, kind, ...props }, ref) => {
-      let k = null;
+  asExoticComponent<FieldProps, "div">((props, ref) => {
+    const { as, align, multiline, horizontal, kind, ...rest } = modify(props);
 
-      if (kind === "addons") {
-        k = "has-addons";
-      } else if (kind === "group") {
-        k = "is-grouped";
-      }
+    let k = null;
+    if (kind === "addons") {
+      k = "has-addons";
+    } else if (kind === "group") {
+      k = "is-grouped";
+    }
 
-      return (
-        <Element
-          {...props}
-          ref={ref}
-          className={cx("field", className, {
-            [`${k}`]: k,
-            [`${k}-${align}`]: k && align,
-            [`${k}-multiline`]: k === "is-grouped" && multiline,
-            "is-horizontal": horizontal,
-          })}
-        />
-      );
-    },
-    "div",
-  ),
+    rest.className = cx("field", rest.className, {
+      [`${k}`]: k,
+      [`${k}-${align}`]: k && align,
+      [`${k}-multiline`]: k === "is-grouped" && multiline,
+      "is-horizontal": horizontal,
+    });
+
+    return React.createElement(as!, { ref, ...rest });
+  }, "div"),
   {
     Body: FieldBody,
     Label: FieldLabel,
   },
 );
+
 Field.defaultProps = Object.assign(
   {
-    children: null,
     horizontal: false,
     multiline: false,
   },

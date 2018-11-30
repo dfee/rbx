@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 import { CardContent } from "./card-content";
 import { CardFooter } from "./card-footer";
 import { CardHeader } from "./card-header";
@@ -15,14 +15,11 @@ export type CardModifierProps = Partial<{
 export type CardProps = ModifierProps & CardModifierProps;
 
 export const Card = Object.assign(
-  extendedForwardRef<CardProps, "div">(
-    ({ className, children, ...props }, ref) => (
-      <Element ref={ref} className={cx("card", className)} {...props}>
-        {children}
-      </Element>
-    ),
-    "div",
-  ),
+  asExoticComponent<CardProps, "div">((props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("card", rest.className);
+    return React.createElement(as!, { ref, ...rest });
+  }, "div"),
   {
     Content: CardContent,
     Footer: CardFooter,
@@ -30,4 +27,3 @@ export const Card = Object.assign(
     Image: CardImage,
   },
 );
-Card.defaultProps = Object.assign({ children: null }, Card.defaultProps);

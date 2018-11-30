@@ -9,13 +9,13 @@ import { ModalCardHead } from "./modal-card-head";
 import { ModalCardTitle } from "./modal-card-title";
 
 export type ModalCardModifierProps = Partial<{
-  children: React.ReactNode;
-  className: string;
   onClose: () => void;
-  style: React.CSSProperties;
 }>;
 
-export type ModalCardProps = ModifierProps & ModalCardModifierProps;
+export type ModalCardProps = Prefer<
+  ModifierProps & ModalCardModifierProps,
+  React.HTMLAttributes<HTMLDivElement>
+>;
 
 export const ModalCard = Object.assign(
   React.forwardRef<HTMLDivElement, ModalCardProps>(
@@ -31,10 +31,4 @@ export const ModalCard = Object.assign(
     Head: ModalCardHead,
     Title: ModalCardTitle,
   },
-);
-ModalCard.defaultProps = Object.assign(
-  {
-    children: null,
-  },
-  ModalCard.defaultProps,
 );

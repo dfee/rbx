@@ -1,35 +1,21 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 import { MediaContent } from "./media-content";
 import { MediaItem } from "./media-item";
 
-export type MediaModifierProps = Partial<{
-  children: React.ReactNode;
-  style: React.CSSProperties;
-}>;
-
-export type MediaProps = ModifierProps & MediaModifierProps;
+export type MediaProps = ModifierProps;
 
 export const Media = Object.assign(
-  extendedForwardRef(
-    ({ children, className, ...props }, ref) => (
-      <Element {...props} ref={ref} className={cx("media", className, {})}>
-        {children}
-      </Element>
-    ),
-    "article",
-  ),
+  asExoticComponent<MediaProps, "article">((props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("media", rest.className);
+    return React.createElement(as!, { ref, ...rest });
+  }, "article"),
   {
     Content: MediaContent,
     Item: MediaItem,
   },
-);
-Media.defaultProps = Object.assign(
-  {
-    children: null,
-  },
-  Media.defaultProps,
 );

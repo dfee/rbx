@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tile component Should concat classname in props with Bulma classname 1`] = `
+exports[`Tile component should concat classname in props with Bulma classname 1`] = `
 <div
   className="tile other-class this-is-a-test"
 >
@@ -10,20 +10,19 @@ exports[`Tile component Should concat classname in props with Bulma classname 1`
 </div>
 `;
 
-exports[`Tile component Should exist 1`] = `
+exports[`Tile component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
+    "as": "div",
     "notification": false,
-    "renderAs": "div",
     "vertical": false,
   },
   "render": [Function],
 }
 `;
 
-exports[`Tile component Should have notification classname 1`] = `
+exports[`Tile component should have notification classname 1`] = `
 <div
   className="tile"
 >
@@ -34,7 +33,7 @@ exports[`Tile component Should have notification classname 1`] = `
 </div>
 `;
 
-exports[`Tile component Should render as Section 1`] = `
+exports[`Tile component should render as Section 1`] = `
 <section
   className="tile"
 >
@@ -44,7 +43,7 @@ exports[`Tile component Should render as Section 1`] = `
 </section>
 `;
 
-exports[`Tile component Should use inline styles 1`] = `
+exports[`Tile component should use inline styles 1`] = `
 <div
   className="tile"
   style={
@@ -59,7 +58,7 @@ exports[`Tile component Should use inline styles 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color black 1`] = `
+exports[`Tile component should use use color black 1`] = `
 <div
   className="tile is-black notification"
 >
@@ -70,7 +69,7 @@ exports[`Tile component Should use use color black 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color danger 1`] = `
+exports[`Tile component should use use color danger 1`] = `
 <div
   className="tile is-danger notification"
 >
@@ -81,7 +80,7 @@ exports[`Tile component Should use use color danger 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color dark 1`] = `
+exports[`Tile component should use use color dark 1`] = `
 <div
   className="tile is-dark notification"
 >
@@ -92,7 +91,7 @@ exports[`Tile component Should use use color dark 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color info 1`] = `
+exports[`Tile component should use use color info 1`] = `
 <div
   className="tile is-info notification"
 >
@@ -103,7 +102,7 @@ exports[`Tile component Should use use color info 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color light 1`] = `
+exports[`Tile component should use use color light 1`] = `
 <div
   className="tile is-light notification"
 >
@@ -114,7 +113,7 @@ exports[`Tile component Should use use color light 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color link 1`] = `
+exports[`Tile component should use use color link 1`] = `
 <div
   className="tile is-link notification"
 >
@@ -125,7 +124,7 @@ exports[`Tile component Should use use color link 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color primary 1`] = `
+exports[`Tile component should use use color primary 1`] = `
 <div
   className="tile is-primary notification"
 >
@@ -136,7 +135,7 @@ exports[`Tile component Should use use color primary 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color success 1`] = `
+exports[`Tile component should use use color success 1`] = `
 <div
   className="tile is-success notification"
 >
@@ -147,7 +146,7 @@ exports[`Tile component Should use use color success 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color warning 1`] = `
+exports[`Tile component should use use color warning 1`] = `
 <div
   className="tile is-warning notification"
 >
@@ -158,7 +157,7 @@ exports[`Tile component Should use use color warning 1`] = `
 </div>
 `;
 
-exports[`Tile component Should use use color white 1`] = `
+exports[`Tile component should use use color white 1`] = `
 <div
   className="tile is-white notification"
 >

@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import { Columns } from "../columns";
 
 describe("Columns component", () => {
-  it("Should have columns classname", () => {
+  it("should have columns classname", () => {
     const component = renderer.create(
       <Columns>
         <Columns.Column>1</Columns.Column>
@@ -14,7 +14,7 @@ describe("Columns component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have columns one column half width and 3 other as default", () => {
+  it("should have columns one column half width and 3 other as default", () => {
     const component = renderer.create(
       <Columns>
         <Columns.Column size="half">1</Columns.Column>
@@ -26,7 +26,7 @@ describe("Columns component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should render as paragraph", () => {
+  it("should render as paragraph", () => {
     const component = renderer.create(
       <Columns<"p"> as="p">
         <Columns.Column<"p"> as="p" size="half">
@@ -40,7 +40,7 @@ describe("Columns component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have columns one column half width, other narrow and 2 other as default", () => {
+  it("should have columns one column half width, other narrow and 2 other as default", () => {
     const component = renderer.create(
       <Columns>
         <Columns.Column size="half">1</Columns.Column>

@@ -2,8 +2,8 @@ import { cx } from "emotion";
 import React from "react";
 
 import { Button } from "@/components/button";
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type ModalCardHeadModifierProps = Partial<{
   children: React.ReactNode;
@@ -14,18 +14,24 @@ export type ModalCardHeadModifierProps = Partial<{
 
 export type ModalCardHeadProps = ModifierProps & ModalCardHeadModifierProps;
 
-export const ModalCardHead = extendedForwardRef<
-  ModalCardHeadProps,
-  "header"
->(
-  ({ children, className, showClose, onClose, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("modal-card-head", className)}>
-      {children}
-      {showClose && <Button remove onClick={onClose} />}
-    </Element>
-  ),
+export const ModalCardHead = asExoticComponent<ModalCardHeadProps, "header">(
+  (props, ref) => {
+    const { as, children, onClose, showClose, ...rest } = modify(props);
+    rest.className = cx("modal-card-head", rest.className);
+    return React.createElement(as!, {
+      children: (
+        <React.Fragment>
+          {children}
+          {showClose && <Button remove onClick={onClose} />}
+        </React.Fragment>
+      ),
+      ref,
+      ...rest,
+    });
+  },
   "header",
 );
+
 ModalCardHead.defaultProps = Object.assign(
   {
     children: null,

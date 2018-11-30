@@ -4,11 +4,11 @@ import renderer from "react-test-renderer";
 import { Heading } from "../heading";
 
 describe("Heading component", () => {
-  it("Should exist", () => {
+  it("should exist", () => {
     expect(Heading).toMatchSnapshot();
   });
 
-  it("Should have title classname", () => {
+  it("should have title classname", () => {
     const component = renderer.create(
       <Heading>
         Test <a>Give me</a>
@@ -17,7 +17,7 @@ describe("Heading component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should concat classname in props with Bulma classname", () => {
+  it("should concat classname in props with Bulma classname", () => {
     const component = renderer.create(
       <Heading className="other-class this-is-a-test">
         <p>Default</p>
@@ -26,7 +26,7 @@ describe("Heading component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use inline styles", () => {
+  it("should use inline styles", () => {
     const component = renderer.create(
       <Heading style={{ height: 250 }}>
         <p>Default</p>
@@ -35,27 +35,27 @@ describe("Heading component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should be a subtitle with size rendered as P", () => {
+  it("should be a subtitle with size rendered as P", () => {
     const component = renderer.create(
-      <Heading size={3} subtitle renderAs="p">
+      <Heading<"p"> size={3} subtitle as="p">
         Subtitle
       </Heading>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should not be spaced because is subtitle", () => {
+  it("should not be spaced because is subtitle", () => {
     const component = renderer.create(
-      <Heading spaced subtitle renderAs="p">
+      <Heading<"p"> spaced subtitle as="p">
         Subtitle
       </Heading>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should be spaced", () => {
+  it("should be spaced", () => {
     const component = renderer.create(
-      <Heading spaced renderAs="p">
+      <Heading<"p"> spaced as="p">
         Subtitle
       </Heading>,
     );

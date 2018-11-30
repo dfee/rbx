@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Image component Should be 32x32 1`] = `
+exports[`Image component should be 32x32 1`] = `
 <figure
   className="image is-32x32"
 >
@@ -10,7 +10,7 @@ exports[`Image component Should be 32x32 1`] = `
 </figure>
 `;
 
-exports[`Image component Should be square 1`] = `
+exports[`Image component should be square 1`] = `
 <figure
   className="image is-square"
 >
@@ -20,7 +20,7 @@ exports[`Image component Should be square 1`] = `
 </figure>
 `;
 
-exports[`Image component Should exist 1`] = `
+exports[`Image component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
@@ -30,7 +30,7 @@ Object {
 }
 `;
 
-exports[`Image component Should have image classname 1`] = `
+exports[`Image component should have image classname 1`] = `
 <figure
   className="image"
 >

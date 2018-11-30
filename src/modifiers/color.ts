@@ -31,15 +31,15 @@ export const GREY_COLORS = tuple(
 export type GreyColors = (typeof GREY_COLORS)[number];
 
 export type ColorsProps = Partial<{
-  textColor: Colors | GreyColors;
   backgroundColor: Colors | GreyColors;
+  textColor: Colors | GreyColors;
 }>;
 
 export const modify = makeModify<ColorsProps>(
   props =>
     cx(props.className, {
-      [`has-text-${props.textColor}`]: props.textColor,
       [`has-background-${props.backgroundColor}`]: props.backgroundColor,
+      [`has-text-${props.textColor}`]: props.textColor,
     }),
   ["backgroundColor", "textColor"],
 );

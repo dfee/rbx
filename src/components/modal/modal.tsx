@@ -5,8 +5,7 @@ import ReactDOM from "react-dom";
 import { ModalCard, ModalCardProps } from "./modal-card";
 import { ModalContent } from "./modal-content";
 
-export interface ModalProps {
-  children: React.ReactNode;
+export interface ModalModifierProps {
   className?: string;
   closeOnBlur?: boolean;
   closeOnEsc?: boolean;
@@ -15,6 +14,11 @@ export interface ModalProps {
   show: boolean;
   showClose?: boolean;
 }
+
+export type ModalProps = Prefer<
+  ModalModifierProps,
+  React.HTMLAttributes<HTMLDivElement>
+>;
 
 type ModalControllerProps = ModalProps & {
   innerRef: React.Ref<HTMLDivElement>;

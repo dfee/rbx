@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tag component Should be Large 1`] = `
+exports[`Tag component should be Large 1`] = `
 <span
   className="tag is-large"
 >
@@ -8,7 +8,7 @@ exports[`Tag component Should be Large 1`] = `
 </span>
 `;
 
-exports[`Tag component Should be group tags 1`] = `
+exports[`Tag component should be group tags 1`] = `
 <span
   className="tags has-addons"
 >
@@ -25,7 +25,7 @@ exports[`Tag component Should be group tags 1`] = `
 </span>
 `;
 
-exports[`Tag component Should concat classname in props with Bulma classname 1`] = `
+exports[`Tag component should concat classname in props with Bulma classname 1`] = `
 <span
   className="tag other-class this-is-a-test"
 >
@@ -33,7 +33,7 @@ exports[`Tag component Should concat classname in props with Bulma classname 1`]
 </span>
 `;
 
-exports[`Tag component Should exist 1`] = `
+exports[`Tag component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "Group": Object {
@@ -44,16 +44,15 @@ Object {
     "render": [Function],
   },
   "defaultProps": Object {
-    "children": null,
+    "as": "span",
     "remove": false,
-    "renderAs": "span",
     "rounded": false,
   },
   "render": [Function],
 }
 `;
 
-exports[`Tag component Should expose Tag Group 1`] = `
+exports[`Tag component should expose Tag Group 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
@@ -63,7 +62,7 @@ Object {
 }
 `;
 
-exports[`Tag component Should have tag classname 1`] = `
+exports[`Tag component should have tag classname 1`] = `
 <span
   className="tag"
 >
@@ -71,7 +70,7 @@ exports[`Tag component Should have tag classname 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use inline styles 1`] = `
+exports[`Tag component should use inline styles 1`] = `
 <span
   className="tag"
   style={
@@ -84,7 +83,7 @@ exports[`Tag component Should use inline styles 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color black 1`] = `
+exports[`Tag component should use use color black 1`] = `
 <span
   className="tag is-black"
 >
@@ -93,7 +92,7 @@ exports[`Tag component Should use use color black 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color danger 1`] = `
+exports[`Tag component should use use color danger 1`] = `
 <span
   className="tag is-danger"
 >
@@ -102,7 +101,7 @@ exports[`Tag component Should use use color danger 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color dark 1`] = `
+exports[`Tag component should use use color dark 1`] = `
 <span
   className="tag is-dark"
 >
@@ -111,7 +110,7 @@ exports[`Tag component Should use use color dark 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color info 1`] = `
+exports[`Tag component should use use color info 1`] = `
 <span
   className="tag is-info"
 >
@@ -120,7 +119,7 @@ exports[`Tag component Should use use color info 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color light 1`] = `
+exports[`Tag component should use use color light 1`] = `
 <span
   className="tag is-light"
 >
@@ -129,7 +128,7 @@ exports[`Tag component Should use use color light 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color link 1`] = `
+exports[`Tag component should use use color link 1`] = `
 <span
   className="tag is-link"
 >
@@ -138,7 +137,7 @@ exports[`Tag component Should use use color link 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color primary 1`] = `
+exports[`Tag component should use use color primary 1`] = `
 <span
   className="tag is-primary"
 >
@@ -147,7 +146,7 @@ exports[`Tag component Should use use color primary 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color success 1`] = `
+exports[`Tag component should use use color success 1`] = `
 <span
   className="tag is-success"
 >
@@ -156,7 +155,7 @@ exports[`Tag component Should use use color success 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color warning 1`] = `
+exports[`Tag component should use use color warning 1`] = `
 <span
   className="tag is-warning"
 >
@@ -165,7 +164,7 @@ exports[`Tag component Should use use color warning 1`] = `
 </span>
 `;
 
-exports[`Tag component Should use use color white 1`] = `
+exports[`Tag component should use use color white 1`] = `
 <span
   className="tag is-white"
 >

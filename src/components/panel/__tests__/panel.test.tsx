@@ -4,11 +4,11 @@ import renderer from "react-test-renderer";
 import { Panel } from "../panel";
 
 describe("Panel component", () => {
-  it("Should Exist", () => {
+  it("should Exist", () => {
     expect(Panel).toMatchSnapshot();
   });
 
-  it("Should have box classname", () => {
+  it("should have box classname", () => {
     const component = renderer.create(
       <Panel>
         <Panel.Header>repositories</Panel.Header>
@@ -22,13 +22,13 @@ describe("Panel component", () => {
           <Panel.Tabs.Tab>sources</Panel.Tabs.Tab>
           <Panel.Tabs.Tab>forks</Panel.Tabs.Tab>
         </Panel.Tabs>
-        <Panel.Block renderAs="a" active>
+        <Panel.Block<"a"> as="a" active>
           <Panel.Icon>
             <i className="fa fa-bars" />
           </Panel.Icon>
           bulma
         </Panel.Block>
-        <Panel.Block renderAs="label" className="panel-block">
+        <Panel.Block<"label"> as="label" className="panel-block">
           <input type="checkbox" />
           remember me
         </Panel.Block>

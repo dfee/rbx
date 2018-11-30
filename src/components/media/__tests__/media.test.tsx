@@ -4,16 +4,16 @@ import renderer from "react-test-renderer";
 import { Media } from "../media";
 
 describe("Media component", () => {
-  it("Should exist", () => {
+  it("should exist", () => {
     expect(Media).toMatchSnapshot();
   });
 
-  it("Should expose Level Side and Item", () => {
+  it("should expose Level Side and Item", () => {
     expect(Media.Content).toMatchSnapshot();
     expect(Media.Item).toMatchSnapshot();
   });
 
-  it("Should have media classname", () => {
+  it("should have media classname", () => {
     const component = renderer.create(
       <Media>
         <img
@@ -25,9 +25,9 @@ describe("Media component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should hbe a Media Item", () => {
+  it("should be a Media Item", () => {
     const component = renderer.create(
-      <Media.Item renderAs="figure" position="left">
+      <Media.Item<"figure"> as="figure" position="left">
         <img
           alt="placeholder"
           src="http://bulma.io/images/placeholders/128x128.png"
@@ -37,9 +37,9 @@ describe("Media component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should hbe a Media Item Centered", () => {
+  it("should hbe a Media Item Centered", () => {
     const component = renderer.create(
-      <Media.Item renderAs="figure" position="center">
+      <Media.Item<"figure"> as="figure" position="center">
         <img
           alt="placeholder"
           src="http://bulma.io/images/placeholders/128x128.png"
@@ -49,7 +49,7 @@ describe("Media component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should be a Media Content", () => {
+  it("should be a Media Content", () => {
     const component = renderer.create(
       <Media.Content>
         <p>Lorem Ipsum</p>
@@ -58,7 +58,7 @@ describe("Media component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should concat classname in props with Bulma classname", () => {
+  it("should concat classname in props with Bulma classname", () => {
     const component = renderer.create(
       <Media className="other-class this-is-a-test">
         <p>Default</p>
@@ -67,7 +67,7 @@ describe("Media component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should use inline styles", () => {
+  it("should use inline styles", () => {
     const component = renderer.create(
       <Media style={{ height: 250 }}>
         <p>Default</p>

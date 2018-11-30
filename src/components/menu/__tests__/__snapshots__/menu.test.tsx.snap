@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Menu component Should Exist 1`] = `
+exports[`Menu component should Exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "List": Object {
@@ -10,48 +10,19 @@ Object {
       "defaultProps": Object {
         "active": false,
         "children": null,
-        "renderAs": "a",
       },
       "render": [Function],
     },
     "render": [Function],
   },
   "defaultProps": Object {
-    "renderAs": "aside",
+    "as": "aside",
   },
   "render": [Function],
 }
 `;
 
-exports[`Menu component Should accept a react Element as renderAs prop 1`] = `
-<aside
-  className="menu"
->
-  <p
-    className="menu-label"
-  >
-    General
-  </p>
-  <ul
-    className="menu-list"
-  >
-    <li>
-      <span>
-        Custom
-        Dashboard
-      </span>
-    </li>
-    <li>
-      <span>
-        Custom
-        Customer
-      </span>
-    </li>
-  </ul>
-</aside>
-`;
-
-exports[`Menu component Should concat Menu.List to display as submenus 1`] = `
+exports[`Menu component should concat Menu.List to display as submenus 1`] = `
 <aside
   className="menu"
 >
@@ -102,7 +73,7 @@ exports[`Menu component Should concat Menu.List to display as submenus 1`] = `
 </aside>
 `;
 
-exports[`Menu component Should have menu classnames 1`] = `
+exports[`Menu component should have menu classnames 1`] = `
 <aside
   className="menu"
 >
@@ -128,7 +99,7 @@ exports[`Menu component Should have menu classnames 1`] = `
 </aside>
 `;
 
-exports[`Menu component Should render custom item child 1`] = `
+exports[`Menu component should render custom item child 1`] = `
 <aside
   className="menu"
 >

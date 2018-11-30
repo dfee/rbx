@@ -1,33 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Message component Should Exist 1`] = `
+exports[`Message component should Exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "Body": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "Header": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "defaultProps": Object {
-    "children": null,
-    "renderAs": "article",
+    "as": "article",
   },
   "render": [Function],
 }
 `;
 
-exports[`Message component Should accept a react Element as renderAs prop 1`] = `
+exports[`Message component should accept a react Element as renderAs prop 1`] = `
 <p
   className="message"
 >
@@ -36,7 +33,7 @@ exports[`Message component Should accept a react Element as renderAs prop 1`] = 
 </p>
 `;
 
-exports[`Message component Should concat Bulma class with classes in props 1`] = `
+exports[`Message component should concat Bulma class with classes in props 1`] = `
 <article
   className="message other-class"
 >
@@ -53,7 +50,7 @@ exports[`Message component Should concat Bulma class with classes in props 1`] =
 </article>
 `;
 
-exports[`Message component Should have custom inline styles 1`] = `
+exports[`Message component should have custom inline styles 1`] = `
 <section
   className="message"
   style={
@@ -67,7 +64,7 @@ exports[`Message component Should have custom inline styles 1`] = `
 </section>
 `;
 
-exports[`Message component Should have message classnames 1`] = `
+exports[`Message component should have message classnames 1`] = `
 <article
   className="message"
 >
@@ -84,7 +81,7 @@ exports[`Message component Should have message classnames 1`] = `
 </article>
 `;
 
-exports[`Message component Should render as an html section 1`] = `
+exports[`Message component should render as an html section 1`] = `
 <section
   className="message"
 >

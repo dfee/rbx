@@ -1,40 +1,31 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type NavbarDropdownModifierProps = Partial<{
   boxed: boolean;
-  children: React.ReactNode;
   right: boolean;
-  style: React.CSSProperties;
 }>;
 
 export type NavbarDropdownProps = ModifierProps & NavbarDropdownModifierProps;
 
-export const NavbarDropdown = extendedForwardRef<
-  NavbarDropdownProps,
-  "span"
->(
-  ({ className, boxed, right, children, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("navbar-dropdown", className, {
-        "is-boxed": boxed,
-        "is-right": right,
-      })}
-    >
-      {children}
-    </Element>
-  ),
+export const NavbarDropdown = asExoticComponent<NavbarDropdownProps, "span">(
+  (props, ref) => {
+    const { as, boxed, right, ...rest } = modify(props);
+    rest.className = cx("navbar-dropdown", rest.className, {
+      "is-boxed": boxed,
+      "is-right": right,
+    });
+    return React.createElement(as!, { ref, ...rest });
+  },
   "span",
 );
+
 NavbarDropdown.defaultProps = Object.assign(
   {
     boxed: false,
-    children: null,
     right: false,
   },
   NavbarDropdown.defaultProps,

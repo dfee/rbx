@@ -1,6 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal component Should Exist 1`] = `
+exports[`Modal component should close the modal 1`] = `
+<div
+  class="modal is-active"
+>
+  <div
+    class="modal-background"
+    role="presentation"
+  />
+  <div
+    class="modal-card"
+  >
+    <header
+      class="modal-card-head"
+    >
+      <p
+        class="modal-card-title"
+      >
+        Modal Title
+      </p>
+      <button
+        class="delete"
+        tabindex="0"
+      />
+    </header>
+  </div>
+  <button
+    aria-label="close"
+    class="modal-close is-large"
+    type="button"
+  />
+</div>
+`;
+
+exports[`Modal component should close the modal if clicked on background 1`] = `
+<div
+  class="modal is-active"
+>
+  <div
+    class="modal-background"
+    role="presentation"
+  />
+  <div
+    class="modal-content"
+  >
+    Content
+  </div>
+  <button
+    aria-label="close"
+    class="modal-close is-large"
+    type="button"
+  />
+</div>
+`;
+
+exports[`Modal component should close the modal on ESC key press 1`] = `
+<div
+  class="modal is-active"
+>
+  <div
+    class="modal-background"
+    role="presentation"
+  />
+  <div
+    class="modal-card"
+  >
+    <header
+      class="modal-card-head"
+    >
+      <p
+        class="modal-card-title"
+      >
+        Modal Title
+      </p>
+      <button
+        class="delete"
+        tabindex="0"
+      />
+    </header>
+  </div>
+  <button
+    aria-label="close"
+    class="modal-close is-large"
+    type="button"
+  />
+</div>
+`;
+
+exports[`Modal component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "Card": Object {
@@ -8,24 +95,22 @@ Object {
     "Body": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "section",
+        "as": "section",
       },
       "render": [Function],
     },
     "Foot": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "footer",
+        "as": "footer",
       },
       "render": [Function],
     },
     "Head": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
+        "as": "header",
         "children": null,
-        "renderAs": "header",
         "showClose": true,
       },
       "render": [Function],
@@ -33,21 +118,16 @@ Object {
     "Title": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "p",
+        "as": "p",
       },
       "render": [Function],
-    },
-    "defaultProps": Object {
-      "children": null,
     },
     "render": [Function],
   },
   "Content": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
@@ -55,128 +135,38 @@ Object {
 }
 `;
 
-exports[`Modal component Should close the modal 1`] = `
-<div
-  class="modal is-active"
->
-  <div
-    class="modal-background"
-    role="presentation"
-  />
-  <div
-    class="modal-card"
-  >
-    <header
-      class="modal-card-head"
-    >
-      <p
-        class="modal-card-title"
-      >
-        Modal Title
-      </p>
-      <button
-        class="delete"
-        tabindex="0"
-      />
-    </header>
-  </div>
-  <button
-    aria-label="close"
-    class="modal-close is-large"
-    type="button"
-  />
-</div>
-`;
-
-exports[`Modal component Should close the modal if clicked on background 1`] = `
-<div
-  class="modal is-active"
->
-  <div
-    class="modal-background"
-    role="presentation"
-  />
-  <div
-    class="modal-content"
-  >
-    Content
-  </div>
-  <button
-    aria-label="close"
-    class="modal-close is-large"
-    type="button"
-  />
-</div>
-`;
-
-exports[`Modal component Should close the modal on ESC key press 1`] = `
-<div
-  class="modal is-active"
->
-  <div
-    class="modal-background"
-    role="presentation"
-  />
-  <div
-    class="modal-card"
-  >
-    <header
-      class="modal-card-head"
-    >
-      <p
-        class="modal-card-title"
-      >
-        Modal Title
-      </p>
-      <button
-        class="delete"
-        tabindex="0"
-      />
-    </header>
-  </div>
-  <button
-    aria-label="close"
-    class="modal-close is-large"
-    type="button"
-  />
-</div>
-`;
-
-exports[`Modal component Should expose Content and Card's types 1`] = `
+exports[`Modal component should expose Content and Card's types 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
-    "renderAs": "div",
+    "as": "div",
   },
   "render": [Function],
 }
 `;
 
-exports[`Modal component Should expose Content and Card's types 2`] = `
+exports[`Modal component should expose Content and Card's types 2`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "Body": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "section",
+      "as": "section",
     },
     "render": [Function],
   },
   "Foot": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "footer",
+      "as": "footer",
     },
     "render": [Function],
   },
   "Head": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "as": "header",
       "children": null,
-      "renderAs": "header",
       "showClose": true,
     },
     "render": [Function],
@@ -184,64 +174,57 @@ Object {
   "Title": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "p",
+      "as": "p",
     },
     "render": [Function],
   },
+  "render": [Function],
+}
+`;
+
+exports[`Modal component should expose Content and Card's types 3`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
+    "as": "p",
   },
   "render": [Function],
 }
 `;
 
-exports[`Modal component Should expose Content and Card's types 3`] = `
+exports[`Modal component should expose Content and Card's types 4`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
+    "as": "header",
     "children": null,
-    "renderAs": "p",
-  },
-  "render": [Function],
-}
-`;
-
-exports[`Modal component Should expose Content and Card's types 4`] = `
-Object {
-  "$$typeof": Symbol(react.forward_ref),
-  "defaultProps": Object {
-    "children": null,
-    "renderAs": "header",
     "showClose": true,
   },
   "render": [Function],
 }
 `;
 
-exports[`Modal component Should expose Content and Card's types 5`] = `
+exports[`Modal component should expose Content and Card's types 5`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
-    "renderAs": "section",
+    "as": "section",
   },
   "render": [Function],
 }
 `;
 
-exports[`Modal component Should expose Content and Card's types 6`] = `
+exports[`Modal component should expose Content and Card's types 6`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
-    "renderAs": "footer",
+    "as": "footer",
   },
   "render": [Function],
 }
 `;
 
-exports[`Modal component Should no try to reopen if other prop change 1`] = `
+exports[`Modal component should not close the modal if clicked on background 1`] = `
 <div
   class="modal is-active"
 >
@@ -262,7 +245,7 @@ exports[`Modal component Should no try to reopen if other prop change 1`] = `
 </div>
 `;
 
-exports[`Modal component Should not close the modal if clicked on background 1`] = `
+exports[`Modal component should not close the modal if clicked on background 2`] = `
 <div
   class="modal is-active"
 >
@@ -283,28 +266,7 @@ exports[`Modal component Should not close the modal if clicked on background 1`]
 </div>
 `;
 
-exports[`Modal component Should not close the modal if clicked on background 2`] = `
-<div
-  class="modal is-active"
->
-  <div
-    class="modal-background"
-    role="presentation"
-  />
-  <div
-    class="modal-content"
-  >
-    Content
-  </div>
-  <button
-    aria-label="close"
-    class="modal-close is-large"
-    type="button"
-  />
-</div>
-`;
-
-exports[`Modal component Should not close the modal on ESC key press 1`] = `
+exports[`Modal component should not close the modal on ESC key press 1`] = `
 <div
   class="modal is-active"
 >
@@ -337,7 +299,7 @@ exports[`Modal component Should not close the modal on ESC key press 1`] = `
 </div>
 `;
 
-exports[`Modal component Should not close the modal on other than ESC key press 1`] = `
+exports[`Modal component should not close the modal on other than ESC key press 1`] = `
 <div
   class="modal is-active"
 >
@@ -380,7 +342,7 @@ exports[`Modal component Should not close the modal on other than ESC key press 
 </div>
 `;
 
-exports[`Modal component Should not show close button 1`] = `
+exports[`Modal component should not show close button 1`] = `
 <div
   class="modal is-active"
 >
@@ -396,7 +358,28 @@ exports[`Modal component Should not show close button 1`] = `
 </div>
 `;
 
-exports[`Modal component Should open the modal 1`] = `
+exports[`Modal component should not try to reopen if other prop change 1`] = `
+<div
+  class="modal is-active"
+>
+  <div
+    class="modal-background"
+    role="presentation"
+  />
+  <div
+    class="modal-content"
+  >
+    Content
+  </div>
+  <button
+    aria-label="close"
+    class="modal-close is-large"
+    type="button"
+  />
+</div>
+`;
+
+exports[`Modal component should open the modal 1`] = `
 <div
   class="modal is-active"
 >
@@ -429,7 +412,7 @@ exports[`Modal component Should open the modal 1`] = `
 </div>
 `;
 
-exports[`Modal component Should render any child type 1`] = `
+exports[`Modal component should render any child type 1`] = `
 <div
   class="modal is-active"
 >
@@ -451,4 +434,4 @@ exports[`Modal component Should render any child type 1`] = `
 </div>
 `;
 
-exports[`Modal component Should render empty because no document on scope 1`] = `""`;
+exports[`Modal component should render empty because no document on scope 1`] = `""`;

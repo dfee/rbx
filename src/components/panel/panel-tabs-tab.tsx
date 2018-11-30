@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type PanelTabsTabModifierProps = Partial<{
   active: boolean;
@@ -10,21 +10,16 @@ export type PanelTabsTabModifierProps = Partial<{
 
 export type PanelTabsTabProps = ModifierProps & PanelTabsTabModifierProps;
 
-export const PanelTabsTab = extendedForwardRef<PanelTabsTabProps, "a">(
-  ({ className, active, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx(className, {
-        "is-active": active,
-      })}
-    />
-  ),
+export const PanelTabsTab = asExoticComponent<PanelTabsTabProps, "a">(
+  (props, ref) => {
+    const { active, as, className: cn, ...rest } = modify(props);
+    const className = cx(cn, { "is-active": active }) || undefined;
+    return React.createElement(as!, { className, ref, ...rest });
+  },
   "a",
 );
+
 PanelTabsTab.defaultProps = Object.assign(
-  {
-    active: false,
-  },
+  { active: false },
   PanelTabsTab.defaultProps,
 );

@@ -1,8 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dropdown component Should Exist 1`] = `[Function]`;
-
-exports[`Dropdown component Should concat Bulma class with classes in props 1`] = `
+exports[`Dropdown component should concat Bulma class with classes in props 1`] = `
 <div
   className="dropdown other-class"
 >
@@ -50,7 +48,9 @@ exports[`Dropdown component Should concat Bulma class with classes in props 1`] 
 </div>
 `;
 
-exports[`Dropdown component Should have custom inline styles 1`] = `
+exports[`Dropdown component should exist 1`] = `[Function]`;
+
+exports[`Dropdown component should have custom inline styles 1`] = `
 <div
   className="dropdown"
   style={
@@ -103,7 +103,7 @@ exports[`Dropdown component Should have custom inline styles 1`] = `
 </div>
 `;
 
-exports[`Dropdown component Should have divider 1`] = `
+exports[`Dropdown component should have divider 1`] = `
 <div
   className="dropdown"
   style={
@@ -167,7 +167,7 @@ exports[`Dropdown component Should have divider 1`] = `
 </div>
 `;
 
-exports[`Dropdown component Should have dropdown classname 1`] = `
+exports[`Dropdown component should have dropdown classname 1`] = `
 <div
   className="dropdown"
 >

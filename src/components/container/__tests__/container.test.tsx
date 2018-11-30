@@ -1,11 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { ResponsiveSizeProps } from "@/modifiers/responsives";
 import { Container } from "../container";
 
 describe("Container component", () => {
-  it("Should have container classname", () => {
+  it("should have container classname", () => {
     const component = renderer.create(
       <Container>
         <p className="bd-notification is-success">
@@ -17,30 +16,28 @@ describe("Container component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have helper classnames", () => {
+  it("should have helper classnames", () => {
     const component = renderer.create(
       <Container
         paddingless
-        responsive={
-          {
-            desktop: {
-              hide: {
-                value: true,
-              },
+        responsive={{
+          desktop: {
+            hide: {
+              value: true,
             },
-            touch: {
-              display: {
-                value: "flex",
-              },
+          },
+          touch: {
+            display: {
+              value: "flex",
             },
-            widescreen: {
-              display: {
-                only: true,
-                value: "block",
-              },
+          },
+          widescreen: {
+            display: {
+              only: true,
+              value: "block",
             },
-          } as ResponsiveSizeProps
-        }
+          },
+        }}
       >
         <p className="bd-notification is-success">
           <p>Default</p>

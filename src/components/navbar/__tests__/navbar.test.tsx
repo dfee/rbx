@@ -19,21 +19,21 @@ describe("Navbar component", () => {
     teardownWindow();
   });
 
-  it("Should Exist", () => {
+  it("should Exist", () => {
     expect(Navbar).toMatchSnapshot();
   });
 
-  it("Should render on server side", () => {
-    const html = renderToString(<Navbar fixed={"top" as "top"} />);
+  it("should render on server side", () => {
+    const html = renderToString(<Navbar fixed="top" />);
     expect(html).toMatchSnapshot();
     expect(getHtmlClasses()).toMatchSnapshot("top");
   });
 
-  it("Should have Navbar classname", () => {
+  it("should have Navbar classname", () => {
     component = renderer.create(
       <Navbar>
         <Navbar.Brand>
-          <Navbar.Item renderAs="a" href="#">
+          <Navbar.Item<"a"> as="a" href="#">
             <img src="/" alt="" />
           </Navbar.Item>
           <Navbar.Burger className="trigger-menu" />
@@ -56,23 +56,23 @@ describe("Navbar component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should concat Bulma class with classes in props", () => {
+  it("should concat Bulma class with classes in props", () => {
     component = renderer.create(<Navbar className="other-class test" />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should render as an html section", () => {
-    component = renderer.create(<Navbar renderAs="section" />);
+  it("should render as an html section", () => {
+    component = renderer.create(<Navbar<"section"> as="section" />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have custom inline styles", () => {
+  it("should have custom inline styles", () => {
     component = renderer.create(<Navbar style={{ width: 200, zIndex: 1 }} />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should be fixed on top", () => {
-    component = renderer.create(<Navbar fixed={"top" as "top"} />);
+  it("should be fixed on top", () => {
+    component = renderer.create(<Navbar fixed="top" />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 });

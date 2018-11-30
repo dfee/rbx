@@ -4,33 +4,23 @@ import React from "react";
 import { Element } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
 
-export interface DropdownItemModifierProps {
+export type DropdownItemModifierProps = {
   active?: boolean;
-  children?: React.ReactNode;
-  onClick?: React.MouseEventHandler<any>;
   value: string;
-}
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "unselectable">;
 
-export type DropdownItemProps = ModifierProps &
-  DropdownItemModifierProps &
-  Partial<React.ComponentPropsWithoutRef<"div">>;
+export type DropdownItemProps = ModifierProps & DropdownItemModifierProps;
 
 export const DropdownItem = React.forwardRef<HTMLDivElement, DropdownItemProps>(
-  ({ active, children, value, ...props }, ref) => (
-    <Element
-      ref={ref}
-      title={value}
-      {...props}
-      role="presentation"
-      className={cx("dropdown-item", {
-        "is-active": active,
-      })}
-    >
-      {children}
-    </Element>
-  ),
+  (props, ref) => {
+    const { active, value, ...rest } = props;
+    rest.className = cx("dropdown-item", rest.className, {
+      "is-active": active,
+    });
+    return <Element ref={ref} title={value} role="presentation" {...rest} />;
+  },
 );
+
 DropdownItem.defaultProps = {
   active: false,
-  children: null,
 };

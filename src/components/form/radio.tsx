@@ -1,51 +1,52 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { classNames, clean, ModifierProps } from "@/modifiers";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type RadioModifierProps = Partial<{
-  children: React.ReactNode;
-  className: string;
-  style: React.CSSProperties;
-  disabled: boolean;
-  checked: boolean;
-  value: string;
-}> & {
+export interface RadioModifierProps {
+  checked?: boolean;
+  disabled?: boolean;
   /**
    * The name of the input field Commonly used for [multi-input handling](https://reactjs.org/docs/forms.html#handling-multiple-inputs)
    */
   name: string;
-};
+  value?: string;
+}
 
-export type RadioProps = ModifierProps &
-  RadioModifierProps &
-  Partial<Omit<React.ComponentPropsWithoutRef<"input">, "unselectable">>;
+export type RadioProps = Prefer<
+  ModifierProps & RadioModifierProps,
+  React.HTMLAttributes<HTMLInputElement>
+>;
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
-  (
-    { className, style, disabled, checked, value, name, children, ...allProps },
-    ref,
-  ) => {
-    const props = clean(allProps);
+  (props, ref) => {
+    const {
+      checked,
+      className,
+      children,
+      disabled,
+      name,
+      style,
+      value,
+      ...rest
+    } = modify(props);
     return (
-      <label
-        className={cx("radio", classNames(allProps), className)}
-        style={style}
-      >
+      <label className={cx("radio", className)} style={style}>
         <input
-          {...props}
-          ref={ref}
-          name={name}
           checked={checked}
+          disabled={disabled}
+          name={name}
+          ref={ref}
           type="radio"
           value={value}
-          disabled={disabled}
+          {...rest}
         />
         {children}
       </label>
     );
   },
 );
+
 Radio.defaultProps = {
   checked: false,
   children: null,

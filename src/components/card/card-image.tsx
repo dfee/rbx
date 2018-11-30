@@ -12,9 +12,9 @@ export type CardImageModifierProps = Partial<{
 export type CardImageProps = ImageProps & CardImageModifierProps;
 
 export const CardImage = React.forwardRef<HTMLElement, CardImageProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, ...rest }, ref) => (
     <Element className={cx("card-image", className)}>
-      <Image ref={ref} {...props} />
+      <Image ref={ref} {...rest} />
     </Element>
   ),
 );

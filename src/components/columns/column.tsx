@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 import { ColumnSizes } from "./constants";
 
 export type ColumnSizeModifierProps = Partial<{
@@ -55,52 +55,41 @@ export type ColumnProps = ModifierProps &
   ColumnModifierProps &
   ColumnSizeModifierProps;
 
-export const Column = extendedForwardRef<ColumnProps, "div">(
-  (
-    {
-      children,
-      className,
-      size,
-      offset,
-      narrow,
-      mobile,
-      tablet,
-      desktop,
-      widescreen,
-      fullhd,
-      ...rest
-    },
-    ref,
-  ) => {
-    const dimmensions = { mobile, tablet, desktop, widescreen, fullhd };
-    const sizeClassNames = {
-      [`is-${size}`]: !!size,
-      [`is-offset-${offset}`]: !!offset,
-      "is-narrow": !!narrow,
-    };
-    Object.keys(dimmensions).forEach(key => {
-      const dimmension = dimmensions[key];
-      Object.assign(sizeClassNames, {
-        [`is-${dimmension.size}-${key}`]: !!dimmension.size,
-        [`is-offset-${dimmension.offset}-${key}`]: !!dimmension.offset,
-        "is-narrow-${key}": !!dimmension.narrow,
-      });
+export const Column = asExoticComponent<ColumnProps, "div">((props, ref) => {
+  const {
+    as,
+    desktop,
+    fullhd,
+    mobile,
+    narrow,
+    offset,
+    size,
+    tablet,
+    widescreen,
+    ...rest
+  } = modify(props);
+
+  const dimmensions = { mobile, tablet, desktop, widescreen, fullhd };
+  const sizeClassNames = {
+    [`is-${size}`]: !!size,
+    [`is-offset-${offset}`]: !!offset,
+    "is-narrow": !!narrow,
+  };
+  Object.keys(dimmensions).forEach(key => {
+    const dimmension = dimmensions[key];
+    Object.assign(sizeClassNames, {
+      [`is-${dimmension.size}-${key}`]: !!dimmension.size,
+      [`is-offset-${dimmension.offset}-${key}`]: !!dimmension.offset,
+      "is-narrow-${key}": !!dimmension.narrow,
     });
-    return (
-      <Element
-        {...rest}
-        ref={ref}
-        className={cx(className, "column", sizeClassNames)}
-      >
-        {children}
-      </Element>
-    );
-  },
-  "div",
-);
+  });
+  rest.className = cx("column", rest.className, sizeClassNames);
+
+  return React.createElement(as!, { ref, ...rest });
+}, "div");
+
 Column.defaultProps = Object.assign(
   {
-    children: null,
     desktop: { narrow: false },
     fullhd: { narrow: false },
     mobile: { narrow: false },

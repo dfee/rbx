@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type ContentModifierProps = Partial<{
   children: React.ReactNode;
@@ -12,18 +12,10 @@ export type ContentModifierProps = Partial<{
 
 export type ContentProps = ModifierProps & ContentModifierProps;
 
-export const Content = extendedForwardRef<ContentProps, "div">(
-  ({ children, className, size, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("content", className, {
-        [`is-${size}`]: size,
-      })}
-    >
-      {children}
-    </Element>
-  ),
-  "div",
-);
-Content.defaultProps = Object.assign({ children: null }, Content.defaultProps);
+export const Content = asExoticComponent<ContentProps, "div">((props, ref) => {
+  const { as, size, ...rest } = modify(props);
+  rest.className = cx("content", rest.className, {
+    [`is-${size}`]: size,
+  });
+  return React.createElement(as!, { ref, ...rest });
+}, "div");

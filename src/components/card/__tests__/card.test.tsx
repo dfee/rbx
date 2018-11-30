@@ -3,12 +3,12 @@ import renderer from "react-test-renderer";
 import { Card } from "../card";
 
 describe("Card component", () => {
-  it("Should have card classname", () => {
+  it("should have card classname", () => {
     const component = renderer.create(<Card>Card Content</Card>);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have card-image classname", () => {
+  it("should have card-image classname", () => {
     const component = renderer.create(
       <Card.Image
         size="4by3"
@@ -18,12 +18,12 @@ describe("Card component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have card-content classname", () => {
+  it("should have card-content classname", () => {
     const component = renderer.create(<Card.Content>Content</Card.Content>);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have card-header's classname", () => {
+  it("should have card-header's classname", () => {
     const component = renderer.create(
       <Card>
         <Card.Header>
@@ -37,7 +37,7 @@ describe("Card component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have card-footer's classname", () => {
+  it("should have card-footer's classname", () => {
     const component = renderer.create(
       <Card>
         <Card.Footer>

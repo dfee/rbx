@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import { Footer } from "..";
 
 describe("Footer component", () => {
-  it("Should have footer classname", () => {
+  it("should have footer classname", () => {
     const component = renderer.create(
       <Footer>
         <p className="bd-notification is-success">

@@ -1,9 +1,9 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
-import { Breakpoints } from "@/modifiers/responsives";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
+import { Breakpoints } from "@/modifiers/responsive";
 import { Column } from "./column";
 
 type ColumnsModifierProps = Partial<{
@@ -31,29 +31,26 @@ type ColumnsModifierProps = Partial<{
 export type ColumnsProps = ModifierProps & ColumnsModifierProps;
 
 export const Columns = Object.assign(
-  extendedForwardRef<ColumnsProps, "div">(
-    (
-      { className, breakpoint, gapless, multiline, centered, ...props },
-      ref,
-    ) => (
-      <Element
-        {...props}
-        ref={ref}
-        className={cx(className, "columns", {
-          [`is-${breakpoint}`]: breakpoint,
-          "is-centered": centered,
-          "is-gapless": gapless,
-          "is-multiline": multiline,
-        })}
-      />
-    ),
-    "div",
-  ),
+  asExoticComponent<ColumnsProps, "div">((props, ref) => {
+    const { as, breakpoint, centered, gapless, multiline, ...rest } = modify(
+      props,
+    );
+    rest.className = cx("columns", rest.className, {
+      [`is-${breakpoint}`]: breakpoint,
+      "is-centered": centered,
+      "is-gapless": gapless,
+      "is-multiline": multiline,
+    });
+    return React.createElement(as!, { ref, ...rest });
+  }, "div"),
   { Column },
 );
-Columns.defaultProps = {
-  centered: false,
-  children: null,
-  gapless: false,
-  multiline: true,
-};
+
+Columns.defaultProps = Object.assign(
+  {
+    centered: false,
+    gapless: false,
+    multiline: true,
+  },
+  Columns.defaultProps,
+);

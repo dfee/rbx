@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import * as React from "react";
 
-import { extendedForwardRef } from "@/components/element";
+import { asExoticComponent } from "@/components/exotic";
 import { ModifierProps, modify } from "@/modifiers";
 
 export interface BreadcrumbItemProps {
@@ -23,7 +23,13 @@ export type BreadcrumbProps = ModifierProps &
   BreadcrumbModifierProps &
   Partial<Omit<React.ComponentPropsWithoutRef<"a">, "unselectable">>;
 
-export const Breadcrumb = extendedForwardRef<BreadcrumbProps, "a">(
+// TODO: should split up Breadcrumb -> Breadcrumb & BreadcrumbItem
+// this is because the `ref` is passed down to the breadcrumb container
+// but the `as` is passed to the bredcrumb item.
+// Ergo: the type system expects `as` to be compatible with the `Ref<type>`,
+// but it won't be. (the item defaults to an <a>, and the container is fixed as
+// a<nav>)
+export const Breadcrumb = asExoticComponent<BreadcrumbProps, "a">(
   (props, ref) => {
     const { align, as, hrefAttr, items, separator, size, ...rest } = modify(
       props,
@@ -56,4 +62,5 @@ export const Breadcrumb = extendedForwardRef<BreadcrumbProps, "a">(
   },
   "a",
 );
+
 Breadcrumb.defaultProps = Object.assign({ items: [] }, Breadcrumb.defaultProps);

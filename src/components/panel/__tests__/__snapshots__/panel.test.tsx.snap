@@ -1,27 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Panel component Should Exist 1`] = `
+exports[`Panel component should Exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "Block": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "active": false,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "Header": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "Icon": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "renderAs": "span",
+      "as": "span",
     },
     "render": [Function],
   },
@@ -31,23 +31,23 @@ Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "active": false,
-        "renderAs": "a",
+        "as": "a",
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "defaultProps": Object {
-    "renderAs": "nav",
+    "as": "nav",
   },
   "render": [Function],
 }
 `;
 
-exports[`Panel component Should have box classname 1`] = `
+exports[`Panel component should have box classname 1`] = `
 <nav
   className="panel"
 >

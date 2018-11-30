@@ -1,0 +1,1 @@
+export { asExoticComponent } from "./exotic";

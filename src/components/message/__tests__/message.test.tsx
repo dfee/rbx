@@ -4,11 +4,11 @@ import renderer from "react-test-renderer";
 import { Message } from "../message";
 
 describe("Message component", () => {
-  it("Should Exist", () => {
+  it("should Exist", () => {
     expect(Message).toMatchSnapshot();
   });
 
-  it("Should have message classnames", () => {
+  it("should have message classnames", () => {
     const component = renderer.create(
       <Message>
         <Message.Header>Lorem Ipsum</Message.Header>
@@ -18,7 +18,7 @@ describe("Message component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should concat Bulma class with classes in props", () => {
+  it("should concat Bulma class with classes in props", () => {
     const component = renderer.create(
       <Message className="other-class">
         <Message.Header>Lorem Ipsum</Message.Header>
@@ -28,34 +28,32 @@ describe("Message component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should render as an html section", () => {
+  it("should render as an html section", () => {
     const component = renderer.create(
-      <Message renderAs="section">This should be a section</Message>,
+      <Message<"section"> as="section">This should be a section</Message>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have custom inline styles", () => {
+  it("should have custom inline styles", () => {
     const component = renderer.create(
-      <Message renderAs="section" style={{ width: 200, zIndex: 1 }}>
+      <Message<"section"> as="section" style={{ width: 200, zIndex: 1 }}>
         This should be a section with custom styles
       </Message>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should accept a react Element as renderAs prop", () => {
-    const Custom = (
-      props: React.ComponentProps<"p"> & { children: React.ReactNode },
-    ) => (
+  it("should accept a react Element as renderAs prop", () => {
+    const Custom = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
       <p {...props}>
         Custom
-        {props.children}
+        {props.children || null}
       </p>
     );
 
     const component = renderer.create(
-      <Message renderAs={Custom}>This should be a p element</Message>,
+      <Message<typeof Custom> as={Custom}>This should be a p element</Message>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });

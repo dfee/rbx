@@ -1,12 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { extendedForwardRef } from "@/components/element";
+import { asExoticComponent } from "@/components/exotic";
 import { ModifierProps, modify } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { Colors } from "@/modifiers/color";
 import { ButtonGroup } from "./button-group";
-
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export type ButtonModifierProps = Partial<{
   as: "a" | "button" | "span" | React.ComponentType<any>;
@@ -29,17 +27,10 @@ export type ButtonModifierProps = Partial<{
   text: boolean;
 }>;
 
-export type ButtonProps = ModifierProps &
-  ButtonModifierProps &
-  Partial<
-    Omit<
-      React.ComponentPropsWithoutRef<"a" | "button" | "span">,
-      "color" | "unselectable"
-    >
-  >;
+export type ButtonProps = ModifierProps & ButtonModifierProps;
 
 export const Button = Object.assign(
-  extendedForwardRef<ButtonProps, "button">((props, ref) => {
+  asExoticComponent<ButtonProps, "button">((props, ref) => {
     const {
       as,
       children,

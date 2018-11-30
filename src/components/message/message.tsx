@@ -1,42 +1,27 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
+import { Colors } from "@/modifiers/color";
 import { MessageBody } from "./message-body";
 import { MessageHeader } from "./message-header";
 
 export type MessageModifierProps = Partial<{
-  children: React.ReactNode;
   color: Colors;
   size: "small" | "medium" | "large";
-  style: React.CSSProperties;
 }>;
 
 export type MessageProps = ModifierProps & MessageModifierProps;
 
 export const Message = Object.assign(
-  extendedForwardRef<MessageProps, "article">(
-    ({ children, className, color, size, ...props }, ref) => (
-      <Element
-        {...props}
-        ref={ref}
-        className={cx("message", className, {
-          [`is-${color}`]: color,
-          [`is-${size}`]: size,
-        })}
-      >
-        {children}
-      </Element>
-    ),
-    "article",
-  ),
+  asExoticComponent<MessageProps, "article">((props, ref) => {
+    const { as, color, size, ...rest } = modify(props);
+    rest.className = cx("message", rest.className, {
+      [`is-${color}`]: color,
+      [`is-${size}`]: size,
+    });
+    return React.createElement(as!, { ref, ...rest });
+  }, "article"),
   { Body: MessageBody, Header: MessageHeader },
-);
-Message.defaultProps = Object.assign(
-  {
-    children: null,
-  },
-  Message.defaultProps,
 );

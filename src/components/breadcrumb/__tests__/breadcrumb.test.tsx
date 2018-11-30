@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import { Breadcrumb, BreadcrumbProps } from "../breadcrumb";
 
 describe("Breadcrumb component", () => {
-  it("Should be a Breadcrumb", () => {
+  it("should be a Breadcrumb", () => {
     const component = renderer.create(
       <Breadcrumb
         items={[
@@ -28,7 +28,7 @@ describe("Breadcrumb component", () => {
   });
 
   [undefined, "identifier"].map(hrefAttr =>
-    it(`Should ${
+    it(`should ${
       hrefAttr ? "" : "not "
     }pass along item.url as hrefAttr prop on 'as' component when hrefAttr is ${
       hrefAttr ? "" : "not "
@@ -91,7 +91,7 @@ describe("Breadcrumb component", () => {
     }),
   );
 
-  it("Should use inline style and custom size", () => {
+  it("should use inline style and custom size", () => {
     const component = renderer.create(
       <Breadcrumb
         style={{ marginTop: 10 }}

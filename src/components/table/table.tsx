@@ -13,29 +13,25 @@ export type TableModifierProps = Partial<{
   style: React.CSSProperties;
 }>;
 
-export type TableProps = ModifierProps &
-  TableModifierProps &
-  Partial<Omit<React.ComponentPropsWithoutRef<"table">, "unselectable">>;
+export type TableProps = Prefer<
+  ModifierProps & TableModifierProps,
+  React.HTMLAttributes<HTMLTableElement>
+>;
 
 export const Table = React.forwardRef<HTMLTableElement, TableProps>(
-  ({ children, className, size, striped, bordered, ...props }, ref) => (
-    <Element
-      renderAs="table"
-      {...props}
-      ref={ref}
-      className={cx("table", className, {
-        [`is-${size}`]: size,
-        "is-bordered": bordered,
-        "is-striped": striped,
-      })}
-    >
-      {children}
-    </Element>
-  ),
+  (props, ref) => {
+    const { bordered, size, striped, ...rest } = props;
+    rest.className = cx("table", rest.className, {
+      [`is-${size}`]: size,
+      "is-bordered": bordered,
+      "is-striped": striped,
+    });
+    return <Element<"table"> as="table" ref={ref} {...rest} />;
+  },
 );
+
 Table.defaultProps = {
   bordered: false,
-  children: null,
   size: "fullwidth",
   striped: true,
 };

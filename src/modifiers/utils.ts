@@ -10,10 +10,15 @@ export function makeModify<T>(
     const obj = Object.keys(props)
       .filter(key => !omitKeys.includes(key) && key !== "className")
       .map(key => ({ [key]: props[key] }))
-      .reduce((accumulator, currentValue) => ({
-        ...accumulator,
-        ...currentValue,
-      })) as ModifiedProps<T, V>;
+      .reduce(
+        (accumulator, currentValue) => ({
+          ...accumulator,
+          ...currentValue,
+        }),
+        {},
+      ) as ModifiedProps<T, V>;
+    // todo
+    // obj.className = classNameTransformer(props);
     const className = classNameTransformer(props);
     if (className) {
       obj.className = classNameTransformer(props);

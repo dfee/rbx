@@ -1,39 +1,23 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
+import { Colors } from "@/modifiers/color";
 
 export type NotificationModifierProps = Partial<{
-  children: React.ReactNode;
   color: Colors;
-  style: React.CSSProperties;
 }>;
 
 export type NotificationProps = ModifierProps & NotificationModifierProps;
 
-export const Notification = extendedForwardRef<NotificationProps, "div">(
-  ({ children, className, color, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx(
-        "notification",
-        {
-          [`is-${color}`]: color,
-        },
-        className,
-      )}
-    >
-      {children}
-    </Element>
-  ),
-  "div",
-);
-Notification.defaultProps = Object.assign(
-  {
-    children: null,
+export const Notification = asExoticComponent<NotificationProps, "div">(
+  (props, ref) => {
+    const { as, color, ...rest } = modify(props);
+    rest.className = cx("notification", rest.className, {
+      [`is-${color}`]: color,
+    });
+    return React.createElement(as!, { ref, ...rest });
   },
-  Notification.defaultProps,
+  "div",
 );

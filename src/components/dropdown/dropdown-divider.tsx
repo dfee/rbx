@@ -1,25 +1,20 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { classNames, clean, ModifierProps } from "@/modifiers";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type DropdownDividerModifierProps = Partial<{
-  className: string;
-  style: React.CSSProperties;
-}>;
+export type DropdownDividerModifierProps = Omit<
+  React.HTMLAttributes<HTMLHRElement>,
+  "unselectable"
+>;
 
 export type DropdownDividerProps = ModifierProps & DropdownDividerModifierProps;
 
 export const DropdownDivider = React.forwardRef<
   HTMLHRElement,
   DropdownDividerProps
->(({ className, ...allProps }, ref) => {
-  const props = clean(allProps);
-  return (
-    <hr
-      ref={ref}
-      {...props}
-      className={cx("dropdown-divider", classNames(allProps), className)}
-    />
-  );
+>((props, ref) => {
+  const modified = modify(props);
+  modified.className = cx("dropdown-divider", modified.className);
+  return <hr ref={ref} {...modified} />;
 });

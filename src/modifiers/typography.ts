@@ -3,11 +3,11 @@ import { cx } from "emotion";
 import { makeModify } from "./utils";
 
 export type TypographyProps = Partial<{
-  textSize: 1 | 2 | 3 | 4 | 5 | 6;
+  italic: boolean;
   textAlignment: "centered" | "justified" | "left" | "right";
+  textSize: 1 | 2 | 3 | 4 | 5 | 6;
   textTransform: "capitalized" | "lowercase" | "uppercase";
   textWeight: "light" | "normal" | "semibold" | "bold";
-  italic: boolean;
 }>;
 
 export const modify = makeModify<TypographyProps>(

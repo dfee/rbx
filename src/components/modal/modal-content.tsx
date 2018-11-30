@@ -1,27 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type ModalContentModifierProps = Partial<{
-  children: React.ReactNode;
-  style: React.CSSProperties;
-}>;
+export type ModalContentProps = ModifierProps;
 
-export type ModalContentProps = ModifierProps & ModalContentModifierProps;
-
-export const ModalContent = extendedForwardRef<ModalContentProps, "div">(
-  ({ children, className, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("modal-content", className)}>
-      {children}
-    </Element>
-  ),
-  "div",
-);
-ModalContent.defaultProps = Object.assign(
-  {
-    children: null,
+export const ModalContent = asExoticComponent<ModalContentProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("modal-content", rest.className);
+    return React.createElement(as!, { ref, ...rest });
   },
-  ModalContent.defaultProps,
+  "div",
 );

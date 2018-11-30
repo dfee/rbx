@@ -15,11 +15,11 @@ describe("Dropdown component", () => {
     teardownWindow();
   });
 
-  it("Should Exist", () => {
+  it("should exist", () => {
     expect(Dropdown).toMatchSnapshot();
   });
 
-  it("Should have dropdown classname", () => {
+  it("should have dropdown classname", () => {
     const component = renderer.create(
       <Dropdown value="value" onChange={noop}>
         {/* <Dropdown.Item value="value">Item</Dropdown.Item> */}
@@ -28,7 +28,7 @@ describe("Dropdown component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should add listener do document on mount", () => {
+  it("should add listener do document on mount", () => {
     const window = getWindow();
     const app = window.document.querySelector<HTMLElement>("#app-root");
     document.addEventListener = jest.fn();
@@ -44,7 +44,7 @@ describe("Dropdown component", () => {
     component.unmount();
   });
 
-  it("Should concat Bulma class with classes in props", () => {
+  it("should concat Bulma class with classes in props", () => {
     const component = renderer.create(
       <Dropdown value="value" className="other-class" onChange={noop}>
         <Dropdown.Item value="value">Item</Dropdown.Item>
@@ -53,7 +53,7 @@ describe("Dropdown component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have custom inline styles", () => {
+  it("should have custom inline styles", () => {
     const component = renderer.create(
       <Dropdown value="value" style={{ width: 400 }} onChange={noop}>
         <Dropdown.Item value="value">Item</Dropdown.Item>
@@ -62,7 +62,7 @@ describe("Dropdown component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should have divider", () => {
+  it("should have divider", () => {
     const component = renderer.create(
       <Dropdown value="value" style={{ width: 400 }} onChange={noop}>
         <Dropdown.Item value="value">Item</Dropdown.Item>
@@ -73,7 +73,7 @@ describe("Dropdown component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should open the Dropdown", () => {
+  it("should open the Dropdown", () => {
     const component = shallow(
       <Dropdown value="value" style={{ width: 400 }} onChange={noop}>
         <Dropdown.Item value="value">Item</Dropdown.Item>
@@ -86,7 +86,7 @@ describe("Dropdown component", () => {
     expect(component.state("open")).toBe(true);
   });
 
-  it("Should open the Dropdown and prevent default event (not to navigate if a link is on the dropdown trigger)", () => {
+  it("should open the Dropdown and prevent default event (not to navigate if a link is on the dropdown trigger)", () => {
     const preventDefault = jest.fn();
     const component = shallow(
       <Dropdown value="value" style={{ width: 400 }} onChange={noop}>
@@ -101,7 +101,7 @@ describe("Dropdown component", () => {
     expect(component.state("open")).toBe(true);
   });
 
-  it("Should change the value", () => {
+  it("should change the value", () => {
     const onChange = jest.fn();
     const component = shallow(
       <Dropdown value="" hoverable style={{ width: 400 }} onChange={onChange}>
@@ -114,7 +114,7 @@ describe("Dropdown component", () => {
     expect(component.state("open")).toBe(false);
   });
 
-  it("Should close on select", () => {
+  it("should close on select", () => {
     const component = shallow(
       <Dropdown>
         <Dropdown.Item value="value">Item</Dropdown.Item>
@@ -125,7 +125,7 @@ describe("Dropdown component", () => {
     expect(component.state("open")).toBe(false);
   });
 
-  it("Should close the dropdown", () => {
+  it("should close the dropdown", () => {
     const onChange = jest.fn();
     const component = shallow(
       <Dropdown value="" style={{ width: 400 }} onChange={onChange}>

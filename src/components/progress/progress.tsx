@@ -3,39 +3,35 @@ import React from "react";
 
 import { Element } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { Colors } from "@/modifiers/color";
 
-export type ProgressModifierProps = Partial<{
-  className: string;
-  color: Colors;
-  size: "small" | "medium" | "large";
-  style: React.CSSProperties;
-}> & {
+export interface ProgressModifierProps {
+  color?: Colors;
+  size?: "small" | "medium" | "large";
   max: number;
   value: number;
-};
+}
 
-export type ProgressProps = ModifierProps &
-  ProgressModifierProps &
-  Partial<
-    Omit<
-      React.ComponentPropsWithoutRef<"progress">,
-      "color" | "max" | "value" | "unselectable"
-    >
-  >;
+export type ProgressProps = Prefer<
+  ModifierProps & ProgressModifierProps,
+  React.HTMLAttributes<HTMLProgressElement>
+>;
 
 export const Progress = React.forwardRef<HTMLProgressElement, ProgressProps>(
-  ({ className, value, max, color, size, ...props }, ref) => (
-    <Element
-      ref={ref}
-      renderAs="progress"
-      {...props}
-      value={value}
-      max={max}
-      className={cx("progress", className, {
-        [`is-${color}`]: color,
-        [`is-${size}`]: size,
-      })}
-    />
-  ),
+  (props, ref) => {
+    const { color, max, size, value, ...rest } = props;
+    rest.className = cx("progress", rest.className, {
+      [`is-${color}`]: color,
+      [`is-${size}`]: size,
+    });
+    return (
+      <Element<"progress">
+        as="progress"
+        max={max}
+        ref={ref}
+        value={value}
+        {...rest}
+      />
+    );
+  },
 );

@@ -1,60 +1,39 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type NavbarItemModifierProps = Partial<{
   active: boolean;
-  children: React.ReactNode;
   dropdown: boolean;
   dropdownUp: boolean;
   hoverable: boolean;
-  style: React.CSSProperties;
 }>;
 
 export type NavbarItemProps = ModifierProps & NavbarItemModifierProps;
 
-export const NavbarItem = extendedForwardRef<NavbarItemProps, "a">(
-  (
-    {
-      className,
-      active,
-      children,
-      dropdown,
-      dropdownUp,
-      hoverable,
-      renderAs,
-      ...props
-    },
-    ref,
-  ) => {
-    let as = renderAs;
-    if (dropdown && renderAs === "a") {
-      as = "span";
-    }
-    return (
-      <Element
-        {...props}
-        ref={ref}
-        renderAs={as}
-        className={cx("navbar-item", className, {
-          "has-dropdown": dropdown,
-          "has-dropdown-up": dropdownUp,
-          "is-active": active,
-          "is-hoverable": hoverable,
-        })}
-      >
-        {children}
-      </Element>
+export const NavbarItem = asExoticComponent<NavbarItemProps, "a">(
+  (props, ref) => {
+    const { as, active, dropdown, dropdownUp, hoverable, ...rest } = modify(
+      props,
     );
+    rest.className = cx("navbar-item", rest.className, {
+      "has-dropdown": dropdown,
+      "has-dropdown-up": dropdownUp,
+      "is-active": active,
+      "is-hoverable": hoverable,
+    });
+
+    const asOverride = dropdown && as === "a" ? "span" : as;
+    return React.createElement(asOverride!, { ref, ...rest });
   },
   "a",
 );
+
 NavbarItem.defaultProps = Object.assign(
   {
     active: false,
-    children: null,
     dropdown: false,
     dropdownUp: false,
     hoverable: false,

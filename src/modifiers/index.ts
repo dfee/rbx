@@ -1,12 +1,12 @@
-import * as colors from "./colors";
+import * as color from "./color";
 import * as helpers from "./helpers";
-import * as responsives from "./responsives";
+import * as responsive from "./responsive";
 import * as typography from "./typography";
 
-export type ModifierProps = colors.ColorsProps &
+export type ModifierProps = color.ColorsProps &
   helpers.HelpersProps &
-  responsives.ResponsivesProps &
+  responsive.ResponsiveProps &
   typography.TypographyProps;
 
 export const modify = <T extends object & { className?: string }>(props: T) =>
-  typography.modify(responsives.modify(helpers.modify(colors.modify(props))));
+  typography.modify(responsive.modify(helpers.modify(color.modify(props))));

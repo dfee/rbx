@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Help component Should be displayed as a successful message 1`] = `
+exports[`Help component should be displayed as a successful message 1`] = `
 <p
   className="help is-success"
 >
@@ -10,7 +10,7 @@ exports[`Help component Should be displayed as a successful message 1`] = `
 </p>
 `;
 
-exports[`Help component Should concat classname in props with Bulma classname 1`] = `
+exports[`Help component should concat classname in props with Bulma classname 1`] = `
 <p
   className="help other-class this-is-a-test"
 >
@@ -20,18 +20,17 @@ exports[`Help component Should concat classname in props with Bulma classname 1`
 </p>
 `;
 
-exports[`Help component Should exist 1`] = `
+exports[`Help component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
-    "renderAs": "p",
+    "as": "p",
   },
   "render": [Function],
 }
 `;
 
-exports[`Help component Should have help classname 1`] = `
+exports[`Help component should have help classname 1`] = `
 <p
   className="help"
 >
@@ -48,7 +47,7 @@ exports[`Help component Should have help classname 1`] = `
 </p>
 `;
 
-exports[`Help component Should use inline styles 1`] = `
+exports[`Help component should use inline styles 1`] = `
 <p
   className="help"
   style={

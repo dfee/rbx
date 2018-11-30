@@ -1,20 +1,19 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 import { CardHeaderIcon } from "./card-header-icon";
 import { CardHeaderTitle } from "./card-header-title";
 
 export type CardHeaderProps = ModifierProps;
 
 export const CardHeader = Object.assign(
-  extendedForwardRef<CardHeaderProps, "div">(
-    ({ className, ...props }, ref) => (
-      <Element {...props} ref={ref} className={cx("card-header", className)} />
-    ),
-    "div",
-  ),
+  asExoticComponent<CardHeaderProps, "div">((props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("card-header", rest.className);
+    return React.createElement(as!, { ref, ...rest });
+  }, "div"),
   {
     Icon: CardHeaderIcon,
     Title: CardHeaderTitle,

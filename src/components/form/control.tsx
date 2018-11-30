@@ -1,54 +1,35 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type ControlModifierProps = Partial<{
-  children: React.ReactNode;
   fullwidth: boolean;
   iconLeft: boolean;
   iconRight: boolean;
   loading: boolean;
   size: "small" | "medium" | "large";
-  style: React.CSSProperties;
 }>;
 
 export type ControlProps = ModifierProps & ControlModifierProps;
 
-export const Control = extendedForwardRef<ControlProps, "div">(
-  (
-    {
-      children,
-      className,
-      fullwidth,
-      iconLeft,
-      iconRight,
-      loading,
-      size,
-      ...props
-    },
-    ref,
-  ) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("control", className, {
-        "has-icons-left": iconLeft,
-        "has-icons-right": iconRight,
-        "is-expanded": fullwidth,
-        "is-loading": loading,
-        [`is-${size}`]: size,
-      })}
-    >
-      {children}
-    </Element>
-  ),
-  "div",
-);
+export const Control = asExoticComponent<ControlProps, "div">((props, ref) => {
+  const { as, fullwidth, iconLeft, iconRight, loading, size, ...rest } = modify(
+    props,
+  );
+  rest.className = cx("control", rest.className, {
+    "has-icons-left": iconLeft,
+    "has-icons-right": iconRight,
+    "is-expanded": fullwidth,
+    "is-loading": loading,
+    [`is-${size}`]: size,
+  });
+  return React.createElement(as!, { ref, ...rest });
+}, "div");
+
 Control.defaultProps = Object.assign(
   {
-    children: null,
     fullwidth: false,
     iconLeft: false,
     iconRight: false,

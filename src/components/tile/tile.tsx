@@ -1,9 +1,9 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
+import { Colors } from "@/modifiers/color";
 
 export type TileModifierProps = Partial<{
   children: React.ReactNode;
@@ -17,39 +17,22 @@ export type TileModifierProps = Partial<{
 
 export type TileProps = ModifierProps & TileModifierProps;
 
-export const Tile = extendedForwardRef<TileProps, "div">(
-  (
-    {
-      children,
-      className,
-      kind,
-      vertical,
-      size,
-      color,
-      notification,
-      ...props
-    },
-    ref,
-  ) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("tile", className, {
-        "is-vertical": vertical,
-        [`is-${kind}`]: kind,
-        [`is-${size}`]: !!size,
-        [`is-${color}`]: color,
-        notification,
-      })}
-    >
-      {children}
-    </Element>
-  ),
-  "div",
-);
+export const Tile = asExoticComponent<TileProps, "div">((props, ref) => {
+  const { as, color, kind, notification, size, vertical, ...rest } = modify(
+    props,
+  );
+  rest.className = cx("tile", rest.className, {
+    "is-vertical": vertical,
+    [`is-${kind}`]: kind,
+    [`is-${size}`]: !!size,
+    [`is-${color}`]: color,
+    notification,
+  });
+  return React.createElement(as!, { ref, ...rest });
+}, "div");
+
 Tile.defaultProps = Object.assign(
   {
-    children: null,
     notification: false,
     vertical: false,
   },

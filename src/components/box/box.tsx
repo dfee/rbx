@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import * as React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type BoxModifierProps = Partial<{
   children: React.ReactNode;
@@ -12,11 +12,8 @@ export type BoxModifierProps = Partial<{
 
 export type BoxProps = ModifierProps & BoxModifierProps;
 
-export const Box = extendedForwardRef<BoxProps, "div">(
-  ({ children, className, ...props }, ref) => (
-    <Element ref={ref} {...props} className={cx("box", className)}>
-      {children}
-    </Element>
-  ),
-  "div",
-);
+export const Box = asExoticComponent<BoxProps, "div">((props, ref) => {
+  const { as, children, ...rest } = modify(props);
+  rest.className = cx("box", rest.className);
+  return React.createElement(as!, { children, ref, ...rest });
+}, "div");

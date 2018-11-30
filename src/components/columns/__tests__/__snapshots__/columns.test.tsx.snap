@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Columns component Should have columns classname 1`] = `
+exports[`Columns component should have columns classname 1`] = `
 <div
   className="columns is-multiline"
 >
@@ -22,7 +22,7 @@ exports[`Columns component Should have columns classname 1`] = `
 </div>
 `;
 
-exports[`Columns component Should have columns one column half width and 3 other as default 1`] = `
+exports[`Columns component should have columns one column half width and 3 other as default 1`] = `
 <div
   className="columns is-multiline"
 >
@@ -49,7 +49,7 @@ exports[`Columns component Should have columns one column half width and 3 other
 </div>
 `;
 
-exports[`Columns component Should have columns one column half width, other narrow and 2 other as default 1`] = `
+exports[`Columns component should have columns one column half width, other narrow and 2 other as default 1`] = `
 <div
   className="columns is-multiline"
 >
@@ -76,7 +76,7 @@ exports[`Columns component Should have columns one column half width, other narr
 </div>
 `;
 
-exports[`Columns component Should render as paragraph 1`] = `
+exports[`Columns component should render as paragraph 1`] = `
 <p
   className="columns is-multiline"
 >

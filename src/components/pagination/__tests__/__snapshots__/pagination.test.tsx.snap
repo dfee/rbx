@@ -63,14 +63,14 @@ exports[`Pagination component Next button should be disabled 1`] = `
 </nav>
 `;
 
-exports[`Pagination component Pagination Should Exist 1`] = `
+exports[`Pagination component Pagination should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[`Pagination component Should have 3 pages and page 1 active 1`] = `
+exports[`Pagination component should have 3 pages and page 1 active 1`] = `
 <nav
   aria-label="pagination"
   className="pagination"
@@ -133,7 +133,7 @@ exports[`Pagination component Should have 3 pages and page 1 active 1`] = `
 </nav>
 `;
 
-exports[`Pagination component Should have 5 pages, page 5 active and display pages 3 to 5 1`] = `
+exports[`Pagination component should have 5 pages, page 5 active and display pages 3 to 5 1`] = `
 <nav
   aria-label="pagination"
   className="pagination"
@@ -196,7 +196,7 @@ exports[`Pagination component Should have 5 pages, page 5 active and display pag
 </nav>
 `;
 
-exports[`Pagination component Should not display Previous/Next buttons 1`] = `
+exports[`Pagination component should not display Previous/Next buttons 1`] = `
 <nav
   aria-label="pagination"
   className="pagination"
@@ -267,7 +267,7 @@ exports[`Pagination component Should not display Previous/Next buttons 1`] = `
 </nav>
 `;
 
-exports[`Pagination component Should not display page numbers 1`] = `
+exports[`Pagination component should not display page numbers 1`] = `
 <nav
   aria-label="pagination"
   className="pagination"
@@ -291,6 +291,6 @@ exports[`Pagination component Should not display page numbers 1`] = `
 </nav>
 `;
 
-exports[`Pagination component Should not render if current page is greater than total pages 1`] = `null`;
+exports[`Pagination component should not render if current page is greater than total pages 1`] = `null`;
 
-exports[`Pagination component Should not render if total pages equals 1 1`] = `null`;
+exports[`Pagination component should not render if total pages equals 1 1`] = `null`;

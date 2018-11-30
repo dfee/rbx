@@ -1,26 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type MessageBoodyModifierProps = Partial<{
-  children: React.ReactNode;
-}>;
+export type MessageBodyProps = ModifierProps;
 
-export type MessageBodyProps = ModifierProps & MessageBoodyModifierProps;
-
-export const MessageBody = extendedForwardRef<MessageBodyProps, "div">(
-  ({ children, className, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("message-body", className)}>
-      {children}
-    </Element>
-  ),
-  "div",
-);
-MessageBody.defaultProps = Object.assign(
-  {
-    children: null,
+export const MessageBody = asExoticComponent<MessageBodyProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("message-body", rest.className);
+    return React.createElement(as!, { ref, ...rest });
   },
-  MessageBody.defaultProps,
+  "div",
 );

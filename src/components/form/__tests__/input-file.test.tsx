@@ -15,11 +15,11 @@ describe("Dropdown component", () => {
     teardownWindow();
   });
 
-  it("Should Exist", () => {
+  it("should Exist", () => {
     expect(InputFile).toMatchSnapshot();
   });
 
-  it("Should render file input tree", () => {
+  it("should render file input tree", () => {
     const component = renderer.create(<InputFile onChange={noop} />);
     expect(component.toJSON()).toMatchSnapshot();
   });
@@ -29,7 +29,6 @@ describe("Dropdown component", () => {
     const component = shallow(
       <InputFile
         className="input-file"
-        value=""
         style={{ width: 400 }}
         onChange={onChange}
       />,
@@ -52,7 +51,6 @@ describe("Dropdown component", () => {
     const component = shallow(
       <InputFile
         className="input-file"
-        value=""
         style={{ width: 400 }}
         onChange={onChange}
       />,

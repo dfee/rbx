@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Radio component Should be disabled, checked and with value 1`] = `
+exports[`Radio component should be disabled, checked and with value 1`] = `
 <label
   className="radio"
 >
@@ -17,7 +17,7 @@ exports[`Radio component Should be disabled, checked and with value 1`] = `
 </label>
 `;
 
-exports[`Radio component Should concat classname in props with Bulma classname 1`] = `
+exports[`Radio component should concat classname in props with Bulma classname 1`] = `
 <label
   className="radio other-class this-is-a-test"
 >
@@ -33,7 +33,7 @@ exports[`Radio component Should concat classname in props with Bulma classname 1
 </label>
 `;
 
-exports[`Radio component Should exist 1`] = `
+exports[`Radio component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
@@ -45,7 +45,7 @@ Object {
 }
 `;
 
-exports[`Radio component Should have radio classname 1`] = `
+exports[`Radio component should have radio classname 1`] = `
 <label
   className="radio"
 >
@@ -62,7 +62,7 @@ exports[`Radio component Should have radio classname 1`] = `
 </label>
 `;
 
-exports[`Radio component Should use inline styles 1`] = `
+exports[`Radio component should use inline styles 1`] = `
 <label
   className="radio"
   style={

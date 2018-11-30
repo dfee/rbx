@@ -1,35 +1,20 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
+import { Colors } from "@/modifiers/color";
 
 export type HelpModifierProps = Partial<{
-  children: React.ReactNode;
-  className: string;
   color: Colors;
 }>;
 
 export type HelpProps = ModifierProps & HelpModifierProps;
 
-export const Help = extendedForwardRef<HelpProps, "p">(
-  ({ className, children, color, ...props }, ref) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx("help", className, {
-        [`is-${color}`]: color,
-      })}
-    >
-      {children}
-    </Element>
-  ),
-  "p",
-);
-Help.defaultProps = Object.assign(
-  {
-    children: null,
-  },
-  Help.defaultProps,
-);
+export const Help = asExoticComponent<HelpProps, "p">((props, ref) => {
+  const { as, color, ...rest } = modify(props);
+  rest.className = cx("help", rest.className, {
+    [`is-${color}`]: color,
+  });
+  return React.createElement(as!, { ref, ...rest });
+}, "p");

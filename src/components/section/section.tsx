@@ -1,34 +1,22 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type SectionModifierProps = Partial<{
-  children: React.ReactNode;
   size: "medium" | "large";
-  style: React.CSSProperties;
 }>;
 
 export type SectionProps = ModifierProps & SectionModifierProps;
 
-export const Section = extendedForwardRef<SectionProps, "section">(
-  ({ children, className, size, ...props }, ref) => (
-    <Element
-      ref={ref}
-      {...props}
-      className={cx("section", className, {
-        [`is-${size}`]: size,
-      })}
-    >
-      {children}
-    </Element>
-  ),
-  "section",
-);
-Section.defaultProps = Object.assign(
-  {
-    children: null,
+export const Section = asExoticComponent<SectionProps, "section">(
+  (props, ref) => {
+    const { as, size, ...rest } = modify(props);
+    rest.className = cx("section", rest.className, {
+      [`is-${size}`]: size,
+    });
+    return React.createElement(as!, { ref, ...rest });
   },
-  Section.defaultProps,
+  "section",
 );

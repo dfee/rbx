@@ -3,10 +3,9 @@ import React from "react";
 
 import { Element } from "@/components/element";
 import { ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { Colors } from "@/modifiers/color";
 
 export type InputModifierProps = Partial<{
-  className: string;
   color: Colors;
   disabled: boolean;
   isStatic: boolean;
@@ -31,14 +30,10 @@ export type InputModifierProps = Partial<{
   value: string;
 }>;
 
-export type InputProps = ModifierProps &
-  InputModifierProps &
-  Partial<
-    Omit<
-      React.ComponentPropsWithoutRef<"input">,
-      "color" | "size" | "unselectable"
-    >
-  >;
+export type InputProps = Prefer<
+  ModifierProps & InputModifierProps,
+  React.HTMLAttributes<HTMLInputElement>
+>;
 
 type InputControllerProps = InputProps & {
   innerRef: React.Ref<HTMLInputElement>;
@@ -68,10 +63,10 @@ class InputController extends React.PureComponent<InputControllerProps> {
       ...props
     } = this.props;
     return (
-      <Element
+      <Element<"input">
         {...props}
         ref={innerRef}
-        renderAs="input"
+        as="input"
         name={name}
         value={value}
         type={type}

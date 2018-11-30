@@ -5,14 +5,15 @@ Object {
   "Box": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "Breadcrumb": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "renderAs": "a",
+      "as": "a",
+      "items": Array [],
     },
     "render": [Function],
   },
@@ -21,11 +22,12 @@ Object {
     "Group": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "defaultProps": Object {
+      "as": "button",
       "disabled": false,
       "fullwidth": false,
       "inverted": false,
@@ -35,7 +37,6 @@ Object {
       "onClick": [Function],
       "outlined": false,
       "remove": false,
-      "renderAs": "button",
       "reset": false,
       "rounded": false,
       "submit": false,
@@ -48,7 +49,7 @@ Object {
     "Content": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
@@ -57,12 +58,12 @@ Object {
       "Item": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "renderAs": "div",
+          "as": "div",
         },
         "render": [Function],
       },
       "defaultProps": Object {
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
@@ -71,19 +72,19 @@ Object {
       "Icon": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "renderAs": "div",
+          "as": "div",
         },
         "render": [Function],
       },
       "Title": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "renderAs": "div",
+          "as": "div",
         },
         "render": [Function],
       },
       "defaultProps": Object {
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
@@ -92,8 +93,7 @@ Object {
       "render": [Function],
     },
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
@@ -102,7 +102,7 @@ Object {
     "Column": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
+        "as": "div",
         "desktop": Object {
           "narrow": false,
         },
@@ -123,8 +123,8 @@ Object {
       "render": [Function],
     },
     "defaultProps": Object {
+      "as": "div",
       "centered": false,
-      "children": null,
       "gapless": false,
       "multiline": true,
     },
@@ -133,17 +133,15 @@ Object {
   "Container": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
+      "as": "div",
       "fluid": false,
-      "renderAs": "div",
     },
     "render": [Function],
   },
   "Content": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
@@ -151,15 +149,14 @@ Object {
   "Element": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "Footer": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
@@ -176,12 +173,11 @@ Object {
     "Control": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
+        "as": "div",
         "fullwidth": false,
         "iconLeft": false,
         "iconRight": false,
         "loading": false,
-        "renderAs": "div",
       },
       "render": [Function],
     },
@@ -190,32 +186,28 @@ Object {
       "Body": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "children": null,
-          "renderAs": "div",
+          "as": "div",
         },
         "render": [Function],
       },
       "Label": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "children": null,
-          "renderAs": "div",
+          "as": "div",
         },
         "render": [Function],
       },
       "defaultProps": Object {
-        "children": null,
+        "as": "div",
         "horizontal": false,
         "multiline": false,
-        "renderAs": "div",
       },
       "render": [Function],
     },
     "Help": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "p",
+        "as": "p",
       },
       "render": [Function],
     },
@@ -226,9 +218,6 @@ Object {
     "InputFile": [Function],
     "Label": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "children": null,
-      },
       "render": [Function],
     },
     "Radio": Object {
@@ -264,9 +253,8 @@ Object {
   "Heading": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
+      "as": "h1",
       "heading": false,
-      "renderAs": "h1",
       "spaced": false,
       "subtitle": false,
     },
@@ -277,31 +265,27 @@ Object {
     "Body": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "Footer": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "Head": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "children": null,
+      "as": "section",
       "gradient": false,
-      "renderAs": "section",
     },
     "render": [Function],
   },
@@ -315,7 +299,7 @@ Object {
   "Image": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "renderAs": "figure",
+      "as": "figure",
     },
     "render": [Function],
   },
@@ -324,8 +308,7 @@ Object {
     "Item": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
@@ -333,22 +316,20 @@ Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "align": "left",
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
   "Loader": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "as": "div",
       "children": null,
-      "renderAs": "div",
     },
     "render": [Function],
   },
@@ -357,23 +338,20 @@ Object {
     "Content": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "Item": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
+        "as": "div",
         "position": "center",
-        "renderAs": "div",
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "article",
+      "as": "article",
     },
     "render": [Function],
   },
@@ -386,14 +364,13 @@ Object {
         "defaultProps": Object {
           "active": false,
           "children": null,
-          "renderAs": "a",
         },
         "render": [Function],
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "renderAs": "aside",
+      "as": "aside",
     },
     "render": [Function],
   },
@@ -402,22 +379,19 @@ Object {
     "Body": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "Header": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "article",
+      "as": "article",
     },
     "render": [Function],
   },
@@ -428,24 +402,22 @@ Object {
       "Body": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "children": null,
-          "renderAs": "section",
+          "as": "section",
         },
         "render": [Function],
       },
       "Foot": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "children": null,
-          "renderAs": "footer",
+          "as": "footer",
         },
         "render": [Function],
       },
       "Head": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
+          "as": "header",
           "children": null,
-          "renderAs": "header",
           "showClose": true,
         },
         "render": [Function],
@@ -453,21 +425,16 @@ Object {
       "Title": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "children": null,
-          "renderAs": "p",
+          "as": "p",
         },
         "render": [Function],
-      },
-      "defaultProps": Object {
-        "children": null,
       },
       "render": [Function],
     },
     "Content": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
@@ -477,9 +444,6 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "Brand": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "children": null,
-      },
       "render": [Function],
     },
     "Burger": Object {
@@ -489,9 +453,8 @@ Object {
     "Container": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
+        "as": "div",
         "position": "start",
-        "renderAs": "div",
       },
       "render": [Function],
     },
@@ -502,9 +465,8 @@ Object {
     "Dropdown": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
+        "as": "span",
         "boxed": false,
-        "children": null,
-        "renderAs": "span",
         "right": false,
       },
       "render": [Function],
@@ -513,39 +475,33 @@ Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "active": false,
-        "children": null,
+        "as": "a",
         "dropdown": false,
         "dropdownUp": false,
         "hoverable": false,
-        "renderAs": "a",
       },
       "render": [Function],
     },
     "Link": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "children": null,
-        "renderAs": "span",
+        "as": "span",
       },
       "render": [Function],
     },
     "Menu": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "children": null,
-      },
       "render": [Function],
     },
     "defaultProps": Object {
-      "renderAs": "nav",
+      "as": "nav",
     },
     "render": [Function],
   },
   "Notification": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "div",
+      "as": "div",
     },
     "render": [Function],
   },
@@ -559,21 +515,21 @@ Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "active": false,
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "Header": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "Icon": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "renderAs": "span",
+        "as": "span",
       },
       "render": [Function],
     },
@@ -583,17 +539,17 @@ Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
           "active": false,
-          "renderAs": "a",
+          "as": "a",
         },
         "render": [Function],
       },
       "defaultProps": Object {
-        "renderAs": "div",
+        "as": "div",
       },
       "render": [Function],
     },
     "defaultProps": Object {
-      "renderAs": "nav",
+      "as": "nav",
     },
     "render": [Function],
   },
@@ -604,8 +560,7 @@ Object {
   "Section": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
-      "renderAs": "section",
+      "as": "section",
     },
     "render": [Function],
   },
@@ -613,7 +568,6 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "bordered": false,
-      "children": null,
       "size": "fullwidth",
       "striped": true,
     },
@@ -625,14 +579,13 @@ Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "active": false,
-        "children": null,
-        "renderAs": "a",
+        "as": "a",
       },
       "render": [Function],
     },
     "defaultProps": Object {
+      "as": "div",
       "fullwidth": false,
-      "renderAs": "div",
     },
     "render": [Function],
   },
@@ -646,9 +599,8 @@ Object {
       "render": [Function],
     },
     "defaultProps": Object {
-      "children": null,
+      "as": "span",
       "remove": false,
-      "renderAs": "span",
       "rounded": false,
     },
     "render": [Function],
@@ -656,9 +608,8 @@ Object {
   "Tile": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "children": null,
+      "as": "div",
       "notification": false,
-      "renderAs": "div",
       "vertical": false,
     },
     "render": [Function],

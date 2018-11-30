@@ -9,19 +9,19 @@ describe("Checkbox component", () => {
     expect(Checkbox).toMatchSnapshot();
   });
 
-  it("Should have checkbox classname", () => {
+  it("should have checkbox classname", () => {
     const component = renderer.create(<Checkbox>Text</Checkbox>);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("Should change value on change event", () => {
+  it("should change value on change event", () => {
     const spy = jest.fn();
     const component = shallow(<Checkbox onChange={spy}>Text</Checkbox>);
     component.find("input").simulate("change");
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it("Should set input checked if checked", () => {
+  it("should set input checked if checked", () => {
     const component = shallow(<Checkbox checked />);
     expect(component.find("input").is("[checked]")).toBe(true);
   });

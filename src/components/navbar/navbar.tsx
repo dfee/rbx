@@ -1,9 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { classNames, ModifierProps } from "@/modifiers";
-import { Colors } from "@/modifiers/colors";
+import { Element } from "@/components/element";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
+import { Colors } from "@/modifiers/color";
 import { canUseDOM } from "@/utils";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
@@ -71,34 +72,28 @@ class NavbarController extends React.PureComponent<
   }
 
   public render() {
+    this.manageHtmlAttributes();
+
     const {
       active, // only used for initialState (in constructor)
-      children,
-      className,
       color,
       fixed,
       innerRef,
       transparent,
-      ...props
-    } = this.props;
+      ...rest
+    } = modify(this.props);
 
-    this.manageHtmlAttributes();
+    rest.className = cx("navbar", rest.className, {
+      "is-transparent": transparent,
+      [`is-fixed-${fixed}`]: fixed,
+      [`is-${color}`]: color,
+    });
+
     return (
       <NavbarContext.Provider
         value={{ active: this.state.active, setActive: this.setActive }}
       >
-        <Element
-          {...props}
-          ref={innerRef}
-          role="navigation"
-          className={cx("navbar", classNames(props), className, {
-            "is-transparent": transparent,
-            [`is-fixed-${fixed}`]: fixed,
-            [`is-${color}`]: color,
-          })}
-        >
-          {children}
-        </Element>
+        <Element ref={innerRef} role="navigation" {...rest} />
       </NavbarContext.Provider>
     );
   }
@@ -119,7 +114,7 @@ class NavbarController extends React.PureComponent<
 }
 
 export const Navbar = Object.assign(
-  extendedForwardRef<NavbarProps, "nav">(
+  asExoticComponent<NavbarProps, "nav">(
     (props, ref) => <NavbarController innerRef={ref} {...props} />,
     "nav",
   ),

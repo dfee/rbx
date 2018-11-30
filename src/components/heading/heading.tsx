@@ -1,11 +1,10 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
 export type HeadingModifierProps = Partial<{
-  children: React.ReactNode;
   heading: boolean;
   size: 1 | 2 | 3 | 4 | 5 | 6;
   spaced: boolean;
@@ -15,31 +14,23 @@ export type HeadingModifierProps = Partial<{
 
 export type HeadingProps = ModifierProps & HeadingModifierProps;
 
-export const Heading = extendedForwardRef<HeadingProps, "h1">(
-  (
-    { children, className, size, subtitle, weight, spaced, heading, ...props },
-    ref,
-  ) => (
-    <Element
-      {...props}
-      ref={ref}
-      className={cx(className, {
-        [`has-text-weight-${weight}`]: weight,
-        heading,
-        [`is-${size}`]: !!size,
-        "is-spaced": spaced && !subtitle,
-        subtitle,
-        title: !subtitle && !heading,
-      })}
-    >
-      {children}
-    </Element>
-  ),
-  "h1",
-);
+export const Heading = asExoticComponent<HeadingProps, "h1">((props, ref) => {
+  const { as, heading, size, spaced, subtitle, weight, ...rest } = modify(
+    props,
+  );
+  rest.className = cx(rest.className, {
+    [`has-text-weight-${weight}`]: weight,
+    heading,
+    [`is-${size}`]: !!size,
+    "is-spaced": spaced && !subtitle,
+    subtitle,
+    title: !subtitle && !heading,
+  });
+  return React.createElement(as!, { ref, ...rest });
+}, "h1");
+
 Heading.defaultProps = Object.assign(
   {
-    children: null,
     heading: false,
     spaced: false,
     subtitle: false,

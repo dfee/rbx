@@ -4,7 +4,7 @@ import renderer from "react-test-renderer";
 import { Content } from "../content";
 
 describe("Content component", () => {
-  it("Should have content classname", () => {
+  it("should have content classname", () => {
     const component = renderer.create(
       <Content>
         <p className="bd-notification is-success">

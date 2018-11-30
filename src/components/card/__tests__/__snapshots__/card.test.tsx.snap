@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card component Should have card classname 1`] = `
+exports[`Card component should have card classname 1`] = `
 <div
   className="card"
 >
@@ -8,7 +8,7 @@ exports[`Card component Should have card classname 1`] = `
 </div>
 `;
 
-exports[`Card component Should have card-content classname 1`] = `
+exports[`Card component should have card-content classname 1`] = `
 <div
   className="card-content"
 >
@@ -16,7 +16,7 @@ exports[`Card component Should have card-content classname 1`] = `
 </div>
 `;
 
-exports[`Card component Should have card-footer's classname 1`] = `
+exports[`Card component should have card-footer's classname 1`] = `
 <div
   className="card"
 >
@@ -37,7 +37,7 @@ exports[`Card component Should have card-footer's classname 1`] = `
 </div>
 `;
 
-exports[`Card component Should have card-header's classname 1`] = `
+exports[`Card component should have card-header's classname 1`] = `
 <div
   className="card"
 >
@@ -60,7 +60,7 @@ exports[`Card component Should have card-header's classname 1`] = `
 </div>
 `;
 
-exports[`Card component Should have card-image classname 1`] = `
+exports[`Card component should have card-image classname 1`] = `
 <div
   className="card-image"
 >

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Container component Should have container classname 1`] = `
+exports[`Container component should have container classname 1`] = `
 <div
   className="container"
 >
@@ -17,7 +17,7 @@ exports[`Container component Should have container classname 1`] = `
 </div>
 `;
 
-exports[`Container component Should have helper classnames 1`] = `
+exports[`Container component should have helper classnames 1`] = `
 <div
   className="container is-paddingless is-hidden-desktop is-flex-touch is-block-widescreen-only"
 >

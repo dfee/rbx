@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Control component Should be fullwidth, loading and size = large 1`] = `
+exports[`Control component should be fullwidth, loading and size = large 1`] = `
 <div
   className="control is-expanded is-loading is-large"
 >
@@ -10,7 +10,7 @@ exports[`Control component Should be fullwidth, loading and size = large 1`] = `
 </div>
 `;
 
-exports[`Control component Should concat classname in props with Bulma classname 1`] = `
+exports[`Control component should concat classname in props with Bulma classname 1`] = `
 <div
   className="control other-class this-is-a-test"
 >
@@ -20,22 +20,21 @@ exports[`Control component Should concat classname in props with Bulma classname
 </div>
 `;
 
-exports[`Control component Should exist 1`] = `
+exports[`Control component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
-    "children": null,
+    "as": "div",
     "fullwidth": false,
     "iconLeft": false,
     "iconRight": false,
     "loading": false,
-    "renderAs": "div",
   },
   "render": [Function],
 }
 `;
 
-exports[`Control component Should have control classname 1`] = `
+exports[`Control component should have control classname 1`] = `
 <div
   className="control"
 >
@@ -52,7 +51,7 @@ exports[`Control component Should have control classname 1`] = `
 </div>
 `;
 
-exports[`Control component Should render as a html section element 1`] = `
+exports[`Control component should render as a html section element 1`] = `
 <section
   className="control"
 >
@@ -62,7 +61,7 @@ exports[`Control component Should render as a html section element 1`] = `
 </section>
 `;
 
-exports[`Control component Should use inline styles 1`] = `
+exports[`Control component should use inline styles 1`] = `
 <div
   className="control"
   style={

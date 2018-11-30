@@ -20,11 +20,11 @@ describe("Modal component", () => {
     teardownWindow();
   });
 
-  it("Should Exist", () => {
+  it("should exist", () => {
     expect(Modal).toMatchSnapshot();
   });
 
-  it("Should expose Content and Card's types", () => {
+  it("should expose Content and Card's types", () => {
     expect(Modal.Content).toMatchSnapshot();
     expect(Modal.Card).toMatchSnapshot();
     expect(Modal.Card.Title).toMatchSnapshot();
@@ -33,7 +33,7 @@ describe("Modal component", () => {
     expect(Modal.Card.Foot).toMatchSnapshot();
   });
 
-  it("Should render modal-card-head", () => {
+  it("should render modal-card-head", () => {
     const onClose = jest.fn();
     component = mount(
       <Modal.Card onClose={onClose}>
@@ -46,7 +46,7 @@ describe("Modal component", () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it("Should open the modal", () => {
+  it("should open the modal", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -67,7 +67,7 @@ describe("Modal component", () => {
     ).toMatchSnapshot();
   });
 
-  it("Should close the modal", () => {
+  it("should close the modal", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -91,7 +91,7 @@ describe("Modal component", () => {
     expect(window.document.querySelector("div.modal.is-active")).toBeNull();
   });
 
-  it("Should close the modal on ESC key press", () => {
+  it("should close the modal on ESC key press", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -113,7 +113,7 @@ describe("Modal component", () => {
     expect(window.document.querySelector("div.modal.is-active")).toBeNull();
   });
 
-  it("Should not close the modal on ESC key press", () => {
+  it("should not close the modal on ESC key press", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -140,7 +140,7 @@ describe("Modal component", () => {
     expect(modal).not.toBe(null);
   });
 
-  it("Should not close the modal on other than ESC key press", () => {
+  it("should not close the modal on other than ESC key press", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -164,7 +164,7 @@ describe("Modal component", () => {
     expect(modal).not.toBe(null);
   });
 
-  it("Should render any child type", () => {
+  it("should render any child type", () => {
     const window = getWindow();
     const onClose = jest.fn();
     component = mount(
@@ -178,7 +178,7 @@ describe("Modal component", () => {
     ).toMatchSnapshot();
   });
 
-  it("Should no try to reopen if other prop change", () => {
+  it("should not try to reopen if other prop change", () => {
     const window = getWindow();
     const onClose = jest.fn();
     component = mount(
@@ -192,7 +192,7 @@ describe("Modal component", () => {
     ).toMatchSnapshot();
   });
 
-  it("Should close the modal if clicked on background", () => {
+  it("should close the modal if clicked on background", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -212,7 +212,7 @@ describe("Modal component", () => {
     expect(window.document.querySelector("div.modal.is-active")).toBeNull();
   });
 
-  it("Should not close the modal if clicked on background", () => {
+  it("should not close the modal if clicked on background", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -239,7 +239,7 @@ describe("Modal component", () => {
     ).toMatchSnapshot();
   });
 
-  it("Should not show close button", () => {
+  it("should not show close button", () => {
     const window = getWindow();
     const onClose = jest.fn(() => {
       component.setProps({ show: false });
@@ -258,7 +258,7 @@ describe("Modal component", () => {
     expect(modal).toMatchSnapshot();
   });
 
-  it("Should render empty because no document on scope", () => {
+  it("should render empty because no document on scope", () => {
     const componentString = renderToString(
       <Modal show onClose={noop}>
         <Modal.Content>Content</Modal.Content>

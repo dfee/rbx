@@ -1,30 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element, extendedForwardRef } from "@/components/element";
-import { ModifierProps } from "@/modifiers";
+import { asExoticComponent } from "@/components/exotic";
+import { ModifierProps, modify } from "@/modifiers";
 
-export type ModalCardFootModifierProps = Partial<{
-  children: React.ReactNode;
-  style: React.CSSProperties;
-}>;
+export type ModalCardFootProps = ModifierProps;
 
-export type ModalCardFootProps = ModifierProps & ModalCardFootModifierProps;
-
-export const ModalCardFoot = extendedForwardRef<
-  ModalCardFootProps,
-  "footer"
->(
-  ({ children, className, ...props }, ref) => (
-    <Element {...props} ref={ref} className={cx("modal-card-foot", className)}>
-      {children}
-    </Element>
-  ),
-  "footer",
-);
-ModalCardFoot.defaultProps = Object.assign(
-  {
-    children: null,
+export const ModalCardFoot = asExoticComponent<ModalCardFootProps, "footer">(
+  (props, ref) => {
+    const { as, ...rest } = modify(props);
+    rest.className = cx("modal-card-foot", rest.className);
+    return React.createElement(as!, { ref, ...rest });
   },
-  ModalCardFoot.defaultProps,
+  "footer",
 );

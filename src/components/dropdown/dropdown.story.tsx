@@ -2,7 +2,7 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Colors } from "@/modifiers/colors";
+import { Colors } from "@/modifiers/color";
 import { Dropdown } from ".";
 
 interface DropdownControllerProps {

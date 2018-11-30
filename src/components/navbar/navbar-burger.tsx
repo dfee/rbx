@@ -2,34 +2,30 @@ import { cx } from "emotion";
 import React from "react";
 
 import { Element } from "@/components/element";
-import { classNames, clean, ModifierProps } from "@/modifiers";
+import { ModifierProps, modify } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 
-export type NavbarBurgerModifierProps = Partial<{
-  className: string;
-  style: React.CSSProperties;
-}>;
-
-export type NavbarBurgerProps = ModifierProps &
-  NavbarBurgerModifierProps &
-  Partial<Omit<React.ComponentPropsWithoutRef<"div">, "unselectable">>;
+export type NavbarBurgerProps = Prefer<
+  ModifierProps,
+  React.HTMLAttributes<HTMLDivElement>
+>;
 
 export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
-  ({ style, className, onClick, ...allProps }, ref) => {
-    const props = clean(allProps);
+  (props, ref) => {
+    const { className, style, onClick, ...rest } = modify(props);
     return (
       <NavbarContext.Consumer>
         {({ active, setActive }) => (
           <Element
-            ref={ref}
-            role="button"
-            tabIndex="0"
-            style={{ outline: "none", ...style }}
-            className={cx("navbar-burger", classNames(allProps), className, {
+            className={cx("navbar-burger", className, {
               "is-active": active,
             })}
             onClick={() => setActive(!active)}
-            {...props}
+            ref={ref}
+            role="button"
+            style={{ outline: "none", ...style }}
+            tabIndex={0}
+            {...rest}
           >
             <span />
             <span />

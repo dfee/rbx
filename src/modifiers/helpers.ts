@@ -4,16 +4,16 @@ import { makeModify } from "./utils";
 
 export type HelpersProps = Partial<{
   clearfix: boolean;
-  pull: "right" | "left";
-  marginless: boolean;
-  paddingless: boolean;
-  overlay: boolean;
   clipped: boolean;
+  hidden: boolean;
+  invisible: boolean;
+  marginless: boolean;
+  overlay: boolean;
+  paddingless: boolean;
+  pull: "right" | "left";
   radiusless: boolean;
   shadowless: boolean;
   unselectable: boolean;
-  invisible: boolean;
-  hidden: boolean;
 }>;
 
 export const modify = makeModify<HelpersProps>(

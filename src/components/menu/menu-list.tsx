@@ -9,27 +9,25 @@ export type MenuListModifierProps = Partial<{
   title: string;
 }>;
 
-export type MenuListProps = ModifierProps &
-  MenuListModifierProps &
-  Partial<Omit<React.ComponentPropsWithoutRef<"ul">, "unselectable">>;
-
-interface MenuList extends React.ForwardRefExoticComponent<MenuListProps> {
-  Item: typeof MenuListItem;
-}
+export type MenuListProps = Prefer<
+  ModifierProps & MenuListModifierProps,
+  React.HTMLAttributes<HTMLUListElement>
+>;
 
 export const MenuList = Object.assign(
-  React.forwardRef<HTMLUListElement, MenuListProps>(
-    ({ className, title, ...props }, ref) => (
+  React.forwardRef<HTMLUListElement, MenuListProps>((props, ref) => {
+    const { className, title, ...rest } = props;
+    return (
       <React.Fragment>
         {title && <p className="menu-label">{title}</p>}
-        <Element
-          ref={ref}
-          renderAs="ul"
+        <Element<"ul">
+          as="ul"
           className={cx("menu-list", className)}
-          {...props}
+          ref={ref}
+          {...rest}
         />
       </React.Fragment>
-    ),
-  ),
+    );
+  }),
   { Item: MenuListItem },
 );
