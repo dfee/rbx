@@ -3,7 +3,7 @@ import React from "react";
 
 import { asExoticComponent } from "@/components/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
-import { PanelTabsTab } from "./panel-tabs-tab";
+import { PanelTab } from "./panel-tab";
 
 export type PanelTabsProps = ModifierProps;
 
@@ -13,5 +13,5 @@ export const PanelTabs = Object.assign(
     rest.className = cx("panel-tabs", rest.className);
     return React.createElement(as!, { ref, ...rest });
   }, "div"),
-  { Tab: PanelTabsTab },
+  { Tab: PanelTab },
 );
