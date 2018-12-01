@@ -45,7 +45,7 @@ describe("Tabs component", () => {
     const Custom = ({
       children,
       ...props
-    }: React.ComponentProps<"p"> & { children: React.ReactNode }) => (
+    }: React.HTMLAttributes<HTMLParagraphElement>) => (
       <p {...props}>
         Custom
         {children}

@@ -5,8 +5,8 @@ import { makeTransform } from "./utils";
 
 export const BREAKPOINTS = tuple(
   "mobile",
-  "desktop",
   "tablet",
+  "desktop",
   "widescreen",
   "fullhd",
 );
@@ -30,14 +30,24 @@ export type ResponsiveSizeProps = Partial<{
     value: boolean;
     only: boolean;
   }>;
-  textSize: Partial<{
-    value: 1 | 2 | 3 | 4 | 5 | 6;
-  }>;
   textAlignment: Partial<{
     value: "centered" | "justified" | "left" | "right";
     only: boolean;
   }>;
+  textSize: Partial<{
+    value: 1 | 2 | 3 | 4 | 5 | 6;
+  }>;
 }>;
+
+export const RESPONSIVE_SIZES = tuple(
+  "mobile",
+  "tablet",
+  "desktop",
+  "widescreen",
+  "fullhd",
+  "touch",
+);
+export type ResponsiveSizes = (typeof RESPONSIVE_SIZES)[number];
 
 export type ResponsiveProps = Partial<{
   responsive: Partial<{

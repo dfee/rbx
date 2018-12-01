@@ -1,7 +1,7 @@
 import { transformModifiers } from "..";
 import { transformColorModifiers } from "../color";
 import { transformHelpersModifiers } from "../helpers";
-// import { transformResponsiveModifiers } from "../responsive";
+import { RESPONSIVE_SIZES, transformResponsiveModifiers } from "../responsive";
 import { transformTypographyModifiers } from "../typography";
 
 describe("Transform modifiers", () => {
@@ -15,7 +15,11 @@ describe("Transform modifiers", () => {
         backgroundColor: "info", // color
         clearfix: true, // helpers
         italic: true, // typography
-        responsive: { textSize: 1 }, // responsive // todo!
+        responsive: {
+          mobile: {
+            display: { only: true, value: "block" },
+          },
+        }, // responsive
       }),
     ).toMatchSnapshot();
   });
@@ -56,16 +60,24 @@ describe("Transform helpers modifiers", () => {
   });
 });
 
-// todo
-// describe("Transform responsive modifiers", () => {
-//   test("should have class names applied", () => {
-//     expect(
-//       responsiveModify({
-//         responsive: []
-//       }),
-//     ).toMatchSnapshot();
-//   });
-// });
+describe("Transform responsive modifiers", () => {
+  RESPONSIVE_SIZES.map(size =>
+    it(`should have class names applied for ${size}`, () => {
+      expect(
+        transformResponsiveModifiers({
+          responsive: {
+            [size]: {
+              display: { only: true, value: "block" },
+              hide: { only: true, value: true },
+              textAlignment: { only: true, value: "centered" },
+              textSize: { value: 1 },
+            },
+          },
+        }),
+      ).toMatchSnapshot();
+    }),
+  );
+});
 
 describe("Transform typography modifiers", () => {
   test("should have class names applied", () => {
@@ -80,102 +92,3 @@ describe("Transform typography modifiers", () => {
     ).toMatchSnapshot();
   });
 });
-
-// todo
-
-// test("Should have paddingless and clearfix classes", () => {
-//   expect(
-//     classNames({
-//       clearfix: true,
-//       paddingless: true,
-//     }),
-//   ).toMatchSnapshot();
-// });
-
-// test("Should have text helpers", () => {
-//   expect(
-//     classNames({
-//       italic: true,
-//       textAlignment: "centered",
-//       textColor: "success",
-//       textTransform: "uppercase",
-//       textWeight: "bold",
-//     }),
-//   ).toMatchSnapshot();
-// });
-
-// test("Should have responsive modifier flex-tablet-only and block-widescreen", () => {
-//   expect(
-//     classNames({
-//       responsive: {
-//         tablet: {
-//           display: {
-//             only: true,
-//             value: "flex",
-//           },
-//         },
-//         widescreen: {
-//           display: {
-//             value: "block",
-//           },
-//         },
-//       },
-//     }),
-//   ).toMatchSnapshot();
-// });
-
-// test("Should have hidden modifier tablet-only and widescreen", () => {
-//   expect(
-//     classNames({
-//       responsive: {
-//         tablet: {
-//           hide: {
-//             only: true,
-//             value: true,
-//           },
-//         },
-//         widescreen: {
-//           hide: {
-//             value: true,
-//           },
-//         },
-//       },
-//     }),
-//   ).toMatchSnapshot();
-// });
-
-// test("Should have alignment responsive modifiers", () => {
-//   expect(
-//     classNames({
-//       responsive: {
-//         tablet: {
-//           textAlignment: {
-//             only: true,
-//             value: "centered",
-//           },
-//         },
-//         widescreen: {
-//           textAlignment: {
-//             value: "left",
-//           },
-//         },
-//       },
-//     }),
-//   ).toMatchSnapshot();
-// });
-
-// test("Should have text color success", () => {
-//   expect(
-//     classNames({
-//       textColor: "success",
-//     }),
-//   ).toMatchSnapshot();
-// });
-
-// test("Should have background color success", () => {
-//   expect(
-//     classNames({
-//       backgroundColor: "success",
-//     }),
-//   ).toMatchSnapshot();
-// });

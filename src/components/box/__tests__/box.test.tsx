@@ -37,9 +37,7 @@ describe("Box component", () => {
   });
 
   it("should accept a react Element as renderAs prop", () => {
-    const Custom = (
-      props: React.ComponentProps<"p"> & { children: React.ReactNode },
-    ) => (
+    const Custom = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
       <p {...props}>
         Custom
         {props.children}

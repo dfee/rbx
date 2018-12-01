@@ -62,18 +62,13 @@ storiesOf("Button", module)
     interface CustomComponentProps {
       customProp: string;
       children: React.ReactNode;
-      className?: string;
+      // className?: string;
     }
 
     const CustomComponent: React.FC<CustomComponentProps> = ({
       customProp,
       children,
-      className,
-    }) => (
-      <a className={className} href={customProp}>
-        {children}
-      </a>
-    );
+    }) => <a href={customProp}>{children}</a>;
 
     return (
       <Section>

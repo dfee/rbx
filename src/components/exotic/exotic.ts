@@ -2,34 +2,26 @@ import React from "react";
 
 export type ForwardRefAsExoticComponentProps<
   TOwnProps,
-  TAsComponent extends React.ComponentType<any> | keyof JSX.IntrinsicElements
+  TAsComponent extends React.ReactType<any>
 > = Prefer<TOwnProps, React.ComponentPropsWithRef<TAsComponent>> & {
   as?: TAsComponent;
 };
 
 export type ForwardRefAsExoticComponent<
   TOwnProps,
-  TDefaultAsComponent extends
-    | React.ComponentType<any>
-    | keyof JSX.IntrinsicElements
+  TDefaultAsComponent extends React.ReactType<any>
 > = React.ForwardRefExoticComponent<
   React.PropsWithoutRef<
     ForwardRefAsExoticComponentProps<TOwnProps, TDefaultAsComponent>
   >
 > &
-  (<
-    TAsComponent extends
-      | React.ComponentType<any>
-      | keyof JSX.IntrinsicElements = TDefaultAsComponent
-  >(
+  (<TAsComponent extends React.ReactType<any> = TDefaultAsComponent>(
     props: ForwardRefAsExoticComponentProps<TOwnProps, TAsComponent>,
   ) => React.ReactElement<any> | null);
 
 export function forwardRefAs<
   TOwnProps,
-  TDefaultAsComponent extends
-    | React.ComponentType<any>
-    | keyof JSX.IntrinsicElements
+  TDefaultAsComponent extends React.ReactType<any>
 >(
   factory: React.RefForwardingComponent<
     any,

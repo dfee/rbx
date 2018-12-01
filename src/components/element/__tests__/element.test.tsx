@@ -18,9 +18,7 @@ describe("Element component", () => {
   });
 
   it("should accept a react component as 'as' prop", () => {
-    const Custom = (
-      props: React.ComponentProps<"p"> & { children: React.ReactNode },
-    ) => (
+    const Custom = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
       <p {...props}>
         Custom
         {props.children}

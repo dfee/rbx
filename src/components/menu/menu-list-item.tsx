@@ -16,17 +16,16 @@ export type MenuListItemProps = Prefer<
 
 export const MenuListItem = React.forwardRef<HTMLLIElement, MenuListItemProps>(
   (props, ref) => {
-    const { active, children, className, ...rest } = props;
+    const { active, children, ...rest } = props;
+    rest.className =
+      cx(rest.className, {
+        "is-active": active,
+      }) || undefined;
 
     if (typeof children === "string") {
       return (
         <li ref={ref}>
-          <Element<"a">
-            as="a"
-            className={cx(className, { "is-active": active })}
-            children={children}
-            {...rest}
-          />
+          <Element<"a"> as="a" children={children} {...rest} />
         </li>
       );
     }
@@ -35,12 +34,7 @@ export const MenuListItem = React.forwardRef<HTMLLIElement, MenuListItemProps>(
       const child = React.Children.only(children);
       return (
         <li ref={ref}>
-          <Element<"a">
-            as="a"
-            className={cx(className, { "is-active": active })}
-            children={child.props.title}
-            {...rest}
-          />
+          <Element<"a"> as="a" children={child.props.title} {...rest} />
           {React.cloneElement(child, { title: null })}
         </li>
       );

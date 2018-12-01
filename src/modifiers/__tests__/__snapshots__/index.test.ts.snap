@@ -24,6 +24,42 @@ Object {
 }
 `;
 
+exports[`Transform responsive modifiers should have class names applied for desktop 1`] = `
+Object {
+  "className": "is-block-desktop-only is-hidden-desktop-only has-text-centered-desktop-only is-size-1-desktop",
+}
+`;
+
+exports[`Transform responsive modifiers should have class names applied for fullhd 1`] = `
+Object {
+  "className": "is-block-fullhd-only is-hidden-fullhd-only has-text-centered-fullhd-only is-size-1-fullhd",
+}
+`;
+
+exports[`Transform responsive modifiers should have class names applied for mobile 1`] = `
+Object {
+  "className": "is-block-mobile-only is-hidden-mobile-only has-text-centered-mobile-only is-size-1-mobile",
+}
+`;
+
+exports[`Transform responsive modifiers should have class names applied for tablet 1`] = `
+Object {
+  "className": "is-block-tablet-only is-hidden-tablet-only has-text-centered-tablet-only is-size-1-tablet",
+}
+`;
+
+exports[`Transform responsive modifiers should have class names applied for touch 1`] = `
+Object {
+  "className": "is-block-touch-only is-hidden-touch-only has-text-centered-touch-only is-size-1-touch",
+}
+`;
+
+exports[`Transform responsive modifiers should have class names applied for widescreen 1`] = `
+Object {
+  "className": "is-block-widescreen-only is-hidden-widescreen-only has-text-centered-widescreen-only is-size-1-widescreen",
+}
+`;
+
 exports[`Transform typography modifiers should have class names applied 1`] = `
 Object {
   "className": "has-text-centered has-text-weight-light is-size-1 is-capitalized is-italic",

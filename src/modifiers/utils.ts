@@ -8,9 +8,10 @@ export function makeTransform<T>(
 ) {
   return <V extends T & object & { className?: string }>(props: V) => {
     const className = classNameTransform(props);
+    const initial = Object.assign({}, props, className ? { className } : null);
 
-    // removeKeys
-    return Object.entries(Object.assign({}, props, { className }))
+    // remove keys
+    return Object.entries(initial)
       .filter(([key, value]) => !removeKeys.includes(key))
       .map(([key, value]) => ({ [key]: value }))
       .reduce(
