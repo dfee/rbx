@@ -5,7 +5,7 @@
 [![Release Version](https://img.shields.io/github/release/dfee/rbx.svg)](https://github.com/dfee/rbx)
 [![Npm Downloads](https://img.shields.io/npm/dm/rbx.svg)](https://www.npmjs.com/package/rbx)
 
-React components for Bulma (v0.7.1) framework
+React components based on the Bulma framework. This is a hard fork of [`react-bulma-components`](https://github.com/couds/react-bulma-components) rewritten in its entirety in TypeScript.
 
 This is an implementation of the [Bulma](http://bulma.io/) Framework Component in React by Jeremy Thomas.
 
