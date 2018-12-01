@@ -4,7 +4,6 @@ import React from "react";
 
 import { Box } from "@/components/box";
 import { Breadcrumb } from "@/components/breadcrumb";
-import { BreadcrumbProps } from "@/components/breadcrumb/breadcrumb";
 
 const makeSeparator = () =>
   select(
@@ -19,45 +18,44 @@ const makeSeparator = () =>
   );
 
 const items = [
-  {
-    name: "Storybook",
-    url: "#1",
-  },
-  {
-    name: "Breadcrumb",
-    url: "#2",
-  },
-  {
-    active: true,
-    name: "Breadcrumb Types",
-    url: "#3",
-  },
+  { href: "#1", name: "Storybook" },
+  { href: "#2", name: "Breadcrumb" },
+  { active: true, href: "#3", name: "Breadcrumb Types" },
 ];
 
 storiesOf("Breadcrumb", module)
   .add("Default", () => (
     <div>
       <Box>
-        <Breadcrumb separator={makeSeparator()} items={items} />
+        <Breadcrumb separator={makeSeparator()}>
+          {items.map(({ active, href, name }, i) => (
+            <Breadcrumb.Item active={active} href={href} key={i}>
+              {name}
+            </Breadcrumb.Item>
+          ))}
+        </Breadcrumb>
       </Box>
     </div>
   ))
   .add("Use Custom render Element", () => {
-    const Anchor = ({ children, unselectable, ...props }: BreadcrumbProps) => (
-      <a className="Others" {...props}>
-        {children}
-      </a>
+    const Link: React.FC<{ children: React.ReactNode; to: string }> = props => (
+      <a href={props.to}>{props.children}</a>
     );
-
     return (
       <div>
         <Box>
-          <Breadcrumb<typeof Anchor>
-            as={Anchor}
-            hrefAttr="href"
-            separator={makeSeparator()}
-            items={items}
-          />
+          <Breadcrumb separator={makeSeparator()}>
+            {items.map(({ active, href: to, name }, i) => (
+              <Breadcrumb.Item<typeof Link>
+                as={Link}
+                active={active}
+                to={to}
+                key={i}
+              >
+                {name}
+              </Breadcrumb.Item>
+            ))}
+          </Breadcrumb>
         </Box>
       </div>
     );

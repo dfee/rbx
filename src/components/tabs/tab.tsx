@@ -12,18 +12,16 @@ export type TabModifierProps = Partial<{
 
 export type TabProps = ModifierProps & TabModifierProps;
 
-// TODO: ref passed to `li` but `as` passed to createElement (default as `a`)
 export const Tab = forwardRefAs<TabModifierProps, "a">((props, ref) => {
   const { as, active, className, style, ...rest } = transformModifiers(props);
   return (
     <li
-      ref={ref}
       style={style}
       className={cx(className, {
         "is-active": active,
       })}
     >
-      {React.createElement(as!, { ...rest })}
+      {React.createElement(as!, { ref, ...rest })}
     </li>
   );
 }, "a");

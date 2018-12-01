@@ -9,7 +9,9 @@ export type TabsModifierProps = Partial<{
   align: "centered" | "right";
   fullwidth: boolean;
   size: "small" | "medium" | "large";
-  /** This is called style on Bulma documentation */
+  /**
+   * This is called style on Bulma documentation
+   */
   type: "toggle" | "boxed" | "toggle-rounded";
 }>;
 
@@ -30,7 +32,6 @@ export const Tabs = Object.assign(
       [`is-${align}`]: align,
       [`is-${size}`]: size,
       "is-fullwidth": fullwidth,
-      // todo: Bulma 0.6.2 is not releaset ATM
       "is-toggle": type === "toggle-rounded",
       [`is-${type}`]: type,
     });

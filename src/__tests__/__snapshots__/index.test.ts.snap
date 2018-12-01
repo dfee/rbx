@@ -11,9 +11,15 @@ Object {
   },
   "Breadcrumb": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "Item": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "a",
+      },
+      "render": [Function],
+    },
     "defaultProps": Object {
-      "as": "a",
-      "items": Array [],
+      "as": "nav",
     },
     "render": [Function],
   },
