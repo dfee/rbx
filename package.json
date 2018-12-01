@@ -45,7 +45,8 @@
   "dependencies": {
     "babel-loader": "^8.0.4",
     "bulma": "0.7.1",
-    "emotion": "^9.2.12"
+    "emotion": "^9.2.12",
+    "typescript": "^3.2.1"
   },
   "peerDependencies": {
     "react": "^16.3.0",
@@ -74,6 +75,7 @@
     "@types/storybook__addon-knobs": "^3.4.1",
     "@types/storybook__addon-options": "^3.2.2",
     "@types/storybook__react": "^4.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "coveralls": "3.0.2",
     "cpx": "^1.5.0",
     "css-loader": "1.0.1",
@@ -106,7 +108,6 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.16.0",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.2.0-dev.20181117",
     "webpack": "4.25.1"
   }
 }

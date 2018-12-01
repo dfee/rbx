@@ -22,16 +22,6 @@
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5"
   },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "dist",
-    "__mocks__"
-    // "**/*.story.ts",
-    // "**/*.story.tsx",
-    // "**/*.test.ts",
-    // "**/*.test.tsx",
-    // "**/__tests__"
-  ],
+  "exclude": ["node_modules", "lib", "dist", "__mocks__"],
   "include": ["src"]
 }

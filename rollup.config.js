@@ -42,10 +42,7 @@ export default {
     }),
     sass({ output: true }),
     typescript({
-      tsconfig: "tsconfig.json",
-      tsconfigOverride: {
-        compilerOptions: { module: "es2015", target: "es5" }
-      },
+      tsconfig: "tsconfig.rollup.json",
       typescript: require("typescript")
     }),
     sizeSnapshot(),

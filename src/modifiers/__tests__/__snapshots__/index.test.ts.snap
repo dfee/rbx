@@ -20,7 +20,7 @@ Object {
 
 exports[`Transform modifiers should run all sub-modifiers 1`] = `
 Object {
-  "className": "has-background-info is-clearfix is-italic",
+  "className": "has-background-info is-clearfix is-block-mobile-only is-italic",
 }
 `;
 
