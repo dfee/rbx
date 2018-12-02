@@ -2,7 +2,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components";
 import { NavbarProps } from "@/components/navbar/navbar";
 import { COLORS, Colors } from "@/modifiers/color";
 
@@ -28,7 +28,7 @@ const fixedSelectOptions = ({
 
 const makeFixedSelect = () => select("Fixed", fixedSelectOptions, "Default");
 
-storiesOf("Navbar", module).add("Default", () => {
+storiesOf("Components/Navbar", module).add("Default", () => {
   return (
     <Navbar
       color={makeColorSelect() as Colors}

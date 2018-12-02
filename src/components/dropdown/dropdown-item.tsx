@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps } from "@/modifiers";
 
 export interface DropdownItemModifierProps {
@@ -20,7 +20,7 @@ export const DropdownItem = React.forwardRef<HTMLDivElement, DropdownItemProps>(
     rest.className = cx("dropdown-item", rest.className, {
       "is-active": active,
     });
-    return <Element ref={ref} title={value} role="presentation" {...rest} />;
+    return <Generic ref={ref} title={value} role="presentation" {...rest} />;
   },
 );
 

@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Button } from "@/components/button";
-import { forwardRefAs } from "@/components/exotic";
+import { forwardRefAs } from "@/exotic";
+import { Button } from "@/elements/button";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ModalCardHeadModifierProps = Partial<{

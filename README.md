@@ -1,4 +1,4 @@
-# <div style="display: flex; align-items: center"><img src="https://raw.githubusercontent.com/dfee/rbx/master/docs/images/logo.png" width="40" style="margin-top: 3px" /><span>rbx</span></div>
+## 👟 rbx :: UI Components for React, Based on Bulma
 
 [![Build Status](https://travis-ci.org/dfee/rbx.svg?branch=master)](https://travis-ci.org/dfee/rbx)
 [![Coverage Status](https://coveralls.io/repos/github/dfee/rbx/badge.svg?branch=master)](https://coveralls.io/github/dfee/rbx?branch=master)
@@ -56,36 +56,67 @@ Some components may vary the api/naming convention with the Bulma Docs. Please r
 
 The following components were ported:
 
-- Box ([Storybook](https://dfee.github.io/rbx/?selectedKind=Box)) ([Docs](http://bulma.io/documentation/elements/box/))
-- Breadcrumb ([Storybook](https://dfee.github.io/rbx/?selectedKind=Breadcrumb)) ([Docs](http://bulma.io/documentation/components/breadcrumb/))
-- Button ([Storybook](https://dfee.github.io/rbx/?selectedKind=Button)) ([Docs](http://bulma.io/documentation/elements/button/))
-- Card ([Storybook](https://dfee.github.io/rbx/?selectedKind=Card)) ([Docs](http://bulma.io/documentation/components/card/))
-- Column ([Storybook](https://dfee.github.io/rbx/?selectedKind=Columns)) ([Docs](http://bulma.io/documentation/columns/basics/))
-- Container ([Storybook](https://dfee.github.io/rbx/?selectedKind=Container)) ([Docs](http://bulma.io/documentation/layout/container/))
-- Content ([Storybook](https://dfee.github.io/rbx/?selectedKind=Content)) ([Docs](http://bulma.io/documentation/elements/content/))
-- Dropdown ([Storybook](https://dfee.github.io/rbx/?selectedKind=Dropdown)) ([Docs](http://bulma.io/documentation/components/dropdown/))
-- Footer ([Storybook](https://dfee.github.io/rbx/?selectedKind=Footer)) ([Docs](http://bulma.io/documentation/layout/footer/))
-- Form ([Storybook](https://dfee.github.io/rbx/?selectedKind=Form)) ([Docs](http://bulma.io/documentation/form/general/))
-- Heading (Title, Subtitle and heading on Bulma) ([Storybook](https://dfee.github.io/rbx/?selectedKind=Heading)) ([Docs](http://bulma.io/documentation/elements/title/))
-- Hero ([Storybook](https://dfee.github.io/rbx/?selectedKind=Hero)) ([Docs](http://bulma.io/documentation/layout/hero/))
-- Icon ([Storybook](https://dfee.github.io/rbx/?selectedKind=Icon)) ([Docs](http://bulma.io/documentation/elements/icon/))
-- Image ([Storybook](https://dfee.github.io/rbx/?selectedKind=Image)) ([Docs](http://bulma.io/documentation/elements/image/))
-- Level ([Storybook](https://dfee.github.io/rbx/?selectedKind=Level)) ([Docs](http://bulma.io/documentation/layout/level/))
-- Loader ([Storybook](https://dfee.github.io/rbx/?selectedKind=Loader))
-- Media ([Storybook](https://dfee.github.io/rbx/?selectedKind=Media)) ([Docs](http://bulma.io/documentation/layout/media-object/))
-- Message ([Storybook](https://dfee.github.io/rbx/?selectedKind=Message)) ([Docs](http://bulma.io/documentation/components/message/))
-- Menu ([Storybook](https://dfee.github.io/rbx/?selectedKind=Menu)) ([Docs](http://bulma.io/documentation/components/menu/))
-- Modal ([Storybook](https://dfee.github.io/rbx/?selectedKind=Modal)) ([Docs](http://bulma.io/documentation/components/modal/))
-- Navbar ([Storybook](https://dfee.github.io/rbx/?selectedKind=Navbar)) ([Docs](https://bulma.io/documentation/components/navbar/))
-- Notification ([Storybook](https://dfee.github.io/rbx/?selectedKind=Notification)) ([Docs](http://bulma.io/documentation/elements/notification/))
-- Pagination ([Storybook](https://dfee.github.io/rbx/?selectedKind=Pagination)) ([Docs](https://bulma.io/documentation/components/pagination/))
-- Panel ([Storybook](https://dfee.github.io/rbx/?selectedKind=Panel)) ([Docs](https://bulma.io/documentation/components/panel/))
-- Progress ([Storybook](https://dfee.github.io/rbx/?selectedKind=Progress)) ([Docs](http://bulma.io/documentation/elements/progress/))
-- Section ([Storybook](https://dfee.github.io/rbx/?selectedKind=Section)) ([Docs](http://bulma.io/documentation/layout/section/))
-- Tabs ([Storybook](https://dfee.github.io/rbx/?selectedKind=Tabs)) ([Docs](https://bulma.io/documentation/components/tabs/))
-- Table ([Storybook](https://dfee.github.io/rbx/?selectedKind=Table)) ([Docs](http://bulma.io/documentation/elements/table/))
-- Tag ([Storybook](https://dfee.github.io/rbx/?selectedKind=Tag)) ([Docs](http://bulma.io/documentation/elements/tag/))
-- Tile ([Storybook](https://dfee.github.io/rbx/?selectedKind=Tile)) ([Docs](http://bulma.io/documentation/layout/tiles/))
+#### Columns
+
+| Item   | Storybook                                                   | Bulma Documentation                                            |
+| ------ | ----------------------------------------------------------- | -------------------------------------------------------------- |
+| Column | [Stories](https://dfee.github.io/rbx/?selectedKind=Columns) | [Documentation](http://bulma.io/documentation/columns/basics/) |
+
+#### Layout
+
+| Item      | Storybook                                                              | Bulma Documentation                                                 |
+| --------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Container | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FContainer) | [Documentation](http://bulma.io/documentation/layout/container/)    |
+| Level     | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FLevel)     | [Documentation](http://bulma.io/documentation/layout/level/)        |
+| Media     | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FMedia)     | [Documentation](http://bulma.io/documentation/layout/media-object/) |
+| Hero      | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FHero)      | [Documentation](http://bulma.io/documentation/layout/hero/)         |
+| Section   | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FSection)   | [Documentation](http://bulma.io/documentation/layout/section/)      |
+| Footer    | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FFooter)    | [Documentation](http://bulma.io/documentation/layout/footer/)       |
+| Tile      | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FTile)      | [Documentation](http://bulma.io/documentation/layout/tiles/)        |
+
+#### Form
+
+| Item | Storybook                                                | Bulma Documentation                                          |
+| ---- | -------------------------------------------------------- | ------------------------------------------------------------ |
+| Form | [Stories](https://dfee.github.io/rbx/?selectedKind=Form) | [Documentation](http://bulma.io/documentation/form/general/) |
+
+#### Elements
+
+| Item         | Storybook                                                                   | Bulma Documentation                                                   |
+| ------------ | --------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Box          | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FBox)          | [Documentation](http://bulma.io/documentation/elements/box/)          |
+| Button       | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FButton)       | [Documentation](http://bulma.io/documentation/elements/button/)       |
+| Content      | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FContent)      | [Documentation](http://bulma.io/documentation/elements/content/)      |
+| Delete       | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FDelete)       | [Documentation](http://bulma.io/documentation/elements/delete/)       |
+| Icon         | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FIcon)         | [Documentation](http://bulma.io/documentation/elements/icon/)         |
+| Image        | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FImage)        | [Documentation](http://bulma.io/documentation/elements/image/)        |
+| Notification | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FNotification) | [Documentation](http://bulma.io/documentation/elements/notification/) |
+| Progress     | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FProgress)     | [Documentation](http://bulma.io/documentation/elements/progress/)     |
+| Table        | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FTable)        | [Documentation](http://bulma.io/documentation/elements/table/)        |
+| Tag          | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FTag)          | [Documentation](http://bulma.io/documentation/elements/tag/)          |
+| - Title      | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FTitle)        | [Documentation](http://bulma.io/documentation/elements/title/)        |
+
+#### Components
+
+| Item       | Storybook                                                                   | Bulma Documentation                                                    |
+| ---------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Breadcrumb | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FBreadcrumb) | [Documentation](http://bulma.io/documentation/components/breadcrumb/)  |
+| Card       | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FCard)       | [Documentation](http://bulma.io/documentation/components/card/)        |
+| Dropdown   | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FDropdown)   | [Documentation](http://bulma.io/documentation/components/dropdown/)    |
+| Menu       | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FMenu)       | [Documentation](http://bulma.io/documentation/components/menu/)        |
+| Message    | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FMessage)    | [Documentation](http://bulma.io/documentation/components/message/)     |
+| Modal      | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FModal)      | [Documentation](http://bulma.io/documentation/components/modal/)       |
+| Navbar     | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FNavbar)     | [Documentation](https://bulma.io/documentation/components/navbar/)     |
+| Pagination | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FPagination) | [Documentation](https://bulma.io/documentation/components/pagination/) |
+| Panel      | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FPanel)      | [Documentation](https://bulma.io/documentation/components/panel/)      |
+| Tabs       | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FTabs)       | [Documentation](https://bulma.io/documentation/components/tabs/)       |
+
+#### Extras
+
+| Item    | Storybook                                                            | Bulma Documentation |
+| ------- | -------------------------------------------------------------------- | ------------------- |
+| Generic | [Stories](https://dfee.github.io/rbx/?selectedKind=Extras%2FGeneric) | N/A                 |
+| Loader  | [Stories](https://dfee.github.io/rbx/?selectedKind=Extras%2FLoader)  | N/A                 |
 
 ### Override Bulma variables
 

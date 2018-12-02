@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps } from "@/modifiers";
 import { MenuListItem } from "./menu-list-item";
 
@@ -20,7 +20,7 @@ export const MenuList = Object.assign(
     return (
       <React.Fragment>
         {title && <p className="menu-label">{title}</p>}
-        <Element<"ul">
+        <Generic<"ul">
           as="ul"
           className={cx("menu-list", className)}
           ref={ref}

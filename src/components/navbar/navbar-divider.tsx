@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps } from "@/modifiers";
 
 export type NavbarDividerProps = Prefer<
@@ -13,5 +13,5 @@ export const NavbarDivider = React.forwardRef<
   HTMLDivElement,
   NavbarDividerProps
 >(({ className, ...props }, ref) => (
-  <Element {...props} ref={ref} className={cx("navbar-divider", className)} />
+  <Generic {...props} ref={ref} className={cx("navbar-divider", className)} />
 ));

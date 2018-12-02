@@ -2,10 +2,10 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Box } from "@/components/box";
-import { Breadcrumb } from "@/components/breadcrumb";
+import { Breadcrumb } from "@/components";
+import { Box } from "@/elements";
 
-const makeSeparator = () =>
+const makeSeparatorSelector = () =>
   select(
     "Separator",
     {
@@ -23,11 +23,11 @@ const items = [
   { active: true, href: "#3", name: "Breadcrumb Types" },
 ];
 
-storiesOf("Breadcrumb", module)
+storiesOf("Components/Breadcrumb", module)
   .add("Default", () => (
     <div>
       <Box>
-        <Breadcrumb separator={makeSeparator()}>
+        <Breadcrumb separator={makeSeparatorSelector()}>
           {items.map(({ active, href, name }, i) => (
             <Breadcrumb.Item active={active} href={href} key={i}>
               {name}
@@ -44,7 +44,7 @@ storiesOf("Breadcrumb", module)
     return (
       <div>
         <Box>
-          <Breadcrumb separator={makeSeparator()}>
+          <Breadcrumb separator={makeSeparatorSelector()}>
             {items.map(({ active, href: to, name }, i) => (
               <Breadcrumb.Item<typeof Link>
                 as={Link}

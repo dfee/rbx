@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
-import { forwardRefAs } from "@/components/exotic";
+import { forwardRefAs } from "@/exotic";
+import { Generic } from "@/extras/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { canUseDOM } from "@/utils";
@@ -93,7 +93,7 @@ class NavbarController extends React.PureComponent<
       <NavbarContext.Provider
         value={{ active: this.state.active, setActive: this.setActive }}
       >
-        <Element ref={innerRef} role="navigation" {...rest} />
+        <Generic ref={innerRef} role="navigation" {...rest} />
       </NavbarContext.Provider>
     );
   }

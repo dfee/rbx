@@ -2,13 +2,11 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Card } from "@/components/card";
-import { Content } from "@/components/content";
-import { Heading } from "@/components/heading";
-import { Image } from "@/components/image";
-import { Media } from "@/components/media";
+import { Card } from "@/components";
+import { Content, Image, Title } from "@/elements";
+import { Media } from "@/layout";
 
-storiesOf("Card", module)
+storiesOf("Components/Card", module)
   .addDecorator(story => (
     <div style={{ margin: "0px auto", width: 450 }}>{story()}</div>
   ))
@@ -29,10 +27,10 @@ storiesOf("Card", module)
             />
           </Media.Item>
           <Media.Item>
-            <Heading size={4}>Devin Fee</Heading>
-            <Heading subtitle size={6}>
+            <Title size={4}>Devin Fee</Title>
+            <Title subtitle size={6}>
               @dfee
-            </Heading>
+            </Title>
           </Media.Item>
         </Media>
         <Content>
@@ -61,10 +59,10 @@ storiesOf("Card", module)
             />
           </Media.Item>
           <Media.Item>
-            <Heading size={4}>Devin Fee</Heading>
-            <Heading subtitle size={6}>
+            <Title size={4}>Devin Fee</Title>
+            <Title subtitle size={6}>
               @dfee
-            </Heading>
+            </Title>
           </Media.Item>
         </Media>
         <Content>

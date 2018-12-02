@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps } from "@/modifiers";
 import { noop } from "@/utils";
 
@@ -97,7 +97,7 @@ class PaginationController extends React.PureComponent<
     const lastPage = this.lastPage(current!, total!);
 
     return (
-      <Element<"nav">
+      <Generic<"nav">
         {...props}
         aria-label="pagination"
         as="nav"
@@ -155,7 +155,7 @@ class PaginationController extends React.PureComponent<
             </ul>
           </React.Fragment>
         )}
-      </Element>
+      </Generic>
     );
   }
 }

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/components/exotic";
+import { forwardRefAs } from "@/exotic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type CardFooterItemProps = ModifierProps;

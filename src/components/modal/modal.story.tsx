@@ -1,13 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Button } from "@/components/button";
-import { Content } from "@/components/content";
-import { Image } from "@/components/image";
-import { Level } from "@/components/level";
-import { Media } from "@/components/media";
-import { Modal } from "@/components/modal";
-import { Section } from "@/components/section";
+import { Modal } from "@/components";
+import { Button, Content, Image } from "@/elements";
+import { Level, Media, Section } from "@/layout";
 
 interface OpenModalProps {
   modal?: {};
@@ -44,7 +40,7 @@ class OpenModal extends React.Component<OpenModalProps, OpenModalState> {
   private close = () => this.setState({ show: false });
 }
 
-storiesOf("Modal", module)
+storiesOf("Components/Modal", module)
   .add("Default", () => (
     <OpenModal modal={{ closeOnEsc: false }}>
       <Modal.Content>

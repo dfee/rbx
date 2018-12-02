@@ -1,9 +1,9 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
-import { Image } from "@/components/image";
-import { ImageProps } from "@/components/image/image";
+import { Image } from "@/elements/image";
+import { ImageProps } from "@/elements/image/image";
+import { Generic } from "@/extras";
 
 export type CardImageModifierProps = Partial<{
   className: string;
@@ -16,8 +16,8 @@ export type CardImageProps = Prefer<
 
 export const CardImage = React.forwardRef<HTMLElement, CardImageProps>(
   ({ className, ...rest }, ref) => (
-    <Element className={cx("card-image", className)}>
+    <Generic className={cx("card-image", className)}>
       <Image ref={ref} {...rest} />
-    </Element>
+    </Generic>
   ),
 );

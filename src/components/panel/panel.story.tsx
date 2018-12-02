@@ -1,12 +1,11 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Button } from "@/components/button";
-import { Checkbox, Control, Input } from "@/components/form";
-import { Icon } from "@/components/icon";
-import { Panel } from "@/components/panel";
+import { Panel } from "@/components";
+import { Button, Icon } from "@/elements";
+import { Checkbox, Control, Input } from "@/form";
 
-storiesOf("Panel", module)
+storiesOf("Components/Panel", module)
   .addDecorator(story => <div style={{ margin: 10 }}>{story()}</div>)
   .add("Default", () => (
     <Panel>

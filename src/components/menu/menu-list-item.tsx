@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps } from "@/modifiers";
 import { MenuList } from "./menu-list";
 
@@ -25,7 +25,7 @@ export const MenuListItem = React.forwardRef<HTMLLIElement, MenuListItemProps>(
     if (typeof children === "string") {
       return (
         <li ref={ref}>
-          <Element<"a"> as="a" children={children} {...rest} />
+          <Generic<"a"> as="a" children={children} {...rest} />
         </li>
       );
     }
@@ -34,7 +34,7 @@ export const MenuListItem = React.forwardRef<HTMLLIElement, MenuListItemProps>(
       const child = React.Children.only(children);
       return (
         <li ref={ref}>
-          <Element<"a"> as="a" children={child.props.title} {...rest} />
+          <Generic<"a"> as="a" children={child.props.title} {...rest} />
           {React.cloneElement(child, { title: null })}
         </li>
       );

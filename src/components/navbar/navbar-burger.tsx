@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 
@@ -16,7 +16,7 @@ export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
     return (
       <NavbarContext.Consumer>
         {({ active, setActive }) => (
-          <Element
+          <Generic
             className={cx("navbar-burger", className, {
               "is-active": active,
             })}
@@ -30,7 +30,7 @@ export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
             <span />
             <span />
             <span />
-          </Element>
+          </Generic>
         )}
       </NavbarContext.Consumer>
     );

@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React, { PureComponent } from "react";
 
-import { Button } from "@/components/button";
-import { Icon } from "@/components/icon";
+import { Button } from "@/elements/button";
+import { Icon } from "@/elements/icon";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { DropdownDivider } from "./dropdown-divider";

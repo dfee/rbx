@@ -103,6 +103,15 @@ Object {
     },
     "render": [Function],
   },
+  "Checkbox": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "checked": false,
+      "children": null,
+      "disabled": false,
+    },
+    "render": [Function],
+  },
   "Columns": Object {
     "$$typeof": Symbol(react.forward_ref),
     "Column": Object {
@@ -151,11 +160,46 @@ Object {
     },
     "render": [Function],
   },
-  "Dropdown": [Function],
-  "Element": Object {
+  "Control": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "as": "div",
+      "fullwidth": false,
+      "iconLeft": false,
+      "iconRight": false,
+      "loading": false,
+    },
+    "render": [Function],
+  },
+  "Delete": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "a",
+      "size": "auto",
+    },
+    "render": [Function],
+  },
+  "Dropdown": [Function],
+  "Field": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Body": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "div",
+      },
+      "render": [Function],
+    },
+    "Label": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "div",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "as": "div",
+      "horizontal": false,
+      "multiline": false,
     },
     "render": [Function],
   },
@@ -166,103 +210,17 @@ Object {
     },
     "render": [Function],
   },
-  "Form": Object {
-    "Checkbox": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "checked": false,
-        "children": null,
-        "disabled": false,
-      },
-      "render": [Function],
-    },
-    "Control": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "div",
-        "fullwidth": false,
-        "iconLeft": false,
-        "iconRight": false,
-        "loading": false,
-      },
-      "render": [Function],
-    },
-    "Field": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "Body": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "defaultProps": Object {
-          "as": "div",
-        },
-        "render": [Function],
-      },
-      "Label": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "defaultProps": Object {
-          "as": "div",
-        },
-        "render": [Function],
-      },
-      "defaultProps": Object {
-        "as": "div",
-        "horizontal": false,
-        "multiline": false,
-      },
-      "render": [Function],
-    },
-    "Help": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "p",
-      },
-      "render": [Function],
-    },
-    "Input": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "InputFile": [Function],
-    "Label": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "Radio": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "checked": false,
-        "children": null,
-        "disabled": false,
-      },
-      "render": [Function],
-    },
-    "Select": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "children": null,
-        "disabled": false,
-        "loading": false,
-        "multiple": false,
-        "readOnly": false,
-      },
-      "render": [Function],
-    },
-    "Textarea": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "disabled": false,
-        "readOnly": false,
-        "rows": 4,
-      },
-      "render": [Function],
-    },
-  },
-  "Heading": Object {
+  "Generic": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "as": "h1",
-      "heading": false,
-      "spaced": false,
-      "subtitle": false,
+      "as": "div",
+    },
+    "render": [Function],
+  },
+  "Help": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "p",
     },
     "render": [Function],
   },
@@ -307,6 +265,15 @@ Object {
     "defaultProps": Object {
       "as": "figure",
     },
+    "render": [Function],
+  },
+  "Input": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "InputFile": [Function],
+  "Label": Object {
+    "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
   "Level": Object {
@@ -563,10 +530,30 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
+  "Radio": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "checked": false,
+      "children": null,
+      "disabled": false,
+    },
+    "render": [Function],
+  },
   "Section": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "as": "section",
+    },
+    "render": [Function],
+  },
+  "Select": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "children": null,
+      "disabled": false,
+      "loading": false,
+      "multiple": false,
+      "readOnly": false,
     },
     "render": [Function],
   },
@@ -611,12 +598,31 @@ Object {
     },
     "render": [Function],
   },
+  "Textarea": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "disabled": false,
+      "readOnly": false,
+      "rows": 4,
+    },
+    "render": [Function],
+  },
   "Tile": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "as": "div",
       "notification": false,
       "vertical": false,
+    },
+    "render": [Function],
+  },
+  "Title": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "h1",
+      "heading": false,
+      "spaced": false,
+      "subtitle": false,
     },
     "render": [Function],
   },

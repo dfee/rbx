@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Pagination } from "../pagination";
+import { Pagination } from "@/components";
 
-storiesOf("Pagination", module)
+storiesOf("Components/Pagination", module)
   .addDecorator(story => <div style={{ margin: 50 }}>{story()}</div>)
   .add("Default", () => <Pagination current={3} total={5} delta={1} />)
   .add("Without page number", () => (

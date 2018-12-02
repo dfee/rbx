@@ -1,10 +1,10 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Button } from "@/components/button";
-import { Message } from "@/components/message";
+import { Message } from "@/components";
+import { Button } from "@/elements";
 
-storiesOf("Message", module)
+storiesOf("Components/Message", module)
   .add("Default", () => (
     <Message>
       <Message.Header>

@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps } from "@/modifiers";
 
 export type NavbarBrandProps = Prefer<
@@ -13,7 +13,7 @@ export const NavbarBrand = React.forwardRef<HTMLDivElement, NavbarBrandProps>(
   (props, ref) => {
     const { className, ...rest } = props;
     return (
-      <Element {...rest} ref={ref} className={cx("navbar-brand", className)} />
+      <Generic {...rest} ref={ref} className={cx("navbar-brand", className)} />
     );
   },
 );

@@ -2,7 +2,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Tabs } from "@/components/tabs";
+import { Tabs } from "@/components";
 import { TabsProps } from "@/components/tabs/tabs";
 
 // https://github.com/storybooks/storybook/issues/4865
@@ -14,7 +14,7 @@ const alignSelectOptions = ({
 
 const makeAlignSelect = () => select("Align", alignSelectOptions, "Default");
 
-storiesOf("Tabs", module)
+storiesOf("Components/Tabs", module)
   .addDecorator(story => <div style={{ margin: 10 }}>{story()}</div>)
   .add("Default", () => (
     <Tabs

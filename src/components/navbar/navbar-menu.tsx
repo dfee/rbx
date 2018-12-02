@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Element } from "@/components/element";
+import { Generic } from "@/extras/generic";
 import { ModifierProps } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 
@@ -16,7 +16,7 @@ export const NavbarMenu = React.forwardRef<HTMLDivElement, NavbarMenuProps>(
     return (
       <NavbarContext.Consumer>
         {({ active }) => (
-          <Element
+          <Generic
             className={cx("navbar-menu", className, {
               "is-active": active,
             })}

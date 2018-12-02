@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generic component Should Exist 1`] = `
+Object {
+  "$$typeof": Symbol(react.forward_ref),
+  "defaultProps": Object {
+    "as": "div",
+  },
+  "render": [Function],
+}
+`;
+
+exports[`Generic component should accept a react component as 'as' prop 1`] = `
+<p>
+  Custom
+  This should be a p element
+</p>
+`;
+
+exports[`Generic component should have helpers classnames 1`] = `
+<div
+  className="has-text-white is-pulled-left"
+>
+  Facebook
+</div>
+`;

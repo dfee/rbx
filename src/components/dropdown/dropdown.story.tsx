@@ -2,8 +2,8 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
+import { Dropdown } from "@/components";
 import { Colors } from "@/modifiers/color";
-import { Dropdown } from ".";
 
 interface DropdownControllerProps {
   hoverable?: boolean;
@@ -45,7 +45,7 @@ class DropdownController extends React.Component<
   }
 }
 
-storiesOf("Dropdown", module)
+storiesOf("Components/Dropdown", module)
   .add("Default", () => (
     <Dropdown>
       <Dropdown.Item value="item">Dropdown item</Dropdown.Item>

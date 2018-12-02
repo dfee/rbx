@@ -1,1 +1,0 @@
-export { forwardRefAs } from "./exotic";
