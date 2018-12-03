@@ -2,46 +2,104 @@ import { cx } from "emotion";
 
 import { makeTransform } from "./utils";
 
-export type HelpersProps = Partial<{
+export type FloatHelpersProps = Partial<{
+  /**
+   * Fixes an element's floating children
+   */
   clearfix: boolean;
-  clipped: boolean;
-  hidden: boolean;
-  invisible: boolean;
+  /**
+   * Moves an element to the left or right
+   */
+  pull: "left" | "right";
+}>;
+
+export type SpacingHelpersProps = Partial<{
+  /**
+   * Removes any margin
+   */
   marginless: boolean;
-  overlay: boolean;
+  /**
+   * Removes any padding
+   */
   paddingless: boolean;
-  pull: "right" | "left";
+}>;
+
+export type OtherHelpersProps = Partial<{
+  /**
+   * Adds overflow hidden
+   */
+  clipped: boolean;
+  /**
+   * Hides an element (unclear on where this is documented in Bulma)
+   */
+  hidden: boolean;
+  /**
+   * Adds visibility hidden
+   */
+  invisible: boolean;
+  /**
+   * Completely covers the first positioned parent
+   */
+  overlay: boolean;
+  /**
+   * Removes any radius
+   */
   radiusless: boolean;
+  /**
+   * Hide elements visually but keep the element available to be announced by a
+   * screen reader
+   */
+  sr: boolean;
+  /**
+   * Removes any shadow
+   */
   shadowless: boolean;
+  /**
+   * Prevents the text from being selectable
+   */
   unselectable: boolean;
 }>;
 
+export type HelpersProps = FloatHelpersProps &
+  SpacingHelpersProps &
+  OtherHelpersProps;
+
+// tslint:disable:object-literal-sort-keys
 export const transformHelpersModifiers = makeTransform<HelpersProps>(
   props =>
     cx(props.className, {
+      // Float
       "is-clearfix": props.clearfix,
+      [`is-pulled-${props.pull}`]: props.pull,
+      // Spacing
+      "is-marginless": props.marginless,
+      "is-paddingless": props.paddingless,
+      // Other
       "is-clipped": props.clipped,
       "is-hidden": props.hidden,
       "is-invisible": props.invisible,
-      "is-marginless": props.marginless,
       "is-overlay": props.overlay,
-      "is-paddingless": props.paddingless,
-      [`is-pulled-${props.pull}`]: props.pull,
       "is-radiusless": props.radiusless,
       "is-shadowless": props.shadowless,
+      "is-sr-only": props.sr,
       "is-unselectable": props.unselectable,
     }) || undefined,
   [
+    // Float
     "clearfix",
+    "pull",
+    // Spacing
+    "marginless",
+    "paddingless",
+    // Other
     "clipped",
     "hidden",
     "invisible",
-    "marginless",
     "overlay",
-    "paddingless",
-    "pull",
     "radiusless",
     "shadowless",
+    "sr",
     "unselectable",
   ],
 );
+// tslint:enable:object-literal-sort-keys

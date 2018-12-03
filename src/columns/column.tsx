@@ -21,39 +21,38 @@ export type ColumnSizeModifierProps = Partial<{
   size?: ColumnSizes;
 }>;
 
-export type ColumnModifierProps = Partial<{
-  className: string;
-  /**
-   * Size, Offset and Narrow props for Mobile devices (Up to 768px)
-   */
-  mobile: ColumnSizeModifierProps;
-  /**
-   * Size, Offset and Narrow props for Tablet devices (Between 769px and 1023px)
-   */
-  tablet: ColumnSizeModifierProps;
-  /**
-   * Size, Offset and Narrow props for Desktop devices (Between 1024px and
-   * 1215px)
-   */
-  desktop: ColumnSizeModifierProps;
-  /**
-   * Size, Offset and Narrow props for WideScreen devices (Between 1216px and
-   * 1407px)
-   */
-  widescreen: ColumnSizeModifierProps;
-  /**
-   * Size, Offset and Narrow props for FullHD devices (1408px and above)
-   */
-  fullhd: ColumnSizeModifierProps;
-  /**
-   * Size, Offset and Narrow props for Touch devices (Up to 1087px)
-   */
-  touch: ColumnSizeModifierProps;
-}>;
+export type ColumnModifierProps = Partial<
+  {
+    /**
+     * Size, Offset and Narrow props for Mobile devices (Up to 768px)
+     */
+    mobile: ColumnSizeModifierProps;
+    /**
+     * Size, Offset and Narrow props for Tablet devices (Between 769px and 1023px)
+     */
+    tablet: ColumnSizeModifierProps;
+    /**
+     * Size, Offset and Narrow props for Desktop devices (Between 1024px and
+     * 1215px)
+     */
+    desktop: ColumnSizeModifierProps;
+    /**
+     * Size, Offset and Narrow props for WideScreen devices (Between 1216px and
+     * 1407px)
+     */
+    widescreen: ColumnSizeModifierProps;
+    /**
+     * Size, Offset and Narrow props for FullHD devices (1408px and above)
+     */
+    fullhd: ColumnSizeModifierProps;
+    /**
+     * Size, Offset and Narrow props for Touch devices (Up to 1087px)
+     */
+    touch: ColumnSizeModifierProps;
+  } & ColumnSizeModifierProps
+>;
 
-export type ColumnProps = ModifierProps &
-  ColumnModifierProps &
-  ColumnSizeModifierProps;
+export type ColumnProps = ModifierProps & ColumnModifierProps;
 
 export const Column = forwardRefAs<ColumnProps, "div">((props, ref) => {
   const {

@@ -1,6 +1,7 @@
 export { Breadcrumb } from "./breadcrumb";
 export { Card } from "./card";
 export { Dropdown } from "./dropdown";
+export { List } from "./list";
 export { Menu } from "./menu";
 export { Message } from "./message";
 export { Modal } from "./modal";

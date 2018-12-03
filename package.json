@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/dfee/rbx#readme",
   "dependencies": {
-    "bulma": "0.7.1",
+    "bulma": "0.7.2",
     "emotion": "^9.2.12"
   },
   "peerDependencies": {

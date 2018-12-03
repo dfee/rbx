@@ -94,7 +94,7 @@ The following components were ported:
 | Progress     | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FProgress)     | [Documentation](http://bulma.io/documentation/elements/progress/)     |
 | Table        | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FTable)        | [Documentation](http://bulma.io/documentation/elements/table/)        |
 | Tag          | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FTag)          | [Documentation](http://bulma.io/documentation/elements/tag/)          |
-| - Title      | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FTitle)        | [Documentation](http://bulma.io/documentation/elements/title/)        |
+| Title        | [Stories](https://dfee.github.io/rbx/?selectedKind=Elements%2FTitle)        | [Documentation](http://bulma.io/documentation/elements/title/)        |
 
 #### Components
 
@@ -103,6 +103,7 @@ The following components were ported:
 | Breadcrumb | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FBreadcrumb) | [Documentation](http://bulma.io/documentation/components/breadcrumb/)  |
 | Card       | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FCard)       | [Documentation](http://bulma.io/documentation/components/card/)        |
 | Dropdown   | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FDropdown)   | [Documentation](http://bulma.io/documentation/components/dropdown/)    |
+| List       | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FList)       | [Documentation](http://bulma.io/documentation/components/list/)        |
 | Menu       | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FMenu)       | [Documentation](http://bulma.io/documentation/components/menu/)        |
 | Message    | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FMessage)    | [Documentation](http://bulma.io/documentation/components/message/)     |
 | Modal      | [Stories](https://dfee.github.io/rbx/?selectedKind=Components%2FModal)      | [Documentation](http://bulma.io/documentation/components/modal/)       |

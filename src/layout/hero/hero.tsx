@@ -12,7 +12,7 @@ export type HeroModifierProps = Partial<{
   children: React.ReactNode;
   color: Colors;
   gradient: boolean;
-  size: "medium" | "large" | "fullheight";
+  size: "medium" | "large" | "fullheight" | "fullheight-with-navbar";
   style: React.CSSProperties;
 }>;
 
