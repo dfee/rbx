@@ -1,9 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
-import { MediaContent } from "./media-content";
 import { MediaItem } from "./media-item";
 
 export type MediaProps = ModifierProps;
@@ -15,7 +14,6 @@ export const Media = Object.assign(
     return React.createElement(as!, { ref, ...rest });
   }, "article"),
   {
-    Content: MediaContent,
     Item: MediaItem,
   },
 );

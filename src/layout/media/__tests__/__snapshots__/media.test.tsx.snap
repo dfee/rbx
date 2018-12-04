@@ -1,13 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Media component should be a Media Content 1`] = `
-<div
-  className="content"
+<figure
+  className="media-content"
 >
-  <p>
-    Lorem Ipsum
-  </p>
-</div>
+  <img
+    alt="placeholder"
+    src="http://bulma.io/images/placeholders/128x128.png"
+  />
+</figure>
 `;
 
 exports[`Media component should be a Media Item 1`] = `
@@ -34,18 +35,11 @@ exports[`Media component should concat classname in props with Bulma classname 1
 exports[`Media component should exist 1`] = `
 Object {
   "$$typeof": Symbol(react.forward_ref),
-  "Content": Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "as": "div",
-    },
-    "render": [Function],
-  },
   "Item": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "as": "div",
-      "position": "center",
+      "position": "content",
     },
     "render": [Function],
   },
@@ -61,17 +55,7 @@ Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
     "as": "div",
-  },
-  "render": [Function],
-}
-`;
-
-exports[`Media component should expose Level Side and Item 2`] = `
-Object {
-  "$$typeof": Symbol(react.forward_ref),
-  "defaultProps": Object {
-    "as": "div",
-    "position": "center",
+    "position": "content",
   },
   "render": [Function],
 }
@@ -86,17 +70,6 @@ exports[`Media component should have media classname 1`] = `
     src="http://bulma.io/images/placeholders/128x128.png"
   />
 </article>
-`;
-
-exports[`Media component should hbe a Media Item Centered 1`] = `
-<figure
-  className="media-content"
->
-  <img
-    alt="placeholder"
-    src="http://bulma.io/images/placeholders/128x128.png"
-  />
-</figure>
 `;
 
 exports[`Media component should use inline styles 1`] = `

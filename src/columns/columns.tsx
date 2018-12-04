@@ -1,11 +1,14 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Breakpoints } from "@/modifiers/responsive";
+import { tuple } from "@/utils";
 import { Column } from "./column";
-import { ColumnsGapSizes } from "./constants";
+
+export const COLUMNS_GAP_SIZES = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);
+export type ColumnsGapSizes = (typeof COLUMNS_GAP_SIZES)[number];
 
 export type ColumnsGapSizeModifierProps = Partial<{
   /**

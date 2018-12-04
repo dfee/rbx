@@ -8,7 +8,7 @@ Object {
 
 exports[`Transform helpers modifiers should have class names applied 1`] = `
 Object {
-  "className": "is-clearfix is-clipped is-hidden is-invisible is-marginless is-overlay is-paddingless is-pulled-right is-radiusless is-shadowless is-unselectable",
+  "className": "is-clearfix is-pulled-right is-marginless is-paddingless is-clipped is-hidden is-invisible is-overlay is-radiusless is-shadowless is-unselectable",
 }
 `;
 

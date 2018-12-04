@@ -1,18 +1,20 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
 import { TagGroup } from "./tag-group";
 
+export const TAG_SIZES = tuple("normal", "medium", "large");
+export type TagSizes = (typeof TAG_SIZES)[number];
+
 export type TagModifierProps = Partial<{
-  children: React.ReactNode;
   color: Colors;
-  remove: boolean;
+  delete: boolean;
   rounded: boolean;
-  size: "medium" | "large";
-  style: React.CSSProperties;
+  size: TagSizes;
 }>;
 
 export type TagProps = ModifierProps & TagModifierProps;
@@ -23,7 +25,7 @@ export const Tag = Object.assign(
       as,
       children,
       color,
-      remove,
+      delete: isDelete,
       rounded,
       size,
       ...rest
@@ -31,11 +33,11 @@ export const Tag = Object.assign(
     rest.className = cx("tag", rest.className, {
       [`is-${size}`]: size,
       [`is-${color}`]: color,
-      "is-delete": remove,
+      "is-delete": isDelete,
       "is-rounded": rounded,
     });
     return React.createElement(as!, {
-      children: !remove && children,
+      children: !isDelete && children,
       ref,
       ...rest,
     });
@@ -45,7 +47,7 @@ export const Tag = Object.assign(
 
 Tag.defaultProps = Object.assign(
   {
-    remove: false,
+    delete: false,
     rounded: false,
   },
   Tag.defaultProps,

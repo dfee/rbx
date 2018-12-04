@@ -1,26 +1,30 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
 import { ButtonGroup } from "./button-group";
+
+export const BUTTON_SIZES = tuple("small", "medium", "large");
+export type ButtonSizes = (typeof BUTTON_SIZES)[number];
+
+export const BUTTON_STATES = tuple("hovered", "focused", "active", "loading");
+export type ButtonStates = (typeof BUTTON_STATES)[number];
 
 export type ButtonModifierProps = Partial<{
   color: Colors;
   disabled: boolean;
   fullwidth: boolean;
   inverted: boolean;
-  isSelected: boolean;
-  isStatic: boolean;
-  loading: boolean;
-  onClick: React.MouseEventHandler<any>;
   outlined: boolean;
-  remove: boolean;
   reset: boolean;
   rounded: boolean;
-  size: "small" | "medium" | "large";
-  state: "hover" | "focus" | "active" | "loading";
+  selected: boolean;
+  size: ButtonSizes;
+  state: ButtonStates;
+  static: boolean;
   submit: boolean;
   text: boolean;
 }>;
@@ -33,35 +37,30 @@ export const Button = Object.assign(
       as,
       children,
       color,
-      size,
-      outlined,
-      inverted,
-      state,
-      submit,
-      reset,
-      fullwidth,
-      loading,
       disabled,
-      remove,
-      isSelected,
-      isStatic,
+      fullwidth,
+      inverted,
+      onClick, // from HTMLAttributes
+      outlined,
+      reset,
       rounded,
-      onClick,
+      selected,
+      size,
+      state,
+      static: isStatic,
+      submit,
       text,
       ...rest
     } = transformModifiers(props);
-    rest.className = cx(rest.className, {
-      button: !remove,
-      delete: remove,
+    rest.className = cx("button", rest.className, {
       [`is-${color}`]: color,
       [`is-${size}`]: size,
       [`is-${state}`]: state,
       "is-fullwidth": fullwidth,
       "is-inverted": inverted,
-      "is-loading": loading,
       "is-outlined": outlined,
       "is-rounded": rounded,
-      "is-selected": isSelected,
+      "is-selected": selected,
       "is-static": isStatic,
       "is-text": text,
     });
@@ -99,14 +98,12 @@ Button.defaultProps = Object.assign(
     disabled: false,
     fullwidth: false,
     inverted: false,
-    isSelected: false,
-    isStatic: false,
-    loading: false,
     onClick: () => null,
     outlined: false,
-    remove: false,
     reset: false,
     rounded: false,
+    selected: false,
+    static: false,
     submit: false,
     text: false,
   },

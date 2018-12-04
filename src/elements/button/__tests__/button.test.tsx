@@ -41,7 +41,7 @@ describe("Button component", () => {
   });
 
   it("should render as a static Button", () => {
-    const component = renderer.create(<Button isStatic color="primary" />);
+    const component = renderer.create(<Button static color="primary" />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 

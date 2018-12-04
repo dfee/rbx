@@ -1,17 +1,15 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 
 export type TileModifierProps = Partial<{
-  children: React.ReactNode;
   color: Colors;
   kind: "ancestor" | "parent" | "child";
   notification: boolean;
   size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  style: React.CSSProperties;
   vertical: boolean;
 }>;
 

@@ -3,24 +3,26 @@ import React from "react";
 
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
+
+export const ICON_SIZES = tuple("small", "medium", "large");
+export type IconSizes = (typeof ICON_SIZES)[number];
 
 export type IconModifierProps = Partial<{
-  align: "left" | "right";
   color: Colors;
   icon: string;
-  size: "small" | "medium" | "large" | "auto";
-}> &
-  Omit<React.HTMLAttributes<HTMLSpanElement>, "color" | "unselectable">;
+  size: IconSizes;
+}>;
 
-export type IconProps = ModifierProps & IconModifierProps;
+export type IconProps = Prefer<
+  ModifierProps & IconModifierProps,
+  React.HTMLAttributes<HTMLSpanElement>
+>;
 
 export const Icon = React.forwardRef<HTMLElement, IconProps>((props, ref) => {
-  const { align, children, color, icon, size, ...rest } = transformModifiers(
-    props,
-  );
+  const { children, color, icon, size, ...rest } = transformModifiers(props);
   rest.className = cx("icon", rest.className, {
     [`is-${size}`]: size,
-    [`is-${align}`]: align,
     [`has-text-${color}`]: color,
   });
   return (

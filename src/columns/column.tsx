@@ -1,9 +1,35 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
-import { ColumnSizes } from "./constants";
+import { tuple } from "@/utils";
+
+export const COLUMN_SIZES = tuple(
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  "one-third",
+  "two-thirds",
+  "one-quarter",
+  "half",
+  "three-quarters",
+  "one-fifth",
+  "two-fifths",
+  "three-fifths",
+  "four-fifths",
+  "full",
+);
+export type ColumnSizes = (typeof COLUMN_SIZES)[number];
 
 export type ColumnSizeModifierProps = Partial<{
   /**

@@ -15,7 +15,7 @@
       "@/*": ["./src/*"]
     },
     "removeComments": true,
-    "rootDirs": ["src"],
+    "rootDirs": ["src", "stories"],
     "sourceMap": true,
     "strictNullChecks": true,
     "strict": true,
@@ -23,5 +23,5 @@
     "target": "es5"
   },
   "exclude": ["node_modules", "lib", "dist", "__mocks__"],
-  "include": ["src"]
+  "include": ["src", "stories"]
 }

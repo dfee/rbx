@@ -1,19 +1,26 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
 import { HeroBody } from "./hero-body";
 import { HeroFooter } from "./hero-footer";
 import { HeroHead } from "./hero-head";
 
+export const HERO_SIZES = tuple(
+  "medium",
+  "large",
+  "fullheight",
+  "fullheight-with-navbar",
+);
+export type HeroSizes = (typeof HERO_SIZES)[number];
+
 export type HeroModifierProps = Partial<{
-  children: React.ReactNode;
   color: Colors;
   gradient: boolean;
-  size: "medium" | "large" | "fullheight" | "fullheight-with-navbar";
-  style: React.CSSProperties;
+  size: HeroSizes;
 }>;
 
 export type HeroProps = ModifierProps & HeroModifierProps;

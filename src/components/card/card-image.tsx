@@ -3,7 +3,7 @@ import React from "react";
 
 import { Image } from "@/elements/image";
 import { ImageProps } from "@/elements/image/image";
-import { Generic } from "@/extras";
+import { Generic } from "@/generic";
 
 export type CardImageModifierProps = Partial<{
   className: string;

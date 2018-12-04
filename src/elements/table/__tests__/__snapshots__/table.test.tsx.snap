@@ -2,7 +2,7 @@
 
 exports[`Table component should concat classname in props with Bulma classname 1`] = `
 <table
-  className="table other-class this-is-a-test is-fullwidth is-striped"
+  className="table other-class this-is-a-test"
 >
   <p>
     Default
@@ -15,8 +15,10 @@ Object {
   "$$typeof": Symbol(react.forward_ref),
   "defaultProps": Object {
     "bordered": false,
-    "size": "fullwidth",
-    "striped": true,
+    "fullwidth": false,
+    "hoverable": false,
+    "narrow": false,
+    "striped": false,
   },
   "render": [Function],
 }
@@ -24,7 +26,7 @@ Object {
 
 exports[`Table component should have table classname 1`] = `
 <table
-  className="table is-fullwidth is-striped"
+  className="table"
 >
   Test 
   <a
@@ -37,7 +39,7 @@ exports[`Table component should have table classname 1`] = `
 
 exports[`Table component should use inline styles 1`] = `
 <table
-  className="table is-fullwidth is-striped"
+  className="table"
   style={
     Object {
       "height": 250,

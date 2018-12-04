@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Button } from "@/elements/button";
-import { forwardRefAs } from "@/exotic";
+import { Delete } from "@/elements";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type ModalCardHeadModifierProps = Partial<{
@@ -24,7 +24,7 @@ export const ModalCardHead = forwardRefAs<ModalCardHeadProps, "header">(
       children: (
         <React.Fragment>
           {children}
-          {showClose && <Button remove onClick={onClose} />}
+          {showClose && <Delete<"button"> as="button" onClick={onClose} />}
         </React.Fragment>
       ),
       ref,

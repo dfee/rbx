@@ -9,7 +9,6 @@ describe("Media component", () => {
   });
 
   it("should expose Level Side and Item", () => {
-    expect(Media.Content).toMatchSnapshot();
     expect(Media.Item).toMatchSnapshot();
   });
 
@@ -37,23 +36,14 @@ describe("Media component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("should hbe a Media Item Centered", () => {
+  it("should be a Media Content", () => {
     const component = renderer.create(
-      <Media.Item<"figure"> as="figure" position="center">
+      <Media.Item<"figure"> as="figure" position="content">
         <img
           alt="placeholder"
           src="http://bulma.io/images/placeholders/128x128.png"
         />
       </Media.Item>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be a Media Content", () => {
-    const component = renderer.create(
-      <Media.Content>
-        <p>Lorem Ipsum</p>
-      </Media.Content>,
     );
     expect(component.toJSON()).toMatchSnapshot();
   });

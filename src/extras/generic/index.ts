@@ -1,1 +1,0 @@
-export { Generic } from "./generic";

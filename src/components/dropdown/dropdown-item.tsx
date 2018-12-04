@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/extras/generic";
+import { Generic } from "@/generic";
 import { ModifierProps } from "@/modifiers";
 
 export interface DropdownItemModifierProps {

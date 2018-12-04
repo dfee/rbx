@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Level component should concat classname in props with Bulma classname 1`] = `
-<div
+<nav
   className="level other-class this-is-a-test"
 >
   <p>
     Default
   </p>
-</div>
+</nav>
 `;
 
 exports[`Level component should exist 1`] = `
@@ -29,7 +29,7 @@ Object {
     "render": [Function],
   },
   "defaultProps": Object {
-    "as": "div",
+    "as": "nav",
   },
   "render": [Function],
 }
@@ -57,7 +57,7 @@ Object {
 `;
 
 exports[`Level component should have level classname 1`] = `
-<div
+<nav
   className="level"
 >
   <div
@@ -75,11 +75,11 @@ exports[`Level component should have level classname 1`] = `
   >
     Item 3
   </div>
-</div>
+</nav>
 `;
 
 exports[`Level component should render Levels with right and left side 1`] = `
-<div
+<nav
   className="level"
 >
   <div
@@ -105,11 +105,11 @@ exports[`Level component should render Levels with right and left side 1`] = `
       Item 3
     </div>
   </div>
-</div>
+</nav>
 `;
 
 exports[`Level component should use inline styles 1`] = `
-<div
+<nav
   className="level"
   style={
     Object {
@@ -120,5 +120,5 @@ exports[`Level component should use inline styles 1`] = `
   <p>
     Default
   </p>
-</div>
+</nav>
 `;

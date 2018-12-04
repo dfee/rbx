@@ -1,11 +1,15 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
+import { tuple } from "@/utils";
+
+export const SECTION_SIZES = tuple("medium", "large");
+export type SectionSizes = (typeof SECTION_SIZES)[number];
 
 export type SectionModifierProps = Partial<{
-  size: "medium" | "large";
+  size: SectionSizes;
 }>;
 
 export type SectionProps = ModifierProps & SectionModifierProps;

@@ -1,13 +1,12 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Breakpoints } from "@/modifiers/responsive";
 
 export type ContainerModifierProps = Partial<{
   breakpoint: Breakpoints;
-  className: string;
   fluid: boolean;
 }>;
 

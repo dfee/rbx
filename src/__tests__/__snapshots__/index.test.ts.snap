@@ -2,6 +2,13 @@
 
 exports[`ReactBulmaComponents component Should Exports all components 1`] = `
 Object {
+  "Block": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "div",
+    },
+    "render": [Function],
+  },
   "Box": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
@@ -37,14 +44,12 @@ Object {
       "disabled": false,
       "fullwidth": false,
       "inverted": false,
-      "isSelected": false,
-      "isStatic": false,
-      "loading": false,
       "onClick": [Function],
       "outlined": false,
-      "remove": false,
       "reset": false,
       "rounded": false,
+      "selected": false,
+      "static": false,
       "submit": false,
       "text": false,
     },
@@ -155,6 +160,14 @@ Object {
   },
   "Content": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "OrderedList": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "Item": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
     "defaultProps": Object {
       "as": "div",
     },
@@ -175,7 +188,6 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "as": "a",
-      "size": "auto",
     },
     "render": [Function],
   },
@@ -217,6 +229,13 @@ Object {
     },
     "render": [Function],
   },
+  "Heading": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "p",
+    },
+    "render": [Function],
+  },
   "Help": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
@@ -250,6 +269,13 @@ Object {
     "defaultProps": Object {
       "as": "section",
       "gradient": false,
+    },
+    "render": [Function],
+  },
+  "Highlight": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "p",
     },
     "render": [Function],
   },
@@ -294,7 +320,23 @@ Object {
       "render": [Function],
     },
     "defaultProps": Object {
+      "as": "nav",
+    },
+    "render": [Function],
+  },
+  "List": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Item": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "active": false,
+        "as": "a",
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
       "as": "div",
+      "hoverable": false,
     },
     "render": [Function],
   },
@@ -308,18 +350,11 @@ Object {
   },
   "Media": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "Content": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "div",
-      },
-      "render": [Function],
-    },
     "Item": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "as": "div",
-        "position": "center",
+        "position": "content",
       },
       "render": [Function],
     },
@@ -478,6 +513,13 @@ Object {
     },
     "render": [Function],
   },
+  "Numeric": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "p",
+    },
+    "render": [Function],
+  },
   "Pagination": Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
@@ -561,8 +603,10 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "bordered": false,
-      "size": "fullwidth",
-      "striped": true,
+      "fullwidth": false,
+      "hoverable": false,
+      "narrow": false,
+      "striped": false,
     },
     "render": [Function],
   },
@@ -593,7 +637,7 @@ Object {
     },
     "defaultProps": Object {
       "as": "span",
-      "remove": false,
+      "delete": false,
       "rounded": false,
     },
     "render": [Function],
@@ -626,5 +670,6 @@ Object {
     },
     "render": [Function],
   },
+  "forwardRefAs": [Function],
 }
 `;

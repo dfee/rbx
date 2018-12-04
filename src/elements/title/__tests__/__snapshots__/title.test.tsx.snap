@@ -3,6 +3,7 @@
 exports[`Title component should be a subtitle with size rendered as P 1`] = `
 <p
   className="is-3 subtitle"
+  heading={false}
 >
   Subtitle
 </p>
@@ -11,6 +12,7 @@ exports[`Title component should be a subtitle with size rendered as P 1`] = `
 exports[`Title component should be spaced 1`] = `
 <p
   className="is-spaced title"
+  heading={false}
 >
   Subtitle
 </p>
@@ -19,6 +21,7 @@ exports[`Title component should be spaced 1`] = `
 exports[`Title component should concat classname in props with Bulma classname 1`] = `
 <h1
   className="other-class this-is-a-test title"
+  heading={false}
 >
   <p>
     Default
@@ -42,6 +45,7 @@ Object {
 exports[`Title component should have title classname 1`] = `
 <h1
   className="title"
+  heading={false}
 >
   Test 
   <a>
@@ -53,6 +57,7 @@ exports[`Title component should have title classname 1`] = `
 exports[`Title component should not be spaced because is subtitle 1`] = `
 <p
   className="subtitle"
+  heading={false}
 >
   Subtitle
 </p>
@@ -61,6 +66,7 @@ exports[`Title component should not be spaced because is subtitle 1`] = `
 exports[`Title component should use inline styles 1`] = `
 <h1
   className="title"
+  heading={false}
   style={
     Object {
       "height": 250,

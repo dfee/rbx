@@ -1,25 +1,28 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
+import { tuple } from "@/utils";
+
+export const MEDIA_ITEM_POSITIONS = tuple("content", "left", "right");
+export type MediaItemPositions = (typeof MEDIA_ITEM_POSITIONS)[number];
 
 export type MediaItemModifierProps = Partial<{
-  position: "center" | "right" | "left";
+  position: MediaItemPositions;
 }>;
 
 export type MediaItemProps = ModifierProps & MediaItemModifierProps;
 
 export const MediaItem = forwardRefAs<MediaItemProps, "div">((props, ref) => {
   const { as, position, ...rest } = transformModifiers(props);
-  const p = position === "center" ? "content" : position;
   rest.className = cx(rest.className, {
-    [`media-${p}`]: p,
+    [`media-${position}`]: position,
   });
   return React.createElement(as!, { ref, ...rest });
 }, "div");
 
 MediaItem.defaultProps = Object.assign(
-  { position: "center" },
+  { position: "content" },
   MediaItem.defaultProps,
 );

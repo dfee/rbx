@@ -1,13 +1,17 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/extras/generic";
+import { Generic } from "@/generic";
 import { ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
+
+export const PROGRESS_SIZES = tuple("small", "medium", "large");
+export type ProgressSizes = (typeof PROGRESS_SIZES)[number];
 
 export interface ProgressModifierProps {
   color?: Colors;
-  size?: "small" | "medium" | "large";
+  size?: ProgressSizes;
   max: number;
   value: number;
 }

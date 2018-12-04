@@ -1,12 +1,16 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
+import { tuple } from "@/utils";
+
+export const BUTTON_GROUP_POSITIONS = tuple("centered", "right");
+export type ButtonGroupPositions = (typeof BUTTON_GROUP_POSITIONS)[number];
 
 export type ButtonGroupModifierProps = Partial<{
   hasAddons: boolean;
-  position: "centered" | "right";
+  position: ButtonGroupPositions;
 }>;
 
 export type ButtonGroupProps = ModifierProps & ButtonGroupModifierProps;

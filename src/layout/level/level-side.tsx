@@ -1,13 +1,11 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/exotic";
+import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type LevelSideModifierProps = Partial<{
-  align: string;
-  children: React.ReactNode;
-  style: React.CSSProperties;
+  align: "left" | "right";
 }>;
 
 export type LevelSideProps = ModifierProps & LevelSideModifierProps;

@@ -22,7 +22,7 @@ addDecorator(withKnobs);
 addDecorator(checkA11y);
 
 function loadStories() {
-  const req = require.context("../src", true, /\.story\.tsx$/);
+  const req = require.context("../stories", true, /\.story\.tsx$/);
   req.keys().forEach(filename => req(filename));
 }
 
