@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Columns } from "@/columns";
 import { Menu } from "@/components";
+import { Columns } from "@/grid";
 import { Section } from "@/layout";
 
 storiesOf("Components/Menu", module)

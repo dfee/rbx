@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/generic";
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type NavbarLinkModifierProps = Partial<{

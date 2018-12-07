@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs, Generic } from "@/generic";
+import { forwardRefAs, Generic } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { canUseDOM } from "@/utils";

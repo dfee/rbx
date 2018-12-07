@@ -2,8 +2,8 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Title } from "@/elements";
-import { Container, Section } from "@/layout";
+import { Container, Title } from "@/elements";
+import { Section } from "@/layout";
 import { SECTION_SIZES } from "@/layout/section/section";
 
 import { iterableToSelectObject } from "../helpers";

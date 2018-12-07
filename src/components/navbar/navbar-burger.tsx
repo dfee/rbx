@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/generic";
+import { Generic } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 

@@ -1,9 +1,9 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { Generic } from "@/base";
 import { Image } from "@/elements/image";
 import { ImageProps } from "@/elements/image/image";
-import { Generic } from "@/generic";
 
 export type CardImageProps = Prefer<
   ImageProps,

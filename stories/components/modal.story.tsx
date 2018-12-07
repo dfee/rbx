@@ -4,10 +4,10 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Modal } from "@/components";
+import { Level, Media, Modal } from "@/components";
 import { ModalProps } from "@/components/modal/modal";
 import { Box, Button, Content, Delete, Icon, Image, Title } from "@/elements";
-import { Level, Media, Section } from "@/layout";
+import { Section } from "@/layout";
 
 interface OpenModalProps {
   modalProps: Omit<ModalProps, "onClose" | "active">;

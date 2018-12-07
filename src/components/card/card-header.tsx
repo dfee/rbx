@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs } from "@/generic";
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { CardHeaderIcon } from "./card-header-icon";
 import { CardHeaderTitle } from "./card-header-title";

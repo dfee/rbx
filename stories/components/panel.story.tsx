@@ -7,10 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Columns } from "@/columns";
 import { Panel } from "@/components";
-import { Button, Icon } from "@/elements";
-import { Checkbox, Control, Input } from "@/form";
+import { Button, Checkbox, Control, Icon, Input } from "@/elements";
+import { Columns } from "@/grid";
 import { Section } from "@/layout";
 
 storiesOf("Components/Panel", module)

@@ -1,8 +1,8 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { Delete } from "@/elements";
-import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { ModalCardTitle } from "./modal-card-title";
 import { ModalContext } from "./modal-context";

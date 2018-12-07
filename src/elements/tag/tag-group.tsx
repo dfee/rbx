@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/generic";
+import { Generic } from "@/base";
 import { ModifierProps } from "@/modifiers";
 
 export type TagGroupModifierProps = Partial<{

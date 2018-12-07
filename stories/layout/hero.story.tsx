@@ -5,8 +5,8 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Navbar, Tabs } from "@/components";
-import { Button, Icon, Title } from "@/elements";
-import { Container, Hero } from "@/layout";
+import { Button, Container, Icon, Title } from "@/elements";
+import { Hero } from "@/layout";
 import { HERO_SIZES } from "@/layout/hero/hero";
 
 import { iterableToSelectObject } from "../helpers";
