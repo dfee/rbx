@@ -56,7 +56,7 @@ storiesOf("Layout/Hero", module)
               <Navbar.Burger />
             </Navbar.Brand>
             <Navbar.Menu>
-              <Navbar.Container position="end">
+              <Navbar.End>
                 <Navbar.Item active>Home</Navbar.Item>
                 <Navbar.Item>Examples</Navbar.Item>
                 <Navbar.Item>Documentation</Navbar.Item>
@@ -68,7 +68,7 @@ storiesOf("Layout/Hero", module)
                     <span>Download</span>
                   </Button>
                 </Navbar.Item>
-              </Navbar.Container>
+              </Navbar.End>
             </Navbar.Menu>
           </Container>
         </Navbar>

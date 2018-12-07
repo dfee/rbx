@@ -2,10 +2,14 @@ import { cx } from "emotion";
 import React from "react";
 
 import { ModifierProps, transformModifiers } from "@/modifiers";
+import { tuple } from "@/utils";
+
+export const LABEL_SIZES = tuple("small", "medium", "large");
+export type LabelSizes = (typeof LABEL_SIZES)[number];
 
 export type LabelModifierProps = Partial<{
   htmlFor: string;
-  size: "small" | "medium" | "large";
+  size: LabelSizes;
 }>;
 
 export type LabelProps = Prefer<

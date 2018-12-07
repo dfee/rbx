@@ -33,7 +33,10 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       ...rest
     } = transformModifiers(props);
     return (
-      <label className={cx("checkbox", className)} style={style}>
+      <label
+        className={cx("checkbox", className, { "is-disabled": disabled })}
+        style={style}
+      >
         <input
           checked={checked}
           disabled={disabled}

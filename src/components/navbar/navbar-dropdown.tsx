@@ -22,11 +22,3 @@ export const NavbarDropdown = forwardRefAs<NavbarDropdownProps, "span">(
   },
   "span",
 );
-
-NavbarDropdown.defaultProps = Object.assign(
-  {
-    boxed: false,
-    right: false,
-  },
-  NavbarDropdown.defaultProps,
-);

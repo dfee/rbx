@@ -33,7 +33,10 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       ...rest
     } = transformModifiers(props);
     return (
-      <label className={cx("radio", className)} style={style}>
+      <label
+        className={cx("radio", className, { "is-disabled": disabled })}
+        style={style}
+      >
         <input
           checked={checked}
           disabled={disabled}

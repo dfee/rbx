@@ -8,11 +8,7 @@ import { CardFooter } from "./card-footer";
 import { CardHeader } from "./card-header";
 import { CardImage } from "./card-image";
 
-export type CardModifierProps = Partial<{
-  children?: React.ReactNode;
-}>;
-
-export type CardProps = ModifierProps & CardModifierProps;
+export type CardProps = ModifierProps;
 
 export const Card = Object.assign(
   forwardRefAs<CardProps, "div">((props, ref) => {

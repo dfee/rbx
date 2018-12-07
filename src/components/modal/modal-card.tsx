@@ -6,20 +6,15 @@ import { ModifierProps } from "@/modifiers";
 import { ModalCardBody } from "./modal-card-body";
 import { ModalCardFoot } from "./modal-card-foot";
 import { ModalCardHead } from "./modal-card-head";
-import { ModalCardTitle } from "./modal-card-title";
-
-export type ModalCardModifierProps = Partial<{
-  onClose: () => void;
-}>;
 
 export type ModalCardProps = Prefer<
-  ModifierProps & ModalCardModifierProps,
+  ModifierProps,
   React.HTMLAttributes<HTMLDivElement>
 >;
 
 export const ModalCard = Object.assign(
   React.forwardRef<HTMLDivElement, ModalCardProps>(
-    ({ className, onClose, ...props }, ref) => (
+    ({ className, ...props }, ref) => (
       <Generic {...props} ref={ref} className={cx("modal-card", className)} />
     ),
   ),
@@ -27,6 +22,5 @@ export const ModalCard = Object.assign(
     Body: ModalCardBody,
     Foot: ModalCardFoot,
     Head: ModalCardHead,
-    Title: ModalCardTitle,
   },
 );

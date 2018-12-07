@@ -3,36 +3,47 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Tabs } from "@/components";
-import { TabsProps } from "@/components/tabs/tabs";
+import {
+  TABS_ALIGNMENTS,
+  TABS_SIZES,
+  TABS_TYPES,
+} from "@/components/tabs/tabs";
+import { Section } from "@/layout";
 
-// https://github.com/storybooks/storybook/issues/4865
-const alignSelectOptions = ({
-  Default: null,
-  centered: "centered",
-  right: "right",
-} as unknown) as { [k: string]: string };
+import { iterableToSelectObject } from "../helpers";
 
-const makeAlignSelect = () => select("Align", alignSelectOptions, "Default");
+export const knobs = {
+  align: (title: string = "Align") =>
+    select(
+      title,
+      iterableToSelectObject(TABS_ALIGNMENTS, { undefined: "" }),
+      "",
+    ),
+  fullwidth: (title: string = "Fullwidth") => boolean(title, false),
+  size: (title: string = "Size") =>
+    select(title, iterableToSelectObject(TABS_SIZES, { undefined: "" }), ""),
+  type: (title: string = "Type") =>
+    select(title, iterableToSelectObject(TABS_TYPES, { undefined: "" }), ""),
+};
 
 storiesOf("Components/Tabs", module)
-  .addDecorator(story => <div style={{ margin: 10 }}>{story()}</div>)
-  .add("Default", () => (
-    <Tabs
-      type={select(
-        "Tab type",
-        {
-          boxed: "boxed",
-          toggle: "toggle",
-          "toggle-rounded": "toggle-rounded",
-        },
-        "boxed",
-      )}
-      fullwidth={boolean("Full width", false)}
-      align={makeAlignSelect() as TabsProps["align"]}
-    >
-      <Tabs.Tab active>Test</Tabs.Tab>
-      <Tabs.Tab>Test</Tabs.Tab>
-      <Tabs.Tab>Test</Tabs.Tab>
-      <Tabs.Tab>Test</Tabs.Tab>
-    </Tabs>
-  ));
+  .addDecorator(story => <Section children={story()} />)
+  .add("Default", () => {
+    const align = knobs.align();
+    const fullwidth = knobs.fullwidth();
+    const size = knobs.size();
+    const type = knobs.type();
+    return (
+      <Tabs
+        align={align || undefined}
+        fullwidth={fullwidth}
+        size={size || undefined}
+        type={type || undefined}
+      >
+        <Tabs.Tab active>Test</Tabs.Tab>
+        <Tabs.Tab>Test</Tabs.Tab>
+        <Tabs.Tab>Test</Tabs.Tab>
+        <Tabs.Tab>Test</Tabs.Tab>
+      </Tabs>
+    );
+  });

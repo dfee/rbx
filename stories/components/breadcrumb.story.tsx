@@ -1,62 +1,77 @@
-import { select } from "@storybook/addon-knobs";
+import {
+  faBook,
+  faHome,
+  faPuzzlePiece,
+  faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Breadcrumb } from "@/components";
-import { Box } from "@/elements";
+import {
+  BREADCRUMB_ALIGNMENTS,
+  BREADCRUMB_SEPARATORS,
+  BREADCRUMB_SIZES,
+} from "@/components/breadcrumb/breadcrumb";
+import { Icon } from "@/elements";
+import { Section } from "@/layout";
 
-const makeSeparatorSelector = () =>
-  select(
-    "Separator",
-    {
-      arrow: "arrow",
-      bullet: "bullet",
-      dot: "dot",
-      succeeds: "succeeds",
-    },
-    "arrow",
-  );
+import { iterableToSelectObject } from "../helpers";
+
+export const knobs = {
+  align: (title: string = "Alignment") =>
+    select(
+      title,
+      iterableToSelectObject(BREADCRUMB_ALIGNMENTS, { undefined: "" }),
+      "",
+    ),
+  hasIcon: (title: string = "Has icon") => boolean(title, false),
+  separator: (title: string = "Separator") =>
+    select(
+      title,
+      iterableToSelectObject(BREADCRUMB_SEPARATORS, { undefined: "" }),
+      "",
+    ),
+  size: (title: string = "Size") =>
+    select(
+      title,
+      iterableToSelectObject(BREADCRUMB_SIZES, { undefined: "" }),
+      "",
+    ),
+};
 
 const items = [
-  { href: "#1", name: "Storybook" },
-  { href: "#2", name: "Breadcrumb" },
-  { active: true, href: "#3", name: "Breadcrumb Types" },
+  { href: "#1", name: "Bulma", icon: faHome },
+  { href: "#2", name: "Documentation", icon: faBook },
+  { href: "#2", name: "Components", icon: faPuzzlePiece },
+  { active: true, href: "#3", name: "Breadcrumbs", icon: faThumbsUp },
 ];
 
 storiesOf("Components/Breadcrumb", module)
-  .add("Default", () => (
-    <div>
-      <Box>
-        <Breadcrumb separator={makeSeparatorSelector()}>
-          {items.map(({ active, href, name }, i) => (
-            <Breadcrumb.Item active={active} href={href} key={i}>
-              {name}
-            </Breadcrumb.Item>
-          ))}
-        </Breadcrumb>
-      </Box>
-    </div>
-  ))
-  .add("Use Custom render Element", () => {
-    const Link: React.FC<{ children: React.ReactNode; to: string }> = props => (
-      <a href={props.to}>{props.children}</a>
-    );
+  .addDecorator(story => <Section children={story()} />)
+  .add("Default", () => {
+    const align = knobs.align();
+    const separator = knobs.separator();
+    const hasIcon = knobs.hasIcon();
+    const size = knobs.size();
     return (
-      <div>
-        <Box>
-          <Breadcrumb separator={makeSeparatorSelector()}>
-            {items.map(({ active, href: to, name }, i) => (
-              <Breadcrumb.Item<typeof Link>
-                as={Link}
-                active={active}
-                to={to}
-                key={i}
-              >
-                {name}
-              </Breadcrumb.Item>
-            ))}
-          </Breadcrumb>
-        </Box>
-      </div>
+      <Breadcrumb
+        align={align || undefined}
+        separator={separator || undefined}
+        size={size || undefined}
+      >
+        {items.map(({ active, href, icon, name }, i) => (
+          <Breadcrumb.Item active={active} href={href} key={i}>
+            {hasIcon && (
+              <Icon size="small">
+                <FontAwesomeIcon icon={icon} />
+              </Icon>
+            )}
+            {name}
+          </Breadcrumb.Item>
+        ))}
+      </Breadcrumb>
     );
   });

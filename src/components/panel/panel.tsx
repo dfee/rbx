@@ -4,7 +4,7 @@ import React from "react";
 import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { PanelBlock } from "./panel-block";
-import { PanelHeader } from "./panel-header";
+import { PanelHeading } from "./panel-heading";
 import { PanelIcon } from "./panel-icon";
 import { PanelTabs } from "./panel-tabs";
 
@@ -18,7 +18,7 @@ export const Panel = Object.assign(
   }, "nav"),
   {
     Block: PanelBlock,
-    Header: PanelHeader,
+    Heading: PanelHeading,
     Icon: PanelIcon,
     Tabs: PanelTabs,
   },

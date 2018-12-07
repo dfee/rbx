@@ -1,32 +1,29 @@
+import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Message } from "@/components";
+import { MESSAGE_SIZES } from "@/components/message/message";
 import { Delete } from "@/elements";
+import { Section } from "@/layout";
+
+import { iterableToSelectObject } from "../helpers";
+import { knobs as modifiersKnobs } from "../modifiers";
+
+export const knobs = {
+  size: (title: string = "Size") =>
+    select(title, iterableToSelectObject(MESSAGE_SIZES, { undefined: "" }), ""),
+};
 
 storiesOf("Components/Message", module)
-  .add("Default", () => (
-    <Message>
-      <Message.Header>
-        Title
-        <Delete<"button"> as="button" />
-      </Message.Header>
-      <Message.Body>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-        <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta
-        nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida
-        purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac{" "}
-        <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
-        sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna
-        a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
-      </Message.Body>
-    </Message>
-  ))
-  .add("Color", () => (
-    <React.Fragment>
-      <Message color="info">
+  .addDecorator(story => <Section children={story()} />)
+  .add("Default", () => {
+    const color = modifiersKnobs.color();
+    const size = knobs.size();
+    return (
+      <Message color={color || undefined} size={size || undefined}>
         <Message.Header>
-          Title
+          <p>Hello world</p>
           <Delete<"button"> as="button" />
         </Message.Header>
         <Message.Body>
@@ -40,11 +37,13 @@ storiesOf("Components/Message", module)
           sem.
         </Message.Body>
       </Message>
-      <Message color="danger">
-        <Message.Header>
-          Title
-          <Delete<"button"> as="button" />
-        </Message.Header>
+    );
+  })
+  .add("Body only", () => {
+    const color = modifiersKnobs.color();
+    const size = knobs.size();
+    return (
+      <Message color={color || undefined} size={size || undefined}>
         <Message.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
           <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta
@@ -56,5 +55,5 @@ storiesOf("Components/Message", module)
           sem.
         </Message.Body>
       </Message>
-    </React.Fragment>
-  ));
+    );
+  });

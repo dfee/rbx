@@ -4,29 +4,41 @@ import React from "react";
 import { Generic } from "@/generic";
 import { ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
+
+export const INPUT_SIZES = tuple("small", "medium", "large");
+export type InputSizes = (typeof INPUT_SIZES)[number];
+
+export const INPUT_STATES = tuple("focused", "hovered");
+export type InputStates = (typeof INPUT_STATES)[number];
+
+export const INPUT_TYPES = tuple(
+  "text",
+  "email",
+  "tel",
+  "password",
+  "number",
+  "search",
+  "color",
+  "date",
+  "time",
+);
+export type InputTypes = (typeof INPUT_TYPES)[number];
 
 export type InputModifierProps = Partial<{
   color: Colors;
   disabled: boolean;
-  isStatic: boolean;
   /**
    * The name of the input field Commonly used for [multi-input handling](https://reactjs.org/docs/forms.html#handling-multiple-inputs)
    */
   name: string;
   placeholder: string;
   readOnly: boolean;
-  size: "small" | "medium" | "large";
-  style: React.CSSProperties;
-  type:
-    | "text"
-    | "email"
-    | "tel"
-    | "password"
-    | "number"
-    | "search"
-    | "color"
-    | "date"
-    | "time";
+  rounded: boolean;
+  size: InputSizes;
+  state: InputStates;
+  static: boolean;
+  type: InputTypes;
   value: string;
 }>;
 
@@ -42,8 +54,8 @@ type InputControllerProps = InputProps & {
 class InputController extends React.PureComponent<InputControllerProps> {
   public static defaultProps = {
     disabled: false,
-    isStatic: false,
     readOnly: false,
+    static: false,
     type: "text",
   };
 
@@ -52,14 +64,16 @@ class InputController extends React.PureComponent<InputControllerProps> {
       className,
       color,
       disabled,
-      isStatic,
+      innerRef,
       name,
       placeholder,
       readOnly,
+      rounded,
       size,
+      state,
+      static: isStatic,
       type,
       value,
-      innerRef,
       ...props
     } = this.props;
     return (
@@ -74,9 +88,11 @@ class InputController extends React.PureComponent<InputControllerProps> {
         readOnly={readOnly || isStatic}
         disabled={disabled}
         className={cx("input", className, {
-          "is-static": isStatic,
-          [`is-${size}`]: size,
           [`is-${color}`]: color,
+          "is-rounded": rounded,
+          [`is-${size}`]: size,
+          "is-static": isStatic,
+          [`is-${state}`]: state,
         })}
       />
     );

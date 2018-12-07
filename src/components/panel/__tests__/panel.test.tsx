@@ -11,7 +11,7 @@ describe("Panel component", () => {
   it("should have box classname", () => {
     const component = renderer.create(
       <Panel>
-        <Panel.Header>repositories</Panel.Header>
+        <Panel.Heading>repositories</Panel.Heading>
         <Panel.Block>
           <div>Control</div>
         </Panel.Block>

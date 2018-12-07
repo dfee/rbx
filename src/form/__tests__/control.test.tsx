@@ -47,9 +47,9 @@ describe("Control component", () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it("should be fullwidth, loading and size = large", () => {
+  it("should be expanded, loading and size = large", () => {
     const component = renderer.create(
-      <Control fullwidth loading size="large">
+      <Control expanded loading size="large">
         <p>Default</p>
       </Control>,
     );

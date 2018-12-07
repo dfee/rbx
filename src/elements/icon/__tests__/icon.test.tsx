@@ -9,14 +9,12 @@ describe("Icon component", () => {
   });
 
   it("should have box classname", () => {
-    const component = renderer.create(<Icon icon="bars" />);
+    const component = renderer.create(<Icon>i</Icon>);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it("should concat Bulma class with classes in props", () => {
-    const component = renderer.create(
-      <Icon icon="bars" className="other-class" />,
-    );
+    const component = renderer.create(<Icon className="other-class">i</Icon>);
     expect(component.toJSON()).toMatchSnapshot();
   });
 });

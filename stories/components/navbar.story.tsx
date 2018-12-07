@@ -3,85 +3,120 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Navbar } from "@/components";
-import { NavbarProps } from "@/components/navbar/navbar";
+import { NAVBAR_FIXED_ALIGNMENTS } from "@/components/navbar/navbar";
 import { Button } from "@/elements";
-import { COLORS, Colors } from "@/modifiers/color";
+import { Section } from "@/layout";
 
-const makeColorSelect = () =>
-  select(
-    "Navbar Color",
-    {
-      None: "",
-      ...Object.assign(
-        {},
-        ...COLORS.map((color: string) => ({ [color]: color })),
-      ),
-    },
-    "white",
-  );
+import { iterableToSelectObject } from "../helpers";
+import { knobs as modifiersKnobs } from "../modifiers";
 
-const makeFixedSelect = () =>
-  select(
-    "Navbar Fixed",
-    {
-      None: "",
-      bottom: "bottom",
-      top: "top",
-    },
-    "",
-  );
+export const knobs = {
+  active: (title: string = "Active (mobile display)") =>
+    select(
+      title,
+      {
+        "false (managed)": "false",
+        "true (managed)": "true",
+        "undefined (unmanaged)": "",
+      },
+      "",
+    ),
+  dropdown: {
+    boxed: (title: string = "Boxed") => boolean(title, false),
+    right: (title: string = "Right") => boolean(title, false),
+  },
+  fixed: (title: string = "Fixed") =>
+    select(
+      title,
+      iterableToSelectObject(NAVBAR_FIXED_ALIGNMENTS, { undefined: "" }),
+      "",
+    ),
+  item: {
+    active: (title: string = "Active") => boolean(title, false),
+    dropdownUp: (title: string = "Dropdown up") => boolean(title, false),
+    hoverable: (title: string = "Hoverable") => boolean(title, true),
+  },
+  link: {
+    arrowless: (title: string = "Arrowless") => boolean(title, false),
+  },
+  menu: {
+    active: (title: string = "Active") => boolean(title, false),
+  },
+  transparent: (title: string = "Transparent") => boolean(title, true),
+};
 
-storiesOf("Components/Navbar", module).add("Basic Navbar", () => {
-  return (
-    <Navbar
-      color={makeColorSelect() as Colors}
-      fixed={makeFixedSelect() as NavbarProps["fixed"]}
-      active={boolean("Navbar Active", false)}
-      transparent={boolean("Navbar Transparent", false)}
-    >
-      <Navbar.Brand>
-        <Navbar.Item href="#">
-          <img
-            src="https://bulma.io/images/bulma-logo.png"
-            width="112"
-            height="28"
-          />
-        </Navbar.Item>
-        <Navbar.Burger />
-      </Navbar.Brand>
+storiesOf("Components/Navbar", module)
+  .addDecorator(story => <Section children={story()} />)
+  .add("Default", () => {
+    const { active, color, fixed, ...rest } = {
+      active: knobs.active("Navbar: active (mobile)") as string,
+      color: modifiersKnobs.color("Navbar: color"),
+      fixed: knobs.fixed("Navbar: fixed"),
+      transparent: knobs.transparent("Navbar: transparent"),
+    };
 
-      <Navbar.Menu>
-        <Navbar.Container position="start">
-          <Navbar.Item href="#">Home</Navbar.Item>
-          <Navbar.Item href="#">Documentation</Navbar.Item>
+    const itemProps = {
+      active: knobs.item.active("Navbar > Menu > Item > Link: active"),
+      dropdownUp: knobs.item.dropdownUp("Navbar > Menu > Item: dropdownUp"),
+      hoverable: knobs.item.hoverable("Navbar > Menu > Item > Link: hoverable"),
+    };
+    const linkProps = {
+      arrowless: knobs.link.arrowless("Navbar > Menu > Item > Link: arrowless"),
+    };
 
-          <Navbar.Item dropdown hoverable>
-            <Navbar.Link
-              arrowless={boolean("Navbar > More (arrowless)", false)}
-            >
-              More
-            </Navbar.Link>
-            <Navbar.Dropdown>
-              <Navbar.Item href="#">About</Navbar.Item>
-              <Navbar.Item href="#">Jobs</Navbar.Item>
-              <Navbar.Item href="#">Contact</Navbar.Item>
-              <Navbar.Divider />
-              <Navbar.Item href="#">Report an issue</Navbar.Item>
-            </Navbar.Dropdown>
+    const dropdownProps = {
+      boxed: knobs.dropdown.boxed("Navbar > Menu > Item > Dropdown: boxed"),
+      right: knobs.dropdown.right("Navbar > Menu > Item > Dropdown: right"),
+    };
+
+    const menuProps = {};
+
+    return (
+      <Navbar
+        active={active === "" ? undefined : active === "true" ? true : false}
+        color={color || undefined}
+        fixed={fixed || undefined}
+        {...rest}
+      >
+        <Navbar.Brand>
+          <Navbar.Item href="#">
+            <img
+              src="https://bulma.io/images/bulma-logo.png"
+              width="112"
+              height="28"
+            />
           </Navbar.Item>
-        </Navbar.Container>
+          <Navbar.Burger />
+        </Navbar.Brand>
 
-        <Navbar.Container position="end">
-          <Navbar.Item>
-            <Button.Group>
-              <Button color="primary">
-                <strong>Sign up</strong>
-              </Button>
-              <Button color="light">Log in</Button>
-            </Button.Group>
-          </Navbar.Item>
-        </Navbar.Container>
-      </Navbar.Menu>
-    </Navbar>
-  );
-});
+        <Navbar.Menu {...menuProps}>
+          <Navbar.Start>
+            <Navbar.Item href="#">Home</Navbar.Item>
+            <Navbar.Item href="#">Documentation</Navbar.Item>
+
+            <Navbar.Item dropdown {...itemProps}>
+              <Navbar.Link {...linkProps}>More</Navbar.Link>
+              <Navbar.Dropdown {...dropdownProps}>
+                <Navbar.Item href="#">About</Navbar.Item>
+                <Navbar.Item href="#">Jobs</Navbar.Item>
+                <Navbar.Item href="#">Contact</Navbar.Item>
+                <Navbar.Divider />
+                <Navbar.Item href="#">Report an issue</Navbar.Item>
+              </Navbar.Dropdown>
+            </Navbar.Item>
+          </Navbar.Start>
+
+          <Navbar.End>
+            <Navbar.Item>
+              <Button.Group>
+                <Button color="primary">
+                  <strong>Sign up</strong>
+                </Button>
+                <Button color="light">Log in</Button>
+              </Button.Group>
+            </Navbar.Item>
+          </Navbar.End>
+        </Navbar.Menu>
+      </Navbar>
+    );
+  });

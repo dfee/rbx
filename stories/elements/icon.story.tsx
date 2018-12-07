@@ -6,7 +6,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Icon } from "@/elements";
-import { ICON_SIZES, IconSizes } from "@/elements/icon/icon";
+import { ICON_ALIGNMENTS, ICON_SIZES, IconSizes } from "@/elements/icon/icon";
 
 import { Section } from "@/layout";
 import { iterableToSelectObject } from "../helpers";
@@ -20,6 +20,12 @@ const faSizeMap: { [k in IconSizes | "default"]: FAProps["size"] } = {
 };
 
 export const knobs = {
+  align: (title: string = "Align") =>
+    select(
+      title,
+      iterableToSelectObject(ICON_ALIGNMENTS, { undefined: "" }),
+      "",
+    ),
   fontAwesome: {
     border: (title: string = "Border") => boolean(title, false),
     fixedWidth: (title: string = "Fixed width") => boolean(title, false),
@@ -49,7 +55,8 @@ export const knobs = {
 storiesOf("Elements/Icon", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Font Awesome", () => {
-    const { color, flip, rotation, size, ...rest } = {
+    const { align, color, flip, rotation, size, ...rest } = {
+      align: knobs.align("Align (when in control)"),
       border: knobs.fontAwesome.border(),
       color: modifierKnobs.color(),
       fixedWidth: knobs.fontAwesome.fixedWidth(),
@@ -62,7 +69,11 @@ storiesOf("Elements/Icon", module)
       spin: knobs.fontAwesome.spin(),
     };
     return (
-      <Icon color={color || undefined} size={size || undefined}>
+      <Icon
+        align={align || undefined}
+        color={color || undefined}
+        size={size || undefined}
+      >
         <FontAwesomeIcon
           {...rest}
           flip={flip || undefined}

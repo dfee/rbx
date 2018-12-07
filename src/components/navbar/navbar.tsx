@@ -5,27 +5,33 @@ import { forwardRefAs, Generic } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { canUseDOM } from "@/utils";
+import { tuple } from "@/utils";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
-import { NavbarContainer } from "./navbar-container";
 import { NavbarContext } from "./navbar-context";
 import { NavbarDivider } from "./navbar-divider";
 import { NavbarDropdown } from "./navbar-dropdown";
+import { NavbarEnd } from "./navbar-end";
 import { NavbarItem } from "./navbar-item";
 import { NavbarLink } from "./navbar-link";
 import { NavbarMenu } from "./navbar-menu";
+import { NavbarStart } from "./navbar-start";
 
 let htmlClass = "";
 
 export const getHtmlClasses = () => htmlClass;
 
+export const NAVBAR_FIXED_ALIGNMENTS = tuple("top", "bottom");
+export type NavbarFixedAlignments = (typeof NAVBAR_FIXED_ALIGNMENTS)[number];
+
 export type NavbarModifierProps = Partial<{
+  /**
+   * Determines whether the menu is displayed on mobile
+   */
   active: boolean;
-  children: React.ReactNode;
   className: string;
   color: Colors;
-  fixed: "top" | "bottom";
-  style: React.CSSProperties;
+  fixed: NavbarFixedAlignments;
   transparent: boolean;
 }>;
 
@@ -44,8 +50,6 @@ class NavbarController extends React.PureComponent<
   NavbarControllerState
 > {
   public static defaultProps = {
-    active: false,
-    children: null,
     transparent: false,
   };
 
@@ -90,11 +94,30 @@ class NavbarController extends React.PureComponent<
 
     return (
       <NavbarContext.Provider
-        value={{ active: this.state.active, setActive: this.setActive }}
+        value={{
+          active: this.active,
+          setActive: (value: boolean) => {
+            this.active = value;
+          },
+        }}
       >
         <Generic ref={innerRef} role="navigation" {...rest} />
       </NavbarContext.Provider>
     );
+  }
+
+  private get managed() {
+    return this.props.active !== undefined;
+  }
+
+  private get active() {
+    return this.managed ? this.props.active || false : this.state.active;
+  }
+
+  private set active(value: boolean) {
+    if (!this.managed) {
+      this.setState({ active: value });
+    }
   }
 
   private manageHtmlAttributes() {
@@ -120,11 +143,13 @@ export const Navbar = Object.assign(
   {
     Brand: NavbarBrand,
     Burger: NavbarBurger,
-    Container: NavbarContainer,
+    Context: NavbarContext,
     Divider: NavbarDivider,
     Dropdown: NavbarDropdown,
+    End: NavbarEnd,
     Item: NavbarItem,
     Link: NavbarLink,
     Menu: NavbarMenu,
+    Start: NavbarStart,
   },
 );

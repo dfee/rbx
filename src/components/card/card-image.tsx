@@ -5,12 +5,8 @@ import { Image } from "@/elements/image";
 import { ImageProps } from "@/elements/image/image";
 import { Generic } from "@/generic";
 
-export type CardImageModifierProps = Partial<{
-  className: string;
-}>;
-
 export type CardImageProps = Prefer<
-  ImageProps & CardImageModifierProps,
+  ImageProps,
   React.HTMLAttributes<HTMLElement>
 >;
 

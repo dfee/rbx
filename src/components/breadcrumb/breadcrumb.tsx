@@ -6,6 +6,9 @@ import { ModifierProps, transformModifiers } from "@/modifiers";
 import { tuple } from "@/utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 
+export const BREADCRUMB_ALIGNMENTS = tuple("centered", "right");
+export type BreadacrumbAlignments = (typeof BREADCRUMB_ALIGNMENTS)[number];
+
 export const BREADCRUMB_SEPARATORS = tuple(
   "arrow",
   "bullet",
@@ -14,10 +17,13 @@ export const BREADCRUMB_SEPARATORS = tuple(
 );
 export type BreadcrumbSeparators = (typeof BREADCRUMB_SEPARATORS)[number];
 
+export const BREADCRUMB_SIZES = tuple("small", "medium", "large");
+export type BreadacrumbSizes = (typeof BREADCRUMB_SIZES)[number];
+
 export type BreadcrumbModifierProps = Partial<{
-  align: "right" | "center";
+  align: BreadacrumbAlignments;
   separator: BreadcrumbSeparators;
-  size: "small" | "medium" | "large";
+  size: BreadacrumbSizes;
 }>;
 
 export type BreadcrumbProps = Prefer<

@@ -4,12 +4,16 @@ import React from "react";
 import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
 import { MessageBody } from "./message-body";
 import { MessageHeader } from "./message-header";
 
+export const MESSAGE_SIZES = tuple("small", "medium", "large");
+export type MessageSizes = (typeof MESSAGE_SIZES)[number];
+
 export type MessageModifierProps = Partial<{
   color: Colors;
-  size: "small" | "medium" | "large";
+  size: MessageSizes;
 }>;
 
 export type MessageProps = ModifierProps & MessageModifierProps;

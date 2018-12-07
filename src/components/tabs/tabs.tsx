@@ -3,16 +3,26 @@ import React from "react";
 
 import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
+import { tuple } from "@/utils";
 import { Tab } from "./tab";
 
+export const TABS_ALIGNMENTS = tuple("centered", "right");
+export type TabsAlignments = (typeof TABS_ALIGNMENTS)[number];
+
+export const TABS_SIZES = tuple("small", "medium", "large");
+export type TabsSizes = (typeof TABS_SIZES)[number];
+
+export const TABS_TYPES = tuple("boxed", "toggle", "toggle-rounded");
+export type TabsTypes = (typeof TABS_TYPES)[number];
+
 export type TabsModifierProps = Partial<{
-  align: "centered" | "right";
+  align: TabsAlignments;
   fullwidth: boolean;
-  size: "small" | "medium" | "large";
+  size: TabsSizes;
   /**
    * This is called style on Bulma documentation
    */
-  type: "toggle" | "boxed" | "toggle-rounded";
+  type: TabsTypes;
 }>;
 
 export type TabsProps = ModifierProps & TabsModifierProps;
@@ -32,7 +42,8 @@ export const Tabs = Object.assign(
       [`is-${align}`]: align,
       [`is-${size}`]: size,
       "is-fullwidth": fullwidth,
-      "is-toggle": type === "toggle-rounded",
+      "is-toggle": type === "toggle" || type === "toggle-rounded",
+      "is-toggle-rounded": type === "toggle-rounded",
       [`is-${type}`]: type,
     });
     return React.createElement(as!, {

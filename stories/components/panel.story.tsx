@@ -1,18 +1,43 @@
+import {
+  faBook,
+  faCodeBranch,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
+import { Columns } from "@/columns";
 import { Panel } from "@/components";
 import { Button, Icon } from "@/elements";
 import { Checkbox, Control, Input } from "@/form";
+import { Section } from "@/layout";
 
 storiesOf("Components/Panel", module)
-  .addDecorator(story => <div style={{ margin: 10 }}>{story()}</div>)
+  .addDecorator(story => (
+    <Section>
+      <Columns>
+        <Columns.Column
+          mobile={{ size: "full" }}
+          tablet={{ size: "half" }}
+          desktop={{ size: "one-third" }}
+          widescreen={{ size: "one-quarter" }}
+          fullhd={{ size: "one-fifth" }}
+        >
+          {story()}
+        </Columns.Column>
+      </Columns>
+    </Section>
+  ))
   .add("Default", () => (
     <Panel>
-      <Panel.Header>repositories</Panel.Header>
+      <Panel.Heading>repositories</Panel.Heading>
       <Panel.Block>
-        <Control>
+        <Control iconLeft>
           <Input size="small" type="text" placeholder="search" />
+          <Icon size="small" className="is-left">
+            <FontAwesomeIcon icon={faSearch} />
+          </Icon>
         </Control>
       </Panel.Block>
       <Panel.Tabs className="panel-tabs">
@@ -23,29 +48,42 @@ storiesOf("Components/Panel", module)
         <Panel.Tabs.Tab>forks</Panel.Tabs.Tab>
       </Panel.Tabs>
       <Panel.Block<"a"> as="a" active>
-        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
+        <Panel.Icon>
+          <FontAwesomeIcon icon={faBook} />
+        </Panel.Icon>
         bulma
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
-        rbx
+        <Panel.Icon>
+          <FontAwesomeIcon icon={faBook} />
+        </Panel.Icon>
+        marksheet
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
+        <Panel.Icon>
+          <FontAwesomeIcon icon={faBook} />
+        </Panel.Icon>
         minireset.css
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
+        <Panel.Icon>
+          <FontAwesomeIcon icon={faBook} />
+        </Panel.Icon>
         jgthms.github.io
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
-        dfee.github.io
+        <Panel.Icon>
+          <FontAwesomeIcon icon={faCodeBranch} />
+        </Panel.Icon>
+        daniellowtw/infboard
       </Panel.Block>
       <Panel.Block>
-        <Panel.Icon<typeof Icon> as={Icon} icon="angle-down" />
+        <Panel.Icon>
+          <FontAwesomeIcon icon={faCodeBranch} />
+        </Panel.Icon>
         mojs
       </Panel.Block>
+
       <Panel.Block<"label"> as="label" className="panel-block">
         <Checkbox />
         remember me

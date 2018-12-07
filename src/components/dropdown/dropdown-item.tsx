@@ -1,29 +1,38 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/generic";
-import { ModifierProps } from "@/modifiers";
+import { forwardRefAs } from "@/generic";
+import { ModifierProps, transformModifiers } from "@/modifiers";
+import { DropdownContext } from "./dropdown-context";
 
-export interface DropdownItemModifierProps {
-  active?: boolean;
-  value: string;
-}
+export type DropdownItemModifierProps = Partial<{
+  active: boolean;
+}>;
 
-export type DropdownItemProps = Prefer<
-  ModifierProps & DropdownItemModifierProps,
-  React.HTMLAttributes<HTMLDivElement>
->;
+export type DropdownItemProps = ModifierProps & DropdownItemModifierProps;
 
-export const DropdownItem = React.forwardRef<HTMLDivElement, DropdownItemProps>(
+export const DropdownItem = forwardRefAs<DropdownItemProps, "a">(
   (props, ref) => {
-    const { active, value, ...rest } = props;
+    const { as, active, onClick, ...rest } = transformModifiers(props);
     rest.className = cx("dropdown-item", rest.className, {
       "is-active": active,
     });
-    return <Generic ref={ref} title={value} role="presentation" {...rest} />;
+    return (
+      <DropdownContext.Consumer>
+        {ctx =>
+          React.createElement(as!, {
+            onClick: event => {
+              if (onClick) {
+                onClick(event);
+              }
+              ctx.setActive(!ctx.active);
+            },
+            ref,
+            ...rest,
+          })
+        }
+      </DropdownContext.Consumer>
+    );
   },
+  "a",
 );
-
-DropdownItem.defaultProps = {
-  active: false,
-};

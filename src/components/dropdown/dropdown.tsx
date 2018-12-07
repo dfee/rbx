@@ -1,20 +1,24 @@
 import { cx } from "emotion";
 import React, { PureComponent } from "react";
 
-import { Button } from "@/elements/button";
-import { Icon } from "@/elements/icon";
 import { ModifierProps, transformModifiers } from "@/modifiers";
-import { Colors } from "@/modifiers/color";
+import { tuple } from "@/utils";
+import { combineRefs } from "@/utils";
+import { DropdownContent } from "./dropdown-content";
+import { DropdownContext } from "./dropdown-context";
 import { DropdownDivider } from "./dropdown-divider";
 import { DropdownItem } from "./dropdown-item";
+import { DropdownMenu } from "./dropdown-menu";
+import { DropdownTrigger } from "./dropdown-trigger";
+
+export const DROPDOWN_ALIGNMENTS = tuple("right");
+export type DropdownAlignments = (typeof DROPDOWN_ALIGNMENTS)[number];
 
 export type DropdownModifierProps = Partial<{
-  align: "right";
-  color: Colors;
+  active: boolean;
+  align: DropdownAlignments;
   hoverable: boolean;
-  innerRef: React.RefObject<HTMLDivElement>;
-  onChange: (value: string) => void;
-  value: string;
+  up: boolean;
 }>;
 
 export type DropdownProps = Prefer<
@@ -23,37 +27,35 @@ export type DropdownProps = Prefer<
 >;
 
 const initialState = {
-  open: false,
+  active: false,
 };
 
-export type DropdownState = typeof initialState;
+export type DropdownControllerProps = DropdownProps & {
+  innerRef: React.Ref<HTMLDivElement>;
+};
+export type DropdownControllerState = typeof initialState;
 
-export class Dropdown extends PureComponent<DropdownProps, DropdownState> {
-  public static Item = DropdownItem;
-  public static Divider = DropdownDivider;
+export class DropdownController extends PureComponent<
+  DropdownControllerProps,
+  DropdownControllerState
+> {
+  public static Menu = DropdownMenu;
+  public static Trigger = DropdownTrigger;
 
   public static defaultProps = {
     children: [],
   };
 
-  public readonly state: DropdownState = initialState;
+  public readonly state: DropdownControllerState = initialState;
 
-  private htmlElement: React.RefObject<HTMLDivElement>;
-  private listener: (() => void) | null = null;
-
-  constructor(props: DropdownProps) {
-    super(props);
-    this.htmlElement = props.innerRef || React.createRef<HTMLDivElement>();
-  }
+  private ref = React.createRef<HTMLDivElement>();
 
   public componentDidMount() {
-    this.listener = () => this.close;
-    document.addEventListener("click", this.listener);
+    document.addEventListener("click", this.handleClick);
   }
 
   public componentWillUnmount() {
-    document.removeEventListener("click", this.listener!);
-    this.listener = null;
+    document.removeEventListener("click", this.handleClick!);
   }
 
   public toggle = (evt: React.MouseEvent<HTMLDivElement>) => {
@@ -63,82 +65,73 @@ export class Dropdown extends PureComponent<DropdownProps, DropdownState> {
     if (evt) {
       evt.preventDefault();
     }
-    this.setState(({ open }) => ({ open: !open }));
-  }
-
-  public select = (value: string) => () => {
-    if (this.props.onChange) {
-      this.props.onChange(value);
-    }
-    this.close();
+    this.setState(({ active }) => ({ active: !active }));
   }
 
   public render() {
     const {
-      children,
-      value,
-      color,
       align,
+      active,
       hoverable,
-      onChange,
+      innerRef,
+      up,
       ...rest
     } = transformModifiers(this.props);
     rest.className = cx("dropdown", rest.className, {
-      "is-active": this.state.open,
-      [`is-,${align}`]: align,
+      [`is-${align}`]: align,
+      "is-active": this.active,
       "is-hoverable": hoverable,
-    });
-
-    let current = null;
-
-    const childrenArray = React.Children.map(children, (child, i) => {
-      if (typeof child !== "string" && typeof child !== "number") {
-        if (i === 0 || child.props.value === value) {
-          current = child.props.children;
-        }
-        return React.cloneElement(
-          child,
-          child.type === DropdownItem
-            ? {
-                active: child.props.value === value,
-                onClick: this.select(child.props.value),
-              }
-            : {},
-        );
-      }
-      return child;
+      "is-up": up,
     });
 
     return (
-      <div {...rest} ref={this.htmlElement}>
-        <div
-          className="dropdown-trigger"
-          role="presentation"
-          onClick={this.toggle}
-        >
-          <Button color={color}>
-            <span>{current}</span>
-            <Icon icon="angle-down" size="small" />
-          </Button>
-        </div>
-        <div className="dropdown-menu" id="dropdown-menu" role="menu">
-          <div className="dropdown-content">{childrenArray}</div>
-        </div>
-      </div>
+      <DropdownContext.Provider
+        value={{
+          active: this.active,
+          setActive: (value: boolean) => (this.active = value),
+        }}
+      >
+        <div {...rest} ref={combineRefs(this.ref, innerRef)} />
+      </DropdownContext.Provider>
     );
   }
 
-  private close(event?: MouseEvent) {
-    // IDK yet how to test using the ref in enzyme
-    if (
-      this.props.hoverable ||
-      (event &&
-        this.htmlElement.current &&
-        event.target instanceof HTMLElement &&
-        !this.htmlElement.current.contains(event.target))
-    ) {
-      return;
+  private get managed() {
+    return this.props.hoverable || this.props.active !== undefined;
+  }
+
+  private get active() {
+    return this.managed ? this.props.active || false : this.state.active;
+  }
+
+  private set active(value: boolean) {
+    if (!this.managed) {
+      this.setState({ active: value });
     }
-    this.setState({ open: false });
+  }
+
+  private handleClick = (event: MouseEvent) => {
+    if (!this.managed && this.active && this.ref.current) {
+      if (
+        event.target instanceof Element &&
+        !this.ref.current.contains(event.target)
+      ) {
+        this.active = false;
+      }
+    }
   }
 }
+
+export const Dropdown = Object.assign(
+  React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
+    return <DropdownController innerRef={ref} {...props} />;
+  }),
+  {
+    Content: DropdownContent,
+    Context: DropdownContext,
+    Divider: DropdownDivider,
+    Item: DropdownItem,
+    Menu: DropdownMenu,
+    Trigger: DropdownTrigger,
+  },
+);

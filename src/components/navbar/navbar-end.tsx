@@ -4,13 +4,12 @@ import React from "react";
 import { forwardRefAs } from "@/generic";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type PanelHeaderProps = ModifierProps;
+export type NavbarEndProps = ModifierProps;
 
-export const PanelHeader = forwardRefAs<PanelHeaderProps, "div">(
-  (props, ref) => {
+export const NavbarEnd = Object.assign(
+  forwardRefAs<NavbarEndProps, "div">((props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("panel-heading", rest.className);
+    rest.className = cx("navbar-end", rest.className);
     return React.createElement(as!, { ref, ...rest });
-  },
-  "div",
+  }, "div"),
 );
