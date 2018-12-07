@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type MessageBodyProps = ModifierProps;
+export type MessageBodyModifierProps = Partial<{ className: string }>;
+
+export type MessageBodyProps = ModifierProps & MessageBodyModifierProps;
 
 export const MessageBody = forwardRefAs<MessageBodyProps, "div">(
   (props, ref) => {
@@ -12,5 +14,5 @@ export const MessageBody = forwardRefAs<MessageBodyProps, "div">(
     rest.className = cx("message-body", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

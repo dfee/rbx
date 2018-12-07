@@ -21,8 +21,8 @@ storiesOf("Components/Card", module)
       />
       <Card.Content>
         <Media>
-          <Media.Item<"figure"> as="figure" position="left">
-            <Image<"p">
+          <Media.Item as="figure" position="left">
+            <Image
               as="p"
               size={64}
               alt="64x64"
@@ -30,10 +30,10 @@ storiesOf("Components/Card", module)
             />
           </Media.Item>
           <Media.Item>
-            <Title<"p"> as="p" size={4}>
+            <Title as="p" size={4}>
               John Smith
             </Title>
-            <Title<"p"> as="p" subtitle size={6}>
+            <Title as="p" subtitle size={6}>
               @johnsmith
             </Title>
           </Media.Item>
@@ -52,7 +52,7 @@ storiesOf("Components/Card", module)
     <Card>
       <Card.Header>
         <Card.Header.Title>Component</Card.Header.Title>
-        <Card.Header.Icon<"a"> as="a">
+        <Card.Header.Icon as="a">
           <Icon>
             <FontAwesomeIcon icon={faAngleDown} />
           </Icon>
@@ -68,13 +68,13 @@ storiesOf("Components/Card", module)
         </Content>
       </Card.Content>
       <Card.Footer>
-        <Card.Footer.Item<"a"> as="a" href="#">
+        <Card.Footer.Item as="a" href="#">
           Save
         </Card.Footer.Item>
-        <Card.Footer.Item<"a"> as="a" href="#">
+        <Card.Footer.Item as="a" href="#">
           Edit
         </Card.Footer.Item>
-        <Card.Footer.Item<"a"> as="a" href="#">
+        <Card.Footer.Item as="a" href="#">
           Delete
         </Card.Footer.Item>
       </Card.Footer>
@@ -89,8 +89,8 @@ storiesOf("Components/Card", module)
         </Title>
         <Title subtitle>Jeff Atwood</Title>
       </Card.Content>
-      <Card.Footer<"footer"> as="footer">
-        <Card.Footer.Item<"p"> as="p">
+      <Card.Footer as="footer">
+        <Card.Footer.Item as="p">
           <span>
             View on{" "}
             <a href="https://twitter.com/codinghorror/status/506010907021828096">
@@ -98,7 +98,7 @@ storiesOf("Components/Card", module)
             </a>
           </span>
         </Card.Footer.Item>
-        <Card.Footer.Item<"p"> as="p">
+        <Card.Footer.Item as="p">
           <span>
             Share on <a href="#">Facebook</a>
           </span>

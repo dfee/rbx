@@ -8,6 +8,7 @@
     "lib": ["es5", "es6", "es7", "es2017", "dom"],
     "module": "es2015",
     "moduleResolution": "node",
+    "noErrorTruncation": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",

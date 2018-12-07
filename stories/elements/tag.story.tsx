@@ -96,7 +96,7 @@ storiesOf("Elements/Tag", module)
       <Section>
         <Tag.Group gapless>
           <Tag color="danger">Alex Smith</Tag>
-          <Tag<"a"> as="a" delete />
+          <Tag as="a" delete />
         </Tag.Group>
       </Section>
     </React.Fragment>

@@ -4,14 +4,14 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type CardContentModifierProps = Partial<{ className: string }>;
+export type HeroFootModifierProps = Partial<{ className: string }>;
 
-export type CardContentProps = ModifierProps & CardContentModifierProps;
+export type HeroFootProps = ModifierProps & HeroFootModifierProps;
 
-export const CardContent = forwardRefAs<CardContentProps, "div">(
+export const HeroFoot = forwardRefAs<HeroFootProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("card-content", rest.className);
+    rest.className = cx("hero-foot", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type ModalCardFootProps = ModifierProps;
+export type ModalCardFootModifierProps = Partial<{ className: string }>;
+
+export type ModalCardFootProps = ModifierProps & ModalCardFootModifierProps;
 
 export const ModalCardFoot = forwardRefAs<ModalCardFootProps, "footer">(
   (props, ref) => {
@@ -12,5 +14,5 @@ export const ModalCardFoot = forwardRefAs<ModalCardFootProps, "footer">(
     rest.className = cx("modal-card-foot", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "footer",
+  { as: "footer" },
 );

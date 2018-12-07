@@ -5,6 +5,7 @@ import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type PaginationLinkModifiers = Partial<{
+  className: string;
   current: boolean;
 }>;
 
@@ -18,5 +19,5 @@ export const PaginationLink = forwardRefAs<PaginationLinkProps, "a">(
     });
     return <li children={React.createElement(as!, { ref, ...rest })} />;
   },
-  "a",
+  { as: "a" },
 );

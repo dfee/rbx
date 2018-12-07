@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type MessageHeaderProps = ModifierProps;
+export type MessageHeaderModifierProps = Partial<{ className: string }>;
+
+export type MessageHeaderProps = ModifierProps & MessageHeaderModifierProps;
 
 export const MessageHeader = forwardRefAs<MessageHeaderProps, "div">(
   (props, ref) => {
@@ -12,5 +14,5 @@ export const MessageHeader = forwardRefAs<MessageHeaderProps, "div">(
     rest.className = cx("message-header", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

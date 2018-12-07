@@ -6,14 +6,19 @@ import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type PanelTabModifierProps = Partial<{
   active: boolean;
+  className: string;
 }>;
 
 export type PanelTabProps = ModifierProps & PanelTabModifierProps;
 
-export const PanelTab = forwardRefAs<PanelTabProps, "a">((props, ref) => {
-  const { active, as, className: cn, ...rest } = transformModifiers(props);
-  const className = cx(cn, { "is-active": active }) || undefined;
-  return React.createElement(as!, { className, ref, ...rest });
-}, "a");
-
-PanelTab.defaultProps = Object.assign({ active: false }, PanelTab.defaultProps);
+export const PanelTab = forwardRefAs<PanelTabProps, "a">(
+  (props, ref) => {
+    const { active, as, className: cn, ...rest } = transformModifiers(props);
+    const className = cx(cn, { "is-active": active }) || undefined;
+    return React.createElement(as!, { className, ref, ...rest });
+  },
+  {
+    active: false,
+    as: "a",
+  },
+);

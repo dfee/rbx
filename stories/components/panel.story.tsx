@@ -46,7 +46,7 @@ storiesOf("Components/Panel", module)
         <Panel.Tabs.Tab>sources</Panel.Tabs.Tab>
         <Panel.Tabs.Tab>forks</Panel.Tabs.Tab>
       </Panel.Tabs>
-      <Panel.Block<"a"> as="a" active>
+      <Panel.Block as="a" active>
         <Panel.Icon>
           <FontAwesomeIcon icon={faBook} />
         </Panel.Icon>
@@ -83,7 +83,7 @@ storiesOf("Components/Panel", module)
         mojs
       </Panel.Block>
 
-      <Panel.Block<"label"> as="label" className="panel-block">
+      <Panel.Block as="label" className="panel-block">
         <Checkbox />
         remember me
       </Panel.Block>

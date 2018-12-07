@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type DropdownContentProps = ModifierProps;
+export type DropdownContentModifierProps = Partial<{ className: string }>;
+
+export type DropdownContentProps = ModifierProps & DropdownContentModifierProps;
 
 export const DropdownContent = forwardRefAs<DropdownContentProps, "div">(
   (props, ref) => {
@@ -12,5 +14,5 @@ export const DropdownContent = forwardRefAs<DropdownContentProps, "div">(
     rest.className = cx("dropdown-content", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

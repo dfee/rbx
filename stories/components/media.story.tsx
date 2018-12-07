@@ -21,8 +21,8 @@ storiesOf("Components/Media", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => (
     <Media>
-      <Media.Item<"figure"> as="figure" position="left">
-        <Image<"p">
+      <Media.Item as="figure" position="left">
+        <Image
           as="p"
           size={64}
           alt="64x64"
@@ -42,17 +42,17 @@ storiesOf("Components/Media", module)
         </Content>
         <Level breakpoint="mobile">
           <Level.Side align="left">
-            <Level.Item<"a"> as="a">
+            <Level.Item as="a">
               <Icon size="small">
                 <FontAwesomeIcon icon={faReply} />
               </Icon>
             </Level.Item>
-            <Level.Item<"a"> as="a">
+            <Level.Item as="a">
               <Icon size="small">
                 <FontAwesomeIcon icon={faRetweet} />
               </Icon>
             </Level.Item>
-            <Level.Item<"a"> as="a">
+            <Level.Item as="a">
               <Icon size="small">
                 <FontAwesomeIcon icon={faHeart} />
               </Icon>
@@ -67,8 +67,8 @@ storiesOf("Components/Media", module)
   ))
   .add("Input", () => (
     <Media>
-      <Media.Item<"figure"> as="figure" position="left">
-        <Image<"p">
+      <Media.Item as="figure" position="left">
+        <Image
           as="p"
           size={64}
           src="https://bulma.io/images/placeholders/128x128.png"
@@ -99,9 +99,9 @@ storiesOf("Components/Media", module)
   ))
   .add("Nesting", () => (
     <React.Fragment>
-      <Media<"article"> as="article">
+      <Media as="article">
         <Media.Item position="left">
-          <Image<"p">
+          <Image
             src="http://bulma.io/images/placeholders/128x128.png"
             size={64}
             as="p"
@@ -125,7 +125,7 @@ storiesOf("Components/Media", module)
 
           <Media>
             <Media.Item position="left">
-              <Image<"p">
+              <Image
                 src="http://bulma.io/images/placeholders/128x128.png"
                 size={48}
                 as="p"
@@ -162,7 +162,7 @@ storiesOf("Components/Media", module)
 
           <Media>
             <Media.Item position="left">
-              <Image<"p">
+              <Image
                 src="http://bulma.io/images/placeholders/96x96.png"
                 size={48}
                 as="p"
@@ -188,9 +188,9 @@ storiesOf("Components/Media", module)
           </Media>
         </Media.Item>
       </Media>
-      <Media<"article"> as="article">
+      <Media as="article">
         <Media.Item position="left">
-          <Image<"p">
+          <Image
             src="http://bulma.io/images/placeholders/128x128.png"
             size={64}
             as="p"
@@ -198,12 +198,12 @@ storiesOf("Components/Media", module)
         </Media.Item>
         <Media.Item position="content">
           <Field>
-            <Control<"p"> as="p">
+            <Control as="p">
               <Textarea placeholder="Add a comment..." />
             </Control>
           </Field>
           <Field>
-            <Control<"p"> as="p">
+            <Control as="p">
               <Button>Post comment</Button>
             </Control>
           </Field>

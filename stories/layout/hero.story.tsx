@@ -32,7 +32,7 @@ storiesOf("Layout/Hero", module)
         <Hero.Body>
           <Container>
             <Title>Primary title</Title>
-            <Title<"h2"> as="h2" subtitle>
+            <Title as="h2" subtitle>
               Primary Subtitle
             </Title>
           </Container>
@@ -60,7 +60,7 @@ storiesOf("Layout/Hero", module)
                 <Navbar.Item active>Home</Navbar.Item>
                 <Navbar.Item>Examples</Navbar.Item>
                 <Navbar.Item>Documentation</Navbar.Item>
-                <Navbar.Item<"span"> as="span">
+                <Navbar.Item as="span">
                   <Button color="primary" inverted>
                     <Icon>
                       <FontAwesomeIcon icon={faGithub} />
@@ -78,16 +78,16 @@ storiesOf("Layout/Hero", module)
       <Hero.Body>
         <Container textAlignment="centered">
           <Title>Title</Title>
-          <Title<"h2"> as="h2" subtitle>
+          <Title as="h2" subtitle>
             Subtitle
           </Title>
         </Container>
       </Hero.Body>
 
       {/* Hero footer: will stick at the bottom */}
-      <Hero.Footer>
+      <Hero.Foot>
         <Container>
-          <Tabs<"nav"> as="nav" type="boxed" fullwidth>
+          <Tabs as="nav" type="boxed" fullwidth>
             <Tabs.Tab active>Overview</Tabs.Tab>
             <Tabs.Tab>Modifiers</Tabs.Tab>
             <Tabs.Tab>Grid</Tabs.Tab>
@@ -96,6 +96,6 @@ storiesOf("Layout/Hero", module)
             <Tabs.Tab>Layout</Tabs.Tab>
           </Tabs>
         </Container>
-      </Hero.Footer>
+      </Hero.Foot>
     </Hero>
   ));

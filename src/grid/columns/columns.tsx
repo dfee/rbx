@@ -64,60 +64,59 @@ type ColumnsModifierProps = Partial<
 export type ColumnsProps = ModifierProps & ColumnsModifierProps;
 
 export const Columns = Object.assign(
-  forwardRefAs<ColumnsProps, "div">((props, ref) => {
-    const {
-      as,
-      breakpoint,
-      centered,
-      desktop,
-      fullhd,
-      gapless,
-      gapSize,
-      mobile,
-      multiline,
-      tablet,
-      widescreen,
-      ...rest
-    } = transformModifiers(props);
-
-    const gapSizeClassNames = cx(
-      { [`is-${gapSize}`]: typeof gapSize === "number" },
-      Object.entries({
+  forwardRefAs<ColumnsProps, "div">(
+    (props, ref) => {
+      const {
+        as,
+        breakpoint,
+        centered,
         desktop,
         fullhd,
+        gapless,
+        gapSize,
         mobile,
+        multiline,
         tablet,
         widescreen,
-      })
-        .filter(([key, value]) => value && typeof value.gapSize === "number")
-        .map(([key, value]) => ({ [`is-${value!.gapSize}-${key}`]: true }))
-        .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-    );
+        ...rest
+      } = transformModifiers(props);
 
-    rest.className = cx(
-      "columns",
-      rest.className,
-      {
-        [`is-${breakpoint}`]: breakpoint,
-        "is-centered": centered,
-        "is-gapless": gapless,
-        "is-multiline": multiline,
-        "is-variable ": !!gapSizeClassNames,
-        [`is-${gapSize}`]: typeof gapSize === "number",
-      },
-      gapSizeClassNames,
-    );
+      const gapSizeClassNames = cx(
+        { [`is-${gapSize}`]: typeof gapSize === "number" },
+        Object.entries({
+          desktop,
+          fullhd,
+          mobile,
+          tablet,
+          widescreen,
+        })
+          .filter(([key, value]) => value && typeof value.gapSize === "number")
+          .map(([key, value]) => ({ [`is-${value!.gapSize}-${key}`]: true }))
+          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+      );
 
-    return React.createElement(as!, { ref, ...rest });
-  }, "div"),
+      rest.className = cx(
+        "columns",
+        rest.className,
+        {
+          [`is-${breakpoint}`]: breakpoint,
+          "is-centered": centered,
+          "is-gapless": gapless,
+          "is-multiline": multiline,
+          "is-variable ": !!gapSizeClassNames,
+          [`is-${gapSize}`]: typeof gapSize === "number",
+        },
+        gapSizeClassNames,
+      );
+
+      return React.createElement(as!, { ref, ...rest });
+    },
+    {
+      as: "div",
+      centered: false,
+      gapless: false,
+      multiline: true,
+    },
+  ),
   { Column },
-);
-
-Columns.defaultProps = Object.assign(
-  {
-    centered: false,
-    gapless: false,
-    multiline: true,
-  },
-  Columns.defaultProps,
 );

@@ -6,6 +6,7 @@ import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type NavbarDropdownModifierProps = Partial<{
   boxed: boolean;
+  className: string;
   right: boolean;
 }>;
 
@@ -20,5 +21,5 @@ export const NavbarDropdown = forwardRefAs<NavbarDropdownProps, "span">(
     });
     return React.createElement(as!, { ref, ...rest });
   },
-  "span",
+  { as: "span" },
 );

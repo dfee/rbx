@@ -12,6 +12,7 @@ export const TITLE_WEIGHTS = tuple("light", "normal", "semibold", "bold");
 export type TitleWeights = (typeof TITLE_WEIGHTS)[number];
 
 export type TitleModifierProps = Partial<{
+  className: string;
   size: TitleSizes;
   spaced: boolean;
   subtitle: boolean;
@@ -20,24 +21,22 @@ export type TitleModifierProps = Partial<{
 
 export type TitleProps = ModifierProps & TitleModifierProps;
 
-export const Title = forwardRefAs<TitleProps, "h1">((props, ref) => {
-  const { as, size, spaced, subtitle, weight, ...rest } = transformModifiers(
-    props,
-  );
-  rest.className = cx(rest.className, {
-    [`is-${size}`]: !!size,
-    "is-spaced": spaced && !subtitle,
-    subtitle,
-    title: !subtitle,
-  });
-  return React.createElement(as!, { ref, ...rest });
-}, "h1");
-
-Title.defaultProps = Object.assign(
+export const Title = forwardRefAs<TitleProps, "h1">(
+  (props, ref) => {
+    const { as, size, spaced, subtitle, weight, ...rest } = transformModifiers(
+      props,
+    );
+    rest.className = cx(rest.className, {
+      [`is-${size}`]: !!size,
+      "is-spaced": spaced && !subtitle,
+      subtitle,
+      title: !subtitle,
+    });
+    return React.createElement(as!, { ref, ...rest });
+  },
   {
-    heading: false,
+    as: "h1",
     spaced: false,
     subtitle: false,
   },
-  Title.defaultProps,
 );

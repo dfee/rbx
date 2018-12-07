@@ -8,14 +8,19 @@ import { CardFooter } from "./card-footer";
 import { CardHeader } from "./card-header";
 import { CardImage } from "./card-image";
 
-export type CardProps = ModifierProps;
+export type CardModifierProps = Partial<{ className: string }>;
+
+export type CardProps = ModifierProps & CardModifierProps;
 
 export const Card = Object.assign(
-  forwardRefAs<CardProps, "div">((props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("card", rest.className);
-    return React.createElement(as!, { ref, ...rest });
-  }, "div"),
+  forwardRefAs<CardProps, "div">(
+    (props, ref) => {
+      const { as, ...rest } = transformModifiers(props);
+      rest.className = cx("card", rest.className);
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "div" },
+  ),
   {
     Content: CardContent,
     Footer: CardFooter,

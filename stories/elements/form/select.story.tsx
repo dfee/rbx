@@ -65,7 +65,7 @@ storiesOf("Elements/Form/Select", module)
           <Select.Option value="Venezuela">Venezuela</Select.Option>
         </Select>
         {hasIcon && (
-          <Icon<"div"> as="div" size="small" align="left">
+          <Icon as="div" size="small" align="left">
             <FontAwesomeIcon icon={faGlobe} />
           </Icon>
         )}

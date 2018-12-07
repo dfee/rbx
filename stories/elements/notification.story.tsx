@@ -12,7 +12,7 @@ storiesOf("Elements/Notification", module)
     const color = modifiersKnobs.color();
     return (
       <Notification color={color || undefined}>
-        <Delete<"button"> as="button" />
+        <Delete as="button" />
         Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem
         ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis
         placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet

@@ -7,6 +7,8 @@ import { DropdownContext } from "./dropdown-context";
 
 export type DropdownItemModifierProps = Partial<{
   active: boolean;
+  className: string;
+  onClick: React.MouseEventHandler<any>;
 }>;
 
 export type DropdownItemProps = ModifierProps & DropdownItemModifierProps;
@@ -21,7 +23,7 @@ export const DropdownItem = forwardRefAs<DropdownItemProps, "a">(
       <DropdownContext.Consumer>
         {ctx =>
           React.createElement(as!, {
-            onClick: event => {
+            onClick: (event: React.MouseEvent<any>) => {
               if (onClick) {
                 onClick(event);
               }
@@ -34,5 +36,5 @@ export const DropdownItem = forwardRefAs<DropdownItemProps, "a">(
       </DropdownContext.Consumer>
     );
   },
-  "a",
+  { as: "a" },
 );

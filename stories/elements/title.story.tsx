@@ -26,7 +26,7 @@ storiesOf("Elements/Title", module)
         <Title size={titleSize || undefined} spaced={spaced}>
           Title
         </Title>
-        <Title<"h2"> as="h2" size={subtitleSize || undefined} subtitle>
+        <Title as="h2" size={subtitleSize || undefined} subtitle>
           Subtitle
         </Title>
       </div>

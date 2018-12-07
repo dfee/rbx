@@ -9,6 +9,7 @@ export const BUTTON_GROUP_POSITIONS = tuple("centered", "right");
 export type ButtonGroupPositions = (typeof BUTTON_GROUP_POSITIONS)[number];
 
 export type ButtonGroupModifierProps = Partial<{
+  className: string;
   hasAddons: boolean;
   position: ButtonGroupPositions;
 }>;
@@ -26,5 +27,5 @@ export const ButtonGroup = forwardRefAs<ButtonGroupProps, "div">(
     });
     return React.createElement(as!, { children, ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

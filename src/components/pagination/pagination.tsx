@@ -18,6 +18,7 @@ export type PaginationSizes = (typeof PAGINATION_SIZES)[number];
 
 export type PaginationModifiers = Partial<{
   align: PaginationAlignments;
+  className: string;
   rounded: boolean;
   size: PaginationSizes;
 }>;
@@ -25,15 +26,18 @@ export type PaginationModifiers = Partial<{
 export type PaginationProps = ModifierProps & PaginationModifiers;
 
 export const Pagination = Object.assign(
-  forwardRefAs<PaginationProps, "nav">((props, ref) => {
-    const { as, align, rounded, size, ...rest } = transformModifiers(props);
-    rest.className = cx("pagination", rest.className, {
-      [`is-${align}`]: align,
-      "is-rounded": rounded,
-      [`is-${size}`]: size,
-    });
-    return React.createElement(as!, { ref, ...rest });
-  }, "nav"),
+  forwardRefAs<PaginationProps, "nav">(
+    (props, ref) => {
+      const { as, align, rounded, size, ...rest } = transformModifiers(props);
+      rest.className = cx("pagination", rest.className, {
+        [`is-${align}`]: align,
+        "is-rounded": rounded,
+        [`is-${size}`]: size,
+      });
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "nav" },
+  ),
   {
     Ellipsis: PaginationEllipsis,
     Link: PaginationLink,

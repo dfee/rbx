@@ -32,26 +32,29 @@ export type BreadcrumbProps = Prefer<
 >;
 
 export const Breadcrumb = Object.assign(
-  forwardRefAs<BreadcrumbProps, "nav">((props, ref) => {
-    const {
-      align,
-      as,
-      children,
-      separator,
-      size,
-      ...rest
-    } = transformModifiers(props);
-    rest.className = cx("breadcrumb", rest.className, {
-      [`has-${separator}-separator`]: separator,
-      [`is-${align}`]: align,
-      [`is-${size}`]: size,
-    });
+  forwardRefAs<BreadcrumbProps, "nav">(
+    (props, ref) => {
+      const {
+        align,
+        as,
+        children,
+        separator,
+        size,
+        ...rest
+      } = transformModifiers(props);
+      rest.className = cx("breadcrumb", rest.className, {
+        [`has-${separator}-separator`]: separator,
+        [`is-${align}`]: align,
+        [`is-${size}`]: size,
+      });
 
-    return (
-      <nav {...rest} ref={ref}>
-        <ul>{children}</ul>
-      </nav>
-    );
-  }, "nav"),
+      return (
+        <nav {...rest} ref={ref}>
+          <ul>{children}</ul>
+        </nav>
+      );
+    },
+    { as: "nav" },
+  ),
   { Item: BreadcrumbItem },
 );

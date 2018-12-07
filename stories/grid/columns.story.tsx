@@ -85,20 +85,20 @@ storiesOf("Grid/Columns", module)
     <Columns>
       <Columns.Column narrow>
         <Box style={{ width: 200 }}>
-          <Title<"p"> as="p" size={5}>
+          <Title as="p" size={5}>
             Narrow column
           </Title>
-          <Title<"p"> as="p" subtitle>
+          <Title as="p" subtitle>
             This column is only 200px wide.
           </Title>
         </Box>
       </Columns.Column>
       <Columns.Column>
         <Box>
-          <Title<"p"> size={5} as="p">
+          <Title size={5} as="p">
             Flexible column
           </Title>
-          <Title<"p"> subtitle as="p">
+          <Title subtitle as="p">
             This column will take up the remaining space available.
           </Title>
         </Box>
@@ -244,14 +244,11 @@ storiesOf("Grid/Columns", module)
     };
     // tslint:enable:object-literal-sort-keys
 
-    const getGapSizeValue = (gapSize: ReturnType<typeof knobs.gapSize>) =>
-      gapSize === "" ? undefined : gapSize;
-
     return (
       <Columns
         {...Object.entries(gapSizes)
           .map(([breakpoint, selectValue]) => ({
-            [breakpoint]: { gapSize: getGapSizeValue(selectValue) },
+            [breakpoint]: { gapSize: selectValue || undefined },
           }))
           .reduce((acc, cv) => ({ ...acc, ...cv }), {})}
       >

@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type PaginationListProps = ModifierProps;
+export type PaginationListModifierProps = Partial<{ className: string }>;
+
+export type PaginationListProps = ModifierProps & PaginationListModifierProps;
 
 export const PaginationList = forwardRefAs<PaginationListProps, "ul">(
   (props, ref) => {
@@ -12,5 +14,5 @@ export const PaginationList = forwardRefAs<PaginationListProps, "ul">(
     rest.className = cx("pagination-list", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "ul",
+  { as: "ul" },
 );

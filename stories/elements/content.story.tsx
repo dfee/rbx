@@ -35,7 +35,7 @@ storiesOf("Elements/Content", module)
           nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat
           odio, sollicitudin vel erat vel, interdum mattis neque.
         </p>
-        <Title<"h2"> as="h2">Second Level</Title>
+        <Title as="h2">Second Level</Title>
         <p>
           Curabitur accumsan turpis pharetra <strong>augue tincidunt</strong>{" "}
           blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum

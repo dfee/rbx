@@ -62,7 +62,7 @@ storiesOf("Components/Modal", module)
         <Modal.Content>
           <Box>
             <Media>
-              <Media.Item<"figure"> as="figure" position="left">
+              <Media.Item as="figure" position="left">
                 <Image
                   as="p"
                   size={64}
@@ -83,12 +83,12 @@ storiesOf("Components/Modal", module)
                 </Content>
                 <Level breakpoint="mobile">
                   <Level.Side align="left">
-                    <Level.Item<"a"> as="a">
+                    <Level.Item as="a">
                       <Icon size="small">
                         <FontAwesomeIcon icon={faRetweet} />
                       </Icon>
                     </Level.Item>
-                    <Level.Item<"a"> as="a">
+                    <Level.Item as="a">
                       <Icon size="small">
                         <FontAwesomeIcon icon={faHeart} />
                       </Icon>
@@ -112,7 +112,7 @@ storiesOf("Components/Modal", module)
       <OpenModal modalProps={props}>
         <Modal.Background />
         <Modal.Content>
-          <Image<"p">
+          <Image
             as="p"
             size="4by3"
             src="https://bulma.io/images/placeholders/1280x960.png"
@@ -146,7 +146,7 @@ storiesOf("Components/Modal", module)
                 dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis
                 neque.
               </p>
-              <Title<"h2"> as="h2">Second level</Title>
+              <Title as="h2">Second level</Title>
               <p>
                 Curabitur accumsan turpis pharetra{" "}
                 <strong>augue tincidunt</strong> blandit. Quisque condimentum
@@ -168,7 +168,7 @@ storiesOf("Components/Modal", module)
                 </li>
                 <li>Ut non enim metus.</li>
               </ul>
-              <Title<"h3"> as="h3">Third level</Title>
+              <Title as="h3">Third level</Title>
               <p>
                 Quisque ante lacus, malesuada ac auctor vitae, congue{" "}
                 <a href="#">non ante</a>. Phasellus lacus ex, semper ac tortor
@@ -216,7 +216,7 @@ storiesOf("Components/Modal", module)
                 tortor nisl, suscipit sed mi sit amet, mollis malesuada nulla.
                 Nulla facilisi. Nullam ac erat ante.
               </p>
-              <Title<"h4"> as="h4">Fourth level</Title>
+              <Title as="h4">Fourth level</Title>
               <p>
                 Nulla efficitur eleifend nisi, sit amet bibendum sapien
                 fringilla ac. Mauris euismod metus a tellus laoreet, at
@@ -240,7 +240,7 @@ storiesOf("Components/Modal", module)
                 Proin tempor cursus nisl vel condimentum. Nam pharetra varius
                 metus non pellentesque.
               </p>
-              <Title<"h5"> as="h5">Fifth level</Title>
+              <Title as="h5">Fifth level</Title>
               <p>
                 Aliquam sagittis rhoncus vulputate. Cras non luctus sem, sed
                 tincidunt ligula. Vestibulum at nunc elit. Praesent aliquet
@@ -248,7 +248,7 @@ storiesOf("Components/Modal", module)
                 diam vel nisi sodales, a eleifend augue laoreet. Sed nec
                 eleifend justo. Nam et sollicitudin odio.
               </p>
-              <Title<"h6"> as="h6">Sixth level</Title>
+              <Title as="h6">Sixth level</Title>
               <p>
                 Cras in nibh lacinia, venenatis nisi et, auctor urna. Donec
                 pulvinar lacus sed diam dignissim, ut eleifend eros accumsan.

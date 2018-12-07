@@ -12,7 +12,7 @@ describe("Hero component", () => {
   it("should expose Hero head, body and footer", () => {
     expect(Hero.Head).toMatchSnapshot();
     expect(Hero.Body).toMatchSnapshot();
-    expect(Hero.Footer).toMatchSnapshot();
+    expect(Hero.Foot).toMatchSnapshot();
   });
 
   it("should have hero classname", () => {
@@ -58,9 +58,9 @@ describe("Hero component", () => {
           <div className="bd-notification is-info">Header</div>
         </Hero.Head>
         <Hero.Body>Body</Hero.Body>
-        <Hero.Footer<"footer"> as="footer">
+        <Hero.Foot<"footer"> as="footer">
           <div className="bd-notification is-danger">Footer</div>
-        </Hero.Footer>
+        </Hero.Foot>
       </Hero>,
     );
     expect(component.toJSON()).toMatchSnapshot();

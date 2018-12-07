@@ -12,7 +12,7 @@ storiesOf("Base", module)
     const backgroundColor = modifiersKnobs.color("Background color");
     const textColor = modifiersKnobs.color("Text color");
     return (
-      <Generic<"p">
+      <Generic
         as="p"
         textColor={textColor || undefined}
         backgroundColor={backgroundColor || undefined}

@@ -15,7 +15,7 @@ storiesOf("Components/Level", module)
       <Level breakpoint={breakpoint || undefined}>
         <Level.Side align="left">
           <Level.Item>
-            <Title<"p"> as="p" size={5} subtitle>
+            <Title as="p" size={5} subtitle>
               <strong>123</strong> posts
             </Title>
           </Level.Item>
@@ -25,7 +25,7 @@ storiesOf("Components/Level", module)
                 <Input placeholder="Find a post" />
               </Control>
               <Control>
-                <Button<"button"> as="button">Search</Button>
+                <Button as="button">Search</Button>
               </Control>
             </Field>
           </Level.Item>
@@ -56,48 +56,48 @@ storiesOf("Components/Level", module)
       <Level.Item textAlignment="centered">
         <div>
           <Heading>Tweets</Heading>
-          <Title<"p"> as="p">3,210</Title>
+          <Title as="p">3,210</Title>
         </div>
       </Level.Item>
       <Level.Item textAlignment="centered">
         <div>
           <Heading>Following</Heading>
-          <Title<"p"> as="p">210</Title>
+          <Title as="p">210</Title>
         </div>
       </Level.Item>
       <Level.Item textAlignment="centered">
         <div>
           <Heading>Followers</Heading>
-          <Title<"p"> as="p">321</Title>
+          <Title as="p">321</Title>
         </div>
       </Level.Item>
       <Level.Item textAlignment="centered">
         <div>
           <Heading>Likes</Heading>
-          <Title<"p"> as="p">321K</Title>
+          <Title as="p">321K</Title>
         </div>
       </Level.Item>
     </Level>
   ))
   .add("Centered (2)", () => (
     <Level>
-      <Level.Item<"p"> as="p" textAlignment="centered">
+      <Level.Item as="p" textAlignment="centered">
         <a className="link is-info">Home</a>
       </Level.Item>
-      <Level.Item<"p"> as="p" textAlignment="centered">
+      <Level.Item as="p" textAlignment="centered">
         <a className="link is-info">Menu</a>
       </Level.Item>
-      <Level.Item<"p"> as="p" textAlignment="centered">
+      <Level.Item as="p" textAlignment="centered">
         <img
           src="https://bulma.io/images/bulma-type.png"
           alt=""
           style={{ height: "30px" }}
         />
       </Level.Item>
-      <Level.Item<"p"> as="p" textAlignment="centered">
+      <Level.Item as="p" textAlignment="centered">
         <a className="link is-info">Reservations</a>
       </Level.Item>
-      <Level.Item<"p"> as="p" textAlignment="centered">
+      <Level.Item as="p" textAlignment="centered">
         <a className="link is-info">Contact</a>
       </Level.Item>
     </Level>

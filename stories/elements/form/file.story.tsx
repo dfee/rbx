@@ -56,7 +56,7 @@ export class ControlledFile extends React.PureComponent<
               <File.Icon>
                 <FontAwesomeIcon icon={faUpload} />
               </File.Icon>
-              <File.Label<"span"> as="span">Choose a File</File.Label>
+              <File.Label as="span">Choose a File</File.Label>
             </File.CTA>
             {withName && <File.Name>{this.state.filename}</File.Name>}
           </File.Label>
@@ -101,7 +101,7 @@ storiesOf("Elements/Form/File", module)
               <File.Icon>
                 <FontAwesomeIcon icon={faUpload} />
               </File.Icon>
-              <File.Label<"span"> as="span">Choose a File</File.Label>
+              <File.Label as="span">Choose a File</File.Label>
             </File.CTA>
             {rest.hasName && (
               <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>

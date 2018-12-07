@@ -4,7 +4,8 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type CardFooterItemProps = ModifierProps;
+export type CardFooterItemModifierProps = Partial<{ className: string }>;
+export type CardFooterItemProps = ModifierProps & CardFooterItemModifierProps;
 
 export const CardFooterItem = forwardRefAs<CardFooterItemProps, "div">(
   (props, ref) => {
@@ -12,5 +13,5 @@ export const CardFooterItem = forwardRefAs<CardFooterItemProps, "div">(
     rest.className = cx("card-footer-item", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

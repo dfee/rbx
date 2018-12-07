@@ -9,18 +9,22 @@ import { LevelSide } from "./level-side";
 
 export type LevelModifierProps = Partial<{
   breakpoint: Breakpoints;
+  className: string;
 }>;
 
 export type LevelProps = ModifierProps & LevelModifierProps;
 
 export const Level = Object.assign(
-  forwardRefAs<LevelProps, "nav">((props, ref) => {
-    const { as, breakpoint, ...rest } = transformModifiers(props);
-    rest.className = cx("level", rest.className, {
-      [`is-${breakpoint}`]: breakpoint,
-    });
-    return React.createElement(as!, { ref, ...rest });
-  }, "nav"),
+  forwardRefAs<LevelProps, "nav">(
+    (props, ref) => {
+      const { as, breakpoint, ...rest } = transformModifiers(props);
+      rest.className = cx("level", rest.className, {
+        [`is-${breakpoint}`]: breakpoint,
+      });
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "nav" },
+  ),
   {
     Item: LevelItem,
     Side: LevelSide,

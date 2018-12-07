@@ -38,17 +38,17 @@ storiesOf("Elements/Box", module)
             </Content>
             <Level breakpoint="mobile">
               <Level.Side align="left">
-                <Level.Item<"a"> as="a" aria-label="reply">
+                <Level.Item as="a" aria-label="reply">
                   <Icon size="small">
                     <FontAwesomeIcon icon={faReply} />
                   </Icon>
                 </Level.Item>
-                <Level.Item<"a"> as="a" aria-label="retweet">
+                <Level.Item as="a" aria-label="retweet">
                   <Icon size="small">
                     <FontAwesomeIcon icon={faRetweet} />
                   </Icon>
                 </Level.Item>
-                <Level.Item<"a"> as="a" aria-label="like">
+                <Level.Item as="a" aria-label="like">
                   <Icon size="small">
                     <FontAwesomeIcon icon={faHeart} />
                   </Icon>

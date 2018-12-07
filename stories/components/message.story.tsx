@@ -24,7 +24,7 @@ storiesOf("Components/Message", module)
       <Message color={color || undefined} size={size || undefined}>
         <Message.Header>
           <p>Hello world</p>
-          <Delete<"button"> as="button" />
+          <Delete as="button" />
         </Message.Header>
         <Message.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}

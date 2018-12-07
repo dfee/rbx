@@ -20,7 +20,7 @@ storiesOf("Layout/Section", module).add("Default", () => {
       <Section size={size || undefined}>
         <Container>
           <Title>Section</Title>
-          <Title<"h2"> as="h2" subtitle>
+          <Title as="h2" subtitle>
             A simple container to divide your page into{" "}
             <strong>sections</strong>, like the one you are currently reading
           </Title>

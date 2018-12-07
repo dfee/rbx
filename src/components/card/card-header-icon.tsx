@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type CardHeaderIconProps = ModifierProps;
+export type CardHeaderIconModifierProps = Partial<{ className: string }>;
+
+export type CardHeaderIconProps = ModifierProps & CardHeaderIconModifierProps;
 
 export const CardHeaderIcon = forwardRefAs<CardHeaderIconProps, "div">(
   (props, ref) => {
@@ -12,5 +14,5 @@ export const CardHeaderIcon = forwardRefAs<CardHeaderIconProps, "div">(
     rest.className = cx("card-header-icon", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

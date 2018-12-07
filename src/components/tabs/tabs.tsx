@@ -17,6 +17,7 @@ export type TabsTypes = (typeof TABS_TYPES)[number];
 
 export type TabsModifierProps = Partial<{
   align: TabsAlignments;
+  className: string;
   fullwidth: boolean;
   size: TabsSizes;
   /**
@@ -28,31 +29,35 @@ export type TabsModifierProps = Partial<{
 export type TabsProps = ModifierProps & TabsModifierProps;
 
 export const Tabs = Object.assign(
-  forwardRefAs<TabsProps, "div">((props, ref) => {
-    const {
-      align,
-      as,
-      children,
-      fullwidth,
-      size,
-      type,
-      ...rest
-    } = transformModifiers(props);
-    rest.className = cx("tabs", rest.className, {
-      [`is-${align}`]: align,
-      [`is-${size}`]: size,
-      "is-fullwidth": fullwidth,
-      "is-toggle": type === "toggle" || type === "toggle-rounded",
-      "is-toggle-rounded": type === "toggle-rounded",
-      [`is-${type}`]: type,
-    });
-    return React.createElement(as!, {
-      children: <ul>{children}</ul>,
-      ref,
-      ...rest,
-    });
-  }, "div"),
+  forwardRefAs<TabsProps, "div">(
+    (props, ref) => {
+      const {
+        align,
+        as,
+        children,
+        fullwidth,
+        size,
+        type,
+        ...rest
+      } = transformModifiers(props);
+      rest.className = cx("tabs", rest.className, {
+        [`is-${align}`]: align,
+        [`is-${size}`]: size,
+        "is-fullwidth": fullwidth,
+        "is-toggle": type === "toggle" || type === "toggle-rounded",
+        "is-toggle-rounded": type === "toggle-rounded",
+        [`is-${type}`]: type,
+      });
+      return React.createElement(as!, {
+        children: <ul>{children}</ul>,
+        ref,
+        ...rest,
+      });
+    },
+    {
+      as: "div",
+      fullwidth: false,
+    },
+  ),
   { Tab },
 );
-
-Tabs.defaultProps = Object.assign({ fullwidth: false }, Tabs.defaultProps);

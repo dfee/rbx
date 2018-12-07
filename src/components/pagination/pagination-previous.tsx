@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type PaginationPreviousProps = ModifierProps;
+export type PaginationPreviousModifierProps = Partial<{ className: string }>;
+export type PaginationPreviousProps = ModifierProps &
+  PaginationPreviousModifierProps;
 
 export const PaginationPrevious = forwardRefAs<PaginationPreviousProps, "a">(
   (props, ref) => {
@@ -12,10 +14,8 @@ export const PaginationPrevious = forwardRefAs<PaginationPreviousProps, "a">(
     rest.className = cx("pagination-previous", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "a",
-);
-
-PaginationPrevious.defaultProps = Object.assign(
-  { children: "Previous" },
-  PaginationPrevious.defaultProps,
+  {
+    as: "a",
+    children: "Previous",
+  },
 );

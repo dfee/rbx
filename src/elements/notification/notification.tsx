@@ -6,6 +6,7 @@ import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 
 export type NotificationModifierProps = Partial<{
+  className: string;
   color: Colors;
 }>;
 
@@ -19,5 +20,5 @@ export const Notification = forwardRefAs<NotificationProps, "div">(
     });
     return React.createElement(as!, { ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

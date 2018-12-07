@@ -4,10 +4,15 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type HeroBodyProps = ModifierProps;
+export type HeroBodyModifierProps = Partial<{ className: string }>;
 
-export const HeroBody = forwardRefAs<HeroBodyProps, "div">((props, ref) => {
-  const { as, ...rest } = transformModifiers(props);
-  rest.className = cx("hero-body", rest.className);
-  return React.createElement(as!, { ref, ...rest });
-}, "div");
+export type HeroBodyProps = ModifierProps & HeroBodyModifierProps;
+
+export const HeroBody = forwardRefAs<HeroBodyProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = transformModifiers(props);
+    rest.className = cx("hero-body", rest.className);
+    return React.createElement(as!, { ref, ...rest });
+  },
+  { as: "div" },
+);

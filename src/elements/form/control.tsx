@@ -9,6 +9,7 @@ export const CONTROL_SIZES = tuple("small", "medium", "large");
 export type ControlSizes = (typeof CONTROL_SIZES)[number];
 
 export type ControlModifierProps = Partial<{
+  className: string;
   expanded: boolean;
   iconLeft: boolean;
   iconRight: boolean;
@@ -18,22 +19,25 @@ export type ControlModifierProps = Partial<{
 
 export type ControlProps = ModifierProps & ControlModifierProps;
 
-export const Control = forwardRefAs<ControlProps, "div">((props, ref) => {
-  const {
-    as,
-    expanded,
-    iconLeft,
-    iconRight,
-    loading,
-    size,
-    ...rest
-  } = transformModifiers(props);
-  rest.className = cx("control", rest.className, {
-    "has-icons-left": iconLeft,
-    "has-icons-right": iconRight,
-    "is-expanded": expanded,
-    "is-loading": loading,
-    [`is-${size}`]: size,
-  });
-  return React.createElement(as!, { ref, ...rest });
-}, "div");
+export const Control = forwardRefAs<ControlProps, "div">(
+  (props, ref) => {
+    const {
+      as,
+      expanded,
+      iconLeft,
+      iconRight,
+      loading,
+      size,
+      ...rest
+    } = transformModifiers(props);
+    rest.className = cx("control", rest.className, {
+      "has-icons-left": iconLeft,
+      "has-icons-right": iconRight,
+      "is-expanded": expanded,
+      "is-loading": loading,
+      [`is-${size}`]: size,
+    });
+    return React.createElement(as!, { ref, ...rest });
+  },
+  { as: "div" },
+);

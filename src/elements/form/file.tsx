@@ -21,6 +21,7 @@ export type FileSizes = (typeof FILE_SIZES)[number];
 export type FileModifierProps = Partial<{
   align: FileAlignmnts;
   boxed: boolean;
+  className: string;
   color: Colors;
   fullwidth: boolean;
   hasName: boolean;
@@ -30,27 +31,30 @@ export type FileModifierProps = Partial<{
 export type FileProps = ModifierProps & FileModifierProps;
 
 export const File = Object.assign(
-  forwardRefAs<FileProps, "div">((props, ref) => {
-    const {
-      as,
-      align,
-      boxed,
-      color,
-      hasName,
-      fullwidth,
-      size,
-      ...rest
-    } = transformModifiers(props);
-    rest.className = cx("file", rest.className, {
-      "has-name": hasName,
-      [`is-${align}`]: align,
-      "is-boxed": boxed,
-      [`is-${color}`]: color,
-      "is-fullwidth": fullwidth,
-      [`is-${size}`]: size,
-    });
-    return React.createElement(as!, { ref, ...rest });
-  }, "div"),
+  forwardRefAs<FileProps, "div">(
+    (props, ref) => {
+      const {
+        as,
+        align,
+        boxed,
+        color,
+        hasName,
+        fullwidth,
+        size,
+        ...rest
+      } = transformModifiers(props);
+      rest.className = cx("file", rest.className, {
+        "has-name": hasName,
+        [`is-${align}`]: align,
+        "is-boxed": boxed,
+        [`is-${color}`]: color,
+        "is-fullwidth": fullwidth,
+        [`is-${size}`]: size,
+      });
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "div" },
+  ),
   {
     CTA: FileCTA,
     Icon: FileIcon,

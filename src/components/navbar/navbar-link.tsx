@@ -6,6 +6,7 @@ import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type NavbarLinkModifierProps = Partial<{
   arrowless: boolean;
+  className: string;
 }>;
 
 export type NavbarLinkProps = ModifierProps & NavbarLinkModifierProps;
@@ -18,5 +19,5 @@ export const NavbarLink = forwardRefAs<NavbarLinkProps, "span">(
     });
     return React.createElement(as!, { ref, ...rest });
   },
-  "span",
+  { as: "span" },
 );

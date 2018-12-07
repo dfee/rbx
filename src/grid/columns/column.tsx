@@ -49,6 +49,7 @@ export type ColumnSizeModifierProps = Partial<{
 
 export type ColumnModifierProps = Partial<
   {
+    className: string;
     /**
      * Size, Offset and Narrow props for Mobile devices (Up to 768px)
      */
@@ -80,41 +81,41 @@ export type ColumnModifierProps = Partial<
 
 export type ColumnProps = ModifierProps & ColumnModifierProps;
 
-export const Column = forwardRefAs<ColumnProps, "div">((props, ref) => {
-  const {
-    as,
-    desktop,
-    fullhd,
-    mobile,
-    narrow,
-    offset,
-    size,
-    tablet,
-    widescreen,
-    ...rest
-  } = transformModifiers(props);
+export const Column = forwardRefAs<ColumnProps, "div">(
+  (props, ref) => {
+    const {
+      as,
+      desktop,
+      fullhd,
+      mobile,
+      narrow,
+      offset,
+      size,
+      tablet,
+      widescreen,
+      ...rest
+    } = transformModifiers(props);
 
-  const dimmensions = { mobile, tablet, desktop, widescreen, fullhd };
-  const sizeClassNames = {
-    [`is-${size}`]: !!size,
-    [`is-offset-${offset}`]: !!offset,
-    "is-narrow": !!narrow,
-  };
-  Object.keys(dimmensions).forEach(key => {
-    const dimmension = dimmensions[key];
-    Object.assign(sizeClassNames, {
-      [`is-${dimmension.size}-${key}`]: !!dimmension.size,
-      [`is-offset-${dimmension.offset}-${key}`]: !!dimmension.offset,
-      "is-narrow-${key}": !!dimmension.narrow,
+    const dimmensions = { mobile, tablet, desktop, widescreen, fullhd };
+    const sizeClassNames = {
+      [`is-${size}`]: !!size,
+      [`is-offset-${offset}`]: !!offset,
+      "is-narrow": !!narrow,
+    };
+    Object.keys(dimmensions).forEach(key => {
+      const dimmension = dimmensions[key];
+      Object.assign(sizeClassNames, {
+        [`is-${dimmension.size}-${key}`]: !!dimmension.size,
+        [`is-offset-${dimmension.offset}-${key}`]: !!dimmension.offset,
+        "is-narrow-${key}": !!dimmension.narrow,
+      });
     });
-  });
-  rest.className = cx("column", rest.className, sizeClassNames);
+    rest.className = cx("column", rest.className, sizeClassNames);
 
-  return React.createElement(as!, { ref, ...rest });
-}, "div");
-
-Column.defaultProps = Object.assign(
+    return React.createElement(as!, { ref, ...rest });
+  },
   {
+    as: "div",
     desktop: { narrow: false },
     fullhd: { narrow: false },
     mobile: { narrow: false },
@@ -122,8 +123,4 @@ Column.defaultProps = Object.assign(
     tablet: { narrow: false },
     widescreen: { narrow: false },
   },
-  Column.defaultProps,
 );
-
-const MyColumn: React.FC<{}> = () => <div>asdf</div>;
-export const MCI = <Column<typeof MyColumn> as={MyColumn} />;

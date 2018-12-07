@@ -8,14 +8,19 @@ import { PanelHeading } from "./panel-heading";
 import { PanelIcon } from "./panel-icon";
 import { PanelTabs } from "./panel-tabs";
 
-export type PanelProps = ModifierProps;
+export type PanelModifierProps = Partial<{ className: string }>;
+
+export type PanelProps = ModifierProps & PanelModifierProps;
 
 export const Panel = Object.assign(
-  forwardRefAs<PanelProps, "nav">((props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("panel", rest.className);
-    return React.createElement(as!, { ref, ...rest });
-  }, "nav"),
+  forwardRefAs<PanelProps, "nav">(
+    (props, ref) => {
+      const { as, ...rest } = transformModifiers(props);
+      rest.className = cx("panel", rest.className);
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "nav" },
+  ),
   {
     Block: PanelBlock,
     Heading: PanelHeading,

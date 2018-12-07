@@ -20,7 +20,7 @@ export const MenuList = Object.assign(
     return (
       <React.Fragment>
         {title && <p className="menu-label">{title}</p>}
-        <Generic<"ul">
+        <Generic
           as="ul"
           className={cx("menu-list", className)}
           ref={ref}

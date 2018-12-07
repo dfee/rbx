@@ -4,7 +4,9 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type ModalContentProps = ModifierProps;
+export type ModalContentModifierProps = Partial<{ className: string }>;
+
+export type ModalContentProps = ModifierProps & ModalContentModifierProps;
 
 export const ModalContent = forwardRefAs<ModalContentProps, "div">(
   (props, ref) => {
@@ -12,5 +14,5 @@ export const ModalContent = forwardRefAs<ModalContentProps, "div">(
     rest.className = cx("modal-content", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
-  "div",
+  { as: "div" },
 );

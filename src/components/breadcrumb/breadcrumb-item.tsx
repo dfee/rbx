@@ -22,5 +22,5 @@ export const BreadcrumbItem = forwardRefAs<BreadcrumbItemProps, "a">(
       </li>
     );
   },
-  "a",
+  { as: "a" },
 );

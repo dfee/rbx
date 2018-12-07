@@ -35,6 +35,7 @@ export type ImageSizes = (typeof IMAGE_SIZES)[number];
 
 export type ImageModifierProps = Partial<{
   alt: string;
+  className: string;
   onError: React.DOMAttributes<HTMLImageElement>["onError"];
   rounded: boolean;
   size: ImageSizes;
@@ -43,30 +44,39 @@ export type ImageModifierProps = Partial<{
 
 export type ImageProps = ModifierProps & ImageModifierProps;
 
-export const Image = forwardRefAs<ImageProps, "figure">((props, ref) => {
-  const { as, alt, onError, rounded, size, src, ...rest } = transformModifiers(
-    props,
-  );
-  let s: string | undefined;
-  if (typeof size === "string") {
-    s = size;
-  } else if (typeof size === "number") {
-    s = `${size}x${size}`;
-  }
-  rest.className = cx("image", rest.className, {
-    [`is-${s}`]: s,
-  });
+export const Image = forwardRefAs<ImageProps, "figure">(
+  (props, ref) => {
+    const {
+      as,
+      alt,
+      onError,
+      rounded,
+      size,
+      src,
+      ...rest
+    } = transformModifiers(props);
+    let s: string | undefined;
+    if (typeof size === "string") {
+      s = size;
+    } else if (typeof size === "number") {
+      s = `${size}x${size}`;
+    }
+    rest.className = cx("image", rest.className, {
+      [`is-${s}`]: s,
+    });
 
-  return React.createElement(as!, {
-    children: (
-      <img
-        className={cx({ "is-rounded": rounded }) || undefined}
-        onError={onError}
-        src={src}
-        alt={alt}
-      />
-    ),
-    ref,
-    ...rest,
-  });
-}, "figure");
+    return React.createElement(as!, {
+      children: (
+        <img
+          className={cx({ "is-rounded": rounded }) || undefined}
+          onError={onError}
+          src={src}
+          alt={alt}
+        />
+      ),
+      ref,
+      ...rest,
+    });
+  },
+  { as: "figure" },
+);

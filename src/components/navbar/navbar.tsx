@@ -138,7 +138,7 @@ class NavbarController extends React.PureComponent<
 export const Navbar = Object.assign(
   forwardRefAs<NavbarProps, "nav">(
     (props, ref) => <NavbarController innerRef={ref} {...props} />,
-    "nav",
+    { as: "nav" },
   ),
   {
     Brand: NavbarBrand,

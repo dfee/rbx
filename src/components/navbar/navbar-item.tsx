@@ -8,6 +8,7 @@ import { NavbarLink } from "./navbar-link";
 
 export type NavbarItemModifierProps = Partial<{
   active: boolean;
+  className: string;
   dropdown: boolean;
   dropdownUp: boolean;
   hoverable: boolean;
@@ -16,25 +17,28 @@ export type NavbarItemModifierProps = Partial<{
 export type NavbarItemProps = ModifierProps & NavbarItemModifierProps;
 
 export const NavbarItem = Object.assign(
-  forwardRefAs<NavbarItemProps, "a">((props, ref) => {
-    const {
-      as,
-      active,
-      dropdown,
-      dropdownUp,
-      hoverable,
-      ...rest
-    } = transformModifiers(props);
-    rest.className = cx("navbar-item", rest.className, {
-      "has-dropdown": dropdown,
-      "has-dropdown-up": dropdownUp,
-      "is-active": active,
-      "is-hoverable": hoverable,
-    });
+  forwardRefAs<NavbarItemProps, "a">(
+    (props, ref) => {
+      const {
+        as,
+        active,
+        dropdown,
+        dropdownUp,
+        hoverable,
+        ...rest
+      } = transformModifiers(props);
+      rest.className = cx("navbar-item", rest.className, {
+        "has-dropdown": dropdown,
+        "has-dropdown-up": dropdownUp,
+        "is-active": active,
+        "is-hoverable": hoverable,
+      });
 
-    const asOverride = dropdown && as === "a" ? "span" : as;
-    return React.createElement(asOverride!, { ref, ...rest });
-  }, "a"),
+      const asOverride = dropdown && as === "a" ? "span" : as;
+      return React.createElement(asOverride!, { ref, ...rest });
+    },
+    { as: "a" },
+  ),
   {
     Dropdown: NavbarDropdown,
     Link: NavbarLink,
