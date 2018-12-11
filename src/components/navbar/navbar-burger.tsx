@@ -1,38 +1,50 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 
-export type NavbarBurgerProps = Prefer<
-  ModifierProps,
-  React.HTMLAttributes<HTMLDivElement>
->;
+export type NavbarBurgerModifierProps = Partial<{
+  className: string;
+  onClick: React.MouseEventHandler<any>;
+  style: React.CSSProperties;
+}>;
 
-export const NavbarBurger = React.forwardRef<HTMLDivElement, NavbarBurgerProps>(
+export type NavbarBurgerProps = ModifierProps & NavbarBurgerModifierProps;
+
+export const NavbarBurger = forwardRefAs<NavbarBurgerProps, "div">(
   (props, ref) => {
-    const { className, style, onClick, ...rest } = transformModifiers(props);
     return (
       <NavbarContext.Consumer>
-        {({ active, setActive }) => (
-          <Generic
-            className={cx("navbar-burger", className, {
-              "is-active": active,
-            })}
-            onClick={() => setActive(!active)}
-            ref={ref}
-            role="button"
-            style={{ outline: "none", ...style }}
-            tabIndex={0}
-            {...rest}
-          >
-            <span />
-            <span />
-            <span />
-          </Generic>
-        )}
+        {({ active, setActive }) => {
+          const { as, style, onClick, ...rest } = transformModifiers(props);
+          rest.className = cx("navbar-burger", rest.className, {
+            "is-active": active,
+          });
+          return React.createElement(as!, {
+            children: (
+              <React.Fragment>
+                <span />
+                <span />
+                <span />
+              </React.Fragment>
+            ),
+            onClick: (event: React.MouseEvent) => {
+              if (onClick) {
+                onClick(event);
+              }
+              setActive(!active);
+            },
+            ref,
+            role: "button",
+            style: { outline: "none", ...style },
+            tabIndex: 0,
+            ...rest,
+          });
+        }}
       </NavbarContext.Consumer>
     );
   },
+  { as: "div" },
 );

@@ -15,36 +15,40 @@ export type ModalModifierProps = Partial<{
 export type ModalControllerProps = ModalPortalProps & ModalModifierProps;
 export type ModalProps = Omit<ModalControllerProps, "innerRef">;
 
-class ModalController extends PureComponent<ModalControllerProps> {
-  private element: HTMLElement | null = null;
+export class ModalController extends PureComponent<ModalControllerProps> {
+  private el: HTMLDivElement;
+
+  constructor(props: ModalControllerProps) {
+    super(props);
+    this.el = document.createElement("div");
+    this.el.className = "modal-controller";
+  }
 
   public componentDidMount() {
     const document = getDocument();
     if (document) {
-      this.element = document.createElement("div");
-      this.element.setAttribute("class", "modal-container");
-      document.body.appendChild(this.element);
+      document.body.appendChild(this.el);
     }
   }
 
   public componentWillUnmount() {
     if (document) {
-      this.element!.remove();
+      document.body.removeChild(this.el);
     }
   }
 
   public render() {
     const { active, ...rest } = this.props;
-    return getDocument() && this.element && active
-      ? ReactDOM.createPortal(<ModalPortal {...rest} />, this.element)
+    return getDocument() && this.el && active
+      ? ReactDOM.createPortal(<ModalPortal {...rest} />, this.el)
       : null;
   }
 }
 
 export const Modal = Object.assign(
-  React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => (
-    <ModalController innerRef={ref} {...props} />
-  )),
+  React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
+    return <ModalController innerRef={ref} {...props} />;
+  }),
   {
     Background: ModalBackground,
     Card: ModalCard,

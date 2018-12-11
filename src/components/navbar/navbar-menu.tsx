@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
+import { forwardRefAs } from "@/base";
 import { ModifierProps } from "@/modifiers";
 import { NavbarContext } from "./navbar-context";
 
@@ -10,21 +10,19 @@ export type NavbarMenuProps = Prefer<
   React.HTMLAttributes<HTMLDivElement>
 >;
 
-export const NavbarMenu = React.forwardRef<HTMLDivElement, NavbarMenuProps>(
+export const NavbarMenu = forwardRefAs<NavbarMenuProps, "div">(
   (props, ref) => {
-    const { className, ...rest } = props;
     return (
       <NavbarContext.Consumer>
-        {({ active }) => (
-          <Generic
-            className={cx("navbar-menu", className, {
-              "is-active": active,
-            })}
-            ref={ref}
-            {...rest}
-          />
-        )}
+        {({ active }) => {
+          const { as, ...rest } = props;
+          rest.className = cx("navbar-menu", rest.className, {
+            "is-active": active,
+          });
+          return React.createElement(as!, { ref, ...rest });
+        }}
       </NavbarContext.Consumer>
     );
   },
+  { as: "div" },
 );

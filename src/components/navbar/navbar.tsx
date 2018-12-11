@@ -32,20 +32,21 @@ export type NavbarModifierProps = Partial<{
   className: string;
   color: Colors;
   fixed: NavbarFixedAlignments;
+  managed: boolean;
   transparent: boolean;
 }>;
 
 export type NavbarProps = ModifierProps & NavbarModifierProps;
 
-type NavbarControllerProps = NavbarProps & {
+export type NavbarControllerProps = NavbarProps & {
   innerRef: React.Ref<HTMLDivElement>;
 };
 
-interface NavbarControllerState {
+export interface NavbarControllerState {
   active: boolean;
 }
 
-class NavbarController extends React.PureComponent<
+export class NavbarController extends React.PureComponent<
   NavbarControllerProps,
   NavbarControllerState
 > {
@@ -82,6 +83,7 @@ class NavbarController extends React.PureComponent<
       color,
       fixed,
       innerRef,
+      managed,
       transparent,
       ...rest
     } = transformModifiers(this.props);
@@ -106,16 +108,12 @@ class NavbarController extends React.PureComponent<
     );
   }
 
-  private get managed() {
-    return this.props.active !== undefined;
-  }
-
   private get active() {
-    return this.managed ? this.props.active || false : this.state.active;
+    return this.props.managed ? this.props.active || false : this.state.active;
   }
 
   private set active(value: boolean) {
-    if (!this.managed) {
+    if (!this.props.managed) {
       this.setState({ active: value });
     }
   }

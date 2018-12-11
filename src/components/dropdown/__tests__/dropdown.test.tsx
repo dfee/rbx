@@ -1,184 +1,155 @@
-// import { mount, shallow } from "enzyme";
-// import React from "react";
-// import renderer from "react-test-renderer";
+import Enzyme from "enzyme";
+import React from "react";
 
-// import { getWindow, setupWindow, teardownWindow } from "@/__tests__/helpers";
-// import { Button } from "@/elements";
-// import { noop } from "@/utils";
-// import { Dropdown } from "../dropdown";
+import { Dropdown, DROPDOWN_ALIGNMENTS, DropdownController } from "../dropdown";
+import { DropdownContent } from "../dropdown-content";
+import { DropdownContext } from "../dropdown-context";
+import { DropdownDivider } from "../dropdown-divider";
+import { DropdownItem } from "../dropdown-item";
+import { DropdownMenu } from "../dropdown-menu";
+import { DropdownTrigger } from "../dropdown-trigger";
 
-// describe("Dropdown component", () => {
-//   beforeEach(() => {
-//     setupWindow();
-//   });
+import { hasProperties } from "@/__tests__/helpers";
 
-//   afterEach(() => {
-//     teardownWindow();
-//   });
+describe("Card component", () => {
+  hasProperties(Dropdown, {
+    Content: DropdownContent,
+    Context: DropdownContext,
+    Divider: DropdownDivider,
+    Item: DropdownItem,
+    Menu: DropdownMenu,
+    Trigger: DropdownTrigger,
+    defaultProps: undefined,
+  });
 
-//   it("should exist", () => {
-//     expect(Dropdown).toMatchSnapshot();
-//   });
+  it("should render as the default component", () => {
+    const wrapper = Enzyme.mount(<Dropdown />);
+    try {
+      expect(
+        wrapper
+          .find(DropdownController)
+          .children()
+          .is("div"),
+      ).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("should have dropdown classname", () => {
-//     const component = renderer.create(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value="value"
-//         onChange={noop}
-//       >
-//         {/* <Dropdown.Item value="value">Item</Dropdown.Item> */}
-//       </Dropdown>,
-//     );
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Dropdown ref={ref} />
+      </div>,
+    );
+    try {
+      expect(ref.current).toBe(wrapper.find(".dropdown").instance());
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("should add listener do document on mount", () => {
-//     const window = getWindow();
-//     const app = window.document.querySelector<HTMLElement>("#app-root");
-//     document.addEventListener = jest.fn();
-//     const component = mount(
-//       <Dropdown
-//         trigger={<Button>i am button</Button>}
-//         value="value"
-//         onChange={noop}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//       </Dropdown>,
-//       {
-//         attachTo: app,
-//       },
-//     );
-//     expect(window.document.addEventListener).toHaveBeenCalled();
-//     component.unmount();
-//   });
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.mount(<Dropdown />);
+    try {
+      expect(
+        wrapper
+          .find(DropdownController)
+          .children()
+          .hasClass("dropdown"),
+      ).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("should concat Bulma class with classes in props", () => {
-//     const component = renderer.create(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value="value"
-//         className="other-class"
-//         onChange={noop}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.mount(<Dropdown className={className} />);
+    try {
+      expect(
+        wrapper
+          .find(DropdownController)
+          .children()
+          .hasClass(className),
+      ).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("should have custom inline styles", () => {
-//     const component = renderer.create(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value="value"
-//         style={{ width: 400 }}
-//         onChange={noop}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should be active", () => {
+    const wrapper = Enzyme.mount(<Dropdown active />);
+    try {
+      expect(
+        wrapper
+          .find(DropdownController)
+          .children()
+          .hasClass("is-active"),
+      ).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("should have divider", () => {
-//     const component = renderer.create(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value="value"
-//         style={{ width: 400 }}
-//         onChange={noop}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//         <Dropdown.Divider />
-//         <Dropdown.Item value="other">Other</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should be hoverable", () => {
+    const wrapper = Enzyme.mount(<Dropdown hoverable />);
+    try {
+      expect(
+        wrapper
+          .find(DropdownController)
+          .children()
+          .hasClass("is-hoverable"),
+      ).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("should open the Dropdown", () => {
-//     const component = shallow(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value="value"
-//         style={{ width: 400 }}
-//         onChange={noop}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//         <Dropdown.Divider />
-//         <Dropdown.Item value="other">Other</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     expect(component.state("open")).toBe(false);
-//     component.find(".dropdown-trigger").simulate("click");
-//     expect(component.state("open")).toBe(true);
-//   });
+  it("should be up", () => {
+    const wrapper = Enzyme.mount(<Dropdown up />);
+    try {
+      expect(
+        wrapper
+          .find(DropdownController)
+          .children()
+          .hasClass("is-up"),
+      ).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("should open the Dropdown and prevent default event (not to navigate if a link is on the dropdown trigger)", () => {
-//     const preventDefault = jest.fn();
-//     const component = shallow(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value="value"
-//         style={{ width: 400 }}
-//         onChange={noop}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//         <Dropdown.Divider />
-//         <Dropdown.Item value="other">Other</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     expect(component.state("open")).toBe(false);
-//     component.find(".dropdown-trigger").simulate("click", { preventDefault });
-//     expect(preventDefault).toHaveBeenCalled();
-//     expect(component.state("open")).toBe(true);
-//   });
+  DROPDOWN_ALIGNMENTS.map(align =>
+    it(`should be aligned ${align}`, () => {
+      const wrapper = Enzyme.mount(<Dropdown align={align} />);
+      try {
+        expect(
+          wrapper
+            .find(DropdownController)
+            .children()
+            .hasClass(`is-${align}`),
+        ).toBe(true);
+      } finally {
+        wrapper.unmount();
+      }
+    }),
+  );
 
-//   it("should change the value", () => {
-//     const onChange = jest.fn();
-//     const component = shallow(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value=""
-//         hoverable
-//         style={{ width: 400 }}
-//         onChange={onChange}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     component.find(".dropdown-trigger").simulate("click");
-//     component.find(Dropdown.Item).simulate("click");
-//     expect(onChange).toHaveBeenCalledWith("value");
-//     expect(component.state("open")).toBe(false);
-//   });
-
-//   it("should close on select", () => {
-//     const component = shallow(
-//       <Dropdown trigger={<Button>i am trigger</Button>}>
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     component.find(".dropdown-trigger").simulate("click");
-//     component.find(Dropdown.Item).simulate("click");
-//     expect(component.state("open")).toBe(false);
-//   });
-
-//   it("should close the dropdown", () => {
-//     const onChange = jest.fn();
-//     const component = shallow(
-//       <Dropdown
-//         trigger={<Button>i am trigger</Button>}
-//         value=""
-//         style={{ width: 400 }}
-//         onChange={onChange}
-//       >
-//         <Dropdown.Item value="value">Item</Dropdown.Item>
-//       </Dropdown>,
-//     );
-//     component.find(".dropdown-trigger").simulate("click");
-//     component.find(Dropdown.Item).simulate("click", { path: [] });
-//     expect(component.state("open")).toBe(false);
-//   });
-// });
+  [false, true].map(managed =>
+    it(`should ${
+      managed ? "not " : ""
+    }be disabled on click in document when managed is ${managed}`, () => {
+      const wrapper = Enzyme.mount(<Dropdown active managed={managed} />);
+      try {
+        document.getElementsByTagName("body")[0].click();
+        wrapper.update();
+        expect(wrapper.find(".dropdown").hasClass("is-active")).toBe(managed);
+      } finally {
+        wrapper.unmount();
+      }
+    }),
+  );
+});

@@ -27,7 +27,7 @@ export const DropdownItem = forwardRefAs<DropdownItemProps, "a">(
               if (onClick) {
                 onClick(event);
               }
-              ctx.setActive(!ctx.active);
+              ctx.setActive(false);
             },
             ref,
             ...rest,

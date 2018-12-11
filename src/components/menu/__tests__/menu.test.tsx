@@ -1,58 +1,53 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Menu } from "../menu";
+import { MenuLabel } from "../menu-label";
+import { MenuList } from "../menu-list";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Menu component", () => {
-  it("should Exist", () => {
-    expect(Menu).toMatchSnapshot();
+  hasProperties(Menu, {
+    Label: MenuLabel,
+    List: MenuList,
+    defaultProps: { as: "aside" },
   });
 
-  it("should have menu classnames", () => {
-    const component = renderer.create(
-      <Menu>
-        <Menu.List title="General">
-          <Menu.List.Item>Dashboard</Menu.List.Item>
-          <Menu.List.Item>Customer</Menu.List.Item>
-        </Menu.List>
-      </Menu>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Menu />);
+    expect(wrapper.is("aside")).toBe(true);
   });
 
-  it("should concat Menu.List to display as submenus", () => {
-    const component = renderer.create(
-      <Menu>
-        <Menu.List title="General">
-          <Menu.List.Item>Dashboard</Menu.List.Item>
-          <Menu.List.Item>
-            <Menu.List.Item active>
-              <Menu.List title="Manage Your Team">
-                <Menu.List.Item>Members</Menu.List.Item>
-                <Menu.List.Item active>Plugins</Menu.List.Item>
-                <Menu.List.Item>Add a member</Menu.List.Item>
-              </Menu.List>
-            </Menu.List.Item>
-          </Menu.List.Item>
-        </Menu.List>
-      </Menu>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Menu as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should render custom item child", () => {
-    const component = renderer.create(
-      <Menu>
-        <Menu.List title="General">
-          <Menu.List.Item>
-            <p>Custom children 1</p>
-          </Menu.List.Item>
-          <Menu.List.Item>
-            <a>Custom children 2</a>
-          </Menu.List.Item>
-        </Menu.List>
-      </Menu>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Menu ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".menu").instance());
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Menu />);
+    expect(wrapper.hasClass("menu")).toBe(true);
+  });
+
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Menu className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

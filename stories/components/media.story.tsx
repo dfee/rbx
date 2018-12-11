@@ -41,7 +41,7 @@ storiesOf("Components/Media", module)
           </p>
         </Content>
         <Level breakpoint="mobile">
-          <Level.Side align="left">
+          <Level.Left>
             <Level.Item as="a">
               <Icon size="small">
                 <FontAwesomeIcon icon={faReply} />
@@ -57,7 +57,7 @@ storiesOf("Components/Media", module)
                 <FontAwesomeIcon icon={faHeart} />
               </Icon>
             </Level.Item>
-          </Level.Side>
+          </Level.Left>
         </Level>
       </Media.Item>
       <Media.Item position="right">
@@ -81,18 +81,18 @@ storiesOf("Components/Media", module)
           </Control>
         </Field>
         <Level>
-          <Level.Side align="left">
+          <Level.Left>
             <Level.Item>
               <Button color="info" submit>
                 Submit
               </Button>
             </Level.Item>
-          </Level.Side>
-          <Level.Side align="right">
+          </Level.Left>
+          <Level.Right>
             <Level.Item>
               <Checkbox>Press enter to submit</Checkbox>
             </Level.Item>
-          </Level.Side>
+          </Level.Right>
         </Level>
       </Media.Item>
     </Media>

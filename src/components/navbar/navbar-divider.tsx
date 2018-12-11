@@ -1,17 +1,19 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
-import { ModifierProps } from "@/modifiers";
+import { forwardRefAs } from "@/base";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type NavbarDividerProps = Prefer<
   ModifierProps,
   React.HTMLAttributes<HTMLDivElement>
 >;
 
-export const NavbarDivider = React.forwardRef<
-  HTMLDivElement,
-  NavbarDividerProps
->(({ className, ...props }, ref) => (
-  <Generic {...props} ref={ref} className={cx("navbar-divider", className)} />
-));
+export const NavbarDivider = forwardRefAs<NavbarDividerProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = transformModifiers(props);
+    rest.className = cx("navbar-divider", rest.className);
+    return React.createElement(as!, { ref, ...rest });
+  },
+  { as: "div" },
+);

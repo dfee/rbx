@@ -1,33 +1,24 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
-import { ModifierProps } from "@/modifiers";
+import { forwardRefAs } from "@/base";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { MenuListItem } from "./menu-list-item";
 
-export type MenuListModifierProps = Partial<{
-  title: string;
-}>;
+export type MenuListModifierProps = Partial<{ className: string }>;
 
-export type MenuListProps = Prefer<
-  ModifierProps & MenuListModifierProps,
-  React.HTMLAttributes<HTMLUListElement>
->;
+export type MenuListProps = ModifierProps & MenuListModifierProps;
 
 export const MenuList = Object.assign(
-  React.forwardRef<HTMLUListElement, MenuListProps>((props, ref) => {
-    const { className, title, ...rest } = props;
-    return (
-      <React.Fragment>
-        {title && <p className="menu-label">{title}</p>}
-        <Generic
-          as="ul"
-          className={cx("menu-list", className)}
-          ref={ref}
-          {...rest}
-        />
-      </React.Fragment>
-    );
-  }),
-  { Item: MenuListItem },
+  forwardRefAs<MenuListProps, "ul">(
+    (props, ref) => {
+      const { as, ...rest } = transformModifiers(props);
+      rest.className = cx("menu-list", rest.className);
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "ul" },
+  ),
+  {
+    Item: MenuListItem,
+  },
 );

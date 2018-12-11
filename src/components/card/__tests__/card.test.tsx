@@ -1,51 +1,57 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
+
 import { Card } from "../card";
+import { CardContent } from "../card-content";
+import { CardFooter } from "../card-footer";
+import { CardHeader } from "../card-header";
+import { CardImage } from "../card-image";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Card component", () => {
-  it("should have card classname", () => {
-    const component = renderer.create(<Card>Card Content</Card>);
-    expect(component.toJSON()).toMatchSnapshot();
+  hasProperties(Card, {
+    Content: CardContent,
+    Footer: CardFooter,
+    Header: CardHeader,
+    Image: CardImage,
+    defaultProps: { as: "div" },
   });
 
-  it("should have card-image classname", () => {
-    const component = renderer.create(
-      <Card.Image
-        size="4by3"
-        src="http://bulma.io/images/placeholders/1280x960.png"
-      />,
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Card />);
+    expect(wrapper.is("div")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Card as={as} />);
+    expect(wrapper.is(as)).toBe(true);
+  });
+
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Card ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".card").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should have card-content classname", () => {
-    const component = renderer.create(<Card.Content>Content</Card.Content>);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Card />);
+    expect(wrapper.hasClass("card")).toBe(true);
   });
 
-  it("should have card-header's classname", () => {
-    const component = renderer.create(
-      <Card>
-        <Card.Header>
-          <Card.Header.Title>Title</Card.Header.Title>
-          <Card.Header.Icon>
-            <i className="icon" />
-          </Card.Header.Icon>
-        </Card.Header>
-      </Card>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should have card-footer's classname", () => {
-    const component = renderer.create(
-      <Card>
-        <Card.Footer>
-          <Card.Footer.Item>Yes</Card.Footer.Item>
-          <Card.Footer.Item>No</Card.Footer.Item>
-        </Card.Footer>
-      </Card>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Card className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

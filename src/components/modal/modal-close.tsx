@@ -1,29 +1,38 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { ModalContext } from "./modal-context";
 
-export type ModalCloseProps = Prefer<
-  ModifierProps,
-  React.HTMLAttributes<HTMLButtonElement>
->;
+export type ModalCloseModifierProps = Partial<{
+  className: string;
+  onClick: React.MouseEventHandler<any>;
+}>;
 
-export const ModalClose = React.forwardRef<HTMLButtonElement, ModalCloseProps>(
+export type ModalCloseProps = ModifierProps & ModalCloseModifierProps;
+
+export const ModalClose = forwardRefAs<ModalCloseProps, "button">(
   (props, ref) => {
-    const { className, ...rest } = transformModifiers(props);
+    const { as, onClick, ...rest } = transformModifiers(props);
+    rest.className = cx("modal-close", "is-large", rest.className);
     return (
       <ModalContext.Consumer>
-        {({ onClose }) => (
-          <button
-            aria-label="close"
-            className={cx("modal-close", "is-large", className)}
-            onClick={() => onClose()}
-            ref={ref}
-            {...rest}
-          />
-        )}
+        {({ onClose }) =>
+          React.createElement(as!, {
+            ["aria-label"]: "close",
+            onClick: (event: React.MouseEvent<any>) => {
+              if (onClick) {
+                onClick(event);
+              }
+              onClose();
+            },
+            ref,
+            ...rest,
+          })
+        }
       </ModalContext.Consumer>
     );
   },
+  { as: "button" },
 );

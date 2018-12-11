@@ -1,70 +1,82 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
-import { Tabs } from "../tabs";
+import { Tab } from "../tab";
+import { Tabs, TABS_ALIGNMENTS, TABS_SIZES, TABS_TYPES } from "../tabs";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Tabs component", () => {
-  it("should Exist", () => {
-    expect(Tabs).toMatchSnapshot();
+  hasProperties(Tabs, {
+    Tab,
+    defaultProps: { as: "div" },
   });
 
-  it("should expose Tab", () => {
-    expect(Tabs.Tab).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Tabs />);
+    expect(wrapper.is("div")).toBe(true);
   });
 
-  it("should have Tabs classname", () => {
-    const component = renderer.create(<Tabs>Facebook</Tabs>);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Tabs as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should concat Bulma class with classes in props", () => {
-    const component = renderer.create(
-      <Tabs className="other-class test">Facebook</Tabs>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Tabs ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".tabs").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should render as an html section", () => {
-    const component = renderer.create(
-      <Tabs<"section"> as="section">This should be a section</Tabs>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Tabs />);
+    expect(wrapper.hasClass("tabs")).toBe(true);
   });
 
-  it("should have custom inline styles", () => {
-    const component = renderer.create(
-      <Tabs<"section"> as="section" style={{ width: 200, zIndex: 1 }}>
-        This should be a section with custom styles
-      </Tabs>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Tabs className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should accept a react Element as renderAs prop", () => {
-    // eslint-disable-next-line react/prop-types
-    const Custom = ({
-      children,
-      ...props
-    }: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p {...props}>
-        Custom
-        {children}
-      </p>
-    );
-    const component = renderer.create(
-      <Tabs<typeof Custom> as={Custom}>This should be a p element</Tabs>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  TABS_ALIGNMENTS.map(align =>
+    it(`should be aligned ${align}`, () => {
+      const wrapper = Enzyme.shallow(<Tabs align={align} />);
+      expect(wrapper.hasClass(`is-${align}`)).toBe(true);
+    }),
+  );
 
-  it("should render propertly Inside Tabs", () => {
-    const component = renderer.create(
-      <Tabs>
-        <Tabs.Tab>Tab 1</Tabs.Tab>
-        <Tabs.Tab>Tab 2</Tabs.Tab>
-        <Tabs.Tab>Tab 3</Tabs.Tab>
-      </Tabs>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  TABS_SIZES.map(size =>
+    it(`should be size ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Tabs size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
+
+  TABS_TYPES.map(type =>
+    it(`should be type ${type}`, () => {
+      const wrapper = Enzyme.shallow(<Tabs type={type} />);
+      expect(wrapper.hasClass(`is-${type}`)).toBe(true);
+      expect(wrapper.hasClass("is-toggle-rounded")).toBe(
+        type === "toggle-rounded",
+      );
+    }),
+  );
+
+  [false, true].map(fullwidth =>
+    it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
+      const wrapper = Enzyme.shallow(<Tabs fullwidth={fullwidth} />);
+      expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
+    }),
+  );
 });

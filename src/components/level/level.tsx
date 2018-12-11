@@ -5,7 +5,8 @@ import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Breakpoints } from "@/modifiers/responsive";
 import { LevelItem } from "./level-item";
-import { LevelSide } from "./level-side";
+import { LevelLeft } from "./level-left";
+import { LevelRight } from "./level-right";
 
 export type LevelModifierProps = Partial<{
   breakpoint: Breakpoints;
@@ -27,6 +28,7 @@ export const Level = Object.assign(
   ),
   {
     Item: LevelItem,
-    Side: LevelSide,
+    Left: LevelLeft,
+    Right: LevelRight,
   },
 );

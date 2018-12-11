@@ -17,8 +17,5 @@ export const PanelTab = forwardRefAs<PanelTabProps, "a">(
     const className = cx(cn, { "is-active": active }) || undefined;
     return React.createElement(as!, { className, ref, ...rest });
   },
-  {
-    active: false,
-    as: "a",
-  },
+  { as: "a" },
 );

@@ -1,59 +1,84 @@
-// import { mount } from "enzyme";
-// import React from "react";
-// import renderer from "react-test-renderer";
+import Enzyme from "enzyme";
+import React from "react";
 
-// import { Pagination } from "../pagination";
+import {
+  Pagination,
+  PAGINATION_ALIGNMENTS,
+  PAGINATION_SIZES,
+} from "../pagination";
+import { PaginationEllipsis } from "../pagination-ellipsis";
+import { PaginationLink } from "../pagination-link";
+import { PaginationList } from "../pagination-list";
+import { PaginationNext } from "../pagination-next";
+import { PaginationPrevious } from "../pagination-previous";
 
-// describe("Pagination component", () => {
-//   it("Pagination should exist", () => {
-//     expect(Pagination).toMatchSnapshot();
-//   });
+import { hasProperties } from "@/__tests__/helpers";
 
-//   it("should have 3 pages and page 1 active", () => {
-//     const component = renderer.create(<Pagination total={3} current={1} />);
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+describe("Pagination component", () => {
+  hasProperties(Pagination, {
+    Ellipsis: PaginationEllipsis,
+    Link: PaginationLink,
+    List: PaginationList,
+    Next: PaginationNext,
+    Previous: PaginationPrevious,
+    defaultProps: { as: "nav" },
+  });
 
-//   it("should have 5 pages, page 5 active and display pages 3 to 5", () => {
-//     const component = renderer.create(<Pagination total={5} current={5} />);
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Pagination />);
+    expect(wrapper.is("nav")).toBe(true);
+  });
 
-//   it("should not display page numbers", () => {
-//     const component = renderer.create(
-//       <Pagination delta={0} total={5} current={5} />,
-//     );
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Pagination as={as} />);
+    expect(wrapper.is(as)).toBe(true);
+  });
 
-//   it("should not display Previous/Next buttons", () => {
-//     const component = renderer.create(
-//       <Pagination showPrevNext={false} delta={3} total={5} current={2} />,
-//     );
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Pagination ref={ref} />
+      </div>,
+    );
+    try {
+      expect(ref.current).toBe(wrapper.find(".pagination").instance());
+    } finally {
+      wrapper.unmount();
+    }
+  });
 
-//   it("Next button should be disabled", () => {
-//     const component = renderer.create(<Pagination total={3} current={3} />);
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Pagination />);
+    expect(wrapper.hasClass("pagination")).toBe(true);
+  });
 
-//   it("should not render if total pages equals 1", () => {
-//     const component = renderer.create(<Pagination total={1} current={1} />);
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Pagination className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
+  });
 
-//   it("should not render if current page is greater than total pages", () => {
-//     const component = renderer.create(<Pagination total={2} current={3} />);
-//     expect(component.toJSON()).toMatchSnapshot();
-//   });
+  PAGINATION_ALIGNMENTS.map(align =>
+    it(`should be aligned ${align}`, () => {
+      const wrapper = Enzyme.shallow(<Pagination align={align} />);
+      expect(wrapper.hasClass(`is-${align}`)).toBe(true);
+    }),
+  );
 
-//   it("should call to onChange event on click on navigation button", () => {
-//     const onChange = jest.fn();
-//     const component = mount(
-//       <Pagination total={2} current={1} onChange={onChange} />,
-//     );
-//     component.find("a.pagination-next").simulate("click");
-//     expect(onChange).toHaveBeenCalledTimes(1);
-//   });
-// });
+  PAGINATION_SIZES.map(size =>
+    it(`should be size ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Pagination size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(rounded =>
+    it(`should ${rounded ? "" : "not "} be rouned`, () => {
+      const wrapper = Enzyme.shallow(<Pagination rounded={rounded} />);
+      expect(wrapper.hasClass("is-rounded")).toBe(rounded);
+    }),
+  );
+});

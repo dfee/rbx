@@ -17,9 +17,9 @@ export const knobs = {
     select(
       title,
       {
-        "false (managed)": "false",
-        "true (managed)": "true",
-        "undefined (unmanaged)": "",
+        "false (when managed)": "false",
+        "true (when managed)": "true",
+        undefined: "",
       },
       "",
     ),
@@ -29,23 +29,27 @@ export const knobs = {
       iterableToSelectObject(DROPDOWN_ALIGNMENTS, { undefined: "" }),
       "",
     ),
-  hoverable: (title: string = "Hoverable (managed)") => boolean(title, false),
+  hoverable: (title: string = "Hoverable") => boolean(title, false),
+  managed: (title: string = "Managed") => boolean(title, false),
   up: (title: string = "Up") => boolean(title, false),
 };
 
 storiesOf("Components/Dropdown", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const align = knobs.align();
-    const active = knobs.active() as string;
-    const hoverable = knobs.hoverable();
-    const up = knobs.up();
+    const { align, active, ...rest } = {
+      active: knobs.active() as string,
+      align: knobs.align(),
+      hoverable: knobs.hoverable(),
+      managed: knobs.managed(),
+      up: knobs.up(),
+    };
 
     return (
       <div
         style={{
           marginLeft: align !== "" ? "54px" : 0,
-          marginTop: up ? "200px" : 0,
+          marginTop: rest.up ? "200px" : 0,
         }}
       >
         <Dropdown
@@ -53,14 +57,13 @@ storiesOf("Components/Dropdown", module)
             active === "true" ? true : active === "false" ? false : undefined
           }
           align={align || undefined}
-          hoverable={hoverable}
-          up={up}
+          {...rest}
         >
           <Dropdown.Trigger>
             <Button>
-              <span>{up ? "Dropup" : "Dropdown"} button</span>
+              <span>{rest.up ? "Dropup" : "Dropdown"} button</span>
               <Icon size="small">
-                <FontAwesomeIcon icon={up ? faAngleUp : faAngleDown} />
+                <FontAwesomeIcon icon={rest.up ? faAngleUp : faAngleDown} />
               </Icon>
             </Button>
           </Dropdown.Trigger>
@@ -78,7 +81,7 @@ storiesOf("Components/Dropdown", module)
       </div>
     );
   })
-  .add("Controlled component", () => {
+  .add("Controlled", () => {
     interface State {
       selected: string | null;
     }

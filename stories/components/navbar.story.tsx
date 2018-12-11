@@ -15,8 +15,8 @@ export const knobs = {
     select(
       title,
       {
-        "false (managed)": "false",
-        "true (managed)": "true",
+        "false (when managed)": "false",
+        "true (when managed)": "true",
         "undefined (unmanaged)": "",
       },
       "",
@@ -39,6 +39,7 @@ export const knobs = {
   link: {
     arrowless: (title: string = "Arrowless") => boolean(title, false),
   },
+  managed: (title: string = "Managed") => boolean(title, false),
   menu: {
     active: (title: string = "Active") => boolean(title, false),
   },
@@ -52,6 +53,7 @@ storiesOf("Components/Navbar", module)
       active: knobs.active("Navbar: active (mobile)") as string,
       color: modifiersKnobs.color("Navbar: color"),
       fixed: knobs.fixed("Navbar: fixed"),
+      managed: knobs.managed(),
       transparent: knobs.transparent("Navbar: transparent"),
     };
 

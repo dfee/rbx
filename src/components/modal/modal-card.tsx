@@ -1,11 +1,12 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
-import { ModifierProps } from "@/modifiers";
+import { forwardRefAs } from "@/base";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 import { ModalCardBody } from "./modal-card-body";
 import { ModalCardFoot } from "./modal-card-foot";
 import { ModalCardHead } from "./modal-card-head";
+import { ModalCardTitle } from "./modal-card-title";
 
 export type ModalCardProps = Prefer<
   ModifierProps,
@@ -13,14 +14,18 @@ export type ModalCardProps = Prefer<
 >;
 
 export const ModalCard = Object.assign(
-  React.forwardRef<HTMLDivElement, ModalCardProps>(
-    ({ className, ...props }, ref) => (
-      <Generic {...props} ref={ref} className={cx("modal-card", className)} />
-    ),
+  forwardRefAs<ModalCardProps, "div">(
+    (props, ref) => {
+      const { as, ...rest } = transformModifiers(props);
+      rest.className = cx("modal-card", rest.className);
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "div" },
   ),
   {
     Body: ModalCardBody,
     Foot: ModalCardFoot,
     Head: ModalCardHead,
+    Title: ModalCardTitle,
   },
 );

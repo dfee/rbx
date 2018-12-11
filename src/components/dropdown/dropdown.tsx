@@ -18,6 +18,7 @@ export type DropdownModifierProps = Partial<{
   active: boolean;
   align: DropdownAlignments;
   hoverable: boolean;
+  managed: boolean;
   up: boolean;
 }>;
 
@@ -42,13 +43,14 @@ export class DropdownController extends PureComponent<
   public static Menu = DropdownMenu;
   public static Trigger = DropdownTrigger;
 
-  public static defaultProps = {
-    children: [],
-  };
-
-  public readonly state: DropdownControllerState = initialState;
+  public readonly state: DropdownControllerState;
 
   private ref = React.createRef<HTMLDivElement>();
+
+  constructor(props: DropdownControllerProps) {
+    super(props);
+    this.state = { active: props.active || false };
+  }
 
   public componentDidMount() {
     document.addEventListener("click", this.handleClick);
@@ -58,12 +60,12 @@ export class DropdownController extends PureComponent<
     document.removeEventListener("click", this.handleClick!);
   }
 
-  public toggle = (evt: React.MouseEvent<HTMLDivElement>) => {
+  public toggle = (event: React.MouseEvent<HTMLDivElement>) => {
     if (this.props.hoverable) {
       return;
     }
-    if (evt) {
-      evt.preventDefault();
+    if (event) {
+      event.preventDefault();
     }
     this.setState(({ active }) => ({ active: !active }));
   }
@@ -74,6 +76,7 @@ export class DropdownController extends PureComponent<
       active,
       hoverable,
       innerRef,
+      managed,
       up,
       ...rest
     } = transformModifiers(this.props);
@@ -96,22 +99,18 @@ export class DropdownController extends PureComponent<
     );
   }
 
-  private get managed() {
-    return this.props.hoverable || this.props.active !== undefined;
-  }
-
   private get active() {
-    return this.managed ? this.props.active || false : this.state.active;
+    return this.props.managed ? this.props.active || false : this.state.active;
   }
 
   private set active(value: boolean) {
-    if (!this.managed) {
+    if (!this.props.managed) {
       this.setState({ active: value });
     }
   }
 
   private handleClick = (event: MouseEvent) => {
-    if (!this.managed && this.active && this.ref.current) {
+    if (!this.props.managed && this.active && this.ref.current) {
       if (
         event.target instanceof Element &&
         !this.ref.current.contains(event.target)

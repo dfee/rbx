@@ -1,53 +1,27 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
-import { ModifierProps } from "@/modifiers";
-import { MenuList } from "./menu-list";
+import { forwardRefAs } from "@/base";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type MenuListItemModifierProps = Partial<{
   active: boolean;
+  className: string;
+  menu: React.ReactNode;
 }>;
 
-export type MenuListItemProps = Prefer<
-  ModifierProps & MenuListItemModifierProps,
-  React.HTMLAttributes<HTMLAnchorElement>
->;
+export type MenuListItemProps = ModifierProps & MenuListItemModifierProps;
 
-export const MenuListItem = React.forwardRef<HTMLLIElement, MenuListItemProps>(
+export const MenuListItem = forwardRefAs<MenuListItemProps, "a">(
   (props, ref) => {
-    const { active, children, ...rest } = props;
-    rest.className =
-      cx(rest.className, {
-        "is-active": active,
-      }) || undefined;
-
-    if (typeof children === "string") {
-      return (
-        <li ref={ref}>
-          <Generic<"a"> as="a" children={children} {...rest} />
-        </li>
-      );
-    }
-
-    if (React.Children.only(children).type === MenuList) {
-      const child = React.Children.only(children);
-      return (
-        <li ref={ref}>
-          <Generic<"a"> as="a" children={child.props.title} {...rest} />
-          {React.cloneElement(child, { title: null })}
-        </li>
-      );
-    }
-
-    return <li ref={ref}>{children}</li>;
+    const { active, as, menu, ...rest } = transformModifiers(props);
+    rest.className = cx({ "is-active": active }, rest.className) || undefined;
+    return (
+      <li>
+        {React.createElement(as!, { ref, ...rest })}
+        {menu && menu}
+      </li>
+    );
   },
-);
-
-MenuListItem.defaultProps = Object.assign(
-  {
-    active: false,
-    children: null,
-  },
-  MenuListItem.defaultProps,
+  { as: "a" },
 );

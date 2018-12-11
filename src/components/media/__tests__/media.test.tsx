@@ -1,68 +1,51 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Media } from "../media";
+import { MediaItem } from "../media-item";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Media component", () => {
-  it("should exist", () => {
-    expect(Media).toMatchSnapshot();
+  hasProperties(Media, {
+    Item: MediaItem,
+    defaultProps: { as: "article" },
   });
 
-  it("should expose Level Side and Item", () => {
-    expect(Media.Item).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Media />);
+    expect(wrapper.is("article")).toBe(true);
   });
 
-  it("should have media classname", () => {
-    const component = renderer.create(
-      <Media>
-        <img
-          alt="placeholder"
-          src="http://bulma.io/images/placeholders/128x128.png"
-        />
-      </Media>,
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Media as={as} />);
+    expect(wrapper.is(as)).toBe(true);
+  });
+
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Media ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".media").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should be a Media Item", () => {
-    const component = renderer.create(
-      <Media.Item<"figure"> as="figure" position="left">
-        <img
-          alt="placeholder"
-          src="http://bulma.io/images/placeholders/128x128.png"
-        />
-      </Media.Item>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Media />);
+    expect(wrapper.hasClass("media")).toBe(true);
   });
 
-  it("should be a Media Content", () => {
-    const component = renderer.create(
-      <Media.Item<"figure"> as="figure" position="content">
-        <img
-          alt="placeholder"
-          src="http://bulma.io/images/placeholders/128x128.png"
-        />
-      </Media.Item>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Media className="other-class this-is-a-test">
-        <p>Default</p>
-      </Media>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Media style={{ height: 250 }}>
-        <p>Default</p>
-      </Media>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Media className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

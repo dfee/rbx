@@ -28,5 +28,3 @@ export const Tab = forwardRefAs<TabModifierProps, "a">(
   },
   { as: "a" },
 );
-
-Tab.defaultProps = Object.assign({ active: false }, Tab.defaultProps);

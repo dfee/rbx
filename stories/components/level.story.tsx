@@ -13,7 +13,7 @@ storiesOf("Components/Level", module)
     const breakpoint = modifierKnobs.breakpoint();
     return (
       <Level breakpoint={breakpoint || undefined}>
-        <Level.Side align="left">
+        <Level.Left>
           <Level.Item>
             <Title as="p" size={5} subtitle>
               <strong>123</strong> posts
@@ -29,9 +29,9 @@ storiesOf("Components/Level", module)
               </Control>
             </Field>
           </Level.Item>
-        </Level.Side>
+        </Level.Left>
 
-        <Level.Side align="right">
+        <Level.Right>
           <Level.Item>
             <strong>All</strong>
           </Level.Item>
@@ -47,7 +47,7 @@ storiesOf("Components/Level", module)
           <Level.Item>
             <Button color="success">New</Button>
           </Level.Item>
-        </Level.Side>
+        </Level.Right>
       </Level>
     );
   })

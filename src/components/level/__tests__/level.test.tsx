@@ -1,59 +1,66 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
+import { BREAKPOINTS } from "@/modifiers/responsive";
 import { Level } from "../level";
+import { LevelItem } from "../level-item";
+import { LevelLeft } from "../level-left";
+import { LevelRight } from "../level-right";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Level component", () => {
-  it("should exist", () => {
-    expect(Level).toMatchSnapshot();
+  hasProperties(Level, {
+    Item: LevelItem,
+    Left: LevelLeft,
+    Right: LevelRight,
+    defaultProps: { as: "nav" },
   });
 
-  it("should expose Level Side and Item", () => {
-    expect(Level.Side).toMatchSnapshot();
-    expect(Level.Item).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Level />);
+    expect(wrapper.is("nav")).toBe(true);
   });
 
-  it("should have level classname", () => {
-    const component = renderer.create(
-      <Level>
-        <Level.Item>Item 1</Level.Item>
-        <Level.Item>Item 2</Level.Item>
-        <Level.Item>Item 3</Level.Item>
-      </Level>,
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Level as={as} />);
+    expect(wrapper.is(as)).toBe(true);
+  });
+
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Level ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".level").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Level className="other-class this-is-a-test">
-        <p>Default</p>
-      </Level>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Level />);
+    expect(wrapper.hasClass("level")).toBe(true);
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Level style={{ height: 250 }}>
-        <p>Default</p>
-      </Level>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Level className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should render Levels with right and left side", () => {
-    const component = renderer.create(
-      <Level>
-        <Level.Side>
-          <Level.Item>Item 1</Level.Item>
-          <Level.Item>Item 2</Level.Item>
-        </Level.Side>
-        <Level.Side align="right">
-          <Level.Item>Item 3</Level.Item>
-        </Level.Side>
-      </Level>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  /**
+   * Props
+   */
+  BREAKPOINTS.map(breakpoint =>
+    it(`should have breakpoint ${breakpoint}`, () => {
+      const wrapper = Enzyme.shallow(<Level breakpoint={breakpoint} />);
+      expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
+    }),
+  );
 });

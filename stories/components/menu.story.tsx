@@ -17,25 +17,34 @@ storiesOf("Components/Menu", module)
   ))
   .add("Default", () => (
     <Menu>
-      <Menu.List title="General">
+      <Menu.Label>General</Menu.Label>
+      <Menu.List>
         <Menu.List.Item>Dashboard</Menu.List.Item>
         <Menu.List.Item>Customer</Menu.List.Item>
       </Menu.List>
 
-      <Menu.List title="Administration">
+      <Menu.Label>Administration</Menu.Label>
+      <Menu.List>
         <Menu.List.Item>Team Settings</Menu.List.Item>
-        <Menu.List.Item active>
-          <Menu.List title="Manage Your Team">
-            <Menu.List.Item>Members</Menu.List.Item>
-            <Menu.List.Item active>Plugins</Menu.List.Item>
-            <Menu.List.Item>Add a member</Menu.List.Item>
-          </Menu.List>
+        <Menu.List.Item
+          active
+          menu={
+            <Menu.List>
+              <Menu.List.Item>Members</Menu.List.Item>
+              <Menu.List.Item active>Plugins</Menu.List.Item>
+              <Menu.List.Item>Add a member</Menu.List.Item>
+            </Menu.List>
+          }
+        >
+          Manage Your Teeam
         </Menu.List.Item>
         <Menu.List.Item>Invitations</Menu.List.Item>
         <Menu.List.Item>Cloud Storage Environment Settings</Menu.List.Item>
         <Menu.List.Item>Authentication</Menu.List.Item>
       </Menu.List>
-      <Menu.List title="Transactions">
+
+      <Menu.Label>Transactions</Menu.Label>
+      <Menu.List>
         <Menu.List.Item>Payments</Menu.List.Item>
         <Menu.List.Item>Transfers</Menu.List.Item>
         <Menu.List.Item>Balance</Menu.List.Item>

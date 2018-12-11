@@ -15,10 +15,12 @@ storiesOf("Components/Card", module)
   ))
   .add("Default", () => (
     <Card>
-      <Card.Image
-        size="4by3"
-        src="http://bulma.io/images/placeholders/1280x960.png"
-      />
+      <Card.Image>
+        <Image
+          size="4by3"
+          src="http://bulma.io/images/placeholders/1280x960.png"
+        />
+      </Card.Image>
       <Card.Content>
         <Media>
           <Media.Item as="figure" position="left">

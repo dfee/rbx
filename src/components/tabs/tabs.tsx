@@ -54,10 +54,7 @@ export const Tabs = Object.assign(
         ...rest,
       });
     },
-    {
-      as: "div",
-      fullwidth: false,
-    },
+    { as: "div" },
   ),
   { Tab },
 );

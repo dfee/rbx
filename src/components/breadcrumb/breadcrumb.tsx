@@ -48,11 +48,11 @@ export const Breadcrumb = Object.assign(
         [`is-${size}`]: size,
       });
 
-      return (
-        <nav {...rest} ref={ref}>
-          <ul>{children}</ul>
-        </nav>
-      );
+      return React.createElement(as!, {
+        children: <ul>{children}</ul>,
+        ref,
+        ...rest,
+      });
     },
     { as: "nav" },
   ),

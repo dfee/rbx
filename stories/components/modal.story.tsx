@@ -82,7 +82,7 @@ storiesOf("Components/Modal", module)
                   </p>
                 </Content>
                 <Level breakpoint="mobile">
-                  <Level.Side align="left">
+                  <Level.Left>
                     <Level.Item as="a">
                       <Icon size="small">
                         <FontAwesomeIcon icon={faRetweet} />
@@ -93,7 +93,7 @@ storiesOf("Components/Modal", module)
                         <FontAwesomeIcon icon={faHeart} />
                       </Icon>
                     </Level.Item>
-                  </Level.Side>
+                  </Level.Left>
                 </Level>
               </Media.Item>
             </Media>
@@ -133,7 +133,7 @@ storiesOf("Components/Modal", module)
         <Modal.Background />
         <Modal.Card>
           <Modal.Card.Head>
-            <Modal.Card.Head.Title>Modal Title</Modal.Card.Head.Title>
+            <Modal.Card.Title>Modal Title</Modal.Card.Title>
             <Delete />
           </Modal.Card.Head>
           <Modal.Card.Body>

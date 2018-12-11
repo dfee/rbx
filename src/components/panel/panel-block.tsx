@@ -20,7 +20,6 @@ export const PanelBlock = forwardRefAs<PanelBlockProps, "div">(
     return React.createElement(as!, { ref, ...rest });
   },
   {
-    active: false,
     as: "div",
   },
 );

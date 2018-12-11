@@ -1,42 +1,57 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Panel } from "../panel";
+import { PanelBlock } from "../panel-block";
+import { PanelHeading } from "../panel-heading";
+import { PanelIcon } from "../panel-icon";
+import { PanelTabs } from "../panel-tabs";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Panel component", () => {
-  it("should Exist", () => {
-    expect(Panel).toMatchSnapshot();
+  hasProperties(Panel, {
+    Block: PanelBlock,
+    Heading: PanelHeading,
+    Icon: PanelIcon,
+    Tabs: PanelTabs,
+    defaultProps: { as: "nav" },
   });
 
-  it("should have box classname", () => {
-    const component = renderer.create(
-      <Panel>
-        <Panel.Heading>repositories</Panel.Heading>
-        <Panel.Block>
-          <div>Control</div>
-        </Panel.Block>
-        <Panel.Tabs className="panel-tabs">
-          <Panel.Tabs.Tab active>all</Panel.Tabs.Tab>
-          <Panel.Tabs.Tab>public</Panel.Tabs.Tab>
-          <Panel.Tabs.Tab>private</Panel.Tabs.Tab>
-          <Panel.Tabs.Tab>sources</Panel.Tabs.Tab>
-          <Panel.Tabs.Tab>forks</Panel.Tabs.Tab>
-        </Panel.Tabs>
-        <Panel.Block<"a"> as="a" active>
-          <Panel.Icon>
-            <i className="fa fa-bars" />
-          </Panel.Icon>
-          bulma
-        </Panel.Block>
-        <Panel.Block<"label"> as="label" className="panel-block">
-          <input type="checkbox" />
-          remember me
-        </Panel.Block>
-        <Panel.Block>
-          <button type="button">reset all filters</button>
-        </Panel.Block>
-      </Panel>,
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Panel />);
+    expect(wrapper.is("nav")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Panel as={as} />);
+    expect(wrapper.is(as)).toBe(true);
+  });
+
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Panel ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".panel").instance());
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Panel />);
+    expect(wrapper.hasClass("panel")).toBe(true);
+  });
+
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Panel className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

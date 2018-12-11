@@ -37,7 +37,7 @@ storiesOf("Elements/Box", module)
               </p>
             </Content>
             <Level breakpoint="mobile">
-              <Level.Side align="left">
+              <Level.Left>
                 <Level.Item as="a" aria-label="reply">
                   <Icon size="small">
                     <FontAwesomeIcon icon={faReply} />
@@ -53,7 +53,7 @@ storiesOf("Elements/Box", module)
                     <FontAwesomeIcon icon={faHeart} />
                   </Icon>
                 </Level.Item>
-              </Level.Side>
+              </Level.Left>
             </Level>
           </Media.Item>
         </Media>

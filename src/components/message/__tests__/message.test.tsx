@@ -1,60 +1,71 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
-import { Message } from "../message";
+import { COLORS } from "@/modifiers/color";
+import { Message, MESSAGE_SIZES } from "../message";
+import { MessageBody } from "../message-body";
+import { MessageHeader } from "../message-header";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Message component", () => {
-  it("should Exist", () => {
-    expect(Message).toMatchSnapshot();
+  hasProperties(Message, {
+    Body: MessageBody,
+    Header: MessageHeader,
+    defaultProps: { as: "article" },
   });
 
-  it("should have message classnames", () => {
-    const component = renderer.create(
-      <Message>
-        <Message.Header>Lorem Ipsum</Message.Header>
-        <Message.Body>Lorem Ipsum</Message.Body>
-      </Message>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Message />);
+    expect(wrapper.is("article")).toBe(true);
   });
 
-  it("should concat Bulma class with classes in props", () => {
-    const component = renderer.create(
-      <Message className="other-class">
-        <Message.Header>Lorem Ipsum</Message.Header>
-        <Message.Body>Lorem Ipsum</Message.Body>
-      </Message>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Message as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should render as an html section", () => {
-    const component = renderer.create(
-      <Message<"section"> as="section">This should be a section</Message>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Message ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".message").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should have custom inline styles", () => {
-    const component = renderer.create(
-      <Message<"section"> as="section" style={{ width: 200, zIndex: 1 }}>
-        This should be a section with custom styles
-      </Message>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Message />);
+    expect(wrapper.hasClass("message")).toBe(true);
   });
 
-  it("should accept a react Element as renderAs prop", () => {
-    const Custom = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p {...props}>
-        Custom
-        {props.children || null}
-      </p>
-    );
-
-    const component = renderer.create(
-      <Message<typeof Custom> as={Custom}>This should be a p element</Message>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Message className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
+
+  /**
+   * Props
+   */
+  COLORS.map(color =>
+    it(`should be color ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Message color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
+
+  MESSAGE_SIZES.map(size =>
+    it(`should be size ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Message size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
 });

@@ -3,6 +3,7 @@ import React from "react";
 
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
+import { MenuLabel } from "./menu-label";
 import { MenuList } from "./menu-list";
 
 export type MenuModifierProps = Partial<{ className: string }>;
@@ -18,5 +19,8 @@ export const Menu = Object.assign(
     },
     { as: "aside" },
   ),
-  { List: MenuList },
+  {
+    Label: MenuLabel,
+    List: MenuList,
+  },
 );

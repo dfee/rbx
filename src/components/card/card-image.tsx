@@ -1,19 +1,18 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
-import { Image } from "@/elements/image";
-import { ImageProps } from "@/elements/image/image";
+import { forwardRefAs } from "@/base";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type CardImageProps = Prefer<
-  ImageProps,
-  React.HTMLAttributes<HTMLElement>
->;
+export type CardImageModifierProps = Partial<{ className: string }>;
 
-export const CardImage = React.forwardRef<HTMLElement, CardImageProps>(
-  ({ className, ...rest }, ref) => (
-    <Generic className={cx("card-image", className)}>
-      <Image ref={ref} {...rest} />
-    </Generic>
-  ),
+export type CardImageProps = ModifierProps & CardImageModifierProps;
+
+export const CardImage = forwardRefAs<CardImageProps, "div">(
+  (props, ref) => {
+    const { as, ...rest } = transformModifiers(props);
+    rest.className = cx("card-image", rest.className);
+    return React.createElement(as!, { ref, ...rest });
+  },
+  { as: "div" },
 );
