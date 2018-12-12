@@ -1,54 +1,42 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Select } from "../select";
+import { SelectContainer } from "../select-container";
+import { SelectOption } from "../select-option";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Select component", () => {
-  it("should exist", () => {
-    expect(Select).toMatchSnapshot();
+  hasProperties(Select, {
+    Container: SelectContainer,
+    Option: SelectOption,
+    defaultProps: undefined,
   });
 
-  it("should have select classname", () => {
-    const component = renderer.create(
-      <Select>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </Select>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Select />);
+    expect(wrapper.is("select")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Select className="other-class this-is-a-test">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </Select>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLSelectElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Select ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find("select").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Select style={{ width: "100%" }}>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </Select>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be large, red, disabled and multioption", () => {
-    const component = renderer.create(
-      <Select color="danger" size="large" multiple disabled>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-      </Select>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Select className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

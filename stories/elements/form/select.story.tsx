@@ -5,66 +5,89 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Control, Icon, Select } from "@/elements";
-import { SELECT_SIZES, SELECT_STATES } from "@/elements/form/select";
+import {
+  SELECT_CONTAINER_SIZES,
+  SELECT_CONTAINER_STATES,
+} from "@/elements/form/select-container";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../../helpers";
 import { knobs as modifiersKnobs } from "../../modifiers";
 
 export const knobs = {
+  container: {
+    fullwidth: (title: string = "Fullwidth") => boolean(title, false),
+    rounded: (title: string = "Rounded") => boolean(title, false),
+    size: (title: string = "Size") =>
+      select(
+        title,
+        iterableToSelectObject(SELECT_CONTAINER_SIZES, { undefined: "" }),
+        "",
+      ),
+    state: (title: string = "State") =>
+      select(
+        title,
+        iterableToSelectObject(SELECT_CONTAINER_STATES, { undefined: "" }),
+        "",
+      ),
+  },
+  control: {
+    hasIcon: (title: string = "Has icon") => boolean(title, false),
+  },
   disabled: (title: string = "Disabled") => boolean(title, false),
-  hasIcon: (title: string = "Has icon") => boolean(title, false),
   multiple: (title: string = "Multiple") => boolean(title, false),
-  multipleSize: (title: string = "Multiple size") =>
+  size: (title: string = "Size (multiple)") =>
     number(title, 3, {
       max: 10,
       min: 3,
       range: true,
       step: 1,
     }),
-  rounded: (title: string = "Rounded") => boolean(title, false),
-  size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(SELECT_SIZES, { undefined: "" }), ""),
-  state: (title: string = "State") =>
-    select(title, iterableToSelectObject(SELECT_STATES, { undefined: "" }), ""),
 };
 
 storiesOf("Elements/Form/Select", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const hasIcon = knobs.hasIcon();
-    const { color, multipleSize, size, state, ...rest } = {
-      color: modifiersKnobs.color(),
-      disabled: knobs.disabled(),
-      multiple: knobs.multiple(),
-      multipleSize: knobs.multipleSize(),
-      rounded: knobs.rounded(),
-      size: knobs.size(),
-      state: knobs.state(),
-    };
+    const containerColor = modifiersKnobs.color("Container color");
+    const containerFullwidth = knobs.container.fullwidth("Container fullwidth");
+    const containerSize = knobs.container.size("Container size");
+    const containerState = knobs.container.state("Container state");
+    const containerRounded = knobs.container.rounded("Container rounded");
+    const controlHasIcon = knobs.control.hasIcon();
+
+    const selectDisabled = knobs.disabled();
+    const selectMultiple = knobs.multiple();
+    const selectSize = knobs.size();
+
     return (
-      <Control iconLeft={hasIcon}>
-        <Select
-          color={color || undefined}
-          multipleSize={rest.multiple ? multipleSize : undefined}
-          size={size || undefined}
-          state={state || undefined}
-          {...rest}
+      <Control iconLeft={controlHasIcon}>
+        <Select.Container
+          color={containerColor || undefined}
+          fullwidth={containerFullwidth}
+          rounded={containerRounded}
+          size={containerSize || undefined}
+          state={containerState || undefined}
         >
-          <Select.Option value="Argentina">Argentina</Select.Option>
-          <Select.Option value="Bolivia">Bolivia</Select.Option>
-          <Select.Option value="Brazil">Brazil</Select.Option>
-          <Select.Option value="Chile">Chile</Select.Option>
-          <Select.Option value="Colombia">Colombia</Select.Option>
-          <Select.Option value="Ecuador">Ecuador</Select.Option>
-          <Select.Option value="Guyana">Guyana</Select.Option>
-          <Select.Option value="Paraguay">Paraguay</Select.Option>
-          <Select.Option value="Peru">Peru</Select.Option>
-          <Select.Option value="Suriname">Suriname</Select.Option>
-          <Select.Option value="Uruguay">Uruguay</Select.Option>
-          <Select.Option value="Venezuela">Venezuela</Select.Option>
-        </Select>
-        {hasIcon && (
+          <Select
+            disabled={selectDisabled}
+            multiple={selectMultiple}
+            size={(selectMultiple && selectSize) || undefined}
+          >
+            <Select.Option value="Argentina">Argentina</Select.Option>
+            <Select.Option value="Bolivia">Bolivia</Select.Option>
+            <Select.Option value="Brazil">Brazil</Select.Option>
+            <Select.Option value="Chile">Chile</Select.Option>
+            <Select.Option value="Colombia">Colombia</Select.Option>
+            <Select.Option value="Ecuador">Ecuador</Select.Option>
+            <Select.Option value="Guyana">Guyana</Select.Option>
+            <Select.Option value="Paraguay">Paraguay</Select.Option>
+            <Select.Option value="Peru">Peru</Select.Option>
+            <Select.Option value="Suriname">Suriname</Select.Option>
+            <Select.Option value="Uruguay">Uruguay</Select.Option>
+            <Select.Option value="Venezuela">Venezuela</Select.Option>
+          </Select>
+        </Select.Container>
+        {controlHasIcon && (
           <Icon as="div" size="small" align="left">
             <FontAwesomeIcon icon={faGlobe} />
           </Icon>

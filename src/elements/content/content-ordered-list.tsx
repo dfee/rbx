@@ -23,7 +23,7 @@ export type ContentOrderedListProps = Prefer<
 >;
 
 export const ContentOrderedList = Object.assign(
-  React.forwardRef<"ol", ContentOrderedListProps>((props, ref) => {
+  React.forwardRef<HTMLOListElement, ContentOrderedListProps>((props, ref) => {
     const { type, ...rest } = transformModifiers(props);
     rest.className = cx(rest.className, {
       [`is-${type}`]: type,

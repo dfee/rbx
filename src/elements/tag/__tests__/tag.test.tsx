@@ -1,56 +1,80 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { COLORS } from "@/modifiers/color";
-import { Tag } from "../tag";
+import { Tag, TAG_SIZES } from "../tag";
+import { TagGroup } from "../tag-group";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Tag component", () => {
-  it("should exist", () => {
-    expect(Tag).toMatchSnapshot();
+  hasProperties(Tag, {
+    Group: TagGroup,
+    defaultProps: { as: "span" },
   });
 
-  it("should expose Tag Group", () => {
-    expect(Tag.Group).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Tag />);
+    expect(wrapper.is("span")).toBe(true);
   });
 
-  it("should have tag classname", () => {
-    const component = renderer.create(<Tag>Tag name</Tag>);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "div";
+    const wrapper = Enzyme.shallow(<Tag as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Tag className="other-class this-is-a-test">Tag name</Tag>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLSpanElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Tag ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".tag").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Tag style={{ width: 250 }}>Tag name</Tag>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Tag />);
+    expect(wrapper.hasClass("tag")).toBe(true);
   });
 
-  it("should be Large", () => {
-    const component = renderer.create(<Tag size="large">Tag Large</Tag>);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be group tags", () => {
-    const component = renderer.create(
-      <Tag.Group gapless>
-        <Tag>Tag 1</Tag>
-        <Tag>Tag 2</Tag>
-      </Tag.Group>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Tag className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
   COLORS.map(color =>
-    it(`should use use color ${color}`, () => {
-      const component = renderer.create(<Tag color={color}>tag {color}</Tag>);
-      expect(component.toJSON()).toMatchSnapshot();
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Tag color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(isDelete =>
+    it(`should ${isDelete ? "" : "not "}be delete`, () => {
+      const wrapper = Enzyme.shallow(<Tag delete={isDelete} />);
+      expect(wrapper.hasClass("is-delete")).toBe(isDelete);
+    }),
+  );
+
+  [false, true].map(rounded =>
+    it(`should ${rounded ? "" : "not "}be rounded`, () => {
+      const wrapper = Enzyme.shallow(<Tag rounded={rounded} />);
+      expect(wrapper.hasClass("is-rounded")).toBe(rounded);
+    }),
+  );
+
+  TAG_SIZES.map(size =>
+    it(`should be ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Tag size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
 });

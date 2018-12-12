@@ -16,20 +16,19 @@ storiesOf("Components/Card", module)
   .add("Default", () => (
     <Card>
       <Card.Image>
-        <Image
-          size="4by3"
-          src="http://bulma.io/images/placeholders/1280x960.png"
-        />
+        <Image.Container size="4by3">
+          <Image src="http://bulma.io/images/placeholders/1280x960.png" />
+        </Image.Container>
       </Card.Image>
       <Card.Content>
         <Media>
           <Media.Item as="figure" position="left">
-            <Image
-              as="p"
-              size={64}
-              alt="64x64"
-              src="http://bulma.io/images/placeholders/128x128.png"
-            />
+            <Image.Container as="p" size={64}>
+              <Image
+                alt="64x64"
+                src="http://bulma.io/images/placeholders/128x128.png"
+              />
+            </Image.Container>
           </Media.Item>
           <Media.Item>
             <Title as="p" size={4}>

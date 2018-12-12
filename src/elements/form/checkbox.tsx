@@ -1,59 +1,14 @@
-import { cx } from "emotion";
 import React from "react";
 
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type CheckboxModifierProps = Partial<{
-  checked: boolean;
-  disabled: boolean;
-  /**
-   * The name of the input field Commonly used for
-   * [multi-input handling]
-   * (https://reactjs.org/docs/forms.html#handling-multiple-inputs)
-   */
-  name: string;
-  value: string;
-}>;
-
 export type CheckboxProps = Prefer<
-  ModifierProps & CheckboxModifierProps,
-  React.HTMLAttributes<HTMLInputElement>
+  ModifierProps,
+  React.InputHTMLAttributes<HTMLInputElement>
 >;
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  (props, ref) => {
-    const {
-      checked,
-      children,
-      className,
-      disabled,
-      name,
-      style,
-      value,
-      ...rest
-    } = transformModifiers(props);
-    return (
-      <label
-        className={cx("checkbox", className, { "is-disabled": disabled })}
-        style={style}
-      >
-        <input
-          checked={checked}
-          disabled={disabled}
-          name={name}
-          ref={ref}
-          type="checkbox"
-          value={value}
-          {...rest}
-        />
-        {children}
-      </label>
-    );
-  },
+  (props, ref) => (
+    <input ref={ref} type="checkbox" {...transformModifiers(props)} />
+  ),
 );
-
-Checkbox.defaultProps = {
-  checked: false,
-  children: null,
-  disabled: false,
-};

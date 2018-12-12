@@ -86,11 +86,13 @@ storiesOf("Elements/Form", module)
               <Field.Body>
                 <Field narrow>
                   <Control>
-                    <Select fullwidth>
-                      <Select.Option>Business development</Select.Option>
-                      <Select.Option>Marketing</Select.Option>
-                      <Select.Option>Sales</Select.Option>
-                    </Select>
+                    <Select.Container fullwidth>
+                      <Select>
+                        <Select.Option>Business development</Select.Option>
+                        <Select.Option>Marketing</Select.Option>
+                        <Select.Option>Sales</Select.Option>
+                      </Select>
+                    </Select.Container>
                   </Control>
                 </Field>
               </Field.Body>
@@ -103,8 +105,11 @@ storiesOf("Elements/Form", module)
               <Field.Body>
                 <Field narrow>
                   <Control>
-                    <Radio name="member"> Yes</Radio>
-                    <Radio name="member"> No</Radio>
+                    {["Yes", "No"].map(value => (
+                      <Label specifier="radio">
+                        <Radio name="member" value={value} /> {value}
+                      </Label>
+                    ))}
                   </Control>
                 </Field>
               </Field.Body>
@@ -215,10 +220,12 @@ storiesOf("Elements/Form", module)
             <Field>
               <Label>Subject</Label>
               <Control>
-                <Select>
-                  <Select.Option>Select dropdown</Select.Option>
-                  <Select.Option>With options</Select.Option>
-                </Select>
+                <Select.Container>
+                  <Select>
+                    <Select.Option>Select dropdown</Select.Option>
+                    <Select.Option>With Select.Options</Select.Option>
+                  </Select>
+                </Select.Container>
               </Control>
             </Field>
 
@@ -231,17 +238,20 @@ storiesOf("Elements/Form", module)
 
             <Field>
               <Control>
-                <Checkbox>
-                  {" "}
-                  I agree to the <a href="#">terms and conditions</a>
-                </Checkbox>
+                <Label specifier="checkbox">
+                  <Checkbox /> I agree to the{" "}
+                  <a href="#">terms and conditions</a>
+                </Label>
               </Control>
             </Field>
 
             <Field>
               <Control>
-                <Radio name="question"> Yes</Radio>
-                <Radio name="question"> No</Radio>
+                {["Yes", "No"].map(value => (
+                  <Label specifier="radio">
+                    <Radio name="question" value={value} /> {value}
+                  </Label>
+                ))}
               </Control>
             </Field>
 

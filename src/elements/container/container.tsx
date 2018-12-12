@@ -22,8 +22,5 @@ export const Container = forwardRefAs<ContainerProps, "div">(
     });
     return React.createElement(as!, { ref, ...rest });
   },
-  {
-    as: "div",
-    fluid: false,
-  },
+  { as: "div" },
 );

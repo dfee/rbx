@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
+import { forwardRefAs } from "@/base";
 import { ModifierProps } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { tuple } from "@/utils";
@@ -10,32 +10,23 @@ export const PROGRESS_SIZES = tuple("small", "medium", "large");
 export type ProgressSizes = (typeof PROGRESS_SIZES)[number];
 
 export interface ProgressModifierProps {
+  className?: string;
   color?: Colors;
   size?: ProgressSizes;
   max: number;
   value: number;
 }
 
-export type ProgressProps = Prefer<
-  ModifierProps & ProgressModifierProps,
-  React.HTMLAttributes<HTMLProgressElement>
->;
+export type ProgressProps = ModifierProps & ProgressModifierProps;
 
-export const Progress = React.forwardRef<HTMLProgressElement, ProgressProps>(
+export const Progress = forwardRefAs<ProgressProps, "progress">(
   (props, ref) => {
-    const { color, max, size, value, ...rest } = props;
+    const { as, color, size, ...rest } = props;
     rest.className = cx("progress", rest.className, {
       [`is-${color}`]: color,
       [`is-${size}`]: size,
     });
-    return (
-      <Generic<"progress">
-        as="progress"
-        max={max}
-        ref={ref}
-        value={value}
-        {...rest}
-      />
-    );
+    return React.createElement(as!, { ref, ...rest });
   },
+  { as: "progress" },
 );

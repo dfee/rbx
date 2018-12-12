@@ -22,12 +22,12 @@ storiesOf("Components/Media", module)
   .add("Default", () => (
     <Media>
       <Media.Item as="figure" position="left">
-        <Image
-          as="p"
-          size={64}
-          alt="64x64"
-          src="http://bulma.io/images/placeholders/128x128.png"
-        />
+        <Image.Container as="p" size={64}>
+          <Image
+            alt="64x64"
+            src="http://bulma.io/images/placeholders/128x128.png"
+          />
+        </Image.Container>
       </Media.Item>
       <Media.Item position="content">
         <Content>
@@ -68,11 +68,9 @@ storiesOf("Components/Media", module)
   .add("Input", () => (
     <Media>
       <Media.Item as="figure" position="left">
-        <Image
-          as="p"
-          size={64}
-          src="https://bulma.io/images/placeholders/128x128.png"
-        />
+        <Image.Container as="p" size={64}>
+          <Image src="https://bulma.io/images/placeholders/128x128.png" />
+        </Image.Container>
       </Media.Item>
       <Media.Item position="content">
         <Field>
@@ -83,7 +81,7 @@ storiesOf("Components/Media", module)
         <Level>
           <Level.Left>
             <Level.Item>
-              <Button color="info" submit>
+              <Button color="info" type="submit">
                 Submit
               </Button>
             </Level.Item>
@@ -101,11 +99,9 @@ storiesOf("Components/Media", module)
     <React.Fragment>
       <Media as="article">
         <Media.Item position="left">
-          <Image
-            src="http://bulma.io/images/placeholders/128x128.png"
-            size={64}
-            as="p"
-          />
+          <Image.Container as="p" size={64}>
+            <Image src="http://bulma.io/images/placeholders/128x128.png" />
+          </Image.Container>
         </Media.Item>
         <Media.Item position="content">
           <Content>
@@ -125,11 +121,9 @@ storiesOf("Components/Media", module)
 
           <Media>
             <Media.Item position="left">
-              <Image
-                src="http://bulma.io/images/placeholders/128x128.png"
-                size={48}
-                as="p"
-              />
+              <Image.Container as="p" size={48}>
+                <Image src="http://bulma.io/images/placeholders/128x128.png" />
+              </Image.Container>
             </Media.Item>
             <Media.Item position="content">
               <Content>
@@ -162,11 +156,9 @@ storiesOf("Components/Media", module)
 
           <Media>
             <Media.Item position="left">
-              <Image
-                src="http://bulma.io/images/placeholders/96x96.png"
-                size={48}
-                as="p"
-              />
+              <Image.Container as="p" size={48}>
+                <Image src="http://bulma.io/images/placeholders/96x96.png" />
+              </Image.Container>
             </Media.Item>
             <Media.Item position="content">
               <Content>
@@ -190,11 +182,9 @@ storiesOf("Components/Media", module)
       </Media>
       <Media as="article">
         <Media.Item position="left">
-          <Image
-            src="http://bulma.io/images/placeholders/128x128.png"
-            size={64}
-            as="p"
-          />
+          <Image.Container as="p" size={64}>
+            <Image src="http://bulma.io/images/placeholders/128x128.png" />
+          </Image.Container>
         </Media.Item>
         <Media.Item position="content">
           <Field>

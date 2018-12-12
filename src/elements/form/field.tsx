@@ -57,11 +57,7 @@ export const Field = Object.assign(
 
       return React.createElement(as!, { ref, ...rest });
     },
-    {
-      as: "div",
-      horizontal: false,
-      multiline: false,
-    },
+    { as: "div" },
   ),
   {
     Body: FieldBody,

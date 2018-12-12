@@ -20,11 +20,12 @@ storiesOf("Elements/Box", module)
       <Box {...props}>
         <Media>
           <Media.Item position="left">
-            <Image
-              size={64}
-              alt="Image"
-              src="https://bulma.io/images/placeholders/128x128.png"
-            />
+            <Image.Container size={64}>
+              <Image
+                alt="Image"
+                src="https://bulma.io/images/placeholders/128x128.png"
+              />
+            </Image.Container>
           </Media.Item>
           <Media.Item>
             <Content>

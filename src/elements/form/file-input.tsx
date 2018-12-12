@@ -3,13 +3,9 @@ import React from "react";
 
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type FileInputModifierProps = Partial<{
-  name: string;
-}>;
-
 export type FileInputProps = Prefer<
-  ModifierProps & FileInputModifierProps,
-  React.HTMLAttributes<HTMLInputElement>
+  ModifierProps,
+  React.InputHTMLAttributes<HTMLInputElement>
 >;
 
 export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(

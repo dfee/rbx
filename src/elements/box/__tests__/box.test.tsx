@@ -1,52 +1,49 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Box } from "../box";
 
+import { hasProperties } from "@/__tests__/helpers";
+
 describe("Box component", () => {
-  it("should Exist", () => {
-    expect(Box).toMatchSnapshot();
+  hasProperties(Box, {
+    defaultProps: { as: "div" },
   });
 
-  it("should have box classname", () => {
-    const component = renderer.create(<Box>Facebook</Box>);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Box />);
+    expect(wrapper.is("div")).toBe(true);
   });
 
-  it("should concat Bulma class with classes in props", () => {
-    const component = renderer.create(
-      <Box className="other-class test">Facebook</Box>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Box as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should render as an html section", () => {
-    const component = renderer.create(
-      <Box<"section"> as="section">This should be a section</Box>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Box ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".box").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should have custom inline styles", () => {
-    const component = renderer.create(
-      <Box<"section"> as="section" style={{ width: 200, zIndex: 1 }}>
-        This should be a section with custom styles
-      </Box>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Box />);
+    expect(wrapper.hasClass("box")).toBe(true);
   });
 
-  it("should accept a react Element as renderAs prop", () => {
-    const Custom = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <p {...props}>
-        Custom
-        {props.children}
-      </p>
-    );
-
-    const component = renderer.create(
-      <Box<typeof Custom> as={Custom}>This should be a p element</Box>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Box className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

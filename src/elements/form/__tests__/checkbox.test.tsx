@@ -1,28 +1,38 @@
-import { shallow } from "enzyme";
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Checkbox } from "../checkbox";
 
+import { hasProperties } from "@/__tests__/helpers";
+
 describe("Checkbox component", () => {
-  it("Should Exists", () => {
-    expect(Checkbox).toMatchSnapshot();
+  hasProperties(Checkbox, {
+    defaultProps: undefined,
   });
 
-  it("should have checkbox classname", () => {
-    const component = renderer.create(<Checkbox>Text</Checkbox>);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Checkbox />);
+    expect(wrapper.is("input")).toBe(true);
   });
 
-  it("should change value on change event", () => {
-    const spy = jest.fn();
-    const component = shallow(<Checkbox onChange={spy}>Text</Checkbox>);
-    component.find("input").simulate("change");
-    expect(spy).toHaveBeenCalledTimes(1);
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLInputElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Checkbox ref={ref} />
+      </div>,
+    );
+    try {
+      expect(ref.current).toBe(wrapper.find("input").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should set input checked if checked", () => {
-    const component = shallow(<Checkbox checked />);
-    expect(component.find("input").is("[checked]")).toBe(true);
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Checkbox className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

@@ -1,41 +1,72 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
-import { Textarea } from "../textarea";
+import { COLORS } from "@/modifiers/color";
+import { Textarea, TEXTAREA_SIZES, TEXTAREA_STATES } from "../textarea";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Textarea component", () => {
-  it("should exist", () => {
-    expect(Textarea).toMatchSnapshot();
+  hasProperties(Textarea, {
+    defaultProps: { rows: 4 },
   });
 
-  it("should have textarea classname", () => {
-    const component = renderer.create(<Textarea />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Textarea />);
+    expect(wrapper.is("textarea")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Textarea className="other-class this-is-a-test" />,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLTextAreaElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Textarea ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".textarea").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(<Textarea style={{ height: 250 }} />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Textarea />);
+    expect(wrapper.hasClass("textarea")).toBe(true);
   });
 
-  it("should be large with 10 rows and readOnly", () => {
-    const component = renderer.create(
-      <Textarea rows={10} readOnly size="large" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Textarea className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should be disabled with placeholder and value", () => {
-    const component = renderer.create(
-      <Textarea value="TEST" disabled placeholder="hello tests" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  COLORS.map(color =>
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Textarea color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(fixedSize =>
+    it(`should ${fixedSize ? "" : "not "}have fixed size`, () => {
+      const wrapper = Enzyme.shallow(<Textarea fixedSize={fixedSize} />);
+      expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
+    }),
+  );
+
+  TEXTAREA_SIZES.map(size =>
+    it(`should be ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Textarea size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
+
+  TEXTAREA_STATES.map(state =>
+    it(`should be ${state}`, () => {
+      const wrapper = Enzyme.shallow(<Textarea state={state} />);
+      expect(wrapper.hasClass(`is-${state}`)).toBe(true);
+    }),
+  );
 });

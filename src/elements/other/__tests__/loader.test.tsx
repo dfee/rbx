@@ -1,32 +1,52 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Loader } from "../loader";
 
-describe("Box component", () => {
-  it("should Exist", () => {
-    expect(Loader).toMatchSnapshot();
+import { hasProperties } from "@/__tests__/helpers";
+
+describe("Loader component", () => {
+  hasProperties(Loader, {
+    defaultProps: {
+      as: "div",
+      children: null,
+    },
   });
 
-  it("should have box classname", () => {
-    const component = renderer.create(<Loader />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Loader />);
+    expect(wrapper.is("div")).toBe(true);
   });
 
-  it("should concat Bulma class with classes in props", () => {
-    const component = renderer.create(<Loader className="other-class test" />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Loader as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should render as an html section", () => {
-    const component = renderer.create(<Loader<"section"> as="section" />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should have custom inline styles", () => {
-    const component = renderer.create(
-      <Loader<"section"> as="section" style={{ width: 200, zIndex: 1 }} />,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Loader ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".loader").instance());
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Loader />);
+    expect(wrapper.hasClass("loader")).toBe(true);
+  });
+
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Loader className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

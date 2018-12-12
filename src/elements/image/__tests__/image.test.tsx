@@ -1,50 +1,40 @@
-import { shallow } from "enzyme";
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Image } from "../image";
+import { ImageContainer } from "../image-container";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Image component", () => {
-  it("should exist", () => {
-    expect(Image).toMatchSnapshot();
+  hasProperties(Image, {
+    Container: ImageContainer,
+    defaultProps: undefined,
   });
 
-  it("should have image classname", () => {
-    const component = renderer.create(
-      <Image src="http://mydomain.com/image" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Image />);
+    expect(wrapper.is("img")).toBe(true);
   });
 
-  it("should be square", () => {
-    const component = renderer.create(
-      <Image size="square" src="http://mydomain.com/image" />,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLImageElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Image ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find("img").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should be 32x32", () => {
-    const component = renderer.create(
-      <Image size={32} src="http://mydomain.com/image" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should update src", () => {
-    const component = shallow(<Image src="http://mydomain.com/image" />);
-    component.setProps({ src: "http://mydomain.com/other" });
-    expect(component.find("img").props()).toHaveProperty(
-      "src",
-      "http://mydomain.com/other",
-    );
-  });
-
-  it("should NOT update src", () => {
-    const component = shallow(<Image src="http://mydomain.com/image" />);
-    component.setProps({ alt: "change prop" });
-    expect(component.find("img").props()).toHaveProperty(
-      "src",
-      "http://mydomain.com/image",
-    );
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Image className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

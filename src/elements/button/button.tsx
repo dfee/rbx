@@ -4,7 +4,7 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
-import { noop, tuple } from "@/utils";
+import { tuple } from "@/utils";
 import { ButtonGroup } from "./button-group";
 
 export const BUTTON_SIZES = tuple("small", "medium", "large");
@@ -21,13 +21,11 @@ export type ButtonModifierProps = Partial<{
   inverted: boolean;
   outlined: boolean;
   onClick: React.MouseEventHandler<any>;
-  reset: boolean;
   rounded: boolean;
   selected: boolean;
   size: ButtonSizes;
   state: ButtonStates;
   static: boolean;
-  submit: boolean;
   text: boolean;
 }>;
 
@@ -45,13 +43,11 @@ export const Button = Object.assign(
         inverted,
         onClick,
         outlined,
-        reset,
         rounded,
         selected,
         size,
         state,
         static: isStatic,
-        submit,
         text,
         ...rest
       } = transformModifiers(props);
@@ -68,45 +64,19 @@ export const Button = Object.assign(
         "is-text": text,
       });
 
-      let element = isStatic ? "span" : as!;
-      let type: string | undefined;
-
-      if (submit) {
-        element = "button";
-        type = "submit";
-      }
-      if (reset) {
-        element = "button";
-        type = "reset";
-      }
-
       return React.createElement(
-        element,
+        as!,
         {
-          ...rest,
           disabled,
           onClick: disabled ? undefined : onClick,
           ref,
           tabIndex: disabled ? -1 : 0,
-          type,
+          ...rest,
         },
         children,
       );
     },
-    {
-      as: "button",
-      disabled: false,
-      fullwidth: false,
-      inverted: false,
-      onClick: noop,
-      outlined: false,
-      reset: false,
-      rounded: false,
-      selected: false,
-      static: false,
-      submit: false,
-      text: false,
-    },
+    { as: "button" },
   ),
   { Group: ButtonGroup },
 );

@@ -2,16 +2,11 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Checkbox, Control } from "@/elements";
+import { Checkbox, Control, Label } from "@/elements";
+import { CheckboxProps } from "@/elements/form/checkbox";
 import { Section } from "@/layout";
 
-export interface ControlledCheckboxProps {
-  name: string;
-  children: React.ReactNode;
-  value?: string;
-  checked?: boolean;
-}
-
+export type ControlledCheckboxProps = Omit<CheckboxProps, "onChange">;
 export interface ControlledCheckboxState {
   checked?: boolean;
 }
@@ -24,23 +19,24 @@ export class ControlledCheckbox extends React.PureComponent<
 
   constructor(props: ControlledCheckboxProps) {
     super(props);
-    this.state = { checked: props.checked };
+    this.state = { checked: props.checked || false };
   }
 
   public render() {
     const { children, name, value } = this.props;
     return (
       <Control>
-        <Checkbox
-          checked={this.state.checked}
-          name={name}
-          onClick={() =>
-            this.setState(({ checked }) => ({ checked: !checked }))
-          }
-          value={value}
-        >
+        <Label disabled={this.props.disabled} specifier="checkbox">
+          <Checkbox
+            checked={this.state.checked}
+            name={name}
+            onChange={() =>
+              this.setState(({ checked }) => ({ checked: !checked }))
+            }
+            value={value}
+          />
           {children}
-        </Checkbox>
+        </Label>
       </Control>
     );
   }
@@ -54,16 +50,14 @@ export const knobs = {
 storiesOf("Elements/Form/Checkbox", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const props = {
-      checked: knobs.checked(),
-      disabled: knobs.disabled(),
-    };
+    const checked = knobs.checked();
+    const disabled = knobs.disabled();
     return (
       <Control>
-        <Checkbox {...props}>
-          {" "}
-          I agree to the <a href="#">terms and conditions</a>
-        </Checkbox>
+        <Label disabled={disabled} specifier="checkbox">
+          <Checkbox checked={checked} disabled={disabled} /> I agree to the{" "}
+          <a href="#">terms and conditions</a>
+        </Label>
       </Control>
     );
   })

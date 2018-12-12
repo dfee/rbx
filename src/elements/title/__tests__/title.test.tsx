@@ -1,64 +1,65 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
-import { Title } from "../title";
+import { Title, TITLE_SIZES } from "../title";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Title component", () => {
-  it("should exist", () => {
-    expect(Title).toMatchSnapshot();
+  hasProperties(Title, {
+    defaultProps: { as: "h1" },
   });
 
-  it("should have title classname", () => {
-    const component = renderer.create(
-      <Title>
-        Test <a>Give me</a>
-      </Title>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Title />);
+    expect(wrapper.is("h1")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Title className="other-class this-is-a-test">
-        <p>Default</p>
-      </Title>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "div";
+    const wrapper = Enzyme.shallow(<Title as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Title style={{ height: 250 }}>
-        <p>Default</p>
-      </Title>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLHeadingElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Title ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".title").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should be a subtitle with size rendered as P", () => {
-    const component = renderer.create(
-      <Title<"p"> size={3} subtitle as="p">
-        Subtitle
-      </Title>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Title className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should not be spaced because is subtitle", () => {
-    const component = renderer.create(
-      <Title<"p"> spaced subtitle as="p">
-        Subtitle
-      </Title>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  TITLE_SIZES.map(size =>
+    it(`should be ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Title size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
 
-  it("should be spaced", () => {
-    const component = renderer.create(
-      <Title<"p"> spaced as="p">
-        Subtitle
-      </Title>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  [false, true].map(spaced =>
+    it(`should ${spaced ? "" : "not "}be spaced`, () => {
+      const wrapper = Enzyme.shallow(<Title spaced={spaced} />);
+      expect(wrapper.hasClass("is-spaced")).toBe(spaced);
+    }),
+  );
+
+  [false, true].map(subtitle =>
+    it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
+      const wrapper = Enzyme.shallow(<Title subtitle={subtitle} />);
+      expect(wrapper.hasClass(subtitle ? "subtitle" : "title")).toBe(true);
+    }),
+  );
 });

@@ -4,52 +4,66 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import { Image } from "@/elements";
-import { IMAGE_SIZES, ImageSizes } from "@/elements/image/image";
+import {
+  IMAGE_CONTAINER_SIZES,
+  ImageContainerSizes,
+} from "@/elements/image/image-container";
 
 import { Section } from "@/layout";
 import { iterableToSelectObject } from "../helpers";
 
 export const knobs = {
-  fixedSize: (title: string = "Fixed size") =>
-    select(
-      title,
-      iterableToSelectObject(IMAGE_SIZES, { undefined: "" }),
-      "128",
-    ),
-  responsiveSize: (title: string = "Responsive size") =>
-    select(
-      title,
-      iterableToSelectObject(IMAGE_SIZES, { undefined: "" }),
-      "square",
-    ),
+  container: {
+    fixedSize: (title: string = "Fixed size") =>
+      select(
+        title,
+        iterableToSelectObject(
+          IMAGE_CONTAINER_SIZES.filter(value => typeof value === "number"),
+          { undefined: "" },
+        ),
+        "128",
+      ),
+    responsiveSize: (title: string = "Responsive size") =>
+      select(
+        title,
+        iterableToSelectObject(
+          IMAGE_CONTAINER_SIZES.filter(value => typeof value === "string"),
+          { undefined: "" },
+        ),
+        "square",
+      ),
+  },
 };
 
 storiesOf("Elements/Image", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => (
-    <Image src="http://bulma.io/images/placeholders/128x128.png" size={128} />
+    <Image.Container size={128}>
+      <Image src="http://bulma.io/images/placeholders/128x128.png" />
+    </Image.Container>
   ))
   .add("Fixed square", () => {
-    const size = knobs.fixedSize();
+    const size = knobs.container.fixedSize();
     return (
-      <Image
-        src={`https://bulma.io/images/placeholders/${size}x${size}.png`}
-        size={parseInt(size, 10) as ImageSizes}
-      />
+      <Image.Container size={parseInt(size, 10) as ImageContainerSizes}>
+        <Image
+          src={`https://bulma.io/images/placeholders/${size}x${size}.png`}
+        />
+      </Image.Container>
     );
   })
   .add("Rounded images", () => (
-    <Image
-      size={128}
-      rounded
-      src="https://bulma.io/images/placeholders/128x128.png"
-    />
+    <Image.Container size={128}>
+      <Image rounded src="https://bulma.io/images/placeholders/128x128.png" />
+    </Image.Container>
   ))
   .add("Retina images", () => (
-    <Image size={128} src="https://bulma.io/images/placeholders/256x256.png" />
+    <Image.Container size={128}>
+      <Image src="https://bulma.io/images/placeholders/256x256.png" />
+    </Image.Container>
   ))
   .add("Responsive images with ratios", () => {
-    const size = knobs.responsiveSize();
+    const size = knobs.container.responsiveSize();
     const sizeMap = {
       "16by9": "640x360",
       "1by1": "480x480",
@@ -71,10 +85,11 @@ storiesOf("Elements/Image", module)
 
     return (
       <div style={{ height: "300px", width: "300px" }}>
-        <Image
-          src={`https://bulma.io/images/placeholders/${sizeMap[size]}.png`}
-          size={size}
-        />
+        <Image.Container size={size}>
+          <Image
+            src={`https://bulma.io/images/placeholders/${sizeMap[size]}.png`}
+          />
+        </Image.Container>
       </div>
     );
   });

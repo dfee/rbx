@@ -113,9 +113,11 @@ storiesOf("Elements/Form/Field", module)
           <Field>
             <Control iconLeft>
               <Select>
-                <Select.Option selected>Country</Select.Option>
-                <Select.Option>Select dropdown</Select.Option>
-                <Select.Option>With Options</Select.Option>
+                <select>
+                  <option selected>Country</option>
+                  <option>Select dropdown</option>
+                  <option>With Options</option>
+                </select>
               </Select>
               <Icon size="small" align="left">
                 <FontAwesomeIcon icon={faGlobe} />
@@ -142,20 +144,22 @@ storiesOf("Elements/Form/Field", module)
 
         <Field kind="addons" align={align || undefined}>
           <Control expanded={controlExpanded}>
-            <Select fullwidth={controlExpanded}>
-              <Select.Option value="Argentina">Argentina</Select.Option>
-              <Select.Option value="Bolivia">Bolivia</Select.Option>
-              <Select.Option value="Brazil">Brazil</Select.Option>
-              <Select.Option value="Chile">Chile</Select.Option>
-              <Select.Option value="Colombia">Colombia</Select.Option>
-              <Select.Option value="Ecuador">Ecuador</Select.Option>
-              <Select.Option value="Guyana">Guyana</Select.Option>
-              <Select.Option value="Paraguay">Paraguay</Select.Option>
-              <Select.Option value="Peru">Peru</Select.Option>
-              <Select.Option value="Suriname">Suriname</Select.Option>
-              <Select.Option value="Uruguay">Uruguay</Select.Option>
-              <Select.Option value="Venezuela">Venezuela</Select.Option>
-            </Select>
+            <Select.Container fullwidth={controlExpanded}>
+              <select>
+                <option value="Argentina">Argentina</option>
+                <option value="Bolivia">Bolivia</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Chile">Chile</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Guyana">Guyana</option>
+                <option value="Paraguay">Paraguay</option>
+                <option value="Peru">Peru</option>
+                <option value="Suriname">Suriname</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Venezuela">Venezuela</option>
+              </select>
+            </Select.Container>
           </Control>
           <Control>
             <Button color="primary">Choose</Button>
@@ -164,11 +168,13 @@ storiesOf("Elements/Form/Field", module)
 
         <Field kind="addons" align={align || undefined}>
           <Control expanded={controlExpanded}>
-            <Select>
-              <Select.Option>$</Select.Option>
-              <Select.Option>£</Select.Option>
-              <Select.Option>€</Select.Option>
-            </Select>
+            <Select.Container>
+              <select>
+                <option>$</option>
+                <option>£</option>
+                <option>€</option>
+              </select>
+            </Select.Container>
           </Control>
           <Control>
             <Input type="text" placeholder="Amount of money" />

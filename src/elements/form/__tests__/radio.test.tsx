@@ -1,46 +1,38 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Radio } from "../radio";
 
+import { hasProperties } from "@/__tests__/helpers";
+
 describe("Radio component", () => {
-  it("should exist", () => {
-    expect(Radio).toMatchSnapshot();
+  hasProperties(Radio, {
+    defaultProps: undefined,
   });
 
-  it("should have radio classname", () => {
-    const component = renderer.create(
-      <Radio name="test">
-        Test <a>Give me</a>
-      </Radio>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Radio />);
+    expect(wrapper.is("input")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Radio name="test" className="other-class this-is-a-test">
-        <p>Default</p>
-      </Radio>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLInputElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Radio ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find("input").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Radio name="test" style={{ height: 250 }}>
-        <p>Default</p>
-      </Radio>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be disabled, checked and with value", () => {
-    const component = renderer.create(
-      <Radio name="test" value="TEST" checked disabled>
-        <p>Default</p>
-      </Radio>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Radio className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 });

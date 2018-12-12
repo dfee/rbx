@@ -6,26 +6,21 @@ import { Colors } from "@/modifiers/color";
 import { tuple } from "@/utils";
 
 export const TEXTAREA_SIZES = tuple("small", "medium", "large");
-export type TextareSizes = (typeof TEXTAREA_SIZES)[number];
+export type TextareaSizes = (typeof TEXTAREA_SIZES)[number];
 
 export const TEXTAREA_STATES = tuple("focused", "hovered");
 export type TextareaStates = (typeof TEXTAREA_STATES)[number];
 
 export type TextareaModifierProps = Partial<{
   color: Colors;
-  disabled: boolean;
   fixedSize: boolean;
-  name: string;
-  readOnly: boolean;
-  rows: number;
-  size: TextareSizes;
+  size: TextareaSizes;
   state: TextareaStates;
-  value: string;
 }>;
 
 export type TextareaProps = Prefer<
   ModifierProps & TextareaModifierProps,
-  React.HTMLAttributes<HTMLTextAreaElement>
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>
 >;
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -43,8 +38,4 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   },
 );
 
-Textarea.defaultProps = {
-  disabled: false,
-  readOnly: false,
-  rows: 4,
-};
+Textarea.defaultProps = { rows: 4 };

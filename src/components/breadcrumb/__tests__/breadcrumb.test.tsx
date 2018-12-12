@@ -45,13 +45,13 @@ describe("Breadcrumb component", () => {
 
   it("should have bulma className", () => {
     const wrapper = Enzyme.shallow(<Breadcrumb />);
-    expect(wrapper.hasClass("breadcrumb"));
+    expect(wrapper.hasClass("breadcrumb")).toBe(true);
   });
 
   it("should preserve custom className", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Breadcrumb className={className} />);
-    expect(wrapper.hasClass(className));
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
   BREADCRUMB_ALIGNMENTS.map(alignment =>

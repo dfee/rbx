@@ -1,44 +1,87 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
-import { Input } from "../input";
+import { COLORS } from "@/modifiers/color";
+import { Input, INPUT_SIZES, INPUT_STATES, INPUT_TYPES } from "../input";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Input component", () => {
-  it("should exist", () => {
-    expect(Input).toMatchSnapshot();
+  hasProperties(Input, {
+    defaultProps: undefined,
   });
 
-  it("should have input classname", () => {
-    const component = renderer.create(<Input />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Input />);
+    expect(wrapper.is("input")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Input className="other-class this-is-a-test" />,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLInputElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Input ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".input").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(<Input style={{ height: 250 }} />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Input />);
+    expect(wrapper.hasClass("input")).toBe(true);
   });
 
-  it("should be type email and a with success colors", () => {
-    const component = renderer.create(<Input color="success" type="email" />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Input className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should be large and readOnly", () => {
-    const component = renderer.create(<Input readOnly size="large" />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  COLORS.map(color =>
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Input color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
 
-  it("should be disabled with placeholder and value", () => {
-    const component = renderer.create(
-      <Input value="TEST" disabled placeholder="hello tests" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
+  [false, true].map(rounded =>
+    it(`should ${rounded ? "" : "not "}be rounded`, () => {
+      const wrapper = Enzyme.shallow(<Input rounded={rounded} />);
+      expect(wrapper.hasClass("is-rounded")).toBe(rounded);
+    }),
+  );
+
+  INPUT_SIZES.map(size =>
+    it(`should be ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Input size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
+
+  INPUT_STATES.map(state =>
+    it(`should be ${state}`, () => {
+      const wrapper = Enzyme.shallow(<Input state={state} />);
+      expect(wrapper.hasClass(`is-${state}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(isStatic =>
+    it(`should ${isStatic ? "" : "not "}be static`, () => {
+      const wrapper = Enzyme.shallow(<Input static={isStatic} />);
+      expect(wrapper.hasClass("is-static")).toBe(isStatic);
+      expect(wrapper.prop("readOnly")).toBe(isStatic);
+    }),
+  );
+
+  INPUT_TYPES.map(type =>
+    it(`should be ${type}`, () => {
+      const wrapper = Enzyme.shallow(<Input type={type} />);
+      expect(wrapper.prop("type")).toBe(type);
+    }),
+  );
 });

@@ -1,159 +1,136 @@
-import { mount, shallow } from "enzyme";
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
-import { Button } from "../button";
+import { COLORS } from "@/modifiers/color";
+import { Button, BUTTON_SIZES, BUTTON_STATES } from "../button";
+import { ButtonGroup } from "../button-group";
 
-const Link: React.SFC<{ to: string; children: React.ReactNode }> = ({
-  to,
-  children,
-}) => <a href={to}>{children}</a>;
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Button component", () => {
-  it("should exist", () => {
-    expect(Button).toMatchSnapshot();
+  hasProperties(Button, {
+    Group: ButtonGroup,
+    defaultProps: { as: "button" },
   });
 
-  it("should expose Button Group", () => {
-    expect(Button.Group).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Button />);
+    expect(wrapper.is("button")).toBe(true);
   });
 
-  it("should be a default Button", () => {
-    const component = renderer.create(<Button />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be an anchor button", () => {
-    const component = renderer.create(
-      <Button<"a"> as="a" href="https://github.com/dfee/rbx" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be a Primary Button", () => {
-    const component = renderer.create(<Button color="primary" />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be a Large Primary Button", () => {
-    const component = renderer.create(<Button color="primary" size="large" />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should render as a static Button", () => {
-    const component = renderer.create(<Button static color="primary" />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should render as a html button", () => {
-    const component = renderer.create(
-      <Button<"button"> as="button" color="danger" />,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should render as a React element link with to prop", () => {
-    const component = renderer.create(
-      <Button<typeof Link> as={Link} to="http://google.com" color="danger">
-        TEST
-      </Button>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should render be disabled", () => {
-    const component = renderer.create(<Button disabled />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be a submit form button", () => {
-    const component = renderer.create(<Button submit />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should be a reset form button", () => {
-    const component = renderer.create(<Button reset />);
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should have a Click listener", () => {
-    const onClick = jest.fn();
-    const component = shallow(<Button onClick={onClick} />);
-    component.simulate("click");
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
-
-  it("should have no dispatch click handler if disabled", () => {
-    const onClick = jest.fn();
-    const component = shallow(<Button disabled onClick={onClick} />);
-    component.simulate("click");
-    expect(onClick).toHaveBeenCalledTimes(0);
-  });
-
-  it("should have a call default onClick is no listener is set", () => {
-    const spy = jest.spyOn(Button.defaultProps!, "onClick");
-    const component = shallow(<Button />);
-    component.simulate("click");
-    component.simulate("click");
-    expect(spy).toHaveBeenCalledTimes(2);
-    spy.mockRestore();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Button as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {
-    const testRef = React.createRef<HTMLButtonElement>();
-    mount(<Button ref={testRef} />);
-    expect(testRef.current).not.toBeNull();
+    const ref = React.createRef<HTMLButtonElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Button ref={ref} />
+      </div>,
+    );
+    try {
+      expect(ref.current).toBe(wrapper.find(".button").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  describe("Button Group component", () => {
-    it("should be a default list of buttons", () => {
-      const component = renderer.create(
-        <Button.Group>
-          <Button>test 0</Button>
-          <Button>test 1</Button>
-        </Button.Group>,
-      );
-      expect(component).toMatchSnapshot();
-    });
-
-    it("should concat class names in props with Bulma class name", () => {
-      const component = renderer.create(
-        <Button.Group className="super-class-1 dope-class-2">
-          <Button>test 0</Button>
-          <Button>test 1</Button>
-        </Button.Group>,
-      );
-      expect(component.toJSON()).toMatchSnapshot();
-    });
-
-    it("should group buttons together", () => {
-      const component = renderer.create(
-        <Button.Group hasAddons>
-          <Button>test 1</Button>
-          <Button>test 2</Button>
-        </Button.Group>,
-      );
-      expect(component.toJSON()).toMatchSnapshot();
-    });
-
-    it("should be centered", () => {
-      const component = renderer.create(
-        <Button.Group position="centered">
-          <Button>test 0</Button>
-          <Button>test 1</Button>
-        </Button.Group>,
-      );
-      expect(component.toJSON()).toMatchSnapshot();
-    });
-
-    it("should align to the right", () => {
-      const component = renderer.create(
-        <Button.Group position="right">
-          <Button>test 0</Button>
-          <Button>test 1</Button>
-        </Button.Group>,
-      );
-      expect(component.toJSON()).toMatchSnapshot();
-    });
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Button />);
+    expect(wrapper.hasClass("button")).toBe(true);
   });
+
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Button className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  COLORS.map(color =>
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Button color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(disabled =>
+    it(`should ${disabled ? "" : "not "}be disabled`, () => {
+      const wrapper = Enzyme.shallow(<Button disabled={disabled} />);
+      expect(wrapper.prop("disabled")).toBe(disabled);
+    }),
+  );
+
+  [false, true].map(fullwidth =>
+    it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
+      const wrapper = Enzyme.shallow(<Button fullwidth={fullwidth} />);
+      expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
+    }),
+  );
+
+  [false, true].map(inverted =>
+    it(`should ${inverted ? "" : "not "}be inverted`, () => {
+      const wrapper = Enzyme.shallow(<Button inverted={inverted} />);
+      expect(wrapper.hasClass("is-inverted")).toBe(inverted);
+    }),
+  );
+
+  [false, true].map(outlined =>
+    it(`should ${outlined ? "" : "not "}be outlined`, () => {
+      const wrapper = Enzyme.shallow(<Button outlined={outlined} />);
+      expect(wrapper.hasClass("is-outlined")).toBe(outlined);
+    }),
+  );
+
+  it("should call onClick", () => {
+    const onClick = jest.fn();
+    const wrapper = Enzyme.shallow(<Button onClick={onClick} />);
+    wrapper.simulate("click");
+    expect(onClick.mock.calls).toHaveLength(1);
+  });
+
+  [false, true].map(rounded =>
+    it(`should ${rounded ? "" : "not "}be rounded`, () => {
+      const wrapper = Enzyme.shallow(<Button rounded={rounded} />);
+      expect(wrapper.hasClass("is-rounded")).toBe(rounded);
+    }),
+  );
+
+  [false, true].map(selected =>
+    it(`should ${selected ? "" : "not "}be selected`, () => {
+      const wrapper = Enzyme.shallow(<Button selected={selected} />);
+      expect(wrapper.hasClass("is-selected")).toBe(selected);
+    }),
+  );
+
+  BUTTON_SIZES.map(size =>
+    it(`should be ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Button size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
+
+  BUTTON_STATES.map(state =>
+    it(`should be ${state}`, () => {
+      const wrapper = Enzyme.shallow(<Button state={state} />);
+      expect(wrapper.hasClass(`is-${state}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(isStatic =>
+    it(`should ${isStatic ? "" : "not "}be static`, () => {
+      const wrapper = Enzyme.shallow(<Button static={isStatic} />);
+      expect(wrapper.hasClass("is-static")).toBe(isStatic);
+    }),
+  );
+
+  [false, true].map(text =>
+    it(`should ${text ? "" : "not "}be text`, () => {
+      const wrapper = Enzyme.shallow(<Button text={text} />);
+      expect(wrapper.hasClass("is-text")).toBe(text);
+    }),
+  );
 });

@@ -1,61 +1,57 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { COLORS } from "@/modifiers/color";
 import { Notification } from "../notification";
 
+import { hasProperties } from "@/__tests__/helpers";
+
 describe("Notification component", () => {
-  it("should exist", () => {
-    expect(Notification).toMatchSnapshot();
+  hasProperties(Notification, {
+    defaultProps: { as: "div" },
   });
 
-  it("should have notification classname", () => {
-    const component = renderer.create(
-      <Notification>
-        <img
-          alt="placeholder"
-          src="http://bulma.io/images/placeholders/128x128.png"
-        />
-      </Notification>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Notification />);
+    expect(wrapper.is("div")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Notification className="other-class this-is-a-test">
-        <p>Default</p>
-      </Notification>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Notification as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Notification style={{ height: 250 }}>
-        <p>Default</p>
-      </Notification>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Notification ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".notification").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should render as Section", () => {
-    const component = renderer.create(
-      <Notification<"section"> as="section">
-        <p>Default</p>
-      </Notification>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Notification />);
+    expect(wrapper.hasClass("notification")).toBe(true);
+  });
+
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Notification className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
   COLORS.map(color =>
-    it(`should use color ${color}`, () => {
-      const component = renderer.create(
-        <Notification color={color}>
-          <p>Default {color}</p>
-        </Notification>,
-      );
-      expect(component.toJSON()).toMatchSnapshot();
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Notification color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
     }),
   );
 });

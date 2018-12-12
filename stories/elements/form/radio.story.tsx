@@ -2,7 +2,7 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Radio } from "@/elements";
+import { Control, Label, Radio } from "@/elements";
 import { Section } from "@/layout";
 
 export interface ControlledRadioGroupProps {
@@ -31,12 +31,15 @@ export class ControlledRadioGroup extends React.PureComponent<
     return (
       <Control>
         {items.map(item => (
-          <Radio
-            checked={item.value === this.state.selected}
-            name={name}
-            onClick={() => this.setState({ selected: item.value })}
-            value={item.value}
-          >{` ${item.title}`}</Radio>
+          <Label specifier="radio">
+            <Radio
+              checked={item.value === this.state.selected}
+              name={name}
+              onClick={() => this.setState({ selected: item.value })}
+              value={item.value}
+            />
+            {` ${item.title}`}
+          </Label>
         ))}
       </Control>
     );
@@ -51,18 +54,19 @@ export const knobs = {
 storiesOf("Elements/Form/Radio", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const props = {
-      checked: knobs.checked(),
-      disabled: knobs.disabled(),
-    };
+    const checked = knobs.checked();
+    const disabled = knobs.disabled();
     return (
       <Control>
-        <Radio name="rsvp" {...props}>
-          {" "}
-          Going
-        </Radio>
-        <Radio name="rsvp"> Not going</Radio>
-        <Radio name="rsvp"> Maybe</Radio>
+        <Label specifier="radio" disabled={disabled}>
+          <Radio name="rsvp" checked={checked} disabled={disabled} /> Going
+        </Label>
+        <Label specifier="radio">
+          <Radio name="rsvp" /> Not going
+        </Label>
+        <Label specifier="radio">
+          <Radio name="rsvp" /> Maybe
+        </Label>
       </Control>
     );
   })

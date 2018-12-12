@@ -44,11 +44,7 @@ export const Tag = Object.assign(
         ...rest,
       });
     },
-    {
-      as: "span",
-      delete: false,
-      rounded: false,
-    },
+    { as: "span" },
   ),
   { Group: TagGroup },
 );

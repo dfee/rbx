@@ -61,11 +61,11 @@ storiesOf("Elements/Button", module)
         {COLORS.map(color => (
           <Button
             color={color}
-            {...rest}
             onClick={action("Button Click")}
             onMouseEnter={action("Hover")}
             size={size || undefined}
             state={state || undefined}
+            {...rest}
           >
             {titleize(color)}
           </Button>

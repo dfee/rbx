@@ -1,8 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
-import { ModifierProps } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type TableModifierProps = Partial<{
   bordered: boolean;
@@ -19,7 +18,14 @@ export type TableProps = Prefer<
 
 export const Table = React.forwardRef<HTMLTableElement, TableProps>(
   (props, ref) => {
-    const { bordered, fullwidth, hoverable, narrow, striped, ...rest } = props;
+    const {
+      bordered,
+      fullwidth,
+      hoverable,
+      narrow,
+      striped,
+      ...rest
+    } = transformModifiers(props);
     rest.className = cx("table", rest.className, {
       "is-bordered": bordered,
       "is-fullwidth": fullwidth,
@@ -27,14 +33,6 @@ export const Table = React.forwardRef<HTMLTableElement, TableProps>(
       "is-narrow": narrow,
       "is-striped": striped,
     });
-    return <Generic<"table"> as="table" ref={ref} {...rest} />;
+    return <table ref={ref} {...rest} />;
   },
 );
-
-Table.defaultProps = {
-  bordered: false,
-  fullwidth: false,
-  hoverable: false,
-  narrow: false,
-  striped: false,
-};

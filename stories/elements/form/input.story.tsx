@@ -15,8 +15,9 @@ import { iterableToSelectObject } from "../../helpers";
 import { knobs as modifiersKnobs } from "../../modifiers";
 
 export interface ControlledInputState {
-  value: string;
+  value: React.InputHTMLAttributes<HTMLInputElement>["value"];
 }
+
 export class ControlledInput extends React.PureComponent<
   InputProps,
   ControlledInputState

@@ -25,10 +25,9 @@ storiesOf("Grid/Tiles", module)
               <Tile as="article" kind="child" notification color="info">
                 <Title>Middle Tile...</Title>
                 <Title subtitle>With an image</Title>
-                <Image
-                  size="4by3"
-                  src="http://bulma.io/images/placeholders/640x480.png"
-                />
+                <Image.Container size="4by3">
+                  <Image src="http://bulma.io/images/placeholders/640x480.png" />
+                </Image.Container>
               </Tile>
             </Tile>
           </Tile>
@@ -142,10 +141,9 @@ storiesOf("Grid/Tiles", module)
                 <Title as="p" subtitle>
                   With an image
                 </Title>
-                <Image
-                  size="4by3"
-                  src="https://bulma.io/images/placeholders/640x480.png"
-                />
+                <Image.Container size="4by3">
+                  <Image src="https://bulma.io/images/placeholders/640x480.png" />
+                </Image.Container>
               </Tile>
             </Tile>
           </Tile>

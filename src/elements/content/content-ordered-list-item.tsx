@@ -8,7 +8,7 @@ export type ContentOrderedListItemProps = Prefer<
 >;
 
 export const ContentOrderedListItem = React.forwardRef<
-  "ol",
+  HTMLLIElement,
   ContentOrderedListItemProps
 >((props, ref) => {
   const transformed = transformModifiers(props);

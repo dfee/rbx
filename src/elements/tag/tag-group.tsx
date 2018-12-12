@@ -1,26 +1,23 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { Generic } from "@/base";
-import { ModifierProps } from "@/modifiers";
+import { forwardRefAs } from "@/base";
+import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type TagGroupModifierProps = Partial<{
+  className: string;
   gapless: boolean;
 }>;
 
-export type TagGroupProps = Prefer<
-  ModifierProps & TagGroupModifierProps,
-  React.HTMLAttributes<HTMLSpanElement>
->;
+export type TagGroupProps = ModifierProps & TagGroupModifierProps;
 
-export const TagGroup = React.forwardRef<HTMLDivElement, TagGroupProps>(
+export const TagGroup = forwardRefAs<TagGroupProps, "span">(
   (props, ref) => {
-    const { gapless, ...rest } = props;
+    const { as, gapless, ...rest } = transformModifiers(props);
     rest.className = cx("tags", rest.className, {
       "has-addons": gapless,
     });
-    return <Generic<"span"> as="span" ref={ref} {...rest} />;
+    return React.createElement(as!, { ref, ...rest });
   },
+  { as: "span" },
 );
-
-TagGroup.defaultProps = { gapless: false };

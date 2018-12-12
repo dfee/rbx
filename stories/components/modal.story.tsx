@@ -63,12 +63,12 @@ storiesOf("Components/Modal", module)
           <Box>
             <Media>
               <Media.Item as="figure" position="left">
-                <Image
-                  as="p"
-                  size={64}
-                  alt="64x64"
-                  src="http://bulma.io/images/placeholders/128x128.png"
-                />
+                <Image.Container as="p" size={64}>
+                  <Image
+                    alt="64x64"
+                    src="http://bulma.io/images/placeholders/128x128.png"
+                  />
+                </Image.Container>
               </Media.Item>
               <Media.Item>
                 <Content>
@@ -112,11 +112,9 @@ storiesOf("Components/Modal", module)
       <OpenModal modalProps={props}>
         <Modal.Background />
         <Modal.Content>
-          <Image
-            as="p"
-            size="4by3"
-            src="https://bulma.io/images/placeholders/1280x960.png"
-          />
+          <Image.Container as="p" size="4by3">
+            <Image src="https://bulma.io/images/placeholders/1280x960.png" />
+          </Image.Container>
         </Modal.Content>
         <Modal.Close />
       </OpenModal>

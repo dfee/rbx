@@ -1,37 +1,78 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { Table } from "../table";
 
+import { hasProperties } from "@/__tests__/helpers";
+
 describe("Table component", () => {
-  it("should exist", () => {
-    expect(Table).toMatchSnapshot();
+  hasProperties(Table, {
+    defaultProps: undefined,
   });
 
-  it("should have table classname", () => {
-    const component = renderer.create(
-      <Table>
-        Test <a href="test">Give me</a>
-      </Table>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Table />);
+    expect(wrapper.is("table")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Table className="other-class this-is-a-test">
-        <p>Default</p>
-      </Table>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLTableElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Table ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".table").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Table style={{ height: 250 }}>
-        <p>Default</p>
-      </Table>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Table />);
+    expect(wrapper.hasClass("table")).toBe(true);
   });
+
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Table className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  [false, true].map(bordered =>
+    it(`should ${bordered ? "" : "not "}be bordered`, () => {
+      const wrapper = Enzyme.shallow(<Table bordered={bordered} />);
+      expect(wrapper.hasClass("is-bordered")).toBe(bordered);
+    }),
+  );
+
+  [false, true].map(fullwidth =>
+    it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
+      const wrapper = Enzyme.shallow(<Table fullwidth={fullwidth} />);
+      expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
+    }),
+  );
+
+  [false, true].map(hoverable =>
+    it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
+      const wrapper = Enzyme.shallow(<Table hoverable={hoverable} />);
+      expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
+    }),
+  );
+
+  [false, true].map(narrow =>
+    it(`should ${narrow ? "" : "not "}be narrow`, () => {
+      const wrapper = Enzyme.shallow(<Table narrow={narrow} />);
+      expect(wrapper.hasClass("is-narrow")).toBe(narrow);
+    }),
+  );
+
+  [false, true].map(striped =>
+    it(`should ${striped ? "" : "not "}be striped`, () => {
+      const wrapper = Enzyme.shallow(<Table striped={striped} />);
+      expect(wrapper.hasClass("is-striped")).toBe(striped);
+    }),
+  );
 });
