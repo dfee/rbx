@@ -31,7 +31,7 @@ export class ControlledRadioGroup extends React.PureComponent<
     return (
       <Control>
         {items.map(item => (
-          <Label specifier="radio">
+          <Label>
             <Radio
               checked={item.value === this.state.selected}
               name={name}
@@ -58,13 +58,13 @@ storiesOf("Elements/Form/Radio", module)
     const disabled = knobs.disabled();
     return (
       <Control>
-        <Label specifier="radio" disabled={disabled}>
+        <Label disabled={disabled}>
           <Radio name="rsvp" checked={checked} disabled={disabled} /> Going
         </Label>
-        <Label specifier="radio">
+        <Label>
           <Radio name="rsvp" /> Not going
         </Label>
-        <Label specifier="radio">
+        <Label>
           <Radio name="rsvp" /> Maybe
         </Label>
       </Control>

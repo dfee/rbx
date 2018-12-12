@@ -8,10 +8,7 @@ export interface BreadcrumbItemModifierProps {
   active?: boolean;
 }
 
-export type BreadcrumbItemProps = Prefer<
-  ModifierProps & BreadcrumbItemModifierProps,
-  React.HTMLAttributes<HTMLElement>
->;
+export type BreadcrumbItemProps = ModifierProps & BreadcrumbItemModifierProps;
 
 export const BreadcrumbItem = forwardRefAs<BreadcrumbItemProps, "a">(
   (props, ref) => {

@@ -26,7 +26,7 @@ export class ControlledCheckbox extends React.PureComponent<
     const { children, name, value } = this.props;
     return (
       <Control>
-        <Label disabled={this.props.disabled} specifier="checkbox">
+        <Label disabled={this.props.disabled}>
           <Checkbox
             checked={this.state.checked}
             name={name}
@@ -54,7 +54,7 @@ storiesOf("Elements/Form/Checkbox", module)
     const disabled = knobs.disabled();
     return (
       <Control>
-        <Label disabled={disabled} specifier="checkbox">
+        <Label disabled={disabled}>
           <Checkbox checked={checked} disabled={disabled} /> I agree to the{" "}
           <a href="#">terms and conditions</a>
         </Label>

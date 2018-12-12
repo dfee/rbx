@@ -362,9 +362,6 @@ Object {
   },
   "Label": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "specifier": "label",
-    },
     "render": [Function],
   },
   "Level": Object {

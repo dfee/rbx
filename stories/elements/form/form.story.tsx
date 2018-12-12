@@ -106,7 +106,7 @@ storiesOf("Elements/Form", module)
                 <Field narrow>
                   <Control>
                     {["Yes", "No"].map(value => (
-                      <Label specifier="radio">
+                      <Label>
                         <Radio name="member" value={value} /> {value}
                       </Label>
                     ))}
@@ -238,7 +238,7 @@ storiesOf("Elements/Form", module)
 
             <Field>
               <Control>
-                <Label specifier="checkbox">
+                <Label>
                   <Checkbox /> I agree to the{" "}
                   <a href="#">terms and conditions</a>
                 </Label>
@@ -248,7 +248,7 @@ storiesOf("Elements/Form", module)
             <Field>
               <Control>
                 {["Yes", "No"].map(value => (
-                  <Label specifier="radio">
+                  <Label>
                     <Radio name="question" value={value} /> {value}
                   </Label>
                 ))}
