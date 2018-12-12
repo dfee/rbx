@@ -198,6 +198,9 @@ describe("Navbar component", () => {
             .children()
             .hasClass(`is-fixed-${align}`),
         ).toBe(true);
+        expect((document.documentElement as HTMLElement).className).toBe(
+          `has-navbar-fixed-${align}`,
+        );
       } finally {
         wrapper.unmount();
       }

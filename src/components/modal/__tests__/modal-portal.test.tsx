@@ -2,7 +2,7 @@ import Enzyme from "enzyme";
 import React from "react";
 import { ModalPortal } from "../modal-portal";
 
-import { getWindow, hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/helpers";
 import { noop } from "@/utils";
 
 describe("ModalPortal component", () => {
@@ -60,9 +60,8 @@ describe("ModalPortal component", () => {
         />,
       );
       try {
-        const window = getWindow();
         const escEvent = new KeyboardEvent("keydown", { code: "Escape" });
-        window.document.dispatchEvent(escEvent);
+        document.dispatchEvent(escEvent);
         expect(onClose.mock.calls).toHaveLength(closeOnEsc ? 1 : 0);
       } finally {
         wrapper.unmount();

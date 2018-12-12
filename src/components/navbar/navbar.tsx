@@ -17,10 +17,6 @@ import { NavbarLink } from "./navbar-link";
 import { NavbarMenu } from "./navbar-menu";
 import { NavbarStart } from "./navbar-start";
 
-let htmlClass = "";
-
-export const getHtmlClasses = () => htmlClass;
-
 export const NAVBAR_FIXED_ALIGNMENTS = tuple("top", "bottom");
 export type NavbarFixedAlignments = (typeof NAVBAR_FIXED_ALIGNMENTS)[number];
 
@@ -131,7 +127,6 @@ export class NavbarController extends React.PureComponent<
         html.classList.remove("has-navbar-fixed-top");
         html.classList.remove("has-navbar-fixed-bottom");
         if (this.props.fixed) {
-          htmlClass = `has-navbar-fixed-${this.props.fixed}`;
           html.classList.add(`has-navbar-fixed-${this.props.fixed}`);
         }
       }
