@@ -1,7 +1,7 @@
-import * as ReactBulmaComponents from "..";
+import * as rbx from "..";
 
-describe("ReactBulmaComponents component", () => {
-  it("Should Exports all components", () => {
-    expect(ReactBulmaComponents).toMatchSnapshot();
+describe("rbx", () => {
+  it("should export all components", () => {
+    expect(rbx).toMatchSnapshot();
   });
 });

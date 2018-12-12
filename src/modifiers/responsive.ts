@@ -1,6 +1,7 @@
 import { tuple } from "@/utils";
 import { cx } from "emotion";
 
+import { TextAlignments, TextSizes } from "./typography";
 import { makeTransform } from "./utils";
 
 export const BREAKPOINTS = tuple(
@@ -9,6 +10,7 @@ export const BREAKPOINTS = tuple(
   "desktop",
   "widescreen",
   "fullhd",
+  "touch",
 );
 export type Breakpoints = (typeof BREAKPOINTS)[number];
 
@@ -22,36 +24,25 @@ export const DISPLAYS = tuple(
 export type Displays = (typeof DISPLAYS)[number];
 
 export type ResponsiveSizeProps = Partial<{
-  display: Partial<{
+  display?: {
+    only?: boolean;
     value: Displays;
-    only: boolean;
-  }>;
-  hide: Partial<{
+  };
+  hide?: {
+    only?: boolean;
     value: boolean;
-    only: boolean;
-  }>;
-  textAlignment: Partial<{
-    value: "centered" | "justified" | "left" | "right";
-    only: boolean;
-  }>;
-  textSize: Partial<{
-    value: 1 | 2 | 3 | 4 | 5 | 6;
-  }>;
+  };
+  textAlignment?: {
+    only?: boolean;
+    value: TextAlignments;
+  };
+  textSize?: {
+    value: TextSizes;
+  };
 }>;
-
-export const RESPONSIVE_SIZES = tuple(
-  "mobile",
-  "tablet",
-  "desktop",
-  "widescreen",
-  "fullhd",
-  "touch",
-);
-export type ResponsiveSizes = (typeof RESPONSIVE_SIZES)[number];
 
 export type ResponsiveProps = Partial<{
   responsive: Partial<{
-    [key: string]: ResponsiveSizeProps;
     mobile: ResponsiveSizeProps;
     tablet: ResponsiveSizeProps;
     desktop: ResponsiveSizeProps;
@@ -66,31 +57,29 @@ export const transformResponsiveModifiers = makeTransform<ResponsiveProps>(
     cx(
       props.className,
       Object.entries(props.responsive || {})
-        .filter(([size, value]) => value)
-        .map(([size, value]) => {
-          const display = value!.display || {};
-          const hide = value!.hide || {};
-          const textSize = value!.textSize || {};
-          const textAlignment = value!.textAlignment || {};
-          return {
-            [`is-${display.value}-${size}${
-              display.only ? "-only" : ""
-            }`]: display.value,
-            [`is-hidden-${size}${hide.only ? "-only" : ""}`]: hide.value,
-            [`has-text-${textAlignment.value}-${size}${
-              textAlignment.only ? "-only" : ""
-            }`]: textAlignment.value,
-            [`is-size-${textSize.value}-${size}`]:
-              textSize.value !== undefined && textSize.value > 0,
-          };
+        .map(([breakpoint, obj]) => {
+          const names = {};
+          if (obj && obj.display) {
+            const { only, value } = obj.display;
+            names[`is-${value}-${breakpoint}${only ? "-only" : ""}`] = value;
+          }
+          if (obj && obj.hide) {
+            const { only, value } = obj.hide;
+            names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
+          }
+          if (obj && obj.textAlignment) {
+            const { only, value } = obj.textAlignment;
+            names[
+              `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
+            ] = value;
+          }
+          if (obj && obj.textSize) {
+            const { value } = obj.textSize;
+            names[`is-size-${value}-${breakpoint}`] = !!value;
+          }
+          return names;
         })
-        .reduce(
-          (accumulator, currentValue) => ({
-            ...accumulator,
-            ...currentValue,
-          }),
-          {},
-        ),
+        .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
     ) || undefined,
   ["responsive"],
 );

@@ -1,6 +1,10 @@
 import { cx } from "emotion";
 
+import { tuple } from "@/utils";
 import { makeTransform } from "./utils";
+
+export const FLOAT_PULLED_ALIGNMENTS = tuple("left", "right");
+export type FloatPulledAlignments = (typeof FLOAT_PULLED_ALIGNMENTS)[number];
 
 export type FloatHelpersProps = Partial<{
   /**
@@ -10,7 +14,7 @@ export type FloatHelpersProps = Partial<{
   /**
    * Moves an element to the left or right
    */
-  pull: "left" | "right";
+  pull: FloatPulledAlignments;
 }>;
 
 export type SpacingHelpersProps = Partial<{
@@ -49,7 +53,7 @@ export type OtherHelpersProps = Partial<{
    * Hide elements visually but keep the element available to be announced by a
    * screen reader
    */
-  sr: boolean;
+  srOnly: boolean;
   /**
    * Removes any shadow
    */
@@ -81,7 +85,7 @@ export const transformHelpersModifiers = makeTransform<HelpersProps>(
       "is-overlay": props.overlay,
       "is-radiusless": props.radiusless,
       "is-shadowless": props.shadowless,
-      "is-sr-only": props.sr,
+      "is-sr-only": props.srOnly,
       "is-unselectable": props.unselectable,
     }) || undefined,
   [
@@ -98,7 +102,7 @@ export const transformHelpersModifiers = makeTransform<HelpersProps>(
     "overlay",
     "radiusless",
     "shadowless",
-    "sr",
+    "srOnly",
     "unselectable",
   ],
 );

@@ -1,94 +1,43 @@
 import { transformModifiers } from "..";
-import { transformColorModifiers } from "../color";
-import { transformHelpersModifiers } from "../helpers";
-import { RESPONSIVE_SIZES, transformResponsiveModifiers } from "../responsive";
-import { transformTypographyModifiers } from "../typography";
 
-describe("Transform modifiers", () => {
-  test("should work on empty props", () => {
-    expect(transformModifiers({})).toStrictEqual({});
+describe("Modifiers", () => {
+  it("should preserve unknown props", () => {
+    const props = { foo: "bar" };
+    expect(transformModifiers(props)).toEqual(props);
   });
 
-  test("should run all sub-modifiers", () => {
+  it("should not set className on empty", () => {
+    expect(transformModifiers({})).toEqual({});
+  });
+
+  it("should preserve custom className", () => {
+    const className = "foo";
+    expect(transformModifiers({ className })).toEqual({ className });
+  });
+
+  it("should apply color transforms", () => {
+    expect(transformModifiers({ textColor: "primary" })).toEqual({
+      className: "has-text-primary",
+    });
+  });
+
+  it("should apply helpers transforms", () => {
+    expect(transformModifiers({ clearfix: true })).toEqual({
+      className: "is-clearfix",
+    });
+  });
+
+  it("should apply responsive transforms", () => {
     expect(
-      transformModifiers({
-        backgroundColor: "info", // color
-        clearfix: true, // helpers
-        italic: true, // typography
-        responsive: {
-          mobile: {
-            display: { only: true, value: "block" },
-          },
-        }, // responsive
-      }),
-    ).toMatchSnapshot();
+      transformModifiers({ responsive: { mobile: { textSize: { value: 1 } } } }),
+    ).toEqual({
+      className: "is-size-1-mobile",
+    });
   });
 
-  test("should not clear out unknown props", () => {
-    expect(transformModifiers({ unknowwn: true })).toMatchSnapshot();
-  });
-});
-
-describe("Transform color modifiers", () => {
-  test("should have class names applied", () => {
-    expect(
-      transformColorModifiers({
-        backgroundColor: "info",
-        textColor: "success",
-      }),
-    ).toMatchSnapshot();
-  });
-});
-
-describe("Transform helpers modifiers", () => {
-  test("should have class names applied", () => {
-    expect(
-      transformHelpersModifiers({
-        clearfix: true,
-        clipped: true,
-        hidden: true,
-        invisible: true,
-        marginless: true,
-        overlay: true,
-        paddingless: true,
-        pull: "right",
-        radiusless: true,
-        shadowless: true,
-        unselectable: true,
-      }),
-    ).toMatchSnapshot();
-  });
-});
-
-describe("Transform responsive modifiers", () => {
-  RESPONSIVE_SIZES.map(size =>
-    it(`should have class names applied for ${size}`, () => {
-      expect(
-        transformResponsiveModifiers({
-          responsive: {
-            [size]: {
-              display: { only: true, value: "block" },
-              hide: { only: true, value: true },
-              textAlignment: { only: true, value: "centered" },
-              textSize: { value: 1 },
-            },
-          },
-        }),
-      ).toMatchSnapshot();
-    }),
-  );
-});
-
-describe("Transform typography modifiers", () => {
-  test("should have class names applied", () => {
-    expect(
-      transformTypographyModifiers({
-        italic: true,
-        textAlignment: "centered",
-        textSize: 1,
-        textTransform: "capitalized",
-        textWeight: "light",
-      }),
-    ).toMatchSnapshot();
+  it("should apply typography transforms", () => {
+    expect(transformModifiers({ textSize: 1 })).toEqual({
+      className: "is-size-1",
+    });
   });
 });
