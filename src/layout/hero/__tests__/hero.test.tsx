@@ -1,79 +1,77 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { COLORS } from "@/modifiers/color";
-import { Hero } from "../hero";
+import { Hero, HERO_SIZES } from "../hero";
+import { HeroBody } from "../hero-body";
+import { HeroFoot } from "../hero-foot";
+import { HeroHead } from "../hero-head";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Hero component", () => {
-  it("should exist", () => {
-    expect(Hero).toMatchSnapshot();
+  hasProperties(Hero, {
+    Body: HeroBody,
+    Foot: HeroFoot,
+    Head: HeroHead,
+    defaultProps: { as: "section" },
   });
 
-  it("should expose Hero head, body and footer", () => {
-    expect(Hero.Head).toMatchSnapshot();
-    expect(Hero.Body).toMatchSnapshot();
-    expect(Hero.Foot).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Hero />);
+    expect(wrapper.is("section")).toBe(true);
   });
 
-  it("should have hero classname", () => {
-    const component = renderer.create(
-      <Hero>
-        Test <a>Give me</a>
-      </Hero>,
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Hero as={as} />);
+    expect(wrapper.is(as)).toBe(true);
+  });
+
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Hero ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".hero").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Hero className="other-class this-is-a-test">
-        <p>Default</p>
-      </Hero>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Hero />);
+    expect(wrapper.hasClass("hero")).toBe(true);
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Hero style={{ height: 250 }}>
-        <p>Default</p>
-      </Hero>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should use gradient style", () => {
-    const component = renderer.create(
-      <Hero color="primary" gradient>
-        <p>Default</p>
-      </Hero>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-
-  it("should render Hero with hero head, body and footer", () => {
-    const component = renderer.create(
-      <Hero size="fullheight" color="primary">
-        <Hero.Head<"header"> as="header">
-          <div className="bd-notification is-info">Header</div>
-        </Hero.Head>
-        <Hero.Body>Body</Hero.Body>
-        <Hero.Foot<"footer"> as="footer">
-          <div className="bd-notification is-danger">Footer</div>
-        </Hero.Foot>
-      </Hero>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Hero className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
   COLORS.map(color =>
-    it(`should use use color ${color}`, () => {
-      const component = renderer.create(
-        <Hero color={color}>
-          <p>Default {color}</p>
-        </Hero>,
-      );
-      expect(component.toJSON()).toMatchSnapshot();
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Hero color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(gradient =>
+    it(`should ${gradient ? "" : "not "}have gradient`, () => {
+      const wrapper = Enzyme.shallow(<Hero gradient={gradient} />);
+      expect(wrapper.hasClass("is-bold")).toBe(gradient);
+    }),
+  );
+
+  HERO_SIZES.map(size =>
+    it(`should be ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Hero size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
 });

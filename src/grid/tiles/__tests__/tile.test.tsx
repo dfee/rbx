@@ -37,6 +37,11 @@ describe("Tile component", () => {
     }
   });
 
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Tile />);
+    expect(wrapper.hasClass("tile")).toBe(true);
+  });
+
   it("should preserve custom className", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Tile className={className} />);

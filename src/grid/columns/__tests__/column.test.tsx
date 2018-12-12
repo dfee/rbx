@@ -36,6 +36,11 @@ describe("Column component", () => {
     }
   });
 
+  it("should have bulma className", () => {
+    const wrapper = Enzyme.shallow(<Column />);
+    expect(wrapper.hasClass("column")).toBe(true);
+  });
+
   it("should preserve custom className", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Column className={className} />);

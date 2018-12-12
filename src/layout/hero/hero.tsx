@@ -31,16 +31,13 @@ export const Hero = Object.assign(
     (props, ref) => {
       const { as, color, gradient, size, ...rest } = transformModifiers(props);
       rest.className = cx("hero", rest.className, {
+        "is-bold": gradient,
         [`is-${color}`]: color,
         [`is-${size}`]: size,
-        "is-bold": gradient,
       });
       return React.createElement(as!, { ref, ...rest });
     },
-    {
-      as: "section",
-      gradient: false,
-    },
+    { as: "section" },
   ),
   {
     Body: HeroBody,
