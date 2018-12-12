@@ -1,17 +1,18 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type FileInputProps = Prefer<
-  ModifierProps,
-  React.InputHTMLAttributes<HTMLInputElement>
->;
+export type FileInputModifierProps = Partial<{ className: string }>;
 
-export const FileInput = React.forwardRef<HTMLInputElement, FileInputProps>(
+export type FileInputProps = ModifierProps & FileInputModifierProps;
+
+export const FileInput = forwardRefAs<FileInputProps, "input">(
   (props, ref) => {
-    const transformed = transformModifiers(props);
-    transformed.className = cx("file-input", transformed.className);
-    return <input ref={ref} type="file" {...transformed} />;
+    const { as, ...rest } = transformModifiers(props);
+    rest.className = cx("file-input", rest.className);
+    return React.createElement(as!, { ref, type: "file", ...rest });
   },
+  { as: "input" },
 );

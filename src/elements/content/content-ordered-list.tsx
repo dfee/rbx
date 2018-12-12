@@ -1,6 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { tuple } from "@/utils";
 import { ContentOrderedListItem } from "./content-ordered-list-item";
@@ -23,12 +24,15 @@ export type ContentOrderedListProps = Prefer<
 >;
 
 export const ContentOrderedList = Object.assign(
-  React.forwardRef<HTMLOListElement, ContentOrderedListProps>((props, ref) => {
-    const { type, ...rest } = transformModifiers(props);
-    rest.className = cx(rest.className, {
-      [`is-${type}`]: type,
-    });
-    return React.createElement("ol", { ref, ...rest });
-  }),
+  forwardRefAs<ContentOrderedListProps, "ol">(
+    (props, ref) => {
+      const { as, type, ...rest } = transformModifiers(props);
+      rest.className = cx(rest.className, {
+        [`is-${type}`]: type,
+      });
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "ol" },
+  ),
   { Item: ContentOrderedListItem },
 );

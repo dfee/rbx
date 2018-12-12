@@ -12,12 +12,18 @@ import { hasProperties } from "@/__tests__/helpers";
 describe("ContentOrderedList component", () => {
   hasProperties(ContentOrderedList, {
     Item: ContentOrderedListItem,
-    defaultProps: undefined,
+    defaultProps: { as: "ol" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<ContentOrderedList />);
     expect(wrapper.is("ol")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<ContentOrderedList as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

@@ -4,6 +4,7 @@ import React from "react";
 import { initialState, ModalContext } from "./modal-context";
 
 export interface ModalPortalModifierProps {
+  as: React.ReactType<any>;
   className?: string;
   closeOnBlur?: boolean;
   closeOnEsc?: boolean;
@@ -11,10 +12,7 @@ export interface ModalPortalModifierProps {
   onClose: () => void;
 }
 
-export type ModalPortalProps = Prefer<
-  ModalPortalModifierProps,
-  React.HTMLAttributes<HTMLDivElement>
->;
+export type ModalPortalProps = ModalPortalModifierProps;
 
 export class ModalPortal extends React.PureComponent<ModalPortalProps> {
   public static defaultProps = initialState;
@@ -45,7 +43,14 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
   }
 
   public render() {
-    const { closeOnBlur, closeOnEsc, innerRef, onClose, ...rest } = this.props;
+    const {
+      as,
+      closeOnBlur,
+      closeOnEsc,
+      innerRef,
+      onClose,
+      ...rest
+    } = this.props;
     rest.className = cx("modal", "is-active", rest.className);
 
     return (
@@ -56,7 +61,7 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
           onClose: onClose!,
         }}
       >
-        <div ref={innerRef} {...rest} />
+        {React.createElement(as!, { ref: innerRef, ...rest })}
       </ModalContext.Provider>
     );
   }

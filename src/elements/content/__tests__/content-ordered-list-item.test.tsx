@@ -7,12 +7,18 @@ import { hasProperties } from "@/__tests__/helpers";
 
 describe("ContentOrderedListItem component", () => {
   hasProperties(ContentOrderedListItem, {
-    defaultProps: undefined,
+    defaultProps: { as: "li" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<ContentOrderedListItem />);
     expect(wrapper.is("li")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<ContentOrderedListItem as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

@@ -1,24 +1,24 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
 export type TableModifierProps = Partial<{
   bordered: boolean;
+  className: string;
   fullwidth: boolean;
   hoverable: boolean;
   narrow: boolean;
   striped: boolean;
 }>;
 
-export type TableProps = Prefer<
-  ModifierProps & TableModifierProps,
-  React.HTMLAttributes<HTMLTableElement>
->;
+export type TableProps = ModifierProps & TableModifierProps;
 
-export const Table = React.forwardRef<HTMLTableElement, TableProps>(
+export const Table = forwardRefAs<TableProps, "table">(
   (props, ref) => {
     const {
+      as,
       bordered,
       fullwidth,
       hoverable,
@@ -33,6 +33,7 @@ export const Table = React.forwardRef<HTMLTableElement, TableProps>(
       "is-narrow": narrow,
       "is-striped": striped,
     });
-    return <table ref={ref} {...rest} />;
+    return React.createElement(as!, { ref, ...rest });
   },
+  { as: "table" },
 );

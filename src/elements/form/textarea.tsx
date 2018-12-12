@@ -1,6 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { tuple } from "@/utils";
@@ -12,20 +13,18 @@ export const TEXTAREA_STATES = tuple("focused", "hovered");
 export type TextareaStates = (typeof TEXTAREA_STATES)[number];
 
 export type TextareaModifierProps = Partial<{
+  className: string;
   color: Colors;
   fixedSize: boolean;
   size: TextareaSizes;
   state: TextareaStates;
 }>;
 
-export type TextareaProps = Prefer<
-  ModifierProps & TextareaModifierProps,
-  React.TextareaHTMLAttributes<HTMLTextAreaElement>
->;
+export type TextareaProps = ModifierProps & TextareaModifierProps;
 
-export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = forwardRefAs<TextareaProps, "textarea">(
   (props, ref) => {
-    const { color, fixedSize, size, state, ...rest } = transformModifiers(
+    const { as, color, fixedSize, size, state, ...rest } = transformModifiers(
       props,
     );
     rest.className = cx("textarea", rest.className, {
@@ -34,8 +33,10 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       [`is-${size}`]: size,
       [`is-${state}`]: state,
     });
-    return <textarea ref={ref} {...rest} />;
+    return React.createElement(as!, { ref, ...rest });
+  },
+  {
+    as: "textarea",
+    rows: 4,
   },
 );
-
-Textarea.defaultProps = { rows: 4 };

@@ -19,7 +19,7 @@ describe("Card component", () => {
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
-    defaultProps: undefined,
+    defaultProps: { as: "div" },
   });
 
   it("should render as the default component", () => {
@@ -30,6 +30,21 @@ describe("Card component", () => {
           .find(DropdownController)
           .children()
           .is("div"),
+      ).toBe(true);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.mount(<Dropdown as={as} />);
+    try {
+      expect(
+        wrapper
+          .find(DropdownController)
+          .children()
+          .is(as),
       ).toBe(true);
     } finally {
       wrapper.unmount();

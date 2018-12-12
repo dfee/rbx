@@ -8,12 +8,21 @@ import { hasProperties } from "@/__tests__/helpers";
 
 describe("Textarea component", () => {
   hasProperties(Textarea, {
-    defaultProps: { rows: 4 },
+    defaultProps: {
+      as: "textarea",
+      rows: 4,
+    },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<Textarea />);
     expect(wrapper.is("textarea")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Textarea as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

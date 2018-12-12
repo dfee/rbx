@@ -7,12 +7,18 @@ import { hasProperties } from "@/__tests__/helpers";
 
 describe("DropdownDivider component", () => {
   hasProperties(DropdownDivider, {
-    defaultProps: undefined,
+    defaultProps: { as: "hr" },
   });
 
   it("should render as the default component", () => {
     const wrapper = Enzyme.shallow(<DropdownDivider />);
     expect(wrapper.is("hr")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<DropdownDivider as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

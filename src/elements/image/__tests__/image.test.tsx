@@ -9,12 +9,18 @@ import { hasProperties } from "@/__tests__/helpers";
 describe("Image component", () => {
   hasProperties(Image, {
     Container: ImageContainer,
-    defaultProps: undefined,
+    defaultProps: { as: "img" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<Image />);
     expect(wrapper.is("img")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Image as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

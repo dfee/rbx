@@ -1,6 +1,7 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
+import { forwardRefAs } from "@/base";
 import { getDocument } from "@/utils";
 import { ModalBackground } from "./modal-background";
 import { ModalCard } from "./modal-card";
@@ -13,9 +14,8 @@ export type ModalModifierProps = Partial<{
 }>;
 
 export type ModalControllerProps = ModalPortalProps & ModalModifierProps;
-export type ModalProps = Omit<ModalControllerProps, "innerRef">;
 
-export class ModalController extends PureComponent<ModalControllerProps> {
+export class ModalController extends React.PureComponent<ModalControllerProps> {
   private el: HTMLDivElement;
 
   constructor(props: ModalControllerProps) {
@@ -45,10 +45,16 @@ export class ModalController extends PureComponent<ModalControllerProps> {
   }
 }
 
+export type ModalProps = Omit<ModalControllerProps, "as" | "innerRef">;
+
 export const Modal = Object.assign(
-  React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
-    return <ModalController innerRef={ref} {...props} />;
-  }),
+  forwardRefAs<ModalProps, "div">(
+    (props, ref) => {
+      const { as, ...rest } = props;
+      return <ModalController as={as!} innerRef={ref} {...rest} />;
+    },
+    { as: "div" },
+  ),
   {
     Background: ModalBackground,
     Card: ModalCard,

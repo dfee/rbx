@@ -9,12 +9,18 @@ import { hasProperties } from "@/__tests__/helpers";
 
 describe("Label component", () => {
   hasProperties(Label, {
-    defaultProps: undefined,
+    defaultProps: { as: "label" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<Label />);
     expect(wrapper.is("label")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Label as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

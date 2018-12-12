@@ -7,12 +7,18 @@ import { hasProperties } from "@/__tests__/helpers";
 
 describe("Radio component", () => {
   hasProperties(Radio, {
-    defaultProps: undefined,
+    defaultProps: { as: "input" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<Radio />);
     expect(wrapper.is("input")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Radio as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

@@ -11,12 +11,18 @@ describe("Select component", () => {
   hasProperties(Select, {
     Container: SelectContainer,
     Option: SelectOption,
-    defaultProps: undefined,
+    defaultProps: { as: "select" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<Select />);
     expect(wrapper.is("select")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Select as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

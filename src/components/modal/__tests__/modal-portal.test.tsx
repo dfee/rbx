@@ -14,15 +14,15 @@ describe("ModalPortal component", () => {
     },
   });
 
-  it("should render as the default element", () => {
+  it("should render", () => {
     const ref = React.createRef<HTMLDivElement>();
-    const wrapper = Enzyme.shallow(<ModalPortal innerRef={ref} />);
+    const wrapper = Enzyme.shallow(<ModalPortal as="div" innerRef={ref} />);
     expect(wrapper.children().is("div")).toBe(true);
   });
 
   it("should have bulma className", () => {
     const ref = React.createRef<HTMLDivElement>();
-    const wrapper = Enzyme.shallow(<ModalPortal innerRef={ref} />);
+    const wrapper = Enzyme.shallow(<ModalPortal as="div" innerRef={ref} />);
     expect(wrapper.children().hasClass("modal")).toBe(true);
   });
 
@@ -30,14 +30,14 @@ describe("ModalPortal component", () => {
     const className = "foo";
     const ref = React.createRef<HTMLDivElement>();
     const wrapper = Enzyme.shallow(
-      <ModalPortal innerRef={ref} className={className} />,
+      <ModalPortal as="div" innerRef={ref} className={className} />,
     );
     expect(wrapper.children().hasClass(className)).toBe(true);
   });
 
   it("should have ref", () => {
     const ref = React.createRef<HTMLDivElement>();
-    const wrapper = Enzyme.mount(<ModalPortal innerRef={ref} />);
+    const wrapper = Enzyme.mount(<ModalPortal as="div" innerRef={ref} />);
     try {
       expect(ref.current).toBe(wrapper.find(".modal").instance());
     } finally {
@@ -52,7 +52,12 @@ describe("ModalPortal component", () => {
       const onClose = jest.fn();
       const ref = React.createRef<HTMLDivElement>();
       const wrapper = Enzyme.mount(
-        <ModalPortal innerRef={ref} onClose={onClose} closeOnEsc={closeOnEsc} />,
+        <ModalPortal
+          as="div"
+          innerRef={ref}
+          onClose={onClose}
+          closeOnEsc={closeOnEsc}
+        />,
       );
       try {
         const window = getWindow();

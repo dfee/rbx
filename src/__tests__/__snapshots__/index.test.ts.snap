@@ -102,6 +102,9 @@ Object {
   },
   "Checkbox": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "input",
+    },
     "render": [Function],
   },
   "Columns": Object {
@@ -132,7 +135,13 @@ Object {
       "$$typeof": Symbol(react.forward_ref),
       "Item": Object {
         "$$typeof": Symbol(react.forward_ref),
+        "defaultProps": Object {
+          "as": "li",
+        },
         "render": [Function],
+      },
+      "defaultProps": Object {
+        "as": "ol",
       },
       "render": [Function],
     },
@@ -190,6 +199,9 @@ Object {
     },
     "Divider": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "hr",
+      },
       "render": [Function],
     },
     "Item": Object {
@@ -212,6 +224,9 @@ Object {
         "as": "div",
       },
       "render": [Function],
+    },
+    "defaultProps": Object {
+      "as": "div",
     },
     "render": [Function],
   },
@@ -254,6 +269,9 @@ Object {
     },
     "Input": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "input",
+      },
       "render": [Function],
     },
     "Label": Object {
@@ -354,14 +372,23 @@ Object {
       },
       "render": [Function],
     },
+    "defaultProps": Object {
+      "as": "img",
+    },
     "render": [Function],
   },
   "Input": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "input",
+    },
     "render": [Function],
   },
   "Label": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "label",
+    },
     "render": [Function],
   },
   "Level": Object {
@@ -537,6 +564,9 @@ Object {
         "as": "div",
       },
       "render": [Function],
+    },
+    "defaultProps": Object {
+      "as": "div",
     },
     "render": [Function],
   },
@@ -744,6 +774,9 @@ Object {
   },
   "Radio": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "input",
+    },
     "render": [Function],
   },
   "Section": Object {
@@ -764,12 +797,21 @@ Object {
     },
     "Option": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "option",
+      },
       "render": [Function],
+    },
+    "defaultProps": Object {
+      "as": "select",
     },
     "render": [Function],
   },
   "Table": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "table",
+    },
     "render": [Function],
   },
   "Tabs": Object {
@@ -803,6 +845,7 @@ Object {
   "Textarea": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "as": "textarea",
       "rows": 4,
     },
     "render": [Function],

@@ -7,12 +7,18 @@ import { hasProperties } from "@/__tests__/helpers";
 
 describe("FileInput component", () => {
   hasProperties(FileInput, {
-    defaultProps: undefined,
+    defaultProps: { as: "input" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<FileInput />);
     expect(wrapper.is("input")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<FileInput as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {

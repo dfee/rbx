@@ -1,6 +1,7 @@
 import { cx } from "emotion";
-import React, { PureComponent } from "react";
+import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { tuple } from "@/utils";
 import { combineRefs } from "@/utils";
@@ -17,26 +18,25 @@ export type DropdownAlignments = (typeof DROPDOWN_ALIGNMENTS)[number];
 export type DropdownModifierProps = Partial<{
   active: boolean;
   align: DropdownAlignments;
+  className: string;
   hoverable: boolean;
   managed: boolean;
   up: boolean;
 }>;
 
-export type DropdownProps = Prefer<
-  ModifierProps & DropdownModifierProps,
-  React.HTMLAttributes<HTMLDivElement>
->;
+export type DropdownProps = ModifierProps & DropdownModifierProps;
 
 const initialState = {
   active: false,
 };
 
 export type DropdownControllerProps = DropdownProps & {
+  as: React.ReactType<any>;
   innerRef: React.Ref<HTMLDivElement>;
 };
 export type DropdownControllerState = typeof initialState;
 
-export class DropdownController extends PureComponent<
+export class DropdownController extends React.PureComponent<
   DropdownControllerProps,
   DropdownControllerState
 > {
@@ -72,6 +72,7 @@ export class DropdownController extends PureComponent<
 
   public render() {
     const {
+      as,
       align,
       active,
       hoverable,
@@ -94,7 +95,10 @@ export class DropdownController extends PureComponent<
           setActive: (value: boolean) => (this.active = value),
         }}
       >
-        <div {...rest} ref={combineRefs(this.ref, innerRef)} />
+        {React.createElement(as!, {
+          ref: combineRefs(this.ref, innerRef),
+          ...rest,
+        })}
       </DropdownContext.Provider>
     );
   }
@@ -122,9 +126,13 @@ export class DropdownController extends PureComponent<
 }
 
 export const Dropdown = Object.assign(
-  React.forwardRef<HTMLDivElement, DropdownProps>((props, ref) => {
-    return <DropdownController innerRef={ref} {...props} />;
-  }),
+  forwardRefAs<DropdownProps, "div">(
+    (props, ref) => {
+      const { as, ...rest } = props;
+      return <DropdownController as={as!} innerRef={ref} {...rest} />;
+    },
+    { as: "div" },
+  ),
   {
     Content: DropdownContent,
     Context: DropdownContext,

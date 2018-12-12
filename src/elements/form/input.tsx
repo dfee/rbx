@@ -1,6 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { tuple } from "@/utils";
@@ -25,7 +26,9 @@ export const INPUT_TYPES = tuple(
 export type InputTypes = (typeof INPUT_TYPES)[number];
 
 export type InputModifierProps = Partial<{
+  className: string;
   color: Colors;
+  readOnly: React.InputHTMLAttributes<HTMLInputElement>["readOnly"];
   rounded: boolean;
   size: InputSizes;
   state: InputStates;
@@ -33,14 +36,12 @@ export type InputModifierProps = Partial<{
   type: InputTypes;
 }>;
 
-export type InputProps = Prefer<
-  ModifierProps & InputModifierProps,
-  React.InputHTMLAttributes<HTMLInputElement>
->;
+export type InputProps = ModifierProps & InputModifierProps;
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRefAs<InputProps, "input">(
   (props, ref) => {
     const {
+      as,
       color,
       readOnly,
       rounded,
@@ -56,6 +57,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       "is-static": isStatic,
       [`is-${state}`]: state,
     });
-    return <input ref={ref} readOnly={readOnly || isStatic} {...rest} />;
+    return React.createElement(as!, {
+      readOnly: readOnly || isStatic,
+      ref,
+      ...rest,
+    });
   },
+  { as: "input" },
 );

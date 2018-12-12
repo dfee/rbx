@@ -1,6 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { tuple } from "@/utils";
 import { Checkbox } from "./checkbox";
@@ -10,18 +11,16 @@ export const LABEL_SIZES = tuple("small", "medium", "large");
 export type LabelSizes = (typeof LABEL_SIZES)[number];
 
 export type LabelModifierProps = Partial<{
+  className: string;
   disabled: boolean;
   size: LabelSizes;
 }>;
 
-export type LabelProps = Prefer<
-  ModifierProps & LabelModifierProps,
-  React.LabelHTMLAttributes<HTMLLabelElement>
->;
+export type LabelProps = ModifierProps & LabelModifierProps;
 
-export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
+export const Label = forwardRefAs<LabelProps, "label">(
   (props, ref) => {
-    const { disabled, size, ...rest } = transformModifiers(props);
+    const { as, disabled, size, ...rest } = transformModifiers(props);
     let kind = "label";
     React.Children.forEach(rest.children, (child, i) => {
       if (typeof child === "object") {
@@ -43,6 +42,7 @@ export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
       [`is-${size}`]: size,
       [`${kind}`]: kind,
     });
-    return <label {...rest} ref={ref} />;
+    return React.createElement(as!, { ref, ...rest });
   },
+  { as: "label" },
 );

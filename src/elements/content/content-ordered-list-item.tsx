@@ -1,16 +1,22 @@
 import React from "react";
 
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 
-export type ContentOrderedListItemProps = Prefer<
-  ModifierProps,
-  React.HTMLAttributes<HTMLLIElement>
->;
+export type ContentOrderedListItemModifierProps = Partial<{
+  className: string;
+}>;
 
-export const ContentOrderedListItem = React.forwardRef<
-  HTMLLIElement,
-  ContentOrderedListItemProps
->((props, ref) => {
-  const transformed = transformModifiers(props);
-  return React.createElement("li", { ref, ...transformed });
-});
+export type ContentOrderedListItemProps = ModifierProps &
+  ContentOrderedListItemModifierProps;
+
+export const ContentOrderedListItem = forwardRefAs<
+  ContentOrderedListItemProps,
+  "li"
+>(
+  (props, ref) => {
+    const { as, ...rest } = transformModifiers(props);
+    return React.createElement(as!, { ref, ...rest });
+  },
+  { as: "li" },
+);

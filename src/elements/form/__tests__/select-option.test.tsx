@@ -7,12 +7,18 @@ import { hasProperties } from "@/__tests__/helpers";
 
 describe("SelectOption component", () => {
   hasProperties(SelectOption, {
-    defaultProps: undefined,
+    defaultProps: { as: "option" },
   });
 
   it("should render as the default element", () => {
     const wrapper = Enzyme.shallow(<SelectOption />);
     expect(wrapper.is("option")).toBe(true);
+  });
+
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<SelectOption as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
   it("should forward ref", () => {
