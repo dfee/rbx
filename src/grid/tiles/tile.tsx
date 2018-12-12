@@ -35,17 +35,13 @@ export const Tile = forwardRefAs<TileProps, "div">(
       ...rest
     } = transformModifiers(props);
     rest.className = cx("tile", rest.className, {
-      "is-vertical": vertical,
+      [`is-${color}`]: color,
       [`is-${kind}`]: kind,
       [`is-${size}`]: !!size,
-      [`is-${color}`]: color,
+      "is-vertical": vertical,
       notification,
     });
     return React.createElement(as!, { ref, ...rest });
   },
-  {
-    as: "div",
-    notification: false,
-    vertical: false,
-  },
+  { as: "div" },
 );

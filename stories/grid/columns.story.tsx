@@ -6,7 +6,7 @@ import { Box, Notification, Title } from "@/elements";
 import { Columns } from "@/grid";
 import { ColumnProps } from "@/grid/columns/column";
 import { COLUMN_SIZES, ColumnSizes } from "@/grid/columns/column";
-import { COLUMNS_GAP_SIZES } from "@/grid/columns/columns";
+import { COLUMNS_GAPS, ColumnsGaps } from "@/grid/columns/columns";
 import { Section } from "@/layout";
 import { Colors } from "@/modifiers/color";
 import { BREAKPOINTS } from "@/modifiers/responsive";
@@ -16,12 +16,8 @@ import { iterableToSelectObject } from "../helpers";
 export const knobs = {
   breakpoint: (title: string = "Breakpoint") =>
     select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), ""),
-  gapSize: (title: string = "Gap size") =>
-    select(
-      title,
-      iterableToSelectObject(COLUMNS_GAP_SIZES, { undefined: "" }),
-      "",
-    ),
+  gap: (title: string = "Gap") =>
+    select(title, iterableToSelectObject(COLUMNS_GAPS, { undefined: "" }), ""),
   gapless: (title: string = "Gapless") => boolean(title, false),
 };
 
@@ -201,15 +197,17 @@ storiesOf("Grid/Columns", module)
     );
   })
   .add("Gap (variable)", () => {
-    const gapSize = knobs.gapSize();
+    const gap = knobs.gap();
+    const normalizedGap =
+      gap === "" ? undefined : (parseInt(gap, 10) as ColumnsGaps);
     return (
       <React.Fragment>
-        <Columns gapSize={gapSize === "" ? undefined : gapSize}>
+        <Columns gap={normalizedGap}>
           <ColumnNotification color="primary" children="Side" size={3} />
           <ColumnNotification color="primary" children="Main" size={9} />
         </Columns>
 
-        <Columns gapSize={gapSize === "" ? undefined : gapSize}>
+        <Columns gap={normalizedGap}>
           {[1, 2, 3].map(key => (
             <ColumnNotification
               children="Three columns"
@@ -220,7 +218,7 @@ storiesOf("Grid/Columns", module)
           ))}
         </Columns>
 
-        <Columns gapSize={gapSize === "" ? undefined : gapSize}>
+        <Columns gap={normalizedGap}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(key => (
             <ColumnNotification
               children={key}
@@ -235,23 +233,23 @@ storiesOf("Grid/Columns", module)
   })
   .add("Gap (variable, by-breakpoint)", () => {
     // tslint:disable:object-literal-sort-keys
-    const gapSizes = {
-      mobile: knobs.gapSize("Mobile gap size"),
-      tablet: knobs.gapSize("Tablet gap size"),
-      desktop: knobs.gapSize("Desktop gap size"),
-      fullhd: knobs.gapSize("FullHD gap size"),
-      widescreen: knobs.gapSize("Widescreen gap size"),
+    const gap = {
+      mobile: { gap: knobs.gap("Mobile gap size") },
+      tablet: { gap: knobs.gap("Tablet gap size") },
+      desktop: { gap: knobs.gap("Desktop gap size") },
+      fullhd: { gap: knobs.gap("FullHD gap size") },
+      widescreen: { gap: knobs.gap("Widescreen gap size") },
     };
     // tslint:enable:object-literal-sort-keys
 
+    const normalizedGap = Object.entries(gap)
+      .map(([key, value]) => ({
+        [key]: { gap: value.gap === "" ? undefined : parseInt(value.gap, 10) },
+      }))
+      .reduce((acc, cv) => ({ ...acc, ...cv }), {});
+
     return (
-      <Columns
-        {...Object.entries(gapSizes)
-          .map(([breakpoint, selectValue]) => ({
-            [breakpoint]: { gapSize: selectValue || undefined },
-          }))
-          .reduce((acc, cv) => ({ ...acc, ...cv }), {})}
-      >
+      <Columns {...normalizedGap}>
         {[1, 2, 3, 4, 5, 6].map(key => (
           <ColumnNotification children={key} color="primary" key={key} />
         ))}

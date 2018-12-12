@@ -1,61 +1,80 @@
+import Enzyme from "enzyme";
 import React from "react";
-import renderer from "react-test-renderer";
 
 import { COLORS } from "@/modifiers/color";
-import { Tile } from "../tile";
+import { Tile, TILE_KINDS, TILE_SIZES } from "../tile";
+
+import { hasProperties } from "@/__tests__/helpers";
 
 describe("Tile component", () => {
-  it("should exist", () => {
-    expect(Tile).toMatchSnapshot();
+  hasProperties(Tile, {
+    defaultProps: { as: "div" },
   });
 
-  it("should have notification classname", () => {
-    const component = renderer.create(
-      <Tile>
-        <img
-          alt="placeholder"
-          src="http://bulma.io/images/placeholders/128x128.png"
-        />
-      </Tile>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as the default element", () => {
+    const wrapper = Enzyme.shallow(<Tile />);
+    expect(wrapper.is("div")).toBe(true);
   });
 
-  it("should concat classname in props with Bulma classname", () => {
-    const component = renderer.create(
-      <Tile className="other-class this-is-a-test">
-        <p>Default</p>
-      </Tile>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should render as a custom component", () => {
+    const as = "span";
+    const wrapper = Enzyme.shallow(<Tile as={as} />);
+    expect(wrapper.is(as)).toBe(true);
   });
 
-  it("should use inline styles", () => {
-    const component = renderer.create(
-      <Tile style={{ height: 250 }}>
-        <p>Default</p>
-      </Tile>,
+  it("should forward ref", () => {
+    const ref = React.createRef<HTMLDivElement>();
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    const wrapper = Enzyme.mount(
+      <div>
+        <Tile ref={ref} />
+      </div>,
     );
-    expect(component.toJSON()).toMatchSnapshot();
+    try {
+      expect(ref.current).toBe(wrapper.find(".tile").instance());
+    } finally {
+      wrapper.unmount();
+    }
   });
 
-  it("should render as Section", () => {
-    const component = renderer.create(
-      <Tile<"section"> as="section">
-        <p>Default</p>
-      </Tile>,
-    );
-    expect(component.toJSON()).toMatchSnapshot();
+  it("should preserve custom className", () => {
+    const className = "foo";
+    const wrapper = Enzyme.shallow(<Tile className={className} />);
+    expect(wrapper.hasClass(className)).toBe(true);
   });
 
   COLORS.map(color =>
-    it(`should use use color ${color}`, () => {
-      const component = renderer.create(
-        <Tile notification color={color}>
-          <p>Default {color}</p>
-        </Tile>,
-      );
-      expect(component.toJSON()).toMatchSnapshot();
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Tile color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
+
+  TILE_KINDS.map(kind =>
+    it(`should be ${kind}`, () => {
+      const wrapper = Enzyme.shallow(<Tile kind={kind} />);
+      expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(notification =>
+    it(`should ${notification ? "" : "not "}be notification`, () => {
+      const wrapper = Enzyme.shallow(<Tile notification={notification} />);
+      expect(wrapper.hasClass("notification")).toBe(notification);
+    }),
+  );
+
+  TILE_SIZES.map(size =>
+    it(`should be size ${size}`, () => {
+      const wrapper = Enzyme.shallow(<Tile size={size} />);
+      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+    }),
+  );
+
+  [false, true].map(vertical =>
+    it(`should ${vertical ? "" : "not "}be vertical`, () => {
+      const wrapper = Enzyme.shallow(<Tile vertical={vertical} />);
+      expect(wrapper.hasClass("is-vertical")).toBe(vertical);
     }),
   );
 });

@@ -85,42 +85,44 @@ export const Column = forwardRefAs<ColumnProps, "div">(
   (props, ref) => {
     const {
       as,
-      desktop,
-      fullhd,
       mobile,
+      tablet,
+      desktop,
+      widescreen,
+      fullhd,
+      touch,
       narrow,
       offset,
       size,
-      tablet,
-      widescreen,
       ...rest
     } = transformModifiers(props);
 
-    const dimmensions = { mobile, tablet, desktop, widescreen, fullhd };
-    const sizeClassNames = {
-      [`is-${size}`]: !!size,
-      [`is-offset-${offset}`]: !!offset,
-      "is-narrow": !!narrow,
-    };
-    Object.keys(dimmensions).forEach(key => {
-      const dimmension = dimmensions[key];
-      Object.assign(sizeClassNames, {
-        [`is-${dimmension.size}-${key}`]: !!dimmension.size,
-        [`is-offset-${dimmension.offset}-${key}`]: !!dimmension.offset,
-        "is-narrow-${key}": !!dimmension.narrow,
-      });
-    });
-    rest.className = cx("column", rest.className, sizeClassNames);
+    rest.className = cx(
+      "column",
+      rest.className,
+      {
+        [`is-${size}`]: !!size,
+        [`is-offset-${offset}`]: !!offset,
+        "is-narrow": narrow,
+      },
+      Object.entries({
+        desktop,
+        fullhd,
+        mobile,
+        tablet,
+        touch,
+        widescreen,
+      })
+        .filter(([breakpoint, value]) => value)
+        .map(([breakpoint, value]) => ({
+          [`is-${value!.size}-${breakpoint}`]: !!value!.size,
+          [`is-narrow-${breakpoint}`]: value!.narrow,
+          [`is-offset-${value!.offset}-${breakpoint}`]: !!value!.offset,
+        }))
+        .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+    );
 
     return React.createElement(as!, { ref, ...rest });
   },
-  {
-    as: "div",
-    desktop: { narrow: false },
-    fullhd: { narrow: false },
-    mobile: { narrow: false },
-    narrow: false,
-    tablet: { narrow: false },
-    widescreen: { narrow: false },
-  },
+  { as: "div" },
 );

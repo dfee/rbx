@@ -7,14 +7,14 @@ import { Breakpoints } from "@/modifiers/responsive";
 import { tuple } from "@/utils";
 import { Column } from "./column";
 
-export const COLUMNS_GAP_SIZES = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);
-export type ColumnsGapSizes = (typeof COLUMNS_GAP_SIZES)[number];
+export const COLUMNS_GAPS = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);
+export type ColumnsGaps = (typeof COLUMNS_GAPS)[number];
 
-export type ColumnsGapSizeModifierProps = Partial<{
+export type ColumnsBreakpointProps = Partial<{
   /**
    * The column gap size for Tablet devices (Between 769px and 1023px)
    */
-  gapSize: ColumnsGapSizes;
+  gap: ColumnsGaps;
 }>;
 
 type ColumnsModifierProps = Partial<
@@ -41,24 +41,24 @@ type ColumnsModifierProps = Partial<
     /**
      * The column gap size for Mobile devices (Up to 768px)
      */
-    mobile: ColumnsGapSizeModifierProps;
+    mobile: ColumnsBreakpointProps;
     /**
      * The column gap size for Tablet devices (Between 769px and 1023px)
      */
-    tablet: ColumnsGapSizeModifierProps;
+    tablet: ColumnsBreakpointProps;
     /**
      * The column gap size for Desktop devices (Between 1024 and 1215px)
      */
-    desktop: ColumnsGapSizeModifierProps;
+    desktop: ColumnsBreakpointProps;
     /**
      * The column gap size for WideScreen devices (Between 1216px and 1407px)
      */
-    widescreen: ColumnsGapSizeModifierProps;
+    widescreen: ColumnsBreakpointProps;
     /**
      * The column gap size for FullHD devices (1408px and above)
      */
-    fullhd: ColumnsGapSizeModifierProps;
-  } & ColumnsGapSizeModifierProps
+    fullhd: ColumnsBreakpointProps;
+  } & ColumnsBreakpointProps
 >;
 
 export type ColumnsProps = ModifierProps & ColumnsModifierProps;
@@ -72,8 +72,8 @@ export const Columns = Object.assign(
         centered,
         desktop,
         fullhd,
+        gap,
         gapless,
-        gapSize,
         mobile,
         multiline,
         tablet,
@@ -81,8 +81,8 @@ export const Columns = Object.assign(
         ...rest
       } = transformModifiers(props);
 
-      const gapSizeClassNames = cx(
-        { [`is-${gapSize}`]: typeof gapSize === "number" },
+      const gapClassNames = cx(
+        { [`is-${gap}`]: typeof gap === "number" },
         Object.entries({
           desktop,
           fullhd,
@@ -90,8 +90,10 @@ export const Columns = Object.assign(
           tablet,
           widescreen,
         })
-          .filter(([key, value]) => value && typeof value.gapSize === "number")
-          .map(([key, value]) => ({ [`is-${value!.gapSize}-${key}`]: true }))
+          .filter(([key, value]) => value)
+          .map(([key, value]) => ({
+            [`is-${value!.gap}-${key}`]: typeof value!.gap === "number",
+          }))
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       );
 
@@ -103,18 +105,15 @@ export const Columns = Object.assign(
           "is-centered": centered,
           "is-gapless": gapless,
           "is-multiline": multiline,
-          "is-variable ": !!gapSizeClassNames,
-          [`is-${gapSize}`]: typeof gapSize === "number",
+          "is-variable ": !!gapClassNames,
         },
-        gapSizeClassNames,
+        gapClassNames,
       );
 
       return React.createElement(as!, { ref, ...rest });
     },
     {
       as: "div",
-      centered: false,
-      gapless: false,
       multiline: true,
     },
   ),
