@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -36,7 +36,7 @@ export const SelectContainer = forwardRefAs<SelectContainerProps, "div">(
       state,
       ...rest
     } = transformModifiers(props);
-    rest.className = cx("select", rest.className, {
+    rest.className = classNames("select", rest.className, {
       [`is-${color}`]: color,
       "is-fullwidth": fullwidth,
       "is-loading": state === "loading",
@@ -49,12 +49,12 @@ export const SelectContainer = forwardRefAs<SelectContainerProps, "div">(
         typeof child === "object" &&
         (child.type === "select" || child.type === Select)
       ) {
-        rest.className = cx(rest.className, {
+        rest.className = classNames(rest.className, {
           "is-multiple": child.props.multiple,
         });
         if (state === "focused" || state === "hovered") {
           return React.cloneElement(child, {
-            className: cx(`is-${state}`, child.props.className),
+            className: classNames(`is-${state}`, child.props.className),
           });
         }
         return child;

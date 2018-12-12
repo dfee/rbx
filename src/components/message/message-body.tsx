@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type MessageBodyProps = ModifierProps & MessageBodyModifierProps;
 export const MessageBody = forwardRefAs<MessageBodyProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("message-body", rest.className);
+    rest.className = classNames("message-body", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

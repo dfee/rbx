@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -18,7 +18,7 @@ export type SectionProps = ModifierProps & SectionModifierProps;
 export const Section = forwardRefAs<SectionProps, "section">(
   (props, ref) => {
     const { as, size, ...rest } = transformModifiers(props);
-    rest.className = cx("section", rest.className, {
+    rest.className = classNames("section", rest.className, {
       [`is-${size}`]: size,
     });
     return React.createElement(as!, { ref, ...rest });

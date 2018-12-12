@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -50,7 +50,7 @@ export const Input = forwardRefAs<InputProps, "input">(
       static: isStatic,
       ...rest
     } = transformModifiers(props);
-    rest.className = cx("input", rest.className, {
+    rest.className = classNames("input", rest.className, {
       [`is-${color}`]: color,
       "is-rounded": rounded,
       [`is-${size}`]: size,

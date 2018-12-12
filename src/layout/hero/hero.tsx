@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -30,7 +30,7 @@ export const Hero = Object.assign(
   forwardRefAs<HeroProps, "section">(
     (props, ref) => {
       const { as, color, gradient, size, ...rest } = transformModifiers(props);
-      rest.className = cx("hero", rest.className, {
+      rest.className = classNames("hero", rest.className, {
         "is-bold": gradient,
         [`is-${color}`]: color,
         [`is-${size}`]: size,

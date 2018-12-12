@@ -1,5 +1,5 @@
 import { tuple } from "@/utils";
-import { cx } from "emotion";
+import classNames from "classnames";
 
 import { TextAlignments, TextSizes } from "./typography";
 import { makeTransform } from "./utils";
@@ -54,7 +54,7 @@ export type ResponsiveProps = Partial<{
 
 export const transformResponsiveModifiers = makeTransform<ResponsiveProps>(
   props =>
-    cx(
+    classNames(
       props.className,
       Object.entries(props.responsive || {})
         .map(([breakpoint, obj]) => {
@@ -80,6 +80,6 @@ export const transformResponsiveModifiers = makeTransform<ResponsiveProps>(
           return names;
         })
         .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-    ) || undefined,
+    ),
   ["responsive"],
 );

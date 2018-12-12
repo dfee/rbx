@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -14,7 +14,7 @@ export type PanelTabProps = ModifierProps & PanelTabModifierProps;
 export const PanelTab = forwardRefAs<PanelTabProps, "a">(
   (props, ref) => {
     const { active, as, className: cn, ...rest } = transformModifiers(props);
-    const className = cx(cn, { "is-active": active }) || undefined;
+    const className = classNames(cn, { "is-active": active }) || undefined;
     return React.createElement(as!, { className, ref, ...rest });
   },
   { as: "a" },

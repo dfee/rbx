@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -71,7 +71,7 @@ export class DropdownController extends React.PureComponent<
       up,
       ...rest
     } = transformModifiers(this.props);
-    rest.className = cx("dropdown", rest.className, {
+    rest.className = classNames("dropdown", rest.className, {
       [`is-${align}`]: align,
       "is-active": this.active,
       "is-hoverable": hoverable,

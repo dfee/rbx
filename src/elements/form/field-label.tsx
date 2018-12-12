@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -18,7 +18,7 @@ export type FieldLabelProps = ModifierProps & FieldLabelModifierProps;
 export const FieldLabel = forwardRefAs<FieldLabelProps, "div">(
   (props, ref) => {
     const { as, size, ...rest } = transformModifiers(props);
-    rest.className = cx("field-label", rest.className, {
+    rest.className = classNames("field-label", rest.className, {
       [`is-${size}`]: size,
     });
     return React.createElement(as!, { ref, ...rest });

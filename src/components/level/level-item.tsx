@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type LevelItemProps = ModifierProps & LevelItemModifierProps;
 export const LevelItem = forwardRefAs<LevelItemProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("level-item", rest.className);
+    rest.className = classNames("level-item", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -14,7 +14,7 @@ export type PanelBlockProps = ModifierProps & PanelBlockModifierProps;
 export const PanelBlock = forwardRefAs<PanelBlockProps, "div">(
   (props, ref) => {
     const { active, as, ...rest } = transformModifiers(props);
-    rest.className = cx("panel-block", rest.className, {
+    rest.className = classNames("panel-block", rest.className, {
       "is-active": active,
     });
     return React.createElement(as!, { ref, ...rest });

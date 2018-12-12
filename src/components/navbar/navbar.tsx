@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -86,7 +86,7 @@ export class NavbarController extends React.PureComponent<
       ...rest
     } = transformModifiers(this.props);
 
-    rest.className = cx("navbar", rest.className, {
+    rest.className = classNames("navbar", rest.className, {
       "is-transparent": transparent,
       [`is-fixed-${fixed}`]: fixed,
       [`is-${color}`]: color,

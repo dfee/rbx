@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -40,7 +40,7 @@ export const Tabs = Object.assign(
         type,
         ...rest
       } = transformModifiers(props);
-      rest.className = cx("tabs", rest.className, {
+      rest.className = classNames("tabs", rest.className, {
         [`is-${align}`]: align,
         [`is-${size}`]: size,
         "is-fullwidth": fullwidth,

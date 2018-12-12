@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type ModalContentProps = ModifierProps & ModalContentModifierProps;
 export const ModalContent = forwardRefAs<ModalContentProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("modal-content", rest.className);
+    rest.className = classNames("modal-content", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

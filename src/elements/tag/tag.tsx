@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -32,7 +32,7 @@ export const Tag = Object.assign(
         size,
         ...rest
       } = transformModifiers(props);
-      rest.className = cx("tag", rest.className, {
+      rest.className = classNames("tag", rest.className, {
         [`is-${size}`]: size,
         [`is-${color}`]: color,
         "is-delete": isDelete,

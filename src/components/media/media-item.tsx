@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -18,7 +18,7 @@ export type MediaItemProps = ModifierProps & MediaItemModifierProps;
 export const MediaItem = forwardRefAs<MediaItemProps, "div">(
   (props, ref) => {
     const { as, position, ...rest } = transformModifiers(props);
-    rest.className = cx(rest.className, {
+    rest.className = classNames(rest.className, {
       [`media-${position}`]: position,
     });
     return React.createElement(as!, { ref, ...rest });

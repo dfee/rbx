@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -18,7 +18,7 @@ export const Tab = forwardRefAs<TabModifierProps, "a">(
     return (
       <li
         style={style}
-        className={cx(className, {
+        className={classNames(className, {
           "is-active": active,
         })}
       >

@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -21,7 +21,7 @@ export const ButtonGroup = forwardRefAs<ButtonGroupProps, "div">(
     const { as, children, hasAddons, position, ...rest } = transformModifiers(
       props,
     );
-    rest.className = cx("buttons", rest.className, {
+    rest.className = classNames("buttons", rest.className, {
       "has-addons": hasAddons,
       [`is-${[position]}`]: position,
     });

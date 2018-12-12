@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -16,7 +16,7 @@ export const List = Object.assign(
   forwardRefAs<ListProps, "div">(
     (props, ref) => {
       const { as, hoverable, ...rest } = transformModifiers(props);
-      rest.className = cx("list", rest.className, {
+      rest.className = classNames("list", rest.className, {
         "is-hoverable": hoverable,
       });
       return React.createElement(as!, { ref, ...rest });

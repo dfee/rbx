@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -27,7 +27,7 @@ export const Textarea = forwardRefAs<TextareaProps, "textarea">(
     const { as, color, fixedSize, size, state, ...rest } = transformModifiers(
       props,
     );
-    rest.className = cx("textarea", rest.className, {
+    rest.className = classNames("textarea", rest.className, {
       "has-fixed-size": fixedSize,
       [`is-${color}`]: color,
       [`is-${size}`]: size,

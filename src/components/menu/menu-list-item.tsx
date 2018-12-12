@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -15,7 +15,7 @@ export type MenuListItemProps = ModifierProps & MenuListItemModifierProps;
 export const MenuListItem = forwardRefAs<MenuListItemProps, "a">(
   (props, ref) => {
     const { active, as, menu, ...rest } = transformModifiers(props);
-    rest.className = cx({ "is-active": active }, rest.className) || undefined;
+    rest.className = classNames({ "is-active": active }, rest.className) || undefined;
     return (
       <li>
         {React.createElement(as!, { ref, ...rest })}

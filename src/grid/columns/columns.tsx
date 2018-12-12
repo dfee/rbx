@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -81,7 +81,7 @@ export const Columns = Object.assign(
         ...rest
       } = transformModifiers(props);
 
-      const gapClassNames = cx(
+      const gapClassNames = classNames(
         { [`is-${gap}`]: typeof gap === "number" },
         Object.entries({
           desktop,
@@ -97,7 +97,7 @@ export const Columns = Object.assign(
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       );
 
-      rest.className = cx(
+      rest.className = classNames(
         "columns",
         rest.className,
         {

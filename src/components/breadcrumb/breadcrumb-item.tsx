@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -14,7 +14,7 @@ export const BreadcrumbItem = forwardRefAs<BreadcrumbItemProps, "a">(
   (props, ref) => {
     const { as, active, ...rest } = transformModifiers(props);
     return (
-      <li className={cx({ "is-active": active }) || undefined}>
+      <li className={classNames({ "is-active": active }) || undefined}>
         {React.createElement(as!, { ref, ...rest })}
       </li>
     );

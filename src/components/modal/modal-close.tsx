@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -15,7 +15,7 @@ export type ModalCloseProps = ModifierProps & ModalCloseModifierProps;
 export const ModalClose = forwardRefAs<ModalCloseProps, "button">(
   (props, ref) => {
     const { as, onClick, ...rest } = transformModifiers(props);
-    rest.className = cx("modal-close", "is-large", rest.className);
+    rest.className = classNames("modal-close", "is-large", rest.className);
     return (
       <ModalContext.Consumer>
         {({ onClose }) =>

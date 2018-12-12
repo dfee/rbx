@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -23,7 +23,7 @@ export const Message = Object.assign(
   forwardRefAs<MessageProps, "article">(
     (props, ref) => {
       const { as, color, size, ...rest } = transformModifiers(props);
-      rest.className = cx("message", rest.className, {
+      rest.className = classNames("message", rest.className, {
         [`is-${color}`]: color,
         [`is-${size}`]: size,
       });

@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -19,7 +19,7 @@ export const NavbarBurger = forwardRefAs<NavbarBurgerProps, "div">(
       <NavbarContext.Consumer>
         {({ active, setActive }) => {
           const { as, style, onClick, ...rest } = transformModifiers(props);
-          rest.className = cx("navbar-burger", rest.className, {
+          rest.className = classNames("navbar-burger", rest.className, {
             "is-active": active,
           });
           return React.createElement(as!, {

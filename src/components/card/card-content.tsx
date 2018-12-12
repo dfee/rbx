@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type CardContentProps = ModifierProps & CardContentModifierProps;
 export const CardContent = forwardRefAs<CardContentProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("card-content", rest.className);
+    rest.className = classNames("card-content", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

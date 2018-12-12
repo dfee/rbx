@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type HeroHeadProps = ModifierProps & HeroHeadModifierProps;
 export const HeroHead = forwardRefAs<HeroHeadProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("hero-head", rest.className);
+    rest.className = classNames("hero-head", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

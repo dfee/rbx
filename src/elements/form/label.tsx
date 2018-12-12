@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -37,7 +37,7 @@ export const Label = forwardRefAs<LabelProps, "label">(
         }
       }
     });
-    rest.className = cx(rest.className, {
+    rest.className = classNames(rest.className, {
       "is-disabled": disabled,
       [`is-${size}`]: size,
       [`${kind}`]: kind,

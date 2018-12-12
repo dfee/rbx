@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -15,7 +15,7 @@ export type NavbarDropdownProps = ModifierProps & NavbarDropdownModifierProps;
 export const NavbarDropdown = forwardRefAs<NavbarDropdownProps, "span">(
   (props, ref) => {
     const { as, boxed, right, ...rest } = transformModifiers(props);
-    rest.className = cx("navbar-dropdown", rest.className, {
+    rest.className = classNames("navbar-dropdown", rest.className, {
       "is-boxed": boxed,
       "is-right": right,
     });

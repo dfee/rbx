@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type FieldBodyProps = ModifierProps & FieldBodyModifierProps;
 export const FieldBody = forwardRefAs<FieldBodyProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("field-body", rest.className);
+    rest.className = classNames("field-body", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

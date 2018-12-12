@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -43,7 +43,7 @@ export const File = Object.assign(
         size,
         ...rest
       } = transformModifiers(props);
-      rest.className = cx("file", rest.className, {
+      rest.className = classNames("file", rest.className, {
         "has-name": hasName,
         [`is-${align}`]: align,
         "is-boxed": boxed,

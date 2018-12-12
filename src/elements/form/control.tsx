@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -30,7 +30,7 @@ export const Control = forwardRefAs<ControlProps, "div">(
       size,
       ...rest
     } = transformModifiers(props);
-    rest.className = cx("control", rest.className, {
+    rest.className = classNames("control", rest.className, {
       "has-icons-left": iconLeft,
       "has-icons-right": iconRight,
       "is-expanded": expanded,

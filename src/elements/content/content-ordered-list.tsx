@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -27,7 +27,7 @@ export const ContentOrderedList = Object.assign(
   forwardRefAs<ContentOrderedListProps, "ol">(
     (props, ref) => {
       const { as, type, ...rest } = transformModifiers(props);
-      rest.className = cx(rest.className, {
+      rest.className = classNames(rest.className, {
         [`is-${type}`]: type,
       });
       return React.createElement(as!, { ref, ...rest });

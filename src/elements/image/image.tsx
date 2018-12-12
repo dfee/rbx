@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -16,7 +16,7 @@ export const Image = Object.assign(
   forwardRefAs<ImageProps, "img">(
     (props, ref) => {
       const { as, rounded, ...rest } = transformModifiers(props);
-      rest.className = cx(rest.className, { "is-rounded": rounded });
+      rest.className = classNames(rest.className, { "is-rounded": rounded });
       return React.createElement(as!, { ref, ...rest });
     },
     { as: "img" },

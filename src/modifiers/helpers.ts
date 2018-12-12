@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 
 import { tuple } from "@/utils";
 import { makeTransform } from "./utils";
@@ -71,7 +71,7 @@ export type HelpersProps = FloatHelpersProps &
 // tslint:disable:object-literal-sort-keys
 export const transformHelpersModifiers = makeTransform<HelpersProps>(
   props =>
-    cx(props.className, {
+    classNames(props.className, {
       // Float
       "is-clearfix": props.clearfix,
       [`is-pulled-${props.pull}`]: props.pull,
@@ -87,7 +87,7 @@ export const transformHelpersModifiers = makeTransform<HelpersProps>(
       "is-shadowless": props.shadowless,
       "is-sr-only": props.srOnly,
       "is-unselectable": props.unselectable,
-    }) || undefined,
+    }),
   [
     // Float
     "clearfix",

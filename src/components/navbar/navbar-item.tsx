@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -24,7 +24,7 @@ export const NavbarItem = forwardRefAs<NavbarItemProps, "a">(
       hoverable,
       ...rest
     } = transformModifiers(props);
-    rest.className = cx("navbar-item", rest.className, {
+    rest.className = classNames("navbar-item", rest.className, {
       "has-dropdown": dropdown,
       "has-dropdown-up": dropdownUp,
       "is-active": active,

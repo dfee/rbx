@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -29,7 +29,7 @@ export const Pagination = Object.assign(
   forwardRefAs<PaginationProps, "nav">(
     (props, ref) => {
       const { as, align, rounded, size, ...rest } = transformModifiers(props);
-      rest.className = cx("pagination", rest.className, {
+      rest.className = classNames("pagination", rest.className, {
         [`is-${align}`]: align,
         "is-rounded": rounded,
         [`is-${size}`]: size,

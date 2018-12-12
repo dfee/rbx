@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -20,7 +20,7 @@ export const Content = Object.assign(
   forwardRefAs<ContentProps, "div">(
     (props, ref) => {
       const { as, size, ...rest } = transformModifiers(props);
-      rest.className = cx("content", rest.className, {
+      rest.className = classNames("content", rest.className, {
         [`is-${size}`]: size,
       });
       return React.createElement(as!, { ref, ...rest });

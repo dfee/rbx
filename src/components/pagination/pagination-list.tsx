@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type PaginationListProps = ModifierProps & PaginationListModifierProps;
 export const PaginationList = forwardRefAs<PaginationListProps, "ul">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("pagination-list", rest.className);
+    rest.className = classNames("pagination-list", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "ul" },

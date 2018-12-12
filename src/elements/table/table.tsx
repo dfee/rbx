@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -26,7 +26,7 @@ export const Table = forwardRefAs<TableProps, "table">(
       striped,
       ...rest
     } = transformModifiers(props);
-    rest.className = cx("table", rest.className, {
+    rest.className = classNames("table", rest.className, {
       "is-bordered": bordered,
       "is-fullwidth": fullwidth,
       "is-hoverable": hoverable,

@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -27,7 +27,7 @@ export type IconProps = Prefer<
 export const Icon = forwardRefAs<IconProps, "span">(
   (props, ref) => {
     const { align, as, color, size, ...rest } = transformModifiers(props);
-    rest.className = cx("icon", rest.className, {
+    rest.className = classNames("icon", rest.className, {
       [`has-text-${color}`]: color,
       [`is-${align}`]: align,
       [`is-${size}`]: size,

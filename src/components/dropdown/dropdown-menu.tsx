@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -10,7 +10,7 @@ export type DropdownMenuProps = ModifierProps & DropdownMenuModifierProps;
 export const DropdownMenu = forwardRefAs<DropdownMenuProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("dropdown-menu", rest.className);
+    rest.className = classNames("dropdown-menu", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

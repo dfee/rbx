@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -15,7 +15,7 @@ export type ModalBackgroundProps = ModifierProps & ModalBackgroundModifierProps;
 export const ModalBackground = forwardRefAs<ModalBackgroundProps, "div">(
   (props, ref) => {
     const { as, onClick, ...rest } = transformModifiers(props);
-    rest.className = cx("modal-background", rest.className);
+    rest.className = classNames("modal-background", rest.className);
     return (
       <ModalContext.Consumer>
         {({ closeOnBlur, onClose }) =>

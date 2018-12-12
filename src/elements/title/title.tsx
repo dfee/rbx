@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -20,7 +20,7 @@ export type TitleProps = ModifierProps & TitleModifierProps;
 export const Title = forwardRefAs<TitleProps, "h1">(
   (props, ref) => {
     const { as, size, spaced, subtitle, ...rest } = transformModifiers(props);
-    rest.className = cx(rest.className, {
+    rest.className = classNames(rest.className, {
       [`is-${size}`]: !!size,
       "is-spaced": spaced && !subtitle,
       subtitle,

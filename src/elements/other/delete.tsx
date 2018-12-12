@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -18,7 +18,7 @@ export type DeleteProps = ModifierProps & DeleteModifierProps;
 export const Delete = forwardRefAs<DeleteProps, "a">(
   (props, ref) => {
     const { as, size, ...rest } = props;
-    rest.className = cx("delete", rest.className, {
+    rest.className = classNames("delete", rest.className, {
       [`is-${size}`]: size,
     });
     return React.createElement(as!, { ref, ...rest });

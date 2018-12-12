@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -12,7 +12,7 @@ export type PaginationEllipsisProps = ModifierProps &
 export const PaginationEllipsis = forwardRefAs<PaginationEllipsisProps, "span">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("pagination-ellipsis", rest.className);
+    rest.className = classNames("pagination-ellipsis", rest.className);
     return <li children={React.createElement(as!, { ref, ...rest })} />;
   },
   {

@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type CardHeaderTitleProps = ModifierProps & CardHeaderTitleModifierProps;
 export const CardHeaderTitle = forwardRefAs<CardHeaderTitleProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("card-header-title", rest.className);
+    rest.className = classNames("card-header-title", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

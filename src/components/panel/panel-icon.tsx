@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type PanelIconProps = ModifierProps & PanelIconModifierProps;
 export const PanelIcon = forwardRefAs<PanelIconProps, "span">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("panel-icon", rest.className);
+    rest.className = classNames("panel-icon", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "span" },

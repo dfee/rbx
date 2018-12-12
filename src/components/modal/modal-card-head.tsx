@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -13,7 +13,7 @@ export type ModalCardHeadProps = ModifierProps & ModalCardHeadModifierProps;
 export const ModalCardHead = forwardRefAs<ModalCardHeadProps, "header">(
   (props, ref) => {
     const { as, children, ...rest } = transformModifiers(props);
-    rest.className = cx("modal-card-head", rest.className);
+    rest.className = classNames("modal-card-head", rest.className);
     return (
       <ModalContext.Consumer>
         {({ onClose }) => {

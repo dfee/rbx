@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -34,7 +34,7 @@ export const Tile = forwardRefAs<TileProps, "div">(
       vertical,
       ...rest
     } = transformModifiers(props);
-    rest.className = cx("tile", rest.className, {
+    rest.className = classNames("tile", rest.className, {
       [`is-${color}`]: color,
       [`is-${kind}`]: kind,
       [`is-${size}`]: !!size,

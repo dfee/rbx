@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -97,7 +97,7 @@ export const Column = forwardRefAs<ColumnProps, "div">(
       ...rest
     } = transformModifiers(props);
 
-    rest.className = cx(
+    rest.className = classNames(
       "column",
       rest.className,
       {

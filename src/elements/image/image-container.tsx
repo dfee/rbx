@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -49,7 +49,7 @@ export const ImageContainer = forwardRefAs<ImageContainerProps, "figure">(
     } else if (typeof size === "number") {
       s = `${size}x${size}`;
     }
-    rest.className = cx("image", rest.className, {
+    rest.className = classNames("image", rest.className, {
       [`is-${s}`]: s,
     });
 

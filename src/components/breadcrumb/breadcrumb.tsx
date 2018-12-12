@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -42,7 +42,7 @@ export const Breadcrumb = Object.assign(
         size,
         ...rest
       } = transformModifiers(props);
-      rest.className = cx("breadcrumb", rest.className, {
+      rest.className = classNames("breadcrumb", rest.className, {
         [`has-${separator}-separator`]: separator,
         [`is-${align}`]: align,
         [`is-${size}`]: size,

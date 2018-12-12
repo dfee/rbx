@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type FileCTAProps = ModifierProps & FileCTAModifierProps;
 export const FileCTA = forwardRefAs<FileCTAProps, "span">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("file-cta", rest.className);
+    rest.className = classNames("file-cta", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "span" },

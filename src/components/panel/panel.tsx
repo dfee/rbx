@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -16,7 +16,7 @@ export const Panel = Object.assign(
   forwardRefAs<PanelProps, "nav">(
     (props, ref) => {
       const { as, ...rest } = transformModifiers(props);
-      rest.className = cx("panel", rest.className);
+      rest.className = classNames("panel", rest.className);
       return React.createElement(as!, { ref, ...rest });
     },
     { as: "nav" },

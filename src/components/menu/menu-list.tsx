@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -13,7 +13,7 @@ export const MenuList = Object.assign(
   forwardRefAs<MenuListProps, "ul">(
     (props, ref) => {
       const { as, ...rest } = transformModifiers(props);
-      rest.className = cx("menu-list", rest.className);
+      rest.className = classNames("menu-list", rest.className);
       return React.createElement(as!, { ref, ...rest });
     },
     { as: "ul" },

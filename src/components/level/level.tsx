@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -19,7 +19,7 @@ export const Level = Object.assign(
   forwardRefAs<LevelProps, "nav">(
     (props, ref) => {
       const { as, breakpoint, ...rest } = transformModifiers(props);
-      rest.className = cx("level", rest.className, {
+      rest.className = classNames("level", rest.className, {
         [`is-${breakpoint}`]: breakpoint,
       });
       return React.createElement(as!, { ref, ...rest });

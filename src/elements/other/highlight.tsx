@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -10,7 +10,7 @@ export type HighlightProps = ModifierProps & HighlightModifierProps;
 export const Highlight = forwardRefAs<HighlightProps, "p">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("highlight", rest.className);
+    rest.className = classNames("highlight", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "p" },

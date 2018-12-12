@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { initialState, ModalContext } from "./modal-context";
@@ -51,7 +51,7 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
       onClose,
       ...rest
     } = this.props;
-    rest.className = cx("modal", "is-active", rest.className);
+    rest.className = classNames("modal", "is-active", rest.className);
 
     return (
       <ModalContext.Provider

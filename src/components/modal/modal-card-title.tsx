@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -11,7 +11,7 @@ export type ModalCardTitleProps = ModifierProps & ModalCardTitleModifierProps;
 export const ModalCardTitle = forwardRefAs<ModalCardTitleProps, "p">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("modal-card-title", rest.className);
+    rest.className = classNames("modal-card-title", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "p" },

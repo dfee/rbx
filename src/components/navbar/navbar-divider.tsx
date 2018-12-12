@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -12,7 +12,7 @@ export type NavbarDividerProps = Prefer<
 export const NavbarDivider = forwardRefAs<NavbarDividerProps, "div">(
   (props, ref) => {
     const { as, ...rest } = transformModifiers(props);
-    rest.className = cx("navbar-divider", rest.className);
+    rest.className = classNames("navbar-divider", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "div" },

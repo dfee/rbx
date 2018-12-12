@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 
 import { tuple } from "@/utils";
 import { makeTransform } from "./utils";
@@ -25,12 +25,12 @@ export type TypographyProps = Partial<{
 
 export const transformTypographyModifiers = makeTransform<TypographyProps>(
   props =>
-    cx(props.className, {
+    classNames(props.className, {
       "is-italic": props.italic,
       [`is-${props.textTransform}`]: props.textTransform,
       [`has-text-${props.textAlignment}`]: props.textAlignment,
       [`has-text-weight-${props.textWeight}`]: props.textWeight,
       [`is-size-${props.textSize}`]: !!props.textSize,
-    }) || undefined,
+    }),
   ["italic", "textAlignment", "textSize", "textTransform", "textWeight"],
 );

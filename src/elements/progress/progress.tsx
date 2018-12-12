@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -22,7 +22,7 @@ export type ProgressProps = ModifierProps & ProgressModifierProps;
 export const Progress = forwardRefAs<ProgressProps, "progress">(
   (props, ref) => {
     const { as, color, size, ...rest } = props;
-    rest.className = cx("progress", rest.className, {
+    rest.className = classNames("progress", rest.className, {
       [`is-${color}`]: color,
       [`is-${size}`]: size,
     });

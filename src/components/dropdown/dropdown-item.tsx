@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -16,7 +16,7 @@ export type DropdownItemProps = ModifierProps & DropdownItemModifierProps;
 export const DropdownItem = forwardRefAs<DropdownItemProps, "a">(
   (props, ref) => {
     const { as, active, onClick, ...rest } = transformModifiers(props);
-    rest.className = cx("dropdown-item", rest.className, {
+    rest.className = classNames("dropdown-item", rest.className, {
       "is-active": active,
     });
     return (

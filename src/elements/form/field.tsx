@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -46,7 +46,7 @@ export const Field = Object.assign(
         k = "is-grouped";
       }
 
-      rest.className = cx("field", rest.className, {
+      rest.className = classNames("field", rest.className, {
         [`${k}`]: k,
         [`${k}-${align}`]: k && align,
         [`${k}-multiline`]: k === "is-grouped" && multiline,

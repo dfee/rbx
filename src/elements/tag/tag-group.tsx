@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -14,7 +14,7 @@ export type TagGroupProps = ModifierProps & TagGroupModifierProps;
 export const TagGroup = forwardRefAs<TagGroupProps, "span">(
   (props, ref) => {
     const { as, gapless, ...rest } = transformModifiers(props);
-    rest.className = cx("tags", rest.className, {
+    rest.className = classNames("tags", rest.className, {
       "has-addons": gapless,
     });
     return React.createElement(as!, { ref, ...rest });

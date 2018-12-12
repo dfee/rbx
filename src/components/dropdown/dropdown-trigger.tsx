@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -15,7 +15,7 @@ export type DropdownTriggerProps = ModifierProps & DropdownTriggerModifierProps;
 export const DropdownTrigger = forwardRefAs<DropdownTriggerProps, "div">(
   (props, ref) => {
     const { as, onClick, ...rest } = transformModifiers(props);
-    rest.className = cx("dropdown-trigger", rest.className);
+    rest.className = classNames("dropdown-trigger", rest.className);
     return (
       <DropdownContext.Consumer>
         {({ active, setActive }) => {

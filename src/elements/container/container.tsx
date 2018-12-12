@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -16,7 +16,7 @@ export type ContainerProps = ModifierProps & ContainerModifierProps;
 export const Container = forwardRefAs<ContainerProps, "div">(
   (props, ref) => {
     const { as, fluid, breakpoint, ...rest } = transformModifiers(props);
-    rest.className = cx("container", rest.className, {
+    rest.className = classNames("container", rest.className, {
       "is-fluid": fluid,
       [`is-${breakpoint}`]: breakpoint,
     });

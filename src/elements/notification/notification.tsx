@@ -1,4 +1,4 @@
-import { cx } from "emotion";
+import classNames from "classnames";
 import React from "react";
 
 import { forwardRefAs } from "@/base";
@@ -15,7 +15,7 @@ export type NotificationProps = ModifierProps & NotificationModifierProps;
 export const Notification = forwardRefAs<NotificationProps, "div">(
   (props, ref) => {
     const { as, color, ...rest } = transformModifiers(props);
-    rest.className = cx("notification", rest.className, {
+    rest.className = classNames("notification", rest.className, {
       [`is-${color}`]: color,
     });
     return React.createElement(as!, { ref, ...rest });

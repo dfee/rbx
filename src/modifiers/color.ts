@@ -1,5 +1,5 @@
 import { tuple } from "@/utils";
-import { cx } from "emotion";
+import classNames from "classnames";
 
 import { makeTransform } from "./utils";
 
@@ -37,9 +37,9 @@ export type ColorsProps = Partial<{
 
 export const transformColorModifiers = makeTransform<ColorsProps>(
   props =>
-    cx(props.className, {
+    classNames(props.className, {
       [`has-background-${props.backgroundColor}`]: props.backgroundColor,
       [`has-text-${props.textColor}`]: props.textColor,
-    }) || undefined,
+    }),
   ["backgroundColor", "textColor"],
 );
