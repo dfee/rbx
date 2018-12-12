@@ -1,7 +1,7 @@
 import { cx } from "emotion";
 import React from "react";
 
-import { forwardRefAs, Generic } from "@/base";
+import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
 import { canUseDOM } from "@/utils";
@@ -39,6 +39,7 @@ export type NavbarModifierProps = Partial<{
 export type NavbarProps = ModifierProps & NavbarModifierProps;
 
 export type NavbarControllerProps = NavbarProps & {
+  as: React.ReactType<any>;
   innerRef: React.Ref<HTMLDivElement>;
 };
 
@@ -80,6 +81,7 @@ export class NavbarController extends React.PureComponent<
 
     const {
       active, // only used for initialState (in constructor)
+      as,
       color,
       fixed,
       innerRef,
@@ -103,7 +105,11 @@ export class NavbarController extends React.PureComponent<
           },
         }}
       >
-        <Generic ref={innerRef} role="navigation" {...rest} />
+        {React.createElement(as!, {
+          ref: innerRef,
+          role: "navigation",
+          ...rest,
+        })}
       </NavbarContext.Provider>
     );
   }
@@ -135,7 +141,10 @@ export class NavbarController extends React.PureComponent<
 
 export const Navbar = Object.assign(
   forwardRefAs<NavbarProps, "nav">(
-    (props, ref) => <NavbarController innerRef={ref} {...props} />,
+    (props, ref) => {
+      const { as, ...rest } = props;
+      return <NavbarController as={as!} innerRef={ref} {...rest} />;
+    },
     { as: "nav" },
   ),
   {

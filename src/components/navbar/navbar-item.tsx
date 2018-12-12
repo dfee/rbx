@@ -31,10 +31,8 @@ export const NavbarItem = forwardRefAs<NavbarItemProps, "a">(
       "is-hoverable": hoverable,
     });
 
-    const asOverride = dropdown && as === "a" ? "span" : as;
+    const asOverride = dropdown && as === "a" ? "div" : as;
     return React.createElement(asOverride!, { ref, ...rest });
   },
-  {
-    as: "a",
-  },
+  { as: "a" },
 );

@@ -37,7 +37,6 @@ describe("Navbar component", () => {
       expect(
         wrapper
           .find(NavbarController)
-          .children() // forwradRef
           .children()
           .is("nav"),
       ).toBe(true);
@@ -53,7 +52,6 @@ describe("Navbar component", () => {
       expect(
         wrapper
           .find(NavbarController)
-          .children() // forwradRef
           .children()
           .is(as),
       ).toBe(true);
@@ -74,7 +72,6 @@ describe("Navbar component", () => {
       expect(ref.current).toBe(
         wrapper
           .find(NavbarController)
-          .children() // forwardRef
           .children()
           .instance(),
       );
@@ -89,7 +86,6 @@ describe("Navbar component", () => {
       expect(
         wrapper
           .find(NavbarController)
-          .children() // forwardRef
           .children()
           .hasClass("navbar"),
       ).toBe(true);
@@ -105,7 +101,6 @@ describe("Navbar component", () => {
       expect(
         wrapper
           .find(NavbarController)
-          .children() // forwardRef
           .children()
           .hasClass(className),
       ).toBe(true);
@@ -185,7 +180,6 @@ describe("Navbar component", () => {
           wrapper
             .find(NavbarController)
             .children()
-            .children()
             .hasClass(`is-${color}`),
         ).toBe(true);
       } finally {
@@ -202,7 +196,6 @@ describe("Navbar component", () => {
           wrapper
             .find(NavbarController)
             .children()
-            .children()
             .hasClass(`is-fixed-${align}`),
         ).toBe(true);
       } finally {
@@ -218,7 +211,6 @@ describe("Navbar component", () => {
         expect(
           wrapper
             .find(NavbarController)
-            .children()
             .children()
             .hasClass("is-transparent"),
         ).toBe(transparent);
