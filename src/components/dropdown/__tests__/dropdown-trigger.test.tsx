@@ -50,17 +50,21 @@ describe("DropdownTrigger component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should call provided onClick and setActive", () => {
-    const onClick = jest.fn();
-    const setActive = jest.fn();
-    const wrapper = shallowInContext(
-      DropdownTrigger,
-      contextFactory({ active: false, setActive }),
-      { onClick },
-    );
-    wrapper.simulate("click");
-    expect(onClick.mock.calls).toHaveLength(1);
-    expect(setActive.mock.calls).toHaveLength(1);
-    expect(setActive.mock.calls[0]).toEqual([true]);
-  });
+  [false, true].map(hasOnClick =>
+    it(`should update context ${
+      hasOnClick ? "and call provided onClick" : ""
+    }`, () => {
+      const onClick = jest.fn();
+      const setActive = jest.fn();
+      const wrapper = shallowInContext(
+        DropdownTrigger,
+        contextFactory({ active: false, setActive }),
+        { onClick: hasOnClick ? onClick : undefined },
+      );
+      wrapper.simulate("click");
+      expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+      expect(setActive.mock.calls).toHaveLength(1);
+      expect(setActive.mock.calls[0]).toEqual([true]);
+    }),
+  );
 });

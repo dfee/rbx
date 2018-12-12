@@ -1,9 +1,14 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { Dropdown, DROPDOWN_ALIGNMENTS, DropdownController } from "../dropdown";
+import {
+  Dropdown,
+  DROPDOWN_ALIGNMENTS,
+  DropdownController,
+  DropdownControllerState,
+} from "../dropdown";
 import { DropdownContent } from "../dropdown-content";
-import { DropdownContext } from "../dropdown-context";
+import { DropdownContext, DropdownContextState } from "../dropdown-context";
 import { DropdownDivider } from "../dropdown-divider";
 import { DropdownItem } from "../dropdown-item";
 import { DropdownMenu } from "../dropdown-menu";
@@ -166,5 +171,42 @@ describe("Card component", () => {
         wrapper.unmount();
       }
     }),
+  );
+
+  [undefined, false, true].map(initialActive =>
+    [undefined, false, true].map(managed =>
+      it(`should ${
+        managed ? "" : "not "
+      }set DropdownController's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
+        let contextState: DropdownContextState | undefined;
+        const innerRef = React.createRef<HTMLDivElement>();
+        const wrapper = Enzyme.mount(
+          <DropdownController
+            active={initialActive}
+            managed={managed}
+            innerRef={innerRef}
+            as="div"
+          >
+            <DropdownContext.Consumer>
+              {context => {
+                contextState = context;
+                return null;
+              }}
+            </DropdownContext.Consumer>
+          </DropdownController>,
+        );
+        try {
+          expect(contextState!.active).toBe(!!initialActive);
+          contextState!.setActive(!contextState!.active);
+          expect((wrapper.state() as DropdownControllerState).active).toBe(
+            managed ? !!initialActive : !initialActive,
+          );
+        } finally {
+          if (wrapper) {
+            wrapper.unmount();
+          }
+        }
+      }),
+    ),
   );
 });

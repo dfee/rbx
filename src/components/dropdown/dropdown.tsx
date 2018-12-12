@@ -60,16 +60,6 @@ export class DropdownController extends React.PureComponent<
     document.removeEventListener("click", this.handleClick!);
   }
 
-  public toggle = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (this.props.hoverable) {
-      return;
-    }
-    if (event) {
-      event.preventDefault();
-    }
-    this.setState(({ active }) => ({ active: !active }));
-  }
-
   public render() {
     const {
       as,
