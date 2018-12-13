@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { Modal } from "../modal";
+import { Modal, ModalController } from "../modal";
 import { ModalBackground } from "../modal-background";
 import { ModalCard } from "../modal-card";
 import { ModalClose } from "../modal-close";
@@ -24,12 +24,16 @@ describe("Modal component", () => {
       active ? "" : "not "
     }active`, () => {
       const wrapper = Enzyme.mount(
-        <Modal active={active} onClose={jest.fn()} />,
+        <Modal
+          active={active}
+          containerClassName="modal-container"
+          onClose={jest.fn()}
+        />,
       );
       try {
-        expect(
-          window.document.getElementsByClassName("modal-controller").length,
-        ).toBe(1);
+        expect(document.getElementsByClassName("modal-container").length).toBe(
+          1,
+        );
         if (active) {
           expect(
             wrapper
@@ -52,12 +56,17 @@ describe("Modal component", () => {
     }active`, () => {
       const as = "span";
       const wrapper = Enzyme.mount(
-        <Modal active={active} as={as} onClose={jest.fn()} />,
+        <Modal
+          active={active}
+          as={as}
+          containerClassName="modal-container"
+          onClose={jest.fn()}
+        />,
       );
       try {
-        expect(
-          window.document.getElementsByClassName("modal-controller").length,
-        ).toBe(1);
+        expect(document.getElementsByClassName("modal-container").length).toBe(
+          1,
+        );
         if (active) {
           expect(
             wrapper
@@ -144,5 +153,27 @@ describe("Modal component", () => {
     } finally {
       wrapper.unmount();
     }
+  });
+
+  describe("ssr", () => {
+    let initWindow: Window;
+
+    beforeEach(() => {
+      initWindow = (global as any).window;
+      delete (global as any).window;
+    });
+
+    afterEach(() => {
+      (global as any).window = initWindow;
+    });
+
+    it("should render without window being available (ssr)", () => {
+      const ref = React.createRef<HTMLDivElement>();
+      const wrapper = Enzyme.shallow(
+        <ModalController innerRef={ref} as="div" onClose={jest.fn()} active />,
+      );
+      wrapper.unmount();
+      expect(wrapper.type()).toBeNull();
+    });
   });
 });

@@ -23,9 +23,6 @@ export const combineRefs = <T>(
   };
 };
 
-export const getDocument = () =>
-  typeof document !== "undefined" ? document : null;
-
 export const noop = () => {}; // tslint:disable-line:no-empty
 
 export const tuple = <T extends Lit[]>(...args: T) => args;

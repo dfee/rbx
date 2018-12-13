@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { forwardRefAs } from "@/base";
-import { getDocument } from "@/utils";
+import { canUseDOM } from "@/utils";
 import { ModalBackground } from "./modal-background";
 import { ModalCard } from "./modal-card";
 import { ModalClose } from "./modal-close";
@@ -13,36 +13,37 @@ export type ModalModifierProps = Partial<{
   active: boolean;
 }>;
 
-export type ModalControllerProps = ModalPortalProps & ModalModifierProps;
+export type ModalControllerProps = ModalPortalProps &
+  ModalModifierProps & { containerClassName?: string };
 
 export class ModalController extends React.PureComponent<ModalControllerProps> {
   private el: HTMLDivElement | undefined;
 
   constructor(props: ModalControllerProps) {
     super(props);
-    const document = getDocument();
-    if (document) {
+    if (canUseDOM()) {
       this.el = document.createElement("div");
-      this.el.className = "modal-controller";
+      if (props.containerClassName) {
+        this.el.className = props.containerClassName;
+      }
     }
   }
 
   public componentDidMount() {
-    const document = getDocument();
-    if (document) {
+    if (canUseDOM()) {
       document.body.appendChild(this.el!);
     }
   }
 
   public componentWillUnmount() {
-    if (document) {
+    if (canUseDOM()) {
       document.body.removeChild(this.el!);
     }
   }
 
   public render() {
-    const { active, ...rest } = this.props;
-    return getDocument() && this.el && active
+    const { active, containerClassName, ...rest } = this.props;
+    return this.el && active
       ? ReactDOM.createPortal(<ModalPortal {...rest} />, this.el)
       : null;
   }

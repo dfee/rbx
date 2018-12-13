@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import React from "react";
 
-import { getDocument } from "@/utils";
 import { initialState, ModalContext } from "./modal-context";
 
 export interface ModalPortalModifierProps {
@@ -19,17 +18,11 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
   public static defaultProps = initialState;
 
   public componentDidMount() {
-    const document = getDocument();
-    if (document) {
-      document.addEventListener("keydown", this.handleKeydown);
-    }
+    document.addEventListener("keydown", this.handleKeydown);
   }
 
   public componentWillUnmount() {
-    const document = getDocument();
-    if (document) {
-      document.removeEventListener("keydown", this.handleKeydown);
-    }
+    document.removeEventListener("keydown", this.handleKeydown);
   }
 
   public handleKeydown = (event: KeyboardEvent) => {

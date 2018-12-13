@@ -264,4 +264,27 @@ describe("Navbar component", () => {
       }),
     ),
   );
+
+  describe("ssr", () => {
+    let initWindow: Window;
+
+    beforeEach(() => {
+      initWindow = (global as any).window;
+      delete (global as any).window;
+    });
+
+    afterEach(() => {
+      (global as any).window = initWindow;
+    });
+
+    it("should render without window being available (ssr)", () => {
+      const ref = React.createRef<HTMLDivElement>();
+      const wrapper = Enzyme.shallow(
+        <NavbarController innerRef={ref} as="div" />,
+      );
+      expect(wrapper.children().hasClass("navbar")).toBe(true);
+      wrapper.unmount();
+      expect(wrapper.type()).toBeNull();
+    });
+  });
 });

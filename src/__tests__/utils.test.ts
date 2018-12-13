@@ -1,6 +1,6 @@
 import React from "react";
 
-import { canUseDOM, combineRefs, getDocument } from "../utils";
+import { canUseDOM, combineRefs } from "../utils";
 
 describe("Utils", () => {
   describe("canUseDOM", () => {
@@ -65,29 +65,6 @@ describe("Utils", () => {
 
         combined(div);
         expect(refObj.current).toBe(div);
-      }),
-    );
-  });
-
-  describe("getDocument", () => {
-    let initDocument: Document;
-
-    beforeEach(() => {
-      initDocument = (global as any).document;
-    });
-
-    afterEach(() => {
-      (global as any).document = initDocument;
-    });
-
-    [false, true].map(hasDocument =>
-      it(`should return ${hasDocument ? "document" : "undefined"}`, () => {
-        if (hasDocument) {
-          expect(getDocument()).toBe(window.document);
-        } else {
-          delete (global as any).document;
-          expect(getDocument()).toBeNull();
-        }
       }),
     );
   });

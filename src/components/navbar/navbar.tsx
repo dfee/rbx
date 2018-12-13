@@ -4,8 +4,7 @@ import React from "react";
 import { forwardRefAs } from "@/base";
 import { ModifierProps, transformModifiers } from "@/modifiers";
 import { Colors } from "@/modifiers/color";
-import { canUseDOM } from "@/utils";
-import { tuple } from "@/utils";
+import { canUseDOM, tuple } from "@/utils";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
 import { NavbarContext } from "./navbar-context";
@@ -61,7 +60,8 @@ export class NavbarController extends React.PureComponent<
   public componentWillUnmount() {
     if (canUseDOM()) {
       const { fixed } = this.props;
-      const html = window.document.querySelector("html");
+      const html = document.querySelector("html");
+      /* istanbul ignore else: typeguard */
       if (html) {
         html.classList.remove(`has-navbar-fixed-${fixed}`);
       }
@@ -118,7 +118,8 @@ export class NavbarController extends React.PureComponent<
 
   private manageHtmlAttributes() {
     if (canUseDOM()) {
-      const html = window.document.querySelector("html");
+      const html = document.querySelector("html");
+      /* istanbul ignore else: typeguard */
       if (html) {
         html.classList.remove("has-navbar-fixed-top");
         html.classList.remove("has-navbar-fixed-bottom");
