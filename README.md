@@ -5,14 +5,15 @@
 [![Release Version](https://img.shields.io/github/release/dfee/rbx.svg)](https://github.com/dfee/rbx)
 [![Npm Downloads](https://img.shields.io/npm/dm/rbx.svg)](https://www.npmjs.com/package/rbx)
 
-[Bulma](http://bulma.io) components for the React framework.
+`rbx` is a comprehensive library of React components for [Bulma 0.7.2](http://bulma.io).
 
 🔥 **All components have exhaustive** [storybook examples](https://dfee.github.io/rbx).
+
 🙃 _I'll wait, go check them out!_
 
 ### To Install
 
-`npm install rbx` or `yarn add -E rbx`
+`npm install rbx` or `yarn add rbx`
 
 ### To Use
 

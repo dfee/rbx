@@ -1,7 +1,7 @@
 {
   "name": "rbx",
-  "version": "0.7.1",
-  "description": "UI Components for React based on Bulma",
+  "version": "1.0.0-beta",
+  "description": "The Comprehensive Bulma UI Framework for React",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "files": [
@@ -90,6 +90,7 @@
     "postcss-loader": "3.0.0",
     "progress-bar-webpack-plugin": "1.11.0",
     "react": "16.6.3",
+    "react-docgen-typescript-loader": "^3.0.0",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-dom": "16.6.3",
     "react-test-renderer": "16.6.3",
