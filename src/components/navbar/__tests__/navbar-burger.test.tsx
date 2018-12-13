@@ -73,4 +73,27 @@ describe("NavbarBurger component", () => {
     expect(setActive.mock.calls).toHaveLength(1);
     expect(onClick.mock.calls).toHaveLength(1);
   });
+
+  [false, true].map(hasOnClick =>
+    it(`should update context ${
+      hasOnClick ? "and call provided onClick" : ""
+    }`, () => {
+      const onClick = jest.fn();
+      const setActive = jest.fn();
+
+      const wrapper = shallowInContext(
+        NavbarBurger,
+        contextFactory({ setActive }),
+        {
+          onClick: hasOnClick
+            ? (onClick as React.MouseEventHandler<any>)
+            : undefined,
+        },
+      );
+      wrapper.simulate("click");
+      expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+      expect(setActive.mock.calls).toHaveLength(1);
+      expect(setActive.mock.calls[0]).toEqual([true]);
+    }),
+  );
 });

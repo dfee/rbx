@@ -14,17 +14,22 @@ import { Section } from "@/layout";
 import { iterableToSelectObject } from "../../helpers";
 import { knobs as modifiersKnobs } from "../../modifiers";
 
+export type ControlledInputProps = Prefer<
+  InputProps,
+  React.InputHTMLAttributes<HTMLInputElement>
+>;
+
 export interface ControlledInputState {
   value: React.InputHTMLAttributes<HTMLInputElement>["value"];
 }
 
 export class ControlledInput extends React.PureComponent<
-  InputProps,
+  ControlledInputProps,
   ControlledInputState
 > {
   public readonly state: ControlledInputState = { value: "" };
 
-  constructor(props: InputProps) {
+  constructor(props: ControlledInputProps) {
     super(props);
     this.state = { value: props.value || "" };
   }

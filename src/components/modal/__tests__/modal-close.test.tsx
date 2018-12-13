@@ -53,14 +53,20 @@ describe("ModalClose component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should call the onClick handler and the context's onClose", () => {
-    const onClick = jest.fn();
-    const onClose = jest.fn();
-    const wrapper = shallowInContext(ModalClose, contextFactory({ onClose }), {
-      onClick: onClick as React.MouseEventHandler<any>,
-    });
-    wrapper.simulate("click");
-    expect(onClose.mock.calls).toHaveLength(1);
-    expect(onClick.mock.calls).toHaveLength(1);
-  });
+  [false, true].map(hasOnClick =>
+    it(`should call the context"s onClose ${
+      hasOnClick ? "and the onClick" : ""
+    }`, () => {
+      const onClick = jest.fn();
+      const onClose = jest.fn();
+      const wrapper = shallowInContext(
+        ModalClose,
+        contextFactory({ onClose }),
+        { onClick: hasOnClick ? onClick : undefined },
+      );
+      wrapper.simulate("click");
+      expect(onClose.mock.calls).toHaveLength(1);
+      expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+    }),
+  );
 });

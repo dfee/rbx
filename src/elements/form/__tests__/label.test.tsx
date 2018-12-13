@@ -2,6 +2,7 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { Checkbox } from "../checkbox";
+import { Input } from "../input";
 import { Label, LABEL_SIZES } from "../label";
 import { Radio } from "../radio";
 
@@ -38,10 +39,14 @@ describe("Label component", () => {
     }
   });
 
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Label />);
-    expect(wrapper.hasClass("label")).toBe(true);
-  });
+  ["component", "string"].map(type =>
+    it("should have bulma className for ", () => {
+      const wrapper = Enzyme.shallow(
+        <Label children={type === "component" ? <Input /> : type} />,
+      );
+      expect(wrapper.hasClass("label")).toBe(true);
+    }),
+  );
 
   it("should preserve custom className", () => {
     const className = "foo";

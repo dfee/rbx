@@ -16,24 +16,27 @@ export type ModalModifierProps = Partial<{
 export type ModalControllerProps = ModalPortalProps & ModalModifierProps;
 
 export class ModalController extends React.PureComponent<ModalControllerProps> {
-  private el: HTMLDivElement;
+  private el: HTMLDivElement | undefined;
 
   constructor(props: ModalControllerProps) {
     super(props);
-    this.el = document.createElement("div");
-    this.el.className = "modal-controller";
+    const document = getDocument();
+    if (document) {
+      this.el = document.createElement("div");
+      this.el.className = "modal-controller";
+    }
   }
 
   public componentDidMount() {
     const document = getDocument();
     if (document) {
-      document.body.appendChild(this.el);
+      document.body.appendChild(this.el!);
     }
   }
 
   public componentWillUnmount() {
     if (document) {
-      document.body.removeChild(this.el);
+      document.body.removeChild(this.el!);
     }
   }
 

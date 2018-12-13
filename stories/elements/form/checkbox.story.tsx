@@ -3,10 +3,12 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Checkbox, Control, Label } from "@/elements";
-import { CheckboxProps } from "@/elements/form/checkbox";
 import { Section } from "@/layout";
 
-export type ControlledCheckboxProps = Omit<CheckboxProps, "onChange">;
+export type ControlledCheckboxProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "onChange"
+>;
 export interface ControlledCheckboxState {
   checked?: boolean;
 }

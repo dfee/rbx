@@ -51,16 +51,27 @@ describe("ModalCardHead component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  it("should call Delete's onClick and the context's onClose", () => {
-    const onClick = jest.fn();
-    const onClose = jest.fn();
-    const wrapper = shallowInContext(
-      ModalCardHead,
-      contextFactory({ onClose }),
-      { children: <Delete onClick={onClick} /> },
-    );
-    wrapper.find(Delete).simulate("click");
-    expect(onClose.mock.calls).toHaveLength(1);
-    expect(onClick.mock.calls).toHaveLength(1);
+  [false, true].map(hasOnClick =>
+    it(`should call the context"s onClose ${
+      hasOnClick ? "and Delete's onClick" : ""
+    }`, () => {
+      const onClick = jest.fn();
+      const onClose = jest.fn();
+      const wrapper = shallowInContext(
+        ModalCardHead,
+        contextFactory({ onClose }),
+        { children: <Delete onClick={hasOnClick ? onClick : undefined} /> },
+      );
+      wrapper.find(Delete).simulate("click");
+      expect(onClose.mock.calls).toHaveLength(1);
+      expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+    }),
+  );
+
+  it("should pass through non-Delete children", () => {
+    const wrapper = shallowInContext(ModalCardHead, contextFactory(), {
+      children: <div id="foo" />,
+    });
+    expect(wrapper.children().prop("id")).toBe("foo");
   });
 });

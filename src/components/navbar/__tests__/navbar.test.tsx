@@ -2,10 +2,15 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { COLORS } from "@/modifiers/color";
-import { Navbar, NAVBAR_FIXED_ALIGNMENTS, NavbarController } from "../navbar";
+import {
+  Navbar,
+  NAVBAR_FIXED_ALIGNMENTS,
+  NavbarController,
+  NavbarControllerState,
+} from "../navbar";
 import { NavbarBrand } from "../navbar-brand";
 import { NavbarBurger } from "../navbar-burger";
-import { NavbarContext } from "../navbar-context";
+import { NavbarContext, NavbarContextState } from "../navbar-context";
 import { NavbarDivider } from "../navbar-divider";
 import { NavbarDropdown } from "../navbar-dropdown";
 import { NavbarEnd } from "../navbar-end";
@@ -221,5 +226,42 @@ describe("Navbar component", () => {
         wrapper.unmount();
       }
     }),
+  );
+
+  [undefined, false, true].map(initialActive =>
+    [undefined, false, true].map(managed =>
+      it(`should ${
+        managed ? "" : "not "
+      }set NavbarController's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
+        let contextState: NavbarContextState | undefined;
+        const innerRef = React.createRef<HTMLDivElement>();
+        const wrapper = Enzyme.mount(
+          <NavbarController
+            active={initialActive}
+            managed={managed}
+            innerRef={innerRef}
+            as="div"
+          >
+            <NavbarContext.Consumer>
+              {context => {
+                contextState = context;
+                return null;
+              }}
+            </NavbarContext.Consumer>
+          </NavbarController>,
+        );
+        try {
+          expect(contextState!.active).toBe(!!initialActive);
+          contextState!.setActive(!contextState!.active);
+          expect((wrapper.state() as NavbarControllerState).active).toBe(
+            managed ? !!initialActive : !initialActive,
+          );
+        } finally {
+          if (wrapper) {
+            wrapper.unmount();
+          }
+        }
+      }),
+    ),
   );
 });

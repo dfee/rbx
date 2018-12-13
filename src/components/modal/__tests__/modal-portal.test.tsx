@@ -68,4 +68,16 @@ describe("ModalPortal component", () => {
       }
     }),
   );
+
+  it("should render without document (ssr)", () => {
+    const initDocument = (global as any).document;
+    try {
+      delete (global as any).document;
+      const ref = React.createRef<HTMLDivElement>();
+      const wrapper = Enzyme.shallow(<ModalPortal as="div" innerRef={ref} />);
+      wrapper.unmount();
+    } finally {
+      (global as any).document = initDocument;
+    }
+  });
 });

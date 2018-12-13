@@ -114,4 +114,14 @@ describe("SelectContainer component", () => {
       }),
     ),
   );
+
+  it("should infer with multiple children", () => {
+    const wrapper = Enzyme.shallow(
+      <SelectContainer>
+        <div className="hidden-element" />
+        <select multiple />
+      </SelectContainer>,
+    );
+    expect(wrapper.hasClass("is-multiple")).toBe(true);
+  });
 });

@@ -158,6 +158,32 @@ describe("Card component", () => {
     }),
   );
 
+  it("should not be disabled if component is the target of click", () => {
+    const root = document.createElement("div");
+    root.setAttribute("id", "root");
+    document.body.appendChild(root);
+    let wrapper;
+
+    try {
+      const ref = React.createRef<HTMLDivElement>();
+      // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+      wrapper = Enzyme.mount(
+        <div>
+          <Dropdown active ref={ref} />
+        </div>,
+        { attachTo: root },
+      );
+      (ref.current as HTMLDivElement).click();
+      wrapper.children().update();
+      expect(wrapper.find(".dropdown").hasClass("is-active")).toBe(true);
+    } finally {
+      if (wrapper) {
+        wrapper.unmount();
+      }
+      document.body.removeChild(root);
+    }
+  });
+
   [false, true].map(managed =>
     it(`should ${
       managed ? "not " : ""

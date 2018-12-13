@@ -50,19 +50,21 @@ describe("ModalBackground component", () => {
   });
 
   [false, true].map(closeOnBlur =>
-    it(`should ${
-      closeOnBlur ? "" : "not "
-    }close on click when closeOnBlur is ${closeOnBlur}`, () => {
-      const onClick = jest.fn();
-      const onClose = jest.fn();
-      const wrapper = shallowInContext(
-        ModalBackground,
-        contextFactory({ closeOnBlur, onClose }),
-        { onClick },
-      );
-      wrapper.simulate("click");
-      expect(onClose.mock.calls).toHaveLength(closeOnBlur ? 1 : 0);
-      expect(onClick.mock.calls).toHaveLength(1);
-    }),
+    [false, true].map(hasOnClick =>
+      it(`should ${closeOnBlur ? "" : "not "}close on click when ${
+        closeOnBlur ? "" : "not "
+      }closeOnBlur ${hasOnClick ? "and call onClick" : ""}`, () => {
+        const onClick = jest.fn();
+        const onClose = jest.fn();
+        const wrapper = shallowInContext(
+          ModalBackground,
+          contextFactory({ closeOnBlur, onClose }),
+          { onClick: hasOnClick ? onClick : undefined },
+        );
+        wrapper.simulate("click");
+        expect(onClose.mock.calls).toHaveLength(closeOnBlur ? 1 : 0);
+        expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+      }),
+    ),
   );
 });

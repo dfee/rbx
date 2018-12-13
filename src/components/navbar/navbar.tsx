@@ -55,11 +55,7 @@ export class NavbarController extends React.PureComponent<
 
   constructor(props: NavbarControllerProps) {
     super(props);
-    this.state = { active: props.active! };
-  }
-
-  public setActive = (value: boolean) => {
-    this.setState({ active: value });
+    this.state = { active: !!props.active };
   }
 
   public componentWillUnmount() {
