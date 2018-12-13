@@ -1,4 +1,4 @@
-## 👟 rbx :: UI Components for React, Based on Bulma
+## 👟 rbx – The Comprehensive Bulma UI Framework for React
 
 [![Build Status](https://travis-ci.org/dfee/rbx.svg?branch=master)](https://travis-ci.org/dfee/rbx)
 [![Coverage Status](https://coveralls.io/repos/github/dfee/rbx/badge.svg?branch=master)](https://coveralls.io/github/dfee/rbx?branch=master)
@@ -7,7 +7,8 @@
 
 [Bulma](http://bulma.io) components for the React framework.
 
-You can find the Storybook stories of all components [here](https://dfee.github.io/rbx/)
+🔥 **All components have exhaustive** [storybook examples](https://dfee.github.io/rbx).
+🙃 _I'll wait, go check them out!_
 
 ### To Install
 
@@ -50,9 +51,6 @@ export const MyPage = () => (
 ```
 
 ### Library
-
-All components have been ported and have exhaustive [storybook examples](https://dfee.github.io/rbx).
-You should check them out!
 
 All components support ref-forwarding, and are able to render as any other React Component Type you want to provide, by using the special prop `as`.
 For example, to render a `Button` component as a `react-router` `Link`:
@@ -228,3 +226,4 @@ exports.onCreateWebpackConfig = ({
 This library was hard-forked from [`react-bulma-components`](https://github.com/couds/react-bulma-components) and has been rewritten in its entirety from scratch.
 
 If you're coming from that library, expect some breaking changes - largely due to stylistic interpretations of the Bulma API and a propensity to keep the React component names semantic.
+In addition, there were **many** additions and bug fixes required to bring this library into compliance with the latest release of Bulma.
