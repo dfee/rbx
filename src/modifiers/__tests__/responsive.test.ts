@@ -26,73 +26,103 @@ describe("Responsive modifiers", () => {
   });
 
   BREAKPOINTS.map(breakpoint => {
+    // these sizes don't support the `only` prop.
+    const noOnly = ["mobile", "fullhd", "desktop"];
+
     describe(`for ${breakpoint}`, () => {
       DISPLAYS.map(value =>
-        [false, true].map(only =>
-          it(`should be display ${value} ${only ? "only" : ""}`, () => {
-            expect(
-              transformResponsiveModifiers({
-                responsive: { [breakpoint]: { display: { value, only } } },
-              }),
-            ).toEqual(
-              value
-                ? {
-                    className: `is-${value}-${breakpoint}${only ? "-only" : ""}`,
-                  }
-                : {},
-            );
-          }),
-        ),
+        [undefined, false, true]
+          .filter(() => noOnly.includes(breakpoint))
+          .map(only =>
+            it(`should be display ${value} ${only ? "only" : ""}`, () => {
+              const display = only === undefined ? { value } : { value, only };
+              expect(
+                transformResponsiveModifiers({
+                  responsive: { [breakpoint]: { display } },
+                }),
+              ).toEqual(
+                value
+                  ? {
+                      className: `is-${value}-${breakpoint}${
+                        only ? "-only" : ""
+                      }`,
+                    }
+                  : {},
+              );
+            }),
+          ),
       );
 
       [false, true].map(value =>
-        [false, true].map(only =>
-          it(`should ${value ? "" : "not "}be hidden ${
-            only ? "only" : ""
-          }`, () => {
-            expect(
-              transformResponsiveModifiers({
-                responsive: { [breakpoint]: { hide: { value, only } } },
-              }),
-            ).toEqual(
-              value
-                ? { className: `is-hidden-${breakpoint}${only ? "-only" : ""}` }
-                : {},
-            );
-          }),
-        ),
+        [undefined, false, true]
+          .filter(() => noOnly.includes(breakpoint))
+          .map(only =>
+            it(`should ${value ? "" : "not "}be hidden ${
+              only ? "only" : ""
+            }`, () => {
+              const hide = only === undefined ? { value } : { value, only };
+              expect(
+                transformResponsiveModifiers({
+                  responsive: { [breakpoint]: { hide } },
+                }),
+              ).toEqual(
+                value
+                  ? {
+                      className: `is-hidden-${breakpoint}${only ? "-only" : ""}`,
+                    }
+                  : {},
+              );
+            }),
+          ),
       );
 
       TEXT_ALIGNMENTS.map(value =>
-        [false, true].map(only =>
-          it(`should have text aligned ${value} ${only ? "only" : ""}`, () => {
-            expect(
-              transformResponsiveModifiers({
-                responsive: { [breakpoint]: { textAlignment: { value, only } } },
-              }),
-            ).toEqual(
-              value
-                ? {
-                    className: `has-text-${value}-${breakpoint}${
-                      only ? "-only" : ""
-                    }`,
-                  }
-                : {},
-            );
-          }),
-        ),
+        [undefined, false, true]
+          .filter(() => noOnly.includes(breakpoint))
+          .map(only =>
+            it(`should have text aligned ${value} ${
+              only ? "only" : ""
+            }`, () => {
+              const textAlignment =
+                only === undefined ? { value } : { value, only };
+              expect(
+                transformResponsiveModifiers({
+                  responsive: { [breakpoint]: { textAlignment } },
+                }),
+              ).toEqual(
+                value
+                  ? {
+                      className: `has-text-${value}-${breakpoint}${
+                        only ? "-only" : ""
+                      }`,
+                    }
+                  : {},
+              );
+            }),
+          ),
       );
 
       TEXT_SIZES.map(value =>
-        it(`should have text size ${value}`, () => {
-          expect(
-            transformResponsiveModifiers({
-              responsive: { [breakpoint]: { textSize: { value } } },
+        [undefined, false, true]
+          .filter(() => noOnly.includes(breakpoint))
+          .map(only =>
+            it(`should have text size ${value} ${only ? "only" : ""}`, () => {
+              const textSize = only === undefined ? { value } : { value, only };
+              expect(
+                transformResponsiveModifiers({
+                  responsive: { [breakpoint]: { textSize } },
+                }),
+              ).toEqual(
+                value
+                  ? {
+                      className: `is-size-${value}-${breakpoint}${
+                        only ? "-only" : ""
+                      }`,
+                    }
+                  : {},
+              );
             }),
-          ).toEqual(
-            value ? { className: `is-size-${value}-${breakpoint}` } : {},
-          );
-        }),
+          ),
       );
     });
   });

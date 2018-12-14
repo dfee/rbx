@@ -13,6 +13,7 @@ import {
   Field,
   Icon,
   Image,
+  Label,
   Textarea,
 } from "@/elements";
 import { Section } from "@/layout";
@@ -88,7 +89,9 @@ storiesOf("Components/Media", module)
           </Level.Left>
           <Level.Right>
             <Level.Item>
-              <Checkbox>Press enter to submit</Checkbox>
+              <Label>
+                <Checkbox /> Press enter to submit
+              </Label>
             </Level.Item>
           </Level.Right>
         </Level>
