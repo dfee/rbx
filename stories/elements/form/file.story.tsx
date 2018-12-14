@@ -9,7 +9,7 @@ import { FILE_ALIGNMENTS, FILE_SIZES, FileProps } from "@/elements/form/file";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../../helpers";
-import { knobs as modifiersKnobs } from "../../modifiers";
+import { colorKnob } from "../../modifiers";
 
 export const knobs = {
   align: (title: string = "Alignment") =>
@@ -82,7 +82,7 @@ storiesOf("Elements/Form/File", module)
     const { align, color, size, ...rest } = {
       align: knobs.align(),
       boxed: knobs.boxed(),
-      color: modifiersKnobs.color(),
+      color: colorKnob(),
       fullwidth: knobs.fullwidth(),
       hasName: knobs.hasName(),
       size: knobs.size(),
@@ -115,7 +115,7 @@ storiesOf("Elements/Form/File", module)
     const { align, color, size, ...rest } = {
       align: knobs.align(),
       boxed: knobs.boxed(),
-      color: modifiersKnobs.color(),
+      color: colorKnob(),
       fullwidth: knobs.fullwidth(),
       hasName: knobs.hasName(),
       size: knobs.size(),

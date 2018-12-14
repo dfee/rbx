@@ -10,7 +10,7 @@ import { Hero } from "@/layout";
 import { HERO_SIZES } from "@/layout/hero/hero";
 
 import { iterableToSelectObject } from "../helpers";
-import { knobs as modifiersKnobs } from "../modifiers";
+import { colorKnob } from "../modifiers";
 
 export const knobs = {
   gradient: (title: string = "Gradient") => boolean(title, false),
@@ -20,7 +20,7 @@ export const knobs = {
 
 storiesOf("Layout/Hero", module)
   .add("Default", () => {
-    const color = modifiersKnobs.color();
+    const color = colorKnob();
     const gradient = knobs.gradient();
     const size = knobs.size();
     return (

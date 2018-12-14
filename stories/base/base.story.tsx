@@ -1,4 +1,3 @@
-import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
@@ -6,19 +5,17 @@ import { Generic } from "@/base";
 import { Section } from "@/layout";
 import { BREAKPOINTS } from "@/modifiers/responsive";
 
-import { iterableToSelectObject } from "../helpers";
-import { knobs2 as mk } from "../modifiers";
+import { iterableToSelectObject, selectFactory } from "../helpers";
+import { modifiersKnobs as mk } from "../modifiers";
 
 const genericKnobs = {
-  as: (title: string = "as") =>
-    select(
-      title,
-      iterableToSelectObject(["a", "div", "h1", "other", "p", "span"], {
-        undefined: "",
-      }),
-      "div",
-      "as",
-    ),
+  as: selectFactory(
+    "as",
+    iterableToSelectObject(["a", "div", "h1", "p", "span"], {
+      undefined: "",
+    }),
+    "div",
+  ),
 };
 
 const filterUndefined = (props: { [k: string]: any }) =>
@@ -49,7 +46,7 @@ storiesOf("Base", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Generic", () => {
     const props = filterUndefined({
-      as: genericKnobs.as(),
+      as: genericKnobs.as({ group: "as" }),
       // colors
       ...mapFactories(mk.color, "Color"),
       // helpers
@@ -82,8 +79,16 @@ storiesOf("Base", module)
     });
     return (
       <Generic as="p" {...props}>
-        The generic component takes advantage of all the modifiers available
-        with Bulma.
+        This is the Generic component.
+        <br />
+        It takes advantage of all the modifiers available with Bulma.
+        <br />
+        It supports ref forwarding (using the `ref` prop).
+        <br />
+        In addition, you can render this component as any other component (with
+        the `as` prop).
+        <br />
+        All components support these features.
       </Generic>
     );
   });

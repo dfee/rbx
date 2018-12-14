@@ -7,7 +7,7 @@ import { TAG_SIZES } from "@/elements/tag/tag";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../helpers";
-import { knobs as modifiersKnobs } from "../modifiers";
+import { colorKnob } from "../modifiers";
 
 export const knobs = {
   delete: (title: string = "Delete") => boolean(title, false),
@@ -24,7 +24,7 @@ storiesOf("Elements/Tag", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
     const { color, size, ...rest } = {
-      color: modifiersKnobs.color(),
+      color: colorKnob(),
       delete: knobs.delete(),
       rounded: knobs.rounded(),
       size: knobs.size(),

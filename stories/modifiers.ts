@@ -1,4 +1,4 @@
-import { boolean, select } from "@storybook/addon-knobs";
+import { select } from "@storybook/addon-knobs";
 
 import { COLORS, GREY_COLORS } from "@/modifiers/color";
 import { FLOAT_PULLED_ALIGNMENTS } from "@/modifiers/helpers";
@@ -10,46 +10,19 @@ import {
   TEXT_WEIGHTS,
 } from "@/modifiers/typography";
 
-import { iterableToSelectObject } from "./helpers";
+import {
+  booleanFactory,
+  iterableToSelectObject,
+  selectFactory,
+} from "./helpers";
 
-interface BaseFactoryOptions {
-  title?: string;
-  group?: string;
-}
+export const colorKnob = (title: string = "Color") =>
+  select(title, iterableToSelectObject(COLORS, { undefined: "" }), "");
 
-interface BooleanFactoryOptions extends BaseFactoryOptions {
-  initial?: boolean;
-}
+export const breakpointKnob = (title: string = "Breakpoint") =>
+  select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), "");
 
-interface SelectFactoryOptions extends BaseFactoryOptions {
-  initial?: string;
-}
-
-const booleanFactory = (title: string, initial: boolean, group?: string) => (
-  options?: BooleanFactoryOptions,
-) => {
-  const compiled = Object.assign({}, { title, initial, group }, options);
-  return boolean(compiled.title, compiled.initial, compiled.group);
-};
-
-const selectFactory = (
-  title: string,
-  choices: any,
-  initial: string = "",
-  group?: string,
-) => (options?: SelectFactoryOptions) => {
-  const compiled = Object.assign({ title, initial, group }, options);
-  return select(compiled.title, choices, compiled.initial, compiled.group);
-};
-
-export const knobs = {
-  breakpoint: (title: string = "Breakpoint") =>
-    select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), ""),
-  color: (title: string = "Color") =>
-    select(title, iterableToSelectObject(COLORS, { undefined: "" }), ""),
-};
-
-export const knobs2 = {
+export const modifiersKnobs = {
   color: {
     backgroundColor: selectFactory(
       "backgroundColor",

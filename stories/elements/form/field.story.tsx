@@ -27,7 +27,7 @@ import { Columns } from "@/grid";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../../helpers";
-import { knobs as modifiersKnobs } from "../../modifiers";
+import { colorKnob } from "../../modifiers";
 
 export const knobs = {
   align: (title: string = "Alignment") =>
@@ -61,8 +61,8 @@ storiesOf("Elements/Form/Field", module)
   .add("Default", () => {
     const controlLoading = knobs.control.loading("Control loading");
     const controlSize = knobs.control.size("Control size (use with loading)");
-    const helpColor = modifiersKnobs.color("Help color");
-    const inputColor = modifiersKnobs.color("Input color");
+    const helpColor = colorKnob("Help color");
+    const inputColor = colorKnob("Input color");
     const inputSize = knobs.input.size("Input size");
     const labelSize = knobs.label.size("Label size");
     return (

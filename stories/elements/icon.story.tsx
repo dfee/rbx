@@ -10,7 +10,7 @@ import { ICON_ALIGNMENTS, ICON_SIZES, IconSizes } from "@/elements/icon/icon";
 
 import { Section } from "@/layout";
 import { iterableToSelectObject } from "../helpers";
-import { knobs as modifierKnobs } from "../modifiers";
+import { colorKnob } from "../modifiers";
 
 const faSizeMap: { [k in IconSizes | "default"]: FAProps["size"] } = {
   default: "1x",
@@ -58,7 +58,7 @@ storiesOf("Elements/Icon", module)
     const { align, color, flip, rotation, size, ...rest } = {
       align: knobs.align("Align (when in control)"),
       border: knobs.fontAwesome.border(),
-      color: modifierKnobs.color(),
+      color: colorKnob(),
       fixedWidth: knobs.fontAwesome.fixedWidth(),
       flip: knobs.fontAwesome.flip(),
       inverse: knobs.fontAwesome.inverse(),

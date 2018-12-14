@@ -7,7 +7,7 @@ import { TEXTAREA_SIZES, TEXTAREA_STATES } from "@/elements/form/textarea";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../../helpers";
-import { knobs as modifiersKnobs } from "../../modifiers";
+import { colorKnob } from "../../modifiers";
 
 export const knobs = {
   disabled: (title: string = "Disabled") => boolean(title, false),
@@ -38,7 +38,7 @@ storiesOf("Elements/Form/Textarea", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
     const { color, size, state, ...rest } = {
-      color: modifiersKnobs.color(),
+      color: colorKnob(),
       disabled: knobs.disabled(),
       fixedSize: knobs.fixedSize(),
       readOnly: knobs.readOnly(),

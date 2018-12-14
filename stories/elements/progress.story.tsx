@@ -7,7 +7,7 @@ import { PROGRESS_SIZES } from "@/elements/progress/progress";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../helpers";
-import { knobs as modifiersKnobs } from "../modifiers";
+import { colorKnob } from "../modifiers";
 
 export const knobs = {
   max: (title: string = "Max") =>
@@ -26,7 +26,7 @@ storiesOf("Elements/Progress", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
     const { color, size, ...rest } = {
-      color: modifiersKnobs.color(),
+      color: colorKnob(),
       max: knobs.max(),
       size: knobs.size(),
       value: knobs.value(),

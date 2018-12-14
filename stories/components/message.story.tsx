@@ -8,7 +8,7 @@ import { Delete } from "@/elements";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../helpers";
-import { knobs as modifiersKnobs } from "../modifiers";
+import { colorKnob } from "../modifiers";
 
 export const knobs = {
   size: (title: string = "Size") =>
@@ -18,7 +18,7 @@ export const knobs = {
 storiesOf("Components/Message", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const color = modifiersKnobs.color();
+    const color = colorKnob();
     const size = knobs.size();
     return (
       <Message color={color || undefined} size={size || undefined}>
@@ -40,7 +40,7 @@ storiesOf("Components/Message", module)
     );
   })
   .add("Body only", () => {
-    const color = modifiersKnobs.color();
+    const color = colorKnob();
     const size = knobs.size();
     return (
       <Message color={color || undefined} size={size || undefined}>

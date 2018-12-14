@@ -5,12 +5,12 @@ import { Level } from "@/components";
 import { Button, Control, Field, Heading, Input, Title } from "@/elements";
 import { Section } from "@/layout";
 
-import { knobs as modifierKnobs } from "../modifiers";
+import { breakpointKnob } from "../modifiers";
 
 storiesOf("Components/Level", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const breakpoint = modifierKnobs.breakpoint();
+    const breakpoint = breakpointKnob();
     return (
       <Level breakpoint={breakpoint || undefined}>
         <Level.Left>

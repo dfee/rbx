@@ -8,7 +8,7 @@ import { Button } from "@/elements";
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../helpers";
-import { knobs as modifiersKnobs } from "../modifiers";
+import { colorKnob } from "../modifiers";
 
 export const knobs = {
   active: (title: string = "Active (mobile display)") =>
@@ -51,7 +51,7 @@ storiesOf("Components/Navbar", module)
   .add("Default", () => {
     const { active, color, fixed, ...rest } = {
       active: knobs.active("Navbar: active (mobile)") as string,
-      color: modifiersKnobs.color("Navbar: color"),
+      color: colorKnob("Navbar: color"),
       fixed: knobs.fixed("Navbar: fixed"),
       managed: knobs.managed(),
       transparent: knobs.transparent("Navbar: transparent"),

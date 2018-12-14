@@ -12,7 +12,7 @@ import {
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../../helpers";
-import { knobs as modifiersKnobs } from "../../modifiers";
+import { colorKnob } from "../../modifiers";
 
 export type ControlledInputProps = Prefer<
   InputProps,
@@ -69,7 +69,7 @@ storiesOf("Elements/Form/Input", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
     const { color, size, state, ...rest } = {
-      color: modifiersKnobs.color(),
+      color: colorKnob(),
       disabled: knobs.disabled(),
       placeholder: knobs.placeholder(),
       readOnly: knobs.readOnly(),
@@ -92,7 +92,7 @@ storiesOf("Elements/Form/Input", module)
   })
   .add("Controlled", () => {
     const { color, size, state, type, ...rest } = {
-      color: modifiersKnobs.color(),
+      color: colorKnob(),
       disabled: knobs.disabled(),
       placeholder: knobs.placeholder(),
       readOnly: knobs.readOnly(),

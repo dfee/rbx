@@ -4,12 +4,12 @@ import React from "react";
 import { Delete, Notification } from "@/elements";
 import { Section } from "@/layout";
 
-import { knobs as modifiersKnobs } from "../modifiers";
+import { colorKnob } from "../modifiers";
 
 storiesOf("Elements/Notification", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const color = modifiersKnobs.color();
+    const color = colorKnob();
     return (
       <Notification color={color || undefined}>
         <Delete as="button" />

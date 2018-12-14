@@ -12,7 +12,7 @@ import {
 import { Section } from "@/layout";
 
 import { iterableToSelectObject } from "../../helpers";
-import { knobs as modifiersKnobs } from "../../modifiers";
+import { colorKnob } from "../../modifiers";
 
 export const knobs = {
   container: {
@@ -48,7 +48,7 @@ export const knobs = {
 storiesOf("Elements/Form/Select", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const containerColor = modifiersKnobs.color("Container color");
+    const containerColor = colorKnob("Container color");
     const containerFullwidth = knobs.container.fullwidth("Container fullwidth");
     const containerSize = knobs.container.size("Container size");
     const containerState = knobs.container.state("Container state");
