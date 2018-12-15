@@ -1,5 +1,3 @@
-import "./index.module.sass";
-
 export * from "./base";
 export * from "./components";
 export * from "./elements";

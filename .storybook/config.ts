@@ -1,4 +1,3 @@
-import { withInfo } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import {
@@ -7,15 +6,16 @@ import {
 } from "@storybook/addon-viewport";
 import { addDecorator, configure } from "@storybook/react";
 
-import "../src/index.module.sass";
+import "./storybook.sass";
 
 // addon-info is currently broken with prop types
-addDecorator(
-  withInfo({
-    // propTables: false,
-    source: false,
-  }),
-);
+// import { withInfo } from "@storybook/addon-info";
+// addDecorator(
+//   withInfo({
+//     // propTables: false,
+//     source: false,
+//   }),
+// );
 
 setOptions({
   name: "👟 rbx - Bulma UI",

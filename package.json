@@ -1,6 +1,6 @@
 {
   "name": "rbx",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "The Comprehensive Bulma UI Framework for React",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -45,10 +45,10 @@
   },
   "homepage": "https://github.com/dfee/rbx#readme",
   "dependencies": {
-    "bulma": "0.7.2",
     "classnames": "^2.2.6"
   },
   "peerDependencies": {
+    "bulma": "0.7.2",
     "react": "^16.3.0",
     "react-dom": "^16.3.0"
   },
@@ -81,6 +81,7 @@
     "@types/storybook__react": "^4.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.4",
+    "bulma": "0.7.2",
     "coveralls": "3.0.2",
     "cpx": "^1.5.0",
     "css-loader": "2.0.0",

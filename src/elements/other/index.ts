@@ -1,5 +1,3 @@
-import "./other.module.sass";
-
 export { Block } from "./block";
 export { Delete } from "./delete";
 export { Heading } from "./heading";

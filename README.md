@@ -21,25 +21,11 @@ Follow the instructions below for adding `sass` support to your webpack configur
 
 ```tsx
 import React from "react";
-/**
- * You can import directly from rbx
- * (you will need to include the css file dist/rbx.min.css)
- */
 import { Columns } from "rbx";
-
 /**
- * You can also include the js that also bundles the css
- * (does not work with server-side rendering)
+ * Alternatively, you can import only the components you need
  */
-import { Columns } from "rbx/lib/columns";
-
-/**
- * [RECOMENDED] Or import only the components you will use
- * (this will reduce your total bundle size)
- * If you use this approach and want to use the global Bulma styles,
- * import rbx/src/index.sass and configure webpack to handle sass files
- */
-import Columns from "rbx/lib/components/columns";
+import { Columns } from "rbx/grid/columns";
 
 export const MyPage = () => (
   <Columns>
@@ -130,35 +116,24 @@ While some components may slightly differ from the Bulma API, these changes are 
 | Hero    | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FHero)    | [Documentation](http://bulma.io/documentation/layout/hero/)    |
 | Section | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FSection) | [Documentation](http://bulma.io/documentation/layout/section/) |
 
-### Overriding Bulma variables
+### Styling
 
-#### General
+#### SASS Support
 
-To override the variables set by Bulma you will need to create a sass file like this one (\_variable.sass):
+To override the variables set by Bulma, [follow the Bulma instructions](https://bulma.io/documentation/customize/variables/).
+
+You will also need to import `rbx/index.sass` as it contains any pertinent bug fixes for Bulma.
+
+A minimal example of `style.sass` might look like:
 
 ```sass
-@import "~bulma/sass/utilities/initial-variables"
+$primary: #61dafb
 
-// ADD HERE variables you want to override
-$primary: #f4f4f4
-
-@import "~bulma/sass/utilities/_all"
+@import "~bulma/bulma.sass"
+@import "../src/index.sass"
 ```
 
-It may be necessary, depending on your project setup, to create this file, even if you do not intend on overriding default styles.
-
-After that you will need to add an alias pointing to the file to your webpack configuration
-
-```
-resolve {
-  // Other resolve props
-  alias: {
-    // Other aliases
-    '_variables.sass': path.resolve(__dirname, 'relative/path/from/webpack/config/to/your/_variables.sass'),
-  },
-}
-
-```
+Then, import this file into the root of your project.
 
 #### Create React App
 
@@ -166,60 +141,12 @@ Create React App 2 supports SASS compilation out of the box.
 
 To get started, please follow the [official instructions](https://facebook.github.io/create-react-app/docs/adding-a-sass-stylesheet) to enable this feature.
 
-Then, create a SASS file in your project with the following code:
-
-```sass
-// Any Bulma variables I want to override go here...
-$family-sans-serif: 'Overpass', sans-serif
-
-@import '~rbx/src/index.module.sass'
-```
+Then, create a SASS file in your project (as described above):
 
 Finally, import this stylesheet somewhere in your CRA app.
 
 ```js
 import "./App.sass";
-```
-
-#### Gatsby.js v1
-
-Add a `modifyWebpackConfig` export to your `gatsby-node.js` file:
-
-```
-exports.modifyWebpackConfig = ({config, env}) => {
-  config.merge({
-    resolve: {
-      alias: {
-        '_variables.sass': path.resolve(__dirname, 'relative/path/from/webpack/config/to/your/_variables.sass')
-      }
-    }
-  })
-  return config
-}
-```
-
-#### Gatsby.js v2
-
-Add a `onCreateWebpackConfig` export to your `gatsby-node.js` file:
-
-```
-const path = require('path')
-
-exports.onCreateWebpackConfig = ({
-  stage,
-  getConfig,
-  rules,
-  loaders,
-  actions,
-}) => {
-  actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        '_variables.sass': path.resolve(__dirname, 'relative/path/from/webpack/config/to/your/_variables.sass'),
-      },
-    },
-  })
-}
 ```
 
 #### Etc.
