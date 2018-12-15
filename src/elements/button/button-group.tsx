@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { tuple } from "../../utils";
 
 export const BUTTON_GROUP_POSITIONS = tuple("centered", "right");
 export type ButtonGroupPositions = (typeof BUTTON_GROUP_POSITIONS)[number];

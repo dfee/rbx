@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { Colors } from "@/modifiers/color";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { Colors } from "../../modifiers/color";
 
 export type HelpModifierProps = Partial<{
   className: string;

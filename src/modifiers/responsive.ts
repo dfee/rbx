@@ -1,6 +1,6 @@
-import { tuple } from "@/utils";
 import classNames from "classnames";
 
+import { tuple } from "../utils";
 import { TextAlignments, TextSizes } from "./typography";
 import { makeTransform } from "./utils";
 

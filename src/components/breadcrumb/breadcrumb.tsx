@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 
 export const BREADCRUMB_ALIGNMENTS = tuple("centered", "right");

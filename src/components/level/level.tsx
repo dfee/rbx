@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { Breakpoints } from "@/modifiers/responsive";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { Breakpoints } from "../../modifiers/responsive";
 import { LevelItem } from "./level-item";
 import { LevelLeft } from "./level-left";
 import { LevelRight } from "./level-right";

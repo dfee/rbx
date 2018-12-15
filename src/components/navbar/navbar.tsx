@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { Colors } from "@/modifiers/color";
-import { canUseDOM, tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { Colors } from "../../modifiers/color";
+import { canUseDOM, tuple } from "../../utils";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
 import { NavbarContext } from "./navbar-context";

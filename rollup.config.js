@@ -28,7 +28,7 @@ export default {
       sourcemap: true
     },
     {
-      file: pkg.main,
+      file: "dist/index.js",
       format: "cjs",
       globals,
       sourcemap: true
@@ -42,7 +42,7 @@ export default {
     }),
     sass({ output: true }),
     typescript({
-      tsconfig: "tsconfig.rollup.json",
+      tsconfig: "tsconfig.build.json",
       typescript: require("typescript")
     }),
     sizeSnapshot(),

@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { tuple } from "@/utils";
-import { combineRefs } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { tuple } from "../../utils";
+import { combineRefs } from "../../utils";
 import { DropdownContent } from "./dropdown-content";
 import { DropdownContext } from "./dropdown-context";
 import { DropdownDivider } from "./dropdown-divider";

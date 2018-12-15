@@ -2,17 +2,19 @@
   "name": "rbx",
   "version": "1.0.0-beta",
   "description": "The Comprehensive Bulma UI Framework for React",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "files": [
-    "dist"
+    "dist",
+    "es",
+    "lib"
   ],
   "types": "dist/index.d.ts",
   "scripts": {
     "build:dist": "rollup -c",
-    "build:lib": "tsc --project . && cpx \"src/**/*.sass\" lib",
+    "build:lib": "tsc -project tsconfig.build.json && cpx \"src/**/*.sass\" lib",
     "build": "npm run clean && npm run build:dist && npm run build:lib",
-    "clean": "rimraf lib dist",
+    "clean": "rimraf dist es lib",
     "coveralls": "cat ./.coverage/lcov.info | coveralls",
     "lint": "tslint --project .",
     "storybook:deploy": "storybook-to-ghpages",

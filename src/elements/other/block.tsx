@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps } from "@/modifiers";
+import { forwardRefAs } from "../../base";
+import { ModifierProps } from "../../modifiers";
 
 export type BlockModifierProps = Partial<{ className: string }>;
 

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import { tuple } from "@/utils";
+import { tuple } from "../utils";
 import { makeTransform } from "./utils";
 
 export const TEXT_ALIGNMENTS = tuple("centered", "justified", "left", "right");

@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { tuple } from "../../utils";
 
 export const CONTROL_SIZES = tuple("small", "medium", "large");
 export type ControlSizes = (typeof CONTROL_SIZES)[number];

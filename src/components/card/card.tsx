@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
 import { CardContent } from "./card-content";
 import { CardFooter } from "./card-footer";
 import { CardHeader } from "./card-header";

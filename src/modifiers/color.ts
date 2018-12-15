@@ -1,6 +1,6 @@
-import { tuple } from "@/utils";
 import classNames from "classnames";
 
+import { tuple } from "../utils";
 import { makeTransform } from "./utils";
 
 export const COLORS = tuple(

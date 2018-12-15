@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
 import { PanelTab } from "./panel-tab";
 
 export type PanelTabsModifierProps = Partial<{ className: string }>;

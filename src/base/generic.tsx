@@ -1,7 +1,7 @@
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
+import { ModifierProps, transformModifiers } from "../modifiers";
+import { forwardRefAs } from "./exotic";
 
 export type GenericProps = ModifierProps;
 

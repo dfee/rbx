@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { Breakpoints } from "@/modifiers/responsive";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { Breakpoints } from "../../modifiers/responsive";
+import { tuple } from "../../utils";
 import { Column } from "./column";
 
 export const COLUMNS_GAPS = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);

@@ -1,28 +1,7 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "declaration": true,
-    "esModuleInterop": true,
-    "jsx": "react",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
-    "module": "es2015",
-    "moduleResolution": "node",
-    "noErrorTruncation": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "removeComments": true,
-    "rootDirs": ["src", "stories"],
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "strict": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "es5"
+    "rootDirs": ["src", "stories"]
   },
-  "exclude": ["node_modules", "lib", "dist", "__mocks__"],
   "include": ["src", "stories"]
 }

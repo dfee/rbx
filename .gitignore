@@ -16,6 +16,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+.coverage
 
 # nyc test coverage
 .nyc_output
@@ -62,15 +63,16 @@ typings/
 
 .DS_Store
 
+# Build Files
+dist
+es
+lib
+
+# Ouptut & cache files
 .out
 out*
-
-reports
-build
-dist
-lib
-full
-.coverage
-.vscode
 .cache
 .rpt2_cache
+
+# Editor
+.vscode

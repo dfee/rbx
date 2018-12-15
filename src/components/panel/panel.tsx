@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
 import { PanelBlock } from "./panel-block";
 import { PanelHeading } from "./panel-heading";
 import { PanelIcon } from "./panel-icon";

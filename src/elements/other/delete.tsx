@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps } from "@/modifiers";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps } from "../../modifiers";
+import { tuple } from "../../utils";
 
 export const DELETE_SIZES = tuple("small", "medium", "large");
 export type DeleteSizes = (typeof DELETE_SIZES)[number];

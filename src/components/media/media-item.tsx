@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { tuple } from "../../utils";
 
 export const MEDIA_ITEM_POSITIONS = tuple("content", "left", "right");
 export type MediaItemPositions = (typeof MEDIA_ITEM_POSITIONS)[number];

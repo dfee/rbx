@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import { tuple } from "@/utils";
+import { tuple } from "../utils";
 import { makeTransform } from "./utils";
 
 export const FLOAT_PULLED_ALIGNMENTS = tuple("left", "right");

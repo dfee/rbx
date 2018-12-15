@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { Delete } from "@/elements";
-import { ModifierProps, transformModifiers } from "@/modifiers";
+import { forwardRefAs } from "../../base";
+import { Delete } from "../../elements";
+import { ModifierProps, transformModifiers } from "../../modifiers";
 import { ModalContext } from "./modal-context";
 
 export type ModalCardHeadModifierProps = Partial<{ className: string }>;

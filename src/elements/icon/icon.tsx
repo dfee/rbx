@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { Colors } from "@/modifiers/color";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { Colors } from "../../modifiers/color";
+import { tuple } from "../../utils";
 
 export const ICON_ALIGNMENTS = tuple("left", "right");
 export type IconAlignments = (typeof ICON_ALIGNMENTS)[number];

@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "@/base";
-import { ModifierProps, transformModifiers } from "@/modifiers";
-import { Colors } from "@/modifiers/color";
-import { tuple } from "@/utils";
+import { forwardRefAs } from "../../base";
+import { ModifierProps, transformModifiers } from "../../modifiers";
+import { Colors } from "../../modifiers/color";
+import { tuple } from "../../utils";
 
 export const TILE_KINDS = tuple("ancestor", "parent", "child");
 export type TileKinds = (typeof TILE_KINDS)[number];
