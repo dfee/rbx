@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Breakpoints } from "../../modifiers/responsive";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Breakpoints } from "../../base/helpers";
 
 export type ContainerModifierProps = Partial<{
   breakpoint: Breakpoints;
@@ -11,11 +10,11 @@ export type ContainerModifierProps = Partial<{
   fluid: boolean;
 }>;
 
-export type ContainerProps = ModifierProps & ContainerModifierProps;
+export type ContainerProps = HelpersProps & ContainerModifierProps;
 
 export const Container = forwardRefAs<ContainerProps, "div">(
   (props, ref) => {
-    const { as, fluid, breakpoint, ...rest } = transformModifiers(props);
+    const { as, fluid, breakpoint, ...rest } = transformHelpers(props);
     rest.className = classNames("container", rest.className, {
       "is-fluid": fluid,
       [`is-${breakpoint}`]: breakpoint,

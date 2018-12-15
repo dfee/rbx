@@ -2,14 +2,14 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
+import { Colors } from "@/base/helpers";
+import { BREAKPOINTS } from "@/base/helpers";
 import { Box, Notification, Title } from "@/elements";
 import { Columns } from "@/grid";
 import { ColumnProps } from "@/grid/columns/column";
 import { COLUMN_SIZES, ColumnSizes } from "@/grid/columns/column";
 import { COLUMNS_GAPS, ColumnsGaps } from "@/grid/columns/columns";
 import { Section } from "@/layout";
-import { Colors } from "@/modifiers/color";
-import { BREAKPOINTS } from "@/modifiers/responsive";
 
 import { iterableToSelectObject } from "../helpers";
 

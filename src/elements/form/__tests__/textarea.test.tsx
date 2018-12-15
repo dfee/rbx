@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { Textarea, TEXTAREA_SIZES, TEXTAREA_STATES } from "../textarea";
 
 import { hasProperties } from "@/__tests__/helpers";

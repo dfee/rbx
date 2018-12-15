@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const COLUMN_SIZES = tuple(
@@ -79,7 +78,7 @@ export type ColumnModifierProps = Partial<
   } & ColumnSizeModifierProps
 >;
 
-export type ColumnProps = ModifierProps & ColumnModifierProps;
+export type ColumnProps = HelpersProps & ColumnModifierProps;
 
 export const Column = forwardRefAs<ColumnProps, "div">(
   (props, ref) => {
@@ -95,7 +94,7 @@ export const Column = forwardRefAs<ColumnProps, "div">(
       offset,
       size,
       ...rest
-    } = transformModifiers(props);
+    } = transformHelpers(props);
 
     rest.className = classNames(
       "column",

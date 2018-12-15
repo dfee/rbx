@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Breakpoints } from "../../modifiers/responsive";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Breakpoints } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { Column } from "./column";
 
@@ -61,7 +60,7 @@ type ColumnsModifierProps = Partial<
   } & ColumnsBreakpointProps
 >;
 
-export type ColumnsProps = ModifierProps & ColumnsModifierProps;
+export type ColumnsProps = HelpersProps & ColumnsModifierProps;
 
 export const Columns = Object.assign(
   forwardRefAs<ColumnsProps, "div">(
@@ -79,7 +78,7 @@ export const Columns = Object.assign(
         tablet,
         widescreen,
         ...rest
-      } = transformModifiers(props);
+      } = transformHelpers(props);
 
       const gapClassNames = classNames(
         { [`is-${gap}`]: typeof gap === "number" },

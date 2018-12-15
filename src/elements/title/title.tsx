@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const TITLE_SIZES = tuple(1, 2, 3, 4, 5, 6);
@@ -15,11 +14,11 @@ export type TitleModifierProps = Partial<{
   subtitle: boolean;
 }>;
 
-export type TitleProps = ModifierProps & TitleModifierProps;
+export type TitleProps = HelpersProps & TitleModifierProps;
 
 export const Title = forwardRefAs<TitleProps, "h1">(
   (props, ref) => {
-    const { as, size, spaced, subtitle, ...rest } = transformModifiers(props);
+    const { as, size, spaced, subtitle, ...rest } = transformHelpers(props);
     rest.className = classNames(rest.className, {
       [`is-${size}`]: !!size,
       "is-spaced": spaced && !subtitle,

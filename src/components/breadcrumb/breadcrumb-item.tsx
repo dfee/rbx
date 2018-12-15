@@ -1,18 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export interface BreadcrumbItemModifierProps {
   active?: boolean;
 }
 
-export type BreadcrumbItemProps = ModifierProps & BreadcrumbItemModifierProps;
+export type BreadcrumbItemProps = HelpersProps & BreadcrumbItemModifierProps;
 
 export const BreadcrumbItem = forwardRefAs<BreadcrumbItemProps, "a">(
   (props, ref) => {
-    const { as, active, ...rest } = transformModifiers(props);
+    const { as, active, ...rest } = transformHelpers(props);
     return (
       <li className={classNames({ "is-active": active }) || undefined}>
         {React.createElement(as!, { ref, ...rest })}

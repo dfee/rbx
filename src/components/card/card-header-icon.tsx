@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type CardHeaderIconModifierProps = Partial<{ className: string }>;
 
-export type CardHeaderIconProps = ModifierProps & CardHeaderIconModifierProps;
+export type CardHeaderIconProps = HelpersProps & CardHeaderIconModifierProps;
 
 export const CardHeaderIcon = forwardRefAs<CardHeaderIconProps, "div">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("card-header-icon", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

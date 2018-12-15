@@ -2,8 +2,8 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Generic } from "@/base";
+import { BREAKPOINTS } from "@/base/helpers";
 import { Section } from "@/layout";
-import { BREAKPOINTS } from "@/modifiers/responsive";
 
 import { iterableToSelectObject, selectFactory } from "../helpers";
 import { modifiersKnobs as mk } from "../modifiers";

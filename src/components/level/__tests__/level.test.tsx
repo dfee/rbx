@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { BREAKPOINTS } from "@/modifiers/responsive";
+import { BREAKPOINTS } from "@/base/helpers";
 import { Level } from "../level";
 import { LevelItem } from "../level-item";
 import { LevelLeft } from "../level-left";

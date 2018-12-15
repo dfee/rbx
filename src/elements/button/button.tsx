@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { ButtonGroup } from "./button-group";
 
@@ -29,7 +28,7 @@ export type ButtonModifierProps = Partial<{
   text: boolean;
 }>;
 
-export type ButtonProps = ModifierProps & ButtonModifierProps;
+export type ButtonProps = HelpersProps & ButtonModifierProps;
 
 export const Button = Object.assign(
   forwardRefAs<ButtonProps, "button">(
@@ -50,7 +49,7 @@ export const Button = Object.assign(
         static: isStatic,
         text,
         ...rest
-      } = transformModifiers(props);
+      } = transformHelpers(props);
       rest.className = classNames("button", rest.className, {
         [`is-${color}`]: color,
         [`is-${size}`]: size,

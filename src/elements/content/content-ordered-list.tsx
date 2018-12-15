@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 import { ContentOrderedListItem } from "./content-ordered-list-item";
 
@@ -19,14 +18,14 @@ export type ContentOrderedListModifierProps = Partial<{
 }>;
 
 export type ContentOrderedListProps = Prefer<
-  ModifierProps & ContentOrderedListModifierProps,
+  HelpersProps & ContentOrderedListModifierProps,
   Omit<React.HTMLAttributes<HTMLOListElement>, "type">
 >;
 
 export const ContentOrderedList = Object.assign(
   forwardRefAs<ContentOrderedListProps, "ol">(
     (props, ref) => {
-      const { as, type, ...rest } = transformModifiers(props);
+      const { as, type, ...rest } = transformHelpers(props);
       rest.className = classNames(rest.className, {
         [`is-${type}`]: type,
       });

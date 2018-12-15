@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { ModalContext } from "./modal-context";
 
 export type ModalCloseModifierProps = Partial<{
@@ -10,11 +9,11 @@ export type ModalCloseModifierProps = Partial<{
   onClick: React.MouseEventHandler<any>;
 }>;
 
-export type ModalCloseProps = ModifierProps & ModalCloseModifierProps;
+export type ModalCloseProps = HelpersProps & ModalCloseModifierProps;
 
 export const ModalClose = forwardRefAs<ModalCloseProps, "button">(
   (props, ref) => {
-    const { as, onClick, ...rest } = transformModifiers(props);
+    const { as, onClick, ...rest } = transformHelpers(props);
     rest.className = classNames("modal-close", "is-large", rest.className);
     return (
       <ModalContext.Consumer>

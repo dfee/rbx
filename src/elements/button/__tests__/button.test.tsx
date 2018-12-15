@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { Button, BUTTON_SIZES, BUTTON_STATES } from "../button";
 import { ButtonGroup } from "../button-group";
 

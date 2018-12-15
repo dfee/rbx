@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type NavbarItemModifierProps = Partial<{
   active: boolean;
@@ -12,7 +11,7 @@ export type NavbarItemModifierProps = Partial<{
   hoverable: boolean;
 }>;
 
-export type NavbarItemProps = ModifierProps & NavbarItemModifierProps;
+export type NavbarItemProps = HelpersProps & NavbarItemModifierProps;
 
 export const NavbarItem = forwardRefAs<NavbarItemProps, "a">(
   (props, ref) => {
@@ -23,7 +22,7 @@ export const NavbarItem = forwardRefAs<NavbarItemProps, "a">(
       dropdownUp,
       hoverable,
       ...rest
-    } = transformModifiers(props);
+    } = transformHelpers(props);
     rest.className = classNames("navbar-item", rest.className, {
       "has-dropdown": dropdown,
       "has-dropdown-up": dropdownUp,

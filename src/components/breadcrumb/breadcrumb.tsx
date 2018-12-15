@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 
@@ -27,7 +26,7 @@ export type BreadcrumbModifierProps = Partial<{
 }>;
 
 export type BreadcrumbProps = Prefer<
-  ModifierProps & BreadcrumbModifierProps,
+  HelpersProps & BreadcrumbModifierProps,
   React.HTMLAttributes<HTMLElement>
 >;
 
@@ -41,7 +40,7 @@ export const Breadcrumb = Object.assign(
         separator,
         size,
         ...rest
-      } = transformModifiers(props);
+      } = transformHelpers(props);
       rest.className = classNames("breadcrumb", rest.className, {
         [`has-${separator}-separator`]: separator,
         [`is-${align}`]: align,

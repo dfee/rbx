@@ -1,19 +1,18 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type PanelBlockModifierProps = Partial<{
   active: boolean;
   className: string;
 }>;
 
-export type PanelBlockProps = ModifierProps & PanelBlockModifierProps;
+export type PanelBlockProps = HelpersProps & PanelBlockModifierProps;
 
 export const PanelBlock = forwardRefAs<PanelBlockProps, "div">(
   (props, ref) => {
-    const { active, as, ...rest } = transformModifiers(props);
+    const { active, as, ...rest } = transformHelpers(props);
     rest.className = classNames("panel-block", rest.className, {
       "is-active": active,
     });

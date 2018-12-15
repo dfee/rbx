@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type CardHeaderTitleModifierProps = Partial<{ className: string }>;
 
-export type CardHeaderTitleProps = ModifierProps & CardHeaderTitleModifierProps;
+export type CardHeaderTitleProps = HelpersProps & CardHeaderTitleModifierProps;
 
 export const CardHeaderTitle = forwardRefAs<CardHeaderTitleProps, "div">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("card-header-title", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type TableModifierProps = Partial<{
   bordered: boolean;
@@ -13,7 +12,7 @@ export type TableModifierProps = Partial<{
   striped: boolean;
 }>;
 
-export type TableProps = ModifierProps & TableModifierProps;
+export type TableProps = HelpersProps & TableModifierProps;
 
 export const Table = forwardRefAs<TableProps, "table">(
   (props, ref) => {
@@ -25,7 +24,7 @@ export const Table = forwardRefAs<TableProps, "table">(
       narrow,
       striped,
       ...rest
-    } = transformModifiers(props);
+    } = transformHelpers(props);
     rest.className = classNames("table", rest.className, {
       "is-bordered": bordered,
       "is-fullwidth": fullwidth,

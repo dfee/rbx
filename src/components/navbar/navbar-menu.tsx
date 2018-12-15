@@ -1,12 +1,11 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { NavbarContext } from "./navbar-context";
 
 export type NavbarMenuProps = Prefer<
-  ModifierProps,
+  HelpersProps,
   React.HTMLAttributes<HTMLDivElement>
 >;
 
@@ -15,7 +14,7 @@ export const NavbarMenu = forwardRefAs<NavbarMenuProps, "div">(
     return (
       <NavbarContext.Consumer>
         {({ active }) => {
-          const { as, ...rest } = props;
+          const { as, ...rest } = transformHelpers(props);
           rest.className = classNames("navbar-menu", rest.className, {
             "is-active": active,
           });

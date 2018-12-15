@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { File, FILE_ALIGNMENTS, FILE_SIZES } from "../file";
 import { FileCTA } from "../file-cta";
 import { FileIcon } from "../file-icon";

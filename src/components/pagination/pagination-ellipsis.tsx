@@ -1,17 +1,16 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type PaginationEllipsisModifierProps = Partial<{ className: string }>;
 
-export type PaginationEllipsisProps = ModifierProps &
+export type PaginationEllipsisProps = HelpersProps &
   PaginationEllipsisModifierProps;
 
 export const PaginationEllipsis = forwardRefAs<PaginationEllipsisProps, "span">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("pagination-ellipsis", rest.className);
     return <li children={React.createElement(as!, { ref, ...rest })} />;
   },

@@ -865,5 +865,6 @@ Object {
     "render": [Function],
   },
   "forwardRefAs": [Function],
+  "transformHelpers": [Function],
 }
 `;

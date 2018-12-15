@@ -1,16 +1,15 @@
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type RadioProps = Prefer<
-  ModifierProps,
+  HelpersProps,
   React.InputHTMLAttributes<HTMLInputElement>
 >;
 
 export const Radio = forwardRefAs<RadioProps, "input">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     return React.createElement(as!, { ref, type: "radio", ...rest });
   },
   { as: "input" },

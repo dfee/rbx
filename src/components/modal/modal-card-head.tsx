@@ -1,18 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { Delete } from "../../elements";
-import { ModifierProps, transformModifiers } from "../../modifiers";
 import { ModalContext } from "./modal-context";
 
 export type ModalCardHeadModifierProps = Partial<{ className: string }>;
 
-export type ModalCardHeadProps = ModifierProps & ModalCardHeadModifierProps;
+export type ModalCardHeadProps = HelpersProps & ModalCardHeadModifierProps;
 
 export const ModalCardHead = forwardRefAs<ModalCardHeadProps, "header">(
   (props, ref) => {
-    const { as, children, ...rest } = transformModifiers(props);
+    const { as, children, ...rest } = transformHelpers(props);
     rest.className = classNames("modal-card-head", rest.className);
     return (
       <ModalContext.Consumer>

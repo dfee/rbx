@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type DropdownDividerModifierProps = Partial<{ className: string }>;
 
-export type DropdownDividerProps = ModifierProps & DropdownDividerModifierProps;
+export type DropdownDividerProps = HelpersProps & DropdownDividerModifierProps;
 
 export const DropdownDivider = forwardRefAs<DropdownDividerProps, "hr">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("dropdown-divider", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

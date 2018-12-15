@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { DropdownContext } from "./dropdown-context";
 
 export type DropdownTriggerModifierProps = Partial<{
@@ -10,11 +9,11 @@ export type DropdownTriggerModifierProps = Partial<{
   onClick: React.MouseEventHandler<any>;
 }>;
 
-export type DropdownTriggerProps = ModifierProps & DropdownTriggerModifierProps;
+export type DropdownTriggerProps = HelpersProps & DropdownTriggerModifierProps;
 
 export const DropdownTrigger = forwardRefAs<DropdownTriggerProps, "div">(
   (props, ref) => {
-    const { as, onClick, ...rest } = transformModifiers(props);
+    const { as, onClick, ...rest } = transformHelpers(props);
     rest.className = classNames("dropdown-trigger", rest.className);
     return (
       <DropdownContext.Consumer>

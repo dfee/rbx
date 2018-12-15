@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const ICON_ALIGNMENTS = tuple("left", "right");
@@ -20,13 +19,13 @@ export type IconModifierProps = Partial<{
 }>;
 
 export type IconProps = Prefer<
-  ModifierProps & IconModifierProps,
+  HelpersProps & IconModifierProps,
   React.HTMLAttributes<HTMLSpanElement>
 >;
 
 export const Icon = forwardRefAs<IconProps, "span">(
   (props, ref) => {
-    const { align, as, color, size, ...rest } = transformModifiers(props);
+    const { align, as, color, size, ...rest } = transformHelpers(props);
     rest.className = classNames("icon", rest.className, {
       [`has-text-${color}`]: color,
       [`is-${align}`]: align,

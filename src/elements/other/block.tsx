@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type BlockModifierProps = Partial<{ className: string }>;
 
-export type BlockProps = ModifierProps & BlockModifierProps;
+export type BlockProps = HelpersProps & BlockModifierProps;
 
 export const Block = forwardRefAs<BlockProps, "div">(
   (props, ref) => {
-    const { as, ...rest } = props;
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("block", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

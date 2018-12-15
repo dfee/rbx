@@ -1,19 +1,18 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type ListItemModifierProps = Partial<{
   active: boolean;
   className: string;
 }>;
 
-export type ListItemProps = ModifierProps & ListItemModifierProps;
+export type ListItemProps = HelpersProps & ListItemModifierProps;
 
 export const ListItem = forwardRefAs<ListItemProps, "a">(
   (props, ref) => {
-    const { active, as, ...rest } = transformModifiers(props);
+    const { active, as, ...rest } = transformHelpers(props);
     rest.className = classNames("list-item", rest.className, {
       "is-active": active,
     });

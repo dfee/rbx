@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 import { FileCTA } from "./file-cta";
@@ -28,7 +27,7 @@ export type FileModifierProps = Partial<{
   size: FileSizes;
 }>;
 
-export type FileProps = ModifierProps & FileModifierProps;
+export type FileProps = HelpersProps & FileModifierProps;
 
 export const File = Object.assign(
   forwardRefAs<FileProps, "div">(
@@ -42,7 +41,7 @@ export const File = Object.assign(
         fullwidth,
         size,
         ...rest
-      } = transformModifiers(props);
+      } = transformHelpers(props);
       rest.className = classNames("file", rest.className, {
         "has-name": hasName,
         [`is-${align}`]: align,

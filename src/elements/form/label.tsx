@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
@@ -16,11 +15,11 @@ export type LabelModifierProps = Partial<{
   size: LabelSizes;
 }>;
 
-export type LabelProps = ModifierProps & LabelModifierProps;
+export type LabelProps = HelpersProps & LabelModifierProps;
 
 export const Label = forwardRefAs<LabelProps, "label">(
   (props, ref) => {
-    const { as, disabled, size, ...rest } = transformModifiers(props);
+    const { as, disabled, size, ...rest } = transformHelpers(props);
     let kind = "label";
     React.Children.forEach(rest.children, (child, i) => {
       if (typeof child === "object") {

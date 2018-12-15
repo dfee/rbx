@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const TILE_KINDS = tuple("ancestor", "parent", "child");
@@ -21,7 +20,7 @@ export type TileModifierProps = Partial<{
   vertical: boolean;
 }>;
 
-export type TileProps = ModifierProps & TileModifierProps;
+export type TileProps = HelpersProps & TileModifierProps;
 
 export const Tile = forwardRefAs<TileProps, "div">(
   (props, ref) => {
@@ -33,7 +32,7 @@ export const Tile = forwardRefAs<TileProps, "div">(
       size,
       vertical,
       ...rest
-    } = transformModifiers(props);
+    } = transformHelpers(props);
     rest.className = classNames("tile", rest.className, {
       [`is-${color}`]: color,
       [`is-${kind}`]: kind,

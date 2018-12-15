@@ -1,19 +1,18 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type PaginationLinkModifiers = Partial<{
   className: string;
   current: boolean;
 }>;
 
-export type PaginationLinkProps = ModifierProps & PaginationLinkModifiers;
+export type PaginationLinkProps = HelpersProps & PaginationLinkModifiers;
 
 export const PaginationLink = forwardRefAs<PaginationLinkProps, "a">(
   (props, ref) => {
-    const { as, current, ...rest } = transformModifiers(props);
+    const { as, current, ...rest } = transformHelpers(props);
     rest.className = classNames("pagination-link", rest.className, {
       "is-current": current,
     });

@@ -1,20 +1,19 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 
 export type HelpModifierProps = Partial<{
   className: string;
   color: Colors;
 }>;
 
-export type HelpProps = ModifierProps & HelpModifierProps;
+export type HelpProps = HelpersProps & HelpModifierProps;
 
 export const Help = forwardRefAs<HelpProps, "p">(
   (props, ref) => {
-    const { as, color, ...rest } = transformModifiers(props);
+    const { as, color, ...rest } = transformHelpers(props);
     rest.className = classNames("help", rest.className, {
       [`is-${color}`]: color,
     });

@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 import { combineRefs } from "../../utils";
 import { DropdownContent } from "./dropdown-content";
@@ -24,7 +23,7 @@ export type DropdownModifierProps = Partial<{
   up: boolean;
 }>;
 
-export type DropdownProps = ModifierProps & DropdownModifierProps;
+export type DropdownProps = HelpersProps & DropdownModifierProps;
 
 const initialState = {
   active: false,
@@ -70,7 +69,7 @@ export class DropdownController extends React.PureComponent<
       managed,
       up,
       ...rest
-    } = transformModifiers(this.props);
+    } = transformHelpers(this.props);
     rest.className = classNames("dropdown", rest.className, {
       [`is-${align}`]: align,
       "is-active": this.active,

@@ -1,19 +1,18 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type TagGroupModifierProps = Partial<{
   className: string;
   gapless: boolean;
 }>;
 
-export type TagGroupProps = ModifierProps & TagGroupModifierProps;
+export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 
 export const TagGroup = forwardRefAs<TagGroupProps, "span">(
   (props, ref) => {
-    const { as, gapless, ...rest } = transformModifiers(props);
+    const { as, gapless, ...rest } = transformHelpers(props);
     rest.className = classNames("tags", rest.className, {
       "has-addons": gapless,
     });

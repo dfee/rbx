@@ -1,22 +1,21 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { ModalCardBody } from "./modal-card-body";
 import { ModalCardFoot } from "./modal-card-foot";
 import { ModalCardHead } from "./modal-card-head";
 import { ModalCardTitle } from "./modal-card-title";
 
 export type ModalCardProps = Prefer<
-  ModifierProps,
+  HelpersProps,
   React.HTMLAttributes<HTMLDivElement>
 >;
 
 export const ModalCard = Object.assign(
   forwardRefAs<ModalCardProps, "div">(
     (props, ref) => {
-      const { as, ...rest } = transformModifiers(props);
+      const { as, ...rest } = transformHelpers(props);
       rest.className = classNames("modal-card", rest.className);
       return React.createElement(as!, { ref, ...rest });
     },

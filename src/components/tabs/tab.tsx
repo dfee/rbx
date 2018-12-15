@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type TabModifierProps = Partial<{
   active: boolean;
@@ -10,11 +9,11 @@ export type TabModifierProps = Partial<{
   style: React.CSSProperties;
 }>;
 
-export type TabProps = ModifierProps & TabModifierProps;
+export type TabProps = HelpersProps & TabModifierProps;
 
 export const Tab = forwardRefAs<TabModifierProps, "a">(
   (props, ref) => {
-    const { as, active, className, style, ...rest } = transformModifiers(props);
+    const { as, active, className, style, ...rest } = transformHelpers(props);
     return (
       <li
         style={style}

@@ -1,18 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { CardFooterItem } from "./card-footer-item";
 
 export type CardFooterModifierProps = Partial<{ className: string }>;
 
-export type CardFooterProps = ModifierProps & CardFooterModifierProps;
+export type CardFooterProps = HelpersProps & CardFooterModifierProps;
 
 export const CardFooter = Object.assign(
   forwardRefAs<CardFooterProps, "div">(
     (props, ref) => {
-      const { as, ...rest } = transformModifiers(props);
+      const { as, ...rest } = transformHelpers(props);
       rest.className = classNames("card-footer", rest.className);
       return React.createElement(as!, { ref, ...rest });
     },

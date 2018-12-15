@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const TEXTAREA_SIZES = tuple("small", "medium", "large");
@@ -20,11 +19,11 @@ export type TextareaModifierProps = Partial<{
   state: TextareaStates;
 }>;
 
-export type TextareaProps = ModifierProps & TextareaModifierProps;
+export type TextareaProps = HelpersProps & TextareaModifierProps;
 
 export const Textarea = forwardRefAs<TextareaProps, "textarea">(
   (props, ref) => {
-    const { as, color, fixedSize, size, state, ...rest } = transformModifiers(
+    const { as, color, fixedSize, size, state, ...rest } = transformHelpers(
       props,
     );
     rest.className = classNames("textarea", rest.className, {

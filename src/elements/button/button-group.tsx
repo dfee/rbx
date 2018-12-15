@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const BUTTON_GROUP_POSITIONS = tuple("centered", "right");
@@ -14,11 +13,11 @@ export type ButtonGroupModifierProps = Partial<{
   position: ButtonGroupPositions;
 }>;
 
-export type ButtonGroupProps = ModifierProps & ButtonGroupModifierProps;
+export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
 export const ButtonGroup = forwardRefAs<ButtonGroupProps, "div">(
   (props, ref) => {
-    const { as, children, hasAddons, position, ...rest } = transformModifiers(
+    const { as, children, hasAddons, position, ...rest } = transformHelpers(
       props,
     );
     rest.className = classNames("buttons", rest.className, {

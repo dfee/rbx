@@ -2,9 +2,9 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
+import { BREAKPOINTS } from "@/base/helpers";
 import { Container, Notification } from "@/elements";
 import { Section } from "@/layout";
-import { BREAKPOINTS } from "@/modifiers/responsive";
 
 import { iterableToSelectObject } from "../helpers";
 

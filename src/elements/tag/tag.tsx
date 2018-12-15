@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { TagGroup } from "./tag-group";
 
@@ -18,7 +17,7 @@ export type TagModifierProps = Partial<{
   size: TagSizes;
 }>;
 
-export type TagProps = ModifierProps & TagModifierProps;
+export type TagProps = HelpersProps & TagModifierProps;
 
 export const Tag = Object.assign(
   forwardRefAs<TagProps, "span">(
@@ -31,7 +30,7 @@ export const Tag = Object.assign(
         rounded,
         size,
         ...rest
-      } = transformModifiers(props);
+      } = transformHelpers(props);
       rest.className = classNames("tag", rest.className, {
         [`is-${size}`]: size,
         [`is-${color}`]: color,

@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { Tile, TILE_KINDS, TILE_SIZES } from "../tile";
 
 import { hasProperties } from "@/__tests__/helpers";

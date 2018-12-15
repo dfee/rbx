@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 import { ContentOrderedList } from "./content-ordered-list";
 
@@ -14,12 +13,12 @@ export type ContentModifierProps = Partial<{
   size: ContentSizes;
 }>;
 
-export type ContentProps = ModifierProps & ContentModifierProps;
+export type ContentProps = HelpersProps & ContentModifierProps;
 
 export const Content = Object.assign(
   forwardRefAs<ContentProps, "div">(
     (props, ref) => {
-      const { as, size, ...rest } = transformModifiers(props);
+      const { as, size, ...rest } = transformHelpers(props);
       rest.className = classNames("content", rest.className, {
         [`is-${size}`]: size,
       });

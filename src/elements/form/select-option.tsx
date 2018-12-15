@@ -1,14 +1,13 @@
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type SelectOptionModifierProps = Partial<{ className: string }>;
-export type SelectOptionProps = ModifierProps & SelectOptionModifierProps;
+export type SelectOptionProps = HelpersProps & SelectOptionModifierProps;
 
 export const SelectOption = forwardRefAs<SelectOptionProps, "option">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "option" },

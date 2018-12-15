@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { Hero, HERO_SIZES } from "../hero";
 import { HeroBody } from "../hero-body";
 import { HeroFoot } from "../hero-foot";

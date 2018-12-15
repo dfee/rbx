@@ -1,17 +1,16 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type NavbarEndModifierProps = Partial<{ className: string }>;
 
-export type NavbarEndProps = ModifierProps & NavbarEndModifierProps;
+export type NavbarEndProps = HelpersProps & NavbarEndModifierProps;
 
 export const NavbarEnd = Object.assign(
   forwardRefAs<NavbarEndProps, "div">(
     (props, ref) => {
-      const { as, ...rest } = transformModifiers(props);
+      const { as, ...rest } = transformHelpers(props);
       rest.className = classNames("navbar-end", rest.className);
       return React.createElement(as!, { ref, ...rest });
     },

@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const CONTROL_SIZES = tuple("small", "medium", "large");
@@ -17,7 +16,7 @@ export type ControlModifierProps = Partial<{
   size: ControlSizes;
 }>;
 
-export type ControlProps = ModifierProps & ControlModifierProps;
+export type ControlProps = HelpersProps & ControlModifierProps;
 
 export const Control = forwardRefAs<ControlProps, "div">(
   (props, ref) => {
@@ -29,7 +28,7 @@ export const Control = forwardRefAs<ControlProps, "div">(
       loading,
       size,
       ...rest
-    } = transformModifiers(props);
+    } = transformHelpers(props);
     rest.className = classNames("control", rest.className, {
       "has-icons-left": iconLeft,
       "has-icons-right": iconRight,

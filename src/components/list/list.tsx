@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { ListItem } from "./list-item";
 
 export type ListModifierProps = Partial<{
@@ -10,12 +9,12 @@ export type ListModifierProps = Partial<{
   hoverable: boolean;
 }>;
 
-export type ListProps = ModifierProps & ListModifierProps;
+export type ListProps = HelpersProps & ListModifierProps;
 
 export const List = Object.assign(
   forwardRefAs<ListProps, "div">(
     (props, ref) => {
-      const { as, hoverable, ...rest } = transformModifiers(props);
+      const { as, hoverable, ...rest } = transformHelpers(props);
       rest.className = classNames("list", rest.className, {
         "is-hoverable": hoverable,
       });

@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const MEDIA_ITEM_POSITIONS = tuple("content", "left", "right");
@@ -13,11 +12,11 @@ export type MediaItemModifierProps = Partial<{
   position: MediaItemPositions;
 }>;
 
-export type MediaItemProps = ModifierProps & MediaItemModifierProps;
+export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 
 export const MediaItem = forwardRefAs<MediaItemProps, "div">(
   (props, ref) => {
-    const { as, position, ...rest } = transformModifiers(props);
+    const { as, position, ...rest } = transformHelpers(props);
     rest.className = classNames(rest.className, {
       [`media-${position}`]: position,
     });

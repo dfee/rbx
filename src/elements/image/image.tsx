@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { ImageContainer } from "./image-container";
 
 export type ImageModifierProps = Partial<{
@@ -10,12 +9,12 @@ export type ImageModifierProps = Partial<{
   rounded: boolean;
 }>;
 
-export type ImageProps = ModifierProps & ImageModifierProps;
+export type ImageProps = HelpersProps & ImageModifierProps;
 
 export const Image = Object.assign(
   forwardRefAs<ImageProps, "img">(
     (props, ref) => {
-      const { as, rounded, ...rest } = transformModifiers(props);
+      const { as, rounded, ...rest } = transformHelpers(props);
       rest.className = classNames(rest.className, { "is-rounded": rounded });
       return React.createElement(as!, { ref, ...rest });
     },

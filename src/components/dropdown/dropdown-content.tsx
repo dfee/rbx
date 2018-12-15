@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type DropdownContentModifierProps = Partial<{ className: string }>;
 
-export type DropdownContentProps = ModifierProps & DropdownContentModifierProps;
+export type DropdownContentProps = HelpersProps & DropdownContentModifierProps;
 
 export const DropdownContent = forwardRefAs<DropdownContentProps, "div">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("dropdown-content", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

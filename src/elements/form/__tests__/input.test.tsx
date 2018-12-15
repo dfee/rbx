@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { Input, INPUT_SIZES, INPUT_STATES, INPUT_TYPES } from "../input";
 
 import { hasProperties } from "@/__tests__/helpers";

@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const FILED_LABEL_SIZES = tuple("small", "normal", "medium", "large");
@@ -13,11 +12,11 @@ export type FieldLabelModifierProps = Partial<{
   size: FieldLabelSizes;
 }>;
 
-export type FieldLabelProps = ModifierProps & FieldLabelModifierProps;
+export type FieldLabelProps = HelpersProps & FieldLabelModifierProps;
 
 export const FieldLabel = forwardRefAs<FieldLabelProps, "div">(
   (props, ref) => {
-    const { as, size, ...rest } = transformModifiers(props);
+    const { as, size, ...rest } = transformHelpers(props);
     rest.className = classNames("field-label", rest.className, {
       [`is-${size}`]: size,
     });

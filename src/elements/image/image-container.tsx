@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const IMAGE_CONTAINER_SIZES = tuple(
@@ -38,11 +37,11 @@ export type ImageContainerModifierProps = Partial<{
   size: ImageContainerSizes;
 }>;
 
-export type ImageContainerProps = ModifierProps & ImageContainerModifierProps;
+export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 
 export const ImageContainer = forwardRefAs<ImageContainerProps, "figure">(
   (props, ref) => {
-    const { as, size, ...rest } = transformModifiers(props);
+    const { as, size, ...rest } = transformHelpers(props);
     let s: string | undefined;
     if (typeof size === "string") {
       s = size;

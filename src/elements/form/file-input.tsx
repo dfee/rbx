@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type FileInputModifierProps = Partial<{ className: string }>;
 
-export type FileInputProps = ModifierProps & FileInputModifierProps;
+export type FileInputProps = HelpersProps & FileInputModifierProps;
 
 export const FileInput = forwardRefAs<FileInputProps, "input">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("file-input", rest.className);
     return React.createElement(as!, { ref, type: "file", ...rest });
   },

@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { Tag, TAG_SIZES } from "../tag";
 import { TagGroup } from "../tag-group";
 

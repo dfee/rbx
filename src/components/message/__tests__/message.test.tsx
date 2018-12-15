@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/modifiers/color";
+import { COLORS } from "@/base/helpers";
 import { Message, MESSAGE_SIZES } from "../message";
 import { MessageBody } from "../message-body";
 import { MessageHeader } from "../message-header";

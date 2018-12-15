@@ -1,13 +1,12 @@
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type ContentOrderedListItemModifierProps = Partial<{
   className: string;
 }>;
 
-export type ContentOrderedListItemProps = ModifierProps &
+export type ContentOrderedListItemProps = HelpersProps &
   ContentOrderedListItemModifierProps;
 
 export const ContentOrderedListItem = forwardRefAs<
@@ -15,7 +14,7 @@ export const ContentOrderedListItem = forwardRefAs<
   "li"
 >(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     return React.createElement(as!, { ref, ...rest });
   },
   { as: "li" },

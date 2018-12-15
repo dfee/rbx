@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type PaginationPreviousModifierProps = Partial<{ className: string }>;
-export type PaginationPreviousProps = ModifierProps &
+export type PaginationPreviousProps = HelpersProps &
   PaginationPreviousModifierProps;
 
 export const PaginationPrevious = forwardRefAs<PaginationPreviousProps, "a">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("pagination-previous", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

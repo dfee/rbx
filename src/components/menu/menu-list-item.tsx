@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type MenuListItemModifierProps = Partial<{
   active: boolean;
@@ -10,12 +9,13 @@ export type MenuListItemModifierProps = Partial<{
   menu: React.ReactNode;
 }>;
 
-export type MenuListItemProps = ModifierProps & MenuListItemModifierProps;
+export type MenuListItemProps = HelpersProps & MenuListItemModifierProps;
 
 export const MenuListItem = forwardRefAs<MenuListItemProps, "a">(
   (props, ref) => {
-    const { active, as, menu, ...rest } = transformModifiers(props);
-    rest.className = classNames({ "is-active": active }, rest.className) || undefined;
+    const { active, as, menu, ...rest } = transformHelpers(props);
+    rest.className =
+      classNames({ "is-active": active }, rest.className) || undefined;
     return (
       <li>
         {React.createElement(as!, { ref, ...rest })}

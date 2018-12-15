@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const SECTION_SIZES = tuple("medium", "large");
@@ -13,11 +12,11 @@ export type SectionModifierProps = Partial<{
   size: SectionSizes;
 }>;
 
-export type SectionProps = ModifierProps & SectionModifierProps;
+export type SectionProps = HelpersProps & SectionModifierProps;
 
 export const Section = forwardRefAs<SectionProps, "section">(
   (props, ref) => {
-    const { as, size, ...rest } = transformModifiers(props);
+    const { as, size, ...rest } = transformHelpers(props);
     rest.className = classNames("section", rest.className, {
       [`is-${size}`]: size,
     });

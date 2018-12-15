@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
@@ -23,7 +22,7 @@ export type FieldModifierProps = Partial<{
   narrow: boolean;
 }>;
 
-export type FieldProps = ModifierProps & FieldModifierProps;
+export type FieldProps = HelpersProps & FieldModifierProps;
 
 export const Field = Object.assign(
   forwardRefAs<FieldProps, "div">(
@@ -37,7 +36,7 @@ export const Field = Object.assign(
         kind,
         narrow,
         ...rest
-      } = transformModifiers(props);
+      } = transformHelpers(props);
 
       let k = null;
       if (kind === "addons") {

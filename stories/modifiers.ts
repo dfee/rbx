@@ -1,14 +1,14 @@
 import { select } from "@storybook/addon-knobs";
 
-import { COLORS, GREY_COLORS } from "@/modifiers/color";
-import { FLOAT_PULLED_ALIGNMENTS } from "@/modifiers/helpers";
-import { BREAKPOINTS, DISPLAYS } from "@/modifiers/responsive";
+import { COLORS, GREY_COLORS } from "@/base/helpers";
+import { BREAKPOINTS, DISPLAYS } from "@/base/helpers";
 import {
+  FLOAT_PULLED_ALIGNMENTS,
   TEXT_ALIGNMENTS,
   TEXT_SIZES,
   TEXT_TRANSFORMS,
   TEXT_WEIGHTS,
-} from "@/modifiers/typography";
+} from "@/base/helpers";
 
 import {
   booleanFactory,

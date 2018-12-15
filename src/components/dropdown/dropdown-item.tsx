@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { DropdownContext } from "./dropdown-context";
 
 export type DropdownItemModifierProps = Partial<{
@@ -11,11 +10,11 @@ export type DropdownItemModifierProps = Partial<{
   onClick: React.MouseEventHandler<any>;
 }>;
 
-export type DropdownItemProps = ModifierProps & DropdownItemModifierProps;
+export type DropdownItemProps = HelpersProps & DropdownItemModifierProps;
 
 export const DropdownItem = forwardRefAs<DropdownItemProps, "a">(
   (props, ref) => {
-    const { as, active, onClick, ...rest } = transformModifiers(props);
+    const { as, active, onClick, ...rest } = transformHelpers(props);
     rest.className = classNames("dropdown-item", rest.className, {
       "is-active": active,
     });

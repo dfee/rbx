@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type NavbarStartModifierProps = Partial<{ className: string }>;
 
-export type NavbarStartProps = ModifierProps & NavbarStartModifierProps;
+export type NavbarStartProps = HelpersProps & NavbarStartModifierProps;
 
 export const NavbarStart = forwardRefAs<NavbarStartProps, "div">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("navbar-start", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

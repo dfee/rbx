@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { canUseDOM, tuple } from "../../utils";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
@@ -31,7 +30,7 @@ export type NavbarModifierProps = Partial<{
   transparent: boolean;
 }>;
 
-export type NavbarProps = ModifierProps & NavbarModifierProps;
+export type NavbarProps = HelpersProps & NavbarModifierProps;
 
 export type NavbarControllerProps = NavbarProps & {
   as: React.ReactType<any>;
@@ -80,7 +79,7 @@ export class NavbarController extends React.PureComponent<
       managed,
       transparent,
       ...rest
-    } = transformModifiers(this.props);
+    } = transformHelpers(this.props);
 
     rest.className = classNames("navbar", rest.className, {
       "is-transparent": transparent,

@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { ModalContext } from "./modal-context";
 
 export type ModalBackgroundModifierProps = Partial<{
@@ -10,11 +9,11 @@ export type ModalBackgroundModifierProps = Partial<{
   onClick: React.MouseEventHandler<any>;
 }>;
 
-export type ModalBackgroundProps = ModifierProps & ModalBackgroundModifierProps;
+export type ModalBackgroundProps = HelpersProps & ModalBackgroundModifierProps;
 
 export const ModalBackground = forwardRefAs<ModalBackgroundProps, "div">(
   (props, ref) => {
-    const { as, onClick, ...rest } = transformModifiers(props);
+    const { as, onClick, ...rest } = transformHelpers(props);
     rest.className = classNames("modal-background", rest.className);
     return (
       <ModalContext.Consumer>

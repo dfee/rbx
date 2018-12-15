@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 
 export const DELETE_SIZES = tuple("small", "medium", "large");
@@ -13,11 +12,11 @@ export type DeleteModifierProps = Partial<{
   size: DeleteSizes;
 }>;
 
-export type DeleteProps = ModifierProps & DeleteModifierProps;
+export type DeleteProps = HelpersProps & DeleteModifierProps;
 
 export const Delete = forwardRefAs<DeleteProps, "a">(
   (props, ref) => {
-    const { as, size, ...rest } = props;
+    const { as, size, ...rest } = transformHelpers(props);
     rest.className = classNames("delete", rest.className, {
       [`is-${size}`]: size,
     });

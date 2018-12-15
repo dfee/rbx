@@ -1,19 +1,18 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type NavbarLinkModifierProps = Partial<{
   arrowless: boolean;
   className: string;
 }>;
 
-export type NavbarLinkProps = ModifierProps & NavbarLinkModifierProps;
+export type NavbarLinkProps = HelpersProps & NavbarLinkModifierProps;
 
 export const NavbarLink = forwardRefAs<NavbarLinkProps, "span">(
   (props, ref) => {
-    const { as, arrowless, ...rest } = transformModifiers(props);
+    const { as, arrowless, ...rest } = transformHelpers(props);
     rest.className = classNames("navbar-link", rest.className, {
       "is-arrowless": arrowless,
     });

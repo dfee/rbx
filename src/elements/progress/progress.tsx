@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const PROGRESS_SIZES = tuple("small", "medium", "large");
@@ -17,11 +16,11 @@ export interface ProgressModifierProps {
   value: number;
 }
 
-export type ProgressProps = ModifierProps & ProgressModifierProps;
+export type ProgressProps = HelpersProps & ProgressModifierProps;
 
 export const Progress = forwardRefAs<ProgressProps, "progress">(
   (props, ref) => {
-    const { as, color, size, ...rest } = props;
+    const { as, color, size, ...rest } = transformHelpers(props);
     rest.className = classNames("progress", rest.className, {
       [`is-${color}`]: color,
       [`is-${size}`]: size,

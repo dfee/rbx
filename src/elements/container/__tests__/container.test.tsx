@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { BREAKPOINTS } from "@/modifiers/responsive";
+import { BREAKPOINTS } from "@/base/helpers";
 import { Container } from "../container";
 
 import { hasProperties } from "@/__tests__/helpers";

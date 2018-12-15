@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { tuple } from "../../utils";
 import { Tab } from "./tab";
 
@@ -26,7 +25,7 @@ export type TabsModifierProps = Partial<{
   type: TabsTypes;
 }>;
 
-export type TabsProps = ModifierProps & TabsModifierProps;
+export type TabsProps = HelpersProps & TabsModifierProps;
 
 export const Tabs = Object.assign(
   forwardRefAs<TabsProps, "div">(
@@ -39,7 +38,7 @@ export const Tabs = Object.assign(
         size,
         type,
         ...rest
-      } = transformModifiers(props);
+      } = transformHelpers(props);
       rest.className = classNames("tabs", rest.className, {
         [`is-${align}`]: align,
         [`is-${size}`]: size,

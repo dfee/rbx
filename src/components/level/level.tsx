@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Breakpoints } from "../../modifiers/responsive";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Breakpoints } from "../../base/helpers";
 import { LevelItem } from "./level-item";
 import { LevelLeft } from "./level-left";
 import { LevelRight } from "./level-right";
@@ -13,12 +12,12 @@ export type LevelModifierProps = Partial<{
   className: string;
 }>;
 
-export type LevelProps = ModifierProps & LevelModifierProps;
+export type LevelProps = HelpersProps & LevelModifierProps;
 
 export const Level = Object.assign(
   forwardRefAs<LevelProps, "nav">(
     (props, ref) => {
-      const { as, breakpoint, ...rest } = transformModifiers(props);
+      const { as, breakpoint, ...rest } = transformHelpers(props);
       rest.className = classNames("level", rest.className, {
         [`is-${breakpoint}`]: breakpoint,
       });

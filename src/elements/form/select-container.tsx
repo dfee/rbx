@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { Select } from "./select";
 
@@ -22,7 +21,7 @@ export type SelectContainerModifierProps = Partial<{
   state: SelectContainerStates;
 }>;
 
-export type SelectContainerProps = ModifierProps & SelectContainerModifierProps;
+export type SelectContainerProps = HelpersProps & SelectContainerModifierProps;
 
 export const SelectContainer = forwardRefAs<SelectContainerProps, "div">(
   (props, ref) => {
@@ -35,7 +34,7 @@ export const SelectContainer = forwardRefAs<SelectContainerProps, "div">(
       size,
       state,
       ...rest
-    } = transformModifiers(props);
+    } = transformHelpers(props);
     rest.className = classNames("select", rest.className, {
       [`is-${color}`]: color,
       "is-fullwidth": fullwidth,

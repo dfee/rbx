@@ -1,16 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 
 export type FileIconModifierProps = Partial<{ className: string }>;
 
-export type FileIconProps = ModifierProps & FileIconModifierProps;
+export type FileIconProps = HelpersProps & FileIconModifierProps;
 
 export const FileIcon = forwardRefAs<FileIconProps, "span">(
   (props, ref) => {
-    const { as, ...rest } = transformModifiers(props);
+    const { as, ...rest } = transformHelpers(props);
     rest.className = classNames("file-icon", rest.className);
     return React.createElement(as!, { ref, ...rest });
   },

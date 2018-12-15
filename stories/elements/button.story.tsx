@@ -15,6 +15,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
+import { COLORS } from "@/base/helpers";
 import { Button, Icon } from "@/elements";
 import {
   BUTTON_SIZES,
@@ -23,7 +24,6 @@ import {
 } from "@/elements/button/button";
 import { BUTTON_GROUP_POSITIONS } from "@/elements/button/button-group";
 import { Section } from "@/layout";
-import { COLORS } from "@/modifiers/color";
 
 import { iterableToSelectObject, titleize } from "../helpers";
 

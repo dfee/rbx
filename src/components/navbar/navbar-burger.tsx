@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
 import { NavbarContext } from "./navbar-context";
 
 export type NavbarBurgerModifierProps = Partial<{
@@ -11,14 +10,14 @@ export type NavbarBurgerModifierProps = Partial<{
   style: React.CSSProperties;
 }>;
 
-export type NavbarBurgerProps = ModifierProps & NavbarBurgerModifierProps;
+export type NavbarBurgerProps = HelpersProps & NavbarBurgerModifierProps;
 
 export const NavbarBurger = forwardRefAs<NavbarBurgerProps, "div">(
   (props, ref) => {
     return (
       <NavbarContext.Consumer>
         {({ active, setActive }) => {
-          const { as, style, onClick, ...rest } = transformModifiers(props);
+          const { as, style, onClick, ...rest } = transformHelpers(props);
           rest.className = classNames("navbar-burger", rest.className, {
             "is-active": active,
           });

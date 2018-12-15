@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { HeroBody } from "./hero-body";
 import { HeroFoot } from "./hero-foot";
@@ -24,12 +23,12 @@ export type HeroModifierProps = Partial<{
   size: HeroSizes;
 }>;
 
-export type HeroProps = ModifierProps & HeroModifierProps;
+export type HeroProps = HelpersProps & HeroModifierProps;
 
 export const Hero = Object.assign(
   forwardRefAs<HeroProps, "section">(
     (props, ref) => {
-      const { as, color, gradient, size, ...rest } = transformModifiers(props);
+      const { as, color, gradient, size, ...rest } = transformHelpers(props);
       rest.className = classNames("hero", rest.className, {
         "is-bold": gradient,
         [`is-${color}`]: color,

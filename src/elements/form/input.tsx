@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs } from "../../base";
-import { ModifierProps, transformModifiers } from "../../modifiers";
-import { Colors } from "../../modifiers/color";
+import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const INPUT_SIZES = tuple("small", "medium", "large");
@@ -36,7 +35,7 @@ export type InputModifierProps = Partial<{
   type: InputTypes;
 }>;
 
-export type InputProps = ModifierProps & InputModifierProps;
+export type InputProps = HelpersProps & InputModifierProps;
 
 export const Input = forwardRefAs<InputProps, "input">(
   (props, ref) => {
@@ -49,7 +48,7 @@ export const Input = forwardRefAs<InputProps, "input">(
       state,
       static: isStatic,
       ...rest
-    } = transformModifiers(props);
+    } = transformHelpers(props);
     rest.className = classNames("input", rest.className, {
       [`is-${color}`]: color,
       "is-rounded": rounded,
