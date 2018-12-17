@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  asHelpersPropTypes,
+  forwardRefAs,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 import { ContentOrderedListItem } from "./content-ordered-list-item";
 
@@ -22,6 +28,11 @@ export type ContentOrderedListProps = Prefer<
   Omit<React.HTMLAttributes<HTMLOListElement>, "type">
 >;
 
+const propTypes = {
+  ...asHelpersPropTypes,
+  type: PropTypes.oneOf(CONTENT_ORDERED_LIST_TYPES),
+};
+
 export const ContentOrderedList = Object.assign(
   forwardRefAs<ContentOrderedListProps, "ol">(
     (props, ref) => {
@@ -33,5 +44,8 @@ export const ContentOrderedList = Object.assign(
     },
     { as: "ol" },
   ),
-  { Item: ContentOrderedListItem },
+  {
+    Item: ContentOrderedListItem,
+    propTypes,
+  },
 );

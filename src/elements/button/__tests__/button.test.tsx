@@ -5,7 +5,11 @@ import { COLORS } from "@/base/helpers";
 import { Button, BUTTON_SIZES, BUTTON_STATES } from "../button";
 import { ButtonGroup } from "../button-group";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  describeExoticPropTypes,
+  hasProperties,
+  validatePropTypes,
+} from "@/__tests__/helpers";
 
 describe("Button component", () => {
   hasProperties(Button, {
@@ -133,4 +137,75 @@ describe("Button component", () => {
       expect(wrapper.hasClass("is-text")).toBe(text);
     }),
   );
+
+  describeExoticPropTypes(Button.propTypes);
+
+  describe("propTypes", () => {
+    const propTypes = Button.propTypes;
+
+    validatePropTypes(propTypes, "className", [
+      { value: "custom", valid: true },
+      { value: true, valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "color", [
+      ...COLORS.map(value => ({ value, valid: true })),
+      { value: "unknown", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "disabled", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "fullwidth", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "inverted", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "onClick", [
+      { value: () => null, valid: true, descriptor: "func" },
+      { value: true, valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "outlined", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "rounded", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "selected", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "size", [
+      ...BUTTON_SIZES.map(value => ({ value, valid: true })),
+      { value: "unknown", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "state", [
+      ...BUTTON_STATES.map(value => ({ value, valid: true })),
+      { value: "unknown", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "static", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "text", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "true", valid: false },
+    ]);
+  });
 });

@@ -4,7 +4,11 @@ import React from "react";
 import { BREAKPOINTS } from "@/base/helpers";
 import { Container } from "../container";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  describeExoticPropTypes,
+  hasProperties,
+  validatePropTypes,
+} from "@/__tests__/helpers";
 
 describe("Container component", () => {
   hasProperties(Container, {
@@ -59,4 +63,20 @@ describe("Container component", () => {
       expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
     }),
   );
+
+  describeExoticPropTypes(Container.propTypes);
+
+  describe("propTypes", () => {
+    const propTypes = Container.propTypes;
+
+    validatePropTypes(propTypes, "breakpoint", [
+      ...BREAKPOINTS.map(value => ({ value, valid: true })),
+      { value: "other", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "fluid", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "string", valid: false },
+    ]);
+  });
 });

@@ -1,3 +1,3 @@
 export { forwardRefAs } from "./exotic";
-export { Generic } from "./generic";
-export { HelpersProps, transformHelpers } from "./helpers";
+export { Generic, propTypes as asHelpersPropTypes } from "./generic";
+export { HelpersProps, transformHelpers, helpersPropTypes } from "./helpers";

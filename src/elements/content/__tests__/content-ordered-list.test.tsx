@@ -7,7 +7,11 @@ import {
 } from "../content-ordered-list";
 import { ContentOrderedListItem } from "../content-ordered-list-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  describeExoticPropTypes,
+  hasProperties,
+  validatePropTypes,
+} from "@/__tests__/helpers";
 
 describe("ContentOrderedList component", () => {
   hasProperties(ContentOrderedList, {
@@ -55,4 +59,15 @@ describe("ContentOrderedList component", () => {
       expect(wrapper.hasClass(`is-${type}`)).toBe(true);
     }),
   );
+
+  describeExoticPropTypes(ContentOrderedList.propTypes);
+
+  describe("propTypes", () => {
+    const propTypes = ContentOrderedList.propTypes;
+
+    validatePropTypes(propTypes, "type", [
+      ...CONTENT_ORDERED_LIST_TYPES.map(value => ({ value, valid: true })),
+      { value: "other", valid: false },
+    ]);
+  });
 });

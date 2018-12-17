@@ -3,7 +3,7 @@ import React from "react";
 
 import { Box } from "../box";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { describeExoticPropTypes, hasProperties } from "@/__tests__/helpers";
 
 describe("Box component", () => {
   hasProperties(Box, {
@@ -46,4 +46,6 @@ describe("Box component", () => {
     const wrapper = Enzyme.shallow(<Box className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
   });
+
+  describeExoticPropTypes(Box.propTypes);
 });

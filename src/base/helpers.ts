@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
 import { tuple } from "../utils";
 
@@ -14,6 +15,11 @@ export type FloatHelpersProps = Partial<{
   /** Moves an element to the left or right */
   pull: FloatPulledAlignments;
 }>;
+
+export const floatHelpersPropTypes = {
+  clearfix: PropTypes.bool,
+  pull: PropTypes.oneOf(FLOAT_PULLED_ALIGNMENTS),
+};
 
 export const transformFloatHelpers = <
   P extends object & FloatHelpersProps & { className?: string }
@@ -40,6 +46,10 @@ export type OverflowHelpersProps = Partial<{
   clipped: boolean;
 }>;
 
+export const overflowHelpersPropTypes = {
+  clipped: PropTypes.bool,
+};
+
 export const transformOverflowHelpers = <
   P extends object & OverflowHelpersProps & { className?: string }
 >(
@@ -58,6 +68,10 @@ export type OverlayHelpersProps = Partial<{
   /** Completely covers the first positioned parent */
   overlay: boolean;
 }>;
+
+export const overlayHelpersPropTypes = {
+  overlay: PropTypes.bool,
+};
 
 export const transformOverlayHelpers = <
   P extends object & OverlayHelpersProps & { className?: string }
@@ -122,6 +136,16 @@ export type TypographyHelpersProps = Partial<{
   textWeight: TextWeights;
 }>;
 
+export const typographyHelpersPropTypes = {
+  backgroundColor: PropTypes.oneOf([...COLORS, ...GREY_COLORS]),
+  italic: PropTypes.bool,
+  textAlignment: PropTypes.oneOf(TEXT_ALIGNMENTS),
+  textColor: PropTypes.oneOf([...COLORS, ...GREY_COLORS]),
+  textSize: PropTypes.oneOf(TEXT_SIZES),
+  textTransform: PropTypes.oneOf(TEXT_TRANSFORMS),
+  textWeight: PropTypes.oneOf(TEXT_WEIGHTS),
+};
+
 export const transformTypographyHelpers = <
   P extends object & TypographyHelpersProps & { className?: string }
 >(
@@ -180,6 +204,12 @@ export type VisibilityHelpersProps = Partial<{
   srOnly: boolean;
 }>;
 
+export const visibilityHelpersPropTypes = {
+  hidden: PropTypes.bool,
+  invisible: PropTypes.bool,
+  srOnly: PropTypes.bool,
+};
+
 export const transformVisibilityHelpers = <
   P extends object & VisibilityHelpersProps & { className?: string }
 >(
@@ -219,6 +249,14 @@ export type OtherHelpersProps = Partial<{
   /** Prevents the text from being selectable */
   unselectable: boolean;
 }>;
+
+export const otherHelpersPropTypes = {
+  marginless: PropTypes.bool,
+  paddingless: PropTypes.bool,
+  radiusless: PropTypes.bool,
+  shadowless: PropTypes.bool,
+  unselectable: PropTypes.bool,
+};
 
 export const transformOtherHelpers = <
   P extends object & OtherHelpersProps & { className?: string }
@@ -308,6 +346,53 @@ export type ResponsiveHelpersProps = Partial<{
   }>;
 }>;
 
+export const responsiveBreakpointPropTypes = {
+  display: PropTypes.shape({
+    only: PropTypes.bool,
+    value: PropTypes.oneOf(DISPLAYS).isRequired,
+  }),
+  hide: PropTypes.shape({
+    only: PropTypes.bool,
+    value: PropTypes.bool.isRequired,
+  }),
+  textAlignment: PropTypes.shape({
+    only: PropTypes.bool,
+    value: PropTypes.bool.isRequired,
+  }),
+  textSize: PropTypes.shape({
+    only: PropTypes.bool,
+    value: PropTypes.oneOf(TEXT_SIZES).isRequired,
+  }),
+};
+
+export const limitedResponsiveBreakpointPropTypes = {
+  display: PropTypes.shape({
+    value: PropTypes.oneOf(DISPLAYS).isRequired,
+  }),
+  hide: PropTypes.shape({
+    value: PropTypes.bool.isRequired,
+  }),
+  textAlignment: PropTypes.shape({
+    value: PropTypes.bool.isRequired,
+  }),
+  textSize: PropTypes.shape({
+    value: PropTypes.oneOf(TEXT_SIZES).isRequired,
+  }),
+};
+
+export const responsiveHelpersPropTypes = {
+  responsive: PropTypes.shape({
+    // tslint:disable:object-literal-sort-keys
+    mobile: PropTypes.shape(limitedResponsiveBreakpointPropTypes),
+    tablet: PropTypes.shape(responsiveBreakpointPropTypes),
+    desktop: PropTypes.shape(responsiveBreakpointPropTypes),
+    widescreen: PropTypes.shape(responsiveBreakpointPropTypes),
+    fullhd: PropTypes.shape(limitedResponsiveBreakpointPropTypes),
+    touch: PropTypes.shape(limitedResponsiveBreakpointPropTypes),
+    // tslint:enable:object-literal-sort-keys
+  }),
+};
+
 export const transformResponsiveHelpers = <
   P extends object & ResponsiveHelpersProps & { className?: string }
 >(
@@ -358,13 +443,27 @@ export const transformResponsiveHelpers = <
   return { className, ...rest };
 };
 
+/**
+ * Union of helpers
+ */
 export type HelpersProps = FloatHelpersProps &
   OverflowHelpersProps &
   OverlayHelpersProps &
   TypographyHelpersProps &
   VisibilityHelpersProps &
   OtherHelpersProps &
-  ResponsiveHelpersProps;
+  ResponsiveHelpersProps & { className?: string };
+
+export const helpersPropTypes = {
+  ...floatHelpersPropTypes,
+  ...overflowHelpersPropTypes,
+  ...overlayHelpersPropTypes,
+  ...typographyHelpersPropTypes,
+  ...visibilityHelpersPropTypes,
+  ...otherHelpersPropTypes,
+  ...responsiveHelpersPropTypes,
+  className: PropTypes.string,
+};
 
 export const transformHelpers = <T extends object & { className?: string }>(
   props: T,

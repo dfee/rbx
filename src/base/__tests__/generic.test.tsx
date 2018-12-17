@@ -4,6 +4,7 @@ import React from "react";
 import { Generic } from "../generic";
 
 import { hasProperties } from "@/__tests__/helpers";
+import { describeExoticPropTypes } from "../../__tests__/helpers";
 
 describe("Generic component", () => {
   hasProperties(Generic, {
@@ -46,4 +47,6 @@ describe("Generic component", () => {
     const wrapper = Enzyme.shallow(<Generic className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
   });
+
+  describeExoticPropTypes(Generic.propTypes);
 });

@@ -1,25 +1,39 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
-import { Breakpoints } from "../../base/helpers";
+import {
+  asHelpersPropTypes,
+  forwardRefAs,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
+import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
 
 export type ContainerModifierProps = Partial<{
   breakpoint: Breakpoints;
-  className: string;
   fluid: boolean;
 }>;
 
 export type ContainerProps = HelpersProps & ContainerModifierProps;
 
-export const Container = forwardRefAs<ContainerProps, "div">(
-  (props, ref) => {
-    const { as, fluid, breakpoint, ...rest } = transformHelpers(props);
-    rest.className = classNames("container", rest.className, {
-      "is-fluid": fluid,
-      [`is-${breakpoint}`]: breakpoint,
-    });
-    return React.createElement(as!, { ref, ...rest });
-  },
-  { as: "div" },
+const propTypes = {
+  ...asHelpersPropTypes,
+  breakpoint: PropTypes.oneOf(BREAKPOINTS),
+  fluid: PropTypes.bool,
+};
+
+export const Container = Object.assign(
+  forwardRefAs<ContainerProps, "div">(
+    (props, ref) => {
+      const { as, fluid, breakpoint, ...rest } = transformHelpers(props);
+      rest.className = classNames("container", rest.className, {
+        "is-fluid": fluid,
+        [`is-${breakpoint}`]: breakpoint,
+      });
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "div" },
+  ),
+  { propTypes },
 );

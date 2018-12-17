@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  asHelpersPropTypes,
+  forwardRefAs,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 import { ContentOrderedList } from "./content-ordered-list";
 
@@ -9,11 +15,15 @@ export const CONTENT_SIZES = tuple("small", "medium", "large");
 export type ContentSizes = (typeof CONTENT_SIZES)[number];
 
 export type ContentModifierProps = Partial<{
-  className: string;
   size: ContentSizes;
 }>;
 
 export type ContentProps = HelpersProps & ContentModifierProps;
+
+const propTypes = {
+  ...asHelpersPropTypes,
+  size: PropTypes.oneOf(CONTENT_SIZES),
+};
 
 export const Content = Object.assign(
   forwardRefAs<ContentProps, "div">(
@@ -26,5 +36,8 @@ export const Content = Object.assign(
     },
     { as: "div" },
   ),
-  { OrderedList: ContentOrderedList },
+  {
+    OrderedList: ContentOrderedList,
+    propTypes,
+  },
 );

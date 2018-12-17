@@ -3,7 +3,7 @@ import React from "react";
 
 import { ContentOrderedListItem } from "../content-ordered-list-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { describeExoticPropTypes, hasProperties } from "@/__tests__/helpers";
 
 describe("ContentOrderedListItem component", () => {
   hasProperties(ContentOrderedListItem, {
@@ -43,4 +43,6 @@ describe("ContentOrderedListItem component", () => {
     );
     expect(wrapper.hasClass(className)).toBe(true);
   });
+
+  describeExoticPropTypes(ContentOrderedListItem.propTypes);
 });

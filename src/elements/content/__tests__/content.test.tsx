@@ -4,7 +4,11 @@ import React from "react";
 import { Content, CONTENT_SIZES } from "../content";
 import { ContentOrderedList } from "../content-ordered-list";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  describeExoticPropTypes,
+  hasProperties,
+  validatePropTypes,
+} from "@/__tests__/helpers";
 
 describe("Content component", () => {
   hasProperties(Content, {
@@ -55,4 +59,15 @@ describe("Content component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describeExoticPropTypes(Content.propTypes);
+
+  describe("propTypes", () => {
+    const propTypes = Content.propTypes;
+
+    validatePropTypes(propTypes, "size", [
+      ...CONTENT_SIZES.map(value => ({ value, valid: true })),
+      { value: "other", valid: false },
+    ]);
+  });
 });

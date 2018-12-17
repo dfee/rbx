@@ -1,8 +1,14 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
-import { Colors } from "../../base/helpers";
+import {
+  asHelpersPropTypes,
+  forwardRefAs,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
+import { COLORS, Colors } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { ButtonGroup } from "./button-group";
 
@@ -13,13 +19,12 @@ export const BUTTON_STATES = tuple("hovered", "focused", "active", "loading");
 export type ButtonStates = (typeof BUTTON_STATES)[number];
 
 export type ButtonModifierProps = Partial<{
-  className: string;
   color: Colors;
   disabled: boolean;
   fullwidth: boolean;
   inverted: boolean;
-  outlined: boolean;
   onClick: React.MouseEventHandler<any>;
+  outlined: boolean;
   rounded: boolean;
   selected: boolean;
   size: ButtonSizes;
@@ -29,6 +34,22 @@ export type ButtonModifierProps = Partial<{
 }>;
 
 export type ButtonProps = HelpersProps & ButtonModifierProps;
+
+const propTypes = {
+  ...asHelpersPropTypes,
+  color: PropTypes.oneOf(COLORS),
+  disabled: PropTypes.bool,
+  fullwidth: PropTypes.bool,
+  inverted: PropTypes.bool,
+  onClick: PropTypes.func,
+  outlined: PropTypes.bool,
+  rounded: PropTypes.bool,
+  selected: PropTypes.bool,
+  size: PropTypes.oneOf(BUTTON_SIZES),
+  state: PropTypes.oneOf(BUTTON_STATES),
+  static: PropTypes.bool,
+  text: PropTypes.bool,
+};
 
 export const Button = Object.assign(
   forwardRefAs<ButtonProps, "button">(
@@ -77,5 +98,8 @@ export const Button = Object.assign(
     },
     { as: "button" },
   ),
-  { Group: ButtonGroup },
+  {
+    Group: ButtonGroup,
+    propTypes,
+  },
 );

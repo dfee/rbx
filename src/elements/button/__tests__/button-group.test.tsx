@@ -3,7 +3,11 @@ import React from "react";
 
 import { BUTTON_GROUP_POSITIONS, ButtonGroup } from "../button-group";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  describeExoticPropTypes,
+  hasProperties,
+  validatePropTypes,
+} from "@/__tests__/helpers";
 
 describe("ButtonGroup component", () => {
   hasProperties(ButtonGroup, {
@@ -58,4 +62,20 @@ describe("ButtonGroup component", () => {
       expect(wrapper.hasClass(`is-${position}`)).toBe(true);
     }),
   );
+
+  describeExoticPropTypes(ButtonGroup.propTypes);
+
+  describe("propTypes", () => {
+    const propTypes = ButtonGroup.propTypes;
+
+    validatePropTypes(propTypes, "hasAddons", [
+      ...[false, true].map(value => ({ value, valid: true })),
+      { value: "other", valid: false },
+    ]);
+
+    validatePropTypes(propTypes, "position", [
+      ...BUTTON_GROUP_POSITIONS.map(value => ({ value, valid: true })),
+      { value: "other", valid: false },
+    ]);
+  });
 });
