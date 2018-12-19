@@ -3,7 +3,7 @@ import React from "react";
 
 import { HeroFoot } from "../hero-foot";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("HeroFoot component", () => {
   hasProperties(HeroFoot, {
@@ -45,5 +45,10 @@ describe("HeroFoot component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<HeroFoot className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = HeroFoot;
+    testGenericPropTypes(propTypes);
   });
 });

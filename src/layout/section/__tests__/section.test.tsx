@@ -3,7 +3,11 @@ import React from "react";
 
 import { Section, SECTION_SIZES } from "../section";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Section component", () => {
   hasProperties(Section, {
@@ -53,4 +57,10 @@ describe("Section component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Section;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "size", SECTION_SIZES);
+  });
 });

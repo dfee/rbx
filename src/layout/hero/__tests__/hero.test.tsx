@@ -7,7 +7,12 @@ import { HeroBody } from "../hero-body";
 import { HeroFoot } from "../hero-foot";
 import { HeroHead } from "../hero-head";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Hero component", () => {
   hasProperties(Hero, {
@@ -74,4 +79,12 @@ describe("Hero component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Hero;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateBoolPropType(propTypes, "gradient");
+    validateOneOfPropType(propTypes, "size", HERO_SIZES);
+  });
 });

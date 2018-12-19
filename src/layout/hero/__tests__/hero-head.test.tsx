@@ -3,7 +3,7 @@ import React from "react";
 
 import { HeroHead } from "../hero-head";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("HeroHead component", () => {
   hasProperties(HeroHead, {
@@ -45,5 +45,10 @@ describe("HeroHead component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<HeroHead className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = HeroHead;
+    testGenericPropTypes(propTypes);
   });
 });
