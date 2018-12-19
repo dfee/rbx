@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardContent } from "../card-content";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("CardContent component", () => {
   hasProperties(CardContent, {
@@ -45,5 +45,10 @@ describe("CardContent component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<CardContent className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = CardContent;
+    testGenericPropTypes(propTypes);
   });
 });

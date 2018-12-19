@@ -3,7 +3,11 @@ import React from "react";
 
 import { PanelTab } from "../panel-tab";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("PanelTab component", () => {
   hasProperties(PanelTab, {
@@ -53,4 +57,10 @@ describe("PanelTab component", () => {
       expect(wrapper.hasClass("is-active")).toBe(active);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = PanelTab;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
+  });
 });

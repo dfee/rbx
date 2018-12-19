@@ -4,7 +4,12 @@ import React from "react";
 import { MenuList } from "../menu-list";
 import { MenuListItem } from "../menu-list-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validatePropType,
+} from "@/__tests__/testing";
 
 describe("MenuListItem component", () => {
   hasProperties(MenuListItem, {
@@ -57,5 +62,15 @@ describe("MenuListItem component", () => {
     expect(wrapper.children().length).toBe(2);
     expect(wrapper.childAt(0).is("a")).toBe(true);
     expect(wrapper.childAt(1).type()).toBe(MenuList);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = MenuListItem;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
+    validatePropType(propTypes, "menu", [
+      { value: <div />, valid: true, descriptor: "div" },
+      { value: {}, valid: false, descriptor: "obj" },
+    ]);
   });
 });

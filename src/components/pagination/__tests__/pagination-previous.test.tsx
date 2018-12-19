@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationPrevious } from "../pagination-previous";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("PaginationPrevious component", () => {
   hasProperties(PaginationPrevious, {
@@ -50,5 +50,10 @@ describe("PaginationPrevious component", () => {
       <PaginationPrevious className={className} />,
     );
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = PaginationPrevious;
+    testGenericPropTypes(propTypes);
   });
 });

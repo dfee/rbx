@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -12,6 +13,17 @@ import { ModalPortal, ModalPortalProps } from "./modal-portal";
 export type ModalModifierProps = Partial<{
   active: boolean;
 }>;
+
+export type ModalProps = Omit<ModalControllerProps, "as" | "innerRef">;
+
+const propTypes = {
+  active: PropTypes.bool,
+  className: PropTypes.string,
+  closeOnBlur: PropTypes.bool,
+  closeOnEsc: PropTypes.bool,
+  containerClassName: PropTypes.string,
+  onClose: PropTypes.func,
+};
 
 export type ModalControllerProps = ModalPortalProps &
   ModalModifierProps & { containerClassName?: string };
@@ -49,8 +61,6 @@ export class ModalController extends React.PureComponent<ModalControllerProps> {
   }
 }
 
-export type ModalProps = Omit<ModalControllerProps, "as" | "innerRef">;
-
 export const Modal = Object.assign(
   forwardRefAs<ModalProps, "div">(
     (props, ref) => {
@@ -64,5 +74,6 @@ export const Modal = Object.assign(
     Card: ModalCard,
     Close: ModalClose,
     Content: ModalContent,
+    propTypes,
   },
 );

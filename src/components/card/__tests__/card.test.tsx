@@ -7,7 +7,7 @@ import { CardFooter } from "../card-footer";
 import { CardHeader } from "../card-header";
 import { CardImage } from "../card-image";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Card component", () => {
   hasProperties(Card, {
@@ -53,5 +53,10 @@ describe("Card component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Card className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Card;
+    testGenericPropTypes(propTypes);
   });
 });

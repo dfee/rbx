@@ -7,7 +7,7 @@ import { ModalCardFoot } from "../modal-card-foot";
 import { ModalCardHead } from "../modal-card-head";
 import { ModalCardTitle } from "../modal-card-title";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("ModalCard component", () => {
   hasProperties(ModalCard, {
@@ -53,5 +53,10 @@ describe("ModalCard component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<ModalCard className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = ModalCard;
+    testGenericPropTypes(propTypes);
   });
 });

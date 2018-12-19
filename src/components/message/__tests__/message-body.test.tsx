@@ -3,7 +3,7 @@ import React from "react";
 
 import { MessageBody } from "../message-body";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("MessageBody component", () => {
   hasProperties(MessageBody, {
@@ -45,5 +45,10 @@ describe("MessageBody component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<MessageBody className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = MessageBody;
+    testGenericPropTypes(propTypes);
   });
 });

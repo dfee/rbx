@@ -9,7 +9,11 @@ import {
 } from "../breadcrumb";
 import { BreadcrumbItem } from "../breadcrumb-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Breadcrumb component", () => {
   hasProperties(Breadcrumb, {
@@ -78,4 +82,12 @@ describe("Breadcrumb component", () => {
       expect(wrapper.find(".breadcrumb").hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Breadcrumb;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "align", BREADCRUMB_ALIGNMENTS);
+    validateOneOfPropType(propTypes, "separator", BREADCRUMB_SEPARATORS);
+    validateOneOfPropType(propTypes, "size", BREADCRUMB_SIZES);
+  });
 });

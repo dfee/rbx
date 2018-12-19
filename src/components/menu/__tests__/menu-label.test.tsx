@@ -3,7 +3,7 @@ import React from "react";
 
 import { MenuLabel } from "../menu-label";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("MenuLabel component", () => {
   hasProperties(MenuLabel, {
@@ -45,5 +45,10 @@ describe("MenuLabel component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<MenuLabel className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = MenuLabel;
+    testGenericPropTypes(propTypes);
   });
 });

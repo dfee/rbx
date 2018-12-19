@@ -145,3 +145,12 @@ export const validateOneOfPropType = (
     ...choices.map(value => ({ value, valid: true })),
     { value: "__UNKNOWN", valid: false },
   ]);
+
+export const validateStringPropType = (
+  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propName: string,
+) =>
+  validatePropType(propTypes, propName, [
+    { value: "string", valid: true },
+    { value: 1, valid: false },
+  ]);

@@ -14,7 +14,12 @@ import { DropdownItem } from "../dropdown-item";
 import { DropdownMenu } from "../dropdown-menu";
 import { DropdownTrigger } from "../dropdown-trigger";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Card component", () => {
   hasProperties(Dropdown, {
@@ -235,4 +240,14 @@ describe("Card component", () => {
       }),
     ),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Dropdown;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
+    validateOneOfPropType(propTypes, "align", DROPDOWN_ALIGNMENTS);
+    validateBoolPropType(propTypes, "hoverable");
+    validateBoolPropType(propTypes, "managed");
+    validateBoolPropType(propTypes, "up");
+  });
 });

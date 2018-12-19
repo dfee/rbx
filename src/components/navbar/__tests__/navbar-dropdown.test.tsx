@@ -3,7 +3,11 @@ import React from "react";
 
 import { NavbarDropdown } from "../navbar-dropdown";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("NavbarDropdown component", () => {
   hasProperties(NavbarDropdown, {
@@ -60,4 +64,11 @@ describe("NavbarDropdown component", () => {
       expect(wrapper.hasClass("is-boxed")).toBe(boxed);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = NavbarDropdown;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "boxed");
+    validateBoolPropType(propTypes, "right");
+  });
 });

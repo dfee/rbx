@@ -5,7 +5,7 @@ import { CardHeader } from "../card-header";
 import { CardHeaderIcon } from "../card-header-icon";
 import { CardHeaderTitle } from "../card-header-title";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("CardHeader component", () => {
   hasProperties(CardHeader, {
@@ -49,5 +49,10 @@ describe("CardHeader component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<CardHeader className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = CardHeader;
+    testGenericPropTypes(propTypes);
   });
 });

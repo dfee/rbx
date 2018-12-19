@@ -1,12 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { MenuListItem } from "./menu-list-item";
 
-export type MenuListModifierProps = Partial<{ className: string }>;
-
-export type MenuListProps = HelpersProps & MenuListModifierProps;
+export type MenuListProps = HelpersProps;
 
 export const MenuList = Object.assign(
   forwardRefAs<MenuListProps, "ul">(
@@ -19,5 +22,6 @@ export const MenuList = Object.assign(
   ),
   {
     Item: MenuListItem,
+    propTypes: genericPropTypes,
   },
 );

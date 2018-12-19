@@ -4,7 +4,7 @@ import React from "react";
 import { CardFooter } from "../card-footer";
 import { CardFooterItem } from "../card-footer-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("CardFooter component", () => {
   hasProperties(CardFooter, {
@@ -47,5 +47,10 @@ describe("CardFooter component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<CardFooter className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = CardFooter;
+    testGenericPropTypes(propTypes);
   });
 });

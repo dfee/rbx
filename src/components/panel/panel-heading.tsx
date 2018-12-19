@@ -1,16 +1,23 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 
-export type PanelHeadingModifierProps = Partial<{ className: string }>;
-export type PanelHeadingProps = HelpersProps & PanelHeadingModifierProps;
+export type PanelHeadingProps = HelpersProps;
 
-export const PanelHeading = forwardRefAs<PanelHeadingProps, "div">(
-  (props, ref) => {
-    const { as, ...rest } = transformHelpers(props);
-    rest.className = classNames("panel-heading", rest.className);
-    return React.createElement(as!, { ref, ...rest });
-  },
-  { as: "div" },
+export const PanelHeading = Object.assign(
+  forwardRefAs<PanelHeadingProps, "div">(
+    (props, ref) => {
+      const { as, ...rest } = transformHelpers(props);
+      rest.className = classNames("panel-heading", rest.className);
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "div" },
+  ),
+  { propTypes: genericPropTypes },
 );

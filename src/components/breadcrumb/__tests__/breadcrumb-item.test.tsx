@@ -3,7 +3,11 @@ import React from "react";
 
 import { BreadcrumbItem } from "../breadcrumb-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("BreadcrumbItem component", () => {
   hasProperties(BreadcrumbItem, {
@@ -53,5 +57,11 @@ describe("BreadcrumbItem component", () => {
   it("should be active", () => {
     const wrapper = Enzyme.shallow(<BreadcrumbItem active />);
     expect(wrapper.hasClass("is-active")).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = BreadcrumbItem;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
   });
 });

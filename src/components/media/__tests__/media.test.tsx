@@ -4,7 +4,7 @@ import React from "react";
 import { Media } from "../media";
 import { MediaItem } from "../media-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Media component", () => {
   hasProperties(Media, {
@@ -47,5 +47,10 @@ describe("Media component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Media className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Media;
+    testGenericPropTypes(propTypes);
   });
 });

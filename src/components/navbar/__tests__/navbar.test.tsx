@@ -19,7 +19,12 @@ import { NavbarLink } from "../navbar-link";
 import { NavbarMenu } from "../navbar-menu";
 import { NavbarStart } from "../navbar-start";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Navbar component", () => {
   hasProperties(Navbar, {
@@ -286,5 +291,15 @@ describe("Navbar component", () => {
       wrapper.unmount();
       expect(wrapper.type()).toBeNull();
     });
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Navbar;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateOneOfPropType(propTypes, "fixed", NAVBAR_FIXED_ALIGNMENTS);
+    validateBoolPropType(propTypes, "managed");
+    validateBoolPropType(propTypes, "transparent");
   });
 });

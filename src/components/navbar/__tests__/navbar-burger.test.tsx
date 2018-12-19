@@ -4,7 +4,12 @@ import React from "react";
 import { NavbarBurger } from "../navbar-burger";
 import { contextFactory } from "./helpers";
 
-import { hasProperties, shallowInContext } from "@/__tests__/testing";
+import {
+  hasProperties,
+  shallowInContext,
+  testGenericPropTypes,
+  validatePropType,
+} from "@/__tests__/testing";
 
 describe("NavbarBurger component", () => {
   hasProperties(NavbarBurger, {
@@ -96,4 +101,17 @@ describe("NavbarBurger component", () => {
       expect(setActive.mock.calls[0]).toEqual([true]);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = NavbarBurger;
+    testGenericPropTypes(propTypes);
+    validatePropType(propTypes, "onClick", [
+      { value: () => null, valid: true, descriptor: "func" },
+      { value: "string", valid: false },
+    ]);
+    validatePropType(propTypes, "style", [
+      { value: {}, valid: true, descriptor: "obj" },
+      { value: "string", valid: false },
+    ]);
+  });
 });

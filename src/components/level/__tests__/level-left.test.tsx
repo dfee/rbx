@@ -3,7 +3,7 @@ import React from "react";
 
 import { LevelLeft } from "../level-left";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("LevelLeft component", () => {
   // todo: LevelSide
@@ -46,5 +46,10 @@ describe("LevelLeft component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<LevelLeft className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = LevelLeft;
+    testGenericPropTypes(propTypes);
   });
 });

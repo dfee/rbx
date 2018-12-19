@@ -8,7 +8,12 @@ import { ModalClose } from "../modal-close";
 import { ModalContent } from "../modal-content";
 import { ModalPortal } from "../modal-portal";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  validateBoolPropType,
+  validatePropType,
+  validateStringPropType,
+} from "@/__tests__/testing";
 
 describe("Modal component", () => {
   hasProperties(Modal, {
@@ -175,5 +180,18 @@ describe("Modal component", () => {
       wrapper.unmount();
       expect(wrapper.type()).toBeNull();
     });
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Modal;
+    validateBoolPropType(propTypes, "active");
+    validateStringPropType(propTypes, "className");
+    validateStringPropType(propTypes, "containerClassName");
+    validateBoolPropType(propTypes, "closeOnBlur");
+    validateBoolPropType(propTypes, "closeOnEsc");
+    validatePropType(propTypes, "onClose", [
+      { value: () => null, valid: true, descriptor: "func" },
+      { value: "string", valid: false },
+    ]);
   });
 });

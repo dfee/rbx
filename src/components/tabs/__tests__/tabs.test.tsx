@@ -4,7 +4,12 @@ import React from "react";
 import { Tab } from "../tab";
 import { Tabs, TABS_ALIGNMENTS, TABS_SIZES, TABS_TYPES } from "../tabs";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Tabs component", () => {
   hasProperties(Tabs, {
@@ -79,4 +84,13 @@ describe("Tabs component", () => {
       expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Tabs;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "align", TABS_ALIGNMENTS);
+    validateBoolPropType(propTypes, "fullwidth");
+    validateOneOfPropType(propTypes, "size", TABS_SIZES);
+    validateOneOfPropType(propTypes, "type", TABS_TYPES);
+  });
 });

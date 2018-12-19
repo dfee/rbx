@@ -4,7 +4,7 @@ import React from "react";
 import { PanelTab } from "../panel-tab";
 import { PanelTabs } from "../panel-tabs";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("PanelTabs component", () => {
   hasProperties(PanelTabs, {
@@ -42,5 +42,10 @@ describe("PanelTabs component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<PanelTabs className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = PanelTabs;
+    testGenericPropTypes(propTypes);
   });
 });

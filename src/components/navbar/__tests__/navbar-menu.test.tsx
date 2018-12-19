@@ -4,7 +4,11 @@ import React from "react";
 import { NavbarMenu } from "../navbar-menu";
 import { contextFactory } from "./helpers";
 
-import { hasProperties, shallowInContext } from "@/__tests__/testing";
+import {
+  hasProperties,
+  shallowInContext,
+  testGenericPropTypes,
+} from "@/__tests__/testing";
 
 describe("NavbarMenu component", () => {
   hasProperties(NavbarMenu, {
@@ -60,4 +64,9 @@ describe("NavbarMenu component", () => {
       expect(wrapper.hasClass("is-active")).toBe(active);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = NavbarMenu;
+    testGenericPropTypes(propTypes);
+  });
 });

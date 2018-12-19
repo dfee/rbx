@@ -3,7 +3,11 @@ import React from "react";
 
 import { NavbarItem } from "../navbar-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("NavbarItem component", () => {
   hasProperties(NavbarItem, {
@@ -74,4 +78,13 @@ describe("NavbarItem component", () => {
       expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = NavbarItem;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
+    validateBoolPropType(propTypes, "dropdown");
+    validateBoolPropType(propTypes, "dropdownUp");
+    validateBoolPropType(propTypes, "hoverable");
+  });
 });

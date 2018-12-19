@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 
@@ -30,6 +36,13 @@ export type BreadcrumbProps = Prefer<
   React.HTMLAttributes<HTMLElement>
 >;
 
+const propTypes = {
+  ...genericPropTypes,
+  align: PropTypes.oneOf(BREADCRUMB_ALIGNMENTS),
+  separator: PropTypes.oneOf(BREADCRUMB_SEPARATORS),
+  size: PropTypes.oneOf(BREADCRUMB_SIZES),
+};
+
 export const Breadcrumb = Object.assign(
   forwardRefAs<BreadcrumbProps, "nav">(
     (props, ref) => {
@@ -55,5 +68,8 @@ export const Breadcrumb = Object.assign(
     },
     { as: "nav" },
   ),
-  { Item: BreadcrumbItem },
+  {
+    Item: BreadcrumbItem,
+    propTypes,
+  },
 );

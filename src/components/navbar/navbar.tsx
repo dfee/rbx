@@ -1,8 +1,14 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
-import { Colors } from "../../base/helpers";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
+import { Colors, COLORS } from "../../base/helpers";
 import { canUseDOM, tuple } from "../../utils";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
@@ -19,11 +25,8 @@ export const NAVBAR_FIXED_ALIGNMENTS = tuple("top", "bottom");
 export type NavbarFixedAlignments = (typeof NAVBAR_FIXED_ALIGNMENTS)[number];
 
 export type NavbarModifierProps = Partial<{
-  /**
-   * Determines whether the menu is displayed on mobile
-   */
+  /** * Determines whether the menu is displayed on mobile */
   active: boolean;
-  className: string;
   color: Colors;
   fixed: NavbarFixedAlignments;
   managed: boolean;
@@ -31,6 +34,15 @@ export type NavbarModifierProps = Partial<{
 }>;
 
 export type NavbarProps = HelpersProps & NavbarModifierProps;
+
+const propTypes = {
+  ...genericPropTypes,
+  active: PropTypes.bool,
+  color: PropTypes.oneOf(COLORS),
+  fixed: PropTypes.oneOf(NAVBAR_FIXED_ALIGNMENTS),
+  managed: PropTypes.bool,
+  transparent: PropTypes.bool,
+};
 
 export type NavbarControllerProps = NavbarProps & {
   as: React.ReactType<any>;
@@ -149,5 +161,6 @@ export const Navbar = Object.assign(
     Link: NavbarLink,
     Menu: NavbarMenu,
     Start: NavbarStart,
+    propTypes,
   },
 );

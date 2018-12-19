@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardFooterItem } from "../card-footer-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("CardFooterItem component", () => {
   hasProperties(CardFooterItem, {
@@ -45,5 +45,10 @@ describe("CardFooterItem component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<CardFooterItem className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = CardFooterItem;
+    testGenericPropTypes(propTypes);
   });
 });

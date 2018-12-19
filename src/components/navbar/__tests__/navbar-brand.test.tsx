@@ -3,7 +3,7 @@ import React from "react";
 
 import { NavbarBrand } from "../navbar-brand";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("NavbarBrand component", () => {
   hasProperties(NavbarBrand, {
@@ -45,5 +45,10 @@ describe("NavbarBrand component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<NavbarBrand className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = NavbarBrand;
+    testGenericPropTypes(propTypes);
   });
 });

@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 import { combineRefs } from "../../utils";
 import { DropdownContent } from "./dropdown-content";
@@ -17,13 +23,21 @@ export type DropdownAlignments = (typeof DROPDOWN_ALIGNMENTS)[number];
 export type DropdownModifierProps = Partial<{
   active: boolean;
   align: DropdownAlignments;
-  className: string;
   hoverable: boolean;
   managed: boolean;
   up: boolean;
 }>;
 
 export type DropdownProps = HelpersProps & DropdownModifierProps;
+
+const propTypes = {
+  ...genericPropTypes,
+  active: PropTypes.bool,
+  align: PropTypes.oneOf(DROPDOWN_ALIGNMENTS),
+  hoverable: PropTypes.bool,
+  managed: PropTypes.bool,
+  up: PropTypes.bool,
+};
 
 const initialState = {
   active: false,
@@ -129,5 +143,6 @@ export const Dropdown = Object.assign(
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
+    propTypes,
   },
 );

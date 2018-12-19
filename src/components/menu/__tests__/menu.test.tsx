@@ -5,7 +5,7 @@ import { Menu } from "../menu";
 import { MenuLabel } from "../menu-label";
 import { MenuList } from "../menu-list";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Menu component", () => {
   hasProperties(Menu, {
@@ -49,5 +49,10 @@ describe("Menu component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Menu className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Menu;
+    testGenericPropTypes(propTypes);
   });
 });

@@ -6,7 +6,11 @@ import { Message, MESSAGE_SIZES } from "../message";
 import { MessageBody } from "../message-body";
 import { MessageHeader } from "../message-header";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Message component", () => {
   hasProperties(Message, {
@@ -68,4 +72,11 @@ describe("Message component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Message;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateOneOfPropType(propTypes, "size", MESSAGE_SIZES);
+  });
 });

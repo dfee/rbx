@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationEllipsis } from "../pagination-ellipsis";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("PaginationEllipsis component", () => {
   hasProperties(PaginationEllipsis, {
@@ -50,5 +50,10 @@ describe("PaginationEllipsis component", () => {
       <PaginationEllipsis className={className} />,
     );
     expect(wrapper.children().hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = PaginationEllipsis;
+    testGenericPropTypes(propTypes);
   });
 });

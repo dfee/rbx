@@ -3,7 +3,7 @@ import React from "react";
 
 import { NavbarDivider } from "../navbar-divider";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("NavbarDivider component", () => {
   hasProperties(NavbarDivider, {
@@ -45,5 +45,10 @@ describe("NavbarDivider component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<NavbarDivider className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = NavbarDivider;
+    testGenericPropTypes(propTypes);
   });
 });

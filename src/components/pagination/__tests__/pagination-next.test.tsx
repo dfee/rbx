@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationNext } from "../pagination-next";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("PaginationNext component", () => {
   hasProperties(PaginationNext, {
@@ -48,5 +48,10 @@ describe("PaginationNext component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<PaginationNext className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = PaginationNext;
+    testGenericPropTypes(propTypes);
   });
 });

@@ -7,7 +7,7 @@ import { PanelHeading } from "../panel-heading";
 import { PanelIcon } from "../panel-icon";
 import { PanelTabs } from "../panel-tabs";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Panel component", () => {
   hasProperties(Panel, {
@@ -53,5 +53,10 @@ describe("Panel component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Panel className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Panel;
+    testGenericPropTypes(propTypes);
   });
 });

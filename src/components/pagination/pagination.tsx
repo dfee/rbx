@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 import { PaginationEllipsis } from "./pagination-ellipsis";
 import { PaginationLink } from "./pagination-link";
@@ -17,12 +23,18 @@ export type PaginationSizes = (typeof PAGINATION_SIZES)[number];
 
 export type PaginationModifiers = Partial<{
   align: PaginationAlignments;
-  className: string;
   rounded: boolean;
   size: PaginationSizes;
 }>;
 
 export type PaginationProps = HelpersProps & PaginationModifiers;
+
+const propTypes = {
+  ...genericPropTypes,
+  align: PropTypes.oneOf(PAGINATION_ALIGNMENTS),
+  rounded: PropTypes.bool,
+  size: PropTypes.oneOf(PAGINATION_SIZES),
+};
 
 export const Pagination = Object.assign(
   forwardRefAs<PaginationProps, "nav">(
@@ -43,5 +55,6 @@ export const Pagination = Object.assign(
     List: PaginationList,
     Next: PaginationNext,
     Previous: PaginationPrevious,
+    propTypes,
   },
 );

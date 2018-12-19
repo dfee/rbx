@@ -1,12 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { MediaItem } from "./media-item";
 
-export type MediaModifierProps = Partial<{ className: string }>;
-
-export type MediaProps = HelpersProps & MediaModifierProps;
+export type MediaProps = HelpersProps;
 
 export const Media = Object.assign(
   forwardRefAs<MediaProps, "article">(
@@ -19,5 +22,6 @@ export const Media = Object.assign(
   ),
   {
     Item: MediaItem,
+    propTypes: genericPropTypes,
   },
 );

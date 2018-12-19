@@ -3,7 +3,7 @@ import React from "react";
 
 import { DropdownDivider } from "../dropdown-divider";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("DropdownDivider component", () => {
   hasProperties(DropdownDivider, {
@@ -45,5 +45,10 @@ describe("DropdownDivider component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<DropdownDivider className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = DropdownDivider;
+    testGenericPropTypes(propTypes);
   });
 });

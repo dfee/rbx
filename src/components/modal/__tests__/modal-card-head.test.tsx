@@ -4,7 +4,11 @@ import React from "react";
 import { Delete } from "@/elements";
 import { ModalCardHead } from "../modal-card-head";
 
-import { hasProperties, shallowInContext } from "@/__tests__/testing";
+import {
+  hasProperties,
+  shallowInContext,
+  testGenericPropTypes,
+} from "@/__tests__/testing";
 import { contextFactory } from "./helpers";
 
 describe("ModalCardHead component", () => {
@@ -73,5 +77,10 @@ describe("ModalCardHead component", () => {
       children: <div id="foo" />,
     });
     expect(wrapper.children().prop("id")).toBe("foo");
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = ModalCardHead;
+    testGenericPropTypes(propTypes);
   });
 });

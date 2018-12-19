@@ -3,7 +3,12 @@ import React from "react";
 
 import { Tab } from "../tab";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validatePropType,
+} from "@/__tests__/testing";
 
 describe("Tab component", () => {
   hasProperties(Tab, {
@@ -53,4 +58,14 @@ describe("Tab component", () => {
       expect(wrapper.hasClass("is-active")).toBe(active);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Tab;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
+    validatePropType(propTypes, "style", [
+      { value: {}, valid: true, descriptor: "obj" },
+      { value: "string", valid: false },
+    ]);
+  });
 });

@@ -12,7 +12,12 @@ import { PaginationList } from "../pagination-list";
 import { PaginationNext } from "../pagination-next";
 import { PaginationPrevious } from "../pagination-previous";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Pagination component", () => {
   hasProperties(Pagination, {
@@ -81,4 +86,12 @@ describe("Pagination component", () => {
       expect(wrapper.hasClass("is-rounded")).toBe(rounded);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Pagination;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "align", PAGINATION_ALIGNMENTS);
+    validateBoolPropType(propTypes, "rounded");
+    validateOneOfPropType(propTypes, "size", PAGINATION_SIZES);
+  });
 });

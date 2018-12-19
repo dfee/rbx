@@ -3,7 +3,7 @@ import React from "react";
 
 import { PanelHeading } from "../panel-heading";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("PanelHeading component", () => {
   hasProperties(PanelHeading, {
@@ -45,5 +45,10 @@ describe("PanelHeading component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<PanelHeading className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = PanelHeading;
+    testGenericPropTypes(propTypes);
   });
 });

@@ -4,7 +4,12 @@ import React from "react";
 import { ModalClose } from "../modal-close";
 import { contextFactory } from "./helpers";
 
-import { hasProperties, shallowInContext } from "@/__tests__/testing";
+import {
+  hasProperties,
+  shallowInContext,
+  testGenericPropTypes,
+  validatePropType,
+} from "@/__tests__/testing";
 
 describe("ModalClose component", () => {
   hasProperties(ModalClose, {
@@ -69,4 +74,13 @@ describe("ModalClose component", () => {
       expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = ModalClose;
+    testGenericPropTypes(propTypes);
+    validatePropType(propTypes, "onClick", [
+      { value: () => null, valid: true, descriptor: "func" },
+      { value: "string", valid: false },
+    ]);
+  });
 });

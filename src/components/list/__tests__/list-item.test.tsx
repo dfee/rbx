@@ -3,7 +3,11 @@ import React from "react";
 
 import { ListItem } from "../list-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("ListItem component", () => {
   hasProperties(ListItem, {
@@ -50,11 +54,14 @@ describe("ListItem component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  /**
-   * Props
-   */
   it("should be active", () => {
     const wrapper = Enzyme.shallow(<ListItem active />);
     expect(wrapper.hasClass("is-active")).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = ListItem;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
   });
 });

@@ -1,12 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { CardFooterItem } from "./card-footer-item";
 
-export type CardFooterModifierProps = Partial<{ className: string }>;
-
-export type CardFooterProps = HelpersProps & CardFooterModifierProps;
+export type CardFooterProps = HelpersProps;
 
 export const CardFooter = Object.assign(
   forwardRefAs<CardFooterProps, "div">(
@@ -17,5 +20,8 @@ export const CardFooter = Object.assign(
     },
     { as: "div" },
   ),
-  { Item: CardFooterItem },
+  {
+    Item: CardFooterItem,
+    propTypes: genericPropTypes,
+  },
 );

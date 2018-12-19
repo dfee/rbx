@@ -2,7 +2,12 @@ import Enzyme from "enzyme";
 import React from "react";
 import { ModalBackground } from "../modal-background";
 
-import { hasProperties, shallowInContext } from "@/__tests__/testing";
+import {
+  hasProperties,
+  shallowInContext,
+  testGenericPropTypes,
+  validatePropType,
+} from "@/__tests__/testing";
 import { contextFactory } from "./helpers";
 
 describe("ModalBackground component", () => {
@@ -67,4 +72,13 @@ describe("ModalBackground component", () => {
       }),
     ),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = ModalBackground;
+    testGenericPropTypes(propTypes);
+    validatePropType(propTypes, "onClick", [
+      { value: () => null, valid: true, descriptor: "func" },
+      { value: "string", valid: false },
+    ]);
+  });
 });

@@ -7,7 +7,11 @@ import { LevelItem } from "../level-item";
 import { LevelLeft } from "../level-left";
 import { LevelRight } from "../level-right";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Level component", () => {
   hasProperties(Level, {
@@ -54,13 +58,16 @@ describe("Level component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  /**
-   * Props
-   */
   BREAKPOINTS.map(breakpoint =>
     it(`should have breakpoint ${breakpoint}`, () => {
       const wrapper = Enzyme.shallow(<Level breakpoint={breakpoint} />);
       expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Level;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
+  });
 });

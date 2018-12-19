@@ -3,7 +3,11 @@ import React from "react";
 
 import { MEDIA_ITEM_POSITIONS, MediaItem } from "../media-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("MediaItem component", () => {
   hasProperties(MediaItem, {
@@ -53,4 +57,10 @@ describe("MediaItem component", () => {
       expect(wrapper.hasClass(`media-${position}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = MediaItem;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "position", MEDIA_ITEM_POSITIONS);
+  });
 });

@@ -3,7 +3,7 @@ import React from "react";
 
 import { ModalContent } from "../modal-content";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("ModalContent component", () => {
   hasProperties(ModalContent, {
@@ -45,5 +45,10 @@ describe("ModalContent component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<ModalContent className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = ModalContent;
+    testGenericPropTypes(propTypes);
   });
 });

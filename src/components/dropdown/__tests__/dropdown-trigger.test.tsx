@@ -3,7 +3,12 @@ import React from "react";
 
 import { DropdownTrigger } from "../dropdown-trigger";
 
-import { hasProperties, shallowInContext } from "@/__tests__/testing";
+import {
+  hasProperties,
+  shallowInContext,
+  testGenericPropTypes,
+  validatePropType,
+} from "@/__tests__/testing";
 import { contextFactory } from "./helpers";
 
 describe("DropdownTrigger component", () => {
@@ -67,4 +72,13 @@ describe("DropdownTrigger component", () => {
       expect(setActive.mock.calls[0]).toEqual([true]);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = DropdownTrigger;
+    testGenericPropTypes(propTypes);
+    validatePropType(propTypes, "onClick", [
+      { value: () => null, valid: true, descriptor: "func" },
+      { value: "string", valid: false },
+    ]);
+  });
 });

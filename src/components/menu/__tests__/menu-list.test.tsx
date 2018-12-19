@@ -4,7 +4,7 @@ import React from "react";
 import { MenuList } from "../menu-list";
 import { MenuListItem } from "../menu-list-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("MenuList component", () => {
   hasProperties(MenuList, {
@@ -41,5 +41,10 @@ describe("MenuList component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<MenuList className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = MenuList;
+    testGenericPropTypes(propTypes);
   });
 });

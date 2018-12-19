@@ -1,12 +1,15 @@
 import classNames from "classnames";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { PanelTab } from "./panel-tab";
 
-export type PanelTabsModifierProps = Partial<{ className: string }>;
-
-export type PanelTabsProps = HelpersProps & PanelTabsModifierProps;
+export type PanelTabsProps = HelpersProps;
 
 export const PanelTabs = Object.assign(
   forwardRefAs<PanelTabsProps, "div">(
@@ -17,5 +20,8 @@ export const PanelTabs = Object.assign(
     },
     { as: "div" },
   ),
-  { Tab: PanelTab },
+  {
+    Tab: PanelTab,
+    propTypes: genericPropTypes,
+  },
 );

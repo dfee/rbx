@@ -3,7 +3,11 @@ import React from "react";
 
 import { NavbarLink } from "../navbar-link";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("NavbarLink component", () => {
   hasProperties(NavbarLink, {
@@ -55,4 +59,10 @@ describe("NavbarLink component", () => {
       expect(wrapper.hasClass("is-arrowless")).toBe(arrowless);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = NavbarLink;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "arrowless");
+  });
 });

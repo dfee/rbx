@@ -3,7 +3,7 @@ import React from "react";
 
 import { DropdownContent } from "../dropdown-content";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("DropdownContent component", () => {
   hasProperties(DropdownContent, {
@@ -45,5 +45,10 @@ describe("DropdownContent component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<DropdownContent className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = DropdownContent;
+    testGenericPropTypes(propTypes);
   });
 });

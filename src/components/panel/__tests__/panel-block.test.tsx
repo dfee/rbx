@@ -3,7 +3,11 @@ import React from "react";
 
 import { PanelBlock } from "../panel-block";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("PanelBlock component", () => {
   hasProperties(PanelBlock, {
@@ -53,4 +57,10 @@ describe("PanelBlock component", () => {
       expect(wrapper.hasClass("is-active")).toBe(active);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = PanelBlock;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "active");
+  });
 });

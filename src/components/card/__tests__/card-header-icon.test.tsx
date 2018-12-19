@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardHeaderIcon } from "../card-header-icon";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("CardHeaderIcon component", () => {
   hasProperties(CardHeaderIcon, {
@@ -45,5 +45,10 @@ describe("CardHeaderIcon component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<CardHeaderIcon className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = CardHeaderIcon;
+    testGenericPropTypes(propTypes);
   });
 });

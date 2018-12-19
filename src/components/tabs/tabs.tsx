@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 import { Tab } from "./tab";
 
@@ -16,16 +22,21 @@ export type TabsTypes = (typeof TABS_TYPES)[number];
 
 export type TabsModifierProps = Partial<{
   align: TabsAlignments;
-  className: string;
   fullwidth: boolean;
   size: TabsSizes;
-  /**
-   * This is called style on Bulma documentation
-   */
+  /** * This is called style on Bulma documentation */
   type: TabsTypes;
 }>;
 
 export type TabsProps = HelpersProps & TabsModifierProps;
+
+const propTypes = {
+  ...genericPropTypes,
+  align: PropTypes.oneOf(TABS_ALIGNMENTS),
+  fullwidth: PropTypes.bool,
+  size: PropTypes.oneOf(TABS_SIZES),
+  type: PropTypes.oneOf(TABS_TYPES),
+};
 
 export const Tabs = Object.assign(
   forwardRefAs<TabsProps, "div">(
@@ -55,5 +66,8 @@ export const Tabs = Object.assign(
     },
     { as: "div" },
   ),
-  { Tab },
+  {
+    Tab,
+    propTypes,
+  },
 );

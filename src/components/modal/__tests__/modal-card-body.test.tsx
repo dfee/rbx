@@ -3,7 +3,7 @@ import React from "react";
 
 import { ModalCardBody } from "../modal-card-body";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("ModalCardBody component", () => {
   hasProperties(ModalCardBody, {
@@ -45,5 +45,10 @@ describe("ModalCardBody component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<ModalCardBody className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = ModalCardBody;
+    testGenericPropTypes(propTypes);
   });
 });

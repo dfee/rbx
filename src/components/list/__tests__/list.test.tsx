@@ -4,7 +4,11 @@ import React from "react";
 import { List } from "../list";
 import { ListItem } from "../list-item";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("List component", () => {
   hasProperties(List, {
@@ -52,11 +56,14 @@ describe("List component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  /**
-   * Props
-   */
   it("should be hoverable", () => {
     const wrapper = Enzyme.shallow(<List hoverable />);
     expect(wrapper.hasClass("is-hoverable")).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = List;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "hoverable");
   });
 });

@@ -3,7 +3,11 @@ import React from "react";
 
 import { PaginationLink } from "../pagination-link";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("PaginationLink component", () => {
   hasProperties(PaginationLink, {
@@ -53,4 +57,10 @@ describe("PaginationLink component", () => {
       expect(wrapper.children().hasClass("is-current")).toBe(current);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = PaginationLink;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "current");
+  });
 });
