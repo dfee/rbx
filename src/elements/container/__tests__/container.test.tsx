@@ -5,10 +5,11 @@ import { BREAKPOINTS } from "@/base/helpers";
 import { Container } from "../container";
 
 import {
-  describeExoticPropTypes,
   hasProperties,
-  validatePropTypes,
-} from "@/__tests__/helpers";
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Container component", () => {
   hasProperties(Container, {
@@ -64,19 +65,10 @@ describe("Container component", () => {
     }),
   );
 
-  describeExoticPropTypes(Container.propTypes);
-
   describe("propTypes", () => {
-    const propTypes = Container.propTypes;
-
-    validatePropTypes(propTypes, "breakpoint", [
-      ...BREAKPOINTS.map(value => ({ value, valid: true })),
-      { value: "other", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "fluid", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    const { propTypes } = Container;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
+    validateBoolPropType(propTypes, "fluid");
   });
 });

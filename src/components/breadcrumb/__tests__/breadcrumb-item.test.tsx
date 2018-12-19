@@ -3,7 +3,7 @@ import React from "react";
 
 import { BreadcrumbItem } from "../breadcrumb-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("BreadcrumbItem component", () => {
   hasProperties(BreadcrumbItem, {

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {
-  asHelpersPropTypes,
   forwardRefAs,
+  genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
@@ -36,7 +36,7 @@ export type ButtonModifierProps = Partial<{
 export type ButtonProps = HelpersProps & ButtonModifierProps;
 
 const propTypes = {
-  ...asHelpersPropTypes,
+  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   disabled: PropTypes.bool,
   fullwidth: PropTypes.bool,

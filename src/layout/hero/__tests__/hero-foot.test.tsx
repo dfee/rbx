@@ -3,7 +3,7 @@ import React from "react";
 
 import { HeroFoot } from "../hero-foot";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("HeroFoot component", () => {
   hasProperties(HeroFoot, {

@@ -2,7 +2,7 @@ import Enzyme from "enzyme";
 import React from "react";
 import { ModalBackground } from "../modal-background";
 
-import { hasProperties, shallowInContext } from "@/__tests__/helpers";
+import { hasProperties, shallowInContext } from "@/__tests__/testing";
 import { contextFactory } from "./helpers";
 
 describe("ModalBackground component", () => {

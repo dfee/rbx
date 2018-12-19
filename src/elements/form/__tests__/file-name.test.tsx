@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileName } from "../file-name";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("FileName component", () => {
   hasProperties(FileName, {
@@ -45,5 +45,10 @@ describe("FileName component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<FileName className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = FileName;
+    testGenericPropTypes(propTypes);
   });
 });

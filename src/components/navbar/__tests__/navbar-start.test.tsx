@@ -3,7 +3,7 @@ import React from "react";
 
 import { NavbarStart } from "../navbar-start";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("NavbarStart component", () => {
   hasProperties(NavbarStart, {

@@ -4,7 +4,7 @@ import React from "react";
 import { Tab } from "../tab";
 import { Tabs, TABS_ALIGNMENTS, TABS_SIZES, TABS_TYPES } from "../tabs";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Tabs component", () => {
   hasProperties(Tabs, {

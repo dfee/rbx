@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {
-  asHelpersPropTypes,
   forwardRefAs,
+  genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
@@ -29,7 +29,7 @@ export type ContentOrderedListProps = Prefer<
 >;
 
 const propTypes = {
-  ...asHelpersPropTypes,
+  ...genericPropTypes,
   type: PropTypes.oneOf(CONTENT_ORDERED_LIST_TYPES),
 };
 

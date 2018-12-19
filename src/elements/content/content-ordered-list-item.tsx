@@ -1,8 +1,8 @@
 import React from "react";
 
 import {
-  asHelpersPropTypes,
   forwardRefAs,
+  genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
@@ -17,5 +17,5 @@ export const ContentOrderedListItem = Object.assign(
     },
     { as: "li" },
   ),
-  { propTypes: asHelpersPropTypes },
+  { propTypes: genericPropTypes },
 );

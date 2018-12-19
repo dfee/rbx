@@ -4,7 +4,7 @@ import React from "react";
 import { Delete } from "@/elements";
 import { ModalCardHead } from "../modal-card-head";
 
-import { hasProperties, shallowInContext } from "@/__tests__/helpers";
+import { hasProperties, shallowInContext } from "@/__tests__/testing";
 import { contextFactory } from "./helpers";
 
 describe("ModalCardHead component", () => {

@@ -8,10 +8,10 @@ import {
 import { ContentOrderedListItem } from "../content-ordered-list-item";
 
 import {
-  describeExoticPropTypes,
   hasProperties,
-  validatePropTypes,
-} from "@/__tests__/helpers";
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("ContentOrderedList component", () => {
   hasProperties(ContentOrderedList, {
@@ -60,14 +60,9 @@ describe("ContentOrderedList component", () => {
     }),
   );
 
-  describeExoticPropTypes(ContentOrderedList.propTypes);
-
   describe("propTypes", () => {
-    const propTypes = ContentOrderedList.propTypes;
-
-    validatePropTypes(propTypes, "type", [
-      ...CONTENT_ORDERED_LIST_TYPES.map(value => ({ value, valid: true })),
-      { value: "other", valid: false },
-    ]);
+    const { propTypes } = ContentOrderedList;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "type", CONTENT_ORDERED_LIST_TYPES);
   });
 });

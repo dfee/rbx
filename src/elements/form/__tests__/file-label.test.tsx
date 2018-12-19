@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileLabel } from "../file-label";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("FileLabel component", () => {
   hasProperties(FileLabel, {
@@ -45,5 +45,10 @@ describe("FileLabel component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<FileLabel className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = FileLabel;
+    testGenericPropTypes(propTypes);
   });
 });

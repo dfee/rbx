@@ -19,7 +19,7 @@ import { NavbarLink } from "../navbar-link";
 import { NavbarMenu } from "../navbar-menu";
 import { NavbarStart } from "../navbar-start";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Navbar component", () => {
   hasProperties(Navbar, {

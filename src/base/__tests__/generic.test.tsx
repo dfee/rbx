@@ -3,8 +3,8 @@ import React from "react";
 
 import { Generic } from "../generic";
 
-import { hasProperties } from "@/__tests__/helpers";
-import { describeExoticPropTypes } from "../../__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
+import { testGenericPropTypes } from "../../__tests__/testing";
 
 describe("Generic component", () => {
   hasProperties(Generic, {
@@ -48,5 +48,8 @@ describe("Generic component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  describeExoticPropTypes(Generic.propTypes);
+  describe("propTypes", () => {
+    const { propTypes } = Generic;
+    testGenericPropTypes(propTypes);
+  });
 });

@@ -3,7 +3,7 @@ import React from "react";
 
 import { ModalCardTitle } from "../modal-card-title";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("ModalCardTitle component", () => {
   hasProperties(ModalCardTitle, {

@@ -9,7 +9,12 @@ import {
   SelectContainer,
 } from "../select-container";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("SelectContainer component", () => {
   hasProperties(SelectContainer, {
@@ -123,5 +128,15 @@ describe("SelectContainer component", () => {
       </SelectContainer>,
     );
     expect(wrapper.hasClass("is-multiple")).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = SelectContainer;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateBoolPropType(propTypes, "fullwidth");
+    validateBoolPropType(propTypes, "rounded");
+    validateOneOfPropType(propTypes, "size", SELECT_CONTAINER_SIZES);
+    validateOneOfPropType(propTypes, "state", SELECT_CONTAINER_STATES);
   });
 });

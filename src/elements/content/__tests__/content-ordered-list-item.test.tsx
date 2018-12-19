@@ -3,7 +3,7 @@ import React from "react";
 
 import { ContentOrderedListItem } from "../content-ordered-list-item";
 
-import { describeExoticPropTypes, hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("ContentOrderedListItem component", () => {
   hasProperties(ContentOrderedListItem, {
@@ -44,5 +44,8 @@ describe("ContentOrderedListItem component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  describeExoticPropTypes(ContentOrderedListItem.propTypes);
+  describe("propTypes", () => {
+    const { propTypes } = ContentOrderedListItem;
+    testGenericPropTypes(propTypes);
+  });
 });

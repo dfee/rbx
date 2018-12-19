@@ -3,7 +3,11 @@ import React from "react";
 
 import { TagGroup } from "../tag-group";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("TagGroup component", () => {
   hasProperties(TagGroup, {
@@ -53,4 +57,10 @@ describe("TagGroup component", () => {
       expect(wrapper.hasClass("has-addons")).toBe(gapless);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = TagGroup;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "gapless");
+  });
 });

@@ -5,7 +5,7 @@ import { Select } from "../select";
 import { SelectContainer } from "../select-container";
 import { SelectOption } from "../select-option";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Select component", () => {
   hasProperties(Select, {
@@ -44,5 +44,10 @@ describe("Select component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Select className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Select;
+    testGenericPropTypes(propTypes);
   });
 });

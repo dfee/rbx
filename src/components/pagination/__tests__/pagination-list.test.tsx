@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationList } from "../pagination-list";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PaginationList component", () => {
   hasProperties(PaginationList, {

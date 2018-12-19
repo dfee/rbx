@@ -36,7 +36,48 @@ export const makeRandomString = () =>
     .toString(36)
     .substring(7);
 
-export const validatePropTypes = (
+export const testGenericPropTypes = (propTypes: {
+  [k: string]: PropTypes.Requireable<any>;
+}) => {
+  /**
+   * we want to make sure that exotic propTypes are checked (i.e. as)
+   */
+  describe("exotic [integration]", () => {
+    // tslint:disable-next-line:max-classes-per-file
+    class ClassComponent extends React.Component {
+      public render() {
+        return React.createElement("div");
+      }
+    }
+
+    const ForwardRefComponent = React.forwardRef((props, ref) =>
+      React.createElement("div", { ref, ...props }),
+    );
+
+    const FunctionComponent = () => React.createElement("div");
+
+    validatePropType(propTypes, "as", [
+      { value: "div", valid: true },
+      { value: ClassComponent, valid: true },
+      { value: ForwardRefComponent, valid: true, descriptor: "ForwardRefAs" },
+      { value: FunctionComponent, valid: true },
+      { value: true, valid: false },
+    ]);
+  });
+
+  /**
+   * we want to make sure that helpersPropTypes are checked
+   */
+  describe("helpers [integration]", () => {
+    validateBoolPropType(propTypes, "clipped");
+    validatePropType(propTypes, "className", [
+      { value: "string", valid: true },
+      { value: true, valid: false },
+    ]);
+  });
+};
+
+export const validatePropType = (
   propTypes: { [k: string]: PropTypes.Requireable<any> },
   propName: string,
   options: Array<{
@@ -77,42 +118,30 @@ export const validatePropTypes = (
     }),
   );
 
-export const describeExoticPropTypes = (propTypes: {
-  [k: string]: PropTypes.Requireable<any>;
-}) =>
-  describe("propTypes", () => {
-    /**
-     * we want to make sure that exotic propTypes are checked (i.e. as)
-     */
-    describe("exotic [integration]", () => {
-      class ClassComponent extends React.Component {
-        public render() {
-          return React.createElement("div");
-        }
-      }
+export const validateBoolPropType = (
+  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propName: string,
+) =>
+  validatePropType(propTypes, propName, [
+    ...[false, true].map(value => ({ value, valid: true })),
+    { value: "string", valid: false },
+  ]);
 
-      const ForwardRefComponent = React.forwardRef((props, ref) =>
-        React.createElement("div", { ref, ...props }),
-      );
+export const validateNumberPropType = (
+  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propName: string,
+) =>
+  validatePropType(propTypes, propName, [
+    { value: 1, valid: true },
+    { value: "string", valid: false },
+  ]);
 
-      const FunctionComponent = () => React.createElement("div");
-
-      validatePropTypes(propTypes, "as", [
-        { value: "div", valid: true },
-        { value: ClassComponent, valid: true },
-        { value: ForwardRefComponent, valid: true, descriptor: "ForwardRefAs" },
-        { value: FunctionComponent, valid: true },
-        { value: true, valid: false },
-      ]);
-    });
-
-    /**
-     * we want to make sure that helpersPropTypes are checked
-     */
-    describe("helpers [integration]", () => {
-      validatePropTypes(propTypes, "className", [
-        { value: "string", valid: true },
-        { value: true, valid: false },
-      ]);
-    });
-  });
+export const validateOneOfPropType = (
+  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propName: string,
+  choices: Array<string | number>,
+) =>
+  validatePropType(propTypes, propName, [
+    ...choices.map(value => ({ value, valid: true })),
+    { value: "__UNKNOWN", valid: false },
+  ]);

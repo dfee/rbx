@@ -4,7 +4,11 @@ import React from "react";
 import { COLORS } from "@/base/helpers";
 import { Icon, ICON_ALIGNMENTS, ICON_SIZES } from "../icon";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Icon component", () => {
   hasProperties(Icon, {
@@ -68,4 +72,12 @@ describe("Icon component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Icon;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "align", ICON_ALIGNMENTS);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateOneOfPropType(propTypes, "size", ICON_SIZES);
+  });
 });

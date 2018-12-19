@@ -3,7 +3,12 @@ import React from "react";
 
 import { Control, CONTROL_SIZES } from "../control";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Control component", () => {
   hasProperties(Control, {
@@ -81,4 +86,14 @@ describe("Control component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Control;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "expanded");
+    validateBoolPropType(propTypes, "iconLeft");
+    validateBoolPropType(propTypes, "iconRight");
+    validateBoolPropType(propTypes, "loading");
+    validateOneOfPropType(propTypes, "size", CONTROL_SIZES);
+  });
 });

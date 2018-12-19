@@ -4,7 +4,12 @@ import React from "react";
 import { COLORS } from "@/base/helpers";
 import { Input, INPUT_SIZES, INPUT_STATES, INPUT_TYPES } from "../input";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Input component", () => {
   hasProperties(Input, {
@@ -90,4 +95,16 @@ describe("Input component", () => {
       expect(wrapper.prop("type")).toBe(type);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Input;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateBoolPropType(propTypes, "readOnly");
+    validateBoolPropType(propTypes, "rounded");
+    validateOneOfPropType(propTypes, "size", INPUT_SIZES);
+    validateOneOfPropType(propTypes, "state", INPUT_STATES);
+    validateBoolPropType(propTypes, "static");
+    validateOneOfPropType(propTypes, "type", INPUT_TYPES);
+  });
 });

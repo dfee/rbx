@@ -4,10 +4,11 @@ import React from "react";
 import { BUTTON_GROUP_POSITIONS, ButtonGroup } from "../button-group";
 
 import {
-  describeExoticPropTypes,
   hasProperties,
-  validatePropTypes,
-} from "@/__tests__/helpers";
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("ButtonGroup component", () => {
   hasProperties(ButtonGroup, {
@@ -63,19 +64,10 @@ describe("ButtonGroup component", () => {
     }),
   );
 
-  describeExoticPropTypes(ButtonGroup.propTypes);
-
   describe("propTypes", () => {
-    const propTypes = ButtonGroup.propTypes;
-
-    validatePropTypes(propTypes, "hasAddons", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "other", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "position", [
-      ...BUTTON_GROUP_POSITIONS.map(value => ({ value, valid: true })),
-      { value: "other", valid: false },
-    ]);
+    const { propTypes } = ButtonGroup;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "hasAddons");
+    validateOneOfPropType(propTypes, "position", BUTTON_GROUP_POSITIONS);
   });
 });

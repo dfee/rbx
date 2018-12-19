@@ -14,7 +14,7 @@ import { DropdownItem } from "../dropdown-item";
 import { DropdownMenu } from "../dropdown-menu";
 import { DropdownTrigger } from "../dropdown-trigger";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Card component", () => {
   hasProperties(Dropdown, {

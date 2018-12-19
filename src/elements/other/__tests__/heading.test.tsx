@@ -3,7 +3,7 @@ import React from "react";
 
 import { Heading } from "../heading";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Heading component", () => {
   hasProperties(Heading, {
@@ -45,5 +45,10 @@ describe("Heading component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Heading className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Heading;
+    testGenericPropTypes(propTypes);
   });
 });

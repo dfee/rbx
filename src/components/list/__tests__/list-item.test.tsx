@@ -3,7 +3,7 @@ import React from "react";
 
 import { ListItem } from "../list-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("ListItem component", () => {
   hasProperties(ListItem, {

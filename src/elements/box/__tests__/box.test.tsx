@@ -3,7 +3,7 @@ import React from "react";
 
 import { Box } from "../box";
 
-import { describeExoticPropTypes, hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Box component", () => {
   hasProperties(Box, {
@@ -47,5 +47,8 @@ describe("Box component", () => {
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
-  describeExoticPropTypes(Box.propTypes);
+  describe("propTypes", () => {
+    const { propTypes } = Box;
+    testGenericPropTypes(propTypes);
+  });
 });

@@ -1,8 +1,14 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
-import { Colors } from "../../base/helpers";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
+import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const ICON_ALIGNMENTS = tuple("left", "right");
@@ -13,7 +19,6 @@ export type IconSizes = (typeof ICON_SIZES)[number];
 
 export type IconModifierProps = Partial<{
   align: IconAlignments;
-  className: string;
   color: Colors;
   size: IconSizes;
 }>;
@@ -23,15 +28,25 @@ export type IconProps = Prefer<
   React.HTMLAttributes<HTMLSpanElement>
 >;
 
-export const Icon = forwardRefAs<IconProps, "span">(
-  (props, ref) => {
-    const { align, as, color, size, ...rest } = transformHelpers(props);
-    rest.className = classNames("icon", rest.className, {
-      [`has-text-${color}`]: color,
-      [`is-${align}`]: align,
-      [`is-${size}`]: size,
-    });
-    return React.createElement(as!, { ref, ...rest });
-  },
-  { as: "span" },
+const propTypes = {
+  ...genericPropTypes,
+  align: PropTypes.oneOf(ICON_ALIGNMENTS),
+  color: PropTypes.oneOf(COLORS),
+  size: PropTypes.oneOf(ICON_SIZES),
+};
+
+export const Icon = Object.assign(
+  forwardRefAs<IconProps, "span">(
+    (props, ref) => {
+      const { align, as, color, size, ...rest } = transformHelpers(props);
+      rest.className = classNames("icon", rest.className, {
+        [`has-text-${color}`]: color,
+        [`is-${align}`]: align,
+        [`is-${size}`]: size,
+      });
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "span" },
+  ),
+  { propTypes },
 );

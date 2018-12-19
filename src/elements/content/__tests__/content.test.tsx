@@ -5,10 +5,10 @@ import { Content, CONTENT_SIZES } from "../content";
 import { ContentOrderedList } from "../content-ordered-list";
 
 import {
-  describeExoticPropTypes,
   hasProperties,
-  validatePropTypes,
-} from "@/__tests__/helpers";
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Content component", () => {
   hasProperties(Content, {
@@ -60,14 +60,9 @@ describe("Content component", () => {
     }),
   );
 
-  describeExoticPropTypes(Content.propTypes);
-
   describe("propTypes", () => {
-    const propTypes = Content.propTypes;
-
-    validatePropTypes(propTypes, "size", [
-      ...CONTENT_SIZES.map(value => ({ value, valid: true })),
-      { value: "other", valid: false },
-    ]);
+    const { propTypes } = Content;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "size", CONTENT_SIZES);
   });
 });

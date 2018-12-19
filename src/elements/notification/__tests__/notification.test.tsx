@@ -4,7 +4,11 @@ import React from "react";
 import { COLORS } from "@/base/helpers";
 import { Notification } from "../notification";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Notification component", () => {
   hasProperties(Notification, {
@@ -54,4 +58,10 @@ describe("Notification component", () => {
       expect(wrapper.hasClass(`is-${color}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Notification;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+  });
 });

@@ -3,7 +3,7 @@ import React from "react";
 
 import { PanelHeading } from "../panel-heading";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PanelHeading component", () => {
   hasProperties(PanelHeading, {

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {
-  asHelpersPropTypes,
   forwardRefAs,
+  genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
@@ -18,7 +18,7 @@ export type ContainerModifierProps = Partial<{
 export type ContainerProps = HelpersProps & ContainerModifierProps;
 
 const propTypes = {
-  ...asHelpersPropTypes,
+  ...genericPropTypes,
   breakpoint: PropTypes.oneOf(BREAKPOINTS),
   fluid: PropTypes.bool,
 };

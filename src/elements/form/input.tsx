@@ -1,8 +1,14 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
-import { Colors } from "../../base/helpers";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
+import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const INPUT_SIZES = tuple("small", "medium", "large");
@@ -25,7 +31,6 @@ export const INPUT_TYPES = tuple(
 export type InputTypes = (typeof INPUT_TYPES)[number];
 
 export type InputModifierProps = Partial<{
-  className: string;
   color: Colors;
   readOnly: React.InputHTMLAttributes<HTMLInputElement>["readOnly"];
   rounded: boolean;
@@ -37,30 +42,44 @@ export type InputModifierProps = Partial<{
 
 export type InputProps = HelpersProps & InputModifierProps;
 
-export const Input = forwardRefAs<InputProps, "input">(
-  (props, ref) => {
-    const {
-      as,
-      color,
-      readOnly,
-      rounded,
-      size,
-      state,
-      static: isStatic,
-      ...rest
-    } = transformHelpers(props);
-    rest.className = classNames("input", rest.className, {
-      [`is-${color}`]: color,
-      "is-rounded": rounded,
-      [`is-${size}`]: size,
-      "is-static": isStatic,
-      [`is-${state}`]: state,
-    });
-    return React.createElement(as!, {
-      readOnly: readOnly || isStatic,
-      ref,
-      ...rest,
-    });
-  },
-  { as: "input" },
+const propTypes = {
+  ...genericPropTypes,
+  color: PropTypes.oneOf(COLORS),
+  readOnly: PropTypes.bool,
+  rounded: PropTypes.bool,
+  size: PropTypes.oneOf(INPUT_SIZES),
+  state: PropTypes.oneOf(INPUT_STATES),
+  static: PropTypes.bool,
+  type: PropTypes.oneOf(INPUT_TYPES),
+};
+
+export const Input = Object.assign(
+  forwardRefAs<InputProps, "input">(
+    (props, ref) => {
+      const {
+        as,
+        color,
+        readOnly,
+        rounded,
+        size,
+        state,
+        static: isStatic,
+        ...rest
+      } = transformHelpers(props);
+      rest.className = classNames("input", rest.className, {
+        [`is-${color}`]: color,
+        "is-rounded": rounded,
+        [`is-${size}`]: size,
+        "is-static": isStatic,
+        [`is-${state}`]: state,
+      });
+      return React.createElement(as!, {
+        readOnly: readOnly || isStatic,
+        ref,
+        ...rest,
+      });
+    },
+    { as: "input" },
+  ),
+  { propTypes },
 );

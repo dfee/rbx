@@ -3,7 +3,7 @@ import React from "react";
 
 import { FieldBody } from "../field-body";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("FieldBody component", () => {
   hasProperties(FieldBody, {
@@ -45,5 +45,10 @@ describe("FieldBody component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<FieldBody className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = FieldBody;
+    testGenericPropTypes(propTypes);
   });
 });

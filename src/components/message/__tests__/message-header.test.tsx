@@ -3,7 +3,7 @@ import React from "react";
 
 import { MessageHeader } from "../message-header";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("MessageHeader component", () => {
   hasProperties(MessageHeader, {

@@ -7,7 +7,7 @@ import { LevelItem } from "../level-item";
 import { LevelLeft } from "../level-left";
 import { LevelRight } from "../level-right";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Level component", () => {
   hasProperties(Level, {

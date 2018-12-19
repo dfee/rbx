@@ -3,7 +3,7 @@ import React from "react";
 
 import { Radio } from "../radio";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Radio component", () => {
   hasProperties(Radio, {
@@ -40,5 +40,10 @@ describe("Radio component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Radio className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Radio;
+    testGenericPropTypes(propTypes);
   });
 });

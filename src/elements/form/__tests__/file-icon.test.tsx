@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileIcon } from "../file-icon";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("FileIcon component", () => {
   hasProperties(FileIcon, {
@@ -45,5 +45,10 @@ describe("FileIcon component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<FileIcon className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = FileIcon;
+    testGenericPropTypes(propTypes);
   });
 });

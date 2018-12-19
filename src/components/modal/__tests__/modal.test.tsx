@@ -8,7 +8,7 @@ import { ModalClose } from "../modal-close";
 import { ModalContent } from "../modal-content";
 import { ModalPortal } from "../modal-portal";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Modal component", () => {
   hasProperties(Modal, {

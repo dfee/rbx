@@ -3,7 +3,7 @@ import React from "react";
 
 import { Numeric } from "../numeric";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Numeric component", () => {
   hasProperties(Numeric, {
@@ -45,5 +45,10 @@ describe("Numeric component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Numeric className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Numeric;
+    testGenericPropTypes(propTypes);
   });
 });

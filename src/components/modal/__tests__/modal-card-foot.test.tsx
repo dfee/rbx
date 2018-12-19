@@ -3,7 +3,7 @@ import React from "react";
 
 import { ModalCardFoot } from "../modal-card-foot";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("ModalCardFoot component", () => {
   hasProperties(ModalCardFoot, {

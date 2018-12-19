@@ -3,7 +3,7 @@ import React from "react";
 
 import { ModalContent } from "../modal-content";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("ModalContent component", () => {
   hasProperties(ModalContent, {

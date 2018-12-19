@@ -26,7 +26,11 @@ import {
   visibilityHelpersPropTypes,
 } from "../helpers";
 
-import { validatePropTypes } from "../../__tests__/helpers";
+import {
+  validateBoolPropType,
+  validateOneOfPropType,
+  validatePropType,
+} from "../../__tests__/testing";
 
 const makeItShouldPreserveUnknown = (transformer: any) =>
   it("should preserve unknown props", () => {
@@ -48,16 +52,8 @@ const makeItShouldPreserveCustomClassName = (transformer: any) =>
 describe("Float helpers", () => {
   describe("propTypes", () => {
     const propTypes = floatHelpersPropTypes;
-
-    validatePropTypes(propTypes, "clearfix", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "pull", [
-      ...FLOAT_PULLED_ALIGNMENTS.map(value => ({ value, valid: true })),
-      { value: false, valid: false },
-    ]);
+    validateBoolPropType(propTypes, "clearfix");
+    validateOneOfPropType(propTypes, "pull", FLOAT_PULLED_ALIGNMENTS);
   });
 
   describe("transform", () => {
@@ -87,11 +83,7 @@ describe("Float helpers", () => {
 describe("Overflow helpers", () => {
   describe("propTypes", () => {
     const propTypes = overflowHelpersPropTypes;
-
-    validatePropTypes(propTypes, "clipped", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "clipped");
   });
 
   describe("transform", () => {
@@ -113,11 +105,7 @@ describe("Overflow helpers", () => {
 describe("Overlay helpers", () => {
   describe("propTypes", () => {
     const propTypes = overlayHelpersPropTypes;
-
-    validatePropTypes(propTypes, "overlay", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "overlay");
   });
 
   describe("transform", () => {
@@ -139,41 +127,16 @@ describe("Overlay helpers", () => {
 describe("Typography modifiers", () => {
   describe("propTypes", () => {
     const propTypes = typographyHelpersPropTypes;
-
-    validatePropTypes(propTypes, "backgroundColor", [
-      ...[...COLORS, ...GREY_COLORS].map(value => ({ value, valid: true })),
-      { value: "unknown", valid: false },
+    validateOneOfPropType(propTypes, "backgroundColor", [
+      ...COLORS,
+      ...GREY_COLORS,
     ]);
-
-    validatePropTypes(propTypes, "italic", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "other", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "textAlignment", [
-      ...TEXT_ALIGNMENTS.map(value => ({ value, valid: true })),
-      { value: "above", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "textColor", [
-      ...[...COLORS, ...GREY_COLORS].map(value => ({ value, valid: true })),
-      { value: "unknown", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "textSize", [
-      ...TEXT_SIZES.map(value => ({ value, valid: true })),
-      { value: 0, valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "textTransform", [
-      ...TEXT_TRANSFORMS.map(value => ({ value, valid: true })),
-      { value: "unknown", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "textWeight", [
-      ...TEXT_WEIGHTS.map(value => ({ value, valid: true })),
-      { value: "unknown", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "italic");
+    validateOneOfPropType(propTypes, "textAlignment", TEXT_ALIGNMENTS);
+    validateOneOfPropType(propTypes, "textColor", [...COLORS, ...GREY_COLORS]);
+    validateOneOfPropType(propTypes, "textSize", TEXT_SIZES);
+    validateOneOfPropType(propTypes, "textTransform", TEXT_TRANSFORMS);
+    validateOneOfPropType(propTypes, "textWeight", TEXT_WEIGHTS);
   });
 
   describe("transform", () => {
@@ -252,21 +215,9 @@ describe("Typography modifiers", () => {
 describe("Visibility helpers", () => {
   describe("propTypes", () => {
     const propTypes = visibilityHelpersPropTypes;
-
-    validatePropTypes(propTypes, "hidden", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "invisible", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "srOnly", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "hidden");
+    validateBoolPropType(propTypes, "invisible");
+    validateBoolPropType(propTypes, "srOnly");
   });
 
   describe("transform", () => {
@@ -304,31 +255,11 @@ describe("Visibility helpers", () => {
 describe("Other helpers", () => {
   describe("propTypes", () => {
     const propTypes = otherHelpersPropTypes;
-
-    validatePropTypes(propTypes, "marginless", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "paddingless", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "radiusless", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "shadowless", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
-
-    validatePropTypes(propTypes, "unselectable", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "marginless");
+    validateBoolPropType(propTypes, "paddingless");
+    validateBoolPropType(propTypes, "radiusless");
+    validateBoolPropType(propTypes, "shadowless");
+    validateBoolPropType(propTypes, "unselectable");
   });
 
   describe("transform", () => {
@@ -383,13 +314,13 @@ describe("Responsive modifiers", () => {
   describe("propTypes", () => {
     const propTypes = responsiveHelpersPropTypes;
 
-    validatePropTypes(propTypes, "responsive", [
+    validatePropType(propTypes, "responsive", [
       { value: {}, valid: true },
       { value: "string", valid: false },
     ]);
 
     BREAKPOINTS.map(rvalue =>
-      validatePropTypes(propTypes, "responsive", [
+      validatePropType(propTypes, "responsive", [
         ...DISPLAYS.map(value => ({
           valid: true,
           value: { [rvalue]: { display: { value } } },
@@ -412,7 +343,7 @@ describe("Responsive modifiers", () => {
     );
 
     ["tablet", "desktop", "widescreen"].map(rvalue =>
-      validatePropTypes(propTypes, "responsive", [
+      validatePropType(propTypes, "responsive", [
         ...[false, true].map(value => ({
           valid: true,
           value: { [rvalue]: { display: { value: "block", only: value } } },
@@ -547,49 +478,31 @@ describe("Modifiers", () => {
     const propTypes = helpersPropTypes;
 
     // verify prop from floatHelperPropTypes
-    validatePropTypes(propTypes, "clearfix", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "clearfix");
 
     // verify prop from overflowHelperPropTypes
-    validatePropTypes(propTypes, "clipped", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "clipped");
 
     // verify prop from overlayHelperPropTypes
-    validatePropTypes(propTypes, "overlay", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "overlay");
 
     // verify prop from typographyHelperPropTypes
-    validatePropTypes(propTypes, "italic", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "italic");
 
     // verify prop from visibilityHelperPropTypes
-    validatePropTypes(propTypes, "hidden", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "hidden");
 
     // verify prop from otherHelperPropTypes
-    validatePropTypes(propTypes, "unselectable", [
-      ...[false, true].map(value => ({ value, valid: true })),
-      { value: "string", valid: false },
-    ]);
+    validateBoolPropType(propTypes, "unselectable");
 
     // verify prop from responsiveHelperPropTypes
-    validatePropTypes(propTypes, "responsive", [
+    validatePropType(propTypes, "responsive", [
       { value: {}, valid: true },
       { value: "string", valid: false },
     ]);
 
     // verify className prop
-    validatePropTypes(propTypes, "className", [
+    validatePropType(propTypes, "className", [
       { value: "custom", valid: true },
       { value: true, valid: false },
     ]);

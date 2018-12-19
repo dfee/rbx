@@ -3,7 +3,7 @@ import React from "react";
 
 import { Column, COLUMN_SIZES } from "../column";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Column component", () => {
   hasProperties(Column, {

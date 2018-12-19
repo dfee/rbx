@@ -3,7 +3,7 @@ import React from "react";
 
 import { MEDIA_ITEM_POSITIONS, MediaItem } from "../media-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("MediaItem component", () => {
   hasProperties(MediaItem, {

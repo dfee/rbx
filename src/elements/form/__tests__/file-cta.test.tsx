@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileCTA } from "../file-cta";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("FileCTA component", () => {
   hasProperties(FileCTA, {
@@ -45,5 +45,10 @@ describe("FileCTA component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<FileCTA className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = FileCTA;
+    testGenericPropTypes(propTypes);
   });
 });

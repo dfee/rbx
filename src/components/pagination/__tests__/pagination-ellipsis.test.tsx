@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationEllipsis } from "../pagination-ellipsis";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PaginationEllipsis component", () => {
   hasProperties(PaginationEllipsis, {

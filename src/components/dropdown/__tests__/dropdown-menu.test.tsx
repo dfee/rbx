@@ -3,7 +3,7 @@ import React from "react";
 
 import { DropdownMenu } from "../dropdown-menu";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("DropdownMenu component", () => {
   hasProperties(DropdownMenu, {

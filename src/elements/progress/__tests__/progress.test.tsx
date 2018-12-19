@@ -4,7 +4,12 @@ import React from "react";
 import { COLORS } from "@/base/helpers";
 import { Progress, PROGRESS_SIZES } from "../progress";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateNumberPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Progress component", () => {
   hasProperties(Progress, {
@@ -69,4 +74,13 @@ describe("Progress component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Progress;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateNumberPropType(propTypes, "max");
+    validateOneOfPropType(propTypes, "size", PROGRESS_SIZES);
+    validateNumberPropType(propTypes, "value");
+  });
 });

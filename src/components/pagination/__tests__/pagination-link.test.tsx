@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationLink } from "../pagination-link";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PaginationLink component", () => {
   hasProperties(PaginationLink, {

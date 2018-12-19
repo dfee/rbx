@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationPrevious } from "../pagination-previous";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PaginationPrevious component", () => {
   hasProperties(PaginationPrevious, {

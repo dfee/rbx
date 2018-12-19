@@ -5,7 +5,7 @@ import { BREAKPOINTS } from "@/base/helpers";
 import { Column } from "../column";
 import { Columns, COLUMNS_GAPS } from "../columns";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Columns component", () => {
   hasProperties(Columns, {

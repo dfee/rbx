@@ -3,7 +3,7 @@ import React from "react";
 
 import { Checkbox } from "../checkbox";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Checkbox component", () => {
   hasProperties(Checkbox, {
@@ -40,5 +40,10 @@ describe("Checkbox component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Checkbox className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Checkbox;
+    testGenericPropTypes(propTypes);
   });
 });

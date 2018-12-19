@@ -4,7 +4,7 @@ import React from "react";
 import { NavbarMenu } from "../navbar-menu";
 import { contextFactory } from "./helpers";
 
-import { hasProperties, shallowInContext } from "@/__tests__/helpers";
+import { hasProperties, shallowInContext } from "@/__tests__/testing";
 
 describe("NavbarMenu component", () => {
   hasProperties(NavbarMenu, {

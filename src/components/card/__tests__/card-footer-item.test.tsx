@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardFooterItem } from "../card-footer-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("CardFooterItem component", () => {
   hasProperties(CardFooterItem, {

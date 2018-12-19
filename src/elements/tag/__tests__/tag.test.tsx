@@ -5,7 +5,12 @@ import { COLORS } from "@/base/helpers";
 import { Tag, TAG_SIZES } from "../tag";
 import { TagGroup } from "../tag-group";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Tag component", () => {
   hasProperties(Tag, {
@@ -77,4 +82,13 @@ describe("Tag component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Tag;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateBoolPropType(propTypes, "delete"),
+      validateBoolPropType(propTypes, "rounded"),
+      validateOneOfPropType(propTypes, "size", TAG_SIZES);
+  });
 });

@@ -3,7 +3,7 @@ import React from "react";
 
 import { Highlight } from "../highlight";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Highlight component", () => {
   hasProperties(Highlight, {
@@ -45,5 +45,10 @@ describe("Highlight component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Highlight className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Highlight;
+    testGenericPropTypes(propTypes);
   });
 });

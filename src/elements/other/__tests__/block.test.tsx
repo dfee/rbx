@@ -3,7 +3,7 @@ import React from "react";
 
 import { Block } from "../block";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Block component", () => {
   hasProperties(Block, {
@@ -45,5 +45,10 @@ describe("Block component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Block className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Block;
+    testGenericPropTypes(propTypes);
   });
 });

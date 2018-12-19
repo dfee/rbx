@@ -7,7 +7,7 @@ import { PanelHeading } from "../panel-heading";
 import { PanelIcon } from "../panel-icon";
 import { PanelTabs } from "../panel-tabs";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Panel component", () => {
   hasProperties(Panel, {

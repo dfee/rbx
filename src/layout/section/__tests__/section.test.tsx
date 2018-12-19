@@ -3,7 +3,7 @@ import React from "react";
 
 import { Section, SECTION_SIZES } from "../section";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Section component", () => {
   hasProperties(Section, {

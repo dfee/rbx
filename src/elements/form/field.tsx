@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
@@ -14,7 +20,6 @@ export type FieldKinds = (typeof FIELD_KINDS)[number];
 
 export type FieldModifierProps = Partial<{
   align: FieldAlignments;
-  className: string;
   expanded: boolean;
   horizontal: boolean;
   kind: FieldKinds;
@@ -24,16 +29,26 @@ export type FieldModifierProps = Partial<{
 
 export type FieldProps = HelpersProps & FieldModifierProps;
 
+const propTypes = {
+  ...genericPropTypes,
+  align: PropTypes.oneOf(FIELD_ALIGNMENTS),
+  expanded: PropTypes.bool,
+  horizontal: PropTypes.bool,
+  kind: PropTypes.oneOf(FIELD_KINDS),
+  multiline: PropTypes.bool,
+  narrow: PropTypes.bool,
+};
+
 export const Field = Object.assign(
   forwardRefAs<FieldProps, "div">(
     (props, ref) => {
       const {
-        as,
         align,
+        as,
         expanded,
-        multiline,
         horizontal,
         kind,
+        multiline,
         narrow,
         ...rest
       } = transformHelpers(props);
@@ -61,5 +76,6 @@ export const Field = Object.assign(
   {
     Body: FieldBody,
     Label: FieldLabel,
+    propTypes,
   },
 );

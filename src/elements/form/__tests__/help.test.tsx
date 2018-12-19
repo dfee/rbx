@@ -1,9 +1,14 @@
 import Enzyme from "enzyme";
 import React from "react";
 
+import { COLORS } from "@/base/helpers";
 import { Help } from "../help";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Help component", () => {
   hasProperties(Help, {
@@ -45,5 +50,18 @@ describe("Help component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Help className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  COLORS.map(color =>
+    it(`should be ${color}`, () => {
+      const wrapper = Enzyme.shallow(<Help color={color} />);
+      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+    }),
+  );
+
+  describe("propTypes", () => {
+    const { propTypes } = Help;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
   });
 });

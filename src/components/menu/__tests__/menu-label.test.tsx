@@ -3,7 +3,7 @@ import React from "react";
 
 import { MenuLabel } from "../menu-label";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("MenuLabel component", () => {
   hasProperties(MenuLabel, {

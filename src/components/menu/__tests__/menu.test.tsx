@@ -5,7 +5,7 @@ import { Menu } from "../menu";
 import { MenuLabel } from "../menu-label";
 import { MenuList } from "../menu-list";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Menu component", () => {
   hasProperties(Menu, {

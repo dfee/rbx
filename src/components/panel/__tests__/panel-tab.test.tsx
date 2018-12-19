@@ -3,7 +3,7 @@ import React from "react";
 
 import { PanelTab } from "../panel-tab";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PanelTab component", () => {
   hasProperties(PanelTab, {

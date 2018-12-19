@@ -4,7 +4,7 @@ import React from "react";
 import { CardFooter } from "../card-footer";
 import { CardFooterItem } from "../card-footer-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("CardFooter component", () => {
   hasProperties(CardFooter, {

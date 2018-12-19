@@ -4,7 +4,12 @@ import React from "react";
 import { COLORS } from "@/base/helpers";
 import { Textarea, TEXTAREA_SIZES, TEXTAREA_STATES } from "../textarea";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Textarea component", () => {
   hasProperties(Textarea, {
@@ -78,4 +83,13 @@ describe("Textarea component", () => {
       expect(wrapper.hasClass(`is-${state}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Textarea;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateBoolPropType(propTypes, "fixedSize");
+    validateOneOfPropType(propTypes, "size", TEXTAREA_SIZES);
+    validateOneOfPropType(propTypes, "state", TEXTAREA_STATES);
+  });
 });

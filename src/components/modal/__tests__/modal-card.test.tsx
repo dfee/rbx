@@ -7,7 +7,7 @@ import { ModalCardFoot } from "../modal-card-foot";
 import { ModalCardHead } from "../modal-card-head";
 import { ModalCardTitle } from "../modal-card-title";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("ModalCard component", () => {
   hasProperties(ModalCard, {

@@ -4,7 +4,7 @@ import React from "react";
 import { List } from "../list";
 import { ListItem } from "../list-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("List component", () => {
   hasProperties(List, {

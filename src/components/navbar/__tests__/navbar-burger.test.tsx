@@ -4,7 +4,7 @@ import React from "react";
 import { NavbarBurger } from "../navbar-burger";
 import { contextFactory } from "./helpers";
 
-import { hasProperties, shallowInContext } from "@/__tests__/helpers";
+import { hasProperties, shallowInContext } from "@/__tests__/testing";
 
 describe("NavbarBurger component", () => {
   hasProperties(NavbarBurger, {

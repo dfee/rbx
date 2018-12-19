@@ -6,7 +6,12 @@ import { Input } from "../input";
 import { Label, LABEL_SIZES } from "../label";
 import { Radio } from "../radio";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Label component", () => {
   hasProperties(Label, {
@@ -89,4 +94,11 @@ describe("Label component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Label;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "disabled");
+    validateOneOfPropType(propTypes, "size", LABEL_SIZES);
+  });
 });

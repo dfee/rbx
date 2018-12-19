@@ -3,7 +3,7 @@ import React from "react";
 
 import { NavbarItem } from "../navbar-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("NavbarItem component", () => {
   hasProperties(NavbarItem, {

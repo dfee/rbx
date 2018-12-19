@@ -9,7 +9,7 @@ import {
 } from "../breadcrumb";
 import { BreadcrumbItem } from "../breadcrumb-item";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Breadcrumb component", () => {
   hasProperties(Breadcrumb, {

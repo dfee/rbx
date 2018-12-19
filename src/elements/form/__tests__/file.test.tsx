@@ -9,7 +9,12 @@ import { FileInput } from "../file-input";
 import { FileLabel } from "../file-label";
 import { FileName } from "../file-name";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("File component", () => {
   hasProperties(File, {
@@ -99,4 +104,15 @@ describe("File component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = File;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "align", FILE_ALIGNMENTS);
+    validateBoolPropType(propTypes, "boxed");
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateBoolPropType(propTypes, "fullwidth");
+    validateBoolPropType(propTypes, "hasName");
+    validateOneOfPropType(propTypes, "size", FILE_SIZES);
+  });
 });

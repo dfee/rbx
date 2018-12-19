@@ -3,7 +3,7 @@ import React from "react";
 
 import { DropdownItem } from "../dropdown-item";
 
-import { hasProperties, shallowInContext } from "@/__tests__/helpers";
+import { hasProperties, shallowInContext } from "@/__tests__/testing";
 import { contextFactory } from "./helpers";
 
 describe("DropdownItem component", () => {

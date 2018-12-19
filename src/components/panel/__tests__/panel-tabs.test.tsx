@@ -4,7 +4,7 @@ import React from "react";
 import { PanelTab } from "../panel-tab";
 import { PanelTabs } from "../panel-tabs";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PanelTabs component", () => {
   hasProperties(PanelTabs, {

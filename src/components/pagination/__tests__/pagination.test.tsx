@@ -12,7 +12,7 @@ import { PaginationList } from "../pagination-list";
 import { PaginationNext } from "../pagination-next";
 import { PaginationPrevious } from "../pagination-previous";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Pagination component", () => {
   hasProperties(Pagination, {

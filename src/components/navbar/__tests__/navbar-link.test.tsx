@@ -3,7 +3,7 @@ import React from "react";
 
 import { NavbarLink } from "../navbar-link";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("NavbarLink component", () => {
   hasProperties(NavbarLink, {

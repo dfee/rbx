@@ -3,7 +3,11 @@ import React from "react";
 
 import { Table } from "../table";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("Table component", () => {
   hasProperties(Table, {
@@ -81,4 +85,14 @@ describe("Table component", () => {
       expect(wrapper.hasClass("is-striped")).toBe(striped);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Table;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "bordered");
+    validateBoolPropType(propTypes, "fullwidth");
+    validateBoolPropType(propTypes, "hoverable");
+    validateBoolPropType(propTypes, "narrow");
+    validateBoolPropType(propTypes, "striped");
+  });
 });

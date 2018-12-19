@@ -3,7 +3,7 @@ import React from "react";
 
 import { DropdownContent } from "../dropdown-content";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("DropdownContent component", () => {
   hasProperties(DropdownContent, {

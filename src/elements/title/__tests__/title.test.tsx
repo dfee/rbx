@@ -3,7 +3,12 @@ import React from "react";
 
 import { Title, TITLE_SIZES } from "../title";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Title component", () => {
   hasProperties(Title, {
@@ -62,4 +67,12 @@ describe("Title component", () => {
       expect(wrapper.hasClass(subtitle ? "subtitle" : "title")).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Title;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "size", TITLE_SIZES);
+    validateBoolPropType(propTypes, "spaced");
+    validateBoolPropType(propTypes, "subtitle");
+  });
 });

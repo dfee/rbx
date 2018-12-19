@@ -4,7 +4,7 @@ import React from "react";
 import { COLORS } from "@/base/helpers";
 import { Tile, TILE_KINDS, TILE_SIZES } from "../tile";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Tile component", () => {
   hasProperties(Tile, {

@@ -7,7 +7,7 @@ import { HeroBody } from "../hero-body";
 import { HeroFoot } from "../hero-foot";
 import { HeroHead } from "../hero-head";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Hero component", () => {
   hasProperties(Hero, {

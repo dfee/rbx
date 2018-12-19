@@ -3,7 +3,7 @@ import React from "react";
 
 import { SelectOption } from "../select-option";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("SelectOption component", () => {
   hasProperties(SelectOption, {
@@ -40,5 +40,10 @@ describe("SelectOption component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<SelectOption className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = SelectOption;
+    testGenericPropTypes(propTypes);
   });
 });

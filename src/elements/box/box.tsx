@@ -2,8 +2,8 @@ import classNames from "classnames";
 import React from "react";
 
 import {
-  asHelpersPropTypes,
   forwardRefAs,
+  genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
@@ -19,5 +19,5 @@ export const Box = Object.assign(
     },
     { as: "div" },
   ),
-  { propTypes: asHelpersPropTypes },
+  { propTypes: genericPropTypes },
 );

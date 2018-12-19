@@ -3,7 +3,7 @@ import React from "react";
 
 import { PanelBlock } from "../panel-block";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PanelBlock component", () => {
   hasProperties(PanelBlock, {

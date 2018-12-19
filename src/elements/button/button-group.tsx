@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {
-  asHelpersPropTypes,
   forwardRefAs,
+  genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
@@ -21,7 +21,7 @@ export type ButtonGroupModifierProps = Partial<{
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
 const propTypes = {
-  ...asHelpersPropTypes,
+  ...genericPropTypes,
   hasAddons: PropTypes.bool,
   position: PropTypes.oneOf(BUTTON_GROUP_POSITIONS),
 };

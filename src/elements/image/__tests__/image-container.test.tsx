@@ -3,7 +3,11 @@ import React from "react";
 
 import { IMAGE_CONTAINER_SIZES, ImageContainer } from "../image-container";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("ImageContainer component", () => {
   hasProperties(ImageContainer, {
@@ -57,4 +61,10 @@ describe("ImageContainer component", () => {
       }
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = ImageContainer;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "size", IMAGE_CONTAINER_SIZES);
+  });
 });

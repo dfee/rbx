@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardHeaderTitle } from "../card-header-title";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("CardHeaderTitle component", () => {
   hasProperties(CardHeaderTitle, {

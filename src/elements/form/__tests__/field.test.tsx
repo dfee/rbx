@@ -5,7 +5,12 @@ import { Field, FIELD_ALIGNMENTS, FIELD_KINDS } from "../field";
 import { FieldBody } from "../field-body";
 import { FieldLabel } from "../field-label";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Field component", () => {
   hasProperties(Field, {
@@ -110,4 +115,15 @@ describe("Field component", () => {
       expect(wrapper.hasClass("is-narrow")).toBe(narrow);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Field;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "align", FIELD_ALIGNMENTS);
+    validateBoolPropType(propTypes, "expanded");
+    validateBoolPropType(propTypes, "horizontal");
+    validateOneOfPropType(propTypes, "kind", FIELD_KINDS);
+    validateBoolPropType(propTypes, "multiline");
+    validateBoolPropType(propTypes, "narrow");
+  });
 });

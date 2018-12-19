@@ -3,7 +3,11 @@ import React from "react";
 
 import { Delete, DELETE_SIZES } from "../delete";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Delete component", () => {
   hasProperties(Delete, {
@@ -52,5 +56,11 @@ describe("Delete component", () => {
       const wrapper = Enzyme.shallow(<Delete size={size} />);
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     });
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Delete;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "size", DELETE_SIZES);
   });
 });

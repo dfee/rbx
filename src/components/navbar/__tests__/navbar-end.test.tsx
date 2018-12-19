@@ -3,7 +3,7 @@ import React from "react";
 
 import { NavbarEnd } from "../navbar-end";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("NavbarEnd component", () => {
   hasProperties(NavbarEnd, {

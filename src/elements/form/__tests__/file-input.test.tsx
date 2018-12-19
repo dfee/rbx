@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileInput } from "../file-input";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("FileInput component", () => {
   hasProperties(FileInput, {
@@ -45,5 +45,10 @@ describe("FileInput component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<FileInput className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = FileInput;
+    testGenericPropTypes(propTypes);
   });
 });

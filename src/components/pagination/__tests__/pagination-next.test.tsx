@@ -3,7 +3,7 @@ import React from "react";
 
 import { PaginationNext } from "../pagination-next";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("PaginationNext component", () => {
   hasProperties(PaginationNext, {

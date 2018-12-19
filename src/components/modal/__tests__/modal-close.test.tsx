@@ -4,7 +4,7 @@ import React from "react";
 import { ModalClose } from "../modal-close";
 import { contextFactory } from "./helpers";
 
-import { hasProperties, shallowInContext } from "@/__tests__/helpers";
+import { hasProperties, shallowInContext } from "@/__tests__/testing";
 
 describe("ModalClose component", () => {
   hasProperties(ModalClose, {

@@ -3,7 +3,11 @@ import React from "react";
 
 import { FieldLabel, FILED_LABEL_SIZES } from "../field-label";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("FieldLabel component", () => {
   hasProperties(FieldLabel, {
@@ -53,4 +57,10 @@ describe("FieldLabel component", () => {
       expect(wrapper.hasClass(`is-${size}`)).toBe(true);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = FieldLabel;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "size", FILED_LABEL_SIZES);
+  });
 });

@@ -3,7 +3,7 @@ import React from "react";
 
 import { Loader } from "../loader";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
 
 describe("Loader component", () => {
   hasProperties(Loader, {
@@ -48,5 +48,10 @@ describe("Loader component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Loader className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Loader;
+    testGenericPropTypes(propTypes);
   });
 });

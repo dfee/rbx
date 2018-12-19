@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardContent } from "../card-content";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("CardContent component", () => {
   hasProperties(CardContent, {

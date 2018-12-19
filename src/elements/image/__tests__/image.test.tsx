@@ -4,7 +4,11 @@ import React from "react";
 import { Image } from "../image";
 import { ImageContainer } from "../image-container";
 
-import { hasProperties } from "@/__tests__/helpers";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+} from "@/__tests__/testing";
 
 describe("Image component", () => {
   hasProperties(Image, {
@@ -42,5 +46,11 @@ describe("Image component", () => {
     const className = "foo";
     const wrapper = Enzyme.shallow(<Image className={className} />);
     expect(wrapper.hasClass(className)).toBe(true);
+  });
+
+  describe("propTypes", () => {
+    const { propTypes } = Image;
+    testGenericPropTypes(propTypes);
+    validateBoolPropType(propTypes, "rounded");
   });
 });

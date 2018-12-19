@@ -6,7 +6,7 @@ import { Message, MESSAGE_SIZES } from "../message";
 import { MessageBody } from "../message-body";
 import { MessageHeader } from "../message-header";
 
-import { hasProperties } from "@/__tests__/helpers";
+import { hasProperties } from "@/__tests__/testing";
 
 describe("Message component", () => {
   hasProperties(Message, {
