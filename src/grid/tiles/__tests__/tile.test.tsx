@@ -4,7 +4,12 @@ import React from "react";
 import { COLORS } from "@/base/helpers";
 import { Tile, TILE_KINDS, TILE_SIZES } from "../tile";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+} from "@/__tests__/testing";
 
 describe("Tile component", () => {
   hasProperties(Tile, {
@@ -82,4 +87,14 @@ describe("Tile component", () => {
       expect(wrapper.hasClass("is-vertical")).toBe(vertical);
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Tile;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "color", COLORS);
+    validateOneOfPropType(propTypes, "kind", TILE_KINDS);
+    validateBoolPropType(propTypes, "notification");
+    validateOneOfPropType(propTypes, "size", TILE_SIZES);
+    validateBoolPropType(propTypes, "vertical");
+  });
 });

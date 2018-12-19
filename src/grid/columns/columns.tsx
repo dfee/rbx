@@ -1,8 +1,14 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
-import { Breakpoints } from "../../base/helpers";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
+import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { Column } from "./column";
 
@@ -16,6 +22,10 @@ export type ColumnsBreakpointProps = Partial<{
   gap: ColumnsGaps;
 }>;
 
+const ColumnsBreakpointPropTypes = {
+  gap: PropTypes.oneOf(COLUMNS_GAPS),
+};
+
 type ColumnsModifierProps = Partial<
   {
     /**
@@ -26,8 +36,6 @@ type ColumnsModifierProps = Partial<
      * `true` you want the columns inside to be horizontaly centered
      */
     centered: boolean;
-    children: React.ReactNode;
-    className: string;
     /**
      * `true` to remove space between columns
      */
@@ -57,10 +65,26 @@ type ColumnsModifierProps = Partial<
      * The column gap size for FullHD devices (1408px and above)
      */
     fullhd: ColumnsBreakpointProps;
+    /**
+     * The column gap size for FullHD devices (1408px and above)
+     */
+    touch: ColumnsBreakpointProps;
   } & ColumnsBreakpointProps
 >;
 
 export type ColumnsProps = HelpersProps & ColumnsModifierProps;
+
+const propTypes = {
+  ...genericPropTypes,
+  ...BREAKPOINTS.map(breakpoint => ({
+    [breakpoint]: PropTypes.shape(ColumnsBreakpointPropTypes),
+  })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+  ...ColumnsBreakpointPropTypes,
+  breakpoint: PropTypes.oneOf(BREAKPOINTS),
+  centered: PropTypes.bool,
+  gapless: PropTypes.bool,
+  multiline: PropTypes.bool,
+};
 
 export const Columns = Object.assign(
   forwardRefAs<ColumnsProps, "div">(
@@ -77,6 +101,7 @@ export const Columns = Object.assign(
         multiline,
         tablet,
         widescreen,
+        touch,
         ...rest
       } = transformHelpers(props);
 
@@ -87,6 +112,7 @@ export const Columns = Object.assign(
           fullhd,
           mobile,
           tablet,
+          touch,
           widescreen,
         })
           .filter(([key, value]) => value)
@@ -116,5 +142,8 @@ export const Columns = Object.assign(
       multiline: true,
     },
   ),
-  { Column },
+  {
+    Column,
+    propTypes,
+  },
 );

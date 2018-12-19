@@ -1,7 +1,14 @@
 import classNames from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, HelpersProps, transformHelpers } from "../../base";
+import { BREAKPOINTS } from "@/base/helpers";
+import {
+  forwardRefAs,
+  genericPropTypes,
+  HelpersProps,
+  transformHelpers,
+} from "../../base";
 import { tuple } from "../../utils";
 
 export const COLUMN_SIZES = tuple(
@@ -35,20 +42,25 @@ export type ColumnSizeModifierProps = Partial<{
    * If you want a column to only take the space it needs, use the narrow
    * modifier. The other column(s) will fill up the remaining space.
    */
-  narrow?: boolean;
+  narrow: boolean;
   /**
    * Create horizontal space around Column elements
    */
-  offset?: ColumnSizes;
+  offset: ColumnSizes;
   /**
    * The size of the column. the maximun size of a row is 12
    */
-  size?: ColumnSizes;
+  size: ColumnSizes;
 }>;
+
+const ColumnSizeModifierPropTypes = {
+  narrow: PropTypes.bool,
+  offset: PropTypes.oneOf(COLUMN_SIZES),
+  size: PropTypes.oneOf(COLUMN_SIZES),
+};
 
 export type ColumnModifierProps = Partial<
   {
-    className: string;
     /**
      * Size, Offset and Narrow props for Mobile devices (Up to 768px)
      */
@@ -80,48 +92,59 @@ export type ColumnModifierProps = Partial<
 
 export type ColumnProps = HelpersProps & ColumnModifierProps;
 
-export const Column = forwardRefAs<ColumnProps, "div">(
-  (props, ref) => {
-    const {
-      as,
-      mobile,
-      tablet,
-      desktop,
-      widescreen,
-      fullhd,
-      touch,
-      narrow,
-      offset,
-      size,
-      ...rest
-    } = transformHelpers(props);
+const propTypes = {
+  ...genericPropTypes,
+  ...BREAKPOINTS.map(breakpoint => ({
+    [breakpoint]: PropTypes.shape(ColumnSizeModifierPropTypes),
+  })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+  ...ColumnSizeModifierPropTypes,
+};
 
-    rest.className = classNames(
-      "column",
-      rest.className,
-      {
-        [`is-${size}`]: !!size,
-        [`is-offset-${offset}`]: !!offset,
-        "is-narrow": narrow,
-      },
-      Object.entries({
-        desktop,
-        fullhd,
+export const Column = Object.assign(
+  forwardRefAs<ColumnProps, "div">(
+    (props, ref) => {
+      const {
+        as,
         mobile,
         tablet,
-        touch,
+        desktop,
         widescreen,
-      })
-        .filter(([breakpoint, value]) => value)
-        .map(([breakpoint, value]) => ({
-          [`is-${value!.size}-${breakpoint}`]: !!value!.size,
-          [`is-narrow-${breakpoint}`]: value!.narrow,
-          [`is-offset-${value!.offset}-${breakpoint}`]: !!value!.offset,
-        }))
-        .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-    );
+        fullhd,
+        touch,
+        narrow,
+        offset,
+        size,
+        ...rest
+      } = transformHelpers(props);
 
-    return React.createElement(as!, { ref, ...rest });
-  },
-  { as: "div" },
+      rest.className = classNames(
+        "column",
+        rest.className,
+        {
+          [`is-${size}`]: !!size,
+          [`is-offset-${offset}`]: !!offset,
+          "is-narrow": narrow,
+        },
+        Object.entries({
+          desktop,
+          fullhd,
+          mobile,
+          tablet,
+          touch,
+          widescreen,
+        })
+          .filter(([breakpoint, value]) => value)
+          .map(([breakpoint, value]) => ({
+            [`is-${value!.size}-${breakpoint}`]: !!value!.size,
+            [`is-narrow-${breakpoint}`]: value!.narrow,
+            [`is-offset-${value!.offset}-${breakpoint}`]: !!value!.offset,
+          }))
+          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+      );
+
+      return React.createElement(as!, { ref, ...rest });
+    },
+    { as: "div" },
+  ),
+  { propTypes },
 );

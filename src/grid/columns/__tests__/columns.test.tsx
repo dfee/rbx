@@ -5,7 +5,13 @@ import { BREAKPOINTS } from "@/base/helpers";
 import { Column } from "../column";
 import { Columns, COLUMNS_GAPS } from "../columns";
 
-import { hasProperties } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+  validateBoolPropType,
+  validateOneOfPropType,
+  validatePropType,
+} from "@/__tests__/testing";
 
 describe("Columns component", () => {
   hasProperties(Columns, {
@@ -94,7 +100,7 @@ describe("Columns component", () => {
     }),
   );
 
-  ["mobile", "tablet", "desktop", "widescreen", "fullhd"].map(breakpoint =>
+  BREAKPOINTS.map(breakpoint =>
     describe(`for ${breakpoint}`, () => {
       COLUMNS_GAPS.map(gap =>
         it(`should have gap ${gap}`, () => {
@@ -106,4 +112,32 @@ describe("Columns component", () => {
       );
     }),
   );
+
+  describe("propTypes", () => {
+    const { propTypes } = Columns;
+    testGenericPropTypes(propTypes);
+    validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
+    validateBoolPropType(propTypes, "centered");
+    validateBoolPropType(propTypes, "gapless");
+    validateBoolPropType(propTypes, "multiline");
+    validateOneOfPropType(propTypes, "gap", COLUMNS_GAPS);
+
+    BREAKPOINTS.map(breakpoint => {
+      describe(breakpoint, () => {
+        validatePropType(propTypes, breakpoint, [
+          ...COLUMNS_GAPS.map(value => ({
+            descriptor: `gap = ${value}`,
+            valid: true,
+            value: { gap: value },
+          })),
+          {
+            descriptor: "narrow = 'string'",
+            error: new RegExp(`Warning.+Failed prop.+ \`${breakpoint}.gap\``),
+            valid: false,
+            value: { gap: "__UNKNOWN" },
+          },
+        ]);
+      });
+    });
+  });
 });
