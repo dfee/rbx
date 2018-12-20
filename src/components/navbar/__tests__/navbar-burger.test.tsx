@@ -2,7 +2,7 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { NavbarBurger } from "../navbar-burger";
-import { contextFactory } from "./context";
+import { navbarContextFactory } from "./context";
 
 import {
   hasProperties,
@@ -17,7 +17,7 @@ describe("NavbarBurger component", () => {
   });
 
   it("should render as the default element", () => {
-    const wrapper = shallowInContext(NavbarBurger, contextFactory(), {});
+    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {});
     expect(wrapper.is("div")).toBe(true);
     expect(wrapper.props().role).toEqual("button");
     expect(wrapper.prop("style")).toHaveProperty("outline", "none");
@@ -25,7 +25,9 @@ describe("NavbarBurger component", () => {
 
   it("should render as a custom component", () => {
     const as = "span";
-    const wrapper = shallowInContext(NavbarBurger, contextFactory(), { as });
+    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {
+      as,
+    });
     expect(wrapper.is(as)).toBe(true);
   });
 
@@ -45,20 +47,20 @@ describe("NavbarBurger component", () => {
   });
 
   it("should have bulma className", () => {
-    const wrapper = shallowInContext(NavbarBurger, contextFactory(), {});
+    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {});
     expect(wrapper.hasClass("navbar-burger")).toBe(true);
   });
 
   it("should preserve custom className", () => {
     const className = "foo";
-    const wrapper = shallowInContext(NavbarBurger, contextFactory(), {
+    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {
       className,
     });
     expect(wrapper.hasClass(className)).toBe(true);
   });
 
   it("should preserve custom style", () => {
-    const wrapper = shallowInContext(NavbarBurger, contextFactory(), {
+    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {
       style: { margin: "10px" },
     });
     expect(wrapper.prop("style")).toHaveProperty("margin", "10px");
@@ -69,7 +71,7 @@ describe("NavbarBurger component", () => {
     const setActive = jest.fn();
     const wrapper = shallowInContext(
       NavbarBurger,
-      contextFactory({ setActive }),
+      navbarContextFactory({ setActive }),
       {
         onClick: onClick as React.MouseEventHandler<any>,
       },
@@ -88,7 +90,7 @@ describe("NavbarBurger component", () => {
 
       const wrapper = shallowInContext(
         NavbarBurger,
-        contextFactory({ setActive }),
+        navbarContextFactory({ setActive }),
         {
           onClick: hasOnClick
             ? (onClick as React.MouseEventHandler<any>)

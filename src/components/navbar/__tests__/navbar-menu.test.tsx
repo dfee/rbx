@@ -2,7 +2,7 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { NavbarMenu } from "../navbar-menu";
-import { contextFactory } from "./context";
+import { navbarContextFactory } from "./context";
 
 import {
   hasProperties,
@@ -16,13 +16,15 @@ describe("NavbarMenu component", () => {
   });
 
   it("should render as the default element", () => {
-    const wrapper = shallowInContext(NavbarMenu, contextFactory(), {});
+    const wrapper = shallowInContext(NavbarMenu, navbarContextFactory(), {});
     expect(wrapper.is("div")).toBe(true);
   });
 
   it("should render as a custom component", () => {
     const as = "span";
-    const wrapper = shallowInContext(NavbarMenu, contextFactory(), { as });
+    const wrapper = shallowInContext(NavbarMenu, navbarContextFactory(), {
+      as,
+    });
     expect(wrapper.is(as)).toBe(true);
   });
 
@@ -42,13 +44,13 @@ describe("NavbarMenu component", () => {
   });
 
   it("should have bulma className", () => {
-    const wrapper = shallowInContext(NavbarMenu, contextFactory(), {});
+    const wrapper = shallowInContext(NavbarMenu, navbarContextFactory(), {});
     expect(wrapper.hasClass("navbar-menu")).toBe(true);
   });
 
   it("should preserve custom className", () => {
     const className = "foo";
-    const wrapper = shallowInContext(NavbarMenu, contextFactory(), {
+    const wrapper = shallowInContext(NavbarMenu, navbarContextFactory(), {
       className,
     });
     expect(wrapper.hasClass(className)).toBe(true);
@@ -58,7 +60,7 @@ describe("NavbarMenu component", () => {
     it(`should ${active ? "" : "not "}be active`, () => {
       const wrapper = shallowInContext(
         NavbarMenu,
-        contextFactory({ active }),
+        navbarContextFactory({ active }),
         {},
       );
       expect(wrapper.hasClass("is-active")).toBe(active);

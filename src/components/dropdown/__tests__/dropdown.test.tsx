@@ -105,47 +105,41 @@ describe("Card component", () => {
     }
   });
 
-  it("should be active", () => {
-    const wrapper = Enzyme.mount(<Dropdown active />);
-    try {
-      expect(
-        wrapper
-          .find(DropdownController)
-          .children()
-          .hasClass("is-active"),
-      ).toBe(true);
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  [false, true].map(active =>
+    it(`should ${active ? "" : "not "}be active`, () => {
+      const wrapper = Enzyme.mount(<Dropdown active={active} />);
+      try {
+        const children = wrapper.find(DropdownController).children();
+        expect(children.hasClass("is-active")).toBe(active);
+      } finally {
+        wrapper.unmount();
+      }
+    }),
+  );
 
-  it("should be hoverable", () => {
-    const wrapper = Enzyme.mount(<Dropdown hoverable />);
-    try {
-      expect(
-        wrapper
-          .find(DropdownController)
-          .children()
-          .hasClass("is-hoverable"),
-      ).toBe(true);
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  [false, true].map(hoverable =>
+    it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
+      const wrapper = Enzyme.mount(<Dropdown hoverable={hoverable} />);
+      try {
+        const children = wrapper.find(DropdownController).children();
+        expect(children.hasClass("is-hoverable")).toBe(hoverable);
+      } finally {
+        wrapper.unmount();
+      }
+    }),
+  );
 
-  it("should be up", () => {
-    const wrapper = Enzyme.mount(<Dropdown up />);
-    try {
-      expect(
-        wrapper
-          .find(DropdownController)
-          .children()
-          .hasClass("is-up"),
-      ).toBe(true);
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  [false, true].map(up =>
+    it(`should ${up ? "" : "not "}be up`, () => {
+      const wrapper = Enzyme.mount(<Dropdown up={up} />);
+      try {
+        const children = wrapper.find(DropdownController).children();
+        expect(children.hasClass("is-up")).toBe(up);
+      } finally {
+        wrapper.unmount();
+      }
+    }),
+  );
 
   DROPDOWN_ALIGNMENTS.map(align =>
     it(`should be aligned ${align}`, () => {
@@ -164,6 +158,7 @@ describe("Card component", () => {
   );
 
   it("should not be disabled if component is the target of click", () => {
+    // For example, if we click a dropdown-divider
     const root = document.createElement("div");
     root.setAttribute("id", "root");
     document.body.appendChild(root);

@@ -34,7 +34,7 @@ export const knobs = {
   item: {
     active: (title: string = "Active") => boolean(title, false),
     dropdownUp: (title: string = "Dropdown up") => boolean(title, false),
-    hoverable: (title: string = "Hoverable") => boolean(title, true),
+    hoverable: (title: string = "Hoverable") => boolean(title, false),
   },
   link: {
     arrowless: (title: string = "Arrowless") => boolean(title, false),
@@ -58,9 +58,9 @@ storiesOf("Components/Navbar", module)
     };
 
     const itemProps = {
-      active: knobs.item.active("Navbar > Menu > Item > Link: active"),
+      active: knobs.item.active("Navbar > Menu > Item: active"),
       dropdownUp: knobs.item.dropdownUp("Navbar > Menu > Item: dropdownUp"),
-      hoverable: knobs.item.hoverable("Navbar > Menu > Item > Link: hoverable"),
+      hoverable: knobs.item.hoverable("Navbar > Menu > Item: hoverable"),
     };
     const linkProps = {
       arrowless: knobs.link.arrowless("Navbar > Menu > Item > Link: arrowless"),
@@ -93,17 +93,17 @@ storiesOf("Components/Navbar", module)
 
         <Navbar.Menu {...menuProps}>
           <Navbar.Start>
-            <Navbar.Item href="#">Home</Navbar.Item>
-            <Navbar.Item href="#">Documentation</Navbar.Item>
+            <Navbar.Item>Home</Navbar.Item>
+            <Navbar.Item>Documentation</Navbar.Item>
 
             <Navbar.Item dropdown {...itemProps}>
               <Navbar.Link {...linkProps}>More</Navbar.Link>
               <Navbar.Dropdown {...dropdownProps}>
-                <Navbar.Item href="#">About</Navbar.Item>
-                <Navbar.Item href="#">Jobs</Navbar.Item>
-                <Navbar.Item href="#">Contact</Navbar.Item>
+                <Navbar.Item>About</Navbar.Item>
+                <Navbar.Item>Jobs</Navbar.Item>
+                <Navbar.Item>Contact</Navbar.Item>
                 <Navbar.Divider />
-                <Navbar.Item href="#">Report an issue</Navbar.Item>
+                <Navbar.Item>Report an issue</Navbar.Item>
               </Navbar.Dropdown>
             </Navbar.Item>
           </Navbar.Start>
