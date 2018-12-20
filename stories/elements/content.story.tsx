@@ -7,7 +7,7 @@ import { CONTENT_SIZES } from "@/elements/content/content";
 import { CONTENT_ORDERED_LIST_TYPES } from "@/elements/content/content-ordered-list";
 
 import { Section } from "@/layout";
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   orderedList: {

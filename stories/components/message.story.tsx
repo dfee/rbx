@@ -7,8 +7,8 @@ import { MESSAGE_SIZES } from "@/components/message/message";
 import { Delete } from "@/elements";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
-import { colorKnob } from "../modifiers";
+import { colorKnob } from "../common";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   size: (title: string = "Size") =>

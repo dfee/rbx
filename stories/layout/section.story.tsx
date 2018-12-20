@@ -6,7 +6,7 @@ import { Container, Title } from "@/elements";
 import { Section } from "@/layout";
 import { SECTION_SIZES } from "@/layout/section/section";
 
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   size: (title: string = "Size") =>

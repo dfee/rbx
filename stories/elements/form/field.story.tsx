@@ -26,8 +26,8 @@ import { LABEL_SIZES } from "@/elements/form/label";
 import { Columns } from "@/grid";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../../helpers";
-import { colorKnob } from "../../modifiers";
+import { colorKnob } from "../../common";
+import { iterableToSelectObject } from "../../utils";
 
 export const knobs = {
   align: (title: string = "Alignment") =>

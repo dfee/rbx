@@ -6,8 +6,8 @@ import { Control, Delete, Field, Tag } from "@/elements";
 import { TAG_SIZES } from "@/elements/tag/tag";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
-import { colorKnob } from "../modifiers";
+import { colorKnob } from "../common";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   delete: (title: string = "Delete") => boolean(title, false),

@@ -25,7 +25,7 @@ import {
 import { BUTTON_GROUP_POSITIONS } from "@/elements/button/button-group";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject, titleize } from "../helpers";
+import { iterableToSelectObject, titleize } from "../utils";
 
 export const knobs = {
   disabled: (title: string = "Disabled") => boolean(title, false),

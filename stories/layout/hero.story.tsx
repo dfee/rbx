@@ -9,8 +9,8 @@ import { Button, Container, Icon, Title } from "@/elements";
 import { Hero } from "@/layout";
 import { HERO_SIZES } from "@/layout/hero/hero";
 
-import { iterableToSelectObject } from "../helpers";
-import { colorKnob } from "../modifiers";
+import { colorKnob } from "../common";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   gradient: (title: string = "Gradient") => boolean(title, false),

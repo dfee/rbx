@@ -6,8 +6,8 @@ import { Progress } from "@/elements";
 import { PROGRESS_SIZES } from "@/elements/progress/progress";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
-import { colorKnob } from "../modifiers";
+import { colorKnob } from "../common";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   max: (title: string = "Max") =>

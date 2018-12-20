@@ -8,16 +8,20 @@ import { Box, Notification, Title } from "@/elements";
 import { Columns } from "@/grid";
 import { ColumnProps } from "@/grid/columns/column";
 import { COLUMN_SIZES, ColumnSizes } from "@/grid/columns/column";
-import { COLUMNS_GAPS, ColumnsGaps } from "@/grid/columns/columns";
+import { COLUMNS_GAP_SIZES, ColumnsGapSizes } from "@/grid/columns/columns";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   breakpoint: (title: string = "Breakpoint") =>
     select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), ""),
   gap: (title: string = "Gap") =>
-    select(title, iterableToSelectObject(COLUMNS_GAPS, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(COLUMNS_GAP_SIZES, { undefined: "" }),
+      "",
+    ),
   gapless: (title: string = "Gapless") => boolean(title, false),
 };
 
@@ -199,15 +203,15 @@ storiesOf("Grid/Columns", module)
   .add("Gap (variable)", () => {
     const gap = knobs.gap();
     const normalizedGap =
-      gap === "" ? undefined : (parseInt(gap, 10) as ColumnsGaps);
+      gap === "" ? undefined : (parseInt(gap, 10) as ColumnsGapSizes);
     return (
       <React.Fragment>
-        <Columns gap={normalizedGap}>
+        <Columns gapSize={normalizedGap}>
           <ColumnNotification color="primary" children="Side" size={3} />
           <ColumnNotification color="primary" children="Main" size={9} />
         </Columns>
 
-        <Columns gap={normalizedGap}>
+        <Columns gapSize={normalizedGap}>
           {[1, 2, 3].map(key => (
             <ColumnNotification
               children="Three columns"
@@ -218,7 +222,7 @@ storiesOf("Grid/Columns", module)
           ))}
         </Columns>
 
-        <Columns gap={normalizedGap}>
+        <Columns gapSize={normalizedGap}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(key => (
             <ColumnNotification
               children={key}

@@ -11,8 +11,8 @@ import {
 } from "@/elements/form/select-container";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../../helpers";
-import { colorKnob } from "../../modifiers";
+import { colorKnob } from "../../common";
+import { iterableToSelectObject } from "../../utils";
 
 export const knobs = {
   container: {

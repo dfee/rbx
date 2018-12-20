@@ -9,7 +9,7 @@ import {
   shallowInContext,
   testGenericPropTypes,
 } from "@/__tests__/testing";
-import { contextFactory } from "./helpers";
+import { contextFactory } from "./context";
 
 describe("ModalCardHead component", () => {
   hasProperties(ModalCardHead, {

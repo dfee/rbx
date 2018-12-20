@@ -8,7 +8,7 @@ import {
   testGenericPropTypes,
   validatePropType,
 } from "@/__tests__/testing";
-import { contextFactory } from "./helpers";
+import { contextFactory } from "./context";
 
 describe("ModalBackground component", () => {
   hasProperties(ModalBackground, {

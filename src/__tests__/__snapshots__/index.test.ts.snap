@@ -541,7 +541,7 @@ Object {
       "clipped": [Function],
       "desktop": [Function],
       "fullhd": [Function],
-      "gap": [Function],
+      "gapSize": [Function],
       "gapless": [Function],
       "hidden": [Function],
       "invisible": [Function],

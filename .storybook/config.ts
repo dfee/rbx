@@ -1,3 +1,4 @@
+import { withInfo } from "@storybook/addon-info";
 import { withKnobs } from "@storybook/addon-knobs";
 import { setOptions } from "@storybook/addon-options";
 import {
@@ -8,14 +9,7 @@ import { addDecorator, configure } from "@storybook/react";
 
 import "./storybook.sass";
 
-// addon-info is currently broken with prop types
-// import { withInfo } from "@storybook/addon-info";
-// addDecorator(
-//   withInfo({
-//     // propTables: false,
-//     source: false,
-//   }),
-// );
+addDecorator(withInfo());
 
 setOptions({
   name: "👟 rbx - Bulma UI",
@@ -27,8 +21,9 @@ addDecorator(withKnobs);
 
 configureViewport({
   defaultViewport: "responsive",
-  // tslint:disable:object-literal-sort-keys
   viewports: {
+    // tslint:disable:object-literal-sort-keys
+    responsive: INITIAL_VIEWPORTS.responsive,
     mobileSmall: {
       name: "Mobile @ 480px",
       styles: {
@@ -89,9 +84,12 @@ configureViewport({
         width: "2880px",
       },
     },
-    ...INITIAL_VIEWPORTS,
+    ...Object.keys(INITIAL_VIEWPORTS)
+      .filter(key => key !== "responsive")
+      .map(key => ({ [key]: INITIAL_VIEWPORTS[key] }))
+      .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+    // tslint:enable:object-literal-sort-keys
   },
-  // tslint:enable:object-literal-sort-keys
 });
 
 function loadStories() {

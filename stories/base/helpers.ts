@@ -1,5 +1,3 @@
-import { select } from "@storybook/addon-knobs";
-
 import { COLORS, GREY_COLORS } from "@/base/helpers";
 import { BREAKPOINTS, DISPLAYS } from "@/base/helpers";
 import {
@@ -14,15 +12,9 @@ import {
   booleanFactory,
   iterableToSelectObject,
   selectFactory,
-} from "./helpers";
+} from "../utils";
 
-export const colorKnob = (title: string = "Color") =>
-  select(title, iterableToSelectObject(COLORS, { undefined: "" }), "");
-
-export const breakpointKnob = (title: string = "Breakpoint") =>
-  select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), "");
-
-export const modifiersKnobs = {
+export const helpersKnobs = {
   color: {
     backgroundColor: selectFactory(
       "backgroundColor",

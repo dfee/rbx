@@ -10,7 +10,7 @@ import {
 } from "@/elements/image/image-container";
 
 import { Section } from "@/layout";
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   container: {

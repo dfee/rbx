@@ -18,7 +18,7 @@ import {
 import { Icon } from "@/elements";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   align: (title: string = "Alignment") =>

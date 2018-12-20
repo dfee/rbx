@@ -16,7 +16,7 @@ import {
 import { DELETE_SIZES } from "@/elements/other/delete";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   deleteSize: (title: string = "Size") =>

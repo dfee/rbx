@@ -4,7 +4,7 @@ import React from "react";
 import { Delete, Notification } from "@/elements";
 import { Section } from "@/layout";
 
-import { colorKnob } from "../modifiers";
+import { colorKnob } from "../common";
 
 storiesOf("Elements/Notification", module)
   .addDecorator(story => <Section children={story()} />)

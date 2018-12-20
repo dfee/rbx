@@ -11,8 +11,8 @@ import {
 } from "@/elements/form/input";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../../helpers";
-import { colorKnob } from "../../modifiers";
+import { colorKnob } from "../../common";
+import { iterableToSelectObject } from "../../utils";
 
 export type ControlledInputProps = Prefer<
   InputProps,

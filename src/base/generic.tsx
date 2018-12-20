@@ -7,6 +7,7 @@ import { HelpersProps, helpersPropTypes, transformHelpers } from "./helpers";
 export type GenericProps = HelpersProps;
 
 export const propTypes = {
+  /** The component this should render as */
   as: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.string,

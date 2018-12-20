@@ -5,7 +5,7 @@ import { Level } from "@/components";
 import { Button, Control, Field, Heading, Input, Title } from "@/elements";
 import { Section } from "@/layout";
 
-import { breakpointKnob } from "../modifiers";
+import { breakpointKnob } from "../common";
 
 storiesOf("Components/Level", module)
   .addDecorator(story => <Section children={story()} />)

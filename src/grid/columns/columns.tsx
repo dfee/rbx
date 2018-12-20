@@ -12,18 +12,18 @@ import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { Column } from "./column";
 
-export const COLUMNS_GAPS = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);
-export type ColumnsGaps = (typeof COLUMNS_GAPS)[number];
+export const COLUMNS_GAP_SIZES = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);
+export type ColumnsGapSizes = (typeof COLUMNS_GAP_SIZES)[number];
 
 export type ColumnsBreakpointProps = Partial<{
   /**
    * The column gap size for Tablet devices (Between 769px and 1023px)
    */
-  gap: ColumnsGaps;
+  gapSize: ColumnsGapSizes;
 }>;
 
 const ColumnsBreakpointPropTypes = {
-  gap: PropTypes.oneOf(COLUMNS_GAPS),
+  gapSize: PropTypes.oneOf(COLUMNS_GAP_SIZES),
 };
 
 type ColumnsModifierProps = Partial<
@@ -95,8 +95,8 @@ export const Columns = Object.assign(
         centered,
         desktop,
         fullhd,
-        gap,
         gapless,
+        gapSize,
         mobile,
         multiline,
         tablet,
@@ -106,7 +106,7 @@ export const Columns = Object.assign(
       } = transformHelpers(props);
 
       const gapClassNames = classNames(
-        { [`is-${gap}`]: typeof gap === "number" },
+        { [`is-${gapSize}`]: typeof gapSize === "number" },
         Object.entries({
           desktop,
           fullhd,
@@ -117,7 +117,7 @@ export const Columns = Object.assign(
         })
           .filter(([key, value]) => value)
           .map(([key, value]) => ({
-            [`is-${value!.gap}-${key}`]: typeof value!.gap === "number",
+            [`is-${value!.gapSize}-${key}`]: typeof value!.gapSize === "number",
           }))
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       );

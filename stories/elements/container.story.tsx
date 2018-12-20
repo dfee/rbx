@@ -6,7 +6,7 @@ import { BREAKPOINTS } from "@/base/helpers";
 import { Container, Notification } from "@/elements";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   breakapoint: (title: string = "Breakpoint") =>

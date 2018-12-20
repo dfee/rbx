@@ -10,7 +10,7 @@ import { DROPDOWN_ALIGNMENTS } from "@/components/dropdown/dropdown";
 import { Button, Icon } from "@/elements";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../helpers";
+import { iterableToSelectObject } from "../utils";
 
 export const knobs = {
   active: (title: string = "Active") =>

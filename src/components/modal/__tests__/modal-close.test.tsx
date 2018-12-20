@@ -2,7 +2,7 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { ModalClose } from "../modal-close";
-import { contextFactory } from "./helpers";
+import { contextFactory } from "./context";
 
 import {
   hasProperties,

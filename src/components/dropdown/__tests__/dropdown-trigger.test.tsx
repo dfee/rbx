@@ -9,7 +9,7 @@ import {
   testGenericPropTypes,
   validatePropType,
 } from "@/__tests__/testing";
-import { contextFactory } from "./helpers";
+import { contextFactory } from "./context";
 
 describe("DropdownTrigger component", () => {
   hasProperties(DropdownTrigger, {

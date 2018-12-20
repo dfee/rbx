@@ -5,8 +5,8 @@ import { Generic } from "@/base";
 import { BREAKPOINTS } from "@/base/helpers";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject, selectFactory } from "../helpers";
-import { modifiersKnobs as mk } from "../modifiers";
+import { iterableToSelectObject, selectFactory } from "../utils";
+import { helpersKnobs } from "./helpers";
 
 const genericKnobs = {
   as: selectFactory(
@@ -48,34 +48,37 @@ storiesOf("Base", module)
     const props = filterUndefined({
       as: genericKnobs.as({ group: "as" }),
       // colors
-      ...mapFactories(mk.color, "Color"),
+      ...mapFactories(helpersKnobs.color, "Color"),
       // helpers
-      ...mapFactories(mk.helpers.float, "Helpers"),
-      ...mapFactories(mk.helpers.spacing, "Helpers"),
-      ...mapFactories(mk.helpers.other, "Helpers"),
+      ...mapFactories(helpersKnobs.helpers.float, "Helpers"),
+      ...mapFactories(helpersKnobs.helpers.spacing, "Helpers"),
+      ...mapFactories(helpersKnobs.helpers.other, "Helpers"),
       // responsive
       responsive: filterResponsive(({
         ...BREAKPOINTS.map(breakpoint => ({
           [breakpoint]: {
             display: mapFactories(
-              mk.responsive[breakpoint].display,
+              helpersKnobs.responsive[breakpoint].display,
               "Responsive",
             ),
-            hide: mapFactories(mk.responsive[breakpoint].hide, "Responsive"),
+            hide: mapFactories(
+              helpersKnobs.responsive[breakpoint].hide,
+              "Responsive",
+            ),
             textAlignment: mapFactories(
-              mk.responsive[breakpoint].textAlignment,
+              helpersKnobs.responsive[breakpoint].textAlignment,
               "Responsive",
             ),
             textSize: mapFactories(
-              mk.responsive[breakpoint].textSize,
+              helpersKnobs.responsive[breakpoint].textSize,
               "Responsive",
             ),
           },
         })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       } as unknown) as any),
-      ...mapFactories(mk.helpers.other, "Helpers"),
+      ...mapFactories(helpersKnobs.helpers.other, "Helpers"),
       // typography
-      ...mapFactories(mk.typography, "Typography"),
+      ...mapFactories(helpersKnobs.typography, "Typography"),
     });
     return (
       <Generic as="p" {...props}>

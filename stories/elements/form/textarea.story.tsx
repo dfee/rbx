@@ -6,8 +6,8 @@ import { Control, Textarea } from "@/elements/form";
 import { TEXTAREA_SIZES, TEXTAREA_STATES } from "@/elements/form/textarea";
 import { Section } from "@/layout";
 
-import { iterableToSelectObject } from "../../helpers";
-import { colorKnob } from "../../modifiers";
+import { colorKnob } from "../../common";
+import { iterableToSelectObject } from "../../utils";
 
 export const knobs = {
   disabled: (title: string = "Disabled") => boolean(title, false),

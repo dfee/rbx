@@ -13,7 +13,7 @@
 
 ### To Install
 
-`npm install rbx` or `yarn add rbx`
+`npm install rbx bulma@0.7.2` or `yarn add rbx bulma@0.7.2`
 
 ### To Use
 

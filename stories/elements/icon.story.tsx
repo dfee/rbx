@@ -9,8 +9,8 @@ import { Icon } from "@/elements";
 import { ICON_ALIGNMENTS, ICON_SIZES, IconSizes } from "@/elements/icon/icon";
 
 import { Section } from "@/layout";
-import { iterableToSelectObject } from "../helpers";
-import { colorKnob } from "../modifiers";
+import { colorKnob } from "../common";
+import { iterableToSelectObject } from "../utils";
 
 const faSizeMap: { [k in IconSizes | "default"]: FAProps["size"] } = {
   default: "1x",

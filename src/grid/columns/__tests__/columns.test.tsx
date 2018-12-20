@@ -3,7 +3,7 @@ import React from "react";
 
 import { BREAKPOINTS } from "@/base/helpers";
 import { Column } from "../column";
-import { Columns, COLUMNS_GAPS } from "../columns";
+import { Columns, COLUMNS_GAP_SIZES } from "../columns";
 
 import {
   hasProperties,
@@ -84,10 +84,10 @@ describe("Columns component", () => {
     }),
   );
 
-  COLUMNS_GAPS.map(gap =>
-    it(`should have gap ${gap}`, () => {
-      const wrapper = Enzyme.shallow(<Columns gap={gap} />);
-      expect(wrapper.hasClass(`is-${gap}`)).toBe(true);
+  COLUMNS_GAP_SIZES.map(gapSize =>
+    it(`should have gapSize ${gapSize}`, () => {
+      const wrapper = Enzyme.shallow(<Columns gapSize={gapSize} />);
+      expect(wrapper.hasClass(`is-${gapSize}`)).toBe(true);
       expect(wrapper.hasClass("is-variable")).toBe(true);
     }),
   );
@@ -102,11 +102,11 @@ describe("Columns component", () => {
 
   BREAKPOINTS.map(breakpoint =>
     describe(`for ${breakpoint}`, () => {
-      COLUMNS_GAPS.map(gap =>
-        it(`should have gap ${gap}`, () => {
-          const props = { [breakpoint]: { gap } };
+      COLUMNS_GAP_SIZES.map(gapSize =>
+        it(`should have gapSize ${gapSize}`, () => {
+          const props = { [breakpoint]: { gapSize } };
           const wrapper = Enzyme.shallow(<Columns {...props} />);
-          expect(wrapper.hasClass(`is-${gap}-${breakpoint}`)).toBe(true);
+          expect(wrapper.hasClass(`is-${gapSize}-${breakpoint}`)).toBe(true);
           expect(wrapper.hasClass("is-variable")).toBe(true);
         }),
       );
@@ -120,21 +120,23 @@ describe("Columns component", () => {
     validateBoolPropType(propTypes, "centered");
     validateBoolPropType(propTypes, "gapless");
     validateBoolPropType(propTypes, "multiline");
-    validateOneOfPropType(propTypes, "gap", COLUMNS_GAPS);
+    validateOneOfPropType(propTypes, "gapSize", COLUMNS_GAP_SIZES);
 
     BREAKPOINTS.map(breakpoint => {
       describe(breakpoint, () => {
         validatePropType(propTypes, breakpoint, [
-          ...COLUMNS_GAPS.map(value => ({
-            descriptor: `gap = ${value}`,
+          ...COLUMNS_GAP_SIZES.map(value => ({
+            descriptor: `gapSize = ${value}`,
             valid: true,
-            value: { gap: value },
+            value: { gapSize: value },
           })),
           {
-            descriptor: "narrow = 'string'",
-            error: new RegExp(`Warning.+Failed prop.+ \`${breakpoint}.gap\``),
+            descriptor: "gapSize = 'string'",
+            error: new RegExp(
+              `Warning.+Failed prop.+ \`${breakpoint}.gapSize\``,
+            ),
             valid: false,
-            value: { gap: "__UNKNOWN" },
+            value: { gapSize: "__UNKNOWN" },
           },
         ]);
       });

@@ -2,7 +2,7 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { NavbarBurger } from "../navbar-burger";
-import { contextFactory } from "./helpers";
+import { contextFactory } from "./context";
 
 import {
   hasProperties,
