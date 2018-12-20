@@ -36,5 +36,43 @@
         "code": 45291
       }
     }
+  },
+  "dist/index.cjs.js": {
+    "bundled": 88776,
+    "minified": 58882,
+    "gzipped": 10585
+  },
+  "dist/rbx.esm.js": {
+    "bundled": 87646,
+    "minified": 57908,
+    "gzipped": 10344,
+    "treeshaked": {
+      "rollup": {
+        "code": 42405,
+        "import_statements": 98
+      },
+      "webpack": {
+        "code": 45291
+      }
+    }
+  },
+  "dist/bundle.cjs.js": {
+    "bundled": 88776,
+    "minified": 58882,
+    "gzipped": 10585
+  },
+  "dist/bundle.esm.js": {
+    "bundled": 87646,
+    "minified": 57908,
+    "gzipped": 10344,
+    "treeshaked": {
+      "rollup": {
+        "code": 42405,
+        "import_statements": 98
+      },
+      "webpack": {
+        "code": 45291
+      }
+    }
   }
 }

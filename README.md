@@ -13,19 +13,14 @@
 
 ### To Install
 
-`npm install rbx bulma@0.7.2` or `yarn add rbx bulma@0.7.2`
+`npm install rbx` or `yarn add rbx`
 
 ### To Use
 
-Follow the instructions below for adding `sass` support to your webpack configuration, and then:
-
 ```tsx
+import "rbx/index.css";
 import React from "react";
 import { Columns } from "rbx";
-/**
- * Alternatively, you can import only the components you need
- */
-import { Columns } from "rbx/grid/columns";
 
 export const MyPage = () => (
   <Columns>
@@ -36,6 +31,8 @@ export const MyPage = () => (
   </Columns>
 );
 ```
+
+To customize Bulma (including colors), follow the instructions below.
 
 ### Library
 
@@ -116,13 +113,11 @@ While some components may slightly differ from the Bulma API, these changes are 
 | Hero    | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FHero)    | [Documentation](http://bulma.io/documentation/layout/hero/)    |
 | Section | [Stories](https://dfee.github.io/rbx/?selectedKind=Layout%2FSection) | [Documentation](http://bulma.io/documentation/layout/section/) |
 
-### Styling
+### Customize Bulma
 
-#### SASS Support
+To override the variables set by Bulma, install Bulma (`npm install bulma@0.7.2`), and [follow the Bulma instructions](https://bulma.io/documentation/customize/variables/).
 
-To override the variables set by Bulma, [follow the Bulma instructions](https://bulma.io/documentation/customize/variables/).
-
-You will also need to import `rbx/index.sass` as it contains any pertinent bug fixes for Bulma.
+You will also need to import `rbx/rbx.sass` as it contains any pertinent bug fixes for Bulma.
 
 A minimal example of `style.sass` might look like:
 
@@ -148,10 +143,3 @@ Finally, import this stylesheet somewhere in your CRA app.
 ```js
 import "./App.sass";
 ```
-
-#### Etc.
-
-This library was hard-forked from [`react-bulma-components`](https://github.com/couds/react-bulma-components) and has been rewritten in its entirety from scratch.
-
-If you're coming from that library, expect some breaking changes - largely due to stylistic interpretations of the Bulma API and a propensity to keep the React component names semantic.
-In addition, there were **many** additions and bug fixes required to bring this library into compliance with the latest release of Bulma.

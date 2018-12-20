@@ -28,7 +28,7 @@ export default {
       sourcemap: true
     },
     {
-      file: "dist/index.js",
+      file: pkg.main,
       format: "cjs",
       globals,
       sourcemap: true
@@ -40,7 +40,7 @@ export default {
         moduleDirectory: "compiled"
       }
     }),
-    sass({ output: true }),
+    sass({ output: "dist/index.css" }),
     typescript({
       tsconfig: "tsconfig.build.json",
       typescript: require("typescript")
