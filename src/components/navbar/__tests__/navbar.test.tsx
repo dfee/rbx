@@ -5,8 +5,8 @@ import { COLORS } from "@/base/helpers";
 import {
   Navbar,
   NAVBAR_FIXED_ALIGNMENTS,
-  NavbarController,
-  NavbarControllerState,
+  NavbarContainer,
+  NavbarContainerState,
 } from "../navbar";
 import { NavbarBrand } from "../navbar-brand";
 import { NavbarBurger } from "../navbar-burger";
@@ -46,7 +46,7 @@ describe("Navbar component", () => {
     try {
       expect(
         wrapper
-          .find(NavbarController)
+          .find(NavbarContainer)
           .children()
           .is("nav"),
       ).toBe(true);
@@ -61,7 +61,7 @@ describe("Navbar component", () => {
     try {
       expect(
         wrapper
-          .find(NavbarController)
+          .find(NavbarContainer)
           .children()
           .is(as),
       ).toBe(true);
@@ -81,7 +81,7 @@ describe("Navbar component", () => {
     try {
       expect(ref.current).toBe(
         wrapper
-          .find(NavbarController)
+          .find(NavbarContainer)
           .children()
           .instance(),
       );
@@ -95,7 +95,7 @@ describe("Navbar component", () => {
     try {
       expect(
         wrapper
-          .find(NavbarController)
+          .find(NavbarContainer)
           .children()
           .hasClass("navbar"),
       ).toBe(true);
@@ -110,7 +110,7 @@ describe("Navbar component", () => {
     try {
       expect(
         wrapper
-          .find(NavbarController)
+          .find(NavbarContainer)
           .children()
           .hasClass(className),
       ).toBe(true);
@@ -188,7 +188,7 @@ describe("Navbar component", () => {
       try {
         expect(
           wrapper
-            .find(NavbarController)
+            .find(NavbarContainer)
             .children()
             .hasClass(`is-${color}`),
         ).toBe(true);
@@ -204,7 +204,7 @@ describe("Navbar component", () => {
       try {
         expect(
           wrapper
-            .find(NavbarController)
+            .find(NavbarContainer)
             .children()
             .hasClass(`is-fixed-${align}`),
         ).toBe(true);
@@ -223,7 +223,7 @@ describe("Navbar component", () => {
       try {
         expect(
           wrapper
-            .find(NavbarController)
+            .find(NavbarContainer)
             .children()
             .hasClass("is-transparent"),
         ).toBe(transparent);
@@ -237,11 +237,11 @@ describe("Navbar component", () => {
     [undefined, false, true].map(managed =>
       it(`should ${
         managed ? "" : "not "
-      }set NavbarController's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
+      }set NavbarContainer's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
         let contextState: NavbarContextState | undefined;
         const innerRef = React.createRef<HTMLDivElement>();
         const wrapper = Enzyme.mount(
-          <NavbarController
+          <NavbarContainer
             active={initialActive}
             managed={managed}
             innerRef={innerRef}
@@ -253,12 +253,12 @@ describe("Navbar component", () => {
                 return null;
               }}
             </NavbarContext.Consumer>
-          </NavbarController>,
+          </NavbarContainer>,
         );
         try {
           expect(contextState!.active).toBe(!!initialActive);
           contextState!.setActive(!contextState!.active);
-          expect((wrapper.state() as NavbarControllerState).active).toBe(
+          expect((wrapper.state() as NavbarContainerState).active).toBe(
             managed ? !!initialActive : !initialActive,
           );
         } finally {
@@ -285,7 +285,7 @@ describe("Navbar component", () => {
     it("should render without window being available (ssr)", () => {
       const ref = React.createRef<HTMLDivElement>();
       const wrapper = Enzyme.shallow(
-        <NavbarController innerRef={ref} as="div" />,
+        <NavbarContainer innerRef={ref} as="div" />,
       );
       expect(wrapper.children().hasClass("navbar")).toBe(true);
       wrapper.unmount();

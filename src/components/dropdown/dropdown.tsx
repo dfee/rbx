@@ -43,24 +43,24 @@ const initialState = {
   active: false,
 };
 
-export type DropdownControllerProps = DropdownProps & {
+export type DropdownContainerProps = DropdownProps & {
   as: React.ReactType<any>;
   innerRef: React.Ref<HTMLDivElement>;
 };
-export type DropdownControllerState = typeof initialState;
+export type DropdownContainerState = typeof initialState;
 
-export class DropdownController extends React.PureComponent<
-  DropdownControllerProps,
-  DropdownControllerState
+export class DropdownContainer extends React.PureComponent<
+  DropdownContainerProps,
+  DropdownContainerState
 > {
   public static Menu = DropdownMenu;
   public static Trigger = DropdownTrigger;
 
-  public readonly state: DropdownControllerState;
+  public readonly state: DropdownContainerState;
 
   private ref = React.createRef<HTMLDivElement>();
 
-  constructor(props: DropdownControllerProps) {
+  constructor(props: DropdownContainerProps) {
     super(props);
     this.state = { active: props.active || false };
   }
@@ -132,7 +132,7 @@ export const Dropdown = Object.assign(
   forwardRefAs<DropdownProps, "div">(
     (props, ref) => {
       const { as, ...rest } = props;
-      return <DropdownController as={as!} innerRef={ref} {...rest} />;
+      return <DropdownContainer as={as!} innerRef={ref} {...rest} />;
     },
     { as: "div" },
   ),

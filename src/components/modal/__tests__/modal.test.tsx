@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { Modal, ModalController } from "../modal";
+import { Modal, ModalContainer } from "../modal";
 import { ModalBackground } from "../modal-background";
 import { ModalCard } from "../modal-card";
 import { ModalClose } from "../modal-close";
@@ -175,7 +175,7 @@ describe("Modal component", () => {
     it("should render without window being available (ssr)", () => {
       const ref = React.createRef<HTMLDivElement>();
       const wrapper = Enzyme.shallow(
-        <ModalController innerRef={ref} as="div" onClose={jest.fn()} active />,
+        <ModalContainer innerRef={ref} as="div" onClose={jest.fn()} active />,
       );
       wrapper.unmount();
       expect(wrapper.type()).toBeNull();

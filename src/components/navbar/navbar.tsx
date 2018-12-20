@@ -44,26 +44,26 @@ const propTypes = {
   transparent: PropTypes.bool,
 };
 
-export type NavbarControllerProps = NavbarProps & {
+export type NavbarContainerProps = NavbarProps & {
   as: React.ReactType<any>;
   innerRef: React.Ref<HTMLDivElement>;
 };
 
-export interface NavbarControllerState {
+export interface NavbarContainerState {
   active: boolean;
 }
 
-export class NavbarController extends React.PureComponent<
-  NavbarControllerProps,
-  NavbarControllerState
+export class NavbarContainer extends React.PureComponent<
+  NavbarContainerProps,
+  NavbarContainerState
 > {
   public static defaultProps = {
     transparent: false,
   };
 
-  public readonly state: NavbarControllerState;
+  public readonly state: NavbarContainerState;
 
-  constructor(props: NavbarControllerProps) {
+  constructor(props: NavbarContainerProps) {
     super(props);
     this.state = { active: !!props.active };
   }
@@ -146,7 +146,7 @@ export const Navbar = Object.assign(
   forwardRefAs<NavbarProps, "nav">(
     (props, ref) => {
       const { as, ...rest } = props;
-      return <NavbarController as={as!} innerRef={ref} {...rest} />;
+      return <NavbarContainer as={as!} innerRef={ref} {...rest} />;
     },
     { as: "nav" },
   ),

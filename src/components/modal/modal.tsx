@@ -14,7 +14,7 @@ export type ModalModifierProps = Partial<{
   active: boolean;
 }>;
 
-export type ModalProps = Omit<ModalControllerProps, "as" | "innerRef">;
+export type ModalProps = Omit<ModalContainerProps, "as" | "innerRef">;
 
 const propTypes = {
   active: PropTypes.bool,
@@ -25,13 +25,13 @@ const propTypes = {
   onClose: PropTypes.func,
 };
 
-export type ModalControllerProps = ModalPortalProps &
+export type ModalContainerProps = ModalPortalProps &
   ModalModifierProps & { containerClassName?: string };
 
-export class ModalController extends React.PureComponent<ModalControllerProps> {
+export class ModalContainer extends React.PureComponent<ModalContainerProps> {
   private el: HTMLDivElement | undefined;
 
-  constructor(props: ModalControllerProps) {
+  constructor(props: ModalContainerProps) {
     super(props);
     if (canUseDOM()) {
       this.el = document.createElement("div");
@@ -65,7 +65,7 @@ export const Modal = Object.assign(
   forwardRefAs<ModalProps, "div">(
     (props, ref) => {
       const { as, ...rest } = props;
-      return <ModalController as={as!} innerRef={ref} {...rest} />;
+      return <ModalContainer as={as!} innerRef={ref} {...rest} />;
     },
     { as: "div" },
   ),

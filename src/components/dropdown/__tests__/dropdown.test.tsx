@@ -4,8 +4,8 @@ import React from "react";
 import {
   Dropdown,
   DROPDOWN_ALIGNMENTS,
-  DropdownController,
-  DropdownControllerState,
+  DropdownContainer,
+  DropdownContainerState,
 } from "../dropdown";
 import { DropdownContent } from "../dropdown-content";
 import { DropdownContext, DropdownContextState } from "../dropdown-context";
@@ -37,7 +37,7 @@ describe("Card component", () => {
     try {
       expect(
         wrapper
-          .find(DropdownController)
+          .find(DropdownContainer)
           .children()
           .is("div"),
       ).toBe(true);
@@ -52,7 +52,7 @@ describe("Card component", () => {
     try {
       expect(
         wrapper
-          .find(DropdownController)
+          .find(DropdownContainer)
           .children()
           .is(as),
       ).toBe(true);
@@ -81,7 +81,7 @@ describe("Card component", () => {
     try {
       expect(
         wrapper
-          .find(DropdownController)
+          .find(DropdownContainer)
           .children()
           .hasClass("dropdown"),
       ).toBe(true);
@@ -96,7 +96,7 @@ describe("Card component", () => {
     try {
       expect(
         wrapper
-          .find(DropdownController)
+          .find(DropdownContainer)
           .children()
           .hasClass(className),
       ).toBe(true);
@@ -109,7 +109,7 @@ describe("Card component", () => {
     it(`should ${active ? "" : "not "}be active`, () => {
       const wrapper = Enzyme.mount(<Dropdown active={active} />);
       try {
-        const children = wrapper.find(DropdownController).children();
+        const children = wrapper.find(DropdownContainer).children();
         expect(children.hasClass("is-active")).toBe(active);
       } finally {
         wrapper.unmount();
@@ -121,7 +121,7 @@ describe("Card component", () => {
     it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
       const wrapper = Enzyme.mount(<Dropdown hoverable={hoverable} />);
       try {
-        const children = wrapper.find(DropdownController).children();
+        const children = wrapper.find(DropdownContainer).children();
         expect(children.hasClass("is-hoverable")).toBe(hoverable);
       } finally {
         wrapper.unmount();
@@ -133,7 +133,7 @@ describe("Card component", () => {
     it(`should ${up ? "" : "not "}be up`, () => {
       const wrapper = Enzyme.mount(<Dropdown up={up} />);
       try {
-        const children = wrapper.find(DropdownController).children();
+        const children = wrapper.find(DropdownContainer).children();
         expect(children.hasClass("is-up")).toBe(up);
       } finally {
         wrapper.unmount();
@@ -147,7 +147,7 @@ describe("Card component", () => {
       try {
         expect(
           wrapper
-            .find(DropdownController)
+            .find(DropdownContainer)
             .children()
             .hasClass(`is-${align}`),
         ).toBe(true);
@@ -203,11 +203,11 @@ describe("Card component", () => {
     [undefined, false, true].map(managed =>
       it(`should ${
         managed ? "" : "not "
-      }set DropdownController's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
+      }set DropdownContainer's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
         let contextState: DropdownContextState | undefined;
         const innerRef = React.createRef<HTMLDivElement>();
         const wrapper = Enzyme.mount(
-          <DropdownController
+          <DropdownContainer
             active={initialActive}
             managed={managed}
             innerRef={innerRef}
@@ -219,12 +219,12 @@ describe("Card component", () => {
                 return null;
               }}
             </DropdownContext.Consumer>
-          </DropdownController>,
+          </DropdownContainer>,
         );
         try {
           expect(contextState!.active).toBe(!!initialActive);
           contextState!.setActive(!contextState!.active);
-          expect((wrapper.state() as DropdownControllerState).active).toBe(
+          expect((wrapper.state() as DropdownContainerState).active).toBe(
             managed ? !!initialActive : !initialActive,
           );
         } finally {
