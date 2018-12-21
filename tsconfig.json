@@ -17,5 +17,5 @@
     "target": "es6"
   },
   "include": ["src", "stories"],
-  "exclude": ["node_modules", "dist", "__mocks__"]
+  "exclude": ["node_modules", "dist"]
 }

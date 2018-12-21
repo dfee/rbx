@@ -41,13 +41,7 @@ export default {
           declaration: true
         },
         include: ["src"],
-        exclude: [
-          "node_modules",
-          "dist",
-          "__mocks__",
-          "**/__tests__",
-          "stories"
-        ]
+        exclude: ["node_modules", "dist", "**/__tests__", "stories"]
       }
     }),
     sass({ output: "dist/index.css" }),
