@@ -239,20 +239,27 @@ storiesOf("Grid/Columns", module)
     );
   })
   .add("Gap (variable, by-breakpoint)", () => {
-    // tslint:disable:object-literal-sort-keys
-    const gap = {
-      mobile: { gap: knobs.gap("Mobile gap size") },
-      tablet: { gap: knobs.gap("Tablet gap size") },
-      desktop: { gap: knobs.gap("Desktop gap size") },
-      fullhd: { gap: knobs.gap("FullHD gap size") },
-      widescreen: { gap: knobs.gap("Widescreen gap size") },
+    const gapSizes = {
+      // tslint:disable:object-literal-sort-keys
+      mobile: { gapSize: knobs.gap("Mobile gapSize") },
+      tablet: { gapSize: knobs.gap("Tablet gapSize") },
+      desktop: { gapSize: knobs.gap("Desktop gapSize") },
+      fullhd: { gapSize: knobs.gap("FullHD gapSize") },
+      widescreen: { gapSize: knobs.gap("Widescreen gapSize") },
+      touch: { gapSize: knobs.gap("Touch gapSize") },
+      // tslint:enable:object-literal-sort-keys
     };
-    // tslint:enable:object-literal-sort-keys
 
-    const normalizedGap = Object.entries(gap)
-      .map(([key, value]) => ({
-        [key]: { gap: value.gap === "" ? undefined : parseInt(value.gap, 10) },
-      }))
+    const normalizedGap = Object.keys(gapSizes)
+      .map(key => {
+        const value = gapSizes[key];
+        return {
+          [key]: {
+            gapSize:
+              value.gapSize === "" ? undefined : parseInt(value.gapSize, 10),
+          },
+        };
+      })
       .reduce((acc, cv) => ({ ...acc, ...cv }), {});
 
     return (

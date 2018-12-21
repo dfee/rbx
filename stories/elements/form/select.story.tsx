@@ -8,7 +8,7 @@ import { Control, Icon, Select } from "../../../src/elements";
 import {
   SELECT_CONTAINER_SIZES,
   SELECT_CONTAINER_STATES,
-} from "../../../src/elements/form/select-container";
+} from "../../../src/elements/form/select";
 import { Section } from "../../../src/layout";
 
 import { colorKnob } from "../../common";

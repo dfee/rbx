@@ -19,27 +19,31 @@ const genericKnobs = {
 };
 
 const filterUndefined = (props: { [k: string]: any }) =>
-  Object.entries(props)
-    .filter(([key, value]) => value !== "")
+  Object.keys(props)
+    .filter(key => props[key] !== "")
     .reduce((acc, [key, value]) => ({ ...acc, ...{ [key]: value } }), {});
 
 const filterResponsive = (props: {
   [k: string]: { [k2: string]: { only?: boolean; value: string } };
 }) =>
-  Object.entries(props)
-    .map(([key, value]) => ({
-      [key]: Object.entries(value)
-        .filter(([key2, value2]) => value2.value !== "")
-        .reduce(
-          (acc, [key2, value2]) => ({ ...acc, ...{ [key2]: value2 } }),
-          {},
-        ),
-    }))
+  Object.keys(props)
+    .map(key => {
+      const value = props[key];
+      return {
+        [key]: Object.keys(value)
+          .filter(key2 => value[key2].value !== "")
+          .map(key2 => ({ [key2]: value[key2] }))
+          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+      };
+    })
     .reduce((acc, cv) => ({ ...acc, ...cv }), {});
 
 export const mapFactories = <T extends object>(obj: T, group?: string) =>
-  Object.entries(obj)
-    .map(([key, factory]) => ({ [key]: factory({ group }) }))
+  Object.keys(obj)
+    .map(key => {
+      const factory = obj[key];
+      return { [key]: factory({ group }) };
+    })
     .reduce((acc, cv) => ({ ...acc, ...cv }), {});
 
 storiesOf("Base", module)

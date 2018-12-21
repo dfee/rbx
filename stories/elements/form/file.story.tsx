@@ -10,7 +10,7 @@ import {
   FILE_SIZES,
   FileProps,
 } from "../../../src/elements/form/file";
-import { Section } from "../../src/../layout";
+import { Section } from "../../../src/layout";
 
 import { colorKnob } from "../../common";
 import { iterableToSelectObject } from "../../utils";
