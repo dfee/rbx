@@ -1,4 +1,3 @@
-import resolve from "rollup-plugin-node-resolve";
 import sass from "rollup-plugin-sass";
 import { sizeSnapshot } from "rollup-plugin-size-snapshot";
 import sourceMaps from "rollup-plugin-sourcemaps";
@@ -35,15 +34,12 @@ export default {
     }
   ],
   plugins: [
-    resolve({
-      customResolveOptions: {
-        moduleDirectory: "compiled"
-      }
-    }),
-    sass({ output: "dist/index.css" }),
     typescript({
       tsconfig: "tsconfig.json",
       tsconfigOverride: {
+        compilerOptions: {
+          declaration: true
+        },
         include: ["src"],
         exclude: [
           "node_modules",
@@ -54,6 +50,7 @@ export default {
         ]
       }
     }),
+    sass({ output: "dist/index.css" }),
     sizeSnapshot(),
     sourceMaps()
   ]
