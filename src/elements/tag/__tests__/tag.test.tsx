@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Tag, TAG_SIZES } from "../tag";
 import { TagGroup } from "../tag-group";
 
@@ -10,7 +10,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Tag component", () => {
   hasProperties(Tag, {

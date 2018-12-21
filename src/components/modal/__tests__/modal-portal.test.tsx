@@ -1,9 +1,10 @@
 import Enzyme from "enzyme";
 import React from "react";
+
+import { noop } from "../../../utils";
 import { ModalPortal } from "../modal-portal";
 
-import { hasProperties } from "@/__tests__/testing";
-import { noop } from "@/utils";
+import { hasProperties } from "../../../__tests__/testing";
 
 describe("ModalPortal component", () => {
   hasProperties(ModalPortal, {

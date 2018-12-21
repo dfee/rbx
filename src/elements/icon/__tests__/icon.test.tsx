@@ -1,14 +1,14 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Icon, ICON_ALIGNMENTS, ICON_SIZES } from "../icon";
 
 import {
   hasProperties,
   testGenericPropTypes,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Icon component", () => {
   hasProperties(Icon, {

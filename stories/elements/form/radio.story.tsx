@@ -2,8 +2,8 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Label, Radio } from "@/elements";
-import { Section } from "@/layout";
+import { Control, Label, Radio } from "../../../src/elements";
+import { Section } from "../../../src/layout";
 
 export interface ControlledRadioGroupProps {
   items: Array<{ title: string; value: string }>;

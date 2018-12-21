@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Input, INPUT_SIZES, INPUT_STATES, INPUT_TYPES } from "../input";
 
 import {
@@ -9,7 +9,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Input component", () => {
   hasProperties(Input, {

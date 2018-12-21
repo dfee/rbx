@@ -3,7 +3,7 @@ import React from "react";
 
 import { Generic } from "../generic";
 
-import { hasProperties } from "@/__tests__/testing";
+import { hasProperties } from "../../__tests__/testing";
 import { testGenericPropTypes } from "../../__tests__/testing";
 
 describe("Generic component", () => {

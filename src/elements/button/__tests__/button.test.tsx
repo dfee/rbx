@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Button, BUTTON_SIZES, BUTTON_STATES } from "../button";
 import { ButtonGroup } from "../button-group";
 
@@ -11,7 +11,7 @@ import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Button component", () => {
   hasProperties(Button, {

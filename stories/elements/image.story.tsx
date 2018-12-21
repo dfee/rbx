@@ -3,13 +3,13 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Image } from "@/elements";
+import { Image } from "../../src/elements";
 import {
   IMAGE_CONTAINER_SIZES,
   ImageContainerSizes,
-} from "@/elements/image/image-container";
+} from "../../src/elements/image/image-container";
 
-import { Section } from "@/layout";
+import { Section } from "../../src/layout";
 import { iterableToSelectObject } from "../utils";
 
 export const knobs = {

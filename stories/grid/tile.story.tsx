@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Box, Content, Image, Title } from "@/elements";
-import { Tile } from "@/grid";
-import { Section } from "@/layout";
+import { Box, Content, Image, Title } from "../../src/elements";
+import { Tile } from "../../src/grid";
+import { Section } from "../../src/layout";
 
 storiesOf("Grid/Tiles", module)
   .add("Default", () => (

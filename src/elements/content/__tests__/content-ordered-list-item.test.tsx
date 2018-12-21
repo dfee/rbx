@@ -3,7 +3,7 @@ import React from "react";
 
 import { ContentOrderedListItem } from "../content-ordered-list-item";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("ContentOrderedListItem component", () => {
   hasProperties(ContentOrderedListItem, {

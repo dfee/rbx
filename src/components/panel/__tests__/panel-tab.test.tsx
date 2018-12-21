@@ -7,7 +7,7 @@ import {
   hasProperties,
   testGenericPropTypes,
   validateBoolPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("PanelTab component", () => {
   hasProperties(PanelTab, {

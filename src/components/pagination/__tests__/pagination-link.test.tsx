@@ -7,7 +7,7 @@ import {
   hasProperties,
   testGenericPropTypes,
   validateBoolPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("PaginationLink component", () => {
   hasProperties(PaginationLink, {

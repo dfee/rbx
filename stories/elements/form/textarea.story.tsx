@@ -2,9 +2,12 @@ import { boolean, number, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Textarea } from "@/elements/form";
-import { TEXTAREA_SIZES, TEXTAREA_STATES } from "@/elements/form/textarea";
-import { Section } from "@/layout";
+import { Control, Textarea } from "../../../src/elements/form";
+import {
+  TEXTAREA_SIZES,
+  TEXTAREA_STATES,
+} from "../../../src/elements/form/textarea";
+import { Section } from "../../../src/layout";
 
 import { colorKnob } from "../../common";
 import { iterableToSelectObject } from "../../utils";

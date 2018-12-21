@@ -2,10 +2,10 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Message } from "@/components";
-import { MESSAGE_SIZES } from "@/components/message/message";
-import { Delete } from "@/elements";
-import { Section } from "@/layout";
+import { Message } from "../../src/components";
+import { MESSAGE_SIZES } from "../../src/components/message/message";
+import { Delete } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 import { colorKnob } from "../common";
 import { iterableToSelectObject } from "../utils";

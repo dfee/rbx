@@ -3,7 +3,7 @@ import React from "react";
 
 import { HeroBody } from "../hero-body";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("HeroBody component", () => {
   hasProperties(HeroBody, {

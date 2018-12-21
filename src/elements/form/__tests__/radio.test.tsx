@@ -3,7 +3,7 @@ import React from "react";
 
 import { Radio } from "../radio";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Radio component", () => {
   hasProperties(Radio, {

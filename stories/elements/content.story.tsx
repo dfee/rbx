@@ -2,11 +2,11 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Content, Title } from "@/elements";
-import { CONTENT_SIZES } from "@/elements/content/content";
-import { CONTENT_ORDERED_LIST_TYPES } from "@/elements/content/content-ordered-list";
+import { Content, Title } from "../../src/elements";
+import { CONTENT_SIZES } from "../../src/elements/content/content";
+import { CONTENT_ORDERED_LIST_TYPES } from "../../src/elements/content/content-ordered-list";
 
-import { Section } from "@/layout";
+import { Section } from "../../src/layout";
 import { iterableToSelectObject } from "../utils";
 
 export const knobs = {

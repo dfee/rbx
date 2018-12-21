@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Select } from "../select";
 import {
   SELECT_CONTAINER_SIZES,
@@ -14,7 +14,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("SelectContainer component", () => {
   hasProperties(SelectContainer, {

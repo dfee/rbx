@@ -3,7 +3,7 @@ import React from "react";
 
 import { Box } from "../box";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Box component", () => {
   hasProperties(Box, {

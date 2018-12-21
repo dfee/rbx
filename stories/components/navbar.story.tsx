@@ -2,10 +2,10 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Navbar } from "@/components";
-import { NAVBAR_FIXED_ALIGNMENTS } from "@/components/navbar/navbar";
-import { Button } from "@/elements";
-import { Section } from "@/layout";
+import { Navbar } from "../../src/components";
+import { NAVBAR_FIXED_ALIGNMENTS } from "../../src/components/navbar/navbar";
+import { Button } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 import { colorKnob } from "../common";
 import { iterableToSelectObject } from "../utils";

@@ -7,7 +7,7 @@ import {
   shallowInContext,
   testGenericPropTypes,
   validatePropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 import { contextFactory } from "./context";
 
 describe("ModalBackground component", () => {

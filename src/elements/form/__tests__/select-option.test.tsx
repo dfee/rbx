@@ -3,7 +3,7 @@ import React from "react";
 
 import { SelectOption } from "../select-option";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("SelectOption component", () => {
   hasProperties(SelectOption, {

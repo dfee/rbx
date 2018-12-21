@@ -20,8 +20,8 @@ import {
   Radio,
   Select,
   Textarea,
-} from "@/elements";
-import { Columns } from "@/grid";
+} from "../../../src/elements";
+import { Columns } from "../../../src/grid";
 
 storiesOf("Elements/Form", module)
   .addDecorator(story => <div style={{ margin: 50 }}>{story()}</div>)

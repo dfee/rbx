@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Generic } from "@/base";
-import { BREAKPOINTS } from "@/base/helpers";
-import { Section } from "@/layout";
+import { Generic } from "../../src/base";
+import { BREAKPOINTS } from "../../src/base/helpers";
+import { Section } from "../../src/layout";
 
 import { iterableToSelectObject, selectFactory } from "../utils";
 import { helpersKnobs } from "./helpers";

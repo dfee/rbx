@@ -2,9 +2,9 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Delete, Field, Tag } from "@/elements";
-import { TAG_SIZES } from "@/elements/tag/tag";
-import { Section } from "@/layout";
+import { Control, Delete, Field, Tag } from "../../src/elements";
+import { TAG_SIZES } from "../../src/elements/tag/tag";
+import { Section } from "../../src/layout";
 
 import { colorKnob } from "../common";
 import { iterableToSelectObject } from "../utils";

@@ -3,7 +3,7 @@ import React from "react";
 
 import { Highlight } from "../highlight";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Highlight component", () => {
   hasProperties(Highlight, {

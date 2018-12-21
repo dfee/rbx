@@ -4,12 +4,12 @@ import { boolean, number, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Icon, Select } from "@/elements";
+import { Control, Icon, Select } from "../../../src/elements";
 import {
   SELECT_CONTAINER_SIZES,
   SELECT_CONTAINER_STATES,
-} from "@/elements/form/select-container";
-import { Section } from "@/layout";
+} from "../../../src/elements/form/select-container";
+import { Section } from "../../../src/layout";
 
 import { colorKnob } from "../../common";
 import { iterableToSelectObject } from "../../utils";

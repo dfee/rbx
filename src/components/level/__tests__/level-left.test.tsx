@@ -3,7 +3,7 @@ import React from "react";
 
 import { LevelLeft } from "../level-left";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("LevelLeft component", () => {
   // todo: LevelSide

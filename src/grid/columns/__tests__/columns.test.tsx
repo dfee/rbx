@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { BREAKPOINTS } from "@/base/helpers";
+import { BREAKPOINTS } from "../../../base/helpers";
 import { Column } from "../column";
 import { Columns, COLUMNS_GAP_SIZES } from "../columns";
 
@@ -11,7 +11,7 @@ import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Columns component", () => {
   hasProperties(Columns, {

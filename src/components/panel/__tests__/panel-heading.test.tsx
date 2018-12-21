@@ -3,7 +3,7 @@ import React from "react";
 
 import { PanelHeading } from "../panel-heading";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("PanelHeading component", () => {
   hasProperties(PanelHeading, {

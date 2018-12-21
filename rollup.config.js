@@ -42,8 +42,17 @@ export default {
     }),
     sass({ output: "dist/index.css" }),
     typescript({
-      tsconfig: "tsconfig.build.json",
-      typescript: require("typescript")
+      tsconfig: "tsconfig.json",
+      tsconfigOverride: {
+        include: ["src"],
+        exclude: [
+          "node_modules",
+          "dist",
+          "__mocks__",
+          "**/__tests__",
+          "stories"
+        ]
+      }
     }),
     sizeSnapshot(),
     sourceMaps()

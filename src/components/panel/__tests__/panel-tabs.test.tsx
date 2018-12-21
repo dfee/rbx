@@ -4,7 +4,7 @@ import React from "react";
 import { PanelTab } from "../panel-tab";
 import { PanelTabs } from "../panel-tabs";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("PanelTabs component", () => {
   hasProperties(PanelTabs, {

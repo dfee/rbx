@@ -2,12 +2,12 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Pagination } from "@/components";
+import { Pagination } from "../../src/components";
 import {
   PAGINATION_ALIGNMENTS,
   PAGINATION_SIZES,
-} from "@/components/pagination/pagination";
-import { Section } from "@/layout";
+} from "../../src/components/pagination/pagination";
+import { Section } from "../../src/layout";
 
 import { iterableToSelectObject } from "../utils";
 

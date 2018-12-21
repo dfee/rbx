@@ -18,13 +18,13 @@ import {
   Input,
   Label,
   Select,
-} from "@/elements";
-import { CONTROL_SIZES } from "@/elements/form/control";
-import { FIELD_ALIGNMENTS } from "@/elements/form/field";
-import { INPUT_SIZES } from "@/elements/form/input";
-import { LABEL_SIZES } from "@/elements/form/label";
-import { Columns } from "@/grid";
-import { Section } from "@/layout";
+} from "../../../src/elements";
+import { CONTROL_SIZES } from "../../../src/elements/form/control";
+import { FIELD_ALIGNMENTS } from "../../../src/elements/form/field";
+import { INPUT_SIZES } from "../../../src/elements/form/input";
+import { LABEL_SIZES } from "../../../src/elements/form/label";
+import { Columns } from "../../../src/grid";
+import { Section } from "../../../src/layout";
 
 import { colorKnob } from "../../common";
 import { iterableToSelectObject } from "../../utils";

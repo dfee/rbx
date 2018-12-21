@@ -372,7 +372,7 @@ describe("Responsive modifiers", () => {
       describe(`for ${breakpoint}`, () => {
         DISPLAYS.map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.includes(breakpoint))
+            .filter(() => noOnly.indexOf(breakpoint) !== -1)
             .map(only =>
               it(`should be display ${value} ${only ? "only" : ""}`, () => {
                 const display =
@@ -396,7 +396,7 @@ describe("Responsive modifiers", () => {
 
         [false, true].map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.includes(breakpoint))
+            .filter(() => noOnly.indexOf(breakpoint) !== -1)
             .map(only =>
               it(`should ${value ? "" : "not "}be hidden ${
                 only ? "only" : ""
@@ -421,7 +421,7 @@ describe("Responsive modifiers", () => {
 
         TEXT_ALIGNMENTS.map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.includes(breakpoint))
+            .filter(() => noOnly.indexOf(breakpoint) !== -1)
             .map(only =>
               it(`should have text aligned ${value} ${
                 only ? "only" : ""
@@ -447,7 +447,7 @@ describe("Responsive modifiers", () => {
 
         TEXT_SIZES.map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.includes(breakpoint))
+            .filter(() => noOnly.indexOf(breakpoint) !== -1)
             .map(only =>
               it(`should have text size ${value} ${only ? "only" : ""}`, () => {
                 const textSize =

@@ -13,7 +13,7 @@ import {
   validateBoolPropType,
   validatePropType,
   validateStringPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Modal component", () => {
   hasProperties(Modal, {

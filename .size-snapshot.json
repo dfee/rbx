@@ -57,21 +57,21 @@
     }
   },
   "dist/bundle.cjs.js": {
-    "bundled": 91867,
-    "minified": 60513,
-    "gzipped": 10683
+    "bundled": 83751,
+    "minified": 58456,
+    "gzipped": 10066
   },
   "dist/bundle.esm.js": {
-    "bundled": 90737,
-    "minified": 59539,
-    "gzipped": 10442,
+    "bundled": 82621,
+    "minified": 57482,
+    "gzipped": 9819,
     "treeshaked": {
       "rollup": {
-        "code": 43828,
+        "code": 43125,
         "import_statements": 98
       },
       "webpack": {
-        "code": 46736
+        "code": 46036
       }
     }
   }

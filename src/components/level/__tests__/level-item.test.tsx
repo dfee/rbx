@@ -3,7 +3,7 @@ import React from "react";
 
 import { LevelItem } from "../level-item";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("LevelItem component", () => {
   hasProperties(LevelItem, {

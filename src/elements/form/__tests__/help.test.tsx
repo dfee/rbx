@@ -1,14 +1,14 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Help } from "../help";
 
 import {
   hasProperties,
   testGenericPropTypes,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Help component", () => {
   hasProperties(Help, {

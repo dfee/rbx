@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { BREAKPOINTS } from "@/base/helpers";
+import { BREAKPOINTS } from "../../../base/helpers";
 import { Level } from "../level";
 import { LevelItem } from "../level-item";
 import { LevelLeft } from "../level-left";
@@ -11,7 +11,7 @@ import {
   hasProperties,
   testGenericPropTypes,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Level component", () => {
   hasProperties(Level, {

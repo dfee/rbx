@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Progress, PROGRESS_SIZES } from "../progress";
 
 import {
@@ -9,7 +9,7 @@ import {
   testGenericPropTypes,
   validateNumberPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Progress component", () => {
   hasProperties(Progress, {

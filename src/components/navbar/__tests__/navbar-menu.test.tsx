@@ -8,7 +8,7 @@ import {
   hasProperties,
   shallowInContext,
   testGenericPropTypes,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("NavbarMenu component", () => {
   hasProperties(NavbarMenu, {

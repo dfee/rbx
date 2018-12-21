@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { File, FILE_ALIGNMENTS, FILE_SIZES } from "../file";
 import { FileCTA } from "../file-cta";
 import { FileIcon } from "../file-icon";
@@ -14,7 +14,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("File component", () => {
   hasProperties(File, {

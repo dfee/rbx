@@ -1,14 +1,14 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { Delete } from "@/elements";
+import { Delete } from "../../../elements";
 import { ModalCardHead } from "../modal-card-head";
 
 import {
   hasProperties,
   shallowInContext,
   testGenericPropTypes,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 import { contextFactory } from "./context";
 
 describe("ModalCardHead component", () => {

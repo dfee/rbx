@@ -6,18 +6,18 @@ export const hasProperties = (
   component: React.ReactType<any>,
   obj: { [s: string]: any },
 ) =>
-  Object.entries(obj).map(([name, value]) =>
-    it(`should have property ${name}`, () => {
-      expect(component[name]).toEqual(value);
+  Object.keys(obj).map(key =>
+    it(`should have property ${key}`, () => {
+      expect(component[key]).toEqual(obj[key]);
     }),
   );
 
 export const makeContextFactory = <P extends {}>(initial: P) => (
   overrides?: Partial<P>,
 ) =>
-  Object.entries(initial)
-    .map(([key, value]) => ({
-      [key]: overrides ? overrides[key] || value : value,
+  Object.keys(initial)
+    .map(key => ({
+      [key]: overrides ? overrides[key] || initial[key] : initial[key],
     }))
     .reduce((acc, cv) => ({ ...acc, ...cv }), {}) as P;
 

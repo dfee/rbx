@@ -2,7 +2,7 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Message } from "@/components";
+import { Message } from "../../src/components";
 import {
   Block,
   Delete,
@@ -12,9 +12,9 @@ import {
   Notification,
   Numeric,
   Tag,
-} from "@/elements";
-import { DELETE_SIZES } from "@/elements/other/delete";
-import { Section } from "@/layout";
+} from "../../src/elements";
+import { DELETE_SIZES } from "../../src/elements/other/delete";
+import { Section } from "../../src/layout";
 
 import { iterableToSelectObject } from "../utils";
 

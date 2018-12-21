@@ -3,7 +3,10 @@ import React from "react";
 
 import { ModalCardTitle } from "../modal-card-title";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import {
+  hasProperties,
+  testGenericPropTypes,
+} from "../../../__tests__/testing";
 
 describe("ModalCardTitle component", () => {
   hasProperties(ModalCardTitle, {

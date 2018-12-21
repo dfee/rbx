@@ -4,9 +4,13 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, File } from "@/elements";
-import { FILE_ALIGNMENTS, FILE_SIZES, FileProps } from "@/elements/form/file";
-import { Section } from "@/layout";
+import { Control, File } from "../../../src/elements";
+import {
+  FILE_ALIGNMENTS,
+  FILE_SIZES,
+  FileProps,
+} from "../../../src/elements/form/file";
+import { Section } from "../../src/../layout";
 
 import { colorKnob } from "../../common";
 import { iterableToSelectObject } from "../../utils";

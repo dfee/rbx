@@ -2,13 +2,13 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { combineRefs } from "@/utils";
 import {
   forwardRefAs,
   genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { combineRefs } from "../../utils";
 import { NavbarItemContext } from "./navbar-item-context";
 
 export type NavbarItemModifierProps = Partial<{

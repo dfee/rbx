@@ -3,7 +3,7 @@ import React from "react";
 
 import { Loader } from "../loader";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Loader component", () => {
   hasProperties(Loader, {

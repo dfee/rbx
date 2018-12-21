@@ -7,7 +7,7 @@ import {
   hasProperties,
   testGenericPropTypes,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Section component", () => {
   hasProperties(Section, {

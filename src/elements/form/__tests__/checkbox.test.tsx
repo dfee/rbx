@@ -3,7 +3,7 @@ import React from "react";
 
 import { Checkbox } from "../checkbox";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Checkbox component", () => {
   hasProperties(Checkbox, {

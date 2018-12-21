@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardHeaderIcon } from "../card-header-icon";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("CardHeaderIcon component", () => {
   hasProperties(CardHeaderIcon, {

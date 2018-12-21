@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Content } from "@/elements";
-import { Footer, Section } from "@/layout";
+import { Content } from "../../src/elements";
+import { Footer, Section } from "../../src/layout";
 
 storiesOf("Layout/Footer", module)
   .addDecorator(story => <Section children={story()} />)

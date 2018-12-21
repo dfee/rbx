@@ -2,13 +2,13 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { BREAKPOINTS } from "@/base/helpers";
 import {
   forwardRefAs,
   genericPropTypes,
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { BREAKPOINTS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const COLUMN_SIZES = tuple(
@@ -117,6 +117,15 @@ export const Column = Object.assign(
         ...rest
       } = transformHelpers(props);
 
+      const breakpoints = {
+        desktop,
+        fullhd,
+        mobile,
+        tablet,
+        touch,
+        widescreen,
+      };
+
       rest.className = classNames(
         "column",
         rest.className,
@@ -125,20 +134,17 @@ export const Column = Object.assign(
           [`is-offset-${offset}`]: !!offset,
           "is-narrow": narrow,
         },
-        Object.entries({
-          desktop,
-          fullhd,
-          mobile,
-          tablet,
-          touch,
-          widescreen,
-        })
-          .filter(([breakpoint, value]) => value)
-          .map(([breakpoint, value]) => ({
-            [`is-${value!.size}-${breakpoint}`]: !!value!.size,
-            [`is-narrow-${breakpoint}`]: value!.narrow,
-            [`is-offset-${value!.offset}-${breakpoint}`]: !!value!.offset,
-          }))
+
+        Object.keys(breakpoints)
+          .filter(breakpoint => breakpoints[breakpoint])
+          .map(breakpoint => {
+            const value = breakpoints[breakpoint];
+            return {
+              [`is-${value.size}-${breakpoint}`]: !!value.size,
+              [`is-narrow-${breakpoint}`]: value!.narrow,
+              [`is-offset-${value.offset}-${breakpoint}`]: !!value.offset,
+            };
+          })
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       );
 

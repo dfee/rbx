@@ -2,10 +2,10 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Title } from "@/elements";
-import { TITLE_SIZES } from "@/elements/title/title";
+import { Title } from "../../src/elements";
+import { TITLE_SIZES } from "../../src/elements/title/title";
 
-import { Section } from "@/layout";
+import { Section } from "../../src/layout";
 import { iterableToSelectObject } from "../utils";
 
 export const knobs = {

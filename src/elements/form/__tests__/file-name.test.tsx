@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileName } from "../file-name";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("FileName component", () => {
   hasProperties(FileName, {

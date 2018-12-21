@@ -2,9 +2,9 @@ import { number, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Progress } from "@/elements";
-import { PROGRESS_SIZES } from "@/elements/progress/progress";
-import { Section } from "@/layout";
+import { Progress } from "../../src/elements";
+import { PROGRESS_SIZES } from "../../src/elements/progress/progress";
+import { Section } from "../../src/layout";
 
 import { colorKnob } from "../common";
 import { iterableToSelectObject } from "../utils";

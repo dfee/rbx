@@ -3,7 +3,7 @@ import React from "react";
 
 import { NavbarDivider } from "../navbar-divider";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("NavbarDivider component", () => {
   hasProperties(NavbarDivider, {

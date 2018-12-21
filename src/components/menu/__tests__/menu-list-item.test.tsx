@@ -9,7 +9,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validatePropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("MenuListItem component", () => {
   hasProperties(MenuListItem, {

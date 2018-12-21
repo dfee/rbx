@@ -15,15 +15,15 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
-import { Button, Icon } from "@/elements";
+import { COLORS } from "../../src/base/helpers";
+import { Button, Icon } from "../../src/elements";
 import {
   BUTTON_SIZES,
   BUTTON_STATES,
   ButtonSizes,
-} from "@/elements/button/button";
-import { BUTTON_GROUP_POSITIONS } from "@/elements/button/button-group";
-import { Section } from "@/layout";
+} from "../../src/elements/button/button";
+import { BUTTON_GROUP_POSITIONS } from "../../src/elements/button/button-group";
+import { Section } from "../../src/layout";
 
 import { iterableToSelectObject, titleize } from "../utils";
 

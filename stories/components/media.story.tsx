@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Level, Media } from "@/components";
+import { Level, Media } from "../../src/components";
 import {
   Button,
   Checkbox,
@@ -15,8 +15,8 @@ import {
   Image,
   Label,
   Textarea,
-} from "@/elements";
-import { Section } from "@/layout";
+} from "../../src/elements";
+import { Section } from "../../src/layout";
 
 storiesOf("Components/Media", module)
   .addDecorator(story => <Section children={story()} />)

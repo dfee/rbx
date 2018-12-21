@@ -9,14 +9,14 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Breadcrumb } from "@/components";
+import { Breadcrumb } from "../../src/components";
 import {
   BREADCRUMB_ALIGNMENTS,
   BREADCRUMB_SEPARATORS,
   BREADCRUMB_SIZES,
-} from "@/components/breadcrumb/breadcrumb";
-import { Icon } from "@/elements";
-import { Section } from "@/layout";
+} from "../../src/components/breadcrumb/breadcrumb";
+import { Icon } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 import { iterableToSelectObject } from "../utils";
 

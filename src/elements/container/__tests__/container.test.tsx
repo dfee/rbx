@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { BREAKPOINTS } from "@/base/helpers";
+import { BREAKPOINTS } from "../../../base/helpers";
 import { Container } from "../container";
 
 import {
@@ -9,7 +9,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Container component", () => {
   hasProperties(Container, {

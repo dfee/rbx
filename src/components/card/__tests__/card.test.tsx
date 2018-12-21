@@ -7,7 +7,7 @@ import { CardFooter } from "../card-footer";
 import { CardHeader } from "../card-header";
 import { CardImage } from "../card-image";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Card component", () => {
   hasProperties(Card, {

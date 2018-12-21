@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Textarea, TEXTAREA_SIZES, TEXTAREA_STATES } from "../textarea";
 
 import {
@@ -9,7 +9,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Textarea component", () => {
   hasProperties(Textarea, {

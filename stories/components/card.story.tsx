@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Card, Media } from "@/components";
-import { Content, Icon, Image, Title } from "@/elements";
-import { Section } from "@/layout";
+import { Card, Media } from "../../src/components";
+import { Content, Icon, Image, Title } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 storiesOf("Components/Card", module)
   .addDecorator(story => (

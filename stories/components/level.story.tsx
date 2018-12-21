@@ -1,9 +1,16 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Level } from "@/components";
-import { Button, Control, Field, Heading, Input, Title } from "@/elements";
-import { Section } from "@/layout";
+import { Level } from "../../src/components";
+import {
+  Button,
+  Control,
+  Field,
+  Heading,
+  Input,
+  Title,
+} from "../../src/elements";
+import { Section } from "../../src/layout";
 
 import { breakpointKnob } from "../common";
 

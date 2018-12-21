@@ -4,7 +4,7 @@ import React from "react";
 import { MenuList } from "../menu-list";
 import { MenuListItem } from "../menu-list-item";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("MenuList component", () => {
   hasProperties(MenuList, {

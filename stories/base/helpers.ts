@@ -1,12 +1,12 @@
-import { COLORS, GREY_COLORS } from "@/base/helpers";
-import { BREAKPOINTS, DISPLAYS } from "@/base/helpers";
+import { COLORS, GREY_COLORS } from "../../src/base/helpers";
+import { BREAKPOINTS, DISPLAYS } from "../../src/base/helpers";
 import {
   FLOAT_PULLED_ALIGNMENTS,
   TEXT_ALIGNMENTS,
   TEXT_SIZES,
   TEXT_TRANSFORMS,
   TEXT_WEIGHTS,
-} from "@/base/helpers";
+} from "../../src/base/helpers";
 
 import {
   booleanFactory,

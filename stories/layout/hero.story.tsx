@@ -4,10 +4,10 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Navbar, Tabs } from "@/components";
-import { Button, Container, Icon, Title } from "@/elements";
-import { Hero } from "@/layout";
-import { HERO_SIZES } from "@/layout/hero/hero";
+import { Navbar, Tabs } from "../../src/components";
+import { Button, Container, Icon, Title } from "../../src/elements";
+import { Hero } from "../../src/layout";
+import { HERO_SIZES } from "../../src/layout/hero/hero";
 
 import { colorKnob } from "../common";
 import { iterableToSelectObject } from "../utils";

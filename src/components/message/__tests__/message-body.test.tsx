@@ -3,7 +3,7 @@ import React from "react";
 
 import { MessageBody } from "../message-body";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("MessageBody component", () => {
   hasProperties(MessageBody, {

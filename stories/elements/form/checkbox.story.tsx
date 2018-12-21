@@ -2,8 +2,9 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Checkbox, Control, Label } from "@/elements";
-import { Section } from "@/layout";
+import { Checkbox, Control, Label } from "../../../src/elements";
+import { Section } from "../../../src/layout";
+import { Omit } from "../../../src/types";
 
 export type ControlledCheckboxProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,

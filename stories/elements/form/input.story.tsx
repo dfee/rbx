@@ -2,14 +2,15 @@ import { boolean, select, text } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Input } from "@/elements";
+import { Control, Input } from "../../../src/elements";
 import {
   INPUT_SIZES,
   INPUT_STATES,
   INPUT_TYPES,
   InputProps,
-} from "@/elements/form/input";
-import { Section } from "@/layout";
+} from "../../../src/elements/form/input";
+import { Section } from "../../../src/layout";
+import { Prefer } from "../../../src/types";
 
 import { colorKnob } from "../../common";
 import { iterableToSelectObject } from "../../utils";

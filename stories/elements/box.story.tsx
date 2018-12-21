@@ -4,9 +4,9 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Level, Media } from "@/components";
-import { Box, Content, Icon, Image } from "@/elements";
-import { Section } from "@/layout";
+import { Level, Media } from "../../src/components";
+import { Box, Content, Icon, Image } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 export const knobs = {
   paddingless: (title: string = "Paddingless") => boolean(title, false),

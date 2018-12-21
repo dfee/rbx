@@ -1,7 +1,22 @@
 {
-  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "rootDirs": ["src", "stories"]
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["es6", "dom"],
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "rootDirs": ["src", "stories"],
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es6"
   },
-  "include": ["src", "stories"]
+  "include": ["src", "stories"],
+  "exclude": ["node_modules", "dist", "__mocks__"]
 }

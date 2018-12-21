@@ -5,10 +5,14 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Icon } from "@/elements";
-import { ICON_ALIGNMENTS, ICON_SIZES, IconSizes } from "@/elements/icon/icon";
+import { Icon } from "../../src/elements";
+import {
+  ICON_ALIGNMENTS,
+  ICON_SIZES,
+  IconSizes,
+} from "../../src/elements/icon/icon";
 
-import { Section } from "@/layout";
+import { Section } from "../../src/layout";
 import { colorKnob } from "../common";
 import { iterableToSelectObject } from "../utils";
 

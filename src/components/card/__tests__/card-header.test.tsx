@@ -5,7 +5,7 @@ import { CardHeader } from "../card-header";
 import { CardHeaderIcon } from "../card-header-icon";
 import { CardHeaderTitle } from "../card-header-title";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("CardHeader component", () => {
   hasProperties(CardHeader, {

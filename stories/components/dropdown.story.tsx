@@ -5,10 +5,10 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Dropdown } from "@/components";
-import { DROPDOWN_ALIGNMENTS } from "@/components/dropdown/dropdown";
-import { Button, Icon } from "@/elements";
-import { Section } from "@/layout";
+import { Dropdown } from "../../src/components";
+import { DROPDOWN_ALIGNMENTS } from "../../src/components/dropdown/dropdown";
+import { Button, Icon } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 import { iterableToSelectObject } from "../utils";
 

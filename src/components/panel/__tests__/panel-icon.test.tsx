@@ -3,7 +3,7 @@ import React from "react";
 
 import { PanelIcon } from "../panel-icon";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("PanelIcon component", () => {
   hasProperties(PanelIcon, {

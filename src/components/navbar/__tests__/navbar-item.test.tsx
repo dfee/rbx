@@ -13,7 +13,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validatePropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 import { navbarItemContextFactory } from "./context";
 
 describe("NavbarItem component", () => {

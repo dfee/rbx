@@ -9,8 +9,8 @@ import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
-} from "@/__tests__/testing";
-import { BREAKPOINTS } from "@/base/helpers";
+} from "../../../__tests__/testing";
+import { BREAKPOINTS } from "../../../base/helpers";
 
 describe("Column component", () => {
   hasProperties(Column, {

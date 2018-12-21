@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileCTA } from "../file-cta";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("FileCTA component", () => {
   hasProperties(FileCTA, {

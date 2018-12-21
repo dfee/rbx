@@ -5,7 +5,7 @@ import { Select } from "../select";
 import { SelectContainer } from "../select-container";
 import { SelectOption } from "../select-option";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Select component", () => {
   hasProperties(Select, {

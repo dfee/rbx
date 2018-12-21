@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileLabel } from "../file-label";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("FileLabel component", () => {
   hasProperties(FileLabel, {

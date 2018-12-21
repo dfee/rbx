@@ -2,13 +2,13 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Tabs } from "@/components";
+import { Tabs } from "../../src/components";
 import {
   TABS_ALIGNMENTS,
   TABS_SIZES,
   TABS_TYPES,
-} from "@/components/tabs/tabs";
-import { Section } from "@/layout";
+} from "../../src/components/tabs/tabs";
+import { Section } from "../../src/layout";
 
 import { iterableToSelectObject } from "../utils";
 

@@ -3,7 +3,7 @@ import React from "react";
 
 import { FileIcon } from "../file-icon";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("FileIcon component", () => {
   hasProperties(FileIcon, {

@@ -105,20 +105,25 @@ export const Columns = Object.assign(
         ...rest
       } = transformHelpers(props);
 
+      const breakpoints = {
+        desktop,
+        fullhd,
+        mobile,
+        tablet,
+        touch,
+        widescreen,
+      };
+
       const gapClassNames = classNames(
         { [`is-${gapSize}`]: typeof gapSize === "number" },
-        Object.entries({
-          desktop,
-          fullhd,
-          mobile,
-          tablet,
-          touch,
-          widescreen,
-        })
-          .filter(([key, value]) => value)
-          .map(([key, value]) => ({
-            [`is-${value!.gapSize}-${key}`]: typeof value!.gapSize === "number",
-          }))
+        Object.keys(breakpoints)
+          .filter(key => breakpoints[key])
+          .map(key => {
+            const value = breakpoints[key];
+            return {
+              [`is-${value.gapSize}-${key}`]: typeof value.gapSize === "number",
+            };
+          })
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       );
 

@@ -3,7 +3,7 @@ import React from "react";
 
 import { ModalCardFoot } from "../modal-card-foot";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("ModalCardFoot component", () => {
   hasProperties(ModalCardFoot, {

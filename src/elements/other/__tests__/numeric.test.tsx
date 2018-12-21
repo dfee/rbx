@@ -3,7 +3,7 @@ import React from "react";
 
 import { Numeric } from "../numeric";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Numeric component", () => {
   hasProperties(Numeric, {

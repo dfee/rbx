@@ -1,7 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { COLORS } from "@/base/helpers";
+import { COLORS } from "../../../base/helpers";
 import { Hero, HERO_SIZES } from "../hero";
 import { HeroBody } from "../hero-body";
 import { HeroFoot } from "../hero-foot";
@@ -12,7 +12,7 @@ import {
   testGenericPropTypes,
   validateBoolPropType,
   validateOneOfPropType,
-} from "@/__tests__/testing";
+} from "../../../__tests__/testing";
 
 describe("Hero component", () => {
   hasProperties(Hero, {

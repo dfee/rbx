@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Delete, Notification } from "@/elements";
-import { Section } from "@/layout";
+import { Delete, Notification } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 import { colorKnob } from "../common";
 

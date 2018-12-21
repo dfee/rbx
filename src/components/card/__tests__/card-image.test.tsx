@@ -3,7 +3,7 @@ import React from "react";
 
 import { CardImage } from "../card-image";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("CardImage component", () => {
   hasProperties(CardImage, {

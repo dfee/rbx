@@ -5,7 +5,7 @@ import { Menu } from "../menu";
 import { MenuLabel } from "../menu-label";
 import { MenuList } from "../menu-list";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Menu component", () => {
   hasProperties(Menu, {

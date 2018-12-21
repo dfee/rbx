@@ -2,8 +2,8 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Table } from "@/elements";
-import { Section } from "@/layout";
+import { Table } from "../../src/elements";
+import { Section } from "../../src/layout";
 
 export const knobs = {
   bordered: (title: string = "Bordered") => boolean(title, false),

@@ -4,7 +4,7 @@ import React from "react";
 import { Media } from "../media";
 import { MediaItem } from "../media-item";
 
-import { hasProperties, testGenericPropTypes } from "@/__tests__/testing";
+import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
 
 describe("Media component", () => {
   hasProperties(Media, {
