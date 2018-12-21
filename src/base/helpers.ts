@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
+import { Omit } from "../types";
 import { tuple } from "../utils";
 
 /**

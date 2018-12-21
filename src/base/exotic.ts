@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Prefer } from "../types";
+
 export interface ForwardRefAsExoticComponent<
   TOwnProps,
   TDefaultComponent extends React.ReactType<any>

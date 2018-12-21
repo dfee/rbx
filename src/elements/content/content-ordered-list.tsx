@@ -8,6 +8,7 @@ import {
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { Omit, Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { ContentOrderedListItem } from "./content-ordered-list-item";
 

@@ -7,6 +7,7 @@ import {
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { Prefer } from "../../types";
 
 export type NavbarDividerProps = Prefer<
   HelpersProps,

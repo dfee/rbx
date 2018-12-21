@@ -9,6 +9,7 @@ import {
   transformHelpers,
 } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
 export const ICON_ALIGNMENTS = tuple("left", "right");

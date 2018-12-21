@@ -7,6 +7,7 @@ import {
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { Prefer } from "../../types";
 import { NavbarContext } from "./navbar-context";
 
 export type NavbarMenuProps = Prefer<

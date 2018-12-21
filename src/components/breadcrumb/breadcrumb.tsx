@@ -8,6 +8,7 @@ import {
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 

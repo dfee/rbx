@@ -93,7 +93,8 @@ configureViewport({
 });
 
 function loadStories() {
-  const req = require.context("../stories", true, /\.story\.tsx$/);
+  // const req = require.context("../stories", true, /\.story\.tsx$/);
+  const req = require.context("../stories/base", true, /\.story\.tsx$/);
   req.keys().forEach(filename => req(filename));
 }
 

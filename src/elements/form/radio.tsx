@@ -6,6 +6,7 @@ import {
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { Prefer } from "../../types";
 
 export type RadioProps = Prefer<
   HelpersProps,

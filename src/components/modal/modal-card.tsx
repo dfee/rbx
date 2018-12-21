@@ -7,6 +7,7 @@ import {
   HelpersProps,
   transformHelpers,
 } from "../../base";
+import { Prefer } from "../../types";
 import { ModalCardBody } from "./modal-card-body";
 import { ModalCardFoot } from "./modal-card-foot";
 import { ModalCardHead } from "./modal-card-head";

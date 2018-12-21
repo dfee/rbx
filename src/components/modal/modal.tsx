@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { forwardRefAs } from "../../base";
+import { Omit } from "../../types";
 import { canUseDOM } from "../../utils";
 import { ModalBackground } from "./modal-background";
 import { ModalCard } from "./modal-card";
