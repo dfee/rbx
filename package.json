@@ -1,6 +1,6 @@
 {
   "name": "rbx",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "description": "The Comprehensive Bulma UI Framework for React",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
@@ -12,10 +12,14 @@
     "build": "npm run clean && rollup -c && cpx \"src/**/*.sass\" dist",
     "clean": "rimraf dist",
     "coveralls": "cat ./.coverage/lcov.info | coveralls",
+    "docs:clean": "rimraf docs/build",
+    "docs:build": "npm run docs:clean && npm run docs:core:build && npm run docs:storybook:build",
+    "docs:deploy": "gh-pages -d docs/build -m \"Deploy Docs [skip ci]\"",
+    "docs:core:build": "webpack --config docs/core/webpack.config.js --mode production",
+    "docs:core:dev": "webpack-dev-server --config docs/core/webpack.config.js --mode development --open",
+    "docs:storybook:build": "build-storybook -c docs/stories/.config -o docs/build/stories",
+    "docs:storybook:dev": "start-storybook -p 9001 -c docs/stories/.config",
     "lint": "tslint --project .",
-    "storybook:deploy": "storybook-to-ghpages",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook:build": "build-storybook -c .storybook -o .out/storybook",
     "test:cov": "tslint --project . && jest --coverage",
     "test": "jest",
     "watch": "rollup -cw"
@@ -46,7 +50,6 @@
     "prop-types": "^15.6.2"
   },
   "peerDependencies": {
-    "bulma": "0.7.2",
     "react": "^16.3.0",
     "react-dom": "^16.3.0"
   },
@@ -62,7 +65,6 @@
     "@storybook/addon-options": "4.1.0",
     "@storybook/addon-viewport": "4.1.0",
     "@storybook/react": "^4.1.0",
-    "@storybook/storybook-deployer": "^2.8.1",
     "@types/classnames": "^2.2.6",
     "@types/enzyme": "^3.1.15",
     "@types/enzyme-adapter-react-16": "^1.0.3",
@@ -85,6 +87,9 @@
     "css-loader": "2.0.0",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
+    "gh-pages": "^2.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "image-webpack-loader": "^4.6.0",
     "jest": "23.6.0",
     "jsdom": "13.0.0",
     "node-sass": "^4.11.0",
@@ -112,6 +117,8 @@
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.2.2",
-    "webpack": "4.27.1"
+    "webpack": "4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.11"
   }
 }
