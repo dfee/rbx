@@ -16,6 +16,6 @@
     "suppressImplicitAnyIndexErrors": true,
     "target": "es6"
   },
-  "include": ["src", "stories"],
+  "include": ["src", "docs"],
   "exclude": ["node_modules", "dist"]
 }
