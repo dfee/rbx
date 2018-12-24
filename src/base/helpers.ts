@@ -22,21 +22,27 @@ export const floatHelpersPropTypes = {
   pull: PropTypes.oneOf(FLOAT_PULLED_ALIGNMENTS),
 };
 
-export const transformFloatHelpers = <
-  P extends object & FloatHelpersProps & { className?: string }
->(
-  props: P,
+export const transformFloatHelpers: TransformFunc<FloatHelpersProps> = (
+  props,
+  componentName,
+  location = "prop",
 ) => {
-  const { className: initialClassName, clearfix, pull, ...rest } = props;
-  const className =
-    classNames(
-      {
-        "is-clearfix": clearfix,
-        [`is-pulled-${pull}`]: pull,
-      },
-      initialClassName,
-    ) || undefined;
-  return { className, ...rest };
+  PropTypes.checkPropTypes(
+    floatHelpersPropTypes,
+    props,
+    location,
+    componentName,
+  );
+
+  const { clearfix, pull, ...rest } = props;
+  const className = classNames(
+    {
+      "is-clearfix": clearfix,
+      [`is-pulled-${pull}`]: pull,
+    },
+    props.className,
+  );
+  return Object.assign(rest, className ? { className } : {});
 };
 
 /**
@@ -51,15 +57,21 @@ export const overflowHelpersPropTypes = {
   clipped: PropTypes.bool,
 };
 
-export const transformOverflowHelpers = <
-  P extends object & OverflowHelpersProps & { className?: string }
->(
-  props: P,
+export const transformOverflowHelpers: TransformFunc<OverflowHelpersProps> = (
+  props,
+  componentName,
+  location = "prop",
 ) => {
-  const { className: initialClassName, clipped, ...rest } = props;
-  const className =
-    classNames({ "is-clipped": clipped }, initialClassName) || undefined;
-  return { className, ...rest };
+  PropTypes.checkPropTypes(
+    overflowHelpersPropTypes,
+    props,
+    location,
+    componentName,
+  );
+
+  const { clipped, ...rest } = props;
+  const className = classNames({ "is-clipped": clipped }, props.className);
+  return Object.assign(rest, className ? { className } : {});
 };
 
 /**
@@ -74,15 +86,21 @@ export const overlayHelpersPropTypes = {
   overlay: PropTypes.bool,
 };
 
-export const transformOverlayHelpers = <
-  P extends object & OverlayHelpersProps & { className?: string }
->(
-  props: P,
+export const transformOverlayHelpers: TransformFunc<OverlayHelpersProps> = (
+  props,
+  componentName,
+  location = "prop",
 ) => {
-  const { className: initialClassName, overlay, ...rest } = props;
-  const className =
-    classNames({ "is-overlay": overlay }, initialClassName) || undefined;
-  return { className, ...rest };
+  PropTypes.checkPropTypes(
+    overlayHelpersPropTypes,
+    props,
+    location,
+    componentName,
+  );
+
+  const { overlay, ...rest } = props;
+  const className = classNames({ "is-overlay": overlay }, props.className);
+  return Object.assign(rest, className ? { className } : {});
 };
 
 /**
@@ -147,14 +165,18 @@ export const typographyHelpersPropTypes = {
   textWeight: PropTypes.oneOf(TEXT_WEIGHTS),
 };
 
-export const transformTypographyHelpers = <
-  P extends object & TypographyHelpersProps & { className?: string }
->(
-  props: P,
-) => {
+export const transformTypographyHelpers: TransformFunc<
+  TypographyHelpersProps
+> = (props, componentName, location = "prop") => {
+  PropTypes.checkPropTypes(
+    typographyHelpersPropTypes,
+    props,
+    location,
+    componentName,
+  );
+
   const {
     backgroundColor,
-    className: initialClassName,
     italic,
     textAlignment,
     textColor,
@@ -164,21 +186,19 @@ export const transformTypographyHelpers = <
     ...rest
   } = props;
 
-  const className =
-    classNames(
-      {
-        [`has-background-${backgroundColor}`]: backgroundColor,
-        [`has-text-${textColor}`]: textColor,
-        "is-italic": italic,
-        [`is-${textTransform}`]: textTransform,
-        [`has-text-${textAlignment}`]: textAlignment,
-        [`has-text-weight-${textWeight}`]: textWeight,
-        [`is-size-${textSize}`]: !!textSize,
-      },
-      initialClassName,
-    ) || undefined;
-
-  return { className, ...rest };
+  const className = classNames(
+    {
+      [`has-background-${backgroundColor}`]: backgroundColor,
+      [`has-text-${textColor}`]: textColor,
+      "is-italic": italic,
+      [`is-${textTransform}`]: textTransform,
+      [`has-text-${textAlignment}`]: textAlignment,
+      [`has-text-weight-${textWeight}`]: textWeight,
+      [`is-size-${textSize}`]: !!textSize,
+    },
+    props.className,
+  );
+  return Object.assign(rest, className ? { className } : {});
 };
 
 /**
@@ -211,28 +231,26 @@ export const visibilityHelpersPropTypes = {
   srOnly: PropTypes.bool,
 };
 
-export const transformVisibilityHelpers = <
-  P extends object & VisibilityHelpersProps & { className?: string }
->(
-  props: P,
-) => {
-  const {
-    className: initialClassName,
-    hidden,
-    invisible,
-    srOnly,
-    ...rest
-  } = props;
-  const className =
-    classNames(
-      {
-        "is-hidden": hidden,
-        "is-invisible": invisible,
-        "is-sr-only": srOnly,
-      },
-      initialClassName,
-    ) || undefined;
-  return { className, ...rest };
+export const transformVisibilityHelpers: TransformFunc<
+  VisibilityHelpersProps
+> = (props, componentName, location = "prop") => {
+  PropTypes.checkPropTypes(
+    visibilityHelpersPropTypes,
+    props,
+    location,
+    componentName,
+  );
+
+  const { hidden, invisible, srOnly, ...rest } = props;
+  const className = classNames(
+    {
+      "is-hidden": hidden,
+      "is-invisible": invisible,
+      "is-sr-only": srOnly,
+    },
+    props.className,
+  );
+  return Object.assign(rest, className ? { className } : {});
 };
 
 /**
@@ -259,13 +277,19 @@ export const otherHelpersPropTypes = {
   unselectable: PropTypes.bool,
 };
 
-export const transformOtherHelpers = <
-  P extends object & OtherHelpersProps & { className?: string }
->(
-  props: P,
+export const transformOtherHelpers: TransformFunc<OtherHelpersProps> = (
+  props,
+  componentName,
+  location = "prop",
 ) => {
+  PropTypes.checkPropTypes(
+    otherHelpersPropTypes,
+    props,
+    location,
+    componentName,
+  );
+
   const {
-    className: initialClassName,
     marginless,
     paddingless,
     radiusless,
@@ -274,19 +298,17 @@ export const transformOtherHelpers = <
     ...rest
   } = props;
 
-  const className =
-    classNames(
-      {
-        "is-marginless": props.marginless,
-        "is-paddingless": props.paddingless,
-        "is-radiusless": props.radiusless,
-        "is-shadowless": props.shadowless,
-        "is-unselectable": props.unselectable,
-      },
-      initialClassName,
-    ) || undefined;
-
-  return { className, ...rest };
+  const className = classNames(
+    {
+      "is-marginless": props.marginless,
+      "is-paddingless": props.paddingless,
+      "is-radiusless": props.radiusless,
+      "is-shadowless": props.shadowless,
+      "is-unselectable": props.unselectable,
+    },
+    props.className,
+  );
+  return Object.assign(rest, className ? { className } : {});
 };
 
 /**
@@ -358,7 +380,7 @@ export const responsiveBreakpointPropTypes = {
   }),
   textAlignment: PropTypes.shape({
     only: PropTypes.bool,
-    value: PropTypes.bool.isRequired,
+    value: PropTypes.oneOf(TEXT_ALIGNMENTS).isRequired,
   }),
   textSize: PropTypes.shape({
     only: PropTypes.bool,
@@ -374,7 +396,7 @@ export const limitedResponsiveBreakpointPropTypes = {
     value: PropTypes.bool.isRequired,
   }),
   textAlignment: PropTypes.shape({
-    value: PropTypes.bool.isRequired,
+    value: PropTypes.oneOf(TEXT_ALIGNMENTS).isRequired,
   }),
   textSize: PropTypes.shape({
     value: PropTypes.oneOf(TEXT_SIZES).isRequired,
@@ -394,54 +416,57 @@ export const responsiveHelpersPropTypes = {
   }),
 };
 
-export const transformResponsiveHelpers = <
-  P extends object & ResponsiveHelpersProps & { className?: string }
->(
-  props: P,
-) => {
-  const { className: initialClassName, responsive, ...rest } = props;
+export const transformResponsiveHelpers: TransformFunc<
+  ResponsiveHelpersProps
+> = (props, componentName, location = "prop") => {
+  PropTypes.checkPropTypes(
+    responsiveHelpersPropTypes,
+    props,
+    location,
+    componentName,
+  );
 
-  const className =
-    classNames(
-      responsive &&
-        Object.keys(responsive)
-          .filter(breakpoint => responsive![breakpoint])
-          .map(breakpoint => {
-            const names = {};
-            const { display, hide, textAlignment, textSize } = responsive![
-              breakpoint
-            ] as ResponsiveBreakpointProps | LimitiedResponsiveBreakpointProps;
-            if (display) {
-              const value = display.value;
-              const only = "only" in display ? display.only : false;
-              names[`is-${value}-${breakpoint}${only ? "-only" : ""}`] = value;
-            }
-            if (hide) {
-              const value = hide.value;
-              const only = "only" in hide ? hide.only : false;
-              names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
-            }
-            if (textAlignment) {
-              const value = textAlignment.value;
-              const only = "only" in textAlignment ? textAlignment.only : false;
-              names[
-                `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
-              ] = value;
-            }
-            if (textSize) {
-              const value = textSize.value;
-              const only = "only" in textSize ? textSize.only : false;
-              names[
-                `is-size-${value}-${breakpoint}${only ? "-only" : ""}`
-              ] = !!value;
-            }
-            return names;
-          })
-          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-      initialClassName,
-    ) || undefined;
+  const { responsive, ...rest } = props;
 
-  return { className, ...rest };
+  const className = classNames(
+    responsive &&
+      Object.keys(responsive)
+        .filter(breakpoint => responsive![breakpoint])
+        .map(breakpoint => {
+          const names = {};
+          const { display, hide, textAlignment, textSize } = responsive![
+            breakpoint
+          ] as ResponsiveBreakpointProps | LimitiedResponsiveBreakpointProps;
+          if (display) {
+            const value = display.value;
+            const only = "only" in display ? display.only : false;
+            names[`is-${value}-${breakpoint}${only ? "-only" : ""}`] = value;
+          }
+          if (hide) {
+            const value = hide.value;
+            const only = "only" in hide ? hide.only : false;
+            names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
+          }
+          if (textAlignment) {
+            const value = textAlignment.value;
+            const only = "only" in textAlignment ? textAlignment.only : false;
+            names[
+              `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
+            ] = value;
+          }
+          if (textSize) {
+            const value = textSize.value;
+            const only = "only" in textSize ? textSize.only : false;
+            names[
+              `is-size-${value}-${breakpoint}${only ? "-only" : ""}`
+            ] = !!value;
+          }
+          return names;
+        })
+        .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+    props.className,
+  );
+  return Object.assign(rest, className ? { className } : {});
 };
 
 /**
@@ -466,15 +491,34 @@ export const helpersPropTypes = {
   className: PropTypes.string,
 };
 
-export const transformHelpers = <T extends object & { className?: string }>(
-  props: T,
-): Omit<T, keyof HelpersProps> & { className?: string } =>
-  [
-    transformFloatHelpers,
-    transformOverflowHelpers,
-    transformOverlayHelpers,
-    transformTypographyHelpers,
-    transformVisibilityHelpers,
-    transformOtherHelpers,
-    transformResponsiveHelpers,
-  ].reduce((acc, transformer) => transformer(acc as any), props);
+export const combineTransformFunctions = <TTransformProps>(
+  ...funcs: Array<TransformFunc<any>>
+): TransformFunc<TTransformProps> => (
+  props,
+  componentName,
+  location = "prop",
+) => {
+  let transformed: any = props;
+  for (const func of funcs) {
+    transformed = func(transformed, componentName, location);
+  }
+  return transformed;
+};
+
+export const transformHelpers = combineTransformFunctions<HelpersProps>(
+  transformFloatHelpers,
+  transformOverflowHelpers,
+  transformOverlayHelpers,
+  transformTypographyHelpers,
+  transformVisibilityHelpers,
+  transformOtherHelpers,
+  transformResponsiveHelpers,
+);
+
+export type TransformFunc<TTransformProps> = <
+  TProps extends object & TTransformProps & { className?: string }
+>(
+  props: TProps,
+  componentName: string,
+  location?: string,
+) => Omit<TProps, keyof TTransformProps> & { className?: string };

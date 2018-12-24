@@ -12,6 +12,7 @@ const globals = {
   "react-dom": "ReactDOM"
 };
 
+// todo: https://reactjs.org/docs/optimizing-performance.html#rollup
 export default {
   entry: input,
   input,

@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import Enzyme from "enzyme";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -26,9 +26,9 @@ export const shallowInContext = <P, T>(
   context: T,
   props: P,
 ) => {
-  const outer = shallow(<Component {...props} />);
+  const outer = Enzyme.shallow(<Component {...props} />);
   const Children = outer.props().children;
-  return shallow(<Children {...context} />);
+  return Enzyme.shallow(<Children {...context} />);
 };
 
 export const makeRandomString = () =>
@@ -92,29 +92,24 @@ export const validatePropType = (
       valid ? "not warn on valid" : "warn on invalid"
     } ${propName} [${descriptor ||
       (value.hasOwnProperty("name") ? value.name : value)}]`, () => {
-      const errorMock = jest.fn();
-      const initError = global.console.error;
-      global.console.error = errorMock;
-      try {
-        // if the componentName isn't randomized, propTypes will
-        // (for some reason) fail if the test is run twice
+      withMockError({}, ({ context }) => {
+        // if the componentName or locaation isn't randomized, propTypes will
+        // (for some reason) fail if the prop is checked (and fails) twice
         PropTypes.checkPropTypes(
           propTypes,
           { [propName]: value },
           "prop", // location
-          `componentName:${makeRandomString()}`, // componentName
+          `test(${makeRandomString()})`, // componentName
         );
         if (valid) {
-          expect(errorMock.mock.calls).toHaveLength(0);
+          expect(context.error.mock.calls).toHaveLength(0);
         } else {
-          expect(errorMock.mock.calls).toHaveLength(1);
-          expect(errorMock.mock.calls[0][0]).toMatch(
+          expect(context.error.mock.calls).toHaveLength(1);
+          expect(context.error.mock.calls[0][0]).toMatch(
             error || new RegExp(`Warning.+Invalid prop \`${propName}\`.+`),
           );
         }
-      } finally {
-        global.console.error = initError;
-      }
+      });
     }),
   );
 
@@ -154,3 +149,50 @@ export const validateStringPropType = (
     { value: "string", valid: true },
     { value: 1, valid: false },
   ]);
+
+export const contextManager = <
+  TContext extends object,
+  TParams extends object,
+  TState extends object
+>(
+  enter: (params: TParams) => { context: TContext; state: TState },
+  exit: (
+    {
+      context,
+      params,
+      state,
+    }: { context: TContext; params: TParams; state: TState },
+  ) => void,
+) => (
+  params: TParams,
+  inner: ({ context, params }: { context: TContext; params: TParams }) => void,
+) => {
+  const { context, state } = enter(params);
+  try {
+    inner({ context, params });
+  } finally {
+    exit({ context, params, state });
+  }
+};
+
+export const withMockError = contextManager(
+  () => {
+    const context = { error: jest.fn() };
+    const state = { initError: global.console.error };
+    global.console.error = context.error;
+    return { context, state };
+  },
+  ({ state }) => {
+    global.console.error = state.initError;
+  },
+);
+
+export const withEnzymeMount = contextManager(
+  ({ node }: { node: React.ReactElement<any> }) => {
+    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
+    // So, mount in div
+    const outer = Enzyme.mount(<div children={node} />);
+    return { context: { wrapper: outer.children() }, state: { outer } };
+  },
+  ({ state }) => state.outer.unmount(),
+);
