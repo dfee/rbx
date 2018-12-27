@@ -7,6 +7,7 @@
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
     "noImplicitReturns": true,
+    "noErrorTruncation": true,
     "noUnusedLocals": true,
     "removeComments": true,
     "rootDirs": ["src", "stories"],

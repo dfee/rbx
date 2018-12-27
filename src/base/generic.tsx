@@ -2,8 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs } from "./exotic";
-// import { HelpersProps, helpersPropTypes, transformHelpers } from "./helpers";
-import { HelpersProps, transformHelpers } from "./helpers";
+import { HelpersProps } from "./helpers";
 import { TransformContext } from "./transform-context";
 
 export type GenericProps = HelpersProps;
@@ -15,14 +14,12 @@ export const propTypes = {
     PropTypes.string,
     PropTypes.shape({ render: PropTypes.func.isRequired }),
   ]),
-  transform: PropTypes.func,
-  // ...helpersPropTypes,
 };
 
 export const Generic = Object.assign(
-  forwardRefAs<GenericProps, "div", HelpersProps>(
+  forwardRefAs<GenericProps, "div">(
     (props, ref) => {
-      const { as, transform: propTransform, ...rest } = props;
+      const { as, ...rest } = props;
       return (
         <TransformContext.Consumer>
           {({ transform }) => {
@@ -32,9 +29,7 @@ export const Generic = Object.assign(
         </TransformContext.Consumer>
       );
     },
-    { as: "div", transform: transformHelpers },
+    { as: "div" },
   ),
-  {
-    propTypes,
-  },
+  { propTypes },
 );

@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { HeroBody } from "./hero-body";
@@ -31,7 +26,6 @@ export type HeroModifierProps = Partial<{
 export type HeroProps = HelpersProps & HeroModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   gradient: PropTypes.bool,
   size: PropTypes.oneOf(HERO_SIZES),
@@ -40,13 +34,17 @@ const propTypes = {
 export const Hero = Object.assign(
   forwardRefAs<HeroProps, "section">(
     (props, ref) => {
-      const { as, color, gradient, size, ...rest } = transformHelpers(props);
-      rest.className = classNames("hero", rest.className, {
-        "is-bold": gradient,
-        [`is-${color}`]: color,
-        [`is-${size}`]: size,
-      });
-      return React.createElement(as!, { ref, ...rest });
+      const { as, color, gradient, size, ...rest } = props;
+      rest.className = classNames(
+        "hero",
+        {
+          "is-bold": gradient,
+          [`is-${color}`]: color,
+          [`is-${size}`]: size,
+        },
+        rest.className,
+      );
+      return <Generic as={as!} ref={ref} {...rest} />;
     },
     { as: "section" },
   ),

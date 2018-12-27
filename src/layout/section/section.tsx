@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 
 export const SECTION_SIZES = tuple("medium", "large");
@@ -20,18 +15,19 @@ export type SectionModifierProps = Partial<{
 export type SectionProps = HelpersProps & SectionModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   size: PropTypes.oneOf(SECTION_SIZES),
 };
 
 export const Section = Object.assign(
   forwardRefAs<SectionProps, "section">(
     (props, ref) => {
-      const { as, size, ...rest } = transformHelpers(props);
-      rest.className = classNames("section", rest.className, {
-        [`is-${size}`]: size,
-      });
-      return React.createElement(as!, { ref, ...rest });
+      const { as, size, ...rest } = props;
+      rest.className = classNames(
+        "section",
+        { [`is-${size}`]: size },
+        rest.className,
+      );
+      return <Generic as={as!} ref={ref} {...rest} />;
     },
     { as: "section" },
   ),
