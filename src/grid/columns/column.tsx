@@ -2,13 +2,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
-import { BREAKPOINTS } from "../../base/helpers";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
 export const COLUMN_SIZES = tuple(
@@ -60,40 +55,12 @@ const ColumnSizeModifierPropTypes = {
 };
 
 export type ColumnModifierProps = Partial<
-  {
-    /**
-     * Size, Offset and Narrow props for Mobile devices (Up to 768px)
-     */
-    mobile: ColumnSizeModifierProps;
-    /**
-     * Size, Offset and Narrow props for Tablet devices (Between 769px and 1023px)
-     */
-    tablet: ColumnSizeModifierProps;
-    /**
-     * Size, Offset and Narrow props for Desktop devices (Between 1024px and
-     * 1215px)
-     */
-    desktop: ColumnSizeModifierProps;
-    /**
-     * Size, Offset and Narrow props for WideScreen devices (Between 1216px and
-     * 1407px)
-     */
-    widescreen: ColumnSizeModifierProps;
-    /**
-     * Size, Offset and Narrow props for FullHD devices (1408px and above)
-     */
-    fullhd: ColumnSizeModifierProps;
-    /**
-     * Size, Offset and Narrow props for Touch devices (Up to 1087px)
-     */
-    touch: ColumnSizeModifierProps;
-  } & ColumnSizeModifierProps
+  { [B in Breakpoints]: ColumnSizeModifierProps } & ColumnSizeModifierProps
 >;
 
 export type ColumnProps = HelpersProps & ColumnModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   ...BREAKPOINTS.map(breakpoint => ({
     [breakpoint]: PropTypes.shape(ColumnSizeModifierPropTypes),
   })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
@@ -115,7 +82,7 @@ export const Column = Object.assign(
         offset,
         size,
         ...rest
-      } = transformHelpers(props);
+      } = props;
 
       const breakpoints = {
         desktop,
@@ -128,13 +95,11 @@ export const Column = Object.assign(
 
       rest.className = classNames(
         "column",
-        rest.className,
         {
           [`is-${size}`]: !!size,
           [`is-offset-${offset}`]: !!offset,
           "is-narrow": narrow,
         },
-
         Object.keys(breakpoints)
           .filter(breakpoint => breakpoints[breakpoint])
           .map(breakpoint => {
@@ -146,9 +111,10 @@ export const Column = Object.assign(
             };
           })
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+        rest.className,
       );
 
-      return React.createElement(as!, { ref, ...rest });
+      return <Generic as={as!} ref={ref} {...rest} />;
     },
     { as: "div" },
   ),

@@ -31,7 +31,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
   describe("props", () => {
-    const { propTypes } = Section;
+    const { propTypes } = COMPONENT;
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", SECTION_SIZES);

@@ -39,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
   describe("props", () => {
-    const { propTypes } = Hero;
+    const { propTypes } = COMPONENT;
 
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS);

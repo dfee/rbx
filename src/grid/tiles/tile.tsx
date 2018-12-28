@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
@@ -28,7 +23,6 @@ export type TileModifierProps = Partial<{
 export type TileProps = HelpersProps & TileModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   kind: PropTypes.oneOf(TILE_KINDS),
   notification: PropTypes.bool,
@@ -39,23 +33,19 @@ const propTypes = {
 export const Tile = Object.assign(
   forwardRefAs<TileProps, "div">(
     (props, ref) => {
-      const {
-        as,
-        color,
-        kind,
-        notification,
-        size,
-        vertical,
-        ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("tile", rest.className, {
-        [`is-${color}`]: color,
-        [`is-${kind}`]: kind,
-        [`is-${size}`]: !!size,
-        "is-vertical": vertical,
-        notification,
-      });
-      return React.createElement(as!, { ref, ...rest });
+      const { as, color, kind, notification, size, vertical, ...rest } = props;
+      rest.className = classNames(
+        "tile",
+        {
+          [`is-${color}`]: color,
+          [`is-${kind}`]: kind,
+          [`is-${size}`]: !!size,
+          "is-vertical": vertical,
+          notification,
+        },
+        rest.className,
+      );
+      return <Generic as={as!} ref={ref} {...rest} />;
     },
     { as: "div" },
   ),

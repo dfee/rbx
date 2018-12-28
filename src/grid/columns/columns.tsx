@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { Column } from "./column";
@@ -27,7 +22,7 @@ const ColumnsBreakpointPropTypes = {
 };
 
 type ColumnsModifierProps = Partial<
-  {
+  { [B in Breakpoints]: ColumnsBreakpointProps } & {
     /**
      * Breakpoint where columns become stacked.
      */
@@ -45,37 +40,12 @@ type ColumnsModifierProps = Partial<
      * elements that would fit in a single row.
      */
     multiline: boolean;
-    /**
-     * The column gap size for Mobile devices (Up to 768px)
-     */
-    mobile: ColumnsBreakpointProps;
-    /**
-     * The column gap size for Tablet devices (Between 769px and 1023px)
-     */
-    tablet: ColumnsBreakpointProps;
-    /**
-     * The column gap size for Desktop devices (Between 1024 and 1215px)
-     */
-    desktop: ColumnsBreakpointProps;
-    /**
-     * The column gap size for WideScreen devices (Between 1216px and 1407px)
-     */
-    widescreen: ColumnsBreakpointProps;
-    /**
-     * The column gap size for FullHD devices (1408px and above)
-     */
-    fullhd: ColumnsBreakpointProps;
-    /**
-     * The column gap size for FullHD devices (1408px and above)
-     */
-    touch: ColumnsBreakpointProps;
   } & ColumnsBreakpointProps
 >;
 
 export type ColumnsProps = HelpersProps & ColumnsModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   ...BREAKPOINTS.map(breakpoint => ({
     [breakpoint]: PropTypes.shape(ColumnsBreakpointPropTypes),
   })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
@@ -103,7 +73,7 @@ export const Columns = Object.assign(
         widescreen,
         touch,
         ...rest
-      } = transformHelpers(props);
+      } = props;
 
       const breakpoints = {
         desktop,
@@ -129,7 +99,6 @@ export const Columns = Object.assign(
 
       rest.className = classNames(
         "columns",
-        rest.className,
         {
           [`is-${breakpoint}`]: breakpoint,
           "is-centered": centered,
@@ -138,9 +107,10 @@ export const Columns = Object.assign(
           "is-variable ": !!gapClassNames,
         },
         gapClassNames,
+        rest.className,
       );
 
-      return React.createElement(as!, { ref, ...rest });
+      return <Generic as={as!} ref={ref} {...rest} />;
     },
     {
       as: "div",

@@ -1,135 +1,92 @@
-import Enzyme from "enzyme";
-import React from "react";
-
+import { BREAKPOINTS } from "../../../base/helpers";
 import { Column, COLUMN_SIZES } from "../column";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
 } from "../../../__tests__/testing";
-import { BREAKPOINTS } from "../../../base/helpers";
 
-describe("Column component", () => {
-  hasProperties(Column, {
-    defaultProps: { as: "div" },
+const COMPONENT = Column;
+const COMPONENT_NAME = "Column";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "column";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Column />);
-    expect(wrapper.is("div")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Column as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Column ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".column").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Column />);
-    expect(wrapper.hasClass("column")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Column className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  [false, true].map(narrow =>
-    it(`should ${narrow ? "" : "not "}be narrow`, () => {
-      const wrapper = Enzyme.shallow(<Column narrow={narrow} />);
-      expect(wrapper.hasClass("is-narrow")).toBe(narrow);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  COLUMN_SIZES.map(offset =>
-    it(`should be offset ${offset}`, () => {
-      const wrapper = Enzyme.shallow(<Column offset={offset} />);
-      expect(wrapper.hasClass(`is-offset-${offset}`)).toBe(true);
-    }),
-  );
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  COLUMN_SIZES.map(size =>
-    it(`should be ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Column size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+    describe("narrow", () => {
+      validateBoolPropType(propTypes, "narrow");
 
-  BREAKPOINTS.map(breakpoint =>
-    describe(`for ${breakpoint}:`, () => {
       [false, true].map(narrow =>
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
-          const props = { [breakpoint]: { narrow } };
-          const wrapper = Enzyme.shallow(<Column {...props} />);
-          expect(wrapper.hasClass(`is-narrow-${breakpoint}`)).toBe(narrow);
+          const node = makeNode({ narrow });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         }),
       );
+
+      BREAKPOINTS.map(breakpoint => {
+        describe(breakpoint, () => {
+          validatePropType(propTypes, breakpoint, [
+            ...[false, true].map(value => ({
+              descriptor: `narrow = ${value}`,
+              valid: true,
+              value: { narrow: value },
+            })),
+            {
+              descriptor: "narrow = 'string'",
+              error: new RegExp(
+                `Warning.+Failed prop.+ \`${breakpoint}.narrow\``,
+              ),
+              valid: false,
+              value: { narrow: "string" },
+            },
+          ]);
+
+          [false, true].map(narrow =>
+            it(`should ${narrow ? "" : "not "}be narrow`, () => {
+              const node = makeNode({ [breakpoint]: { narrow } });
+              const wrapper = makeShallowWrapper(node);
+              expect(wrapper.hasClass(`is-narrow-${breakpoint}`)).toBe(narrow);
+            }),
+          );
+        });
+      });
+    });
+
+    describe("offset", () => {
+      validateOneOfPropType(propTypes, "offset", COLUMN_SIZES);
 
       COLUMN_SIZES.map(offset =>
-        it(`should be offset ${offset}`, () => {
-          const props = { [breakpoint]: { offset } };
-          const wrapper = Enzyme.shallow(<Column {...props} />);
-          expect(wrapper.hasClass(`is-offset-${offset}-${breakpoint}`)).toBe(
-            true,
-          );
+        it(`should be ${offset}`, () => {
+          const node = makeNode({ offset });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-offset-${offset}`)).toBe(true);
         }),
       );
 
-      COLUMN_SIZES.map(size =>
-        it(`should be ${size}`, () => {
-          const props = { [breakpoint]: { size } };
-          const wrapper = Enzyme.shallow(<Column {...props} />);
-          expect(wrapper.hasClass(`is-${size}-${breakpoint}`)).toBe(true);
-        }),
-      );
-    }),
-  );
-
-  describe("propTypes", () => {
-    const { propTypes } = Column;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "narrow");
-    validateOneOfPropType(propTypes, "offset", COLUMN_SIZES);
-    validateOneOfPropType(propTypes, "size", COLUMN_SIZES);
-
-    BREAKPOINTS.map(breakpoint => {
-      describe(breakpoint, () => {
-        validatePropType(propTypes, breakpoint, [
-          ...[false, true].map(value => ({
-            descriptor: `narrow = ${value}`,
-            valid: true,
-            value: { narrow: value },
-          })),
-          {
-            descriptor: "narrow = 'string'",
-            error: new RegExp(
-              `Warning.+Failed prop.+ \`${breakpoint}.narrow\``,
-            ),
-            valid: false,
-            value: { narrow: "string" },
-          },
-        ]);
-
+      BREAKPOINTS.map(breakpoint => {
         validatePropType(propTypes, breakpoint, [
           ...COLUMN_SIZES.map(value => ({
             descriptor: `offset = ${value}`,
@@ -146,19 +103,57 @@ describe("Column component", () => {
           },
         ]);
 
-        validatePropType(propTypes, breakpoint, [
-          ...COLUMN_SIZES.map(value => ({
-            descriptor: `size = ${value}`,
-            valid: true,
-            value: { size: value },
-          })),
-          {
-            descriptor: "size = __UNKNOWN",
-            error: new RegExp(`Warning.+Failed prop.+ \`${breakpoint}.size\``),
-            valid: false,
-            value: { size: "__UNKNOWN" },
-          },
-        ]);
+        describe(breakpoint, () => {
+          COLUMN_SIZES.map(offset =>
+            it(`should be offset ${offset}`, () => {
+              const node = makeNode({ [breakpoint]: { offset } });
+              const wrapper = makeShallowWrapper(node);
+              expect(
+                wrapper.hasClass(`is-offset-${offset}-${breakpoint}`),
+              ).toBe(true);
+            }),
+          );
+        });
+      });
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", COLUMN_SIZES);
+
+      COLUMN_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+
+      BREAKPOINTS.map(breakpoint => {
+        describe(breakpoint, () => {
+          validatePropType(propTypes, breakpoint, [
+            ...COLUMN_SIZES.map(value => ({
+              descriptor: `size = ${value}`,
+              valid: true,
+              value: { size: value },
+            })),
+            {
+              descriptor: "size = __UNKNOWN",
+              error: new RegExp(
+                `Warning.+Failed prop.+ \`${breakpoint}.size\``,
+              ),
+              valid: false,
+              value: { size: "__UNKNOWN" },
+            },
+          ]);
+
+          COLUMN_SIZES.map(size =>
+            it(`should be ${size}`, () => {
+              const node = makeNode({ [breakpoint]: { size } });
+              const wrapper = makeShallowWrapper(node);
+              expect(wrapper.hasClass(`is-${size}-${breakpoint}`)).toBe(true);
+            }),
+          );
+        });
       });
     });
   });
