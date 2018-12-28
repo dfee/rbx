@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { TagGroup } from "./tag-group";
@@ -25,7 +20,6 @@ export type TagModifierProps = Partial<{
 export type TagProps = HelpersProps & TagModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   delete: PropTypes.bool,
   rounded: PropTypes.bool,
@@ -34,28 +28,26 @@ const propTypes = {
 
 export const Tag = Object.assign(
   forwardRefAs<TagProps, "span">(
-    (props, ref) => {
-      const {
-        as,
-        children,
-        color,
-        delete: isDelete,
-        rounded,
-        size,
-        ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("tag", rest.className, {
-        [`is-${size}`]: size,
-        [`is-${color}`]: color,
-        "is-delete": isDelete,
-        "is-rounded": rounded,
-      });
-      return React.createElement(as!, {
-        children: !isDelete && children,
-        ref,
-        ...rest,
-      });
-    },
+    (
+      { children, className, color, delete: isDelete, rounded, size, ...rest },
+      ref,
+    ) => (
+      <Generic
+        className={classNames(
+          "tag",
+          {
+            [`is-${size}`]: size,
+            [`is-${color}`]: color,
+            "is-delete": isDelete,
+            "is-rounded": rounded,
+          },
+          className,
+        )}
+        children={!isDelete && children}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "span" },
   ),
   {

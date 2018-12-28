@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
@@ -27,7 +22,6 @@ export type TextareaModifierProps = Partial<{
 export type TextareaProps = HelpersProps & TextareaModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   fixedSize: PropTypes.bool,
   size: PropTypes.oneOf(TEXTAREA_SIZES),
@@ -36,18 +30,22 @@ const propTypes = {
 
 export const Textarea = Object.assign(
   forwardRefAs<TextareaProps, "textarea">(
-    (props, ref) => {
-      const { as, color, fixedSize, size, state, ...rest } = transformHelpers(
-        props,
-      );
-      rest.className = classNames("textarea", rest.className, {
-        "has-fixed-size": fixedSize,
-        [`is-${color}`]: color,
-        [`is-${size}`]: size,
-        [`is-${state}`]: state,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ className, color, fixedSize, size, state, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "textarea",
+          {
+            "has-fixed-size": fixedSize,
+            [`is-${color}`]: color,
+            [`is-${size}`]: size,
+            [`is-${state}`]: state,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     {
       as: "textarea",
       rows: 4,

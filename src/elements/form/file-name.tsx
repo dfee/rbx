@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type FileNameProps = HelpersProps;
 
-export const FileName = Object.assign(
-  forwardRefAs<FileNameProps, "span">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("file-name", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "span" },
+export const FileName = forwardRefAs<FileNameProps, "span">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("file-name", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "span" },
 );

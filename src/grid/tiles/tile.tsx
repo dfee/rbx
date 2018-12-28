@@ -32,21 +32,26 @@ const propTypes = {
 
 export const Tile = Object.assign(
   forwardRefAs<TileProps, "div">(
-    (props, ref) => {
-      const { as, color, kind, notification, size, vertical, ...rest } = props;
-      rest.className = classNames(
-        "tile",
-        {
-          [`is-${color}`]: color,
-          [`is-${kind}`]: kind,
-          [`is-${size}`]: !!size,
-          "is-vertical": vertical,
-          notification,
-        },
-        rest.className,
-      );
-      return <Generic as={as!} ref={ref} {...rest} />;
-    },
+    (
+      { className, color, kind, notification, size, vertical, ...rest },
+      ref,
+    ) => (
+      <Generic
+        className={classNames(
+          "tile",
+          {
+            [`is-${color}`]: color,
+            [`is-${kind}`]: kind,
+            [`is-${size}`]: !!size,
+            "is-vertical": vertical,
+            notification,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "div" },
   ),
   { propTypes },

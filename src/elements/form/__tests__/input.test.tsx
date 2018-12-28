@@ -1,110 +1,123 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { COLORS } from "../../../base/helpers";
 import { Input, INPUT_SIZES, INPUT_STATES, INPUT_TYPES } from "../input";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Input component", () => {
-  hasProperties(Input, {
-    defaultProps: { as: "input" },
+const COMPONENT = Input;
+const COMPONENT_NAME = "Input";
+const DEFAULT_ELEMENT = "input";
+const BULMA_CLASS_NAME = "input";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Input />);
-    expect(wrapper.is("input")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Input as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLInputElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Input ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".input").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Input />);
-    expect(wrapper.hasClass("input")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Input className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  COLORS.map(color =>
-    it(`should be ${color}`, () => {
-      const wrapper = Enzyme.shallow(<Input color={color} />);
-      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  [false, true].map(rounded =>
-    it(`should ${rounded ? "" : "not "}be rounded`, () => {
-      const wrapper = Enzyme.shallow(<Input rounded={rounded} />);
-      expect(wrapper.hasClass("is-rounded")).toBe(rounded);
-    }),
-  );
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  INPUT_SIZES.map(size =>
-    it(`should be ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Input size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  INPUT_STATES.map(state =>
-    it(`should be ${state}`, () => {
-      const wrapper = Enzyme.shallow(<Input state={state} />);
-      expect(wrapper.hasClass(`is-${state}`)).toBe(true);
-    }),
-  );
+    describe("color", () => {
+      validateOneOfPropType(propTypes, "color", COLORS);
 
-  [false, true].map(isStatic =>
-    it(`should ${isStatic ? "" : "not "}be static`, () => {
-      const wrapper = Enzyme.shallow(<Input static={isStatic} />);
-      expect(wrapper.hasClass("is-static")).toBe(isStatic);
-      expect(wrapper.prop("readOnly")).toBe(isStatic);
-    }),
-  );
+      COLORS.map(color =>
+        it(`should be ${color}`, () => {
+          const node = makeNode({ color });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+        }),
+      );
+    });
 
-  INPUT_TYPES.map(type =>
-    it(`should be ${type}`, () => {
-      const wrapper = Enzyme.shallow(<Input type={type} />);
-      expect(wrapper.prop("type")).toBe(type);
-    }),
-  );
+    describe("readOnly", () => {
+      validateBoolPropType(propTypes, "readOnly");
 
-  describe("propTypes", () => {
-    const { propTypes } = Input;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "color", COLORS);
-    validateBoolPropType(propTypes, "readOnly");
-    validateBoolPropType(propTypes, "rounded");
-    validateOneOfPropType(propTypes, "size", INPUT_SIZES);
-    validateOneOfPropType(propTypes, "state", INPUT_STATES);
-    validateBoolPropType(propTypes, "static");
-    validateOneOfPropType(propTypes, "type", INPUT_TYPES);
+      [false, true].map(readOnly =>
+        it(`should ${readOnly ? "" : "not "}be readOnly`, () => {
+          const node = makeNode({ readOnly });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.prop("readOnly")).toBe(readOnly ? true : undefined);
+        }),
+      );
+    });
+
+    describe("rounded", () => {
+      validateBoolPropType(propTypes, "rounded");
+
+      [false, true].map(rounded =>
+        it(`should ${rounded ? "" : "not "}be rounded`, () => {
+          const node = makeNode({ rounded });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-rounded")).toBe(rounded);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", INPUT_SIZES);
+
+      INPUT_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("state", () => {
+      validateOneOfPropType(propTypes, "state", INPUT_STATES);
+
+      INPUT_STATES.map(state =>
+        it(`should be ${state}`, () => {
+          const node = makeNode({ state });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${state}`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("static", () => {
+      validateBoolPropType(propTypes, "static");
+
+      [false, true].map(isStatic =>
+        it(`should ${isStatic ? "" : "not "}be static`, () => {
+          const node = makeNode({ static: isStatic });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-static")).toBe(isStatic);
+          expect(wrapper.prop("readOnly")).toBe(isStatic);
+        }),
+      );
+    });
+
+    describe("type", () => {
+      validateOneOfPropType(propTypes, "type", INPUT_TYPES);
+
+      INPUT_TYPES.map(type =>
+        it(`should be ${type}`, () => {
+          const node = makeNode({ type });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.props().type).toEqual(type);
+        }),
+      );
+    });
   });
 });

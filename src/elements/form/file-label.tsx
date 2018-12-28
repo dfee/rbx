@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type FileLabelProps = HelpersProps;
 
-export const FileLabel = Object.assign(
-  forwardRefAs<FileLabelProps, "label">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("file-label", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "label" },
+export const FileLabel = forwardRefAs<FileLabelProps, "label">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("file-label", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "label" },
 );

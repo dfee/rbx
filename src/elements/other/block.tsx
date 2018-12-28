@@ -1,23 +1,13 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type BlockProps = HelpersProps;
 
-export const Block = Object.assign(
-  forwardRefAs<BlockProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("block", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "div" },
+export const Block = forwardRefAs<BlockProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Generic className={classNames("block", className)} ref={ref} {...rest} />
   ),
-  { propTypes: genericPropTypes },
+  { as: "div" },
 );

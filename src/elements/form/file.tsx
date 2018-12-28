@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
@@ -35,7 +30,6 @@ export type FileModifierProps = Partial<{
 export type FileProps = HelpersProps & FileModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   align: PropTypes.oneOf(FILE_ALIGNMENTS),
   boxed: PropTypes.bool,
   color: PropTypes.oneOf(COLORS),
@@ -46,27 +40,27 @@ const propTypes = {
 
 export const File = Object.assign(
   forwardRefAs<FileProps, "div">(
-    (props, ref) => {
-      const {
-        as,
-        align,
-        boxed,
-        color,
-        hasName,
-        fullwidth,
-        size,
-        ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("file", rest.className, {
-        "has-name": hasName,
-        [`is-${align}`]: align,
-        "is-boxed": boxed,
-        [`is-${color}`]: color,
-        "is-fullwidth": fullwidth,
-        [`is-${size}`]: size,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    (
+      { align, boxed, className, color, fullwidth, hasName, size, ...rest },
+      ref,
+    ) => (
+      <Generic
+        className={classNames(
+          "file",
+          {
+            "has-name": hasName,
+            [`is-${align}`]: align,
+            "is-boxed": boxed,
+            [`is-${color}`]: color,
+            "is-fullwidth": fullwidth,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "div" },
   ),
   {

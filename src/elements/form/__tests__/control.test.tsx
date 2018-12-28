@@ -1,99 +1,97 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { Control, CONTROL_SIZES } from "../control";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Control component", () => {
-  hasProperties(Control, {
-    defaultProps: { as: "div" },
+const COMPONENT = Control;
+const COMPONENT_NAME = "Control";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "control";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Control />);
-    expect(wrapper.is("div")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Control as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Control ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".control").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Control />);
-    expect(wrapper.hasClass("control")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Control className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  [false, true].map(expanded =>
-    it(`should ${expanded ? "" : "not "}be expanded`, () => {
-      const wrapper = Enzyme.shallow(<Control expanded={expanded} />);
-      expect(wrapper.hasClass("is-expanded")).toBe(expanded);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  [false, true].map(iconLeft =>
-    it(`should ${iconLeft ? "" : "not "}be icon-left`, () => {
-      const wrapper = Enzyme.shallow(<Control iconLeft={iconLeft} />);
-      expect(wrapper.hasClass("has-icons-left")).toBe(iconLeft);
-    }),
-  );
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  [false, true].map(iconRight =>
-    it(`should ${iconRight ? "" : "not "}be icon-right`, () => {
-      const wrapper = Enzyme.shallow(<Control iconRight={iconRight} />);
-      expect(wrapper.hasClass("has-icons-right")).toBe(iconRight);
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  [false, true].map(loading =>
-    it(`should ${loading ? "" : "not "}be loading`, () => {
-      const wrapper = Enzyme.shallow(<Control loading={loading} />);
-      expect(wrapper.hasClass("is-loading")).toBe(loading);
-    }),
-  );
+    describe("expanded", () => {
+      validateBoolPropType(propTypes, "expanded");
 
-  CONTROL_SIZES.map(size =>
-    it(`should be ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Control size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+      [false, true].map(expanded =>
+        it(`should ${expanded ? "" : "not "}be expanded`, () => {
+          const node = makeNode({ expanded });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-expanded")).toBe(expanded);
+        }),
+      );
+    });
 
-  describe("propTypes", () => {
-    const { propTypes } = Control;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "expanded");
-    validateBoolPropType(propTypes, "iconLeft");
-    validateBoolPropType(propTypes, "iconRight");
-    validateBoolPropType(propTypes, "loading");
-    validateOneOfPropType(propTypes, "size", CONTROL_SIZES);
+    describe("iconLeft", () => {
+      validateBoolPropType(propTypes, "iconLeft");
+
+      [false, true].map(iconLeft =>
+        it(`should ${iconLeft ? "" : "not "}have left icon`, () => {
+          const node = makeNode({ iconLeft });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("has-icons-left")).toBe(iconLeft);
+        }),
+      );
+    });
+
+    describe("iconRight", () => {
+      validateBoolPropType(propTypes, "iconRight");
+
+      [false, true].map(iconRight =>
+        it(`should ${iconRight ? "" : "not "}have right icon`, () => {
+          const node = makeNode({ iconRight });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("has-icons-right")).toBe(iconRight);
+        }),
+      );
+    });
+
+    describe("loading", () => {
+      validateBoolPropType(propTypes, "loading");
+
+      [false, true].map(loading =>
+        it(`should ${loading ? "" : "not "}be loading`, () => {
+          const node = makeNode({ loading });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-loading")).toBe(loading);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", CONTROL_SIZES);
+
+      CONTROL_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

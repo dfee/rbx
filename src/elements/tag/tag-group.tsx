@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type TagGroupModifierProps = Partial<{
   gapless: boolean;
@@ -16,19 +11,18 @@ export type TagGroupModifierProps = Partial<{
 export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   gapless: PropTypes.bool,
 };
 
 export const TagGroup = Object.assign(
   forwardRefAs<TagGroupProps, "span">(
-    (props, ref) => {
-      const { as, gapless, ...rest } = transformHelpers(props);
-      rest.className = classNames("tags", rest.className, {
-        "has-addons": gapless,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ className, gapless, ...rest }, ref) => (
+      <Generic
+        className={classNames("tags", { "has-addons": gapless }, className)}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "span" },
   ),
   { propTypes },

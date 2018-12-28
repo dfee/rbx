@@ -20,15 +20,13 @@ const propTypes = {
 
 export const Section = Object.assign(
   forwardRefAs<SectionProps, "section">(
-    (props, ref) => {
-      const { as, size, ...rest } = props;
-      rest.className = classNames(
-        "section",
-        { [`is-${size}`]: size },
-        rest.className,
-      );
-      return <Generic as={as!} ref={ref} {...rest} />;
-    },
+    ({ className, size, ...rest }, ref) => (
+      <Generic
+        className={classNames("section", { [`is-${size}`]: size }, className)}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "section" },
   ),
   { propTypes },

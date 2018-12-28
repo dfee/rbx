@@ -1,25 +1,10 @@
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
-import { Prefer } from "../../types";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
-export type RadioProps = Prefer<
-  HelpersProps,
-  React.InputHTMLAttributes<HTMLInputElement>
->;
+export type RadioProps = HelpersProps;
 
-export const Radio = Object.assign(
-  forwardRefAs<RadioProps, "input">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      return React.createElement(as!, { ref, type: "radio", ...rest });
-    },
-    { as: "input" },
-  ),
-  { propTypes: genericPropTypes },
+export const Radio = forwardRefAs<RadioProps, "input">(
+  (props, ref) => <Generic ref={ref} type="radio" {...props} />,
+  { as: "input" },
 );

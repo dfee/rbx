@@ -1,23 +1,13 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type HeadingProps = HelpersProps;
 
-export const Heading = Object.assign(
-  forwardRefAs<HeadingProps, "p">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("heading", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "p" },
+export const Heading = forwardRefAs<HeadingProps, "p">(
+  ({ className, ...rest }, ref) => (
+    <Generic className={classNames("heading", className)} ref={ref} {...rest} />
   ),
-  { propTypes: genericPropTypes },
+  { as: "p" },
 );

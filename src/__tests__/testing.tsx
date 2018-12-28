@@ -94,17 +94,17 @@ export const testGenericPropTypes = (
 };
 
 export const validatePropType = (
-  // propTypes: { [k: string]: PropTypes.Requireable<any> },
   propTypes: React.WeakValidationMap<any>,
   propName: string,
   options: Array<{
     descriptor?: string;
     error?: RegExp;
+    extras?: { [k: string]: any };
     valid: boolean;
     value: any;
   }>,
 ) =>
-  options.map(({ value, valid, error, descriptor }) =>
+  options.map(({ value, valid, error, descriptor, extras }) =>
     it(`should ${
       valid ? "not warn on valid" : "warn on invalid"
     } ${propName} [${descriptor ||
@@ -114,7 +114,7 @@ export const validatePropType = (
         // (for some reason) fail if the prop is checked (and fails) twice
         PropTypes.checkPropTypes(
           propTypes,
-          { [propName]: value },
+          { [propName]: value, ...extras },
           "prop", // location
           `test(${makeRandomString()})`, // componentName
         );
@@ -131,40 +131,52 @@ export const validatePropType = (
   );
 
 export const validateBoolPropType = (
-  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propTypes: {
+    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
+  },
   propName: string,
+  extras?: { [k: string]: any },
 ) =>
   validatePropType(propTypes, propName, [
-    ...[false, true].map(value => ({ value, valid: true })),
-    { value: "string", valid: false },
+    ...[false, true].map(value => ({ value, valid: true, extras })),
+    { value: "string", valid: false, extras },
   ]);
 
 export const validateNumberPropType = (
-  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propTypes: {
+    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
+  },
   propName: string,
+  extras?: { [k: string]: any },
 ) =>
   validatePropType(propTypes, propName, [
-    { value: 1, valid: true },
-    { value: "string", valid: false },
+    { value: 1, valid: true, extras },
+    { value: "string", valid: false, extras },
   ]);
 
 export const validateOneOfPropType = (
-  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propTypes: {
+    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
+  },
   propName: string,
   choices: Array<string | number>,
+  extras?: { [k: string]: any },
 ) =>
   validatePropType(propTypes, propName, [
-    ...choices.map(value => ({ value, valid: true })),
-    { value: "__UNKNOWN", valid: false },
+    ...choices.map(value => ({ value, valid: true, extras })),
+    { value: "__UNKNOWN", valid: false, extras },
   ]);
 
 export const validateStringPropType = (
-  propTypes: { [k: string]: PropTypes.Requireable<any> },
+  propTypes: {
+    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
+  },
   propName: string,
+  extras?: { [k: string]: any },
 ) =>
   validatePropType(propTypes, propName, [
-    { value: "string", valid: true },
-    { value: 1, valid: false },
+    { value: "string", valid: true, extras },
+    { value: 1, valid: false, extras },
   ]);
 
 export const contextManager = <

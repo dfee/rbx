@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 
 export const IMAGE_CONTAINER_SIZES = tuple(
@@ -45,25 +40,26 @@ export type ImageContainerModifierProps = Partial<{
 export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   size: PropTypes.oneOf(IMAGE_CONTAINER_SIZES),
 };
 
 export const ImageContainer = Object.assign(
   forwardRefAs<ImageContainerProps, "figure">(
-    (props, ref) => {
-      const { as, size, ...rest } = transformHelpers(props);
+    ({ className, size, ...rest }, ref) => {
       let s: string | undefined;
       if (typeof size === "string") {
         s = size;
       } else if (typeof size === "number") {
         s = `${size}x${size}`;
       }
-      rest.className = classNames("image", rest.className, {
-        [`is-${s}`]: s,
-      });
 
-      return React.createElement(as!, { ref, ...rest });
+      return (
+        <Generic
+          className={classNames("image", { [`is-${s}`]: s }, className)}
+          ref={ref}
+          {...rest}
+        />
+      );
     },
     { as: "figure" },
   ),

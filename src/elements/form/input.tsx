@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
@@ -43,7 +38,6 @@ export type InputModifierProps = Partial<{
 export type InputProps = HelpersProps & InputModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   readOnly: PropTypes.bool,
   rounded: PropTypes.bool,
@@ -55,9 +49,9 @@ const propTypes = {
 
 export const Input = Object.assign(
   forwardRefAs<InputProps, "input">(
-    (props, ref) => {
-      const {
-        as,
+    (
+      {
+        className,
         color,
         readOnly,
         rounded,
@@ -65,20 +59,26 @@ export const Input = Object.assign(
         state,
         static: isStatic,
         ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("input", rest.className, {
-        [`is-${color}`]: color,
-        "is-rounded": rounded,
-        [`is-${size}`]: size,
-        "is-static": isStatic,
-        [`is-${state}`]: state,
-      });
-      return React.createElement(as!, {
-        readOnly: readOnly || isStatic,
-        ref,
-        ...rest,
-      });
-    },
+      },
+      ref,
+    ) => (
+      <Generic
+        className={classNames(
+          "input",
+          {
+            [`is-${color}`]: color,
+            "is-rounded": rounded,
+            [`is-${size}`]: size,
+            "is-static": isStatic,
+            [`is-${state}`]: state,
+          },
+          className,
+        )}
+        readOnly={readOnly || isStatic}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "input" },
   ),
   { propTypes },

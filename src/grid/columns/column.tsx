@@ -69,9 +69,9 @@ const propTypes = {
 
 export const Column = Object.assign(
   forwardRefAs<ColumnProps, "div">(
-    (props, ref) => {
-      const {
-        as,
+    (
+      {
+        className,
         mobile,
         tablet,
         desktop,
@@ -82,8 +82,9 @@ export const Column = Object.assign(
         offset,
         size,
         ...rest
-      } = props;
-
+      },
+      ref,
+    ) => {
       const breakpoints = {
         desktop,
         fullhd,
@@ -93,28 +94,32 @@ export const Column = Object.assign(
         widescreen,
       };
 
-      rest.className = classNames(
-        "column",
-        {
-          [`is-${size}`]: !!size,
-          [`is-offset-${offset}`]: !!offset,
-          "is-narrow": narrow,
-        },
-        Object.keys(breakpoints)
-          .filter(breakpoint => breakpoints[breakpoint])
-          .map(breakpoint => {
-            const value = breakpoints[breakpoint];
-            return {
-              [`is-${value.size}-${breakpoint}`]: !!value.size,
-              [`is-narrow-${breakpoint}`]: value!.narrow,
-              [`is-offset-${value.offset}-${breakpoint}`]: !!value.offset,
-            };
-          })
-          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-        rest.className,
+      return (
+        <Generic
+          className={classNames(
+            "column",
+            {
+              [`is-${size}`]: !!size,
+              [`is-offset-${offset}`]: !!offset,
+              "is-narrow": narrow,
+            },
+            Object.keys(breakpoints)
+              .filter(breakpoint => breakpoints[breakpoint])
+              .map(breakpoint => {
+                const value = breakpoints[breakpoint];
+                return {
+                  [`is-${value.size}-${breakpoint}`]: !!value.size,
+                  [`is-narrow-${breakpoint}`]: value!.narrow,
+                  [`is-offset-${value.offset}-${breakpoint}`]: !!value.offset,
+                };
+              })
+              .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+            className,
+          )}
+          ref={ref}
+          {...rest}
+        />
       );
-
-      return <Generic as={as!} ref={ref} {...rest} />;
     },
     { as: "div" },
   ),

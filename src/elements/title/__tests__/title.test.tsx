@@ -1,78 +1,79 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { Title, TITLE_SIZES } from "../title";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Title component", () => {
-  hasProperties(Title, {
-    defaultProps: { as: "h1" },
+const COMPONENT = Title;
+const COMPONENT_NAME = "Title";
+const DEFAULT_ELEMENT = "h1";
+const BULMA_CLASS_NAME = "title";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Title />);
-    expect(wrapper.is("h1")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "div";
-    const wrapper = Enzyme.shallow(<Title as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLHeadingElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Title ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".title").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Title className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  TITLE_SIZES.map(size =>
-    it(`should be ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Title size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  [false, true].map(spaced =>
-    it(`should ${spaced ? "" : "not "}be spaced`, () => {
-      const wrapper = Enzyme.shallow(<Title spaced={spaced} />);
-      expect(wrapper.hasClass("is-spaced")).toBe(spaced);
-    }),
-  );
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  [false, true].map(subtitle =>
-    it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
-      const wrapper = Enzyme.shallow(<Title subtitle={subtitle} />);
-      expect(wrapper.hasClass(subtitle ? "subtitle" : "title")).toBe(true);
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  describe("propTypes", () => {
-    const { propTypes } = Title;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "size", TITLE_SIZES);
-    validateBoolPropType(propTypes, "spaced");
-    validateBoolPropType(propTypes, "subtitle");
+    describe("spaced", () => {
+      validateBoolPropType(propTypes, "spaced");
+
+      [false, true].map(spaced =>
+        [false, true].map(subtitle => {
+          const isSpaced = spaced && !subtitle;
+          it(`should ${
+            isSpaced ? "" : "not "
+          }be spaced when spaced ${spaced} and subtitle ${subtitle}`, () => {
+            const node = makeNode({ spaced });
+            const wrapper = makeShallowWrapper(node);
+            expect(wrapper.hasClass("is-spaced")).toBe(spaced);
+          });
+        }),
+      );
+    });
+
+    describe("subtitle", () => {
+      validateBoolPropType(propTypes, "subtitle");
+
+      [false, true].map(subtitle =>
+        it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
+          const node = makeNode({ subtitle });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("subtitle")).toBe(subtitle);
+          expect(wrapper.hasClass("title")).toBe(!subtitle);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", TITLE_SIZES);
+
+      TITLE_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

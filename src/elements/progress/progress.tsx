@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 
@@ -24,23 +19,28 @@ export interface ProgressModifierProps {
 export type ProgressProps = HelpersProps & ProgressModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
-  max: PropTypes.number,
+  max: PropTypes.number.isRequired,
   size: PropTypes.oneOf(PROGRESS_SIZES),
-  value: PropTypes.number,
+  value: PropTypes.number.isRequired,
 };
 
 export const Progress = Object.assign(
   forwardRefAs<ProgressProps, "progress">(
-    (props, ref) => {
-      const { as, color, size, ...rest } = transformHelpers(props);
-      rest.className = classNames("progress", rest.className, {
-        [`is-${color}`]: color,
-        [`is-${size}`]: size,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ className, color, size, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "progress",
+          {
+            [`is-${color}`]: color,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "progress" },
   ),
   { propTypes },

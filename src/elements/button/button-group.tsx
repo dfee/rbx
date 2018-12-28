@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 
 export const BUTTON_GROUP_POSITIONS = tuple("centered", "right");
@@ -21,23 +16,26 @@ export type ButtonGroupModifierProps = Partial<{
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   hasAddons: PropTypes.bool,
   position: PropTypes.oneOf(BUTTON_GROUP_POSITIONS),
 };
 
 export const ButtonGroup = Object.assign(
   forwardRefAs<ButtonGroupProps, "div">(
-    (props, ref) => {
-      const { as, children, hasAddons, position, ...rest } = transformHelpers(
-        props,
-      );
-      rest.className = classNames("buttons", rest.className, {
-        "has-addons": hasAddons,
-        [`is-${[position]}`]: position,
-      });
-      return React.createElement(as!, { children, ref, ...rest });
-    },
+    ({ children, className, hasAddons, position, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "buttons",
+          {
+            "has-addons": hasAddons,
+            [`is-${[position]}`]: position,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "div" },
   ),
   { propTypes },

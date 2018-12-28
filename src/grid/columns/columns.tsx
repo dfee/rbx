@@ -58,9 +58,9 @@ const propTypes = {
 
 export const Columns = Object.assign(
   forwardRefAs<ColumnsProps, "div">(
-    (props, ref) => {
-      const {
-        as,
+    (
+      {
+        className,
         breakpoint,
         centered,
         desktop,
@@ -73,8 +73,9 @@ export const Columns = Object.assign(
         widescreen,
         touch,
         ...rest
-      } = props;
-
+      },
+      ref,
+    ) => {
       const breakpoints = {
         desktop,
         fullhd,
@@ -97,20 +98,24 @@ export const Columns = Object.assign(
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       );
 
-      rest.className = classNames(
-        "columns",
-        {
-          [`is-${breakpoint}`]: breakpoint,
-          "is-centered": centered,
-          "is-gapless": gapless,
-          "is-multiline": multiline,
-          "is-variable ": !!gapClassNames,
-        },
-        gapClassNames,
-        rest.className,
+      return (
+        <Generic
+          className={classNames(
+            "columns",
+            {
+              [`is-${breakpoint}`]: breakpoint,
+              "is-centered": centered,
+              "is-gapless": gapless,
+              "is-multiline": multiline,
+              "is-variable ": !!gapClassNames,
+            },
+            gapClassNames,
+            className,
+          )}
+          ref={ref}
+          {...rest}
+        />
       );
-
-      return <Generic as={as!} ref={ref} {...rest} />;
     },
     {
       as: "div",

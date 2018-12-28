@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 
 export type NotificationModifierProps = Partial<{
@@ -17,19 +12,22 @@ export type NotificationModifierProps = Partial<{
 export type NotificationProps = HelpersProps & NotificationModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
 };
 
 export const Notification = Object.assign(
   forwardRefAs<NotificationProps, "div">(
-    (props, ref) => {
-      const { as, color, ...rest } = transformHelpers(props);
-      rest.className = classNames("notification", rest.className, {
-        [`is-${color}`]: color,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ className, color, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "notification",
+          { [`is-${color}`]: color },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "div" },
   ),
   { propTypes },

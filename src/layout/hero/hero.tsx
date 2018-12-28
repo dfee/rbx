@@ -33,19 +33,21 @@ const propTypes = {
 
 export const Hero = Object.assign(
   forwardRefAs<HeroProps, "section">(
-    (props, ref) => {
-      const { as, color, gradient, size, ...rest } = props;
-      rest.className = classNames(
-        "hero",
-        {
-          "is-bold": gradient,
-          [`is-${color}`]: color,
-          [`is-${size}`]: size,
-        },
-        rest.className,
-      );
-      return <Generic as={as!} ref={ref} {...rest} />;
-    },
+    ({ className, color, gradient, size, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "hero",
+          {
+            "is-bold": gradient,
+            [`is-${color}`]: color,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "section" },
   ),
   {

@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 
 export const DELETE_SIZES = tuple("small", "medium", "large");
@@ -20,19 +15,18 @@ export type DeleteModifierProps = Partial<{
 export type DeleteProps = HelpersProps & DeleteModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   size: PropTypes.oneOf(DELETE_SIZES),
 };
 
 export const Delete = Object.assign(
   forwardRefAs<DeleteProps, "a">(
-    (props, ref) => {
-      const { as, size, ...rest } = transformHelpers(props);
-      rest.className = classNames("delete", rest.className, {
-        [`is-${size}`]: size,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ className, size, ...rest }, ref) => (
+      <Generic
+        className={classNames("delete", { [`is-${size}`]: size }, className)}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "a" },
   ),
   { propTypes },

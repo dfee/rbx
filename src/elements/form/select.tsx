@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { Prefer } from "../../types";
 import { tuple } from "../../utils";
@@ -30,7 +25,6 @@ export type SelectContainerModifierProps = Partial<{
 export type SelectContainerProps = HelpersProps & SelectContainerModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   fullwidth: PropTypes.bool,
   rounded: PropTypes.bool,
@@ -38,46 +32,67 @@ const propTypes = {
   state: PropTypes.oneOf(SELECT_CONTAINER_STATES),
 };
 
+const mapSelectContainerChildren = (
+  children: React.ReactNode,
+  state?: SelectContainerStates,
+) => {
+  let classNameExtension: string | undefined;
+  const mapped = React.Children.map(children, (child, i) => {
+    if (
+      typeof child === "object" &&
+      (child.type === "select" || child.type === Select)
+    ) {
+      classNameExtension = classNames({
+        "is-multiple": child.props.multiple,
+      });
+      if (state === "focused" || state === "hovered") {
+        return React.cloneElement(child, {
+          className: classNames(`is-${state}`, child.props.className),
+        });
+      }
+      return child;
+    } else if (typeof child === "object" && child.type === React.Fragment) {
+      const fragmentMapped = mapSelectContainerChildren(
+        child.props.children,
+        state,
+      );
+      classNameExtension = classNames(
+        classNameExtension,
+        fragmentMapped.classNameExtension,
+      );
+      return <React.Fragment children={fragmentMapped.children} />;
+    }
+    return child;
+  });
+  return { children: mapped, classNameExtension };
+};
+
 export const SelectContainer = Object.assign(
   forwardRefAs<SelectContainerProps, "div">(
-    (props, ref) => {
-      const {
-        as,
-        children,
-        color,
-        fullwidth,
-        rounded,
-        size,
-        state,
-        ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("select", rest.className, {
-        [`is-${color}`]: color,
-        "is-fullwidth": fullwidth,
-        "is-loading": state === "loading",
-        "is-rounded": rounded,
-        [`is-${size}`]: size,
-      });
-
-      const mapped = React.Children.map(children, (child, i) => {
-        if (
-          typeof child === "object" &&
-          (child.type === "select" || child.type === Select)
-        ) {
-          rest.className = classNames(rest.className, {
-            "is-multiple": child.props.multiple,
-          });
-          if (state === "focused" || state === "hovered") {
-            return React.cloneElement(child, {
-              className: classNames(`is-${state}`, child.props.className),
-            });
-          }
-          return child;
-        }
-        return child;
-      });
-
-      return React.createElement(as!, { children: mapped, ref, ...rest });
+    (
+      { className, children, color, fullwidth, rounded, size, state, ...rest },
+      ref,
+    ) => {
+      const mapped = mapSelectContainerChildren(children, state);
+      return (
+        <Generic
+          className={classNames(
+            "select",
+            {
+              [`is-${color}`]: color,
+              "is-fullwidth": fullwidth,
+              "is-loading": state === "loading",
+              "is-rounded": rounded,
+              [`is-${size}`]: size,
+            },
+            mapped.classNameExtension,
+            className,
+          )}
+          children={mapped.children}
+          ref={ref}
+          {...rest}
+        />
+      );
     },
     { as: "div" },
   ),
@@ -91,15 +106,11 @@ export type SelectProps = Prefer<
 
 export const Select = Object.assign(
   forwardRefAs<SelectProps, "select">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      return React.createElement(as!, { ref, ...rest });
-    },
+    (props, ref) => <Generic ref={ref} {...props} />,
     { as: "select" },
   ),
   {
     Container: SelectContainer,
     Option: SelectOption,
-    propTypes: genericPropTypes,
   },
 );

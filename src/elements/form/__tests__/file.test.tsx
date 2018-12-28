@@ -1,118 +1,110 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { COLORS } from "../../../base/helpers";
 import { File, FILE_ALIGNMENTS, FILE_SIZES } from "../file";
-import { FileCTA } from "../file-cta";
-import { FileIcon } from "../file-icon";
-import { FileInput } from "../file-input";
-import { FileLabel } from "../file-label";
-import { FileName } from "../file-name";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("File component", () => {
-  hasProperties(File, {
-    CTA: FileCTA,
-    Icon: FileIcon,
-    Input: FileInput,
-    Label: FileLabel,
-    Name: FileName,
-    defaultProps: { as: "div" },
+const COMPONENT = File;
+const COMPONENT_NAME = "File";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "file";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<File />);
-    expect(wrapper.is("div")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<File as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <File ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".file").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<File />);
-    expect(wrapper.hasClass("file")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<File className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  FILE_ALIGNMENTS.map(align =>
-    it(`should be aligned ${align}`, () => {
-      const wrapper = Enzyme.shallow(<File align={align} />);
-      expect(wrapper.hasClass(`is-${align}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  [false, true].map(boxed =>
-    it(`should ${boxed ? "" : "not "}be boxed`, () => {
-      const wrapper = Enzyme.shallow(<File boxed={boxed} />);
-      expect(wrapper.hasClass("is-boxed")).toBe(boxed);
-    }),
-  );
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  COLORS.map(color =>
-    it(`should be ${color}`, () => {
-      const wrapper = Enzyme.shallow(<File color={color} />);
-      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  [false, true].map(hasName =>
-    it(`should ${hasName ? "" : "not "}have name`, () => {
-      const wrapper = Enzyme.shallow(<File hasName={hasName} />);
-      expect(wrapper.hasClass("has-name")).toBe(hasName);
-    }),
-  );
+    describe("align", () => {
+      validateOneOfPropType(propTypes, "align", FILE_ALIGNMENTS);
 
-  [false, true].map(fullwidth =>
-    it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
-      const wrapper = Enzyme.shallow(<File fullwidth={fullwidth} />);
-      expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
-    }),
-  );
+      FILE_ALIGNMENTS.map(align =>
+        it(`should be ${align}`, () => {
+          const node = makeNode({ align });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${align}`)).toBe(true);
+        }),
+      );
+    });
 
-  FILE_SIZES.map(size =>
-    it(`should be ${size}`, () => {
-      const wrapper = Enzyme.shallow(<File size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+    describe("boxed", () => {
+      validateBoolPropType(propTypes, "boxed");
 
-  describe("propTypes", () => {
-    const { propTypes } = File;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "align", FILE_ALIGNMENTS);
-    validateBoolPropType(propTypes, "boxed");
-    validateOneOfPropType(propTypes, "color", COLORS);
-    validateBoolPropType(propTypes, "fullwidth");
-    validateBoolPropType(propTypes, "hasName");
-    validateOneOfPropType(propTypes, "size", FILE_SIZES);
+      [false, true].map(boxed =>
+        it(`should ${boxed ? "" : "not "}be boxed`, () => {
+          const node = makeNode({ boxed });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-boxed")).toBe(boxed);
+        }),
+      );
+    });
+
+    describe("color", () => {
+      validateOneOfPropType(propTypes, "color", COLORS);
+
+      COLORS.map(color =>
+        it(`should be ${color}`, () => {
+          const node = makeNode({ color });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("fullwidth", () => {
+      validateBoolPropType(propTypes, "fullwidth");
+
+      [false, true].map(fullwidth =>
+        it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
+          const node = makeNode({ fullwidth });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
+        }),
+      );
+    });
+
+    describe("hasName", () => {
+      validateBoolPropType(propTypes, "hasName");
+
+      [false, true].map(hasName =>
+        it(`should ${hasName ? "" : "not "}have name`, () => {
+          const node = makeNode({ hasName });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("has-name")).toBe(hasName);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", FILE_SIZES);
+
+      FILE_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

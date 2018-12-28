@@ -1,56 +1,50 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { Image } from "../image";
 import { ImageContainer } from "../image-container";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
 } from "../../../__tests__/testing";
 
-describe("Image component", () => {
-  hasProperties(Image, {
+const COMPONENT = Image;
+const COMPONENT_NAME = "Image";
+const DEFAULT_ELEMENT = "img";
+const BULMA_CLASS_NAME = undefined;
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Container: ImageContainer,
-    defaultProps: { as: "img" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Image />);
-    expect(wrapper.is("img")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Image as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLImageElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Image ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find("img").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Image className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
+    describe("rounded", () => {
+      validateBoolPropType(propTypes, "rounded");
 
-  describe("propTypes", () => {
-    const { propTypes } = Image;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "rounded");
+      [false, true].map(rounded =>
+        it(`should ${rounded ? "" : "not "}be rounded`, () => {
+          const node = makeNode({ rounded });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-rounded")).toBe(rounded);
+        }),
+      );
+    });
   });
 });

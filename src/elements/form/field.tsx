@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
@@ -30,7 +25,6 @@ export type FieldModifierProps = Partial<{
 export type FieldProps = HelpersProps & FieldModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   align: PropTypes.oneOf(FIELD_ALIGNMENTS),
   expanded: PropTypes.bool,
   horizontal: PropTypes.bool,
@@ -51,7 +45,7 @@ export const Field = Object.assign(
         multiline,
         narrow,
         ...rest
-      } = transformHelpers(props);
+      } = props;
 
       let k = null;
       if (kind === "addons") {
@@ -60,16 +54,20 @@ export const Field = Object.assign(
         k = "is-grouped";
       }
 
-      rest.className = classNames("field", rest.className, {
-        [`${k}`]: k,
-        [`${k}-${align}`]: k && align,
-        [`${k}-multiline`]: k === "is-grouped" && multiline,
-        "is-expanded": expanded,
-        "is-horizontal": horizontal,
-        "is-narrow": narrow,
-      });
+      rest.className = classNames(
+        "field",
+        {
+          [`${k}`]: k,
+          [`${k}-${align}`]: k && align,
+          [`${k}-multiline`]: k === "is-grouped" && multiline,
+          "is-expanded": expanded,
+          "is-horizontal": horizontal,
+          "is-narrow": narrow,
+        },
+        rest.className,
+      );
 
-      return React.createElement(as!, { ref, ...rest });
+      return <Generic as={as!} ref={ref} {...rest} />;
     },
     { as: "div" },
   ),

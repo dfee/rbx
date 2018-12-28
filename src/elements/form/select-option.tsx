@@ -1,21 +1,10 @@
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type SelectOptionProps = HelpersProps;
 
-export const SelectOption = Object.assign(
-  forwardRefAs<SelectOptionProps, "option">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "option" },
-  ),
-  { propTypes: genericPropTypes },
+export const SelectOption = forwardRefAs<SelectOptionProps, "option">(
+  (props, ref) => <Generic ref={ref} {...props} />,
+  { as: "option" },
 );

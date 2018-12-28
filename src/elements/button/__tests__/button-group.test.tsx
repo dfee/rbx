@@ -1,73 +1,61 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { BUTTON_GROUP_POSITIONS, ButtonGroup } from "../button-group";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("ButtonGroup component", () => {
-  hasProperties(ButtonGroup, {
-    defaultProps: { as: "div" },
+const COMPONENT = ButtonGroup;
+const COMPONENT_NAME = "ButtonGroup";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "buttons";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<ButtonGroup />);
-    expect(wrapper.is("div")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<ButtonGroup as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <ButtonGroup ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".buttons").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<ButtonGroup />);
-    expect(wrapper.hasClass("buttons")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<ButtonGroup className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  it("should have addons", () => {
-    const wrapper = Enzyme.shallow(<ButtonGroup hasAddons />);
-    expect(wrapper.hasClass("has-addons")).toBe(true);
-  });
-
-  BUTTON_GROUP_POSITIONS.map(position =>
-    it(`should be ${position}`, () => {
-      const wrapper = Enzyme.shallow(<ButtonGroup position={position} />);
-      expect(wrapper.hasClass(`is-${position}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  describe("propTypes", () => {
-    const { propTypes } = ButtonGroup;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "hasAddons");
-    validateOneOfPropType(propTypes, "position", BUTTON_GROUP_POSITIONS);
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("hasAddons", () => {
+      validateBoolPropType(propTypes, "hasAddons");
+
+      [false, true].map(hasAddons =>
+        it(`should ${hasAddons ? "" : "not "}have addons`, () => {
+          const node = makeNode({ hasAddons });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("has-addons")).toBe(hasAddons);
+        }),
+      );
+    });
+
+    describe("position", () => {
+      validateOneOfPropType(propTypes, "position", BUTTON_GROUP_POSITIONS);
+
+      BUTTON_GROUP_POSITIONS.map(position =>
+        it(`should be ${position}`, () => {
+          const node = makeNode({ position });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${position}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

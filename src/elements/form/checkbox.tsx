@@ -1,21 +1,10 @@
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type CheckboxProps = HelpersProps;
 
-export const Checkbox = Object.assign(
-  forwardRefAs<CheckboxProps, "input">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      return React.createElement(as!, { ref, type: "checkbox", ...rest });
-    },
-    { as: "input" },
-  ),
-  { propTypes: genericPropTypes },
+export const Checkbox = forwardRefAs<CheckboxProps, "input">(
+  (props, ref) => <Generic ref={ref} type="checkbox" {...props} />,
+  { as: "input" },
 );

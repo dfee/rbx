@@ -1,95 +1,89 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { COLORS } from "../../../base/helpers";
 import { Textarea, TEXTAREA_SIZES, TEXTAREA_STATES } from "../textarea";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Textarea component", () => {
-  hasProperties(Textarea, {
+const COMPONENT = Textarea;
+const COMPONENT_NAME = "Textarea";
+const DEFAULT_ELEMENT = "textarea";
+const BULMA_CLASS_NAME = "textarea";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     defaultProps: {
-      as: "textarea",
+      as: DEFAULT_ELEMENT,
       rows: 4,
     },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Textarea />);
-    expect(wrapper.is("textarea")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Textarea as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLTextAreaElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Textarea ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".textarea").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Textarea />);
-    expect(wrapper.hasClass("textarea")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Textarea className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  COLORS.map(color =>
-    it(`should be ${color}`, () => {
-      const wrapper = Enzyme.shallow(<Textarea color={color} />);
-      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  [false, true].map(fixedSize =>
-    it(`should ${fixedSize ? "" : "not "}have fixed size`, () => {
-      const wrapper = Enzyme.shallow(<Textarea fixedSize={fixedSize} />);
-      expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
-    }),
-  );
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  TEXTAREA_SIZES.map(size =>
-    it(`should be ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Textarea size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  TEXTAREA_STATES.map(state =>
-    it(`should be ${state}`, () => {
-      const wrapper = Enzyme.shallow(<Textarea state={state} />);
-      expect(wrapper.hasClass(`is-${state}`)).toBe(true);
-    }),
-  );
+    describe("color", () => {
+      validateOneOfPropType(propTypes, "color", COLORS);
 
-  describe("propTypes", () => {
-    const { propTypes } = Textarea;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "color", COLORS);
-    validateBoolPropType(propTypes, "fixedSize");
-    validateOneOfPropType(propTypes, "size", TEXTAREA_SIZES);
-    validateOneOfPropType(propTypes, "state", TEXTAREA_STATES);
+      COLORS.map(color =>
+        it(`should be ${color}`, () => {
+          const node = makeNode({ color });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("fixedSize", () => {
+      validateBoolPropType(propTypes, "fixedSize");
+
+      [false, true].map(fixedSize =>
+        it(`should ${fixedSize ? "" : "not "}be fixed size`, () => {
+          const node = makeNode({ fixedSize });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", TEXTAREA_SIZES);
+
+      TEXTAREA_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("state", () => {
+      validateOneOfPropType(propTypes, "state", TEXTAREA_STATES);
+
+      TEXTAREA_STATES.map(state =>
+        it(`should be ${state}`, () => {
+          const node = makeNode({ state });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${state}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

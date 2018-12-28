@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type TableModifierProps = Partial<{
   bordered: boolean;
@@ -20,7 +15,6 @@ export type TableModifierProps = Partial<{
 export type TableProps = HelpersProps & TableModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   bordered: PropTypes.bool,
   fullwidth: PropTypes.bool,
   hoverable: PropTypes.bool,
@@ -30,25 +24,26 @@ const propTypes = {
 
 export const Table = Object.assign(
   forwardRefAs<TableProps, "table">(
-    (props, ref) => {
-      const {
-        as,
-        bordered,
-        fullwidth,
-        hoverable,
-        narrow,
-        striped,
-        ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("table", rest.className, {
-        "is-bordered": bordered,
-        "is-fullwidth": fullwidth,
-        "is-hoverable": hoverable,
-        "is-narrow": narrow,
-        "is-striped": striped,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    (
+      { bordered, className, fullwidth, hoverable, narrow, striped, ...rest },
+      ref,
+    ) => (
+      <Generic
+        className={classNames(
+          "table",
+          {
+            "is-bordered": bordered,
+            "is-fullwidth": fullwidth,
+            "is-hoverable": hoverable,
+            "is-narrow": narrow,
+            "is-striped": striped,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "table" },
   ),
   { propTypes },

@@ -18,8 +18,7 @@ export const propTypes = {
 
 export const Generic = Object.assign(
   forwardRefAs<GenericProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = props;
+    ({ as, ...rest }, ref) => {
       return (
         <TransformContext.Consumer>
           {({ transform }) => {

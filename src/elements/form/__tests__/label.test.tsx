@@ -1,4 +1,3 @@
-import Enzyme from "enzyme";
 import React from "react";
 
 import { Checkbox } from "../checkbox";
@@ -8,97 +7,97 @@ import { Radio } from "../radio";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Label component", () => {
-  hasProperties(Label, {
-    defaultProps: { as: "label" },
+const COMPONENT = Label;
+const COMPONENT_NAME = "Label";
+const DEFAULT_ELEMENT = "label";
+const BULMA_CLASS_NAME = "label";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Label />);
-    expect(wrapper.is("label")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Label as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLLabelElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Label ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find("label").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  ["component", "string"].map(type =>
-    it("should have bulma className for ", () => {
-      const wrapper = Enzyme.shallow(
-        <Label children={type === "component" ? <Input /> : type} />,
+    describe("disabled", () => {
+      validateBoolPropType(propTypes, "disabled");
+
+      [false, true].map(disabled =>
+        it(`should ${disabled ? "" : "not "}be disabled`, () => {
+          const node = makeNode({ disabled });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-disabled")).toBe(disabled);
+        }),
       );
-      expect(wrapper.hasClass("label")).toBe(true);
-    }),
-  );
+    });
 
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Label className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  ["element", "component"].map(type =>
-    it(`should infer checkbox className for ${type}`, () => {
-      const wrapper = Enzyme.shallow(
-        <Label>
-          {type === "element" ? <input type="checkbox" /> : <Checkbox />}
-        </Label>,
+    describe("discriminator", () => {
+      [
+        { discriminator: "checkbox", className: "checkbox" },
+        { discriminator: "input", className: "label" },
+        { discriminator: "radio", className: "radio" },
+        { discriminator: "string", className: "label" },
+        { discriminator: "fragment-radio", className: "radio" },
+        { discriminator: "fragment-empty", className: "label" },
+        { discriminator: "compound-radio", className: "radio" },
+        { discriminator: "empty", className: "label" },
+      ].map(({ discriminator, className }) =>
+        it(`should have bulma className ${className} for discriminator ${discriminator}`, () => {
+          let children: JSX.Element | string | JSX.Element[] | null;
+          if (discriminator === "input") {
+            children = <Input />;
+          } else if (discriminator === "checkbox") {
+            children = <Checkbox />;
+          } else if (discriminator === "radio") {
+            children = <Radio />;
+          } else if (discriminator === "fragment-radio") {
+            children = <React.Fragment children={<Radio />} />;
+          } else if (discriminator === "fragment-empty") {
+            children = <React.Fragment />;
+          } else if (discriminator === "compound-radio") {
+            children = [React.createElement("div"), React.createElement(Radio)];
+          } else if (discriminator === "empty") {
+            children = null;
+          } else {
+            children = discriminator;
+          }
+          const node = makeNode({ children });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(className)).toBe(true);
+        }),
       );
-      expect(wrapper.hasClass("checkbox")).toBe(true);
-      expect(wrapper.hasClass("input")).toBe(false);
-    }),
-  );
+    });
 
-  ["element", "component"].map(type =>
-    it(`should infer radio className for ${type}`, () => {
-      const wrapper = Enzyme.shallow(
-        <Label>{type === "element" ? <input type="radio" /> : <Radio />}</Label>,
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", LABEL_SIZES);
+
+      LABEL_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
       );
-      expect(wrapper.hasClass("radio")).toBe(true);
-      expect(wrapper.hasClass("input")).toBe(false);
-    }),
-  );
-
-  [false, true].map(disabled =>
-    it(`should ${disabled ? "" : "not "}be disabled`, () => {
-      const wrapper = Enzyme.shallow(<Label disabled={disabled} />);
-      expect(wrapper.hasClass("is-disabled")).toBe(disabled);
-    }),
-  );
-
-  LABEL_SIZES.map(size =>
-    it(`should be ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Label size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
-
-  describe("propTypes", () => {
-    const { propTypes } = Label;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "disabled");
-    validateOneOfPropType(propTypes, "size", LABEL_SIZES);
+    });
   });
 });

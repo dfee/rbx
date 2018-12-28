@@ -1,49 +1,37 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { Radio } from "../radio";
 
-import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
+import {
+  hasProperties,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
+} from "../../../__tests__/testing";
 
-describe("Radio component", () => {
-  hasProperties(Radio, {
-    defaultProps: { as: "input" },
+const COMPONENT = Radio;
+const COMPONENT_NAME = "Radio";
+const DEFAULT_ELEMENT = "input";
+const BULMA_CLASS_NAME = undefined;
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Radio />);
-    expect(wrapper.is("input")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Radio as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLInputElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Radio ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find("input").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Radio className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  describe("propTypes", () => {
-    const { propTypes } = Radio;
-    testGenericPropTypes(propTypes);
+  it("should be a radio", () => {
+    const node = makeNode({});
+    const wrapper = makeShallowWrapper(node);
+    expect(wrapper.props().type).toEqual("radio");
   });
 });

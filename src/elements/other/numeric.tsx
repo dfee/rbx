@@ -1,23 +1,13 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type NumericProps = HelpersProps;
 
-export const Numeric = Object.assign(
-  forwardRefAs<NumericProps, "p">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("number", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "p" },
+export const Numeric = forwardRefAs<NumericProps, "p">(
+  ({ className, ...rest }, ref) => (
+    <Generic className={classNames("number", className)} ref={ref} {...rest} />
   ),
-  { propTypes: genericPropTypes },
+  { as: "p" },
 );

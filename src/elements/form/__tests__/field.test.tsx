@@ -1,129 +1,129 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { Field, FIELD_ALIGNMENTS, FIELD_KINDS } from "../field";
 import { FieldBody } from "../field-body";
 import { FieldLabel } from "../field-label";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Field component", () => {
-  hasProperties(Field, {
+const COMPONENT = Field;
+const COMPONENT_NAME = "Field";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "field";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Body: FieldBody,
     Label: FieldLabel,
-    defaultProps: { as: "div" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Field />);
-    expect(wrapper.is("div")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Field as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Field ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".field").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Field />);
-    expect(wrapper.hasClass("field")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Field className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  FIELD_KINDS.map(kind =>
-    FIELD_ALIGNMENTS.map(align =>
-      it(`should be aligned ${kind}-${align}`, () => {
-        const wrapper = Enzyme.shallow(<Field align={align} kind={kind} />);
-        expect(
-          wrapper.hasClass(
-            kind === "addons" ? `has-addons-${align}` : `is-grouped-${align}`,
-          ),
-        ).toBe(true);
-      }),
-    ),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  FIELD_KINDS.map(kind =>
-    it(`should be ${kind}`, () => {
-      const wrapper = Enzyme.shallow(<Field kind={kind} />);
-      expect(
-        wrapper.hasClass(kind === "addons" ? "has-addons" : "is-grouped"),
-      ).toBe(true);
-    }),
-  );
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  FIELD_KINDS.map(kind =>
-    [false, true].map(multiline =>
-      it(`should ${
-        kind === "group" && multiline ? "" : "not "
-      }be multiline when ${kind} and ${
-        multiline ? "" : "not "
-      }multiline `, () => {
-        const wrapper = Enzyme.shallow(
-          <Field multiline={multiline} kind={kind} />,
-        );
-        expect(wrapper.hasClass("is-grouped-multiline")).toBe(
-          kind === "group" && multiline,
-        );
-      }),
-    ),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  [false, true].map(expanded =>
-    it(`should ${expanded ? "" : "not "}be expanded`, () => {
-      const wrapper = Enzyme.shallow(<Field expanded={expanded} />);
-      expect(wrapper.hasClass("is-expanded")).toBe(expanded);
-    }),
-  );
+    describe("align", () => {
+      validateOneOfPropType(propTypes, "align", FIELD_ALIGNMENTS);
 
-  [false, true].map(horizontal =>
-    it(`should ${horizontal ? "" : "not "}be horizontal`, () => {
-      const wrapper = Enzyme.shallow(<Field horizontal={horizontal} />);
-      expect(wrapper.hasClass("is-horizontal")).toBe(horizontal);
-    }),
-  );
+      FIELD_ALIGNMENTS.map(align =>
+        FIELD_KINDS.map(kind =>
+          it(`should be aligned ${kind}-${align}`, () => {
+            const node = makeNode({ align, kind });
+            const wrapper = makeShallowWrapper(node);
+            expect(
+              wrapper.hasClass(
+                kind === "addons"
+                  ? `has-addons-${align}`
+                  : `is-grouped-${align}`,
+              ),
+            ).toBe(true);
+          }),
+        ),
+      );
+    });
 
-  [false, true].map(narrow =>
-    it(`should ${narrow ? "" : "not "}be narrow`, () => {
-      const wrapper = Enzyme.shallow(<Field narrow={narrow} />);
-      expect(wrapper.hasClass("is-narrow")).toBe(narrow);
-    }),
-  );
+    describe("expanded", () => {
+      validateBoolPropType(propTypes, "expanded");
 
-  describe("propTypes", () => {
-    const { propTypes } = Field;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "align", FIELD_ALIGNMENTS);
-    validateBoolPropType(propTypes, "expanded");
-    validateBoolPropType(propTypes, "horizontal");
-    validateOneOfPropType(propTypes, "kind", FIELD_KINDS);
-    validateBoolPropType(propTypes, "multiline");
-    validateBoolPropType(propTypes, "narrow");
+      [false, true].map(expanded =>
+        it(`should ${expanded ? "" : "not "}be expanded`, () => {
+          const node = makeNode({ expanded });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-expanded")).toBe(expanded);
+        }),
+      );
+    });
+
+    describe("horizontal", () => {
+      validateBoolPropType(propTypes, "horizontal");
+
+      [false, true].map(horizontal =>
+        it(`should ${horizontal ? "" : "not "}be horizontal`, () => {
+          const node = makeNode({ horizontal });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-horizontal")).toBe(horizontal);
+        }),
+      );
+    });
+
+    describe("kind", () => {
+      validateOneOfPropType(propTypes, "kind", FIELD_KINDS);
+
+      FIELD_KINDS.map(kind =>
+        it(`should be kind ${kind}`, () => {
+          const node = makeNode({ kind });
+          const wrapper = makeShallowWrapper(node);
+          expect(
+            wrapper.hasClass(kind === "group" ? "is-grouped" : "has-addons"),
+          ).toBe(true);
+        }),
+      );
+    });
+
+    describe("multiline", () => {
+      validateBoolPropType(propTypes, "multiline");
+
+      [false, true].map(multiline =>
+        FIELD_KINDS.map(kind => {
+          it(`should ${
+            multiline && kind === "group" ? "" : "not "
+          }be multiline when kind is ${kind} and multiline is ${multiline}`, () => {
+            const node = makeNode({ multiline, kind });
+            const wrapper = makeShallowWrapper(node);
+            expect(wrapper.hasClass("is-grouped-multiline")).toBe(
+              multiline && kind === "group",
+            );
+          });
+        }),
+      );
+    });
+
+    describe("narrow", () => {
+      validateBoolPropType(propTypes, "narrow");
+
+      [false, true].map(narrow =>
+        it(`should ${narrow ? "" : "not "}be narrow`, () => {
+          const node = makeNode({ narrow });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-narrow")).toBe(narrow);
+        }),
+      );
+    });
   });
 });

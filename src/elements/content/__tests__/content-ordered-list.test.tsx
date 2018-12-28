@@ -1,6 +1,3 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import {
   CONTENT_ORDERED_LIST_TYPES,
   ContentOrderedList,
@@ -9,60 +6,48 @@ import { ContentOrderedListItem } from "../content-ordered-list-item";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("ContentOrderedList component", () => {
-  hasProperties(ContentOrderedList, {
+const COMPONENT = ContentOrderedList;
+const COMPONENT_NAME = "ContentOrderedList";
+const DEFAULT_ELEMENT = "ol";
+const BULMA_CLASS_NAME = undefined;
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Item: ContentOrderedListItem,
-    defaultProps: { as: "ol" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<ContentOrderedList />);
-    expect(wrapper.is("ol")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<ContentOrderedList as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLOListElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <ContentOrderedList ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find("ol").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(
-      <ContentOrderedList className={className} />,
-    );
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  CONTENT_ORDERED_LIST_TYPES.map(type =>
-    it(`should be ${type}`, () => {
-      const wrapper = Enzyme.shallow(<ContentOrderedList type={type} />);
-      expect(wrapper.hasClass(`is-${type}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  describe("propTypes", () => {
-    const { propTypes } = ContentOrderedList;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "type", CONTENT_ORDERED_LIST_TYPES);
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("type", () => {
+      validateOneOfPropType(propTypes, "type", CONTENT_ORDERED_LIST_TYPES);
+
+      CONTENT_ORDERED_LIST_TYPES.map(type =>
+        it(`should be ${type}`, () => {
+          const node = makeNode({ type });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${type}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

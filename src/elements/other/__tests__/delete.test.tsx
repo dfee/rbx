@@ -1,66 +1,48 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { Delete, DELETE_SIZES } from "../delete";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testTransformHelpersIntegration,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Delete component", () => {
-  hasProperties(Delete, {
-    defaultProps: { as: "a" },
+const COMPONENT = Delete;
+const COMPONENT_NAME = "Delete";
+const DEFAULT_ELEMENT = "a";
+const BULMA_CLASS_NAME = "delete";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Delete />);
-    expect(wrapper.is("a")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Delete as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
+  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Delete ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".delete").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Delete />);
-    expect(wrapper.hasClass("delete")).toBe(true);
-  });
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", DELETE_SIZES);
 
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Delete className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  DELETE_SIZES.map(size => {
-    it(`should be size ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Delete size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+      DELETE_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
     });
-  });
-
-  describe("propTypes", () => {
-    const { propTypes } = Delete;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "size", DELETE_SIZES);
   });
 });
