@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type LevelLeftProps = HelpersProps;
 
-export const LevelLeft = Object.assign(
-  forwardRefAs<LevelLeftProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("level-left", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "div" },
+export const LevelLeft = forwardRefAs<LevelLeftProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("level-left", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "div" },
 );

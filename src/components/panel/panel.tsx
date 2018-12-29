@@ -1,12 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { PanelBlock } from "./panel-block";
 import { PanelHeading } from "./panel-heading";
 import { PanelIcon } from "./panel-icon";
@@ -16,11 +11,9 @@ export type PanelProps = HelpersProps;
 
 export const Panel = Object.assign(
   forwardRefAs<PanelProps, "nav">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("panel", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ className, ...rest }, ref) => (
+      <Generic className={classNames("panel", className)} ref={ref} {...rest} />
+    ),
     { as: "nav" },
   ),
   {
@@ -28,6 +21,5 @@ export const Panel = Object.assign(
     Heading: PanelHeading,
     Icon: PanelIcon,
     Tabs: PanelTabs,
-    propTypes: genericPropTypes,
   },
 );

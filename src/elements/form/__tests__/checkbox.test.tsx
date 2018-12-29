@@ -5,7 +5,7 @@ import {
   makeNodeFactory,
   makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
-  testTransformHelpersIntegration,
+  testThemeIntegration,
 } from "../../../__tests__/testing";
 
 const COMPONENT = Checkbox;
@@ -27,7 +27,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     BULMA_CLASS_NAME,
   );
 
-  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeShallowWrapper);
 
   it("should be a checkbox", () => {
     const node = makeNode({});

@@ -10,7 +10,7 @@ import {
   makeNodeFactory,
   makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
-  testTransformHelpersIntegration,
+  testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
@@ -34,7 +34,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     BULMA_CLASS_NAME,
   );
 
-  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeShallowWrapper);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;

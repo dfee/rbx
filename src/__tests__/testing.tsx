@@ -5,6 +5,7 @@ import React from "react";
 
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
 import { TransformFunc, transformHelpers } from "../base/helpers";
+import { ThemeContextValue } from "../base/theme";
 import { noop } from "../utils";
 
 export const hasProperties = (
@@ -251,7 +252,7 @@ export type MakeNodeFunction<
 
 export type MakeShallowWrapperFunction = (
   node: JSX.Element,
-  contextValue?: { transform: TransformFunc<any> },
+  contextValue?: ThemeContextValue,
 ) => Enzyme.ShallowWrapper<any>;
 
 export const testForwardRefAsExoticComponentIntegration = (
@@ -346,12 +347,12 @@ export const testForwardRefAsExoticComponentIntegration = (
   });
 };
 
-export const testTransformHelpersIntegration = (
+export const testThemeIntegration = (
   makeNodeFunc: MakeNodeFunction<any>,
   makeShallowWrapperFunc: MakeShallowWrapperFunction,
 ) => {
-  describe("transformHelpers [integration]", () => {
-    it("default", () => {
+  describe("theme [integration]", () => {
+    it("default transform", () => {
       withMockError({}, ({ context: { error } }) => {
         const node = makeNodeFunc({ pull: "__UNKNOWN" as any });
         const wrapper = makeShallowWrapperFunc(node);
@@ -363,7 +364,7 @@ export const testTransformHelpersIntegration = (
       });
     });
 
-    describe("custom", () => {
+    describe("custom transform", () => {
       interface CustomHelpersProps {
         foo?: "bar" | "baz";
       }
@@ -388,13 +389,13 @@ export const testTransformHelpersIntegration = (
         return Object.assign(rest, className ? { className } : {});
       };
 
-      it("should use custom transform", () => {
+      it("should transform prop", () => {
         const node = makeNodeFunc({ foo: "bar" });
         const wrapper = makeShallowWrapperFunc(node, { transform });
         expect(wrapper.hasClass("foo-bar")).toBe(true);
       });
 
-      it("should warn on invalid use of custom transform", () => {
+      it("should warn on invalid prop transform", () => {
         withMockError({}, ({ context }) => {
           const node = makeNodeFunc({ foo: "qux" });
           const wrapper = makeShallowWrapperFunc(node, { transform });
@@ -418,6 +419,8 @@ export const makeNodeFactory = <
   Component: TComponent,
 ) => (props: TComponentProps) => React.createElement(Component, props);
 
+// todo:
+// makeShallowWrapperInThemeConsumer
 export const makeShallowWrapper: MakeShallowWrapperFunction = (
   node,
   contextValue = { transform: transformHelpers },

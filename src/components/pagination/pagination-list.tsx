@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type PaginationListProps = HelpersProps;
 
-export const PaginationList = Object.assign(
-  forwardRefAs<PaginationListProps, "ul">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("pagination-list", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "ul" },
+export const PaginationList = forwardRefAs<PaginationListProps, "ul">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("pagination-list", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "ul" },
 );

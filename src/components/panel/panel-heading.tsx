@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type PanelHeadingProps = HelpersProps;
 
-export const PanelHeading = Object.assign(
-  forwardRefAs<PanelHeadingProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("panel-heading", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "div" },
+export const PanelHeading = forwardRefAs<PanelHeadingProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("panel-heading", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "div" },
 );

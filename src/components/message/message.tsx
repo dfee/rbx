@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
 import { tuple } from "../../utils";
 import { MessageBody } from "./message-body";
@@ -24,21 +19,26 @@ export type MessageModifierProps = Partial<{
 export type MessageProps = HelpersProps & MessageModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   color: PropTypes.oneOf(COLORS),
   size: PropTypes.oneOf(MESSAGE_SIZES),
 };
 
 export const Message = Object.assign(
   forwardRefAs<MessageProps, "article">(
-    (props, ref) => {
-      const { as, color, size, ...rest } = transformHelpers(props);
-      rest.className = classNames("message", rest.className, {
-        [`is-${color}`]: color,
-        [`is-${size}`]: size,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ className, color, size, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "message",
+          {
+            [`is-${color}`]: color,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "article" },
   ),
   {

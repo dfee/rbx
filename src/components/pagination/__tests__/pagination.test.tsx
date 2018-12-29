@@ -1,6 +1,3 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import {
   Pagination,
   PAGINATION_ALIGNMENTS,
@@ -14,84 +11,77 @@ import { PaginationPrevious } from "../pagination-previous";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Pagination component", () => {
-  hasProperties(Pagination, {
+const COMPONENT = Pagination;
+const COMPONENT_NAME = "Pagination";
+const DEFAULT_ELEMENT = "nav";
+const BULMA_CLASS_NAME = "pagination";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Ellipsis: PaginationEllipsis,
     Link: PaginationLink,
     List: PaginationList,
     Next: PaginationNext,
     Previous: PaginationPrevious,
-    defaultProps: { as: "nav" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Pagination />);
-    expect(wrapper.is("nav")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Pagination as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Pagination ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".pagination").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Pagination />);
-    expect(wrapper.hasClass("pagination")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Pagination className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  PAGINATION_ALIGNMENTS.map(align =>
-    it(`should be aligned ${align}`, () => {
-      const wrapper = Enzyme.shallow(<Pagination align={align} />);
-      expect(wrapper.hasClass(`is-${align}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  PAGINATION_SIZES.map(size =>
-    it(`should be size ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Pagination size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+  testThemeIntegration(makeNode, makeShallowWrapper);
 
-  [false, true].map(rounded =>
-    it(`should ${rounded ? "" : "not "} be rouned`, () => {
-      const wrapper = Enzyme.shallow(<Pagination rounded={rounded} />);
-      expect(wrapper.hasClass("is-rounded")).toBe(rounded);
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  describe("propTypes", () => {
-    const { propTypes } = Pagination;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "align", PAGINATION_ALIGNMENTS);
-    validateBoolPropType(propTypes, "rounded");
-    validateOneOfPropType(propTypes, "size", PAGINATION_SIZES);
+    describe("align", () => {
+      validateOneOfPropType(propTypes, "align", PAGINATION_ALIGNMENTS);
+
+      PAGINATION_ALIGNMENTS.map(align =>
+        it(`should be ${align}`, () => {
+          const node = makeNode({ align });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${align}`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("rounded", () => {
+      validateBoolPropType(propTypes, "rounded");
+
+      [false, true].map(rounded =>
+        it(`should ${rounded ? "" : "not "}be rounded`, () => {
+          const node = makeNode({ rounded });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-rounded")).toBe(rounded);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", PAGINATION_SIZES);
+
+      PAGINATION_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

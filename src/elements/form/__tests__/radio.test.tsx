@@ -5,7 +5,7 @@ import {
   makeNodeFactory,
   makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
-  testTransformHelpersIntegration,
+  testThemeIntegration,
 } from "../../../__tests__/testing";
 
 const COMPONENT = Radio;
@@ -27,7 +27,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     BULMA_CLASS_NAME,
   );
 
-  testTransformHelpersIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeShallowWrapper);
 
   it("should be a radio", () => {
     const node = makeNode({});

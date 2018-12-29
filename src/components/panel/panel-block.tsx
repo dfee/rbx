@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type PanelBlockModifierProps = Partial<{
   active: boolean;
@@ -16,22 +11,23 @@ export type PanelBlockModifierProps = Partial<{
 export type PanelBlockProps = HelpersProps & PanelBlockModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   active: PropTypes.bool,
 };
 
 export const PanelBlock = Object.assign(
   forwardRefAs<PanelBlockProps, "div">(
-    (props, ref) => {
-      const { active, as, ...rest } = transformHelpers(props);
-      rest.className = classNames("panel-block", rest.className, {
-        "is-active": active,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
-    {
-      as: "div",
-    },
+    ({ active, className, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "panel-block",
+          { "is-active": active },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
   { propTypes },
 );

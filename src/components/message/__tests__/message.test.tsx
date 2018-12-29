@@ -1,6 +1,3 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { COLORS } from "../../../base/helpers";
 import { Message, MESSAGE_SIZES } from "../message";
 import { MessageBody } from "../message-body";
@@ -8,75 +5,61 @@ import { MessageHeader } from "../message-header";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Message component", () => {
-  hasProperties(Message, {
+const COMPONENT = Message;
+const COMPONENT_NAME = "Message";
+const DEFAULT_ELEMENT = "article";
+const BULMA_CLASS_NAME = "message";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Body: MessageBody,
     Header: MessageHeader,
-    defaultProps: { as: "article" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Message />);
-    expect(wrapper.is("article")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Message as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Message ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".message").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Message />);
-    expect(wrapper.hasClass("message")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Message className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  /**
-   * Props
-   */
-  COLORS.map(color =>
-    it(`should be color ${color}`, () => {
-      const wrapper = Enzyme.shallow(<Message color={color} />);
-      expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  MESSAGE_SIZES.map(size =>
-    it(`should be size ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Message size={size} />);
-      expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+  testThemeIntegration(makeNode, makeShallowWrapper);
 
-  describe("propTypes", () => {
-    const { propTypes } = Message;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "color", COLORS);
-    validateOneOfPropType(propTypes, "size", MESSAGE_SIZES);
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("color", () => {
+      validateOneOfPropType(propTypes, "color", COLORS);
+
+      COLORS.map(color =>
+        it(`should be ${color}`, () => {
+          const node = makeNode({ color });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", MESSAGE_SIZES);
+
+      MESSAGE_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

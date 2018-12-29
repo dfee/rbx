@@ -1,66 +1,48 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { PanelTab } from "../panel-tab";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validateBoolPropType,
 } from "../../../__tests__/testing";
 
-describe("PanelTab component", () => {
-  hasProperties(PanelTab, {
-    defaultProps: { as: "a" },
+const COMPONENT = PanelTab;
+const COMPONENT_NAME = "PanelTab";
+const DEFAULT_ELEMENT = "a";
+const BULMA_CLASS_NAME = undefined;
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<PanelTab />);
-    expect(wrapper.is("a")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<PanelTab as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <PanelTab ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(
-        wrapper
-          .children()
-          .children()
-          .instance(),
-      );
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<PanelTab className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  [false, true].map(active =>
-    it(`should ${active ? "" : "not "}be active`, () => {
-      const wrapper = Enzyme.shallow(<PanelTab active={active} />);
-      expect(wrapper.hasClass("is-active")).toBe(active);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  describe("propTypes", () => {
-    const { propTypes } = PanelTab;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "active");
+  testThemeIntegration(makeNode, makeShallowWrapper);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("active", () => {
+      validateBoolPropType(propTypes, "active");
+
+      [false, true].map(active =>
+        it(`should ${active ? "" : "not "}be active`, () => {
+          const node = makeNode({ active });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-active")).toBe(active);
+        }),
+      );
+    });
   });
 });

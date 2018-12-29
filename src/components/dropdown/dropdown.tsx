@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 import { combineRefs } from "../../utils";
 import { DropdownContent } from "./dropdown-content";
@@ -31,7 +26,6 @@ export type DropdownModifierProps = Partial<{
 export type DropdownProps = HelpersProps & DropdownModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   active: PropTypes.bool,
   align: PropTypes.oneOf(DROPDOWN_ALIGNMENTS),
   hoverable: PropTypes.bool,
@@ -44,7 +38,7 @@ const initialState = {
 };
 
 export type DropdownContainerProps = DropdownProps & {
-  as: React.ReactType<any>;
+  as?: React.ReactType<any>;
   innerRef: React.Ref<HTMLDivElement>;
 };
 export type DropdownContainerState = typeof initialState;
@@ -75,21 +69,15 @@ export class DropdownContainer extends React.PureComponent<
 
   public render() {
     const {
-      as,
       align,
       active,
+      className,
       hoverable,
       innerRef,
       managed,
       up,
       ...rest
-    } = transformHelpers(this.props);
-    rest.className = classNames("dropdown", rest.className, {
-      [`is-${align}`]: align,
-      "is-active": this.active,
-      "is-hoverable": hoverable,
-      "is-up": up,
-    });
+    } = this.props;
 
     return (
       <DropdownContext.Provider
@@ -98,10 +86,22 @@ export class DropdownContainer extends React.PureComponent<
           setActive: (value: boolean) => (this.active = value),
         }}
       >
-        {React.createElement(as!, {
-          ref: combineRefs(this.ref, innerRef),
-          ...rest,
-        })}
+        {
+          <Generic
+            className={classNames(
+              "dropdown",
+              {
+                [`is-${align}`]: align,
+                "is-active": this.active,
+                "is-hoverable": hoverable,
+                "is-up": up,
+              },
+              className,
+            )}
+            ref={combineRefs(this.ref, innerRef)}
+            {...rest}
+          />
+        }
       </DropdownContext.Provider>
     );
   }
@@ -130,10 +130,7 @@ export class DropdownContainer extends React.PureComponent<
 
 export const Dropdown = Object.assign(
   forwardRefAs<DropdownProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = props;
-      return <DropdownContainer as={as!} innerRef={ref} {...rest} />;
-    },
+    (props, ref) => <DropdownContainer innerRef={ref} {...props} />,
     { as: "div" },
   ),
   {

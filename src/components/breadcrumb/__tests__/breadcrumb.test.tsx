@@ -1,4 +1,3 @@
-import Enzyme from "enzyme";
 import React from "react";
 
 import {
@@ -11,83 +10,93 @@ import { BreadcrumbItem } from "../breadcrumb-item";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Breadcrumb component", () => {
-  hasProperties(Breadcrumb, {
+const COMPONENT = Breadcrumb;
+const COMPONENT_NAME = "Breadcrumb";
+const DEFAULT_ELEMENT = "nav";
+const BULMA_CLASS_NAME = "breadcrumb";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Item: BreadcrumbItem,
-    defaultProps: { as: "nav" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Breadcrumb />);
-    expect(wrapper.is("nav")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "div";
-    const wrapper = Enzyme.shallow(<Breadcrumb as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
+  testThemeIntegration(makeNode, makeShallowWrapper);
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Breadcrumb ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".breadcrumb").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Breadcrumb />);
-    expect(wrapper.hasClass("breadcrumb")).toBe(true);
-  });
+    describe("align", () => {
+      validateOneOfPropType(propTypes, "align", BREADCRUMB_ALIGNMENTS);
 
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Breadcrumb className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  BREADCRUMB_ALIGNMENTS.map(alignment =>
-    it(`should have alignment ${alignment}`, () => {
-      const wrapper = Enzyme.shallow(<Breadcrumb align={alignment} />);
-      expect(wrapper.find(".breadcrumb").hasClass(`is-${alignment}`)).toBe(
-        true,
+      BREADCRUMB_ALIGNMENTS.map(align =>
+        it(`should be ${align}`, () => {
+          const node = makeNode({ align });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${align}`)).toBe(true);
+        }),
       );
-    }),
-  );
+    });
 
-  BREADCRUMB_SEPARATORS.map(separator =>
-    it(`should have separator ${separator}`, () => {
-      const wrapper = Enzyme.shallow(<Breadcrumb separator={separator} />);
-      expect(
-        wrapper.find(".breadcrumb").hasClass(`has-${separator}-separator`),
-      ).toBe(true);
-    }),
-  );
+    describe("children", () => {
+      it("should wrap children in ul element", () => {
+        const children = <li>foo</li>;
+        const node = makeNode({ children });
+        const wrapper = makeShallowWrapper(node);
+        expect(wrapper.children().is("ul")).toBe(true);
+        expect(
+          wrapper
+            .children()
+            .children()
+            .is("li"),
+        ).toBe(true);
+        expect(
+          wrapper
+            .children()
+            .children()
+            .contains("foo"),
+        ).toBe(true);
+      });
+    });
 
-  BREADCRUMB_SIZES.map(size =>
-    it(`should have size ${size}`, () => {
-      const wrapper = Enzyme.shallow(<Breadcrumb size={size} />);
-      expect(wrapper.find(".breadcrumb").hasClass(`is-${size}`)).toBe(true);
-    }),
-  );
+    describe("separator", () => {
+      validateOneOfPropType(propTypes, "separator", BREADCRUMB_SEPARATORS);
 
-  describe("propTypes", () => {
-    const { propTypes } = Breadcrumb;
-    testGenericPropTypes(propTypes);
-    validateOneOfPropType(propTypes, "align", BREADCRUMB_ALIGNMENTS);
-    validateOneOfPropType(propTypes, "separator", BREADCRUMB_SEPARATORS);
-    validateOneOfPropType(propTypes, "size", BREADCRUMB_SIZES);
+      BREADCRUMB_SEPARATORS.map(separator =>
+        it(`should be ${separator}`, () => {
+          const node = makeNode({ separator });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`has-${separator}-separator`)).toBe(true);
+        }),
+      );
+    });
+
+    describe("size", () => {
+      validateOneOfPropType(propTypes, "size", BREADCRUMB_SIZES);
+
+      BREADCRUMB_SIZES.map(size =>
+        it(`should be ${size}`, () => {
+          const node = makeNode({ size });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass(`is-${size}`)).toBe(true);
+        }),
+      );
+    });
   });
 });

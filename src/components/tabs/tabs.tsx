@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 import { Tab } from "./tab";
 
@@ -31,7 +26,6 @@ export type TabsModifierProps = Partial<{
 export type TabsProps = HelpersProps & TabsModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   align: PropTypes.oneOf(TABS_ALIGNMENTS),
   fullwidth: PropTypes.bool,
   size: PropTypes.oneOf(TABS_SIZES),
@@ -40,30 +34,25 @@ const propTypes = {
 
 export const Tabs = Object.assign(
   forwardRefAs<TabsProps, "div">(
-    (props, ref) => {
-      const {
-        align,
-        as,
-        children,
-        fullwidth,
-        size,
-        type,
-        ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("tabs", rest.className, {
-        [`is-${align}`]: align,
-        [`is-${size}`]: size,
-        "is-fullwidth": fullwidth,
-        "is-toggle": type === "toggle" || type === "toggle-rounded",
-        "is-toggle-rounded": type === "toggle-rounded",
-        [`is-${type}`]: type,
-      });
-      return React.createElement(as!, {
-        children: <ul>{children}</ul>,
-        ref,
-        ...rest,
-      });
-    },
+    ({ align, children, className, fullwidth, size, type, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "tabs",
+          {
+            [`is-${align}`]: align,
+            [`is-${size}`]: size,
+            "is-fullwidth": fullwidth,
+            "is-toggle": type === "toggle" || type === "toggle-rounded",
+            "is-toggle-rounded": type === "toggle-rounded",
+            [`is-${type}`]: type,
+          },
+          className,
+        )}
+        children={<ul>{children}</ul>}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "div" },
   ),
   {

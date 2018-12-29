@@ -1,66 +1,74 @@
 import Enzyme from "enzyme";
 import React from "react";
 
+import { transformHelpers } from "../../../base/helpers";
 import { PaginationLink } from "../pagination-link";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  MakeShallowWrapperFunction,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validateBoolPropType,
 } from "../../../__tests__/testing";
 
-describe("PaginationLink component", () => {
-  hasProperties(PaginationLink, {
-    defaultProps: { as: "a" },
+const COMPONENT = PaginationLink;
+const COMPONENT_NAME = "PaginationLink";
+const DEFAULT_ELEMENT = "a";
+const BULMA_CLASS_NAME = "pagination-link";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+const makeShallowRootWrapper = (node: JSX.Element) => Enzyme.shallow(node);
+
+export const makeShallowLeafWrapper: MakeShallowWrapperFunction = (
+  node,
+  contextValue = { transform: transformHelpers },
+) => {
+  const liWrapper = Enzyme.shallow(node);
+  const forwardRefWrapper = liWrapper.children();
+  const contextConsumerWrapper = forwardRefWrapper.dive();
+  const Children = (contextConsumerWrapper.props() as any).children;
+  const wrapper = Enzyme.shallow(<Children {...contextValue} />);
+  return wrapper;
+};
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<PaginationLink />);
-    expect(wrapper.children().is("a")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<PaginationLink as={as} />);
-    expect(wrapper.children().is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <PaginationLink ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".pagination-link").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<PaginationLink />);
-    expect(wrapper.children().hasClass("pagination-link")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<PaginationLink className={className} />);
-    expect(wrapper.children().hasClass(className)).toBe(true);
-  });
-
-  [false, true].map(current =>
-    it(`should ${current ? "" : "not "} be current`, () => {
-      const wrapper = Enzyme.shallow(<PaginationLink current={current} />);
-      expect(wrapper.children().hasClass("is-current")).toBe(current);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowLeafWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  describe("propTypes", () => {
-    const { propTypes } = PaginationLink;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "current");
+  testThemeIntegration(makeNode, makeShallowLeafWrapper);
+
+  describe("root", () => {
+    it("should be li element", () => {
+      const node = makeNode({});
+      const wrapper = makeShallowRootWrapper(node);
+      expect(wrapper.is("li")).toBe(true);
+    });
+  });
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("current", () => {
+      validateBoolPropType(propTypes, "current");
+
+      [false, true].map(current =>
+        it(`should ${current ? "" : "not "}be current`, () => {
+          const node = makeNode({ current });
+          const wrapper = makeShallowLeafWrapper(node);
+          expect(wrapper.hasClass("is-current")).toBe(current);
+        }),
+      );
+    });
   });
 });

@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type MessageHeaderProps = HelpersProps;
 
-export const MessageHeader = Object.assign(
-  forwardRefAs<MessageHeaderProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("message-header", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "div" },
+export const MessageHeader = forwardRefAs<MessageHeaderProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("message-header", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "div" },
 );

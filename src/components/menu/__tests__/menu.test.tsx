@@ -1,58 +1,35 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { Menu } from "../menu";
 import { MenuLabel } from "../menu-label";
 import { MenuList } from "../menu-list";
 
-import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
+import {
+  hasProperties,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
+} from "../../../__tests__/testing";
 
-describe("Menu component", () => {
-  hasProperties(Menu, {
+const COMPONENT = Menu;
+const COMPONENT_NAME = "Menu";
+const DEFAULT_ELEMENT = "aside";
+const BULMA_CLASS_NAME = "menu";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Label: MenuLabel,
     List: MenuList,
-    defaultProps: { as: "aside" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<Menu />);
-    expect(wrapper.is("aside")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<Menu as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Menu ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".menu").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<Menu />);
-    expect(wrapper.hasClass("menu")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<Menu className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  describe("propTypes", () => {
-    const { propTypes } = Menu;
-    testGenericPropTypes(propTypes);
-  });
+  testThemeIntegration(makeNode, makeShallowWrapper);
 });

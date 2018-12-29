@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type MenuLabelProps = HelpersProps;
 
-export const MenuLabel = Object.assign(
-  forwardRefAs<MenuLabelProps, "p">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("menu-label", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "p" },
+export const MenuLabel = forwardRefAs<MenuLabelProps, "p">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("menu-label", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "p" },
 );

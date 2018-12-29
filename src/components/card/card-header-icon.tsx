@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type CardHeaderIconProps = HelpersProps;
 
-export const CardHeaderIcon = Object.assign(
-  forwardRefAs<CardHeaderIconProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("card-header-icon", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "div" },
+export const CardHeaderIcon = forwardRefAs<CardHeaderIconProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("card-header-icon", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "div" },
 );

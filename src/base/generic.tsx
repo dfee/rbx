@@ -3,7 +3,7 @@ import React from "react";
 
 import { forwardRefAs } from "./exotic";
 import { HelpersProps } from "./helpers";
-import { TransformContext } from "./transform-context";
+import { ThemeContext } from "./theme";
 
 export type GenericProps = HelpersProps;
 
@@ -20,12 +20,12 @@ export const Generic = Object.assign(
   forwardRefAs<GenericProps, "div">(
     ({ as, ...rest }, ref) => {
       return (
-        <TransformContext.Consumer>
+        <ThemeContext.Consumer>
           {({ transform }) => {
             const transformed = transform(rest, "Generic");
             return React.createElement(as!, { ref, ...transformed });
           }}
-        </TransformContext.Consumer>
+        </ThemeContext.Consumer>
       );
     },
     { as: "div" },

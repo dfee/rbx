@@ -1,67 +1,48 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { ListItem } from "../list-item";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validateBoolPropType,
 } from "../../../__tests__/testing";
 
-describe("ListItem component", () => {
-  hasProperties(ListItem, {
-    defaultProps: {
-      active: false,
-      as: "a",
-    },
+const COMPONENT = ListItem;
+const COMPONENT_NAME = "ListItem";
+const DEFAULT_ELEMENT = "a";
+const BULMA_CLASS_NAME = "list-item";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<ListItem />);
-    expect(wrapper.is("a")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<ListItem as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
+  testThemeIntegration(makeNode, makeShallowWrapper);
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <ListItem ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".list-item").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<ListItem />);
-    expect(wrapper.hasClass("list-item")).toBe(true);
-  });
+    describe("active", () => {
+      validateBoolPropType(propTypes, "active");
 
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<ListItem className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  it("should be active", () => {
-    const wrapper = Enzyme.shallow(<ListItem active />);
-    expect(wrapper.hasClass("is-active")).toBe(true);
-  });
-
-  describe("propTypes", () => {
-    const { propTypes } = ListItem;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "active");
+      [false, true].map(active =>
+        it(`should ${active ? "" : "not "}be active`, () => {
+          const node = makeNode({ active });
+          const wrapper = makeShallowWrapper(node);
+          expect(wrapper.hasClass("is-active")).toBe(active);
+        }),
+      );
+    });
   });
 });

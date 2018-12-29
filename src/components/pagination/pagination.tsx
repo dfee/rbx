@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { tuple } from "../../utils";
 import { PaginationEllipsis } from "./pagination-ellipsis";
 import { PaginationLink } from "./pagination-link";
@@ -30,7 +25,6 @@ export type PaginationModifiers = Partial<{
 export type PaginationProps = HelpersProps & PaginationModifiers;
 
 const propTypes = {
-  ...genericPropTypes,
   align: PropTypes.oneOf(PAGINATION_ALIGNMENTS),
   rounded: PropTypes.bool,
   size: PropTypes.oneOf(PAGINATION_SIZES),
@@ -38,15 +32,21 @@ const propTypes = {
 
 export const Pagination = Object.assign(
   forwardRefAs<PaginationProps, "nav">(
-    (props, ref) => {
-      const { as, align, rounded, size, ...rest } = transformHelpers(props);
-      rest.className = classNames("pagination", rest.className, {
-        [`is-${align}`]: align,
-        "is-rounded": rounded,
-        [`is-${size}`]: size,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ align, className, rounded, size, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "pagination",
+          {
+            [`is-${align}`]: align,
+            "is-rounded": rounded,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "nav" },
   ),
   {

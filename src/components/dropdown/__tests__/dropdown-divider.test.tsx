@@ -1,54 +1,31 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { DropdownDivider } from "../dropdown-divider";
 
-import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
+import {
+  hasProperties,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
+} from "../../../__tests__/testing";
 
-describe("DropdownDivider component", () => {
-  hasProperties(DropdownDivider, {
-    defaultProps: { as: "hr" },
+const COMPONENT = DropdownDivider;
+const COMPONENT_NAME = "DropdownDivider";
+const DEFAULT_ELEMENT = "hr";
+const BULMA_CLASS_NAME = "dropdown-divider";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default component", () => {
-    const wrapper = Enzyme.shallow(<DropdownDivider />);
-    expect(wrapper.is("hr")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<DropdownDivider as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLHRElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <DropdownDivider ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".dropdown-divider").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<DropdownDivider />);
-    expect(wrapper.hasClass("dropdown-divider")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<DropdownDivider className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  describe("propTypes", () => {
-    const { propTypes } = DropdownDivider;
-    testGenericPropTypes(propTypes);
-  });
+  testThemeIntegration(makeNode, makeShallowWrapper);
 });

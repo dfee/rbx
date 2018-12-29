@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
@@ -38,7 +33,6 @@ export type BreadcrumbProps = Prefer<
 >;
 
 const propTypes = {
-  ...genericPropTypes,
   align: PropTypes.oneOf(BREADCRUMB_ALIGNMENTS),
   separator: PropTypes.oneOf(BREADCRUMB_SEPARATORS),
   size: PropTypes.oneOf(BREADCRUMB_SIZES),
@@ -46,27 +40,23 @@ const propTypes = {
 
 export const Breadcrumb = Object.assign(
   forwardRefAs<BreadcrumbProps, "nav">(
-    (props, ref) => {
-      const {
-        align,
-        as,
-        children,
-        separator,
-        size,
-        ...rest
-      } = transformHelpers(props);
-      rest.className = classNames("breadcrumb", rest.className, {
-        [`has-${separator}-separator`]: separator,
-        [`is-${align}`]: align,
-        [`is-${size}`]: size,
-      });
-
-      return React.createElement(as!, {
-        children: <ul>{children}</ul>,
-        ref,
-        ...rest,
-      });
-    },
+    ({ align, children, className, separator, size, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "breadcrumb",
+          {
+            [`has-${separator}-separator`]: separator,
+            [`is-${align}`]: align,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      >
+        <ul>{children}</ul>
+      </Generic>
+    ),
     { as: "nav" },
   ),
   {

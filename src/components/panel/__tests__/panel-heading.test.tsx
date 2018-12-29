@@ -1,54 +1,31 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { PanelHeading } from "../panel-heading";
 
-import { hasProperties, testGenericPropTypes } from "../../../__tests__/testing";
+import {
+  hasProperties,
+  makeNodeFactory,
+  makeShallowWrapper,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
+} from "../../../__tests__/testing";
 
-describe("PanelHeading component", () => {
-  hasProperties(PanelHeading, {
-    defaultProps: { as: "div" },
+const COMPONENT = PanelHeading;
+const COMPONENT_NAME = "PanelHeading";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "panel-heading";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<PanelHeading />);
-    expect(wrapper.is("div")).toBe(true);
-  });
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeShallowWrapper,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
+  );
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.shallow(<PanelHeading as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <PanelHeading ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".panel-heading").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<PanelHeading />);
-    expect(wrapper.hasClass("panel-heading")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<PanelHeading className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  describe("propTypes", () => {
-    const { propTypes } = PanelHeading;
-    testGenericPropTypes(propTypes);
-  });
+  testThemeIntegration(makeNode, makeShallowWrapper);
 });
