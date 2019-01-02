@@ -1,84 +1,115 @@
 import Enzyme from "enzyme";
 import React from "react";
+
+import {
+  initialValue as themeInitialValue,
+  ThemeContextValue,
+} from "../../../base/theme";
 import { ModalBackground } from "../modal-background";
+import {
+  initialValue as modalInitialValue,
+  ModalContextValue,
+} from "../modal-context";
 
 import {
   hasProperties,
-  shallowInContext,
-  testGenericPropTypes,
+  makeNodeFactory,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validatePropType,
 } from "../../../__tests__/testing";
-import { contextFactory } from "./context";
 
-describe("ModalBackground component", () => {
-  hasProperties(ModalBackground, {
-    defaultProps: { as: "div" },
+const COMPONENT = ModalBackground;
+const COMPONENT_NAME = "ModalBackground";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "modal-background";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+const makeShallowWrapperInModalContextConsumer = (
+  node: JSX.Element,
+  modalContextValue: ModalContextValue = modalInitialValue,
+) => {
+  const modalContextConsumerWrapper = Enzyme.shallow(node);
+  const ModalContextConsumerChildren = modalContextConsumerWrapper.props()
+    .children;
+  const modalContextConsumerChildrenWrapper = Enzyme.shallow(
+    <ModalContextConsumerChildren {...modalContextValue} />,
+  );
+  return modalContextConsumerChildrenWrapper;
+};
+
+const makeGenericHOCShallowWrapperInContextConsumer = (
+  node: JSX.Element,
+  themeContextValue: ThemeContextValue = themeInitialValue,
+  modalContextValue: ModalContextValue = modalInitialValue,
+) => {
+  const modalContextConsumerChildrenWrapper = makeShallowWrapperInModalContextConsumer(
+    node,
+    modalContextValue,
+  );
+  const themeContextConsumerWrapper = modalContextConsumerChildrenWrapper.dive();
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
+    .children;
+  const wrapper = Enzyme.shallow(
+    <ThemeContextConsumerChildren {...themeContextValue} />,
+  );
+  return wrapper;
+};
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = shallowInContext(ModalBackground, contextFactory(), {});
-    expect(wrapper.is("div")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = shallowInContext(ModalBackground, contextFactory(), { as });
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <ModalBackground ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".modal-background").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = shallowInContext(ModalBackground, contextFactory(), {});
-    expect(wrapper.hasClass("modal-background")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = shallowInContext(ModalBackground, contextFactory(), {
-      className,
-    });
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  [false, true].map(closeOnBlur =>
-    [false, true].map(hasOnClick =>
-      it(`should ${closeOnBlur ? "" : "not "}close on click when ${
-        closeOnBlur ? "" : "not "
-      }closeOnBlur ${hasOnClick ? "and call onClick" : ""}`, () => {
-        const onClick = jest.fn();
-        const onClose = jest.fn();
-        const wrapper = shallowInContext(
-          ModalBackground,
-          contextFactory({ closeOnBlur, onClose }),
-          { onClick: hasOnClick ? onClick : undefined },
-        );
-        wrapper.simulate("click");
-        expect(onClose.mock.calls).toHaveLength(closeOnBlur ? 1 : 0);
-        expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
-      }),
-    ),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeGenericHOCShallowWrapperInContextConsumer,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  describe("propTypes", () => {
-    const { propTypes } = ModalBackground;
-    testGenericPropTypes(propTypes);
-    validatePropType(propTypes, "onClick", [
-      { value: () => null, valid: true, descriptor: "func" },
-      { value: "string", valid: false },
-    ]);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("onClick", () => {
+      validatePropType(propTypes, "onClick", [
+        { value: () => null, valid: true, descriptor: "func" },
+        { value: "string", valid: false },
+      ]);
+
+      [false, true].map(hasOnClick =>
+        [false, true].map(closeOnBlur => {
+          it(`should ${closeOnBlur ? "" : "not "}update context ${
+            hasOnClick ? "and call onClick" : ""
+          }`, () => {
+            const onClick = jest.fn();
+            const close = jest.fn();
+            const node = makeNode({
+              onClick: hasOnClick ? onClick : undefined,
+            });
+            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+              node,
+              themeInitialValue,
+              {
+                close,
+                closeOnBlur,
+                closeOnEsc: true,
+              },
+            );
+            wrapper.simulate("click");
+            if (hasOnClick) {
+              expect(onClick.mock.calls).toHaveLength(1);
+            }
+            if (closeOnBlur) {
+              expect(close.mock.calls).toHaveLength(1);
+              expect(close.mock.calls[0]).toEqual([]);
+            }
+          });
+        }),
+      );
+    });
   });
 });

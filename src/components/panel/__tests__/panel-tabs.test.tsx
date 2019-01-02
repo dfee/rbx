@@ -3,8 +3,8 @@ import { PanelTabs } from "../panel-tabs";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "../../../__tests__/testing";
@@ -24,10 +24,10 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 });

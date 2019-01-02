@@ -7,8 +7,8 @@ import { Radio } from "../radio";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -29,12 +29,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -45,7 +45,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(disabled =>
         it(`should ${disabled ? "" : "not "}be disabled`, () => {
           const node = makeNode({ disabled });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-disabled")).toBe(disabled);
         }),
       );
@@ -82,7 +82,7 @@ describe(`${COMPONENT_NAME} component`, () => {
             children = discriminator;
           }
           const node = makeNode({ children });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(className)).toBe(true);
         }),
       );
@@ -94,7 +94,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       LABEL_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );

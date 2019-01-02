@@ -2,15 +2,11 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { COLORS } from "../../../base/helpers";
-import {
-  Navbar,
-  NAVBAR_FIXED_ALIGNMENTS,
-  NavbarContainer,
-  NavbarContainerState,
-} from "../navbar";
+import { Navbar } from "../navbar";
 import { NavbarBrand } from "../navbar-brand";
 import { NavbarBurger } from "../navbar-burger";
-import { NavbarContext, NavbarContextState } from "../navbar-context";
+import { NAVBAR_FIXED_ALIGNMENTS, NavbarContainer } from "../navbar-container";
+import { NavbarContext } from "../navbar-context";
 import { NavbarDivider } from "../navbar-divider";
 import { NavbarDropdown } from "../navbar-dropdown";
 import { NavbarEnd } from "../navbar-end";
@@ -21,15 +17,23 @@ import { NavbarStart } from "../navbar-start";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeNodeFactory,
   validateBoolPropType,
   validateOneOfPropType,
 } from "../../../__tests__/testing";
 
-describe("Navbar component", () => {
-  hasProperties(Navbar, {
+const COMPONENT = Navbar;
+const COMPONENT_NAME = "Navbar";
+const DEFAULT_ELEMENT = "nav";
+// const BULMA_CLASS_NAME = "navbar";
+
+const makeNode = makeNodeFactory(Navbar);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
     Brand: NavbarBrand,
     Burger: NavbarBurger,
+    Container: NavbarContainer,
     Context: NavbarContext,
     Divider: NavbarDivider,
     Dropdown: NavbarDropdown,
@@ -38,268 +42,94 @@ describe("Navbar component", () => {
     Link: NavbarLink,
     Menu: NavbarMenu,
     Start: NavbarStart,
-    defaultProps: { as: "nav" },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.mount(<Navbar />);
-    try {
-      expect(
-        wrapper
-          .find(NavbarContainer)
-          .children()
-          .is("nav"),
-      ).toBe(true);
-    } finally {
-      wrapper.unmount();
-    }
+  test("it renders a NavbarContainer", () => {
+    const node = makeNode({});
+    const wrapper = Enzyme.shallow(node);
+    expect(wrapper.is(NavbarContainer)).toBe(true);
   });
 
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = Enzyme.mount(<Navbar as={as} />);
-    try {
-      expect(
-        wrapper
-          .find(NavbarContainer)
-          .children()
-          .is(as),
-      ).toBe(true);
-    } finally {
-      wrapper.unmount();
-    }
-  });
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <Navbar active ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(
-        wrapper
-          .find(NavbarContainer)
-          .children()
-          .instance(),
-      );
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.mount(<Navbar />);
-    try {
-      expect(
-        wrapper
-          .find(NavbarContainer)
-          .children()
-          .hasClass("navbar"),
-      ).toBe(true);
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.mount(<Navbar className={className} />);
-    try {
-      expect(
-        wrapper
-          .find(NavbarContainer)
-          .children()
-          .hasClass(className),
-      ).toBe(true);
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  [false, true].map(active =>
-    it("should render as active", () => {
-      const wrapper = Enzyme.mount(
-        <Navbar active={active}>
-          <NavbarMenu />
-        </Navbar>,
-      );
-      try {
-        expect(
-          wrapper
-            .find(NavbarMenu)
-            .children()
-            .hasClass("is-active"),
-        ).toBe(active);
-      } finally {
-        wrapper.unmount();
-      }
-    }),
-  );
-
-  [false, true].map(active =>
-    it("should render as active", () => {
-      const wrapper = Enzyme.mount(
-        <Navbar active={active}>
-          <NavbarMenu />
-        </Navbar>,
-      );
-      try {
-        expect(
-          wrapper
-            .find(NavbarMenu)
-            .children()
-            .hasClass("is-active"),
-        ).toBe(active);
-      } finally {
-        wrapper.unmount();
-      }
-    }),
-  );
-
-  [false, true].map(managed =>
-    it(`should render as ${
-      managed ? "not " : ""
-    }active when managed is ${managed}`, () => {
-      const wrapper = Enzyme.mount(
-        <Navbar managed={managed}>
-          <NavbarMenu />
-        </Navbar>,
-      );
-      try {
-        wrapper.setProps({ active: true });
-        expect(
-          wrapper
-            .find(NavbarMenu)
-            .children()
-            .hasClass("is-active"),
-        ).toBe(managed);
-      } finally {
-        wrapper.unmount();
-      }
-    }),
-  );
-
-  COLORS.map(color =>
-    it(`should be ${color}`, () => {
-      const wrapper = Enzyme.mount(<Navbar color={color} />);
-      try {
-        expect(
-          wrapper
-            .find(NavbarContainer)
-            .children()
-            .hasClass(`is-${color}`),
-        ).toBe(true);
-      } finally {
-        wrapper.unmount();
-      }
-    }),
-  );
-
-  NAVBAR_FIXED_ALIGNMENTS.map(align =>
-    it(`should be aligned ${align}`, () => {
-      const wrapper = Enzyme.mount(<Navbar fixed={align} />);
-      try {
-        expect(
-          wrapper
-            .find(NavbarContainer)
-            .children()
-            .hasClass(`is-fixed-${align}`),
-        ).toBe(true);
-        expect((document.documentElement as HTMLElement).className).toBe(
-          `has-navbar-fixed-${align}`,
-        );
-      } finally {
-        wrapper.unmount();
-      }
-    }),
-  );
-
-  [false, true].map(transparent =>
-    it(`should ${transparent ? "" : "not "}be transparent`, () => {
-      const wrapper = Enzyme.mount(<Navbar transparent={transparent} />);
-      try {
-        expect(
-          wrapper
-            .find(NavbarContainer)
-            .children()
-            .hasClass("is-transparent"),
-        ).toBe(transparent);
-      } finally {
-        wrapper.unmount();
-      }
-    }),
-  );
-
-  [undefined, false, true].map(initialActive =>
-    [undefined, false, true].map(managed =>
-      it(`should ${
-        managed ? "" : "not "
-      }set NavbarContainer's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
-        let contextState: NavbarContextState | undefined;
-        const innerRef = React.createRef<HTMLDivElement>();
-        const wrapper = Enzyme.mount(
-          <NavbarContainer
-            active={initialActive}
-            managed={managed}
-            innerRef={innerRef}
-            as="div"
-          >
-            <NavbarContext.Consumer>
-              {context => {
-                contextState = context;
-                return null;
-              }}
-            </NavbarContext.Consumer>
-          </NavbarContainer>,
-        );
-        try {
-          expect(contextState!.active).toBe(!!initialActive);
-          contextState!.setActive(!contextState!.active);
-          expect((wrapper.state() as NavbarContainerState).active).toBe(
-            managed ? !!initialActive : !initialActive,
-          );
-        } finally {
-          if (wrapper) {
-            wrapper.unmount();
-          }
-        }
-      }),
-    ),
-  );
-
-  describe("ssr", () => {
-    let initWindow: Window;
-
-    beforeEach(() => {
-      initWindow = (global as any).window;
-      delete (global as any).window;
+    describe("as", () => {
+      test("it forwards", () => {
+        const as = () => <div />;
+        const node = makeNode({ as });
+        const wrapper = Enzyme.shallow(node);
+        expect(wrapper.props().as).toBe(as);
+      });
     });
 
-    afterEach(() => {
-      (global as any).window = initWindow;
-    });
+    describe("active", () => {
+      validateBoolPropType(propTypes, "active");
 
-    it("should render without window being available (ssr)", () => {
-      const ref = React.createRef<HTMLDivElement>();
-      const wrapper = Enzyme.shallow(
-        <NavbarContainer innerRef={ref} as="div" />,
+      [false, true].map(active =>
+        test(`it forwards active: ${active}`, () => {
+          const node = makeNode({ active });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().active).toBe(active);
+        }),
       );
-      expect(wrapper.children().hasClass("navbar")).toBe(true);
-      wrapper.unmount();
-      expect(wrapper.type()).toBeNull();
     });
-  });
 
-  describe("propTypes", () => {
-    const { propTypes } = Navbar;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "active");
-    validateOneOfPropType(propTypes, "color", COLORS);
-    validateOneOfPropType(propTypes, "fixed", NAVBAR_FIXED_ALIGNMENTS);
-    validateBoolPropType(propTypes, "managed");
-    validateBoolPropType(propTypes, "transparent");
+    describe("color", () => {
+      validateOneOfPropType(propTypes, "color", COLORS);
+
+      COLORS.map(color =>
+        test(`it forwards color: ${color}`, () => {
+          const node = makeNode({ color });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().color).toBe(color);
+        }),
+      );
+    });
+
+    describe("fixed", () => {
+      validateOneOfPropType(propTypes, "fixed", NAVBAR_FIXED_ALIGNMENTS);
+
+      NAVBAR_FIXED_ALIGNMENTS.map(fixed =>
+        test(`it forwards fixed: ${fixed}`, () => {
+          const node = makeNode({ fixed });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().fixed).toBe(fixed);
+        }),
+      );
+    });
+
+    describe("managed", () => {
+      validateBoolPropType(propTypes, "managed");
+
+      [false, true].map(managed =>
+        test(`it forwards managed: ${managed}`, () => {
+          const node = makeNode({ managed });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().managed).toBe(managed);
+        }),
+      );
+    });
+
+    describe("transparent", () => {
+      validateBoolPropType(propTypes, "transparent");
+
+      [false, true].map(transparent =>
+        test(`it forwards transparent: ${transparent}`, () => {
+          const node = makeNode({ transparent });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().transparent).toBe(transparent);
+        }),
+      );
+    });
+
+    describe("ref", () => {
+      test("it forwards", () => {
+        const ref = React.createRef<HTMLAnchorElement>();
+        const node = makeNode({ ref });
+        const wrapper = Enzyme.shallow(node);
+        expect(wrapper.props().innerRef).toBe(ref);
+      });
+    });
   });
 });

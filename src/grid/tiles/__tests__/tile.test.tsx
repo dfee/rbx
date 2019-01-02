@@ -3,8 +3,8 @@ import { Tile, TILE_KINDS, TILE_SIZES } from "../tile";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -25,12 +25,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -41,7 +41,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       COLORS.map(color =>
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         }),
       );
@@ -53,7 +53,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TILE_KINDS.map(kind =>
         it(`should be ${kind}`, () => {
           const node = makeNode({ kind });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
         }),
       );
@@ -65,7 +65,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(notification =>
         it(`should ${notification ? "" : "not "}be notification`, () => {
           const node = makeNode({ notification });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("notification")).toBe(notification);
         }),
       );
@@ -77,7 +77,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TILE_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );
@@ -89,7 +89,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(vertical =>
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = makeNode({ vertical });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-vertical")).toBe(vertical);
         }),
       );

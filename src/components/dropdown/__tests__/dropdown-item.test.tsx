@@ -1,91 +1,106 @@
 import Enzyme from "enzyme";
 import React from "react";
 
+import {
+  initialValue as themeInitialValue,
+  ThemeContextValue,
+} from "../../../base/theme";
+import {
+  DropdownContextValue,
+  initialValue as dropdownInitialValue,
+} from "../dropdown-context";
 import { DropdownItem } from "../dropdown-item";
 
 import {
   hasProperties,
-  shallowInContext,
-  testGenericPropTypes,
+  makeNodeFactory,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validatePropType,
 } from "../../../__tests__/testing";
-import { contextFactory } from "./context";
 
-describe("DropdownItem component", () => {
-  hasProperties(DropdownItem, {
-    defaultProps: { as: "a" },
+const COMPONENT = DropdownItem;
+const COMPONENT_NAME = "DropdownItem";
+const DEFAULT_ELEMENT = "a";
+const BULMA_CLASS_NAME = "dropdown-item";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+const makeShallowWrapperInDropdownContextConsumer = (
+  node: JSX.Element,
+  dropdownContextValue: DropdownContextValue = dropdownInitialValue,
+) => {
+  const dropdownContextConsumerWrapper = Enzyme.shallow(node);
+  const DropdownContextConsumerChildren = dropdownContextConsumerWrapper.props()
+    .children;
+  const dropdownContextConsumerChildrenWrapper = Enzyme.shallow(
+    <DropdownContextConsumerChildren {...dropdownContextValue} />,
+  );
+  return dropdownContextConsumerChildrenWrapper;
+};
+
+const makeGenericHOCShallowWrapperInContextConsumer = (
+  node: JSX.Element,
+  themeContextValue: ThemeContextValue = themeInitialValue,
+  dropdownContextValue: DropdownContextValue = dropdownInitialValue,
+) => {
+  const dropdownContextConsumerChildrenWrapper = makeShallowWrapperInDropdownContextConsumer(
+    node,
+    dropdownContextValue,
+  );
+  const themeContextConsumerWrapper = dropdownContextConsumerChildrenWrapper.dive();
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
+    .children;
+  const wrapper = Enzyme.shallow(
+    <ThemeContextConsumerChildren {...themeContextValue} />,
+  );
+  return wrapper;
+};
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default component", () => {
-    const wrapper = shallowInContext(DropdownItem, contextFactory(), {});
-    expect(wrapper.is("a")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = shallowInContext(DropdownItem, contextFactory(), { as });
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <DropdownItem ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".dropdown-item").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = shallowInContext(DropdownItem, contextFactory(), {});
-    expect(wrapper.hasClass("dropdown-item")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = shallowInContext(DropdownItem, contextFactory(), {
-      className,
-    });
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  it("should be active", () => {
-    const wrapper = shallowInContext(DropdownItem, contextFactory(), {
-      active: true,
-    });
-    expect(wrapper.hasClass("is-active")).toBe(true);
-  });
-
-  [false, true].map(hasOnClick =>
-    it(`should update context ${
-      hasOnClick ? "and call provided onClick" : ""
-    }`, () => {
-      const onClick = jest.fn();
-      const setActive = jest.fn();
-      const wrapper = shallowInContext(
-        DropdownItem,
-        contextFactory({ setActive }),
-        { onClick: hasOnClick ? onClick : undefined },
-      );
-      wrapper.simulate("click");
-      expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
-      expect(setActive.mock.calls).toHaveLength(1);
-      expect(setActive.mock.calls[0]).toEqual([false]);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeGenericHOCShallowWrapperInContextConsumer,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  describe("propTypes", () => {
-    const { propTypes } = DropdownItem;
-    testGenericPropTypes(propTypes);
-    validatePropType(propTypes, "onClick", [
-      { value: () => null, valid: true, descriptor: "func" },
-      { value: "string", valid: false },
-    ]);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("onClick", () => {
+      validatePropType(propTypes, "onClick", [
+        { value: () => null, valid: true, descriptor: "func" },
+        { value: "string", valid: false },
+      ]);
+
+      [false, true].map(hasOnClick =>
+        it(`should update context ${
+          hasOnClick ? "and call provided onClick" : ""
+        }`, () => {
+          const onClick = jest.fn();
+          const setActive = jest.fn();
+          const node = makeNode({ onClick: hasOnClick ? onClick : undefined });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+            node,
+            themeInitialValue,
+            {
+              active: true,
+              setActive,
+            },
+          );
+          wrapper.simulate("click");
+          expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+          expect(setActive.mock.calls).toHaveLength(1);
+          expect(setActive.mock.calls[0]).toEqual([false]);
+        }),
+      );
+    });
   });
 });

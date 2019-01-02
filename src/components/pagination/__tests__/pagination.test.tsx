@@ -11,8 +11,8 @@ import { PaginationPrevious } from "../pagination-previous";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -38,12 +38,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -54,7 +54,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       PAGINATION_ALIGNMENTS.map(align =>
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         }),
       );
@@ -66,7 +66,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(rounded =>
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = makeNode({ rounded });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         }),
       );
@@ -78,7 +78,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       PAGINATION_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );

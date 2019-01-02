@@ -3,8 +3,8 @@ import { ContentOrderedList } from "../content-ordered-list";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
@@ -25,12 +25,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -41,7 +41,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       CONTENT_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );

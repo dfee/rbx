@@ -2,8 +2,8 @@ import { BUTTON_GROUP_POSITIONS, ButtonGroup } from "../button-group";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -24,12 +24,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -40,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(hasAddons =>
         it(`should ${hasAddons ? "" : "not "}have addons`, () => {
           const node = makeNode({ hasAddons });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-addons")).toBe(hasAddons);
         }),
       );
@@ -52,7 +52,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       BUTTON_GROUP_POSITIONS.map(position =>
         it(`should be ${position}`, () => {
           const node = makeNode({ position });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${position}`)).toBe(true);
         }),
       );

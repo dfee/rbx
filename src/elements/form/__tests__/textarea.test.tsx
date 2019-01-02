@@ -3,8 +3,8 @@ import { Textarea, TEXTAREA_SIZES, TEXTAREA_STATES } from "../textarea";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -28,12 +28,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -44,7 +44,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       COLORS.map(color =>
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         }),
       );
@@ -56,7 +56,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(fixedSize =>
         it(`should ${fixedSize ? "" : "not "}be fixed size`, () => {
           const node = makeNode({ fixedSize });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
         }),
       );
@@ -68,7 +68,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TEXTAREA_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );
@@ -80,7 +80,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TEXTAREA_STATES.map(state =>
         it(`should be ${state}`, () => {
           const node = makeNode({ state });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         }),
       );

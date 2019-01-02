@@ -1,119 +1,136 @@
 import Enzyme from "enzyme";
 import React from "react";
 
+import {
+  initialValue as themeInitialValue,
+  ThemeContextValue,
+} from "../../../base/theme";
 import { NavbarBurger } from "../navbar-burger";
-import { navbarContextFactory } from "./context";
+import {
+  initialValue as navbarInitialValue,
+  NavbarContextValue,
+} from "../navbar-context";
 
 import {
   hasProperties,
-  shallowInContext,
-  testGenericPropTypes,
+  makeNodeFactory,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validatePropType,
 } from "../../../__tests__/testing";
 
-describe("NavbarBurger component", () => {
-  hasProperties(NavbarBurger, {
-    defaultProps: { as: "div" },
+const COMPONENT = NavbarBurger;
+const COMPONENT_NAME = "NavbarBurger";
+const DEFAULT_ELEMENT = "div";
+const BULMA_CLASS_NAME = "navbar-burger";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+const makeShallowWrapperInNavbarContextConsumer = (
+  node: JSX.Element,
+  navbarContextValue: NavbarContextValue = navbarInitialValue,
+) => {
+  const navbarContextConsumerWrapper = Enzyme.shallow(node);
+  const NavbarContextConsumerChildren = navbarContextConsumerWrapper.props()
+    .children;
+  const navbarContextConsumerChildrenWrapper = Enzyme.shallow(
+    <NavbarContextConsumerChildren {...navbarContextValue} />,
+  );
+  return navbarContextConsumerChildrenWrapper;
+};
+
+const makeGenericHOCShallowWrapperInContextConsumer = (
+  node: JSX.Element,
+  themeContextValue: ThemeContextValue = themeInitialValue,
+  navbarContextValue: NavbarContextValue = navbarInitialValue,
+) => {
+  const navbarContextConsumerChildrenWrapper = makeShallowWrapperInNavbarContextConsumer(
+    node,
+    navbarContextValue,
+  );
+  const themeContextConsumerWrapper = navbarContextConsumerChildrenWrapper.dive();
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
+    .children;
+  const wrapper = Enzyme.shallow(
+    <ThemeContextConsumerChildren {...themeContextValue} />,
+  );
+  return wrapper;
+};
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {});
-    expect(wrapper.is("div")).toBe(true);
-    expect(wrapper.props().role).toEqual("button");
-    expect(wrapper.prop("style")).toHaveProperty("outline", "none");
-  });
-
-  it("should render as a custom component", () => {
-    const as = "span";
-    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {
-      as,
-    });
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <NavbarBurger ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".navbar-burger").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {});
-    expect(wrapper.hasClass("navbar-burger")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {
-      className,
-    });
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  it("should preserve custom style", () => {
-    const wrapper = shallowInContext(NavbarBurger, navbarContextFactory(), {
-      style: { margin: "10px" },
-    });
-    expect(wrapper.prop("style")).toHaveProperty("margin", "10px");
-  });
-
-  it("should call the onClick handler and the context's setActive", () => {
-    const onClick = jest.fn();
-    const setActive = jest.fn();
-    const wrapper = shallowInContext(
-      NavbarBurger,
-      navbarContextFactory({ setActive }),
-      {
-        onClick: onClick as React.MouseEventHandler<any>,
-      },
-    );
-    wrapper.simulate("click");
-    expect(setActive.mock.calls).toHaveLength(1);
-    expect(onClick.mock.calls).toHaveLength(1);
-  });
-
-  [false, true].map(hasOnClick =>
-    it(`should update context ${
-      hasOnClick ? "and call provided onClick" : ""
-    }`, () => {
-      const onClick = jest.fn();
-      const setActive = jest.fn();
-
-      const wrapper = shallowInContext(
-        NavbarBurger,
-        navbarContextFactory({ setActive }),
-        {
-          onClick: hasOnClick
-            ? (onClick as React.MouseEventHandler<any>)
-            : undefined,
-        },
-      );
-      wrapper.simulate("click");
-      expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
-      expect(setActive.mock.calls).toHaveLength(1);
-      expect(setActive.mock.calls[0]).toEqual([true]);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeGenericHOCShallowWrapperInContextConsumer,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  describe("propTypes", () => {
-    const { propTypes } = NavbarBurger;
-    testGenericPropTypes(propTypes);
-    validatePropType(propTypes, "onClick", [
-      { value: () => null, valid: true, descriptor: "func" },
-      { value: "string", valid: false },
-    ]);
-    validatePropType(propTypes, "style", [
-      { value: {}, valid: true, descriptor: "obj" },
-      { value: "string", valid: false },
-    ]);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("onClick", () => {
+      validatePropType(propTypes, "onClick", [
+        { value: () => null, valid: true, descriptor: "func" },
+        { value: "string", valid: false },
+      ]);
+
+      [false, true].map(hasOnClick =>
+        it(`should update context ${
+          hasOnClick ? "and call provided onClick" : ""
+        }`, () => {
+          const onClick = jest.fn();
+          const setActive = jest.fn();
+          const node = makeNode({ onClick: hasOnClick ? onClick : undefined });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+            node,
+            themeInitialValue,
+            {
+              active: false,
+              setActive,
+            },
+          );
+          wrapper.simulate("click");
+          expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+          expect(setActive.mock.calls).toHaveLength(1);
+          expect(setActive.mock.calls[0]).toEqual([true]);
+        }),
+      );
+    });
+
+    describe("role", () => {
+      it("should have role: button", () => {
+        const node = makeNode({});
+        const wrapper = makeShallowWrapperInNavbarContextConsumer(node);
+        expect(wrapper.prop("role")).toEqual("button");
+      });
+    });
+
+    describe("style", () => {
+      validatePropType(propTypes, "style", [
+        { value: {}, valid: true, descriptor: "obj" },
+        { value: "string", valid: false },
+      ]);
+
+      it("should preserve custom style", () => {
+        const node = makeNode({ style: { margin: "10px" } });
+        const wrapper = makeShallowWrapperInNavbarContextConsumer(node);
+        expect(wrapper.prop("style")).toHaveProperty("margin", "10px");
+        expect(wrapper.prop("style")).toHaveProperty("outline", "none");
+      });
+    });
+
+    describe("tabIndex", () => {
+      it("should have tabIndex", () => {
+        const node = makeNode({});
+        const wrapper = makeShallowWrapperInNavbarContextConsumer(node);
+        expect(wrapper.prop("tabIndex")).toEqual(0);
+      });
+    });
   });
 });

@@ -2,8 +2,8 @@ import { Table } from "../table";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -23,12 +23,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -39,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(bordered =>
         it(`should ${bordered ? "" : "not "}be bordered`, () => {
           const node = makeNode({ bordered });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-bordered")).toBe(bordered);
         }),
       );
@@ -51,7 +51,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(fullwidth =>
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = makeNode({ fullwidth });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         }),
       );
@@ -63,7 +63,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(hoverable =>
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = makeNode({ hoverable });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
         }),
       );
@@ -75,7 +75,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(narrow =>
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = makeNode({ narrow });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         }),
       );
@@ -87,7 +87,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(striped =>
         it(`should ${striped ? "" : "not "}be striped`, () => {
           const node = makeNode({ striped });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-striped")).toBe(striped);
         }),
       );

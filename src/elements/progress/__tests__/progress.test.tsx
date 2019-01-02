@@ -5,7 +5,7 @@ import { Progress, PROGRESS_SIZES } from "../progress";
 
 import {
   hasProperties,
-  makeShallowWrapper,
+  makeGenericHOCShallowWrapperInContextConsumer,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateNumberPropType,
@@ -32,12 +32,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -48,7 +48,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       COLORS.map(color =>
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         }),
       );
@@ -60,7 +60,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       it("should have max", () => {
         const max = 20;
         const node = makeNode({ max });
-        const wrapper = makeShallowWrapper(node);
+        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
         expect(wrapper.props().max).toBe(max);
       });
     });
@@ -71,7 +71,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       PROGRESS_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size, max: 5, value: 10 });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );
@@ -83,7 +83,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       it("should have value", () => {
         const value = 0;
         const node = makeNode({ value });
-        const wrapper = makeShallowWrapper(node);
+        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
         expect(wrapper.props().value).toBe(value);
       });
     });

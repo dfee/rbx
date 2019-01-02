@@ -3,8 +3,8 @@ import { Column, COLUMN_SIZES } from "../column";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -26,12 +26,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -41,7 +41,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(narrow =>
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = makeNode({ narrow });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         }),
       );
@@ -67,7 +67,9 @@ describe(`${COMPONENT_NAME} component`, () => {
           [false, true].map(narrow =>
             it(`should ${narrow ? "" : "not "}be narrow`, () => {
               const node = makeNode({ [breakpoint]: { narrow } });
-              const wrapper = makeShallowWrapper(node);
+              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+                node,
+              );
               expect(wrapper.hasClass(`is-narrow-${breakpoint}`)).toBe(narrow);
             }),
           );
@@ -81,7 +83,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       COLUMN_SIZES.map(offset =>
         it(`should be ${offset}`, () => {
           const node = makeNode({ offset });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-offset-${offset}`)).toBe(true);
         }),
       );
@@ -107,7 +109,9 @@ describe(`${COMPONENT_NAME} component`, () => {
           COLUMN_SIZES.map(offset =>
             it(`should be offset ${offset}`, () => {
               const node = makeNode({ [breakpoint]: { offset } });
-              const wrapper = makeShallowWrapper(node);
+              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+                node,
+              );
               expect(
                 wrapper.hasClass(`is-offset-${offset}-${breakpoint}`),
               ).toBe(true);
@@ -123,7 +127,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       COLUMN_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );
@@ -149,7 +153,9 @@ describe(`${COMPONENT_NAME} component`, () => {
           COLUMN_SIZES.map(size =>
             it(`should be ${size}`, () => {
               const node = makeNode({ [breakpoint]: { size } });
-              const wrapper = makeShallowWrapper(node);
+              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+                node,
+              );
               expect(wrapper.hasClass(`is-${size}-${breakpoint}`)).toBe(true);
             }),
           );

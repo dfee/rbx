@@ -2,12 +2,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type NavbarDropdownModifierProps = Partial<{
   boxed: boolean;
@@ -17,21 +12,26 @@ export type NavbarDropdownModifierProps = Partial<{
 export type NavbarDropdownProps = HelpersProps & NavbarDropdownModifierProps;
 
 const propTypes = {
-  ...genericPropTypes,
   boxed: PropTypes.bool,
   right: PropTypes.bool,
 };
 
 export const NavbarDropdown = Object.assign(
   forwardRefAs<NavbarDropdownProps, "span">(
-    (props, ref) => {
-      const { as, boxed, right, ...rest } = transformHelpers(props);
-      rest.className = classNames("navbar-dropdown", rest.className, {
-        "is-boxed": boxed,
-        "is-right": right,
-      });
-      return React.createElement(as!, { ref, ...rest });
-    },
+    ({ boxed, className, right, ...rest }, ref) => (
+      <Generic
+        className={classNames(
+          "navbar-dropdown",
+          {
+            "is-boxed": boxed,
+            "is-right": right,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    ),
     { as: "span" },
   ),
   { propTypes },

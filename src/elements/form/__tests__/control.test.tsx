@@ -2,8 +2,8 @@ import { Control, CONTROL_SIZES } from "../control";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -24,12 +24,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -40,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(expanded =>
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
           const node = makeNode({ expanded });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-expanded")).toBe(expanded);
         }),
       );
@@ -52,7 +52,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(iconLeft =>
         it(`should ${iconLeft ? "" : "not "}have left icon`, () => {
           const node = makeNode({ iconLeft });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-icons-left")).toBe(iconLeft);
         }),
       );
@@ -64,7 +64,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(iconRight =>
         it(`should ${iconRight ? "" : "not "}have right icon`, () => {
           const node = makeNode({ iconRight });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-icons-right")).toBe(iconRight);
         }),
       );
@@ -76,7 +76,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(loading =>
         it(`should ${loading ? "" : "not "}be loading`, () => {
           const node = makeNode({ loading });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-loading")).toBe(loading);
         }),
       );
@@ -88,7 +88,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       CONTROL_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );

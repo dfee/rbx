@@ -3,8 +3,8 @@ import { Container } from "../container";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -25,12 +25,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -41,7 +41,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       BREAKPOINTS.map(breakpoint =>
         it(`should be ${breakpoint}`, () => {
           const node = makeNode({ breakpoint });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
         }),
       );
@@ -53,7 +53,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(fluid =>
         it(`should ${fluid ? "" : "not "}be fluid`, () => {
           const node = makeNode({ fluid });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fluid")).toBe(fluid);
         }),
       );

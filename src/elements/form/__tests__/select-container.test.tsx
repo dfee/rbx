@@ -10,8 +10,8 @@ import {
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -32,12 +32,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -48,7 +48,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       COLORS.map(color =>
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         }),
       );
@@ -60,7 +60,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(fullwidth =>
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = makeNode({ fullwidth });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         }),
       );
@@ -72,7 +72,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(rounded =>
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = makeNode({ rounded });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         }),
       );
@@ -84,7 +84,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       SELECT_CONTAINER_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );
@@ -109,7 +109,7 @@ describe(`${COMPONENT_NAME} component`, () => {
               children = discriminator;
             }
             const node = makeNode({ children, state });
-            const wrapper = makeShallowWrapper(node);
+            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
             if (state === "loading") {
               expect(wrapper.hasClass("is-loading")).toBe(true);
             } else {
@@ -174,7 +174,9 @@ describe(`${COMPONENT_NAME} component`, () => {
                 children = childType;
               }
               const node = makeNode({ children });
-              const wrapper = makeShallowWrapper(node);
+              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+                node,
+              );
               expect(wrapper.hasClass("is-multiple")).toBe(isMultiple);
             });
           });

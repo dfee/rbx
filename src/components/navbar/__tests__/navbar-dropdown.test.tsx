@@ -1,74 +1,60 @@
-import Enzyme from "enzyme";
-import React from "react";
-
 import { NavbarDropdown } from "../navbar-dropdown";
 
 import {
   hasProperties,
-  testGenericPropTypes,
+  makeGenericHOCShallowWrapperInContextConsumer,
+  makeNodeFactory,
+  testForwardRefAsExoticComponentIntegration,
+  testThemeIntegration,
   validateBoolPropType,
 } from "../../../__tests__/testing";
 
-describe("NavbarDropdown component", () => {
-  hasProperties(NavbarDropdown, {
-    defaultProps: { as: "span" },
+const COMPONENT = NavbarDropdown;
+const COMPONENT_NAME = "NavbarDropdown";
+const DEFAULT_ELEMENT = "span";
+const BULMA_CLASS_NAME = "navbar-dropdown";
+
+const makeNode = makeNodeFactory(COMPONENT);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should render as the default element", () => {
-    const wrapper = Enzyme.shallow(<NavbarDropdown />);
-    expect(wrapper.is("span")).toBe(true);
-  });
-
-  it("should render as a custom component", () => {
-    const as = "div";
-    const wrapper = Enzyme.shallow(<NavbarDropdown as={as} />);
-    expect(wrapper.is(as)).toBe(true);
-  });
-
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLDivElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <NavbarDropdown ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".navbar-dropdown").instance());
-    } finally {
-      wrapper.unmount();
-    }
-  });
-
-  it("should have bulma className", () => {
-    const wrapper = Enzyme.shallow(<NavbarDropdown />);
-    expect(wrapper.hasClass("navbar-dropdown")).toBe(true);
-  });
-
-  it("should preserve custom className", () => {
-    const className = "foo";
-    const wrapper = Enzyme.shallow(<NavbarDropdown className={className} />);
-    expect(wrapper.hasClass(className)).toBe(true);
-  });
-
-  [false, true].map(right =>
-    it(`should ${right ? "" : "not "} be right`, () => {
-      const wrapper = Enzyme.shallow(<NavbarDropdown right={right} />);
-      expect(wrapper.hasClass("is-right")).toBe(right);
-    }),
+  testForwardRefAsExoticComponentIntegration(
+    makeNode,
+    makeGenericHOCShallowWrapperInContextConsumer,
+    DEFAULT_ELEMENT,
+    BULMA_CLASS_NAME,
   );
 
-  [false, true].map(boxed =>
-    it(`should ${boxed ? "" : "not "} be boxed`, () => {
-      const wrapper = Enzyme.shallow(<NavbarDropdown boxed={boxed} />);
-      expect(wrapper.hasClass("is-boxed")).toBe(boxed);
-    }),
-  );
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
-  describe("propTypes", () => {
-    const { propTypes } = NavbarDropdown;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "boxed");
-    validateBoolPropType(propTypes, "right");
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("boxed", () => {
+      validateBoolPropType(propTypes, "boxed");
+
+      [false, true].map(boxed =>
+        it(`should ${boxed ? "" : "not "}be boxed`, () => {
+          const node = makeNode({ boxed });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("is-boxed")).toBe(boxed);
+        }),
+      );
+    });
+
+    describe("right", () => {
+      validateBoolPropType(propTypes, "right");
+
+      [false, true].map(right =>
+        it(`should ${right ? "" : "not "}be right`, () => {
+          const node = makeNode({ right });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("is-right")).toBe(right);
+        }),
+      );
+    });
   });
 });

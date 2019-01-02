@@ -1,27 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
-import { Prefer } from "../../types";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
-export type NavbarDividerProps = Prefer<
-  HelpersProps,
-  React.HTMLAttributes<HTMLDivElement>
->;
+export type NavbarDividerProps = HelpersProps;
 
-export const NavbarDivider = Object.assign(
-  forwardRefAs<NavbarDividerProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("navbar-divider", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "div" },
+export const NavbarDivider = forwardRefAs<NavbarDividerProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("navbar-divider", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "div" },
 );

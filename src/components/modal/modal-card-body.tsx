@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type ModalCardBodyProps = HelpersProps;
 
-export const ModalCardBody = Object.assign(
-  forwardRefAs<ModalCardBodyProps, "section">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("modal-card-body", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "section" },
+export const ModalCardBody = forwardRefAs<ModalCardBodyProps, "section">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("modal-card-body", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "section" },
 );

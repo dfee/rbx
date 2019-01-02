@@ -2,8 +2,8 @@ import { MEDIA_ITEM_POSITIONS, MediaItem } from "../media-item";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
@@ -26,12 +26,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("propTypes", () => {
     const { propTypes } = COMPONENT;
@@ -42,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       MEDIA_ITEM_POSITIONS.map(position =>
         it(`should be ${position}`, () => {
           const node = makeNode({ position });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`media-${position}`)).toBe(true);
         }),
       );

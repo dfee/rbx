@@ -2,8 +2,8 @@ import { Title, TITLE_SIZES } from "../title";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -24,12 +24,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -44,7 +44,7 @@ describe(`${COMPONENT_NAME} component`, () => {
             isSpaced ? "" : "not "
           }be spaced when spaced ${spaced} and subtitle ${subtitle}`, () => {
             const node = makeNode({ spaced });
-            const wrapper = makeShallowWrapper(node);
+            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
             expect(wrapper.hasClass("is-spaced")).toBe(spaced);
           });
         }),
@@ -57,7 +57,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(subtitle =>
         it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
           const node = makeNode({ subtitle });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("subtitle")).toBe(subtitle);
           expect(wrapper.hasClass("title")).toBe(!subtitle);
         }),
@@ -70,7 +70,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TITLE_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );

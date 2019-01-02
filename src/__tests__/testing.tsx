@@ -116,7 +116,8 @@ export const validatePropType = (
         PropTypes.checkPropTypes(
           propTypes,
           { [propName]: value, ...extras },
-          "prop", // location
+          // "prop", // location
+          `prop(${makeRandomString()})`, // componentName
           `test(${makeRandomString()})`, // componentName
         );
         if (valid) {
@@ -124,7 +125,7 @@ export const validatePropType = (
         } else {
           expect(context.error.mock.calls).toHaveLength(1);
           expect(context.error.mock.calls[0][0]).toMatch(
-            error || new RegExp(`Warning.+Invalid prop \`${propName}\`.+`),
+            error || new RegExp(`Warning.+Invalid prop.+\`${propName}\`.+`),
           );
         }
       });
@@ -168,6 +169,19 @@ export const validateOneOfPropType = (
     { value: "__UNKNOWN", valid: false, extras },
   ]);
 
+export const validateRefPropType = (
+  propTypes: {
+    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
+  },
+  propName: string,
+  extras?: { [k: string]: any },
+) =>
+  validatePropType(propTypes, propName, [
+    { value: () => null, valid: true, descriptor: "func", extras },
+    { value: React.createRef(), valid: true, descriptor: "ref", extras },
+    { value: "string", valid: false, extras }, // deprecated, won't support
+  ]);
+
 export const validateStringPropType = (
   propTypes: {
     [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
@@ -195,11 +209,17 @@ export const contextManager = <
   ) => void,
 ) => (
   params: TParams,
-  inner: ({ context, params }: { context: TContext; params: TParams }) => void,
+  inner: (
+    {
+      context,
+      params,
+      state,
+    }: { context: TContext; params: TParams; state: TState },
+  ) => void,
 ) => {
   const { context, state } = enter(params);
   try {
-    inner({ context, params });
+    inner({ context, params, state });
   } finally {
     exit({ context, params, state });
   }
@@ -218,10 +238,16 @@ export const withMockError = contextManager(
 );
 
 export const withEnzymeMount = contextManager(
-  ({ node }: { node: React.ReactElement<any> }) => {
+  ({
+    node,
+    options,
+  }: {
+    node: React.ReactElement<any>;
+    options?: Enzyme.MountRendererProps;
+  }) => {
     // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
     // So, mount in div
-    const outer = Enzyme.mount(<div children={node} />);
+    const outer = Enzyme.mount(<div children={node} />, options);
     return { context: { wrapper: outer.children() }, state: { outer } };
   },
   ({ state }) => state.outer.unmount(),
@@ -260,7 +286,8 @@ export const testForwardRefAsExoticComponentIntegration = (
   makeShallowWrapperFunc: MakeShallowWrapperFunction,
   defaultElement: keyof React.ReactHTML,
   bulmaClassName: string | undefined,
-) => {
+  refPropName: string = "ref",
+) => () => {
   describe("ForwardRefAsExoticComponent [integration]", () => {
     it("should render as the default element", () => {
       const node = makeNodeFunc({});
@@ -277,7 +304,7 @@ export const testForwardRefAsExoticComponentIntegration = (
 
     it("should forward ref", () => {
       const ref = React.createRef<HTMLElement>();
-      const node = makeNodeFunc({ ref });
+      const node = makeNodeFunc({ [refPropName]: ref });
       withEnzymeMount({ node }, ({ context: { wrapper } }) => {
         const selector = bulmaClassName
           ? `${defaultElement}.${bulmaClassName}`
@@ -419,15 +446,33 @@ export const makeNodeFactory = <
   Component: TComponent,
 ) => (props: TComponentProps) => React.createElement(Component, props);
 
-// todo:
-// makeShallowWrapperInThemeConsumer
-export const makeShallowWrapper: MakeShallowWrapperFunction = (
-  node,
-  contextValue = { transform: transformHelpers },
+/**
+ * This function makes a shallow wrapper of a "generic" component in the Theme
+ * Context.Consumer.
+ * A "generic" component is one that simply does a transform of its props and
+ * returns a <Generic /> function.
+ *
+ * For example:
+ *     const MyComponent = forwardRefAs<{}, 'div'>((props, ref) => (
+ *         <Generic ref={ref} {...props} />
+ *       ),
+ *       { as: 'div' },
+ *     );
+ *
+ * Because a Context.Consumer, as produced by Enzyme.shallow, produces a
+ * wrapper that must be 'dive'd into to retrieve the Child, it accepts a
+ * contextValue for the Theme Context.
+ */
+export const makeGenericHOCShallowWrapperInContextConsumer = (
+  node: JSX.Element,
+  themeContextValue: ThemeContextValue = { transform: transformHelpers },
 ) => {
   const forwardRefWrapper = Enzyme.shallow(node);
-  const contextConsumerWrapper = forwardRefWrapper.dive();
-  const Children = (contextConsumerWrapper.props() as any).children;
-  const wrapper = Enzyme.shallow(<Children {...contextValue} />);
+  const themeContextConsumerWrapper = forwardRefWrapper.dive();
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
+    .children;
+  const wrapper = Enzyme.shallow(
+    <ThemeContextConsumerChildren {...themeContextValue} />,
+  );
   return wrapper;
 };

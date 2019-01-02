@@ -1,268 +1,127 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { NavbarItem, NavbarItemContainer } from "../navbar-item";
-import {
-  NavbarItemContext,
-  NavbarItemContextState,
-} from "../navbar-item-context";
-
 import {
   hasProperties,
-  // shallowInContext,
-  testGenericPropTypes,
+  makeNodeFactory,
   validateBoolPropType,
   validatePropType,
 } from "../../../__tests__/testing";
-import { navbarItemContextFactory } from "./context";
+import { NavbarItem } from "../navbar-item";
+import { NavbarItemContainer } from "../navbar-item-container";
 
-describe("NavbarItem component", () => {
-  hasProperties(NavbarItem, {
-    defaultProps: { as: "a" },
+const COMPONENT = NavbarItem;
+const COMPONENT_NAME = "NavbarItem";
+const DEFAULT_ELEMENT = "a";
+// const BULMA_CLASS_NAME = "navbar-item";
+
+const makeNode = makeNodeFactory(NavbarItem);
+
+describe(`${COMPONENT_NAME} component`, () => {
+  hasProperties(COMPONENT, {
+    Container: NavbarItemContainer,
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  it("should forward ref", () => {
-    const ref = React.createRef<HTMLAnchorElement>();
-    // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-    const wrapper = Enzyme.mount(
-      <div>
-        <NavbarItem ref={ref} />
-      </div>,
-    );
-    try {
-      expect(ref.current).toBe(wrapper.find(".navbar-item").instance());
-    } finally {
-      wrapper.unmount();
-    }
+  test("it renders a NavbarItemContainer", () => {
+    const node = makeNode({});
+    const wrapper = Enzyme.shallow(node);
+    expect(wrapper.is(NavbarItemContainer)).toBe(true);
   });
 
-  [false, true].map(active =>
-    it(`should ${active ? "" : "not "}be active`, () => {
-      const wrapper = Enzyme.mount(<NavbarItem active={active} />);
-      try {
-        const children = wrapper.find(NavbarItemContainer).children();
-        expect(children.hasClass("is-active")).toBe(active);
-      } finally {
-        wrapper.unmount();
-      }
-    }),
-  );
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
 
-  describe("NavbarItem: as NOT dropdown", () => {
-    it("should render as the default element", () => {
-      const wrapper = Enzyme.mount(<NavbarItem />);
-      try {
-        const children = wrapper.find(NavbarItemContainer).children();
-        expect(children.is("a")).toBe(true);
-      } finally {
-        wrapper.unmount();
-      }
+    describe("as", () => {
+      test("it forwards", () => {
+        const as = () => <div />;
+        const node = makeNode({ as });
+        const wrapper = Enzyme.shallow(node);
+        expect(wrapper.props().as).toBe(as);
+      });
     });
 
-    it("should render as a custom component", () => {
-      const as = "span";
-      const wrapper = Enzyme.mount(<NavbarItem as={as} />);
-      try {
-        const children = wrapper.find(NavbarItemContainer).children();
-        expect(children.is(as)).toBe(true);
-      } finally {
-        wrapper.unmount();
-      }
+    describe("active", () => {
+      validateBoolPropType(propTypes, "active");
+
+      [false, true].map(active =>
+        test(`it forwards active: ${active}`, () => {
+          const node = makeNode({ active });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().active).toBe(active);
+        }),
+      );
     });
 
-    it("should have bulma className", () => {
-      const wrapper = Enzyme.mount(<NavbarItem />);
-      try {
-        const children = wrapper.find(NavbarItemContainer).children();
-        expect(children.hasClass("navbar-item")).toBe(true);
-        expect(children.hasClass("has-dropdown")).toBe(false);
-      } finally {
-        wrapper.unmount();
-      }
+    describe("dropdown", () => {
+      validateBoolPropType(propTypes, "dropdown");
+
+      [false, true].map(dropdown =>
+        test(`it forwards dropdown: ${dropdown}`, () => {
+          const node = makeNode({ dropdown });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().dropdown).toBe(dropdown);
+        }),
+      );
     });
 
-    [false, true].map(hasOnClick =>
-      it(`should update context ${
-        hasOnClick ? "and call provided onClick" : ""
-      }`, () => {
-        const onClick = jest.fn();
-        const setActive = jest.fn();
-        const innerRef = React.createRef<HTMLAnchorElement>();
-        const outer = Enzyme.shallow(
-          <NavbarItemContainer
-            innerRef={innerRef}
-            as="a"
-            onClick={hasOnClick ? onClick : undefined}
-          />,
-        );
-        const Children = outer.props().children;
-        const context = navbarItemContextFactory({ active: false, setActive });
-        const wrapper = Enzyme.shallow(<Children {...context} />);
-        wrapper.simulate("click");
-        expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
-        expect(setActive.mock.calls).toHaveLength(1);
-        expect(setActive.mock.calls[0]).toEqual([true]);
-      }),
-    );
-
-    describe("NavbarItem: as dropdown", () => {
-      it("should render as the default element", () => {
-        const wrapper = Enzyme.mount(<NavbarItem dropdown />);
-        try {
-          const children = wrapper.find(NavbarItemContainer).children();
-          expect(children.is("div")).toBe(true);
-        } finally {
-          wrapper.unmount();
-        }
-      });
-
-      it("should render as a custom component", () => {
-        const as = "span";
-        const wrapper = Enzyme.mount(<NavbarItem dropdown as={as} />);
-        try {
-          const children = wrapper.find(NavbarItemContainer).children();
-          expect(children.is(as)).toBe(true);
-        } finally {
-          wrapper.unmount();
-        }
-      });
-
-      it("should have bulma className", () => {
-        const wrapper = Enzyme.mount(<NavbarItem dropdown />);
-        try {
-          const children = wrapper.find(NavbarItemContainer).children();
-          expect(children.hasClass("navbar-item")).toBe(true);
-          expect(children.hasClass("has-dropdown")).toBe(true);
-        } finally {
-          wrapper.unmount();
-        }
-      });
+    describe("dropdownUp", () => {
+      validateBoolPropType(propTypes, "dropdownUp");
 
       [false, true].map(dropdownUp =>
-        it(`should ${dropdownUp ? "" : "not "}be dropdownUp`, () => {
-          const wrapper = Enzyme.mount(
-            <NavbarItem dropdown dropdownUp={dropdownUp} />,
-          );
-          try {
-            const children = wrapper.find(NavbarItemContainer).children();
-            expect(children.hasClass("has-dropdown-up")).toBe(dropdownUp);
-          } finally {
-            wrapper.unmount();
-          }
+        test(`it forwards dropdownUp: ${dropdownUp}`, () => {
+          const node = makeNode({ dropdownUp });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().dropdownUp).toBe(dropdownUp);
         }),
       );
+    });
+
+    describe("hoverable", () => {
+      validateBoolPropType(propTypes, "hoverable");
 
       [false, true].map(hoverable =>
-        it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
-          const wrapper = Enzyme.mount(
-            <NavbarItem dropdown hoverable={hoverable} />,
-          );
-          try {
-            const children = wrapper.find(NavbarItemContainer).children();
-            expect(children.hasClass("is-hoverable")).toBe(hoverable);
-          } finally {
-            wrapper.unmount();
-          }
+        test(`it forwards hoverable: ${hoverable}`, () => {
+          const node = makeNode({ hoverable });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().hoverable).toBe(hoverable);
         }),
       );
+    });
+
+    describe("managed", () => {
+      validateBoolPropType(propTypes, "managed");
 
       [false, true].map(managed =>
-        it(`should ${
-          managed ? "not " : ""
-        }be disabled on click in document when managed is ${managed}`, () => {
-          const wrapper = Enzyme.mount(
-            <NavbarItem dropdown active managed={managed} />,
-          );
-          try {
-            document.getElementsByTagName("body")[0].click();
-            wrapper.update();
-            expect(wrapper.find(".navbar-item").hasClass("is-active")).toBe(
-              managed,
-            );
-          } finally {
-            wrapper.unmount();
-          }
+        test(`it forwards managed: ${managed}`, () => {
+          const node = makeNode({ managed });
+          const wrapper = Enzyme.shallow(node);
+          expect(wrapper.props().managed).toBe(managed);
         }),
       );
+    });
 
-      [undefined, false, true].map(initialActive =>
-        [undefined, false, true].map(managed =>
-          it(`should ${
-            managed ? "" : "not "
-          }set NavbarItemContainer's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
-            let contextState: NavbarItemContextState | undefined;
-            const innerRef = React.createRef<HTMLDivElement>();
-            const wrapper = Enzyme.mount(
-              <NavbarItemContainer
-                active={initialActive}
-                managed={managed}
-                innerRef={innerRef}
-                dropdown
-                as="div"
-              >
-                <NavbarItemContext.Consumer>
-                  {context => {
-                    contextState = context;
-                    return null;
-                  }}
-                </NavbarItemContext.Consumer>
-              </NavbarItemContainer>,
-            );
-            try {
-              expect(contextState!.active).toBe(!!initialActive);
-              contextState!.setActive(!contextState!.active);
-              expect((wrapper.state() as NavbarItemContextState).active).toBe(
-                managed ? !!initialActive : !initialActive,
-              );
-            } finally {
-              if (wrapper) {
-                wrapper.unmount();
-              }
-            }
-          }),
-        ),
-      );
+    describe("onClick", () => {
+      validatePropType(propTypes, "onClick", [
+        { value: () => null, valid: true, descriptor: "func" },
+        { value: "string", valid: false },
+      ]);
 
-      it("should not be disabled if component is the target of click", () => {
-        // For example, if we click a dropdown-divider
-        const root = document.createElement("div");
-        root.setAttribute("id", "root");
-        document.body.appendChild(root);
-        let wrapper;
-
-        try {
-          const ref = React.createRef<HTMLDivElement>();
-          // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
-          wrapper = Enzyme.mount(
-            <div>
-              <NavbarItem dropdown active ref={ref} as="div" />
-            </div>,
-            { attachTo: root },
-          );
-          (ref.current as HTMLDivElement).click();
-          wrapper.children().update();
-          expect(wrapper.find(".navbar-item").hasClass("is-active")).toBe(true);
-        } finally {
-          if (wrapper) {
-            wrapper.unmount();
-          }
-          document.body.removeChild(root);
-        }
+      test("it forwards onClick", () => {
+        const onClick = jest.fn();
+        const node = makeNode({ onClick });
+        const wrapper = Enzyme.shallow(node);
+        expect(wrapper.props().onClick).toBe(onClick);
       });
     });
-  });
 
-  describe("propTypes", () => {
-    const { propTypes } = NavbarItem;
-    testGenericPropTypes(propTypes);
-    validateBoolPropType(propTypes, "active");
-    validateBoolPropType(propTypes, "dropdown");
-    validateBoolPropType(propTypes, "dropdownUp");
-    validateBoolPropType(propTypes, "hoverable");
-    validateBoolPropType(propTypes, "managed");
-    validatePropType(propTypes, "onClick", [
-      { value: () => null, valid: true, descriptor: "func" },
-      { value: "string", valid: false },
-    ]);
+    describe("ref", () => {
+      test("it forwards", () => {
+        const ref = React.createRef<HTMLAnchorElement>();
+        const node = makeNode({ ref });
+        const wrapper = Enzyme.shallow(node);
+        expect(wrapper.props().innerRef).toBe(ref);
+      });
+    });
   });
 });

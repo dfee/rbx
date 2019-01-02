@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type NavbarStartProps = HelpersProps;
 
-export const NavbarStart = Object.assign(
-  forwardRefAs<NavbarStartProps, "div">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("navbar-start", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "div" },
+export const NavbarStart = forwardRefAs<NavbarStartProps, "div">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("navbar-start", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "div" },
 );

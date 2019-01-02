@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
 import React from "react";
 
+import { renderablePropType } from "../prop-types-extensions";
 import { forwardRefAs } from "./exotic";
 import { HelpersProps } from "./helpers";
 import { ThemeContext } from "./theme";
@@ -8,12 +8,7 @@ import { ThemeContext } from "./theme";
 export type GenericProps = HelpersProps;
 
 export const propTypes = {
-  /** The component this should render as */
-  as: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.string,
-    PropTypes.shape({ render: PropTypes.func.isRequired }),
-  ]),
+  as: renderablePropType,
 };
 
 export const Generic = Object.assign(

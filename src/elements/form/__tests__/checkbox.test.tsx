@@ -2,8 +2,8 @@ import { Checkbox } from "../checkbox";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "../../../__tests__/testing";
@@ -22,16 +22,16 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   it("should be a checkbox", () => {
     const node = makeNode({});
-    const wrapper = makeShallowWrapper(node);
+    const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
     expect(wrapper.props().type).toEqual("checkbox");
   });
 });

@@ -7,7 +7,6 @@ import { transformHelpers } from "../helpers";
 import {
   hasProperties,
   makeNodeFactory,
-  MakeShallowWrapperFunction,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "../../__tests__/testing";
@@ -19,7 +18,7 @@ const BULMA_CLASS_NAME = undefined;
 
 const makeNode = makeNodeFactory(Generic);
 
-const makeShallowWrapper: MakeShallowWrapperFunction = (
+const makeShallowWrapperInThemeContextConsumer = (
   node: JSX.Element,
   contextValue = { transform: transformHelpers },
 ) => {
@@ -36,10 +35,10 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeShallowWrapperInThemeContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeShallowWrapperInThemeContextConsumer);
 });

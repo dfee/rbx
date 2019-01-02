@@ -5,8 +5,8 @@ import { Tabs, TABS_ALIGNMENTS, TABS_SIZES, TABS_TYPES } from "../tabs";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -28,12 +28,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -44,7 +44,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TABS_ALIGNMENTS.map(align =>
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         }),
       );
@@ -53,7 +53,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("children", () => {
       it("should wrap children in an ul element", () => {
         const node = makeNode({ children: <div className="foo" /> });
-        const wrapper = makeShallowWrapper(node);
+        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
         const children = wrapper.children();
         expect(children.is("ul")).toBe(true);
         expect(children.children().is("div")).toBe(true);
@@ -67,7 +67,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(fullwidth =>
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = makeNode({ fullwidth });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         }),
       );
@@ -79,7 +79,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TABS_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );
@@ -91,7 +91,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       TABS_TYPES.map(type =>
         it(`should be ${type}`, () => {
           const node = makeNode({ type });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${type}`)).toBe(true);
         }),
       );

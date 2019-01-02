@@ -1,14 +1,16 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import { transformHelpers } from "../../../base/helpers";
+import {
+  initialValue as themeInitialValue,
+  ThemeContextValue,
+} from "../../../base/theme";
 import { Menu } from "../menu";
 import { MenuListItem } from "../menu-list-item";
 
 import {
   hasProperties,
   makeNodeFactory,
-  MakeShallowWrapperFunction,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -22,17 +24,20 @@ const BULMA_CLASS_NAME = undefined;
 
 const makeNode = makeNodeFactory(COMPONENT);
 
-const makeShallowRootWrapper = (node: JSX.Element) => Enzyme.shallow(node);
+const makeShallowWrapper = (node: JSX.Element) => Enzyme.shallow(node);
 
-export const makeShallowLeafWrapper: MakeShallowWrapperFunction = (
-  node,
-  contextValue = { transform: transformHelpers },
+const makeGenericHOCShallowWrapperInContextConsumer = (
+  node: JSX.Element,
+  themeContextValue: ThemeContextValue = themeInitialValue,
 ) => {
-  const liWrapper = Enzyme.shallow(node);
-  const forwardRefWrapper = liWrapper.children();
-  const contextConsumerWrapper = forwardRefWrapper.dive();
-  const Children = (contextConsumerWrapper.props() as any).children;
-  const wrapper = Enzyme.shallow(<Children {...contextValue} />);
+  const rootWrapper = makeShallowWrapper(node);
+  const forwardRefWrapper = rootWrapper.children();
+  const themeContextConsumerWrapper = forwardRefWrapper.dive();
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
+    .children;
+  const wrapper = Enzyme.shallow(
+    <ThemeContextConsumerChildren {...themeContextValue} />,
+  );
   return wrapper;
 };
 
@@ -44,19 +49,19 @@ describe(`${COMPONENT_NAME} component`, () => {
   describe("root", () => {
     it("should be li element", () => {
       const node = makeNode({});
-      const wrapper = makeShallowRootWrapper(node);
+      const wrapper = makeShallowWrapper(node);
       expect(wrapper.is("li")).toBe(true);
     });
   });
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowLeafWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowLeafWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -67,7 +72,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(active =>
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = makeNode({ active });
-          const wrapper = makeShallowLeafWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
         }),
       );
@@ -85,7 +90,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [<Menu key={1} className="foo" />, null].map(menu =>
         it(`should ${menu ? "" : "not "}have menu`, () => {
           const node = makeNode({ menu });
-          const wrapper = makeShallowRootWrapper(node);
+          const wrapper = makeShallowWrapper(node);
           const children = wrapper.children();
           expect(children).toHaveLength(menu ? 2 : 1);
           if (menu) {

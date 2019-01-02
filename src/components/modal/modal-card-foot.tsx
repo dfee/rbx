@@ -1,23 +1,17 @@
 import classNames from "classnames";
 import React from "react";
 
-import {
-  forwardRefAs,
-  genericPropTypes,
-  HelpersProps,
-  transformHelpers,
-} from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type ModalCardFootProps = HelpersProps;
 
-export const ModalCardFoot = Object.assign(
-  forwardRefAs<ModalCardFootProps, "footer">(
-    (props, ref) => {
-      const { as, ...rest } = transformHelpers(props);
-      rest.className = classNames("modal-card-foot", rest.className);
-      return React.createElement(as!, { ref, ...rest });
-    },
-    { as: "footer" },
+export const ModalCardFoot = forwardRefAs<ModalCardFootProps, "footer">(
+  ({ className, ...rest }, ref) => (
+    <Generic
+      className={classNames("modal-card-foot", className)}
+      ref={ref}
+      {...rest}
+    />
   ),
-  { propTypes: genericPropTypes },
+  { as: "footer" },
 );

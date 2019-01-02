@@ -2,18 +2,18 @@ import React from "react";
 
 import { noop } from "../../utils";
 
-export interface ModalContextState {
+export interface ModalContextValue {
+  close: () => void;
   closeOnBlur: boolean;
   closeOnEsc: boolean;
-  onClose: () => void;
 }
 
-export const initialState: ModalContextState = {
+export const initialValue: ModalContextValue = {
+  close: noop,
   closeOnBlur: false,
   closeOnEsc: true,
-  onClose: noop,
 };
 
-export const ModalContext = React.createContext<ModalContextState>(
-  initialState,
+export const ModalContext = React.createContext<ModalContextValue>(
+  initialValue,
 );

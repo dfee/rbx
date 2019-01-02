@@ -4,8 +4,8 @@ import { FieldLabel } from "../field-label";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -28,12 +28,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -45,7 +45,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         FIELD_KINDS.map(kind =>
           it(`should be aligned ${kind}-${align}`, () => {
             const node = makeNode({ align, kind });
-            const wrapper = makeShallowWrapper(node);
+            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
             expect(
               wrapper.hasClass(
                 kind === "addons"
@@ -64,7 +64,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(expanded =>
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
           const node = makeNode({ expanded });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-expanded")).toBe(expanded);
         }),
       );
@@ -76,7 +76,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(horizontal =>
         it(`should ${horizontal ? "" : "not "}be horizontal`, () => {
           const node = makeNode({ horizontal });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-horizontal")).toBe(horizontal);
         }),
       );
@@ -88,7 +88,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       FIELD_KINDS.map(kind =>
         it(`should be kind ${kind}`, () => {
           const node = makeNode({ kind });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(
             wrapper.hasClass(kind === "group" ? "is-grouped" : "has-addons"),
           ).toBe(true);
@@ -105,7 +105,7 @@ describe(`${COMPONENT_NAME} component`, () => {
             multiline && kind === "group" ? "" : "not "
           }be multiline when kind is ${kind} and multiline is ${multiline}`, () => {
             const node = makeNode({ multiline, kind });
-            const wrapper = makeShallowWrapper(node);
+            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
             expect(wrapper.hasClass("is-grouped-multiline")).toBe(
               multiline && kind === "group",
             );
@@ -120,7 +120,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(narrow =>
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = makeNode({ narrow });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         }),
       );

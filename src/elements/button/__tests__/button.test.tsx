@@ -4,8 +4,8 @@ import { ButtonGroup } from "../button-group";
 
 import {
   hasProperties,
+  makeGenericHOCShallowWrapperInContextConsumer,
   makeNodeFactory,
-  makeShallowWrapper,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -27,12 +27,12 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(
     makeNode,
-    makeShallowWrapper,
+    makeGenericHOCShallowWrapperInContextConsumer,
     DEFAULT_ELEMENT,
     BULMA_CLASS_NAME,
   );
 
-  testThemeIntegration(makeNode, makeShallowWrapper);
+  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -43,7 +43,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       COLORS.map(color =>
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         }),
       );
@@ -55,7 +55,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(disabled =>
         it(`should ${disabled ? "" : "not "}be disabled`, () => {
           const node = makeNode({ disabled });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.prop("disabled")).toBe(disabled);
         }),
       );
@@ -67,7 +67,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(fullwidth =>
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = makeNode({ fullwidth });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         }),
       );
@@ -79,7 +79,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(inverted =>
         it(`should ${inverted ? "" : "not "}be inverted`, () => {
           const node = makeNode({ inverted });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-inverted")).toBe(inverted);
         }),
       );
@@ -91,7 +91,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(outlined =>
         it(`should ${outlined ? "" : "not "}be outlined`, () => {
           const node = makeNode({ outlined });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-outlined")).toBe(outlined);
         }),
       );
@@ -103,7 +103,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(rounded =>
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = makeNode({ rounded });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         }),
       );
@@ -115,7 +115,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(selected =>
         it(`should ${selected ? "" : "not "}be selected`, () => {
           const node = makeNode({ selected });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-selected")).toBe(selected);
         }),
       );
@@ -125,7 +125,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       BUTTON_STATES.map(state =>
         it(`should be ${state}`, () => {
           const node = makeNode({ state });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         }),
       );
@@ -137,7 +137,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(isStatic =>
         it(`should ${isStatic ? "" : "not "}be static`, () => {
           const node = makeNode({ static: isStatic });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-static")).toBe(isStatic);
         }),
       );
@@ -149,7 +149,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(text =>
         it(`should ${text ? "" : "not "}be text`, () => {
           const node = makeNode({ text });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-text")).toBe(text);
         }),
       );
@@ -161,7 +161,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       BUTTON_SIZES.map(size =>
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         }),
       );

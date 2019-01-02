@@ -2,16 +2,16 @@ import React from "react";
 
 import { noop } from "../../utils";
 
-export interface NavbarItemContextState {
+export interface NavbarItemContextValue {
   active: boolean;
   setActive: (value: boolean) => void;
 }
 
-export const initialState: NavbarItemContextState = {
+export const initialValue: NavbarItemContextValue = {
   active: false,
   setActive: noop,
 };
 
-export const NavbarItemContext = React.createContext<NavbarItemContextState>(
-  initialState,
+export const NavbarItemContext = React.createContext<NavbarItemContextValue>(
+  initialValue,
 );
