@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs } from "../../base";
@@ -12,6 +13,14 @@ import { ModalPortal } from "./modal-portal";
 
 export type ModalProps = Omit<ModalContainerProps, "as" | "innerRef">;
 
+const propTypes = {
+  active: PropTypes.bool,
+  closeOnBlur: PropTypes.bool,
+  closeOnEsc: PropTypes.bool,
+  containerClassName: PropTypes.string,
+  onClose: PropTypes.func,
+};
+
 export const Modal = Object.assign(
   forwardRefAs<ModalProps, "div">(
     (props, ref) => <ModalContainer innerRef={ref} {...props} />,
@@ -25,5 +34,6 @@ export const Modal = Object.assign(
     Content: ModalContent,
     Context: ModalContext,
     Portal: ModalPortal,
+    propTypes,
   },
 );

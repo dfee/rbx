@@ -1,9 +1,7 @@
 import classNames from "classnames";
-import PropTypes from "prop-types";
 import React from "react";
 
 import { Generic, HelpersProps } from "../../base";
-import { refPropType } from "../../prop-types-extensions";
 import { tuple } from "../../utils";
 import { combineRefs } from "../../utils";
 import { DropdownContext } from "./dropdown-context";
@@ -24,16 +22,6 @@ export type DropdownContainerModifierProps = Partial<{
 export type DropdownContainerProps = HelpersProps &
   DropdownContainerModifierProps;
 
-const propTypes = {
-  active: PropTypes.bool,
-  align: PropTypes.oneOf(DROPDOWN_ALIGNMENTS),
-  // as: PropType checked by Generic in render
-  hoverable: PropTypes.bool,
-  innerRef: refPropType,
-  managed: PropTypes.bool,
-  up: PropTypes.bool,
-};
-
 const initialState = {
   active: false,
 };
@@ -44,7 +32,6 @@ export class DropdownContainer extends React.PureComponent<
   DropdownContainerProps,
   DropdownContainerState
 > {
-  public static propTypes = propTypes;
   public readonly state: DropdownContainerState;
   private ref = React.createRef<HTMLDivElement>();
 
@@ -63,8 +50,8 @@ export class DropdownContainer extends React.PureComponent<
 
   public render() {
     const {
-      align,
       active,
+      align,
       className,
       hoverable,
       innerRef,

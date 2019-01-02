@@ -16,13 +16,10 @@ import { DropdownContext, DropdownContextValue } from "../dropdown-context";
 import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateBoolPropType,
-  validateOneOfPropType,
-  validateRefPropType,
   withEnzymeMount,
 } from "../../../__tests__/testing";
 
-const COMPONENT = DropdownContainer;
+// const COMPONENT = DropdownContainer;
 const COMPONENT_NAME = "DropdownContainer";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "dropdown";
@@ -58,11 +55,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
-    const { propTypes } = COMPONENT;
-
     describe("active", () => {
-      validateBoolPropType(propTypes, "active");
-
       [false, true].map(active =>
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = makeNode({ active });
@@ -73,8 +66,6 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "align", DROPDOWN_ALIGNMENTS);
-
       DROPDOWN_ALIGNMENTS.map(align =>
         it(`should be aligned ${align}`, () => {
           const node = makeNode({ align });
@@ -85,8 +76,6 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("hoverable", () => {
-      validateBoolPropType(propTypes, "hoverable");
-
       [false, true].map(hoverable =>
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = makeNode({ hoverable });
@@ -96,15 +85,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       );
     });
 
-    describe("innerRef", () => {
-      validateRefPropType(propTypes, "innerRef");
-      // innerRef's usage is validated by
-      // testforwardRefAsExoticComponentIntegration
-    });
-
     describe("managed", () => {
-      validateBoolPropType(propTypes, "managed");
-
       [false, true].map(managed =>
         [false, true].map(active => {
           const isToggleable = managed && active;
@@ -189,8 +170,6 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("up", () => {
-      validateBoolPropType(propTypes, "up");
-
       [false, true].map(up =>
         it(`should ${up ? "" : "not "}be up`, () => {
           const node = makeNode({ up });

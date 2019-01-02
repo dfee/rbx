@@ -1,8 +1,10 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs } from "../../base";
 import { Omit } from "../../types";
 import {
+  DROPDOWN_ALIGNMENTS,
   DropdownContainer,
   DropdownContainerProps,
 } from "./dropdown-container";
@@ -14,6 +16,14 @@ import { DropdownMenu } from "./dropdown-menu";
 import { DropdownTrigger } from "./dropdown-trigger";
 
 export type DropdownProps = Omit<DropdownContainerProps, "as" | "innerRef">;
+
+const propTypes = {
+  active: PropTypes.bool,
+  align: PropTypes.oneOf(DROPDOWN_ALIGNMENTS),
+  hoverable: PropTypes.bool,
+  managed: PropTypes.bool,
+  up: PropTypes.bool,
+};
 
 export const Dropdown = Object.assign(
   forwardRefAs<DropdownProps, "div">(
@@ -28,5 +38,6 @@ export const Dropdown = Object.assign(
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
+    propTypes,
   },
 );

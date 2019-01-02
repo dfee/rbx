@@ -1,8 +1,6 @@
-import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { refPropType } from "../../prop-types-extensions";
 import { canUseDOM } from "../../utils";
 import { ModalContextValue } from "./modal-context";
 import { ModalPortal } from "./modal-portal";
@@ -18,16 +16,6 @@ export type ModalContainerProps = Partial<{
   onClose: () => void;
 }>;
 
-const propTypes = {
-  active: PropTypes.bool,
-  // as: PropType checked by Generic
-  closeOnBlur: PropTypes.bool,
-  closeOnEsc: PropTypes.bool,
-  containerClassName: PropTypes.string,
-  innerRef: refPropType,
-  onClose: PropTypes.func,
-};
-
 export interface ModalContainerState {
   active: boolean;
 }
@@ -36,7 +24,6 @@ export class ModalContainer extends React.PureComponent<
   ModalContainerProps,
   ModalContainerState
 > {
-  public static propTypes = propTypes;
   public readonly state: ModalContainerState = { active: false };
   private el: HTMLDivElement | undefined;
 
