@@ -6,7 +6,6 @@ import React from "react";
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
 import { TransformFunc, transformHelpers } from "../base/helpers";
 import { ThemeContextValue } from "../base/theme";
-import { noop } from "../utils";
 
 export const hasProperties = (
   component: React.ReactType<any>,
@@ -18,81 +17,10 @@ export const hasProperties = (
     }),
   );
 
-export const makeContextFactory = <P extends {}>(initial: P) => (
-  overrides?: Partial<P>,
-) =>
-  Object.keys(initial)
-    .map(key => ({
-      [key]: overrides ? overrides[key] || initial[key] : initial[key],
-    }))
-    .reduce((acc, cv) => ({ ...acc, ...cv }), {}) as P;
-
-export const shallowInContext = <P, T>(
-  Component: React.ComponentType<P>,
-  context: T,
-  props: P,
-) => {
-  const outer = Enzyme.shallow(<Component {...props} />);
-  const Children = outer.props().children;
-  return Enzyme.shallow(<Children {...context} />);
-};
-
 export const makeRandomString = () =>
   Math.random()
     .toString(36)
     .substring(7);
-
-export const testGenericPropTypes = (
-  // propTypes: { [k: string]: PropTypes.Requireable<any> },
-  component: React.ComponentType<any>,
-) => {
-  /**
-   * we want to make sure that exotic propTypes are checked (i.e. as)
-   */
-  describe("exotic [integration]", () => {
-    // tslint:disable-next-line:max-classes-per-file
-    class ClassComponent extends React.Component {
-      public render() {
-        return React.createElement("div");
-      }
-    }
-
-    const ForwardRefComponent = React.forwardRef((props, ref) =>
-      React.createElement("div", { ref, ...props }),
-    );
-
-    const FunctionComponent = () => React.createElement("div");
-
-    validatePropType(component.propTypes!, "as", [
-      { value: "div", valid: true },
-      { value: ClassComponent, valid: true },
-      { value: ForwardRefComponent, valid: true, descriptor: "ForwardRefAs" },
-      { value: FunctionComponent, valid: true },
-      { value: true, valid: false },
-    ]);
-  });
-
-  /**
-   * we want to make sure that helpersPropTypes are checked
-   */
-  describe("transformHelpers [integration]", () => {
-    it("should warn on invalid propType", () => {
-      const node = React.createElement(component, { pull: "__UNKNOWN" });
-      withMockError({}, ({ context: { error } }) => {
-        withShallowInContextConsumer(
-          { node, contextValue: { transform: transformHelpers } },
-          ({ context: { wrapper } }) => {
-            expect(wrapper.props().className).toEqual("is-pulled-__UNKNOWN");
-            expect(error.mock.calls).toHaveLength(1);
-            expect(error.mock.calls[0][0]).toMatch(
-              new RegExp("Warning.+Invalid prop `pull`.+"),
-            );
-          },
-        );
-      });
-    });
-  });
-};
 
 export const validatePropType = (
   propTypes: React.WeakValidationMap<any>,
@@ -251,22 +179,6 @@ export const withEnzymeMount = contextManager(
     return { context: { wrapper: outer.children() }, state: { outer } };
   },
   ({ state }) => state.outer.unmount(),
-);
-
-export const withShallowInContextConsumer = contextManager(
-  ({
-    node,
-    contextValue,
-  }: {
-    node: React.ReactElement<any>;
-    contextValue: any;
-  }) => {
-    const outer = Enzyme.shallow(node);
-    const Children = outer.props().children;
-    const wrapper = Enzyme.shallow(<Children {...contextValue} />);
-    return { context: { wrapper }, state: {} };
-  },
-  noop,
 );
 
 export type MakeNodeFunction<

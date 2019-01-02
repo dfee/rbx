@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 
@@ -27,10 +26,7 @@ export type BreadcrumbModifierProps = Partial<{
   size: BreadacrumbSizes;
 }>;
 
-export type BreadcrumbProps = Prefer<
-  HelpersProps & BreadcrumbModifierProps,
-  React.HTMLAttributes<HTMLElement>
->;
+export type BreadcrumbProps = HelpersProps & BreadcrumbModifierProps;
 
 const propTypes = {
   align: PropTypes.oneOf(BREADCRUMB_ALIGNMENTS),

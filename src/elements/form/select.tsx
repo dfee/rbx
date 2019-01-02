@@ -4,7 +4,6 @@ import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Colors, COLORS } from "../../base/helpers";
-import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { SelectOption } from "./select-option";
 
@@ -99,10 +98,7 @@ export const SelectContainer = Object.assign(
   { propTypes },
 );
 
-export type SelectProps = Prefer<
-  HelpersProps,
-  React.SelectHTMLAttributes<HTMLSelectElement>
->;
+export type SelectProps = HelpersProps;
 
 export const Select = Object.assign(
   forwardRefAs<SelectProps, "select">(
