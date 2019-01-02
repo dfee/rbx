@@ -305,6 +305,13 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "propTypes": Object {
+      "active": [Function],
+      "align": [Function],
+      "hoverable": [Function],
+      "managed": [Function],
+      "up": [Function],
+    },
     "render": [Function],
   },
   "Field": Object {
@@ -750,6 +757,13 @@ Object {
     "Portal": [Function],
     "defaultProps": Object {
       "as": "div",
+    },
+    "propTypes": Object {
+      "active": [Function],
+      "closeOnBlur": [Function],
+      "closeOnEsc": [Function],
+      "containerClassName": [Function],
+      "onClose": [Function],
     },
     "render": [Function],
   },

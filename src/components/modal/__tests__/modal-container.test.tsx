@@ -1,22 +1,13 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  ModalContainer,
-  ModalContainerProps,
-  // ModalContainerState,
-} from "../modal-container";
+import { ModalContainer, ModalContainerProps } from "../modal-container";
 import { ModalContext, ModalContextValue } from "../modal-context";
 import { ModalPortal } from "../modal-portal";
 
-import {
-  validateBoolPropType,
-  validatePropType,
-  validateRefPropType,
-  withEnzymeMount,
-} from "../../../__tests__/testing";
+import { withEnzymeMount } from "../../../__tests__/testing";
 
-const COMPONENT = ModalContainer;
+// const COMPONENT = ModalContainer;
 const COMPONENT_NAME = "ModalContainer";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "modal";
@@ -44,12 +35,9 @@ describe(`${COMPONENT_NAME} component`, () => {
   });
 
   describe("props", () => {
-    const { propTypes } = COMPONENT;
     const CONTAINER_CLASS_NAME = "modal-container";
 
     describe("active", () => {
-      validateBoolPropType(propTypes, "active");
-
       [false, true].map(active =>
         ["DEFAULT", "span"].map(as =>
           it(`should ${active ? "" : "not "}render as the ${
@@ -82,10 +70,6 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("closeOnBlur", () => {
-      validateBoolPropType(propTypes, "closeOnBlur", {
-        innerRef: React.createRef(),
-      });
-
       [false, true].map(closeOnBlur =>
         it(`should passthrough closeOnBlur as ${closeOnBlur}`, () => {
           const node = makeNode({ active: true, closeOnBlur });
@@ -98,10 +82,6 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("closeOnEsc", () => {
-      validateBoolPropType(propTypes, "closeOnEsc", {
-        innerRef: React.createRef(),
-      });
-
       [false, true].map(closeOnEsc =>
         it(`should passthrough closeOnEsc as ${closeOnEsc}`, () => {
           const node = makeNode({ active: true, closeOnEsc });
@@ -114,8 +94,6 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("innerRef", () => {
-      validateRefPropType(propTypes, "innerRef");
-
       it("should forward ref", () => {
         const ref = React.createRef<HTMLDivElement>();
         const node = makeNode({ active: true, innerRef: ref });
@@ -128,20 +106,6 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("onClose", () => {
-      validatePropType(propTypes, "onClose", [
-        {
-          descriptor: "func",
-          extras: { innerRef: React.createRef() },
-          valid: true,
-          value: () => null,
-        },
-        {
-          extras: { innerRef: React.createRef() },
-          valid: false,
-          value: "string",
-        },
-      ]);
-
       [false, true].map(hasOnClose =>
         it(`should ${hasOnClose ? "" : "not "}call onClose when closed`, () => {
           let contextValue: ModalContextValue | undefined;
