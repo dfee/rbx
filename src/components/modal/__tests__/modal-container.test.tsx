@@ -142,27 +142,31 @@ describe(`${COMPONENT_NAME} component`, () => {
         },
       ]);
 
-      it("should call onClose when closed", () => {
-        let contextValue: ModalContextValue | undefined;
-        const onClose = jest.fn();
-        const node = makeNode({
-          active: true,
-          children: (
-            <ModalContext.Consumer>
-              {context => {
-                contextValue = context;
-                return null;
-              }}
-            </ModalContext.Consumer>
-          ),
-          onClose,
-        });
-        withEnzymeMount({ node }, () => {
-          contextValue!.close();
-          expect(onClose.mock.calls).toHaveLength(1);
-          expect(onClose.mock.calls[0]).toEqual([]);
-        });
-      });
+      [false, true].map(hasOnClose =>
+        it(`should ${hasOnClose ? "" : "not "}call onClose when closed`, () => {
+          let contextValue: ModalContextValue | undefined;
+          const onClose = jest.fn();
+          const node = makeNode({
+            active: true,
+            children: (
+              <ModalContext.Consumer>
+                {context => {
+                  contextValue = context;
+                  return null;
+                }}
+              </ModalContext.Consumer>
+            ),
+            onClose: hasOnClose ? onClose : undefined,
+          });
+          withEnzymeMount({ node }, () => {
+            contextValue!.close();
+            if (hasOnClose) {
+              expect(onClose.mock.calls).toHaveLength(1);
+              expect(onClose.mock.calls[0]).toEqual([]);
+            }
+          });
+        }),
+      );
     });
   });
 });

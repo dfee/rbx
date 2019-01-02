@@ -53,9 +53,11 @@ describe(`${COMPONENT_NAME} component`, () => {
 
     describe("discriminator", () => {
       [
-        { discriminator: "checkbox", className: "checkbox" },
         { discriminator: "input", className: "label" },
-        { discriminator: "radio", className: "radio" },
+        { discriminator: "checkbox-as-component", className: "checkbox" },
+        { discriminator: "checkbox-as-input", className: "checkbox" },
+        { discriminator: "radio-as-component", className: "radio" },
+        { discriminator: "radio-as-input", className: "radio" },
         { discriminator: "string", className: "label" },
         { discriminator: "fragment-radio", className: "radio" },
         { discriminator: "fragment-empty", className: "label" },
@@ -66,10 +68,14 @@ describe(`${COMPONENT_NAME} component`, () => {
           let children: JSX.Element | string | JSX.Element[] | null;
           if (discriminator === "input") {
             children = <Input />;
-          } else if (discriminator === "checkbox") {
+          } else if (discriminator === "checkbox-as-input") {
+            children = <input type="checkbox" />;
+          } else if (discriminator === "checkbox-as-component") {
             children = <Checkbox />;
-          } else if (discriminator === "radio") {
+          } else if (discriminator === "radio-as-component") {
             children = <Radio />;
+          } else if (discriminator === "radio-as-input") {
+            children = <input type="radio" />;
           } else if (discriminator === "fragment-radio") {
             children = <React.Fragment children={<Radio />} />;
           } else if (discriminator === "fragment-empty") {

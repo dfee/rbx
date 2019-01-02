@@ -63,6 +63,14 @@ describe(`${COMPONENT_NAME} component`, () => {
   testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("props", () => {
+    describe("as", () => {
+      it("should force as to be div if a", () => {
+        const node = makeNode({ as: "a" });
+        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+        expect(wrapper.is("div")).toBe(true);
+      });
+    });
+
     describe("managed", () => {
       [false, true].map(managed =>
         [false, true].map(active => {

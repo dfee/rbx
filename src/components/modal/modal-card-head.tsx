@@ -9,7 +9,7 @@ export type ModalCardHeadProps = HelpersProps;
 
 const mapChildren = (
   children: React.ReactNode,
-  setActive: ModalContextValue["setActive"],
+  close: ModalContextValue["close"],
 ) =>
   React.Children.map(children, (child, i) => {
     if (typeof child === "object") {
@@ -19,14 +19,12 @@ const mapChildren = (
             if (child.props.onClick) {
               child.props.onClick(event);
             }
-            setActive(false);
+            close();
           },
         });
       } else if (child.type === React.Fragment) {
         return (
-          <React.Fragment
-            children={mapChildren(child.props.children, setActive)}
-          />
+          <React.Fragment children={mapChildren(child.props.children, close)} />
         );
       }
     }
@@ -36,9 +34,9 @@ const mapChildren = (
 export const ModalCardHead = forwardRefAs<ModalCardHeadProps, "header">(
   ({ className, children, ...rest }, ref) => (
     <ModalContext.Consumer>
-      {({ setActive }) => (
+      {({ close }) => (
         <Generic
-          children={mapChildren(children, setActive)}
+          children={mapChildren(children, close)}
           className={classNames("modal-card-head", className)}
           ref={ref}
           {...rest}

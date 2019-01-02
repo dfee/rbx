@@ -75,6 +75,14 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("children <delete button>", () => {
       const permutations = [
         {
+          descriptor: "string",
+          factory: (
+            hasOnClick: boolean,
+            onClick: React.MouseEventHandler<any>,
+          ) => "string",
+          getDelete: (wrapper: Enzyme.ShallowWrapper<any>) => null,
+        },
+        {
           descriptor: "delete button",
           factory: (
             hasOnClick: boolean,
@@ -119,24 +127,22 @@ describe(`${COMPONENT_NAME} component`, () => {
             hasOnClick ? "and call onClick " : ""
           }for children: <${descriptor}>`, () => {
             const onClick = jest.fn();
-            const setActive = jest.fn();
+            const close = jest.fn();
             const node = makeNode({ children: factory(hasOnClick, onClick) });
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
               node,
               themeInitialValue,
-              {
-                closeOnBlur: true,
-                closeOnEsc: true,
-                setActive,
-              },
+              Object.assign({}, modalInitialValue, { close }),
             );
             const button = getDelete(wrapper);
-            button.simulate("click");
-            if (hasOnClick) {
-              expect(onClick.mock.calls).toHaveLength(1);
+            if (button) {
+              button.simulate("click");
+              if (hasOnClick) {
+                expect(onClick.mock.calls).toHaveLength(1);
+              }
+              expect(close.mock.calls).toHaveLength(1);
+              expect(close.mock.calls[0]).toEqual([]);
             }
-            expect(setActive.mock.calls).toHaveLength(1);
-            expect(setActive.mock.calls[0]).toEqual([false]);
           }),
         );
       });
