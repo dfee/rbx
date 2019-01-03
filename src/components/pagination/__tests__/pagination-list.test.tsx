@@ -1,4 +1,4 @@
-import { PaginationList } from "../pagination-list";
+import { PaginationList } from "src/components/pagination/pagination-list";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = PaginationList;
 const COMPONENT_NAME = "PaginationList";

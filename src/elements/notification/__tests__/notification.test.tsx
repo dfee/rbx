@@ -1,5 +1,5 @@
-import { COLORS } from "../../../base/helpers";
-import { Notification } from "../notification";
+import { COLORS } from "src/base/helpers";
+import { Notification } from "src/elements/notification/notification";
 
 import {
   hasProperties,
@@ -8,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Notification;
 const COMPONENT_NAME = "Notification";
@@ -37,13 +37,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS);
 
-      COLORS.map(color =>
+      COLORS.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

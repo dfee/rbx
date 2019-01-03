@@ -1,6 +1,6 @@
-import { Menu } from "../menu";
-import { MenuLabel } from "../menu-label";
-import { MenuList } from "../menu-list";
+import { Menu } from "src/components/menu/menu";
+import { MenuLabel } from "src/components/menu/menu-label";
+import { MenuList } from "src/components/menu/menu-list";
 
 import {
   hasProperties,
@@ -8,7 +8,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Menu;
 const COMPONENT_NAME = "Menu";

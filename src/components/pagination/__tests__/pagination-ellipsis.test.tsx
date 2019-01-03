@@ -1,18 +1,18 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { PaginationEllipsis } from "../pagination-ellipsis";
+} from "src/base/theme";
+import { PaginationEllipsis } from "src/components/pagination/pagination-ellipsis";
 
 import {
   hasProperties,
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = PaginationEllipsis;
 const COMPONENT_NAME = "PaginationEllipsis";
@@ -30,12 +30,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   const rootWrapper = makeShallowWrapper(node);
   const forwardRefWrapper = rootWrapper.children();
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {

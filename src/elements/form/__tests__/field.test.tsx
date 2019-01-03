@@ -1,6 +1,6 @@
-import { Field, FIELD_ALIGNMENTS, FIELD_KINDS } from "../field";
-import { FieldBody } from "../field-body";
-import { FieldLabel } from "../field-label";
+import { Field, FIELD_ALIGNMENTS, FIELD_KINDS } from "src/elements/form/field";
+import { FieldBody } from "src/elements/form/field-body";
+import { FieldLabel } from "src/elements/form/field-label";
 
 import {
   hasProperties,
@@ -10,7 +10,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Field;
 const COMPONENT_NAME = "Field";
@@ -42,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       validateOneOfPropType(propTypes, "align", FIELD_ALIGNMENTS);
 
       FIELD_ALIGNMENTS.map(align =>
-        FIELD_KINDS.map(kind =>
+        FIELD_KINDS.map(kind => {
           it(`should be aligned ${kind}-${align}`, () => {
             const node = makeNode({ align, kind });
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -53,47 +53,47 @@ describe(`${COMPONENT_NAME} component`, () => {
                   : `is-grouped-${align}`,
               ),
             ).toBe(true);
-          }),
-        ),
+          });
+        }),
       );
     });
 
     describe("expanded", () => {
       validateBoolPropType(propTypes, "expanded");
 
-      [false, true].map(expanded =>
+      [false, true].map(expanded => {
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
           const node = makeNode({ expanded });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-expanded")).toBe(expanded);
-        }),
-      );
+        });
+      });
     });
 
     describe("horizontal", () => {
       validateBoolPropType(propTypes, "horizontal");
 
-      [false, true].map(horizontal =>
+      [false, true].map(horizontal => {
         it(`should ${horizontal ? "" : "not "}be horizontal`, () => {
           const node = makeNode({ horizontal });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-horizontal")).toBe(horizontal);
-        }),
-      );
+        });
+      });
     });
 
     describe("kind", () => {
       validateOneOfPropType(propTypes, "kind", FIELD_KINDS);
 
-      FIELD_KINDS.map(kind =>
+      FIELD_KINDS.map(kind => {
         it(`should be kind ${kind}`, () => {
           const node = makeNode({ kind });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(
             wrapper.hasClass(kind === "group" ? "is-grouped" : "has-addons"),
           ).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("multiline", () => {
@@ -117,13 +117,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("narrow", () => {
       validateBoolPropType(propTypes, "narrow");
 
-      [false, true].map(narrow =>
+      [false, true].map(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = makeNode({ narrow });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
-        }),
-      );
+        });
+      });
     });
   });
 });

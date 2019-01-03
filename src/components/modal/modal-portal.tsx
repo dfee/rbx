@@ -1,16 +1,16 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from "classNames";
+import * as React from "react";
 
-import { Generic } from "../../base";
+import { Generic } from "src/base";
 import { initialValue, ModalContext, ModalContextValue } from "./modal-context";
 
 export interface ModalPortalModifierProps {
-  as?: React.ReactType<any>;
+  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
   className?: string;
   close: ModalContextValue["close"];
   closeOnBlur?: ModalContextValue["closeOnBlur"];
   closeOnEsc?: ModalContextValue["closeOnEsc"];
-  innerRef?: React.Ref<HTMLDivElement>;
+  innerRef?: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
 }
 
 export type ModalPortalProps = ModalPortalModifierProps;
@@ -40,8 +40,8 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
       <ModalContext.Provider
         value={{
           close,
-          closeOnBlur: closeOnBlur!,
-          closeOnEsc: closeOnEsc!,
+          closeOnBlur: closeOnBlur === true,
+          closeOnEsc: closeOnEsc === true,
         }}
       >
         <Generic
@@ -53,8 +53,8 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
     );
   }
 
-  private handleKeydown = (event: KeyboardEvent) => {
-    if (this.props.closeOnEsc && event.code === "Escape") {
+  private readonly handleKeydown = (event: KeyboardEvent) => {
+    if (this.props.closeOnEsc === true && event.code === "Escape") {
       this.props.close();
     }
   }

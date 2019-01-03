@@ -1,20 +1,13 @@
-import React from "react";
+import * as React from "react";
 
-import { canUseDOM, combineRefs } from "../utils";
+import { canUseDOM, combineRefs } from "src/utils";
+
+import { withWindow } from "./testing";
 
 describe("Utils", () => {
   describe("canUseDOM", () => {
-    let initWindow: Window;
-
-    beforeEach(() => {
-      initWindow = (global as any).window;
-    });
-
-    afterEach(() => {
-      (global as any).window = initWindow;
-    });
-
     it("should return true with createElement", () => {
+      // tslint:disable-next-line:no-any
       expect((global as any).window).toBeDefined();
       expect(window.document).toBeTruthy();
       expect(window.document.createElement).toBeTruthy();
@@ -22,24 +15,24 @@ describe("Utils", () => {
     });
 
     it("should return false without window", () => {
-      delete (global as any).window;
-      expect((global as any).window).toBeUndefined();
-      expect(canUseDOM()).toBe(false);
+      withWindow({}, () => {
+        expect(canUseDOM()).toBe(false);
+      });
     });
 
     it("should return false without document", () => {
-      (global as any).window = jest.fn();
-      expect((global as any).window).toBeDefined();
-      expect(window.document).toBeFalsy();
-      expect(canUseDOM()).toBe(false);
+      withWindow({ value: jest.fn() }, () => {
+        expect(window.document).toBeFalsy();
+        expect(canUseDOM()).toBe(false);
+      });
     });
 
     it("should return false without document.createElement", () => {
-      (global as any).window = { document: jest.fn() };
-      expect((global as any).window).toBeDefined();
-      expect(window.document).toBeTruthy();
-      expect(window.document.createElement).toBeFalsy();
-      expect(canUseDOM()).toBe(false);
+      withWindow({ value: { document: jest.fn() } }, () => {
+        expect(window.document).toBeTruthy();
+        expect(window.document.createElement).toBeFalsy();
+        expect(canUseDOM()).toBe(false);
+      });
     });
   });
 
@@ -55,7 +48,8 @@ describe("Utils", () => {
       expect(refObj.current).toBe(div);
     });
 
-    [undefined, null].map(refMissing =>
+    // tslint:disable-next-line:no-null-keyword
+    [undefined, null].map(refMissing => {
       it(`should handle ${
         refMissing === undefined ? "undefined" : "null"
       }`, () => {
@@ -65,7 +59,7 @@ describe("Utils", () => {
 
         combined(div);
         expect(refObj.current).toBe(div);
-      }),
-    );
+      });
+    });
   });
 });

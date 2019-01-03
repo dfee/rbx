@@ -1,4 +1,4 @@
-import { CardHeaderTitle } from "../card-header-title";
+import { CardHeaderTitle } from "src/components/card/card-header-title";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = CardHeaderTitle;
 const COMPONENT_NAME = "CardHeaderTitle";

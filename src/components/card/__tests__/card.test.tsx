@@ -1,8 +1,8 @@
-import { Card } from "../card";
-import { CardContent } from "../card-content";
-import { CardFooter } from "../card-footer";
-import { CardHeader } from "../card-header";
-import { CardImage } from "../card-image";
+import { Card } from "src/components/card/card";
+import { CardContent } from "src/components/card/card-content";
+import { CardFooter } from "src/components/card/card-footer";
+import { CardHeader } from "src/components/card/card-header";
+import { CardImage } from "src/components/card/card-image";
 
 import {
   hasProperties,
@@ -10,7 +10,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Card;
 const COMPONENT_NAME = "Card";

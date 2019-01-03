@@ -15,6 +15,7 @@ import {
   TEXT_TRANSFORMS,
   TEXT_WEIGHTS,
   transformFloatHelpers,
+  TransformFunc,
   transformHelpers,
   transformOtherHelpers,
   transformOverflowHelpers,
@@ -24,112 +25,140 @@ import {
   transformVisibilityHelpers,
   typographyHelpersPropTypes,
   visibilityHelpersPropTypes,
-} from "../helpers";
+} from "src/base/helpers";
 
 import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
-} from "../../__tests__/testing";
+  withMockError,
+} from "src/__tests__/testing";
 
-const CNAME = "dummy";
+const CNAME = "foo";
 const LOC = "prop";
 
-const makeItShouldPreserveUnknown = (transformer: any) =>
+// tslint:disable-next-line:no-any
+const testItShouldPreserveUnknown = (tfunc: TransformFunc<any>) => {
   it("should preserve unknown props", () => {
     const props = { foo: "bar" };
-    expect(transformer(props)).toEqual(props);
+    expect(tfunc(props, CNAME, LOC)).toEqual({ className: "", ...props });
   });
+};
 
-const makeItShouldNotSetClassNameOnEmpty = (transformer: any) =>
+// tslint:disable-next-line:no-any
+const testItShouldNotSetClassNameOnEmpty = (tfunc: TransformFunc<any>) => {
   it("should not set className on empty", () => {
-    expect(transformer({})).toEqual({});
+    expect(tfunc({}, CNAME, LOC)).toEqual({ className: "" });
   });
+};
 
-const makeItShouldPreserveCustomClassName = (transformer: any) =>
+// tslint:disable-next-line:no-any
+const testItShouldPreserveCustomClassName = (tfunc: TransformFunc<any>) => {
   it("should preserve custom className", () => {
     const className = "foo";
-    expect(transformer({ className })).toEqual({ className });
+    expect(tfunc({ className }, CNAME, LOC)).toEqual({ className });
   });
+};
+
+const testItShouldUseDefaultLocationProp = (
+  tfunc: TransformFunc<any>, // tslint:disable-line:no-any
+  props: any, // tslint:disable-line:no-any
+) => {
+  it("should use propTypes location = 'prop' as default", () => {
+    withMockError({}, ({ context: { error } }) => {
+      tfunc(props, "foo");
+      expect(error.mock.calls).toHaveLength(1);
+      expect(error.mock.calls[0][0]).toMatch(/Warning: Failed prop type.+/);
+    });
+  });
+};
 
 describe("Float helpers", () => {
+  const propTypes = floatHelpersPropTypes;
+  const tfunc = transformFloatHelpers;
+
   describe("propTypes", () => {
-    const propTypes = floatHelpersPropTypes;
     validateBoolPropType(propTypes, "clearfix");
     validateOneOfPropType(propTypes, "pull", FLOAT_PULLED_ALIGNMENTS);
+    testItShouldUseDefaultLocationProp(tfunc, { clearfix: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    const transformer = transformFloatHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
-    [false, true].map(clearfix =>
+    [false, true].map(clearfix => {
       it(`should ${clearfix ? "" : "not "}be clearfix`, () => {
-        expect(transformer({ clearfix }, CNAME, LOC)).toEqual(
-          clearfix ? { className: "is-clearfix" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ clearfix }, CNAME, LOC)).toEqual({
+          className: clearfix ? "is-clearfix" : "",
+        });
+      });
+    });
 
-    FLOAT_PULLED_ALIGNMENTS.map(align =>
+    FLOAT_PULLED_ALIGNMENTS.map(align => {
       it(`should pull ${align}`, () => {
-        expect(transformer({ pull: align }, CNAME, LOC)).toEqual({
+        expect(tfunc({ pull: align }, CNAME, LOC)).toEqual({
           className: `is-pulled-${align}`,
         });
-      }),
-    );
+      });
+    });
   });
 });
 
 describe("Overflow helpers", () => {
+  const propTypes = overflowHelpersPropTypes;
+  const tfunc = transformOverflowHelpers;
+
   describe("propTypes", () => {
-    const propTypes = overflowHelpersPropTypes;
     validateBoolPropType(propTypes, "clipped");
+    testItShouldUseDefaultLocationProp(tfunc, { clipped: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    const transformer = transformOverflowHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
-    [false, true].map(clipped =>
+    [false, true].map(clipped => {
       it(`should ${clipped ? "" : "not "}be clipped`, () => {
-        expect(transformer({ clipped }, CNAME, LOC)).toEqual(
-          clipped ? { className: "is-clipped" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ clipped }, CNAME, LOC)).toEqual({
+          className: clipped ? "is-clipped" : "",
+        });
+      });
+    });
   });
 });
 
 describe("Overlay helpers", () => {
+  const propTypes = overlayHelpersPropTypes;
+  const tfunc = transformOverlayHelpers;
+
   describe("propTypes", () => {
-    const propTypes = overlayHelpersPropTypes;
     validateBoolPropType(propTypes, "overlay");
+    testItShouldUseDefaultLocationProp(tfunc, { overlay: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    const transformer = transformOverlayHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
-    [false, true].map(overlay =>
+    [false, true].map(overlay => {
       it(`should ${overlay ? "" : "not "}be overlay`, () => {
-        expect(transformer({ overlay }, CNAME, LOC)).toEqual(
-          overlay ? { className: "is-overlay" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ overlay }, CNAME, LOC)).toEqual({
+          className: overlay ? "is-overlay" : "",
+        });
+      });
+    });
   });
 });
 
 describe("Typography modifiers", () => {
+  const propTypes = typographyHelpersPropTypes;
+  const tfunc = transformTypographyHelpers;
+
   describe("propTypes", () => {
-    const propTypes = typographyHelpersPropTypes;
     validateOneOfPropType(propTypes, "backgroundColor", [
       ...COLORS,
       ...GREY_COLORS,
@@ -140,183 +169,178 @@ describe("Typography modifiers", () => {
     validateOneOfPropType(propTypes, "textSize", TEXT_SIZES);
     validateOneOfPropType(propTypes, "textTransform", TEXT_TRANSFORMS);
     validateOneOfPropType(propTypes, "textWeight", TEXT_WEIGHTS);
+    testItShouldUseDefaultLocationProp(tfunc, { textColor: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    const transformer = transformTypographyHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
-    it("should not set className on empty", () => {
-      expect(transformer({}, CNAME, LOC)).toEqual({});
-    });
-
-    it("should preserve custom className", () => {
-      const className = "foo";
-      expect(transformer({ className }, CNAME, LOC)).toEqual({ className });
-    });
-
-    [...COLORS, ...GREY_COLORS].map(color =>
+    [...COLORS, ...GREY_COLORS].map(color => {
       it(`should make background-color ${color}`, () => {
-        expect(transformer({ backgroundColor: color }, CNAME, LOC)).toEqual({
+        expect(tfunc({ backgroundColor: color }, CNAME, LOC)).toEqual({
           className: `has-background-${color}`,
         });
-      }),
-    );
+      });
+    });
 
-    [false, true].map(italic =>
+    [false, true].map(italic => {
       it(`should ${italic ? "" : "not "}be italic`, () => {
-        expect(transformer({ italic }, CNAME, LOC)).toEqual(
-          italic ? { className: "is-italic" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ italic }, CNAME, LOC)).toEqual({
+          className: italic ? "is-italic" : "",
+        });
+      });
+    });
 
-    TEXT_ALIGNMENTS.map(align =>
+    TEXT_ALIGNMENTS.map(align => {
       it(`should align ${align}`, () => {
-        expect(transformer({ textAlignment: align }, CNAME, LOC)).toEqual({
+        expect(tfunc({ textAlignment: align }, CNAME, LOC)).toEqual({
           className: `has-text-${align}`,
         });
-      }),
-    );
+      });
+    });
 
-    [...COLORS, ...GREY_COLORS].map(color =>
+    [...COLORS, ...GREY_COLORS].map(color => {
       it(`should make text-color ${color}`, () => {
-        expect(transformer({ textColor: color }, CNAME, LOC)).toEqual({
+        expect(tfunc({ textColor: color }, CNAME, LOC)).toEqual({
           className: `has-text-${color}`,
         });
-      }),
-    );
+      });
+    });
 
-    TEXT_SIZES.map(size =>
+    TEXT_SIZES.map(size => {
       it(`should be size ${size}`, () => {
-        expect(transformer({ textSize: size }, CNAME, LOC)).toEqual({
+        expect(tfunc({ textSize: size }, CNAME, LOC)).toEqual({
           className: `is-size-${size}`,
         });
-      }),
-    );
+      });
+    });
 
-    TEXT_TRANSFORMS.map(textTransform =>
+    TEXT_TRANSFORMS.map(textTransform => {
       it(`should be ${textTransform}`, () => {
-        expect(transformer({ textTransform }, CNAME, LOC)).toEqual({
+        expect(tfunc({ textTransform }, CNAME, LOC)).toEqual({
           className: `is-${textTransform}`,
         });
-      }),
-    );
+      });
+    });
 
-    TEXT_WEIGHTS.map(weight =>
+    TEXT_WEIGHTS.map(weight => {
       it(`should be ${weight}`, () => {
-        expect(transformer({ textWeight: weight }, CNAME, LOC)).toEqual({
+        expect(tfunc({ textWeight: weight }, CNAME, LOC)).toEqual({
           className: `has-text-weight-${weight}`,
         });
-      }),
-    );
+      });
+    });
   });
 });
 
 describe("Visibility helpers", () => {
+  const propTypes = visibilityHelpersPropTypes;
+  const tfunc = transformVisibilityHelpers;
+
   describe("propTypes", () => {
-    const propTypes = visibilityHelpersPropTypes;
     validateBoolPropType(propTypes, "hidden");
     validateBoolPropType(propTypes, "invisible");
     validateBoolPropType(propTypes, "srOnly");
+    testItShouldUseDefaultLocationProp(tfunc, { hidden: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    const transformer = transformVisibilityHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
-    [false, true].map(hidden =>
+    [false, true].map(hidden => {
       it(`should ${hidden ? "" : "not "}be hidden`, () => {
-        expect(transformer({ hidden }, CNAME, LOC)).toEqual(
-          hidden ? { className: "is-hidden" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ hidden }, CNAME, LOC)).toEqual({
+          className: hidden ? "is-hidden" : "",
+        });
+      });
+    });
 
-    [false, true].map(invisible =>
+    [false, true].map(invisible => {
       it(`should ${invisible ? "" : "not "}be invisible`, () => {
-        expect(transformer({ invisible }, CNAME, LOC)).toEqual(
-          invisible ? { className: "is-invisible" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ invisible }, CNAME, LOC)).toEqual({
+          className: invisible ? "is-invisible" : "",
+        });
+      });
+    });
 
-    [false, true].map(srOnly =>
+    [false, true].map(srOnly => {
       it(`should ${srOnly ? "" : "not "}be srOnly`, () => {
-        expect(transformer({ srOnly }, CNAME, LOC)).toEqual(
-          srOnly ? { className: "is-sr-only" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ srOnly }, CNAME, LOC)).toEqual({
+          className: srOnly ? "is-sr-only" : "",
+        });
+      });
+    });
   });
 });
 
 describe("Other helpers", () => {
+  const propTypes = otherHelpersPropTypes;
+  const tfunc = transformOtherHelpers;
+
   describe("propTypes", () => {
-    const propTypes = otherHelpersPropTypes;
     validateBoolPropType(propTypes, "marginless");
     validateBoolPropType(propTypes, "paddingless");
     validateBoolPropType(propTypes, "radiusless");
     validateBoolPropType(propTypes, "shadowless");
     validateBoolPropType(propTypes, "unselectable");
+    testItShouldUseDefaultLocationProp(tfunc, { marginless: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    const transformer = transformOtherHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
-    [false, true].map(marginless =>
+    [false, true].map(marginless => {
       it(`should ${marginless ? "" : "not "}be marginless`, () => {
-        expect(transformer({ marginless }, CNAME, LOC)).toEqual(
-          marginless ? { className: "is-marginless" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ marginless }, CNAME, LOC)).toEqual({
+          className: marginless ? "is-marginless" : "",
+        });
+      });
+    });
 
-    [false, true].map(paddingless =>
+    [false, true].map(paddingless => {
       it(`should ${paddingless ? "" : "not "}be paddingless`, () => {
-        expect(transformer({ paddingless }, CNAME, LOC)).toEqual(
-          paddingless ? { className: "is-paddingless" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ paddingless }, CNAME, LOC)).toEqual({
+          className: paddingless ? "is-paddingless" : "",
+        });
+      });
+    });
 
-    [false, true].map(radiusless =>
+    [false, true].map(radiusless => {
       it(`should ${radiusless ? "" : "not "}be radiusless`, () => {
-        expect(transformer({ radiusless }, CNAME, LOC)).toEqual(
-          radiusless ? { className: "is-radiusless" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ radiusless }, CNAME, LOC)).toEqual({
+          className: radiusless ? "is-radiusless" : "",
+        });
+      });
+    });
 
-    [false, true].map(shadowless =>
+    [false, true].map(shadowless => {
       it(`should ${shadowless ? "" : "not "}be shadowless`, () => {
-        expect(transformer({ shadowless }, CNAME, LOC)).toEqual(
-          shadowless ? { className: "is-shadowless" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ shadowless }, CNAME, LOC)).toEqual({
+          className: shadowless ? "is-shadowless" : "",
+        });
+      });
+    });
 
-    [false, true].map(unselectable =>
+    [false, true].map(unselectable => {
       it(`should ${unselectable ? "" : "not "}be unselectable`, () => {
-        expect(transformer({ unselectable }, CNAME, LOC)).toEqual(
-          unselectable ? { className: "is-unselectable" } : {},
-        );
-      }),
-    );
+        expect(tfunc({ unselectable }, CNAME, LOC)).toEqual({
+          className: unselectable ? "is-unselectable" : "",
+        });
+      });
+    });
   });
 });
 
 describe("Responsive modifiers", () => {
+  const propTypes = responsiveHelpersPropTypes;
+  const tfunc = transformResponsiveHelpers;
   describe("propTypes", () => {
-    const propTypes = responsiveHelpersPropTypes;
-
     validatePropType(propTypes, "responsive", [
       { value: {}, valid: true },
       { value: "string", valid: false },
@@ -360,14 +384,16 @@ describe("Responsive modifiers", () => {
         },
       ]),
     );
+
+    testItShouldUseDefaultLocationProp(tfunc, { responsive: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    const transformer = transformResponsiveHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
+    // tslint:disable-next-line:max-func-body-length
     BREAKPOINTS.map(breakpoint => {
       // these sizes don't support the `only` prop.
       const noOnly = ["mobile", "fullhd", "desktop"];
@@ -376,116 +402,92 @@ describe("Responsive modifiers", () => {
         DISPLAYS.map(value =>
           [undefined, false, true]
             .filter(() => noOnly.indexOf(breakpoint) !== -1)
-            .map(only =>
-              it(`should be display ${value} ${only ? "only" : ""}`, () => {
-                const display =
-                  only === undefined ? { value } : { value, only };
+            .map(only => {
+              const isOnly = only === true;
+              it(`should be display ${value} ${isOnly ? "only" : ""}`, () => {
+                const display = isOnly ? { only, value } : { value };
                 expect(
-                  transformer(
+                  tfunc(
                     {
                       responsive: { [breakpoint]: { display } },
                     },
                     CNAME,
                     LOC,
                   ),
-                ).toEqual(
-                  value
-                    ? {
-                        className: `is-${value}-${breakpoint}${
-                          only ? "-only" : ""
-                        }`,
-                      }
-                    : {},
-                );
-              }),
-            ),
+                ).toEqual({
+                  className: `is-${value}-${breakpoint}${isOnly ? "-only" : ""}`,
+                });
+              });
+            }),
         );
 
         [false, true].map(value =>
           [undefined, false, true]
             .filter(() => noOnly.indexOf(breakpoint) !== -1)
-            .map(only =>
+            .map(only => {
+              const isOnly = only === true;
               it(`should ${value ? "" : "not "}be hidden ${
-                only ? "only" : ""
+                isOnly ? "only" : ""
               }`, () => {
-                const hide = only === undefined ? { value } : { value, only };
+                const hide = isOnly ? { only, value } : { value };
                 expect(
-                  transformer(
-                    {
-                      responsive: { [breakpoint]: { hide } },
-                    },
-                    CNAME,
-                    LOC,
-                  ),
-                ).toEqual(
-                  value
-                    ? {
-                        className: `is-hidden-${breakpoint}${
-                          only ? "-only" : ""
-                        }`,
-                      }
-                    : {},
-                );
-              }),
-            ),
+                  tfunc({ responsive: { [breakpoint]: { hide } } }, CNAME, LOC),
+                ).toEqual({
+                  className: value
+                    ? `is-hidden-${breakpoint}${isOnly ? "-only" : ""}`
+                    : "",
+                });
+              });
+            }),
         );
 
         TEXT_ALIGNMENTS.map(value =>
           [undefined, false, true]
             .filter(() => noOnly.indexOf(breakpoint) !== -1)
-            .map(only =>
+            .map(only => {
+              const isOnly = only === true;
               it(`should have text aligned ${value} ${
-                only ? "only" : ""
+                isOnly ? "only" : ""
               }`, () => {
                 const textAlignment =
-                  only === undefined ? { value } : { value, only };
+                  only === isOnly ? { only, value } : { value };
                 expect(
-                  transformer(
-                    {
-                      responsive: { [breakpoint]: { textAlignment } },
-                    },
+                  tfunc(
+                    { responsive: { [breakpoint]: { textAlignment } } },
                     CNAME,
                     LOC,
                   ),
-                ).toEqual(
-                  value
-                    ? {
-                        className: `has-text-${value}-${breakpoint}${
-                          only ? "-only" : ""
-                        }`,
-                      }
-                    : {},
-                );
-              }),
-            ),
+                ).toEqual({
+                  className: `has-text-${value}-${breakpoint}${
+                    isOnly ? "-only" : ""
+                  }`,
+                });
+              });
+            }),
         );
 
         TEXT_SIZES.map(value =>
           [undefined, false, true]
             .filter(() => noOnly.indexOf(breakpoint) !== -1)
-            .map(only =>
-              it(`should have text size ${value} ${only ? "only" : ""}`, () => {
-                const textSize =
-                  only === undefined ? { value } : { value, only };
+            .map(only => {
+              const isOnly = only === true;
+              it(`should have text size ${value} ${
+                isOnly ? "only" : ""
+              }`, () => {
+                const textSize = only === isOnly ? { only, value } : { value };
                 expect(
-                  transformer(
-                    {
-                      responsive: { [breakpoint]: { textSize } },
-                    },
+                  tfunc(
+                    { responsive: { [breakpoint]: { textSize } } },
                     CNAME,
                     LOC,
                   ),
-                ).toEqual(
-                  value
-                    ? {
-                        className: `is-size-${value}-${breakpoint}${
-                          only ? "-only" : ""
-                        }`,
-                      }
-                    : {},
-                );
-              }),
-            ),
+                ).toEqual({
+                  className: `is-size-${value}-${breakpoint}${
+                    isOnly ? "-only" : ""
+                  }`,
+                });
+              });
+            }),
         );
       });
     });
@@ -528,50 +530,50 @@ describe("Modifiers", () => {
   });
 
   describe("transform", () => {
-    const transformer = transformHelpers;
-    makeItShouldPreserveUnknown(transformer);
-    makeItShouldNotSetClassNameOnEmpty(transformer);
-    makeItShouldPreserveCustomClassName(transformer);
+    const tfunc = transformHelpers;
+    testItShouldPreserveUnknown(tfunc);
+    testItShouldNotSetClassNameOnEmpty(tfunc);
+    testItShouldPreserveCustomClassName(tfunc);
 
     it("should apply float transforms", () => {
-      expect(transformer({ clearfix: true }, CNAME, LOC)).toEqual({
+      expect(tfunc({ clearfix: true }, CNAME, LOC)).toEqual({
         className: "is-clearfix",
       });
     });
 
     it("should apply overflow transforms", () => {
-      expect(transformer({ clipped: true }, CNAME, LOC)).toEqual({
+      expect(tfunc({ clipped: true }, CNAME, LOC)).toEqual({
         className: "is-clipped",
       });
     });
 
     it("should apply overlay transforms", () => {
-      expect(transformer({ overlay: true }, CNAME, LOC)).toEqual({
+      expect(tfunc({ overlay: true }, CNAME, LOC)).toEqual({
         className: "is-overlay",
       });
     });
 
     it("should apply typography transforms", () => {
-      expect(transformer({ textSize: 1 }, CNAME, LOC)).toEqual({
+      expect(tfunc({ textSize: 1 }, CNAME, LOC)).toEqual({
         className: "is-size-1",
       });
     });
 
     it("should apply visibility transforms", () => {
-      expect(transformer({ hidden: true }, CNAME, LOC)).toEqual({
+      expect(tfunc({ hidden: true }, CNAME, LOC)).toEqual({
         className: "is-hidden",
       });
     });
 
     it("should apply other transforms", () => {
-      expect(transformer({ marginless: true }, CNAME, LOC)).toEqual({
+      expect(tfunc({ marginless: true }, CNAME, LOC)).toEqual({
         className: "is-marginless",
       });
     });
 
     it("should apply responsive transforms", () => {
       expect(
-        transformer(
+        tfunc(
           { responsive: { mobile: { textSize: { value: 1 } } } },
           CNAME,
           LOC,

@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { tuple } from "src/utils";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
 
@@ -38,7 +38,6 @@ export const Field = Object.assign(
     (props, ref) => {
       const {
         align,
-        as,
         expanded,
         horizontal,
         kind,
@@ -47,7 +46,7 @@ export const Field = Object.assign(
         ...rest
       } = props;
 
-      let k = null;
+      let k: string | undefined;
       if (kind === "addons") {
         k = "has-addons";
       } else if (kind === "group") {
@@ -58,8 +57,8 @@ export const Field = Object.assign(
         "field",
         {
           [`${k}`]: k,
-          [`${k}-${align}`]: k && align,
-          [`${k}-multiline`]: k === "is-grouped" && multiline,
+          [`${k}-${align}`]: k !== undefined && align !== undefined,
+          [`${k}-multiline`]: k === "is-grouped" && multiline === true,
           "is-expanded": expanded,
           "is-horizontal": horizontal,
           "is-narrow": narrow,
@@ -67,7 +66,7 @@ export const Field = Object.assign(
         rest.className,
       );
 
-      return <Generic as={as!} ref={ref} {...rest} />;
+      return <Generic ref={ref} {...rest} />;
     },
     { as: "div" },
   ),

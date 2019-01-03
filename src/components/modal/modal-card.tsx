@@ -1,7 +1,7 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from "classNames";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
 import { ModalCardBody } from "./modal-card-body";
 import { ModalCardFoot } from "./modal-card-foot";
 import { ModalCardHead } from "./modal-card-head";

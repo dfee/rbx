@@ -9,14 +9,17 @@
     "noImplicitReturns": true,
     "noErrorTruncation": true,
     "noUnusedLocals": true,
+    "plugins": [{ "name": "typescript-tslint-plugin" }],
     "removeComments": true,
-    "rootDirs": ["src", "stories"],
+    "rootDirs": ["src"],
     "sourceMap": true,
     "strictNullChecks": true,
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es6"
   },
-  "include": ["src", "docs"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "docs"]
+  // "include": ["src", "docs"],
+  // "exclude": ["node_modules", "dist"]
 }

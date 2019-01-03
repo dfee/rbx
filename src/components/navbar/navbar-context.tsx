@@ -1,10 +1,10 @@
-import React from "react";
+import * as React from "react";
 
-import { noop } from "../../utils";
+import { noop } from "src/utils";
 
 export interface NavbarContextValue {
   active: boolean;
-  setActive: (value: boolean) => void;
+  setActive(value: boolean): void;
 }
 
 export const initialValue: NavbarContextValue = {

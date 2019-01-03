@@ -1,4 +1,4 @@
-import { ModalCardFoot } from "../modal-card-foot";
+import { ModalCardFoot } from "src/components/modal/modal-card-foot";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ModalCardFoot;
 const COMPONENT_NAME = "ModalCardFoot";

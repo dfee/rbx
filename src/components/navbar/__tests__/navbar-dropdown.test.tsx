@@ -1,4 +1,4 @@
-import { NavbarDropdown } from "../navbar-dropdown";
+import { NavbarDropdown } from "src/components/navbar/navbar-dropdown";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = NavbarDropdown;
 const COMPONENT_NAME = "NavbarDropdown";
@@ -36,25 +36,25 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("boxed", () => {
       validateBoolPropType(propTypes, "boxed");
 
-      [false, true].map(boxed =>
+      [false, true].map(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
           const node = makeNode({ boxed });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
-        }),
-      );
+        });
+      });
     });
 
     describe("right", () => {
       validateBoolPropType(propTypes, "right");
 
-      [false, true].map(right =>
+      [false, true].map(right => {
         it(`should ${right ? "" : "not "}be right`, () => {
           const node = makeNode({ right });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-right")).toBe(right);
-        }),
-      );
+        });
+      });
     });
   });
 });

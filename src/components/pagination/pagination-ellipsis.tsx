@@ -1,11 +1,14 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from "classNames";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
 
 export type PaginationEllipsisProps = HelpersProps;
 
-export const PaginationEllipsis = forwardRefAs<PaginationEllipsisProps, "span">(
+export const PaginationEllipsis = forwardRefAs<
+  PaginationEllipsisProps,
+  "span"
+>(
   ({ className, ...rest }, ref) => (
     <li>
       <Generic

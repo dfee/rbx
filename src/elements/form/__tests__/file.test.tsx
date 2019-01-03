@@ -1,5 +1,5 @@
-import { COLORS } from "../../../base/helpers";
-import { File, FILE_ALIGNMENTS, FILE_SIZES } from "../file";
+import { COLORS } from "src/base/helpers";
+import { File, FILE_ALIGNMENTS, FILE_SIZES } from "src/elements/form/file";
 
 import {
   hasProperties,
@@ -9,7 +9,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = File;
 const COMPONENT_NAME = "File";
@@ -38,73 +38,73 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("align", () => {
       validateOneOfPropType(propTypes, "align", FILE_ALIGNMENTS);
 
-      FILE_ALIGNMENTS.map(align =>
+      FILE_ALIGNMENTS.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("boxed", () => {
       validateBoolPropType(propTypes, "boxed");
 
-      [false, true].map(boxed =>
+      [false, true].map(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
           const node = makeNode({ boxed });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
-        }),
-      );
+        });
+      });
     });
 
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS);
 
-      COLORS.map(color =>
+      COLORS.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 
-      [false, true].map(fullwidth =>
+      [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = makeNode({ fullwidth });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
-        }),
-      );
+        });
+      });
     });
 
     describe("hasName", () => {
       validateBoolPropType(propTypes, "hasName");
 
-      [false, true].map(hasName =>
+      [false, true].map(hasName => {
         it(`should ${hasName ? "" : "not "}have name`, () => {
           const node = makeNode({ hasName });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-name")).toBe(hasName);
-        }),
-      );
+        });
+      });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", FILE_SIZES);
 
-      FILE_SIZES.map(size =>
+      FILE_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

@@ -1,6 +1,6 @@
-import { BREAKPOINTS } from "../../../base/helpers";
-import { Column } from "../column";
-import { Columns, COLUMNS_GAP_SIZES } from "../columns";
+import { BREAKPOINTS } from "src/base/helpers";
+import { Column } from "src/grid/columns/column";
+import { Columns, COLUMNS_GAP_SIZES } from "src/grid/columns/columns";
 
 import {
   hasProperties,
@@ -11,7 +11,7 @@ import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Columns;
 const COMPONENT_NAME = "Columns";
@@ -44,55 +44,55 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("breakpoints", () => {
       validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
 
-      BREAKPOINTS.map(breakpoint =>
+      BREAKPOINTS.map(breakpoint => {
         it(`should have breakpoint ${breakpoint}`, () => {
           const node = makeNode({ breakpoint });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
           expect(wrapper.hasClass("is-variable")).toBe(false);
-        }),
-      );
+        });
+      });
     });
 
     describe("centered", () => {
       validateBoolPropType(propTypes, "centered");
 
-      [false, true].map(centered =>
+      [false, true].map(centered => {
         it(`should ${centered ? "" : "not "}be centered`, () => {
           const node = makeNode({ centered });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-centered")).toBe(centered);
           expect(wrapper.hasClass("is-variable")).toBe(false);
-        }),
-      );
+        });
+      });
     });
 
     describe("gapless", () => {
       validateBoolPropType(propTypes, "gapless");
 
-      [false, true].map(gapless =>
+      [false, true].map(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
           const node = makeNode({ gapless });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-gapless")).toBe(gapless);
           expect(wrapper.hasClass("is-variable")).toBe(false);
-        }),
-      );
+        });
+      });
     });
 
     describe("gapSize", () => {
       validateOneOfPropType(propTypes, "gapSize", COLUMNS_GAP_SIZES);
 
-      COLUMNS_GAP_SIZES.map(gapSize =>
+      COLUMNS_GAP_SIZES.map(gapSize => {
         it(`should have gapSize ${gapSize}`, () => {
           const node = makeNode({ gapSize });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${gapSize}`)).toBe(true);
           expect(wrapper.hasClass("is-variable")).toBe(true);
-        }),
-      );
+        });
+      });
 
-      BREAKPOINTS.map(breakpoint =>
+      BREAKPOINTS.map(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
             ...COLUMNS_GAP_SIZES.map(value => ({
@@ -110,7 +110,7 @@ describe(`${COMPONENT_NAME} component`, () => {
             },
           ]);
 
-          COLUMNS_GAP_SIZES.map(gapSize =>
+          COLUMNS_GAP_SIZES.map(gapSize => {
             it(`should have gapSize ${gapSize}`, () => {
               const node = makeNode({ [breakpoint]: { gapSize } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
@@ -120,23 +120,23 @@ describe(`${COMPONENT_NAME} component`, () => {
                 true,
               );
               expect(wrapper.hasClass("is-variable")).toBe(true);
-            }),
-          );
-        }),
-      );
+            });
+          });
+        });
+      });
     });
 
     describe("multiline", () => {
       validateBoolPropType(propTypes, "multiline");
 
-      [false, true].map(multiline =>
+      [false, true].map(multiline => {
         it(`should ${multiline ? "" : "not "}be multiline`, () => {
           const node = makeNode({ multiline });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-multiline")).toBe(multiline);
           expect(wrapper.hasClass("is-variable")).toBe(false);
-        }),
-      );
+        });
+      });
     });
   });
 });

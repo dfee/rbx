@@ -1,4 +1,4 @@
-import { PanelHeading } from "../panel-heading";
+import { PanelHeading } from "src/components/panel/panel-heading";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = PanelHeading;
 const COMPONENT_NAME = "PanelHeading";

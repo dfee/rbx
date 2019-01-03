@@ -1,4 +1,5 @@
-import { List } from "../list";
+import { List } from "src/components/list/list";
+import { ListItem } from "src/components/list/list-item";
 
 import {
   hasProperties,
@@ -7,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = List;
 const COMPONENT_NAME = "List";
@@ -18,6 +19,7 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
+    Item: ListItem,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
@@ -36,13 +38,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("hoverable", () => {
       validateBoolPropType(propTypes, "hoverable");
 
-      [false, true].map(hoverable =>
+      [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = makeNode({ hoverable });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
-        }),
-      );
+        });
+      });
     });
   });
 });

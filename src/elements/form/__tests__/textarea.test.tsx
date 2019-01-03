@@ -1,5 +1,9 @@
-import { COLORS } from "../../../base/helpers";
-import { Textarea, TEXTAREA_SIZES, TEXTAREA_STATES } from "../textarea";
+import { COLORS } from "src/base/helpers";
+import {
+  Textarea,
+  TEXTAREA_SIZES,
+  TEXTAREA_STATES,
+} from "src/elements/form/textarea";
 
 import {
   hasProperties,
@@ -9,7 +13,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Textarea;
 const COMPONENT_NAME = "Textarea";
@@ -41,49 +45,49 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS);
 
-      COLORS.map(color =>
+      COLORS.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("fixedSize", () => {
       validateBoolPropType(propTypes, "fixedSize");
 
-      [false, true].map(fixedSize =>
+      [false, true].map(fixedSize => {
         it(`should ${fixedSize ? "" : "not "}be fixed size`, () => {
           const node = makeNode({ fixedSize });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
-        }),
-      );
+        });
+      });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", TEXTAREA_SIZES);
 
-      TEXTAREA_SIZES.map(size =>
+      TEXTAREA_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("state", () => {
       validateOneOfPropType(propTypes, "state", TEXTAREA_STATES);
 
-      TEXTAREA_STATES.map(state =>
+      TEXTAREA_STATES.map(state => {
         it(`should be ${state}`, () => {
           const node = makeNode({ state });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

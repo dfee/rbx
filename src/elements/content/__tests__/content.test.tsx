@@ -1,5 +1,5 @@
-import { Content, CONTENT_SIZES } from "../content";
-import { ContentOrderedList } from "../content-ordered-list";
+import { Content, CONTENT_SIZES } from "src/elements/content/content";
+import { ContentOrderedList } from "src/elements/content/content-ordered-list";
 
 import {
   hasProperties,
@@ -8,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Content;
 const COMPONENT_NAME = "Content";
@@ -38,13 +38,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", CONTENT_SIZES);
 
-      CONTENT_SIZES.map(size =>
+      CONTENT_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

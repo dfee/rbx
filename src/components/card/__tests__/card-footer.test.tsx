@@ -1,5 +1,5 @@
-import { CardFooter } from "../card-footer";
-import { CardFooterItem } from "../card-footer-item";
+import { CardFooter } from "src/components/card/card-footer";
+import { CardFooterItem } from "src/components/card/card-footer-item";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = CardFooter;
 const COMPONENT_NAME = "CardFooter";

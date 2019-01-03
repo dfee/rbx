@@ -1,4 +1,4 @@
-import { HeroBody } from "../hero-body";
+import { HeroBody } from "src/layout/hero/hero-body";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = HeroBody;
 const COMPONENT_NAME = "HeroBody";

@@ -1,23 +1,26 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
+} from "src/base/theme";
 import {
   DROPDOWN_ALIGNMENTS,
   DropdownContainer,
   DropdownContainerProps,
   DropdownContainerState,
-} from "../dropdown-container";
-import { DropdownContext, DropdownContextValue } from "../dropdown-context";
+} from "src/components/dropdown/dropdown-container";
+import {
+  DropdownContext,
+  DropdownContextValue,
+} from "src/components/dropdown/dropdown-context";
 
 import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   withEnzymeMount,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 // const COMPONENT = DropdownContainer;
 const COMPONENT_NAME = "DropdownContainer";
@@ -35,12 +38,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   const dropdownContextProviderWrapper = Enzyme.shallow(node);
   const forwardRefWrapper = dropdownContextProviderWrapper.children();
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -56,33 +60,33 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   describe("props", () => {
     describe("active", () => {
-      [false, true].map(active =>
+      [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = makeNode({ active });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
-        }),
-      );
+        });
+      });
     });
 
     describe("align", () => {
-      DROPDOWN_ALIGNMENTS.map(align =>
+      DROPDOWN_ALIGNMENTS.map(align => {
         it(`should be aligned ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("hoverable", () => {
-      [false, true].map(hoverable =>
+      [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = makeNode({ hoverable });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
-        }),
-      );
+        });
+      });
     });
 
     describe("managed", () => {
@@ -131,10 +135,12 @@ describe(`${COMPONENT_NAME} component`, () => {
       });
 
       [undefined, false, true].map(initialActive =>
-        [undefined, false, true].map(managed =>
+        [undefined, false, true].map(managed => {
+          const isManaged = managed === true;
+          const initialActiveAsBool = initialActive === true;
           it(`should ${
-            managed ? "" : "not "
-          }set DropdownContainer's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
+            isManaged ? "" : "not "
+          }set DropdownContainer's state.active (${initialActive} as ${initialActiveAsBool} -> ${!initialActiveAsBool})`, () => {
             let contextValue: DropdownContextValue | undefined;
             const innerRef = React.createRef<HTMLDivElement>();
             const wrapper = Enzyme.mount(
@@ -147,36 +153,39 @@ describe(`${COMPONENT_NAME} component`, () => {
                 <DropdownContext.Consumer>
                   {context => {
                     contextValue = context;
-                    return null;
+
+                    return undefined;
                   }}
                 </DropdownContext.Consumer>
               </DropdownContainer>,
             );
 
             try {
-              expect(contextValue!.active).toBe(!!initialActive);
-              contextValue!.setActive(!contextValue!.active);
+              if (contextValue === undefined) {
+                throw new Error("should have contextValue");
+              }
+
+              expect(contextValue.active).toBe(initialActiveAsBool);
+              contextValue.setActive(!contextValue.active);
               expect((wrapper.state() as DropdownContainerState).active).toBe(
-                managed ? !!initialActive : !initialActive,
+                isManaged ? initialActiveAsBool : !initialActiveAsBool,
               );
             } finally {
-              if (wrapper) {
-                wrapper.unmount();
-              }
+              wrapper.unmount();
             }
-          }),
-        ),
+          });
+        }),
       );
     });
 
     describe("up", () => {
-      [false, true].map(up =>
+      [false, true].map(up => {
         it(`should ${up ? "" : "not "}be up`, () => {
           const node = makeNode({ up });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-up")).toBe(up);
-        }),
-      );
+        });
+      });
     });
   });
 });

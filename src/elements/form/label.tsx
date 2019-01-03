@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { tuple } from "src/utils";
 import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
 
@@ -29,16 +29,22 @@ const identifyLabelDiscriminator = (children: React.ReactNode) => {
     if (typeof child === "object") {
       if (
         child.type === Checkbox ||
-        (child.type === "input" && child.props.type === "checkbox")
+        (child.type === "input" &&
+          (child.props as React.InputHTMLAttributes<Element>).type ===
+            "checkbox")
       ) {
         discriminator = "checkbox";
       } else if (
         child.type === Radio ||
-        (child.type === "input" && child.props.type === "radio")
+        (child.type === "input" &&
+          (child.props as React.InputHTMLAttributes<Element>).type === "radio")
       ) {
         discriminator = "radio";
       } else if (child.type === React.Fragment) {
-        discriminator = identifyLabelDiscriminator(child.props.children);
+        discriminator = identifyLabelDiscriminator(
+          (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
+            .children,
+        );
       }
     }
   });
@@ -50,6 +56,7 @@ export const Label = Object.assign(
   forwardRefAs<LabelProps, "label">(
     ({ className, disabled, size, ...rest }, ref) => {
       const discriminator = identifyLabelDiscriminator(rest.children);
+
       return (
         <Generic
           className={classNames(

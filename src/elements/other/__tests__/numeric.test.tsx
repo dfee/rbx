@@ -1,4 +1,4 @@
-import { Numeric } from "../numeric";
+import { Numeric } from "src/elements/other/numeric";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Numeric;
 const COMPONENT_NAME = "Numeric";

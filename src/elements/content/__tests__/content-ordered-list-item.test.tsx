@@ -1,4 +1,4 @@
-import { ContentOrderedListItem } from "../content-ordered-list-item";
+import { ContentOrderedListItem } from "src/elements/content/content-ordered-list-item";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ContentOrderedListItem;
 const COMPONENT_NAME = "ContentOrderedListItem";

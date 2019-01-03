@@ -1,5 +1,5 @@
-import { BREAKPOINTS } from "../../../base/helpers";
-import { Container } from "../container";
+import { BREAKPOINTS } from "src/base/helpers";
+import { Container } from "src/elements/container/container";
 
 import {
   hasProperties,
@@ -9,7 +9,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Container;
 const COMPONENT_NAME = "Container";
@@ -38,25 +38,25 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("breakpoint", () => {
       validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
 
-      BREAKPOINTS.map(breakpoint =>
+      BREAKPOINTS.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = makeNode({ breakpoint });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("fluid", () => {
       validateBoolPropType(propTypes, "fluid");
 
-      [false, true].map(fluid =>
+      [false, true].map(fluid => {
         it(`should ${fluid ? "" : "not "}be fluid`, () => {
           const node = makeNode({ fluid });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fluid")).toBe(fluid);
-        }),
-      );
+        });
+      });
     });
   });
 });

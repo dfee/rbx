@@ -1,4 +1,4 @@
-import { FileLabel } from "../file-label";
+import { FileLabel } from "src/elements/form/file-label";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = FileLabel;
 const COMPONENT_NAME = "FileLabel";

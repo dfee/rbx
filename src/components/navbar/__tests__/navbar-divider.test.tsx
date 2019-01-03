@@ -1,4 +1,4 @@
-import { NavbarDivider } from "../navbar-divider";
+import { NavbarDivider } from "src/components/navbar/navbar-divider";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = NavbarDivider;
 const COMPONENT_NAME = "NavbarDivider";

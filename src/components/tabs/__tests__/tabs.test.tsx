@@ -1,7 +1,12 @@
-import React from "react";
+import * as React from "react";
 
-import { Tab } from "../tab";
-import { Tabs, TABS_ALIGNMENTS, TABS_SIZES, TABS_TYPES } from "../tabs";
+import { Tab } from "src/components/tabs/tab";
+import {
+  Tabs,
+  TABS_ALIGNMENTS,
+  TABS_SIZES,
+  TABS_TYPES,
+} from "src/components/tabs/tabs";
 
 import {
   hasProperties,
@@ -11,7 +16,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Tabs;
 const COMPONENT_NAME = "Tabs";
@@ -41,13 +46,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("align", () => {
       validateOneOfPropType(propTypes, "align", TABS_ALIGNMENTS);
 
-      TABS_ALIGNMENTS.map(align =>
+      TABS_ALIGNMENTS.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("children", () => {
@@ -64,37 +69,37 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 
-      [false, true].map(fullwidth =>
+      [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = makeNode({ fullwidth });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
-        }),
-      );
+        });
+      });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", TABS_SIZES);
 
-      TABS_SIZES.map(size =>
+      TABS_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("type", () => {
       validateOneOfPropType(propTypes, "type", TABS_TYPES);
 
-      TABS_TYPES.map(type =>
-        it(`should be ${type}`, () => {
-          const node = makeNode({ type });
+      TABS_TYPES.map(isType => {
+        it(`should be ${isType}`, () => {
+          const node = makeNode({ type: isType });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`is-${type}`)).toBe(true);
-        }),
-      );
+          expect(wrapper.hasClass(`is-${isType}`)).toBe(true);
+        });
+      });
     });
   });
 });

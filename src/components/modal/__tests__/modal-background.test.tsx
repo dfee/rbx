@@ -1,15 +1,15 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { ModalBackground } from "../modal-background";
+} from "src/base/theme";
+import { ModalBackground } from "src/components/modal/modal-background";
 import {
   initialValue as modalInitialValue,
   ModalContextValue,
-} from "../modal-context";
+} from "src/components/modal/modal-context";
 
 import {
   hasProperties,
@@ -17,7 +17,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validatePropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ModalBackground;
 const COMPONENT_NAME = "ModalBackground";
@@ -31,12 +31,13 @@ const makeShallowWrapperInModalContextConsumer = (
   modalContextValue: ModalContextValue = modalInitialValue,
 ) => {
   const modalContextConsumerWrapper = Enzyme.shallow(node);
-  const ModalContextConsumerChildren = modalContextConsumerWrapper.props()
-    .children;
-  const modalContextConsumerChildrenWrapper = Enzyme.shallow(
+  const ModalContextConsumerChildren = (modalContextConsumerWrapper.props() as {
+    children: React.FC<ModalContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ModalContextConsumerChildren {...modalContextValue} />,
   );
-  return modalContextConsumerChildrenWrapper;
 };
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
@@ -49,12 +50,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
     modalContextValue,
   );
   const themeContextConsumerWrapper = modalContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -76,7 +78,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
-        { value: () => null, valid: true, descriptor: "func" },
+        { value: () => undefined, valid: true, descriptor: "func" },
         { value: "string", valid: false },
       ]);
 

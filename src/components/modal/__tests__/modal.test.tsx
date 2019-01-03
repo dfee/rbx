@@ -1,21 +1,23 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
-import { Modal } from "../modal";
-import { ModalBackground } from "../modal-background";
-import { ModalCard } from "../modal-card";
-import { ModalClose } from "../modal-close";
-import { ModalContainer } from "../modal-container";
-import { ModalContent } from "../modal-content";
-import { ModalContext } from "../modal-context";
-import { ModalPortal } from "../modal-portal";
+import { Modal } from "src/components/modal/modal";
+import { ModalBackground } from "src/components/modal/modal-background";
+import { ModalCard } from "src/components/modal/modal-card";
+import { ModalClose } from "src/components/modal/modal-close";
+import { ModalContainer } from "src/components/modal/modal-container";
+import { ModalContent } from "src/components/modal/modal-content";
+import { ModalContext } from "src/components/modal/modal-context";
+import { ModalPortal } from "src/components/modal/modal-portal";
 
 import {
   hasProperties,
   makeNodeFactory,
+  makeTestPropForwarding,
   validateBoolPropType,
   validatePropType,
-} from "../../../__tests__/testing";
+  validateStringPropType,
+} from "src/__tests__/testing";
 
 const COMPONENT = Modal;
 const COMPONENT_NAME = "Modal";
@@ -23,6 +25,8 @@ const DEFAULT_ELEMENT = "div";
 // const BULMA_CLASS_NAME = "modal";
 
 const makeNode = makeNodeFactory(Modal);
+
+const testPropForwarding = makeTestPropForwarding(makeNode);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -48,87 +52,52 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active =>
-        test(`it forwards active: ${active}`, () => {
-          const node = makeNode({ active });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().active).toBe(active);
-        }),
-      );
+      [false, true].map(active => {
+        testPropForwarding("active", active);
+      });
     });
 
     describe("as", () => {
-      test("it forwards", () => {
-        const as = () => <div />;
-        const node = makeNode({ as });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().as).toBe(as);
-      });
+      testPropForwarding("as", "div");
     });
 
     describe("className", () => {
-      test("it forwards", () => {
-        const className = "foo";
-        const node = makeNode({ className });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().className).toBe(className);
-      });
+      testPropForwarding("className", "foo");
     });
 
     describe("closeOnBlur", () => {
       validateBoolPropType(propTypes, "closeOnBlur");
 
-      [false, true].map(closeOnBlur =>
-        test(`it forwards closeOnBlur: ${closeOnBlur}`, () => {
-          const node = makeNode({ closeOnBlur });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().closeOnBlur).toBe(closeOnBlur);
-        }),
-      );
+      [false, true].map(closeOnBlur => {
+        testPropForwarding("closeOnBlur", closeOnBlur);
+      });
     });
 
     describe("closeOnEsc", () => {
       validateBoolPropType(propTypes, "closeOnEsc");
 
-      [false, true].map(closeOnEsc =>
-        test(`it forwards closeOnEsc: ${closeOnEsc}`, () => {
-          const node = makeNode({ closeOnEsc });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().closeOnEsc).toBe(closeOnEsc);
-        }),
-      );
+      [false, true].map(closeOnEsc => {
+        testPropForwarding("closeOnEsc", closeOnEsc);
+      });
     });
 
     describe("containerClassName", () => {
-      test("it forwards", () => {
-        const containerClassName = "foo";
-        const node = makeNode({ containerClassName });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().containerClassName).toBe(containerClassName);
-      });
+      validateStringPropType(propTypes, "containerClassName");
+
+      testPropForwarding("containerClassName", "foo");
     });
 
     describe("onClose", () => {
       validatePropType(propTypes, "onClose", [
-        { value: () => null, valid: true, descriptor: "func" },
+        { value: () => undefined, valid: true, descriptor: "func" },
         { value: "string", valid: false },
       ]);
 
-      test("it forwards", () => {
-        const onClose = jest.fn();
-        const node = makeNode({ onClose });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().onClose).toBe(onClose);
-      });
+      testPropForwarding("onClose", () => undefined);
     });
 
     describe("ref", () => {
-      test("it forwards", () => {
-        const ref = React.createRef<HTMLDivElement>();
-        const node = makeNode({ ref });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().innerRef).toBe(ref);
-      });
+      testPropForwarding("ref", React.createRef(), "innerRef");
     });
   });
 });

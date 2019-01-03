@@ -1,5 +1,5 @@
-import { COLORS } from "../../../base/helpers";
-import { Tile, TILE_KINDS, TILE_SIZES } from "../tile";
+import { COLORS } from "src/base/helpers";
+import { Tile, TILE_KINDS, TILE_SIZES } from "src/grid/tiles/tile";
 
 import {
   hasProperties,
@@ -9,7 +9,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Tile;
 const COMPONENT_NAME = "Tile";
@@ -38,61 +38,61 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS);
 
-      COLORS.map(color =>
+      COLORS.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("kind", () => {
       validateOneOfPropType(propTypes, "kind", TILE_KINDS);
 
-      TILE_KINDS.map(kind =>
+      TILE_KINDS.map(kind => {
         it(`should be ${kind}`, () => {
           const node = makeNode({ kind });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("notification", () => {
       validateBoolPropType(propTypes, "notification");
 
-      [false, true].map(notification =>
+      [false, true].map(notification => {
         it(`should ${notification ? "" : "not "}be notification`, () => {
           const node = makeNode({ notification });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("notification")).toBe(notification);
-        }),
-      );
+        });
+      });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", TILE_SIZES);
 
-      TILE_SIZES.map(size =>
+      TILE_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("vertical", () => {
       validateBoolPropType(propTypes, "vertical");
 
-      [false, true].map(vertical =>
+      [false, true].map(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = makeNode({ vertical });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-vertical")).toBe(vertical);
-        }),
-      );
+        });
+      });
     });
   });
 });

@@ -1,10 +1,10 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { Colors, COLORS } from "src/base/helpers";
+import { tuple } from "src/utils";
 
 export const INPUT_SIZES = tuple("small", "medium", "large");
 export type InputSizes = (typeof INPUT_SIZES)[number];
@@ -31,7 +31,9 @@ export type InputModifierProps = Partial<{
   rounded: boolean;
   size: InputSizes;
   state: InputStates;
+  // tslint:disable-next-line:no-reserved-keywords
   static: boolean;
+  // tslint:disable-next-line:no-reserved-keywords
   type: InputTypes;
 }>;
 
@@ -61,24 +63,28 @@ export const Input = Object.assign(
         ...rest
       },
       ref,
-    ) => (
-      <Generic
-        className={classNames(
-          "input",
-          {
-            [`is-${color}`]: color,
-            "is-rounded": rounded,
-            [`is-${size}`]: size,
-            "is-static": isStatic,
-            [`is-${state}`]: state,
-          },
-          className,
-        )}
-        readOnly={readOnly || isStatic}
-        ref={ref}
-        {...rest}
-      />
-    ),
+    ) => {
+      const isReadOnly = readOnly === true || isStatic === true;
+
+      return (
+        <Generic
+          className={classNames(
+            "input",
+            {
+              [`is-${color}`]: color,
+              "is-rounded": rounded,
+              [`is-${size}`]: size,
+              "is-static": isStatic,
+              [`is-${state}`]: state,
+            },
+            className,
+          )}
+          readOnly={isReadOnly}
+          ref={ref}
+          {...rest}
+        />
+      );
+    },
     { as: "input" },
   ),
   { propTypes },

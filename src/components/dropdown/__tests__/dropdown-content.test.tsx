@@ -1,4 +1,4 @@
-import { DropdownContent } from "../dropdown-content";
+import { DropdownContent } from "src/components/dropdown/dropdown-content";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = DropdownContent;
 const COMPONENT_NAME = "DropdownContent";

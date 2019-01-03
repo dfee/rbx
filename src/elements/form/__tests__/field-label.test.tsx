@@ -1,4 +1,4 @@
-import { FieldLabel, FILED_LABEL_SIZES } from "../field-label";
+import { FieldLabel, FILED_LABEL_SIZES } from "src/elements/form/field-label";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = FieldLabel;
 const COMPONENT_NAME = "FieldLabel";
@@ -36,13 +36,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", FILED_LABEL_SIZES);
 
-      FILED_LABEL_SIZES.map(size =>
+      FILED_LABEL_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

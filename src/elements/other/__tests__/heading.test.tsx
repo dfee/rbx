@@ -1,4 +1,4 @@
-import { Heading } from "../heading";
+import { Heading } from "src/elements/other/heading";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Heading;
 const COMPONENT_NAME = "Heading";

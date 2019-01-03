@@ -1,10 +1,10 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { Breakpoints, BREAKPOINTS } from "src/base/helpers";
+import { tuple } from "src/utils";
 
 export const COLUMN_SIZES = tuple(
   1,
@@ -99,19 +99,23 @@ export const Column = Object.assign(
           className={classNames(
             "column",
             {
-              [`is-${size}`]: !!size,
-              [`is-offset-${offset}`]: !!offset,
+              [`is-${size}`]: size !== undefined,
+              [`is-offset-${offset}`]: offset !== undefined,
               "is-narrow": narrow,
             },
             Object.keys(breakpoints)
-              .filter(breakpoint => breakpoints[breakpoint])
               .map(breakpoint => {
-                const value = breakpoints[breakpoint];
-                return {
-                  [`is-${value.size}-${breakpoint}`]: !!value.size,
-                  [`is-narrow-${breakpoint}`]: value!.narrow,
-                  [`is-offset-${value.offset}-${breakpoint}`]: !!value.offset,
-                };
+                const value = breakpoints[breakpoint as Breakpoints];
+
+                return value === undefined
+                  ? {}
+                  : {
+                      [`is-${value.size}-${breakpoint}`]:
+                        value.size !== undefined,
+                      [`is-narrow-${breakpoint}`]: value.narrow,
+                      [`is-offset-${value.offset}-${breakpoint}`]:
+                        value.offset !== undefined,
+                    };
               })
               .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
             className,

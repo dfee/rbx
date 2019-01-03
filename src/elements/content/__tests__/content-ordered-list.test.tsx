@@ -1,8 +1,8 @@
 import {
   CONTENT_ORDERED_LIST_TYPES,
   ContentOrderedList,
-} from "../content-ordered-list";
-import { ContentOrderedListItem } from "../content-ordered-list-item";
+} from "src/elements/content/content-ordered-list";
+import { ContentOrderedListItem } from "src/elements/content/content-ordered-list-item";
 
 import {
   hasProperties,
@@ -11,7 +11,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ContentOrderedList;
 const COMPONENT_NAME = "ContentOrderedList";
@@ -41,13 +41,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("type", () => {
       validateOneOfPropType(propTypes, "type", CONTENT_ORDERED_LIST_TYPES);
 
-      CONTENT_ORDERED_LIST_TYPES.map(type =>
-        it(`should be ${type}`, () => {
-          const node = makeNode({ type });
+      CONTENT_ORDERED_LIST_TYPES.map(isType => {
+        it(`should be ${isType}`, () => {
+          const node = makeNode({ type: isType });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`is-${type}`)).toBe(true);
-        }),
-      );
+          expect(wrapper.hasClass(`is-${isType}`)).toBe(true);
+        });
+      });
     });
   });
 });

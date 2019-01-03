@@ -1,22 +1,22 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
+} from "src/base/theme";
 import {
   initialValue as navbarInitialValue,
   NavbarContextValue,
-} from "../navbar-context";
-import { NavbarMenu } from "../navbar-menu";
+} from "src/components/navbar/navbar-context";
+import { NavbarMenu } from "src/components/navbar/navbar-menu";
 
 import {
   hasProperties,
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = NavbarMenu;
 const COMPONENT_NAME = "NavbarMenu";
@@ -30,12 +30,13 @@ const makeShallowWrapperInNavbarContextConsumer = (
   navbarContextValue: NavbarContextValue = navbarInitialValue,
 ) => {
   const navbarContextConsumerWrapper = Enzyme.shallow(node);
-  const NavbarContextConsumerChildren = navbarContextConsumerWrapper.props()
-    .children;
-  const navbarContextConsumerChildrenWrapper = Enzyme.shallow(
+  const NavbarContextConsumerChildren = (navbarContextConsumerWrapper.props() as {
+    children: React.FC<NavbarContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <NavbarContextConsumerChildren {...navbarContextValue} />,
   );
-  return navbarContextConsumerChildrenWrapper;
 };
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
@@ -48,12 +49,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
     navbarContextValue,
   );
   const themeContextConsumerWrapper = navbarContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -72,17 +74,17 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   describe("context", () => {
     describe("active", () => {
-      [false, true].map(active =>
+      [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = makeNode({});
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
             node,
             themeInitialValue,
-            Object.assign({}, navbarInitialValue, { active }),
+            { ...navbarInitialValue, active },
           );
           expect(wrapper.hasClass("is-active")).toBe(active);
-        }),
-      );
+        });
+      });
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Highlight } from "../highlight";
+import { Highlight } from "src/elements/other/highlight";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Highlight;
 const COMPONENT_NAME = "Highlight";

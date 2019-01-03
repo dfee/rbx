@@ -1,12 +1,14 @@
+import * as React from "react";
+
 export const canUseDOM = () =>
-  !!(
-    typeof window !== "undefined" &&
-    window.document &&
-    window.document.createElement
+  !(
+    window === undefined ||
+    window.document === undefined ||
+    window.document.createElement === undefined
   );
 
 export const combineRefs = <T>(
-  ...refs: Array<React.Ref<T> | null | undefined>
+  ...refs: (React.Ref<T> | null | undefined)[]
 ) => {
   return (instance: T | null) => {
     for (const item of refs) {

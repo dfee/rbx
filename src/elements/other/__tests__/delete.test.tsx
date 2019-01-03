@@ -1,4 +1,4 @@
-import { Delete, DELETE_SIZES } from "../delete";
+import { Delete, DELETE_SIZES } from "src/elements/other/delete";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Delete;
 const COMPONENT_NAME = "Delete";
@@ -36,13 +36,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", DELETE_SIZES);
 
-      DELETE_SIZES.map(size =>
+      DELETE_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

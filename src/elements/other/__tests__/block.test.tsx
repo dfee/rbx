@@ -1,4 +1,4 @@
-import { Block } from "../block";
+import { Block } from "src/elements/other/block";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Block;
 const COMPONENT_NAME = "Block";

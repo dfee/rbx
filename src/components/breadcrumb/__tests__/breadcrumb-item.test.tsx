@@ -1,11 +1,11 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { BreadcrumbItem } from "../breadcrumb-item";
+} from "src/base/theme";
+import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 
 import {
   hasProperties,
@@ -13,7 +13,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = BreadcrumbItem;
 const COMPONENT_NAME = "BreadcrumbItem";
@@ -31,12 +31,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   const rootWrapper = makeShallowWrapper(node);
   const forwardRefWrapper = rootWrapper.children();
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -67,13 +68,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active =>
+      [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = makeNode({ active });
           const wrapper = makeShallowWrapper(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
-        }),
-      );
+        });
+      });
     });
   });
 });

@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
 
 export type ContentOrderedListItemProps = HelpersProps;
 

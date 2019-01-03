@@ -1,4 +1,4 @@
-import { NavbarEnd } from "../navbar-end";
+import { NavbarEnd } from "src/components/navbar/navbar-end";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = NavbarEnd;
 const COMPONENT_NAME = "NavbarEnd";

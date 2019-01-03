@@ -1,4 +1,4 @@
-import { LevelLeft } from "../level-left";
+import { LevelLeft } from "src/components/level/level-left";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = LevelLeft;
 const COMPONENT_NAME = "LevelLeft";

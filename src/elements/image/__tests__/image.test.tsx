@@ -1,5 +1,5 @@
-import { Image } from "../image";
-import { ImageContainer } from "../image-container";
+import { Image } from "src/elements/image/image";
+import { ImageContainer } from "src/elements/image/image-container";
 
 import {
   hasProperties,
@@ -8,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Image;
 const COMPONENT_NAME = "Image";
@@ -38,13 +38,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("rounded", () => {
       validateBoolPropType(propTypes, "rounded");
 
-      [false, true].map(rounded =>
+      [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = makeNode({ rounded });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
-        }),
-      );
+        });
+      });
     });
   });
 });

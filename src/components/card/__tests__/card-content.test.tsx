@@ -1,4 +1,4 @@
-import { CardContent } from "../card-content";
+import { CardContent } from "src/components/card/card-content";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = CardContent;
 const COMPONENT_NAME = "CardContent";

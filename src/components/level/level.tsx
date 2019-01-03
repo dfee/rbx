@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { Breakpoints, BREAKPOINTS } from "src/base/helpers";
 import { LevelItem } from "./level-item";
 import { LevelLeft } from "./level-left";
 import { LevelRight } from "./level-right";

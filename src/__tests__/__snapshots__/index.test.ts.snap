@@ -584,7 +584,7 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "as": "div",
-      "children": null,
+      "children": false,
     },
     "render": [Function],
   },

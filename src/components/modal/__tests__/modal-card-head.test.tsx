@@ -1,23 +1,23 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { Delete } from "../../../elements";
-import { ModalCardHead } from "../modal-card-head";
+} from "src/base/theme";
+import { ModalCardHead } from "src/components/modal/modal-card-head";
 import {
   initialValue as modalInitialValue,
   ModalContextValue,
-} from "../modal-context";
+} from "src/components/modal/modal-context";
+import { Delete } from "src/elements";
 
 import {
   hasProperties,
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ModalCardHead;
 const COMPONENT_NAME = "ModalCardHead";
@@ -31,12 +31,13 @@ const makeShallowWrapperInModalContextConsumer = (
   modalContextValue: ModalContextValue = modalInitialValue,
 ) => {
   const modalContextConsumerWrapper = Enzyme.shallow(node);
-  const ModalContextConsumerChildren = modalContextConsumerWrapper.props()
-    .children;
-  const modalContextConsumerChildrenWrapper = Enzyme.shallow(
+  const ModalContextConsumerChildren = (modalContextConsumerWrapper.props() as {
+    children: React.FC<ModalContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ModalContextConsumerChildren {...modalContextValue} />,
   );
-  return modalContextConsumerChildrenWrapper;
 };
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
@@ -49,12 +50,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
     modalContextValue,
   );
   const themeContextConsumerWrapper = modalContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -76,44 +78,33 @@ describe(`${COMPONENT_NAME} component`, () => {
       const permutations = [
         {
           descriptor: "string",
-          factory: (
-            hasOnClick: boolean,
-            onClick: React.MouseEventHandler<any>,
-          ) => "string",
-          getDelete: (wrapper: Enzyme.ShallowWrapper<any>) => null,
+          factory: (onClick: React.MouseEventHandler | undefined) => "string",
+          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
+            undefined,
         },
         {
           descriptor: "delete button",
-          factory: (
-            hasOnClick: boolean,
-            onClick: React.MouseEventHandler<any>,
-          ) => <Delete onClick={hasOnClick ? onClick : undefined} />,
-          getDelete: (wrapper: Enzyme.ShallowWrapper<any>) =>
+          factory: (onClick: React.MouseEventHandler | undefined) => (
+            <Delete onClick={onClick} />
+          ),
+          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
             wrapper.children().dive(),
         },
         {
           descriptor: "delete button in fragment",
-          factory: (
-            hasOnClick: boolean,
-            onClick: React.MouseEventHandler<any>,
-          ) => (
-            <React.Fragment
-              children={<Delete onClick={hasOnClick ? onClick : undefined} />}
-            />
+          factory: (onClick: React.MouseEventHandler | undefined) => (
+            <React.Fragment children={<Delete onClick={onClick} />} />
           ),
-          getDelete: (wrapper: Enzyme.ShallowWrapper<any>) =>
+          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
             wrapper.children().dive(),
         },
         {
           descriptor: "compound children with delete button",
-          factory: (
-            hasOnClick: boolean,
-            onClick: React.MouseEventHandler<any>,
-          ) => [
-            <Delete key={0} onClick={hasOnClick ? onClick : undefined} />,
+          factory: (onClick: React.MouseEventHandler | undefined) => [
+            <Delete key={0} onClick={onClick} />,
             <div key={1} />,
           ],
-          getDelete: (wrapper: Enzyme.ShallowWrapper<any>) =>
+          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
             wrapper
               .children()
               .at(0)
@@ -122,20 +113,22 @@ describe(`${COMPONENT_NAME} component`, () => {
       ];
 
       permutations.map(({ descriptor, factory, getDelete }) => {
-        [false, true].map(hasOnClick =>
+        [false, true].map(hasOnClick => {
           it(`should update context ${
             hasOnClick ? "and call onClick " : ""
           }for children: <${descriptor}>`, () => {
             const onClick = jest.fn();
             const close = jest.fn();
-            const node = makeNode({ children: factory(hasOnClick, onClick) });
+            const node = makeNode({
+              children: factory(hasOnClick ? onClick : undefined),
+            });
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
               node,
               themeInitialValue,
-              Object.assign({}, modalInitialValue, { close }),
+              { ...modalInitialValue, close },
             );
             const button = getDelete(wrapper);
-            if (button) {
+            if (button !== undefined) {
               button.simulate("click");
               if (hasOnClick) {
                 expect(onClick.mock.calls).toHaveLength(1);
@@ -143,8 +136,8 @@ describe(`${COMPONENT_NAME} component`, () => {
               expect(close.mock.calls).toHaveLength(1);
               expect(close.mock.calls[0]).toEqual([]);
             }
-          }),
-        );
+          });
+        });
       });
     });
   });

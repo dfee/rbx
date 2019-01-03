@@ -1,4 +1,4 @@
-import { HeroFoot } from "../hero-foot";
+import { HeroFoot } from "src/layout/hero/hero-foot";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = HeroFoot;
 const COMPONENT_NAME = "HeroFoot";

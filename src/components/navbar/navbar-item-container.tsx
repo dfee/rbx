@@ -1,19 +1,22 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from "classNames";
+import * as React from "react";
 
-import { Generic, HelpersProps } from "../../base";
-import { combineRefs } from "../../utils";
-import { NavbarItemContext } from "./navbar-item-context";
+import { Generic, HelpersProps } from "src/base";
+import { combineRefs } from "src/utils";
+import {
+  NavbarItemContext,
+  NavbarItemContextValue,
+} from "./navbar-item-context";
 
 export type NavbarItemContainerModifierProps = Partial<{
   active: boolean;
-  as: React.ReactType<any>;
+  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   dropdown: boolean;
   dropdownUp: boolean;
   hoverable: boolean;
-  innerRef: React.Ref<HTMLElement>;
+  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   managed: boolean;
-  onClick: React.MouseEventHandler<any>;
+  onClick: React.MouseEventHandler;
 }>;
 
 export type NavbarItemContainerProps = HelpersProps &
@@ -28,21 +31,21 @@ export class NavbarItemContainer extends React.PureComponent<
   NavbarItemContainerState
 > {
   public readonly state: NavbarItemContainerState;
-  private ref = React.createRef<HTMLDivElement>();
+  private readonly ref = React.createRef<HTMLElement>();
 
   constructor(props: NavbarItemContainerProps) {
     super(props);
-    this.state = { active: props.active || false };
+    this.state = { active: props.active === true };
   }
 
   public componentDidMount() {
-    if (this.props.dropdown) {
-      document.addEventListener("click", this.handleClick);
+    if (this.props.dropdown === true) {
+      document.addEventListener("click", this.handleDocumentClick);
     }
   }
 
   public componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick!);
+    document.removeEventListener("click", this.handleDocumentClick);
   }
 
   public render() {
@@ -70,10 +73,11 @@ export class NavbarItemContainer extends React.PureComponent<
       initialClassName,
     );
 
-    const asOverride = dropdown && as === "a" ? "div" : as;
     const ref = combineRefs(this.ref, innerRef);
 
-    if (dropdown) {
+    if (dropdown === true) {
+      const asOverride = as === "a" ? "div" : as;
+
       return (
         <NavbarItemContext.Provider
           value={{
@@ -85,18 +89,14 @@ export class NavbarItemContainer extends React.PureComponent<
         </NavbarItemContext.Provider>
       );
     }
+
     return (
       <NavbarItemContext.Consumer>
-        {context => (
+        {ctx => (
           <Generic
-            as={asOverride}
+            as={as}
             className={className}
-            onClick={(event: React.MouseEvent<any>) => {
-              if (onClick) {
-                onClick(event);
-              }
-              context.setActive(!context.active);
-            }}
+            onClick={this.handleOnClick(ctx)}
             ref={ref}
             {...rest}
           />
@@ -106,17 +106,23 @@ export class NavbarItemContainer extends React.PureComponent<
   }
 
   private get active() {
-    return this.props.managed ? this.props.active || false : this.state.active;
+    return this.props.managed === true
+      ? this.props.active === true
+      : this.state.active;
   }
 
   private set active(value: boolean) {
-    if (!this.props.managed) {
+    if (this.props.managed !== true) {
       this.setState({ active: value });
     }
   }
 
-  private handleClick = (event: MouseEvent) => {
-    if (!this.props.managed && this.active && this.ref.current) {
+  private readonly handleDocumentClick = (event: MouseEvent) => {
+    if (
+      this.props.managed !== true &&
+      this.active &&
+      this.ref.current !== null
+    ) {
       if (
         event.target instanceof Element &&
         !this.ref.current.contains(event.target)
@@ -124,5 +130,14 @@ export class NavbarItemContainer extends React.PureComponent<
         this.active = false;
       }
     }
+  }
+
+  private readonly handleOnClick = (ctx: NavbarItemContextValue) => (
+    event: React.MouseEvent,
+  ) => {
+    if (this.props.onClick !== undefined) {
+      this.props.onClick(event);
+    }
+    ctx.setActive(!ctx.active);
   }
 }

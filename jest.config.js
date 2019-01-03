@@ -1,11 +1,10 @@
 module.exports = {
   collectCoverageFrom: [
-    "**/*.(ts|tsx)",
+    "src/**/*.(ts|tsx)",
     "!**/node_modules/**",
-    "!**/__tests__/*",
-    "!**/*.(story|test).(ts|tsx)"
+    "!**/__tests__/*"
   ],
-  coverageDirectory: "<rootDir>/../.coverage",
+  coverageDirectory: "<rootDir>/.coverage",
   coverageReporters: ["lcov", "text", "text-summary"],
   coverageThreshold: {
     global: {
@@ -18,14 +17,12 @@ module.exports = {
   moduleDirectories: ["node_modules", "<rootDir>"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
   moduleNameMapper: {
-    "\\.(css|less|s(c|a)ss)$": "<rootDir>/../src/__mocks__/style.ts",
+    "\\.(css|less|s(c|a)ss)$": "<rootDir>/src/__mocks__/style.ts",
     "@/(.*)": "<rootDir>/$1"
   },
-  rootDir: "src",
+  rootDir: ".",
   setupFiles: ["raf/polyfill"],
-  setupTestFrameworkScriptFile: "./__tests__/setup.ts",
+  setupTestFrameworkScriptFile: "./src/__tests__/setup.ts",
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
-  transform: {
-    ".(ts|tsx)": "ts-jest"
-  }
+  transform: { ".(ts|tsx)": "ts-jest" }
 };

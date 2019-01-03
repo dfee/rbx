@@ -1,4 +1,4 @@
-import { Footer } from "../footer";
+import { Footer } from "src/layout/footer/footer";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Footer;
 const COMPONENT_NAME = "Footer";

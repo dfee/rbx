@@ -1,12 +1,12 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { ModalContext } from "./modal-context";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { ModalContext, ModalContextValue } from "./modal-context";
 
 export type ModalBackgroundModifierProps = Partial<{
-  onClick: React.MouseEventHandler<any>;
+  onClick: React.MouseEventHandler;
 }>;
 
 export type ModalBackgroundProps = HelpersProps & ModalBackgroundModifierProps;
@@ -15,21 +15,26 @@ const propTypes = {
   onClick: PropTypes.func,
 };
 
+const onClickHandler = (
+  onClick: ModalBackgroundProps["onClick"],
+  ctx: ModalContextValue,
+) => (event: React.MouseEvent) => {
+  if (onClick !== undefined) {
+    onClick(event);
+  }
+  if (ctx.closeOnBlur) {
+    ctx.close();
+  }
+};
+
 export const ModalBackground = Object.assign(
   forwardRefAs<ModalBackgroundProps, "div">(
     ({ className, onClick, ...rest }, ref) => (
       <ModalContext.Consumer>
-        {({ close, closeOnBlur }) => (
+        {ctx => (
           <Generic
             className={classNames("modal-background", className)}
-            onClick={(event: React.MouseEvent) => {
-              if (onClick) {
-                onClick(event);
-              }
-              if (closeOnBlur) {
-                close();
-              }
-            }}
+            onClick={onClickHandler(onClick, ctx)}
             ref={ref}
             role="presentation"
             {...rest}

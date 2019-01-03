@@ -1,4 +1,4 @@
-import { FileName } from "../file-name";
+import { FileName } from "src/elements/form/file-name";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = FileName;
 const COMPONENT_NAME = "FileName";

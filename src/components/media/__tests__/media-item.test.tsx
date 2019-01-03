@@ -1,4 +1,7 @@
-import { MEDIA_ITEM_POSITIONS, MediaItem } from "../media-item";
+import {
+  MEDIA_ITEM_POSITIONS,
+  MediaItem,
+} from "src/components/media/media-item";
 
 import {
   hasProperties,
@@ -7,7 +10,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = MediaItem;
 const COMPONENT_NAME = "MediaItem";
@@ -39,13 +42,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("position", () => {
       validateOneOfPropType(propTypes, "position", MEDIA_ITEM_POSITIONS);
 
-      MEDIA_ITEM_POSITIONS.map(position =>
+      MEDIA_ITEM_POSITIONS.map(position => {
         it(`should be ${position}`, () => {
           const node = makeNode({ position });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`media-${position}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

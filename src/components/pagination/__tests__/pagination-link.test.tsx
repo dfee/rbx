@@ -1,11 +1,11 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { PaginationLink } from "../pagination-link";
+} from "src/base/theme";
+import { PaginationLink } from "src/components/pagination/pagination-link";
 
 import {
   hasProperties,
@@ -13,7 +13,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = PaginationLink;
 const COMPONENT_NAME = "PaginationLink";
@@ -31,12 +31,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   const rootWrapper = makeShallowWrapper(node);
   const forwardRefWrapper = rootWrapper.children();
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -67,13 +68,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("current", () => {
       validateBoolPropType(propTypes, "current");
 
-      [false, true].map(current =>
+      [false, true].map(current => {
         it(`should ${current ? "" : "not "}be current`, () => {
           const node = makeNode({ current });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-current")).toBe(current);
-        }),
-      );
+        });
+      });
     });
   });
 });

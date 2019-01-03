@@ -1,126 +1,17 @@
-import classNames from "classnames";
-import Enzyme from "enzyme";
-import PropTypes from "prop-types";
-import React from "react";
+import crypto from "crypto";
+
+import classNames from "classNames";
+import * as Enzyme from "enzyme";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
-import { TransformFunc, transformHelpers } from "../base/helpers";
-import { ThemeContextValue } from "../base/theme";
-
-export const hasProperties = (
-  component: React.ReactType<any>,
-  obj: { [s: string]: any },
-) =>
-  Object.keys(obj).map(key =>
-    it(`should have property ${key}`, () => {
-      expect(component[key]).toEqual(obj[key]);
-    }),
-  );
-
-export const makeRandomString = () =>
-  Math.random()
-    .toString(36)
-    .substring(7);
-
-export const validatePropType = (
-  propTypes: React.WeakValidationMap<any>,
-  propName: string,
-  options: Array<{
-    descriptor?: string;
-    error?: RegExp;
-    extras?: { [k: string]: any };
-    valid: boolean;
-    value: any;
-  }>,
-) =>
-  options.map(({ value, valid, error, descriptor, extras }) =>
-    it(`should ${
-      valid ? "not warn on valid" : "warn on invalid"
-    } ${propName} [${descriptor ||
-      (value.hasOwnProperty("name") ? value.name : value)}]`, () => {
-      withMockError({}, ({ context }) => {
-        // if the componentName or locaation isn't randomized, propTypes will
-        // (for some reason) fail if the prop is checked (and fails) twice
-        PropTypes.checkPropTypes(
-          propTypes,
-          { [propName]: value, ...extras },
-          // "prop", // location
-          `prop(${makeRandomString()})`, // componentName
-          `test(${makeRandomString()})`, // componentName
-        );
-        if (valid) {
-          expect(context.error.mock.calls).toHaveLength(0);
-        } else {
-          expect(context.error.mock.calls).toHaveLength(1);
-          expect(context.error.mock.calls[0][0]).toMatch(
-            error || new RegExp(`Warning.+Invalid prop.+\`${propName}\`.+`),
-          );
-        }
-      });
-    }),
-  );
-
-export const validateBoolPropType = (
-  propTypes: {
-    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
-  },
-  propName: string,
-  extras?: { [k: string]: any },
-) =>
-  validatePropType(propTypes, propName, [
-    ...[false, true].map(value => ({ value, valid: true, extras })),
-    { value: "string", valid: false, extras },
-  ]);
-
-export const validateNumberPropType = (
-  propTypes: {
-    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
-  },
-  propName: string,
-  extras?: { [k: string]: any },
-) =>
-  validatePropType(propTypes, propName, [
-    { value: 1, valid: true, extras },
-    { value: "string", valid: false, extras },
-  ]);
-
-export const validateOneOfPropType = (
-  propTypes: {
-    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
-  },
-  propName: string,
-  choices: Array<string | number>,
-  extras?: { [k: string]: any },
-) =>
-  validatePropType(propTypes, propName, [
-    ...choices.map(value => ({ value, valid: true, extras })),
-    { value: "__UNKNOWN", valid: false, extras },
-  ]);
-
-export const validateRefPropType = (
-  propTypes: {
-    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
-  },
-  propName: string,
-  extras?: { [k: string]: any },
-) =>
-  validatePropType(propTypes, propName, [
-    { value: () => null, valid: true, descriptor: "func", extras },
-    { value: React.createRef(), valid: true, descriptor: "ref", extras },
-    { value: "string", valid: false, extras }, // deprecated, won't support
-  ]);
-
-export const validateStringPropType = (
-  propTypes: {
-    [k: string]: PropTypes.Requireable<any> | PropTypes.Validator<any>;
-  },
-  propName: string,
-  extras?: { [k: string]: any },
-) =>
-  validatePropType(propTypes, propName, [
-    { value: "string", valid: true, extras },
-    { value: 1, valid: false, extras },
-  ]);
+import {
+  HelpersProps,
+  TransformFunc,
+  transformHelpers,
+} from "src/base/helpers";
+import { ThemeContextValue } from "src/base/theme";
 
 export const contextManager = <
   TContext extends object,
@@ -153,15 +44,31 @@ export const contextManager = <
   }
 };
 
+export const withWindow = contextManager(
+  // tslint:disable:no-any
+  ({ value }: { value?: undefined } = {}) => {
+    const window = (global as any).window;
+    delete (global as any).window;
+    (global as any).window = value;
+
+    return { context: {}, state: { window } };
+  },
+  ({ state: { window } }) => {
+    (global as any).window = window;
+  },
+  // tslint:enable:no-any
+);
+
 export const withMockError = contextManager(
   () => {
     const context = { error: jest.fn() };
-    const state = { initError: global.console.error };
+    const state = { error: global.console.error };
     global.console.error = context.error;
+
     return { context, state };
   },
-  ({ state }) => {
-    global.console.error = state.initError;
+  ({ state: { error } }) => {
+    global.console.error = error;
   },
 );
 
@@ -170,19 +77,136 @@ export const withEnzymeMount = contextManager(
     node,
     options,
   }: {
-    node: React.ReactElement<any>;
+    node: JSX.Element;
     options?: Enzyme.MountRendererProps;
   }) => {
     // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
     // So, mount in div
     const outer = Enzyme.mount(<div children={node} />, options);
+
     return { context: { wrapper: outer.children() }, state: { outer } };
   },
-  ({ state }) => state.outer.unmount(),
+  ({ state: { outer } }) => outer.unmount(),
 );
 
+export const hasProperties = <T extends object>(
+  component: T,
+  obj: { [s: string]: any }, // tslint:disable-line:no-any
+) => {
+  describe("properties", () => {
+    Object.keys(obj).map(key => {
+      it(`should have property ${key}`, () => {
+        expect(component[key]).toEqual(obj[key]);
+      });
+    });
+  });
+};
+
+export const makeRandomString = (length: number = 8) =>
+  crypto.randomBytes(length).toString("hex");
+
+export const validatePropType = <T extends {}>(
+  propTypes: React.WeakValidationMap<T>,
+  propName: string,
+  options: {
+    descriptor?: string;
+    error?: RegExp;
+    extras?: Partial<T>;
+    valid: boolean;
+    value: any; // tslint:disable-line:no-any
+  }[],
+) =>
+  options.map(({ value, valid, error, descriptor, extras }) => {
+    const descriptorString: string =
+      descriptor !== undefined
+        ? descriptor
+        : value === undefined
+        ? "undefined"
+        : String(value);
+    it(`should ${
+      valid ? "not warn on valid" : "warn on invalid"
+    } ${propName} [${descriptorString}]`, () => {
+      withMockError({}, ({ context }) => {
+        // if the componentName or locaation isn't randomized, propTypes will
+        // (for some reason) fail if the prop is checked (and fails) twice
+        PropTypes.checkPropTypes(
+          propTypes,
+          { [propName]: value, ...extras },
+          "prop", // location
+          makeRandomString(), // componentName
+        );
+        if (valid) {
+          expect(context.error.mock.calls).toHaveLength(0);
+        } else {
+          expect(context.error.mock.calls).toHaveLength(1);
+          expect(context.error.mock.calls[0][0]).toMatch(
+            error !== undefined
+              ? error
+              : new RegExp(`Warning.+Invalid prop.+\`${propName}\`.+`),
+          );
+        }
+      });
+    });
+  });
+
+export const validateBoolPropType = <T extends {}>(
+  propTypes: React.WeakValidationMap<T>,
+  propName: string,
+  extras?: Partial<T>,
+) =>
+  validatePropType(propTypes, propName, [
+    ...[false, true].map(value => ({ value, valid: true, extras })),
+    { value: "string", valid: false, extras },
+  ]);
+
+export const validateNumberPropType = <T extends {}>(
+  propTypes: React.WeakValidationMap<T>,
+  propName: string,
+  extras?: Partial<T>,
+) =>
+  validatePropType(propTypes, propName, [
+    { value: 1, valid: true, extras },
+    { value: "string", valid: false, extras },
+  ]);
+
+export const validateOneOfPropType = <T extends {}>(
+  propTypes: React.WeakValidationMap<T>,
+  propName: string,
+  choices: (string | number)[],
+  extras?: Partial<T>,
+) =>
+  validatePropType(propTypes, propName, [
+    ...choices.map(value => ({ value, valid: true, extras })),
+    { value: "__UNKNOWN", valid: false, extras },
+  ]);
+
+export const validateRefPropType = <T extends {}>(
+  propTypes: React.WeakValidationMap<T>,
+  propName: string,
+  extras?: Partial<T>,
+) =>
+  validatePropType(propTypes, propName, [
+    { value: () => undefined, valid: true, descriptor: "func", extras },
+    { value: React.createRef(), valid: true, descriptor: "ref", extras },
+    { value: "string", valid: false, extras }, // deprecated, won't support
+  ]);
+
+export const validateStringPropType = <T extends {}>(
+  propTypes: React.WeakValidationMap<T>,
+  propName: string,
+  extras?: Partial<T>,
+) =>
+  validatePropType(propTypes, propName, [
+    { value: "string", valid: true, extras },
+    { value: 1, valid: false, extras },
+  ]);
+
 export type MakeNodeFunction<
-  TComponent extends ForwardRefAsExoticComponent<TComponentProps, any>,
+  TComponent extends ForwardRefAsExoticComponent<
+    TComponentProps,
+    TDefaultComponent
+  >,
+  TDefaultComponent extends React.ReactType = TComponent,
   TComponentProps extends { className?: string } = React.ComponentProps<
     TComponent
   >
@@ -191,15 +215,58 @@ export type MakeNodeFunction<
 export type MakeShallowWrapperFunction = (
   node: JSX.Element,
   contextValue?: ThemeContextValue,
-) => Enzyme.ShallowWrapper<any>;
+) => Enzyme.ShallowWrapper<React.ReactType>;
+
+export const makeNodeFactory = <
+  // tslint:disable-next-line:no-any
+  TComponent extends ForwardRefAsExoticComponent<any, any>,
+  TComponentProps extends React.ComponentProps<TComponent> & {
+    as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
+  } = React.ComponentProps<TComponent>
+>(
+  Component: TComponent,
+) => (props: TComponentProps) => React.createElement(Component, props);
+
+/**
+ * This function makes a shallow wrapper of a "generic" component in the Theme
+ * Context.Consumer.
+ * A "generic" component is one that simply does a transform of its props and
+ * returns a <Generic /> function.
+ *
+ * For example:
+ *     const MyComponent = forwardRefAs<{}, 'div'>((props, ref) => (
+ *         <Generic ref={ref} {...props} />
+ *       ),
+ *       { as: 'div' },
+ *     );
+ *
+ * Because a Context.Consumer, as produced by Enzyme.shallow, produces a
+ * wrapper that must be 'dive'd into to retrieve the Child, it accepts a
+ * contextValue for the Theme Context.
+ */
+export const makeGenericHOCShallowWrapperInContextConsumer = (
+  node: JSX.Element,
+  themeContextValue: ThemeContextValue = { transform: transformHelpers },
+) => {
+  const forwardRefWrapper = Enzyme.shallow(node);
+  const themeContextConsumerWrapper = forwardRefWrapper.dive();
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
+    <ThemeContextConsumerChildren {...themeContextValue} />,
+  );
+};
 
 export const testForwardRefAsExoticComponentIntegration = (
+  // tslint:disable-next-line:no-any
   makeNodeFunc: MakeNodeFunction<any>,
   makeShallowWrapperFunc: MakeShallowWrapperFunction,
   defaultElement: keyof React.ReactHTML,
   bulmaClassName: string | undefined,
   refPropName: string = "ref",
-) => () => {
+) => {
   describe("ForwardRefAsExoticComponent [integration]", () => {
     it("should render as the default element", () => {
       const node = makeNodeFunc({});
@@ -208,24 +275,25 @@ export const testForwardRefAsExoticComponentIntegration = (
     });
 
     it("should render as a custom component", () => {
-      const as = "span";
-      const node = makeNodeFunc({ as: "span" });
+      const asType = "span" as React.ReactType;
+      const node = makeNodeFunc({ as: asType });
       const wrapper = makeShallowWrapperFunc(node);
-      expect(wrapper.is(as)).toBe(true);
+      expect(wrapper.is(asType)).toBe(true);
     });
 
     it("should forward ref", () => {
       const ref = React.createRef<HTMLElement>();
       const node = makeNodeFunc({ [refPropName]: ref });
       withEnzymeMount({ node }, ({ context: { wrapper } }) => {
-        const selector = bulmaClassName
-          ? `${defaultElement}.${bulmaClassName}`
-          : defaultElement;
+        const selector =
+          bulmaClassName !== undefined
+            ? `${defaultElement}.${bulmaClassName}`
+            : defaultElement;
         expect(ref.current).toBe(wrapper.find(selector).instance());
       });
     });
 
-    if (bulmaClassName) {
+    if (bulmaClassName !== undefined) {
       it("should have bulma className", () => {
         const node = makeNodeFunc({});
         const wrapper = makeShallowWrapperFunc(node);
@@ -242,9 +310,9 @@ export const testForwardRefAsExoticComponentIntegration = (
 
     describe("props", () => {
       describe("as", () => {
-        const FC: React.FC<{}> = () => React.createElement("div");
+        const FC: React.FC = () => React.createElement("div");
 
-        // tslint:disable-next-line:max-classes-per-file
+        /** test class */
         class CC extends React.Component {
           public render() {
             return React.createElement("div");
@@ -287,13 +355,15 @@ export const testForwardRefAsExoticComponentIntegration = (
 };
 
 export const testThemeIntegration = (
-  makeNodeFunc: MakeNodeFunction<any>,
+  makeNodeFunc: MakeNodeFunction<any>, // tslint:disable-line:no-any
   makeShallowWrapperFunc: MakeShallowWrapperFunction,
 ) => {
   describe("theme [integration]", () => {
     it("default transform", () => {
       withMockError({}, ({ context: { error } }) => {
-        const node = makeNodeFunc({ pull: "__UNKNOWN" as any });
+        const node = makeNodeFunc({
+          pull: "__UNKNOWN" as HelpersProps["pull"],
+        });
         const wrapper = makeShallowWrapperFunc(node);
         expect(wrapper.hasClass("is-pulled-__UNKNOWN")).toBe(true);
         expect(error.mock.calls).toHaveLength(1);
@@ -323,9 +393,12 @@ export const testThemeIntegration = (
           location,
           componentName,
         );
-        const { foo, ...rest } = props;
-        const className = classNames(props.className, { [`foo-${foo}`]: foo });
-        return Object.assign(rest, className ? { className } : {});
+        const { className, foo, ...rest } = props;
+
+        return {
+          className: classNames({ [`foo-${foo}`]: foo }, className),
+          ...rest,
+        };
       };
 
       it("should transform prop", () => {
@@ -349,42 +422,18 @@ export const testThemeIntegration = (
   });
 };
 
-export const makeNodeFactory = <
-  TComponent extends ForwardRefAsExoticComponent<any, any>,
-  TComponentProps extends React.ComponentProps<TComponent> & {
-    as?: React.ReactType<any>;
-  } = React.ComponentProps<TComponent>
->(
-  Component: TComponent,
-) => (props: TComponentProps) => React.createElement(Component, props);
-
-/**
- * This function makes a shallow wrapper of a "generic" component in the Theme
- * Context.Consumer.
- * A "generic" component is one that simply does a transform of its props and
- * returns a <Generic /> function.
- *
- * For example:
- *     const MyComponent = forwardRefAs<{}, 'div'>((props, ref) => (
- *         <Generic ref={ref} {...props} />
- *       ),
- *       { as: 'div' },
- *     );
- *
- * Because a Context.Consumer, as produced by Enzyme.shallow, produces a
- * wrapper that must be 'dive'd into to retrieve the Child, it accepts a
- * contextValue for the Theme Context.
- */
-export const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = { transform: transformHelpers },
+export const makeTestPropForwarding = (
+  makeNodeFunc: MakeNodeFunction<any>, // tslint:disable-line:no-any
+) => (
+  propName: string,
+  propValue: any, // tslint:disable-line:no-any
+  mappedPropName?: string,
 ) => {
-  const forwardRefWrapper = Enzyme.shallow(node);
-  const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-  return wrapper;
+  it(`forwards ${propName}: ${propValue}`, () => {
+    const node = makeNodeFunc({ [propName]: propValue });
+    const wrapper = Enzyme.shallow(node);
+    expect(
+      wrapper.prop(mappedPropName !== undefined ? mappedPropName : propName),
+    ).toBe(propValue);
+  });
 };

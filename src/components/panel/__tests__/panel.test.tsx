@@ -1,8 +1,8 @@
-import { Panel } from "../panel";
-import { PanelBlock } from "../panel-block";
-import { PanelHeading } from "../panel-heading";
-import { PanelIcon } from "../panel-icon";
-import { PanelTabs } from "../panel-tabs";
+import { Panel } from "src/components/panel/panel";
+import { PanelBlock } from "src/components/panel/panel-block";
+import { PanelHeading } from "src/components/panel/panel-heading";
+import { PanelIcon } from "src/components/panel/panel-icon";
+import { PanelTabs } from "src/components/panel/panel-tabs";
 
 import {
   hasProperties,
@@ -10,7 +10,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Panel;
 const COMPONENT_NAME = "Panel";

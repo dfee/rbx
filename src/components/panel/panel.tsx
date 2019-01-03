@@ -1,7 +1,7 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from "classNames";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
 import { PanelBlock } from "./panel-block";
 import { PanelHeading } from "./panel-heading";
 import { PanelIcon } from "./panel-icon";

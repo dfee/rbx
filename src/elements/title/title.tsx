@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { tuple } from "src/utils";
 
 export const TITLE_SIZES = tuple(1, 2, 3, 4, 5, 6);
 export type TitleSizes = (typeof TITLE_SIZES)[number];
@@ -28,10 +28,10 @@ export const Title = Object.assign(
       <Generic
         className={classNames(
           {
-            [`is-${size}`]: !!size,
-            "is-spaced": spaced && !subtitle,
+            [`is-${size}`]: size !== undefined,
+            "is-spaced": spaced === true && subtitle !== true,
             subtitle,
-            title: !subtitle,
+            title: subtitle !== true,
           },
           className,
         )}

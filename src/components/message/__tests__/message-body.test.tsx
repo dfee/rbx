@@ -1,4 +1,4 @@
-import { MessageBody } from "../message-body";
+import { MessageBody } from "src/components/message/message-body";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = MessageBody;
 const COMPONENT_NAME = "MessageBody";

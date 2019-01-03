@@ -1,4 +1,4 @@
-import { FieldBody } from "../field-body";
+import { FieldBody } from "src/elements/form/field-body";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = FieldBody;
 const COMPONENT_NAME = "FieldBody";

@@ -1,4 +1,4 @@
-import { MessageHeader } from "../message-header";
+import { MessageHeader } from "src/components/message/message-header";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = MessageHeader;
 const COMPONENT_NAME = "MessageHeader";

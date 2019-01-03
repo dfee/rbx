@@ -1,40 +1,44 @@
-import React from "react";
+import * as React from "react";
 
-import { Prefer } from "../types";
+import { Prefer } from "src/types";
 
 export interface ForwardRefAsExoticComponent<
   TOwnProps,
-  TDefaultComponent extends React.ReactType<any>
+  TDefaultComponent extends React.ReactType
 >
   extends Pick<
-    React.ForwardRefExoticComponent<any>,
-    keyof React.ForwardRefExoticComponent<any>
+    React.ForwardRefExoticComponent<TDefaultComponent>,
+    keyof React.ForwardRefExoticComponent<TDefaultComponent>
   > {
-  <TAsComponent extends React.ReactType<any> = TDefaultComponent>(
+  <TAsComponent extends React.ReactType = TDefaultComponent>(
     props: Prefer<
+      // tslint:disable-next-line:no-reserved-keywords
       React.PropsWithoutRef<TOwnProps & { as?: TAsComponent }>,
       React.ComponentPropsWithRef<TAsComponent>
     >,
-  ): React.ReactElement<any> | null;
+  ): JSX.Element | null;
 }
 
 export function forwardRefAs<
   TOwnProps,
-  TDefaultElement extends React.ReactType<any>
+  TDefaultElement extends React.ReactType
 >(
   factory: React.RefForwardingComponent<
-    any,
-    TOwnProps & { as?: React.ReactType<any> }
+    TDefaultElement,
+    // tslint:disable-next-line:no-reserved-keywords
+    TOwnProps & { as?: React.ReactType }
   >,
   defaultProps: Partial<
     Prefer<
+      // tslint:disable-next-line:no-reserved-keywords
       React.PropsWithoutRef<TOwnProps & { as: TDefaultElement }> &
-        React.RefAttributes<any>,
+        React.RefAttributes<TDefaultElement>,
       React.ComponentPropsWithoutRef<TDefaultElement>
     >
   >,
 ) {
   const forward = React.forwardRef(factory);
   forward.defaultProps = defaultProps;
+
   return forward as ForwardRefAsExoticComponent<TOwnProps, TDefaultElement>;
 }

@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { tuple } from "src/utils";
 import { ContentOrderedListItem } from "./content-ordered-list-item";
 
 export const CONTENT_ORDERED_LIST_TYPES = tuple(
@@ -15,6 +15,7 @@ export const CONTENT_ORDERED_LIST_TYPES = tuple(
 export type ContentOrderedListTypes = (typeof CONTENT_ORDERED_LIST_TYPES)[number];
 
 export type ContentOrderedListModifierProps = Partial<{
+  // tslint:disable-next-line:no-reserved-keywords
   type: ContentOrderedListTypes;
 }>;
 

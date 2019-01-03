@@ -1,26 +1,26 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { Omit } from "../../../types";
+} from "src/base/theme";
 import {
   NavbarItemContainer,
   NavbarItemContainerProps,
   NavbarItemContainerState,
-} from "../navbar-item-container";
+} from "src/components/navbar/navbar-item-container";
 import {
   NavbarItemContext,
   NavbarItemContextValue,
-} from "../navbar-item-context";
+} from "src/components/navbar/navbar-item-context";
+import { Omit } from "src/types";
 
 import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   withEnzymeMount,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 // const COMPONENT = NavbarItemContainer;
 const COMPONENT_NAME = "NavbarItemContainer";
@@ -34,6 +34,7 @@ const makeNode = (props: Omit<NavbarItemContainerProps, "dropdown">) => (
 const makeShallowWrapper = (node: JSX.Element) => {
   // render in Context Provider
   const navbarItemContextProviderWrapper = Enzyme.shallow(node);
+
   return navbarItemContextProviderWrapper.children();
 };
 
@@ -43,12 +44,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
 ) => {
   const forwardRefWrapper = makeShallowWrapper(node);
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -115,10 +117,11 @@ describe(`${COMPONENT_NAME} component`, () => {
       });
 
       [undefined, false, true].map(initialActive =>
-        [undefined, false, true].map(managed =>
+        [undefined, false, true].map(managed => {
+          const initialActiveAsBool = initialActive === true;
           it(`should ${
-            managed ? "" : "not "
-          }set NavbarItemContainer's state.active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
+            managed === true ? "" : "not "
+          }set NavbarItemContainer's state.active (${initialActive} as ${initialActiveAsBool} -> ${!initialActiveAsBool})`, () => {
             let contextValue: NavbarItemContextValue | undefined;
             const innerRef = React.createRef<HTMLDivElement>();
             const wrapper = Enzyme.mount(
@@ -127,50 +130,51 @@ describe(`${COMPONENT_NAME} component`, () => {
                 active={initialActive}
                 managed={managed}
                 innerRef={innerRef}
-                as="div"
               >
                 <NavbarItemContext.Consumer>
                   {context => {
                     contextValue = context;
-                    return null;
+
+                    return undefined;
                   }}
                 </NavbarItemContext.Consumer>
               </NavbarItemContainer>,
             );
             try {
-              expect(contextValue!.active).toBe(!!initialActive);
-              contextValue!.setActive(!contextValue!.active);
+              if (contextValue === undefined) {
+                throw new Error("should have contextValue");
+              }
+              expect(contextValue.active).toBe(initialActiveAsBool);
+              contextValue.setActive(!contextValue.active);
               expect((wrapper.state() as NavbarItemContainerState).active).toBe(
-                managed ? !!initialActive : !initialActive,
+                managed === true ? initialActiveAsBool : !initialActiveAsBool,
               );
             } finally {
-              if (wrapper) {
-                wrapper.unmount();
-              }
+              wrapper.unmount();
             }
-          }),
-        ),
+          });
+        }),
       );
     });
 
     describe("dropdownUp", () => {
-      [false, true].map(dropdownUp =>
+      [false, true].map(dropdownUp => {
         it(`should ${dropdownUp ? "" : "not "}have dropdown-up`, () => {
           const node = makeNode({ dropdownUp });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-dropdown-up")).toBe(dropdownUp);
-        }),
-      );
+        });
+      });
     });
 
     describe("hoverable", () => {
-      [false, true].map(hoverable =>
+      [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = makeNode({ hoverable });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
-        }),
-      );
+        });
+      });
     });
   });
 });

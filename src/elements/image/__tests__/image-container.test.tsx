@@ -1,4 +1,7 @@
-import { IMAGE_CONTAINER_SIZES, ImageContainer } from "../image-container";
+import {
+  IMAGE_CONTAINER_SIZES,
+  ImageContainer,
+} from "src/elements/image/image-container";
 
 import {
   hasProperties,
@@ -7,7 +10,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ImageContainer;
 const COMPONENT_NAME = "ImageContainer";
@@ -36,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", IMAGE_CONTAINER_SIZES);
 
-      IMAGE_CONTAINER_SIZES.map(size =>
+      IMAGE_CONTAINER_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -45,8 +48,8 @@ describe(`${COMPONENT_NAME} component`, () => {
           } else {
             expect(wrapper.hasClass(`is-${size}`)).toBe(true);
           }
-        }),
-      );
+        });
+      });
     });
   });
 });

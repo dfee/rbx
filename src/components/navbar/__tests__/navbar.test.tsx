@@ -1,26 +1,30 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
-import { COLORS } from "../../../base/helpers";
-import { Navbar } from "../navbar";
-import { NavbarBrand } from "../navbar-brand";
-import { NavbarBurger } from "../navbar-burger";
-import { NAVBAR_FIXED_ALIGNMENTS, NavbarContainer } from "../navbar-container";
-import { NavbarContext } from "../navbar-context";
-import { NavbarDivider } from "../navbar-divider";
-import { NavbarDropdown } from "../navbar-dropdown";
-import { NavbarEnd } from "../navbar-end";
-import { NavbarItem } from "../navbar-item";
-import { NavbarLink } from "../navbar-link";
-import { NavbarMenu } from "../navbar-menu";
-import { NavbarStart } from "../navbar-start";
+import { COLORS } from "src/base/helpers";
+import { Navbar } from "src/components/navbar/navbar";
+import { NavbarBrand } from "src/components/navbar/navbar-brand";
+import { NavbarBurger } from "src/components/navbar/navbar-burger";
+import {
+  NAVBAR_FIXED_ALIGNMENTS,
+  NavbarContainer,
+} from "src/components/navbar/navbar-container";
+import { NavbarContext } from "src/components/navbar/navbar-context";
+import { NavbarDivider } from "src/components/navbar/navbar-divider";
+import { NavbarDropdown } from "src/components/navbar/navbar-dropdown";
+import { NavbarEnd } from "src/components/navbar/navbar-end";
+import { NavbarItem } from "src/components/navbar/navbar-item";
+import { NavbarLink } from "src/components/navbar/navbar-link";
+import { NavbarMenu } from "src/components/navbar/navbar-menu";
+import { NavbarStart } from "src/components/navbar/navbar-start";
 
 import {
   hasProperties,
   makeNodeFactory,
+  makeTestPropForwarding,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Navbar;
 const COMPONENT_NAME = "Navbar";
@@ -28,6 +32,7 @@ const DEFAULT_ELEMENT = "nav";
 // const BULMA_CLASS_NAME = "navbar";
 
 const makeNode = makeNodeFactory(Navbar);
+const testPropForwarding = makeTestPropForwarding(makeNode);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -55,81 +60,51 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("as", () => {
-      test("it forwards", () => {
-        const as = () => <div />;
-        const node = makeNode({ as });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().as).toBe(as);
-      });
+      testPropForwarding("as", "div");
     });
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active =>
-        test(`it forwards active: ${active}`, () => {
-          const node = makeNode({ active });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().active).toBe(active);
-        }),
-      );
+      [false, true].map(active => {
+        testPropForwarding("active", active);
+      });
     });
 
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS);
 
-      COLORS.map(color =>
-        test(`it forwards color: ${color}`, () => {
-          const node = makeNode({ color });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().color).toBe(color);
-        }),
-      );
+      COLORS.map(color => {
+        testPropForwarding("color", color);
+      });
     });
 
     describe("fixed", () => {
       validateOneOfPropType(propTypes, "fixed", NAVBAR_FIXED_ALIGNMENTS);
 
-      NAVBAR_FIXED_ALIGNMENTS.map(fixed =>
-        test(`it forwards fixed: ${fixed}`, () => {
-          const node = makeNode({ fixed });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().fixed).toBe(fixed);
-        }),
-      );
+      NAVBAR_FIXED_ALIGNMENTS.map(fixed => {
+        testPropForwarding("fixed", fixed);
+      });
     });
 
     describe("managed", () => {
       validateBoolPropType(propTypes, "managed");
 
-      [false, true].map(managed =>
-        test(`it forwards managed: ${managed}`, () => {
-          const node = makeNode({ managed });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().managed).toBe(managed);
-        }),
-      );
+      [false, true].map(managed => {
+        testPropForwarding("managed", managed);
+      });
     });
 
     describe("transparent", () => {
       validateBoolPropType(propTypes, "transparent");
 
-      [false, true].map(transparent =>
-        test(`it forwards transparent: ${transparent}`, () => {
-          const node = makeNode({ transparent });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().transparent).toBe(transparent);
-        }),
-      );
+      [false, true].map(transparent => {
+        testPropForwarding("transparent", transparent);
+      });
     });
 
     describe("ref", () => {
-      test("it forwards", () => {
-        const ref = React.createRef<HTMLAnchorElement>();
-        const node = makeNode({ ref });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().innerRef).toBe(ref);
-      });
+      testPropForwarding("ref", React.createRef(), "innerRef");
     });
   });
 });

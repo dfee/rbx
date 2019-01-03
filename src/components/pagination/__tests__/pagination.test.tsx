@@ -2,12 +2,12 @@ import {
   Pagination,
   PAGINATION_ALIGNMENTS,
   PAGINATION_SIZES,
-} from "../pagination";
-import { PaginationEllipsis } from "../pagination-ellipsis";
-import { PaginationLink } from "../pagination-link";
-import { PaginationList } from "../pagination-list";
-import { PaginationNext } from "../pagination-next";
-import { PaginationPrevious } from "../pagination-previous";
+} from "src/components/pagination/pagination";
+import { PaginationEllipsis } from "src/components/pagination/pagination-ellipsis";
+import { PaginationLink } from "src/components/pagination/pagination-link";
+import { PaginationList } from "src/components/pagination/pagination-list";
+import { PaginationNext } from "src/components/pagination/pagination-next";
+import { PaginationPrevious } from "src/components/pagination/pagination-previous";
 
 import {
   hasProperties,
@@ -17,7 +17,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Pagination;
 const COMPONENT_NAME = "Pagination";
@@ -51,37 +51,37 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("align", () => {
       validateOneOfPropType(propTypes, "align", PAGINATION_ALIGNMENTS);
 
-      PAGINATION_ALIGNMENTS.map(align =>
+      PAGINATION_ALIGNMENTS.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("rounded", () => {
       validateBoolPropType(propTypes, "rounded");
 
-      [false, true].map(rounded =>
+      [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = makeNode({ rounded });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
-        }),
-      );
+        });
+      });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", PAGINATION_SIZES);
 
-      PAGINATION_SIZES.map(size =>
+      PAGINATION_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

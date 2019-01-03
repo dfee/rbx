@@ -1,7 +1,11 @@
-import React from "react";
+import * as React from "react";
 
-import { COLORS } from "../../../base/helpers";
-import { Progress, PROGRESS_SIZES } from "../progress";
+import { COLORS } from "src/base/helpers";
+import {
+  Progress,
+  PROGRESS_SIZES,
+  ProgressProps,
+} from "src/elements/progress/progress";
 
 import {
   hasProperties,
@@ -10,7 +14,7 @@ import {
   testThemeIntegration,
   validateNumberPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Progress;
 const COMPONENT_NAME = "Progress";
@@ -20,8 +24,9 @@ const BULMA_CLASS_NAME = "progress";
 // these are required props. we provide them so we only get the errors we expect
 const EXTRAS = { max: 10, value: 5 };
 
-const makeNode = (props: Partial<React.ComponentProps<typeof Progress>>) => {
+const makeNode = (props: Partial<ProgressProps>) => {
   const finalProps = { ...EXTRAS, ...props };
+
   return <Progress {...finalProps} />;
 };
 
@@ -45,13 +50,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS, EXTRAS);
 
-      COLORS.map(color =>
+      COLORS.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("max", () => {
@@ -61,20 +66,22 @@ describe(`${COMPONENT_NAME} component`, () => {
         const max = 20;
         const node = makeNode({ max });
         const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-        expect(wrapper.props().max).toBe(max);
+        expect(
+          (wrapper.props() as React.ProgressHTMLAttributes<Element>).max,
+        ).toBe(max);
       });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", PROGRESS_SIZES, EXTRAS);
 
-      PROGRESS_SIZES.map(size =>
+      PROGRESS_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size, max: 5, value: 10 });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("value", () => {
@@ -84,7 +91,9 @@ describe(`${COMPONENT_NAME} component`, () => {
         const value = 0;
         const node = makeNode({ value });
         const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-        expect(wrapper.props().value).toBe(value);
+        expect(
+          (wrapper.props() as React.ProgressHTMLAttributes<Element>).value,
+        ).toBe(value);
       });
     });
   });

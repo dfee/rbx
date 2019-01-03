@@ -1,4 +1,4 @@
-import { SelectOption } from "../select-option";
+import { SelectOption } from "src/elements/form/select-option";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = SelectOption;
 const COMPONENT_NAME = "SelectOption";

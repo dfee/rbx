@@ -1,4 +1,4 @@
-import { Loader } from "../loader";
+import { Loader } from "src/elements/other/loader";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Loader;
 const COMPONENT_NAME = "Loader";
@@ -19,7 +19,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: {
       as: DEFAULT_ELEMENT,
-      children: null,
+      children: false,
     },
   });
 

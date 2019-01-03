@@ -1,24 +1,80 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint-react", "tslint-microsoft-contrib"],
   "jsRules": {},
   "linterOptions": {
     "exclude": ["node_modules/**/*.ts"]
   },
   "rules": {
-    "interface-name": [true, "never-prefix"],
-    "jsx-boolean-value": [true, "never"],
-    "jsx-no-lambda": false,
+    // VSCode overrides 'arguments'...
+    // https://github.com/Microsoft/TypeScript/issues/11629
+    "align": {
+      "options": ["elements", "members", "parameters", "statements"],
+      "severity": "default"
+    },
+    "completed-docs": false,
+    // We want to be able to export from index.ts
+    "export-name": false,
+    // import-name has a bug where we can't import index.sass
+    // https://github.com/Microsoft/tslint-microsoft-contrib/issues/667 <issue>
+    // https://github.com/Microsoft/tslint-microsoft-contrib/issues/671 <issue>
+    // https://github.com/Microsoft/tslint-microsoft-contrib/pull/669 <pr>
+    "import-name": false,
+    // We want to be able to import default exports (e.g. classNames)
+    // "import-name": {
+    //   "options": {
+    //     "classnames": "classNames",
+    //     "enzyme-adapter-react-16": "ReactSixteenAdapter"
+    //   },
+    //   "severity": "default"
+    // },
+    "interface-name": { "options": ["never-prefix"], "severity": "default" },
+    "jsx-boolean-value": { "options": ["never"], "severity": "default" },
     "jsx-no-multiline-js": false,
-    "quotemark": [true, "double", "avoid-escape", "avoid-template"],
-    "semicolon": [true, "always"],
-    "trailing-comma": [
-      true,
-      {
+    // We want dynamic test generation
+    // https://github.com/Microsoft/tslint-microsoft-contrib/issues/85
+    "mocha-no-side-effect-code": false,
+    // Too strict:
+    // https://github.com/palantir/tslint/issues/3646
+    "newline-per-chained-call": false,
+    "no-angle-bracket-type-assertion": true,
+    "no-implicit-dependencies": {
+      "options": ["dev", ["src", "classNames"]],
+      "severity": "default"
+    },
+    "no-import-side-effect": {
+      "options": { "ignore-module": "(\\.sass)$" },
+      "severity": "default"
+    },
+    "no-relative-imports": {
+      "options": ["allow-siblings"],
+      "severity": "default"
+    },
+    // We want to allow JSDoc
+    // https://github.com/Microsoft/tslint-microsoft-contrib/issues/385
+    "no-single-line-block-comment": false,
+    "no-submodule-imports": { "options": ["src"], "severity": "default" },
+    // We want `as` as a typecast instead of using <brackets>
+    // https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#new-tsx-file-extension-and-as-operator
+    "prefer-type-cast": false,
+    "quotemark": {
+      "options": ["double", "avoid-escape", "avoid-template"],
+      "severity": "default"
+    },
+    "semicolon": { "options": ["always"], "severity": "default" },
+    "trailing-comma": {
+      "options": {
         "multiline": "always",
         "singleline": "never",
         "esSpecCompliant": true
-      }
-    ]
+      },
+      "severity": "default"
+    },
+    // This is insanely strict
+    "typedef": false,
+    "variable-name": {
+      "options": ["check-format", "allow-pascal-case"],
+      "severity": "default"
+    }
   },
-  "rulesDirectory": []
+  "rulesDirectory": ["node_modules/tslint-microsoft-contrib"]
 }

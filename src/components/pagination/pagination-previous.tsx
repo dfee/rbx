@@ -1,11 +1,14 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from "classNames";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
 
 export type PaginationPreviousProps = HelpersProps;
 
-export const PaginationPrevious = forwardRefAs<PaginationPreviousProps, "a">(
+export const PaginationPrevious = forwardRefAs<
+  PaginationPreviousProps,
+  "a"
+>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("pagination-previous", className)}

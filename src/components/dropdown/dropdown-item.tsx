@@ -1,13 +1,13 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DropdownContext } from "./dropdown-context";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { DropdownContext, DropdownContextValue } from "./dropdown-context";
 
 export type DropdownItemModifierProps = Partial<{
   active: boolean;
-  onClick: React.MouseEventHandler<any>;
+  onClick: React.MouseEventHandler;
 }>;
 
 export type DropdownItemProps = HelpersProps & DropdownItemModifierProps;
@@ -15,6 +15,16 @@ export type DropdownItemProps = HelpersProps & DropdownItemModifierProps;
 const propTypes = {
   active: PropTypes.bool,
   onClick: PropTypes.func,
+};
+
+const onClickHandler = (
+  onClick: DropdownItemProps["onClick"] | undefined,
+  ctx: DropdownContextValue,
+) => (event: React.MouseEvent) => {
+  if (onClick !== undefined) {
+    onClick(event);
+  }
+  ctx.setActive(false);
 };
 
 export const DropdownItem = Object.assign(
@@ -28,12 +38,7 @@ export const DropdownItem = Object.assign(
               { "is-active": active },
               className,
             )}
-            onClick={(event: React.MouseEvent<any>) => {
-              if (onClick) {
-                onClick(event);
-              }
-              ctx.setActive(false);
-            }}
+            onClick={onClickHandler(onClick, ctx)}
             ref={ref}
             {...rest}
           />

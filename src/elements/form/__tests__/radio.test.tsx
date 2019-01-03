@@ -1,4 +1,4 @@
-import { Radio } from "../radio";
+import { Radio } from "src/elements/form/radio";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Radio;
 const COMPONENT_NAME = "Radio";
@@ -32,6 +32,8 @@ describe(`${COMPONENT_NAME} component`, () => {
   it("should be a radio", () => {
     const node = makeNode({});
     const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-    expect(wrapper.props().type).toEqual("radio");
+    expect(
+      (wrapper.props() as React.InputHTMLAttributes<Element>).type,
+    ).toEqual("radio");
   });
 });

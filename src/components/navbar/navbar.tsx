@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs } from "../../base";
-import { COLORS } from "../../base/helpers";
-import { Omit } from "../../types";
+import { forwardRefAs } from "src/base";
+import { COLORS } from "src/base/helpers";
+import { Omit } from "src/types";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
 import {
@@ -32,9 +32,7 @@ const propTypes = {
 
 export const Navbar = Object.assign(
   forwardRefAs<NavbarProps, "nav">(
-    ({ as, ...rest }, ref) => (
-      <NavbarContainer as={as!} innerRef={ref} {...rest} />
-    ),
+    (props, ref) => <NavbarContainer innerRef={ref} {...props} />,
     { as: "nav" },
   ),
   {

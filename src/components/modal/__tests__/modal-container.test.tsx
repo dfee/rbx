@@ -1,11 +1,17 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
-import { ModalContainer, ModalContainerProps } from "../modal-container";
-import { ModalContext, ModalContextValue } from "../modal-context";
-import { ModalPortal } from "../modal-portal";
+import {
+  ModalContainer,
+  ModalContainerProps,
+} from "src/components/modal/modal-container";
+import {
+  ModalContext,
+  ModalContextValue,
+} from "src/components/modal/modal-context";
+import { ModalPortal } from "src/components/modal/modal-portal";
 
-import { withEnzymeMount } from "../../../__tests__/testing";
+import { withEnzymeMount, withWindow } from "src/__tests__/testing";
 
 // const COMPONENT = ModalContainer;
 const COMPONENT_NAME = "ModalContainer";
@@ -19,18 +25,14 @@ const makeNode = (props: ModalContainerProps) => {
 describe(`${COMPONENT_NAME} component`, () => {
   describe("ssr", () => {
     it("should render without window being available (ssr)", () => {
-      const initialWindow = (global as any).window;
-      try {
-        delete (global as any).window;
+      withWindow({}, () => {
         const ref = React.createRef<HTMLDivElement>();
         const wrapper = Enzyme.shallow(
-          <ModalContainer innerRef={ref} as="div" onClose={jest.fn()} active />,
+          <ModalContainer innerRef={ref} onClose={jest.fn()} active />,
         );
         wrapper.unmount();
         expect(wrapper.type()).toBeNull();
-      } finally {
-        (global as any).window = initialWindow;
-      }
+      });
     });
   });
 
@@ -39,13 +41,14 @@ describe(`${COMPONENT_NAME} component`, () => {
 
     describe("active", () => {
       [false, true].map(active =>
-        ["DEFAULT", "span"].map(as =>
+        ["DEFAULT", "span"].map(asType => {
           it(`should ${active ? "" : "not "}render as the ${
-            as === "DEFAULT" ? "default" : "custom"
+            asType === "DEFAULT" ? "default" : "custom"
           } element when ${active ? "" : "not "}active`, () => {
             const node = makeNode({
               active,
-              as: as === "DEFAULT" ? undefined : (as as React.ReactType<any>),
+              as:
+                asType === "DEFAULT" ? undefined : (asType as React.ReactType),
               containerClassName: CONTAINER_CLASS_NAME,
             });
             withEnzymeMount({ node }, ({ context: { wrapper } }) => {
@@ -58,39 +61,39 @@ describe(`${COMPONENT_NAME} component`, () => {
                     .find(ModalPortal)
                     .children() // Generic's ForwardRef
                     .children()
-                    .is(as === "DEFAULT" ? DEFAULT_ELEMENT : as),
+                    .is(asType === "DEFAULT" ? DEFAULT_ELEMENT : asType),
                 ).toBe(active);
               } else {
                 expect(wrapper.find(ModalPortal)).toHaveLength(0);
               }
             });
-          }),
-        ),
+          });
+        }),
       );
     });
 
     describe("closeOnBlur", () => {
-      [false, true].map(closeOnBlur =>
+      [false, true].map(closeOnBlur => {
         it(`should passthrough closeOnBlur as ${closeOnBlur}`, () => {
           const node = makeNode({ active: true, closeOnBlur });
           withEnzymeMount({ node }, ({ context: { wrapper } }) => {
             const modalPortalWrapper = wrapper.find(ModalPortal);
             expect(modalPortalWrapper.props().closeOnBlur).toEqual(closeOnBlur);
           });
-        }),
-      );
+        });
+      });
     });
 
     describe("closeOnEsc", () => {
-      [false, true].map(closeOnEsc =>
+      [false, true].map(closeOnEsc => {
         it(`should passthrough closeOnEsc as ${closeOnEsc}`, () => {
           const node = makeNode({ active: true, closeOnEsc });
           withEnzymeMount({ node }, ({ context: { wrapper } }) => {
             const modalPortalWrapper = wrapper.find(ModalPortal);
             expect(modalPortalWrapper.props().closeOnEsc).toEqual(closeOnEsc);
           });
-        }),
-      );
+        });
+      });
     });
 
     describe("innerRef", () => {
@@ -106,7 +109,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("onClose", () => {
-      [false, true].map(hasOnClose =>
+      [false, true].map(hasOnClose => {
         it(`should ${hasOnClose ? "" : "not "}call onClose when closed`, () => {
           let contextValue: ModalContextValue | undefined;
           const onClose = jest.fn();
@@ -116,21 +119,25 @@ describe(`${COMPONENT_NAME} component`, () => {
               <ModalContext.Consumer>
                 {context => {
                   contextValue = context;
-                  return null;
+
+                  return undefined;
                 }}
               </ModalContext.Consumer>
             ),
             onClose: hasOnClose ? onClose : undefined,
           });
           withEnzymeMount({ node }, () => {
-            contextValue!.close();
+            if (contextValue === undefined) {
+              throw new Error("should have contextValue");
+            }
+            contextValue.close();
             if (hasOnClose) {
               expect(onClose.mock.calls).toHaveLength(1);
               expect(onClose.mock.calls[0]).toEqual([]);
             }
           });
-        }),
-      );
+        });
+      });
     });
   });
 });

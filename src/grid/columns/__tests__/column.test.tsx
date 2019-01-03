@@ -1,5 +1,5 @@
-import { BREAKPOINTS } from "../../../base/helpers";
-import { Column, COLUMN_SIZES } from "../column";
+import { BREAKPOINTS } from "src/base/helpers";
+import { Column, COLUMN_SIZES } from "src/grid/columns/column";
 
 import {
   hasProperties,
@@ -10,7 +10,7 @@ import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Column;
 const COMPONENT_NAME = "Column";
@@ -38,13 +38,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("narrow", () => {
       validateBoolPropType(propTypes, "narrow");
 
-      [false, true].map(narrow =>
+      [false, true].map(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = makeNode({ narrow });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
-        }),
-      );
+        });
+      });
 
       BREAKPOINTS.map(breakpoint => {
         describe(breakpoint, () => {
@@ -64,15 +64,15 @@ describe(`${COMPONENT_NAME} component`, () => {
             },
           ]);
 
-          [false, true].map(narrow =>
+          [false, true].map(narrow => {
             it(`should ${narrow ? "" : "not "}be narrow`, () => {
               const node = makeNode({ [breakpoint]: { narrow } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
                 node,
               );
               expect(wrapper.hasClass(`is-narrow-${breakpoint}`)).toBe(narrow);
-            }),
-          );
+            });
+          });
         });
       });
     });
@@ -80,13 +80,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("offset", () => {
       validateOneOfPropType(propTypes, "offset", COLUMN_SIZES);
 
-      COLUMN_SIZES.map(offset =>
+      COLUMN_SIZES.map(offset => {
         it(`should be ${offset}`, () => {
           const node = makeNode({ offset });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-offset-${offset}`)).toBe(true);
-        }),
-      );
+        });
+      });
 
       BREAKPOINTS.map(breakpoint => {
         validatePropType(propTypes, breakpoint, [
@@ -106,7 +106,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         ]);
 
         describe(breakpoint, () => {
-          COLUMN_SIZES.map(offset =>
+          COLUMN_SIZES.map(offset => {
             it(`should be offset ${offset}`, () => {
               const node = makeNode({ [breakpoint]: { offset } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
@@ -115,8 +115,8 @@ describe(`${COMPONENT_NAME} component`, () => {
               expect(
                 wrapper.hasClass(`is-offset-${offset}-${breakpoint}`),
               ).toBe(true);
-            }),
-          );
+            });
+          });
         });
       });
     });
@@ -124,13 +124,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", COLUMN_SIZES);
 
-      COLUMN_SIZES.map(size =>
+      COLUMN_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
 
       BREAKPOINTS.map(breakpoint => {
         describe(breakpoint, () => {
@@ -150,15 +150,15 @@ describe(`${COMPONENT_NAME} component`, () => {
             },
           ]);
 
-          COLUMN_SIZES.map(size =>
+          COLUMN_SIZES.map(size => {
             it(`should be ${size}`, () => {
               const node = makeNode({ [breakpoint]: { size } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
                 node,
               );
               expect(wrapper.hasClass(`is-${size}-${breakpoint}`)).toBe(true);
-            }),
-          );
+            });
+          });
         });
       });
     });

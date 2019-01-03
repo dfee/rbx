@@ -1,12 +1,12 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DropdownContext } from "./dropdown-context";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { DropdownContext, DropdownContextValue } from "./dropdown-context";
 
 export type DropdownTriggerModifierProps = Partial<{
-  onClick: React.MouseEventHandler<any>;
+  onClick: React.MouseEventHandler;
 }>;
 
 const propTypes = {
@@ -15,19 +15,24 @@ const propTypes = {
 
 export type DropdownTriggerProps = HelpersProps & DropdownTriggerModifierProps;
 
+const onClickHandler = (
+  onClick: DropdownTriggerProps["onClick"] | undefined,
+  ctx: DropdownContextValue,
+) => (event: React.MouseEvent) => {
+  if (onClick !== undefined) {
+    onClick(event);
+  }
+  ctx.setActive(!ctx.active);
+};
+
 export const DropdownTrigger = Object.assign(
   forwardRefAs<DropdownTriggerProps, "div">(
     ({ className, onClick, ...rest }, ref) => (
       <DropdownContext.Consumer>
-        {({ active, setActive }) => (
+        {ctx => (
           <Generic
             className={classNames("dropdown-trigger", className)}
-            onClick={(event: React.MouseEvent<any>) => {
-              if (onClick) {
-                onClick(event);
-              }
-              setActive(!active);
-            }}
+            onClick={onClickHandler(onClick, ctx)}
             ref={ref}
             {...rest}
           />

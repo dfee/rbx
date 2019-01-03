@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { tuple } from "src/utils";
 
 export const MEDIA_ITEM_POSITIONS = tuple("content", "left", "right");
 export type MediaItemPositions = (typeof MEDIA_ITEM_POSITIONS)[number];

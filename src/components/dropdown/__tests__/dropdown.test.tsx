@@ -1,21 +1,25 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
-import { Dropdown } from "../dropdown";
-import { DROPDOWN_ALIGNMENTS, DropdownContainer } from "../dropdown-container";
-import { DropdownContent } from "../dropdown-content";
-import { DropdownContext } from "../dropdown-context";
-import { DropdownDivider } from "../dropdown-divider";
-import { DropdownItem } from "../dropdown-item";
-import { DropdownMenu } from "../dropdown-menu";
-import { DropdownTrigger } from "../dropdown-trigger";
+import { Dropdown } from "src/components/dropdown/dropdown";
+import {
+  DROPDOWN_ALIGNMENTS,
+  DropdownContainer,
+} from "src/components/dropdown/dropdown-container";
+import { DropdownContent } from "src/components/dropdown/dropdown-content";
+import { DropdownContext } from "src/components/dropdown/dropdown-context";
+import { DropdownDivider } from "src/components/dropdown/dropdown-divider";
+import { DropdownItem } from "src/components/dropdown/dropdown-item";
+import { DropdownMenu } from "src/components/dropdown/dropdown-menu";
+import { DropdownTrigger } from "src/components/dropdown/dropdown-trigger";
 
 import {
   hasProperties,
   makeNodeFactory,
+  makeTestPropForwarding,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Dropdown;
 const COMPONENT_NAME = "Dropdown";
@@ -23,6 +27,8 @@ const DEFAULT_ELEMENT = "div";
 // const BULMA_CLASS_NAME = "dropdown";
 
 const makeNode = makeNodeFactory(Dropdown);
+
+const testPropForwarding = makeTestPropForwarding(makeNode);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -48,88 +54,53 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active =>
-        test(`it forwards active: ${active}`, () => {
-          const node = makeNode({ active });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().active).toBe(active);
-        }),
-      );
+      [false, true].map(active => {
+        testPropForwarding("active", active);
+      });
     });
 
     describe("align", () => {
       validateOneOfPropType(propTypes, "align", DROPDOWN_ALIGNMENTS);
 
-      DROPDOWN_ALIGNMENTS.map(align =>
-        test(`it forwards align: ${align}`, () => {
-          const node = makeNode({ align });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().align).toBe(align);
-        }),
-      );
+      DROPDOWN_ALIGNMENTS.map(align => {
+        testPropForwarding("align", align);
+      });
     });
 
     describe("as", () => {
-      test("it forwards", () => {
-        const as = () => <div />;
-        const node = makeNode({ as });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().as).toBe(as);
-      });
+      testPropForwarding("as", "div");
     });
 
-    describe("clasaName", () => {
-      test("it forwards", () => {
-        const className = "foo";
-        const node = makeNode({ className });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().className).toBe(className);
-      });
+    describe("className", () => {
+      testPropForwarding("className", "foo");
     });
 
     describe("hoverable", () => {
       validateBoolPropType(propTypes, "hoverable");
 
-      [false, true].map(hoverable =>
-        test(`it forwards hoverable: ${hoverable}`, () => {
-          const node = makeNode({ hoverable });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().hoverable).toBe(hoverable);
-        }),
-      );
+      [false, true].map(hoverable => {
+        testPropForwarding("hoverable", hoverable);
+      });
     });
 
     describe("managed", () => {
       validateBoolPropType(propTypes, "managed");
 
-      [false, true].map(managed =>
-        test(`it forwards managed: ${managed}`, () => {
-          const node = makeNode({ managed });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().managed).toBe(managed);
-        }),
-      );
+      [false, true].map(managed => {
+        testPropForwarding("managed", managed);
+      });
     });
 
     describe("ref", () => {
-      test("it forwards", () => {
-        const ref = React.createRef<HTMLDivElement>();
-        const node = makeNode({ ref });
-        const wrapper = Enzyme.shallow(node);
-        expect(wrapper.props().innerRef).toBe(ref);
-      });
+      testPropForwarding("ref", React.createRef(), "innerRef");
     });
 
     describe("up", () => {
       validateBoolPropType(propTypes, "up");
 
-      [false, true].map(up =>
-        test(`it forwards up: ${up}`, () => {
-          const node = makeNode({ up });
-          const wrapper = Enzyme.shallow(node);
-          expect(wrapper.props().up).toBe(up);
-        }),
-      );
+      [false, true].map(up => {
+        testPropForwarding("up", up);
+      });
     });
   });
 });

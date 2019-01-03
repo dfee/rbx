@@ -1,9 +1,8 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from "classNames";
+import * as React from "react";
 
-import { Generic, HelpersProps } from "../../base";
-import { tuple } from "../../utils";
-import { combineRefs } from "../../utils";
+import { Generic, HelpersProps } from "src/base";
+import { combineRefs, tuple } from "src/utils";
 import { DropdownContext } from "./dropdown-context";
 
 export const DROPDOWN_ALIGNMENTS = tuple("right");
@@ -12,9 +11,9 @@ export type DropdownAlignments = (typeof DROPDOWN_ALIGNMENTS)[number];
 export type DropdownContainerModifierProps = Partial<{
   active: boolean;
   align: DropdownAlignments;
-  as?: React.ReactType<any>;
+  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   hoverable: boolean;
-  innerRef: React.Ref<HTMLDivElement>;
+  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   managed: boolean;
   up: boolean;
 }>;
@@ -33,11 +32,11 @@ export class DropdownContainer extends React.PureComponent<
   DropdownContainerState
 > {
   public readonly state: DropdownContainerState;
-  private ref = React.createRef<HTMLDivElement>();
+  private readonly ref = React.createRef<HTMLElement>();
 
   constructor(props: DropdownContainerProps) {
     super(props);
-    this.state = { active: props.active || false };
+    this.state = { active: props.active === true };
   }
 
   public componentDidMount() {
@@ -45,7 +44,7 @@ export class DropdownContainer extends React.PureComponent<
   }
 
   public componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick!);
+    document.removeEventListener("click", this.handleClick);
   }
 
   public render() {
@@ -86,17 +85,23 @@ export class DropdownContainer extends React.PureComponent<
   }
 
   private get active() {
-    return this.props.managed ? this.props.active || false : this.state.active;
+    return this.props.managed === true
+      ? this.props.active === true
+      : this.state.active;
   }
 
   private set active(value: boolean) {
-    if (!this.props.managed) {
+    if (this.props.managed !== true) {
       this.setState({ active: value });
     }
   }
 
-  private handleClick = (event: MouseEvent) => {
-    if (!this.props.managed && this.active && this.ref.current) {
+  private readonly handleClick = (event: MouseEvent) => {
+    if (
+      this.props.managed !== true &&
+      this.active &&
+      this.ref.current !== null
+    ) {
       if (
         event.target instanceof Element &&
         !this.ref.current.contains(event.target)

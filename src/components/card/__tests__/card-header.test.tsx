@@ -1,6 +1,6 @@
-import { CardHeader } from "../card-header";
-import { CardHeaderIcon } from "../card-header-icon";
-import { CardHeaderTitle } from "../card-header-title";
+import { CardHeader } from "src/components/card/card-header";
+import { CardHeaderIcon } from "src/components/card/card-header-icon";
+import { CardHeaderTitle } from "src/components/card/card-header-title";
 
 import {
   hasProperties,
@@ -8,7 +8,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = CardHeader;
 const COMPONENT_NAME = "CardHeader";

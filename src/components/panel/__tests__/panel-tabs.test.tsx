@@ -1,5 +1,5 @@
-import { PanelTab } from "../panel-tab";
-import { PanelTabs } from "../panel-tabs";
+import { PanelTab } from "src/components/panel/panel-tab";
+import { PanelTabs } from "src/components/panel/panel-tabs";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = PanelTabs;
 const COMPONENT_NAME = "PanelTabs";

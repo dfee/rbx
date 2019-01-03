@@ -1,5 +1,5 @@
-import { Select, SelectContainer } from "../select";
-import { SelectOption } from "../select-option";
+import { Select, SelectContainer } from "src/elements/form/select";
+import { SelectOption } from "src/elements/form/select-option";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Select;
 const COMPONENT_NAME = "Select";

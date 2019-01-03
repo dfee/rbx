@@ -1,4 +1,4 @@
-import { PanelIcon } from "../panel-icon";
+import { PanelIcon } from "src/components/panel/panel-icon";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = PanelIcon;
 const COMPONENT_NAME = "PanelIcon";

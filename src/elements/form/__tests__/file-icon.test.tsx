@@ -1,4 +1,4 @@
-import { FileIcon } from "../file-icon";
+import { FileIcon } from "src/elements/form/file-icon";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = FileIcon;
 const COMPONENT_NAME = "FileIcon";

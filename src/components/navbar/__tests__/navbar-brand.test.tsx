@@ -1,4 +1,4 @@
-import { NavbarBrand } from "../navbar-brand";
+import { NavbarBrand } from "src/components/navbar/navbar-brand";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = NavbarBrand;
 const COMPONENT_NAME = "NavbarBrand";

@@ -1,4 +1,4 @@
-import { TagGroup } from "../tag-group";
+import { TagGroup } from "src/elements/tag/tag-group";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = TagGroup;
 const COMPONENT_NAME = "TagGroup";
@@ -36,13 +36,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("size", () => {
       validateBoolPropType(propTypes, "gapless");
 
-      [false, true].map(gapless =>
+      [false, true].map(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
           const node = makeNode({ gapless });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-addons")).toBe(gapless);
-        }),
-      );
+        });
+      });
     });
   });
 });

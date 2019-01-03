@@ -1,15 +1,16 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
-import { Generic } from "../generic";
-import { transformHelpers } from "../helpers";
+import { Generic } from "src/base/generic";
+import { transformHelpers } from "src/base/helpers";
+import { ThemeContextValue } from "src/base/theme";
 
 import {
   hasProperties,
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Generic;
 const COMPONENT_NAME = "Generic";
@@ -23,9 +24,11 @@ const makeShallowWrapperInThemeContextConsumer = (
   contextValue = { transform: transformHelpers },
 ) => {
   const contextConsumerWrapper = Enzyme.shallow(node);
-  const Children = (contextConsumerWrapper.props() as any).children;
-  const wrapper = Enzyme.shallow(<Children {...contextValue} />);
-  return wrapper;
+  const Children = (contextConsumerWrapper.props() as {
+    children(context: ThemeContextValue): JSX.Element;
+  }).children;
+
+  return Enzyme.shallow(<Children {...contextValue} />);
 };
 
 describe(`${COMPONENT_NAME} component`, () => {

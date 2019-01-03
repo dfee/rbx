@@ -1,24 +1,28 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
-import { COLORS } from "../../../base/helpers";
+import { COLORS } from "src/base/helpers";
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
+} from "src/base/theme";
 import {
   NAVBAR_FIXED_ALIGNMENTS,
   NavbarContainer,
   NavbarContainerProps,
   NavbarContainerState,
-} from "../navbar-container";
-import { NavbarContext, NavbarContextValue } from "../navbar-context";
+} from "src/components/navbar/navbar-container";
+import {
+  NavbarContext,
+  NavbarContextValue,
+} from "src/components/navbar/navbar-context";
 
 import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   withEnzymeMount,
-} from "../../../__tests__/testing";
+  withWindow,
+} from "src/__tests__/testing";
 
 // const COMPONENT = NavbarContainer;
 const COMPONENT_NAME = "NavbarContainer";
@@ -32,6 +36,7 @@ const makeNode = (props: NavbarContainerProps) => (
 const makeShallowWrapper = (node: JSX.Element) => {
   // render in Context Provider
   const navbarItemContextProviderWrapper = Enzyme.shallow(node);
+
   return navbarItemContextProviderWrapper.children();
 };
 
@@ -41,12 +46,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
 ) => {
   const forwardRefWrapper = makeShallowWrapper(node);
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -62,70 +68,70 @@ describe(`${COMPONENT_NAME} component`, () => {
 
   describe("ssr", () => {
     it("should render without window being available (ssr)", () => {
-      const initialWindow = (global as any).window;
-      try {
-        delete (global as any).window;
+      withWindow({}, () => {
         const ref = React.createRef<HTMLDivElement>();
-        const wrapper = Enzyme.shallow(
-          <NavbarContainer innerRef={ref} as="div" />,
-        );
+        const wrapper = Enzyme.shallow(<NavbarContainer innerRef={ref} />);
         expect(wrapper.children().hasClass("navbar")).toBe(true);
         wrapper.unmount();
         expect(wrapper.type()).toBeNull();
-      } finally {
-        (global as any).window = initialWindow;
-      }
+      });
     });
   });
 
   describe("props", () => {
     describe("active", () => {
-      [false, true].map(active =>
+      [false, true].map(active => {
         it(`should set active: ${active} in context`, () => {
           let contextValue: NavbarContextValue | undefined;
           const node = (
             <NavbarContainer active={active}>
-              <NavbarContext.Consumer
-                children={context => {
+              <NavbarContext.Consumer>
+                {context => {
                   contextValue = context;
-                  return null;
+
+                  return undefined;
                 }}
+              </NavbarContext.Consumer>
               />
             </NavbarContainer>
           );
           withEnzymeMount({ node }, () => {
-            expect(contextValue!.active).toEqual(active);
+            if (contextValue === undefined) {
+              throw new Error("should have contextValue");
+            }
+            expect(contextValue.active).toEqual(active);
           });
-        }),
-      );
+        });
+      });
     });
 
     describe("color", () => {
-      COLORS.map(color =>
+      COLORS.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("fixed", () => {
-      NAVBAR_FIXED_ALIGNMENTS.map(fixed =>
+      NAVBAR_FIXED_ALIGNMENTS.map(fixed => {
         it(`should be ${fixed}`, () => {
           const node = makeNode({ fixed });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-fixed-${fixed}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("managed", () => {
       [undefined, false, true].map(initialActive =>
-        [undefined, false, true].map(managed =>
+        [undefined, false, true].map(managed => {
+          const initialActiveAsBool = initialActive === true;
           it(`should ${
-            managed ? "" : "not "
-          }set NavbarContext's active (${initialActive} as ${!!initialActive} -> ${!initialActive}) when managed is ${managed}`, () => {
+            managed === true ? "" : "not "
+          }set NavbarContext's active (${initialActive} as ${initialActiveAsBool} -> ${!initialActiveAsBool})`, () => {
             let contextState: NavbarContextValue | undefined;
             const innerRef = React.createRef<HTMLDivElement>();
             const wrapper = Enzyme.mount(
@@ -133,40 +139,42 @@ describe(`${COMPONENT_NAME} component`, () => {
                 active={initialActive}
                 managed={managed}
                 innerRef={innerRef}
-                as="div"
               >
                 <NavbarContext.Consumer>
                   {context => {
                     contextState = context;
-                    return null;
+
+                    return undefined;
                   }}
                 </NavbarContext.Consumer>
               </NavbarContainer>,
             );
             try {
-              expect(contextState!.active).toBe(!!initialActive);
-              contextState!.setActive(!contextState!.active);
+              if (contextState === undefined) {
+                throw new Error("should have contextState");
+              }
+
+              expect(contextState.active).toBe(initialActiveAsBool);
+              contextState.setActive(!contextState.active);
               expect((wrapper.state() as NavbarContainerState).active).toBe(
-                managed ? !!initialActive : !initialActive,
+                managed === true ? initialActiveAsBool : !initialActiveAsBool,
               );
             } finally {
-              if (wrapper) {
-                wrapper.unmount();
-              }
+              wrapper.unmount();
             }
-          }),
-        ),
+          });
+        }),
       );
     });
 
     describe("transparent", () => {
-      [false, true].map(transparent =>
+      [false, true].map(transparent => {
         it(`should ${transparent ? "" : "not "}be transparent`, () => {
           const node = makeNode({ transparent });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-transparent")).toBe(transparent);
-        }),
-      );
+        });
+      });
     });
   });
 });

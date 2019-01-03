@@ -1,4 +1,7 @@
-import { BUTTON_GROUP_POSITIONS, ButtonGroup } from "../button-group";
+import {
+  BUTTON_GROUP_POSITIONS,
+  ButtonGroup,
+} from "src/elements/button/button-group";
 
 import {
   hasProperties,
@@ -8,7 +11,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ButtonGroup;
 const COMPONENT_NAME = "ButtonGroup";
@@ -37,25 +40,25 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("hasAddons", () => {
       validateBoolPropType(propTypes, "hasAddons");
 
-      [false, true].map(hasAddons =>
+      [false, true].map(hasAddons => {
         it(`should ${hasAddons ? "" : "not "}have addons`, () => {
           const node = makeNode({ hasAddons });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-addons")).toBe(hasAddons);
-        }),
-      );
+        });
+      });
     });
 
     describe("position", () => {
       validateOneOfPropType(propTypes, "position", BUTTON_GROUP_POSITIONS);
 
-      BUTTON_GROUP_POSITIONS.map(position =>
+      BUTTON_GROUP_POSITIONS.map(position => {
         it(`should be ${position}`, () => {
           const node = makeNode({ position });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${position}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

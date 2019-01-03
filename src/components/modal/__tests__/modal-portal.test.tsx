@@ -1,18 +1,21 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { initialValue as modalInitialValue } from "../modal-context";
-import { ModalPortal, ModalPortalProps } from "../modal-portal";
+} from "src/base/theme";
+import { initialValue as modalInitialValue } from "src/components/modal/modal-context";
+import {
+  ModalPortal,
+  ModalPortalProps,
+} from "src/components/modal/modal-portal";
 
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 // const COMPONENT = ModalPortal;
 const COMPONENT_NAME = "ModalPortal";
@@ -30,12 +33,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   const modalContextProviderWrapper = Enzyme.shallow(node);
   const forwardRefWrapper = modalContextProviderWrapper.children();
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -54,7 +58,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
 
   describe("extra", () => {
-    [false, true].map(closeOnEsc =>
+    [false, true].map(closeOnEsc => {
       it(`should ${
         closeOnEsc ? "" : "not "
       }call the context's onClose on ESC keydown when closeOnEsc is ${closeOnEsc}`, () => {
@@ -71,7 +75,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         } finally {
           wrapper.unmount();
         }
-      }),
-    );
+      });
+    });
   });
 });

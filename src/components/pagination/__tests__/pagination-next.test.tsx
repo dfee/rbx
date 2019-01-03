@@ -1,4 +1,4 @@
-import { PaginationNext } from "../pagination-next";
+import { PaginationNext } from "src/components/pagination/pagination-next";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = PaginationNext;
 const COMPONENT_NAME = "PaginationNext";

@@ -1,10 +1,10 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { Colors, COLORS } from "src/base/helpers";
+import { tuple } from "src/utils";
 
 export const TILE_KINDS = tuple("ancestor", "parent", "child");
 export type TileKinds = (typeof TILE_KINDS)[number];
@@ -42,7 +42,7 @@ export const Tile = Object.assign(
           {
             [`is-${color}`]: color,
             [`is-${kind}`]: kind,
-            [`is-${size}`]: !!size,
+            [`is-${size}`]: size !== undefined,
             "is-vertical": vertical,
             notification,
           },

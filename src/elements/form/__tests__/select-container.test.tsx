@@ -1,12 +1,12 @@
-import React from "react";
+import * as React from "react";
 
-import { COLORS } from "../../../base/helpers";
+import { COLORS } from "src/base/helpers";
 import {
   Select,
   SELECT_CONTAINER_SIZES,
   SELECT_CONTAINER_STATES,
   SelectContainer,
-} from "../select";
+} from "src/elements/form/select";
 
 import {
   hasProperties,
@@ -16,7 +16,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = SelectContainer;
 const COMPONENT_NAME = "SelectContainer";
@@ -45,49 +45,49 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("color", () => {
       validateOneOfPropType(propTypes, "color", COLORS);
 
-      COLORS.map(color =>
+      COLORS.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 
-      [false, true].map(fullwidth =>
+      [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = makeNode({ fullwidth });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
-        }),
-      );
+        });
+      });
     });
 
     describe("rounded", () => {
       validateBoolPropType(propTypes, "rounded");
 
-      [false, true].map(rounded =>
+      [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = makeNode({ rounded });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
-        }),
-      );
+        });
+      });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", SELECT_CONTAINER_SIZES);
 
-      SELECT_CONTAINER_SIZES.map(size =>
+      SELECT_CONTAINER_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("state", () => {
@@ -98,7 +98,7 @@ describe(`${COMPONENT_NAME} component`, () => {
           { discriminator: "select" },
           { discriminator: "component" },
           { discriminator: "string" },
-        ].map(({ discriminator }) =>
+        ].map(({ discriminator }) => {
           it(`should have state ${state} for discriminator ${discriminator}`, () => {
             let children: JSX.Element | string;
             if (discriminator === "select") {
@@ -117,8 +117,8 @@ describe(`${COMPONENT_NAME} component`, () => {
                 expect(wrapper.children().hasClass(`is-${state}`)).toBe(true);
               }
             }
-          }),
-        );
+          });
+        });
       });
     });
 
@@ -149,7 +149,7 @@ describe(`${COMPONENT_NAME} component`, () => {
             it(`should ${
               isMultiple ? "" : "not "
             }be multiple for childType ${childType}`, () => {
-              let children: JSX.Element | string | JSX.Element[] | null;
+              let children: JSX.Element | string | JSX.Element[] | undefined;
               if (childType === "select") {
                 children = <select multiple={multiple} />;
               } else if (childType === "component") {
@@ -169,7 +169,7 @@ describe(`${COMPONENT_NAME} component`, () => {
               } else if (childType === "fragment-empty") {
                 children = <React.Fragment />;
               } else if (childType === "empty") {
-                children = null;
+                children = undefined;
               } else {
                 children = childType;
               }

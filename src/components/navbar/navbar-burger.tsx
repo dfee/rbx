@@ -1,12 +1,12 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { NavbarContext } from "./navbar-context";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { NavbarContext, NavbarContextValue } from "./navbar-context";
 
 export type NavbarBurgerModifierProps = Partial<{
-  onClick: React.MouseEventHandler<any>;
+  onClick: React.MouseEventHandler;
   style: React.CSSProperties;
 }>;
 
@@ -17,23 +17,28 @@ const propTypes = {
   style: PropTypes.object,
 };
 
+const onClickHandler = (
+  onClick: NavbarBurgerProps["onClick"] | undefined,
+  ctx: NavbarContextValue,
+) => (event: React.MouseEvent) => {
+  if (onClick !== undefined) {
+    onClick(event);
+  }
+  ctx.setActive(!ctx.active);
+};
+
 export const NavbarBurger = Object.assign(
   forwardRefAs<NavbarBurgerProps, "div">(
     ({ className, style, onClick, ...rest }, ref) => (
       <NavbarContext.Consumer>
-        {({ active, setActive }) => (
+        {ctx => (
           <Generic
             className={classNames(
               "navbar-burger",
-              { "is-active": active },
+              { "is-active": ctx.active },
               className,
             )}
-            onClick={(event: React.MouseEvent) => {
-              if (onClick) {
-                onClick(event);
-              }
-              setActive(!active);
-            }}
+            onClick={onClickHandler(onClick, ctx)}
             ref={ref}
             role="button"
             style={{ outline: "none", ...style }}

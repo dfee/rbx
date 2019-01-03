@@ -1,8 +1,8 @@
-import { BREAKPOINTS } from "../../../base/helpers";
-import { Level } from "../level";
-import { LevelItem } from "../level-item";
-import { LevelLeft } from "../level-left";
-import { LevelRight } from "../level-right";
+import { BREAKPOINTS } from "src/base/helpers";
+import { Level } from "src/components/level/level";
+import { LevelItem } from "src/components/level/level-item";
+import { LevelLeft } from "src/components/level/level-left";
+import { LevelRight } from "src/components/level/level-right";
 
 import {
   hasProperties,
@@ -11,7 +11,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Level;
 const COMPONENT_NAME = "Level";
@@ -43,13 +43,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("breakpoint", () => {
       validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
 
-      BREAKPOINTS.map(breakpoint =>
+      BREAKPOINTS.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = makeNode({ breakpoint });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

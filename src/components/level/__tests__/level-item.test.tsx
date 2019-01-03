@@ -1,4 +1,4 @@
-import { LevelItem } from "../level-item";
+import { LevelItem } from "src/components/level/level-item";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = LevelItem;
 const COMPONENT_NAME = "LevelItem";

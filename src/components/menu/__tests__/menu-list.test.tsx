@@ -1,5 +1,5 @@
-import { MenuList } from "../menu-list";
-import { MenuListItem } from "../menu-list-item";
+import { MenuList } from "src/components/menu/menu-list";
+import { MenuListItem } from "src/components/menu/menu-list-item";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = MenuList;
 const COMPONENT_NAME = "MenuList";

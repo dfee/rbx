@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs } from "../../base";
-import { Omit } from "../../types";
+import { forwardRefAs } from "src/base";
+import { Omit } from "src/types";
 import {
   DROPDOWN_ALIGNMENTS,
   DropdownContainer,

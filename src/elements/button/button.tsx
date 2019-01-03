@@ -1,10 +1,10 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { COLORS, Colors } from "../../base/helpers";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { COLORS, Colors } from "src/base/helpers";
+import { tuple } from "src/utils";
 import { ButtonGroup } from "./button-group";
 
 export const BUTTON_SIZES = tuple("small", "medium", "large");
@@ -23,6 +23,7 @@ export type ButtonModifierProps = Partial<{
   selected: boolean;
   size: ButtonSizes;
   state: ButtonStates;
+  // tslint:disable-next-line:no-reserved-keywords
   static: boolean;
   text: boolean;
 }>;

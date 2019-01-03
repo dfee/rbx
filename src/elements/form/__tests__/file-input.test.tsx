@@ -1,4 +1,4 @@
-import { FileInput } from "../file-input";
+import { FileInput } from "src/elements/form/file-input";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = FileInput;
 const COMPONENT_NAME = "FileInput";
@@ -32,6 +32,8 @@ describe(`${COMPONENT_NAME} component`, () => {
   it("should be a file", () => {
     const node = makeNode({});
     const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-    expect(wrapper.props().type).toEqual("file");
+    expect(
+      (wrapper.props() as React.InputHTMLAttributes<Element>).type,
+    ).toEqual("file");
   });
 });

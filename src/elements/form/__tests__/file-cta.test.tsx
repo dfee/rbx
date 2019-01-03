@@ -1,4 +1,4 @@
-import { FileCTA } from "../file-cta";
+import { FileCTA } from "src/elements/form/file-cta";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = FileCTA;
 const COMPONENT_NAME = "FileCTA";

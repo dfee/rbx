@@ -1,15 +1,15 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
+} from "src/base/theme";
 import {
   initialValue as navbarInitialValue,
   NavbarContextValue,
-} from "../navbar-context";
-import { NavbarLink } from "../navbar-link";
+} from "src/components/navbar/navbar-context";
+import { NavbarLink } from "src/components/navbar/navbar-link";
 
 import {
   hasProperties,
@@ -18,7 +18,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validatePropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = NavbarLink;
 const COMPONENT_NAME = "NavbarLink";
@@ -32,12 +32,13 @@ const makeShallowWrapperInNavbarContextConsumer = (
   navbarContextValue: NavbarContextValue = navbarInitialValue,
 ) => {
   const navbarContextConsumerWrapper = Enzyme.shallow(node);
-  const NavbarContextConsumerChildren = navbarContextConsumerWrapper.props()
-    .children;
-  const navbarContextConsumerChildrenWrapper = Enzyme.shallow(
+  const NavbarContextConsumerChildren = (navbarContextConsumerWrapper.props() as {
+    children: React.FC<NavbarContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <NavbarContextConsumerChildren {...navbarContextValue} />,
   );
-  return navbarContextConsumerChildrenWrapper;
 };
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
@@ -50,12 +51,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
     navbarContextValue,
   );
   const themeContextConsumerWrapper = navbarContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -78,22 +80,22 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("arrowless", () => {
       validateBoolPropType(propTypes, "arrowless");
 
-      [false, true].map(arrowless =>
+      [false, true].map(arrowless => {
         it(`should ${arrowless ? "" : "not "}be arrowless`, () => {
           const node = makeNode({ arrowless });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-arrowless")).toBe(arrowless);
-        }),
-      );
+        });
+      });
     });
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
-        { value: () => null, valid: true, descriptor: "func" },
+        { value: () => undefined, valid: true, descriptor: "func" },
         { value: "string", valid: false },
       ]);
 
-      [false, true].map(hasOnClick =>
+      [false, true].map(hasOnClick => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {
@@ -112,8 +114,8 @@ describe(`${COMPONENT_NAME} component`, () => {
           expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
           expect(setActive.mock.calls).toHaveLength(1);
           expect(setActive.mock.calls[0]).toEqual([true]);
-        }),
-      );
+        });
+      });
     });
   });
 });

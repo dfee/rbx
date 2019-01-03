@@ -1,12 +1,12 @@
-import React from "react";
+import * as React from "react";
 
 import {
   Breadcrumb,
   BREADCRUMB_ALIGNMENTS,
   BREADCRUMB_SEPARATORS,
   BREADCRUMB_SIZES,
-} from "../breadcrumb";
-import { BreadcrumbItem } from "../breadcrumb-item";
+} from "src/components/breadcrumb/breadcrumb";
+import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 
 import {
   hasProperties,
@@ -15,7 +15,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateOneOfPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Breadcrumb;
 const COMPONENT_NAME = "Breadcrumb";
@@ -45,13 +45,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("align", () => {
       validateOneOfPropType(propTypes, "align", BREADCRUMB_ALIGNMENTS);
 
-      BREADCRUMB_ALIGNMENTS.map(align =>
+      BREADCRUMB_ALIGNMENTS.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("children", () => {
@@ -78,25 +78,25 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("separator", () => {
       validateOneOfPropType(propTypes, "separator", BREADCRUMB_SEPARATORS);
 
-      BREADCRUMB_SEPARATORS.map(separator =>
+      BREADCRUMB_SEPARATORS.map(separator => {
         it(`should be ${separator}`, () => {
           const node = makeNode({ separator });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`has-${separator}-separator`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
 
     describe("size", () => {
       validateOneOfPropType(propTypes, "size", BREADCRUMB_SIZES);
 
-      BREADCRUMB_SIZES.map(size =>
+      BREADCRUMB_SIZES.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        }),
-      );
+        });
+      });
     });
   });
 });

@@ -1,12 +1,12 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
-import { Menu } from "../menu";
-import { MenuListItem } from "../menu-list-item";
+} from "src/base/theme";
+import { Menu } from "src/components/menu/menu";
+import { MenuListItem } from "src/components/menu/menu-list-item";
 
 import {
   hasProperties,
@@ -15,7 +15,7 @@ import {
   testThemeIntegration,
   validateBoolPropType,
   validatePropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = MenuListItem;
 const COMPONENT_NAME = "MenuListItem";
@@ -33,12 +33,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   const rootWrapper = makeShallowWrapper(node);
   const forwardRefWrapper = rootWrapper.children();
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -69,13 +70,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active =>
+      [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = makeNode({ active });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
-        }),
-      );
+        });
+      });
     });
 
     describe("menu", () => {
@@ -87,17 +88,18 @@ describe(`${COMPONENT_NAME} component`, () => {
         { value: invalidMenu, valid: false, descriptor: "object" },
       ]);
 
-      [<Menu key={1} className="foo" />, null].map(menu =>
-        it(`should ${menu ? "" : "not "}have menu`, () => {
+      [<Menu key={1} className="foo" />, undefined].map(menu => {
+        const isMenu = menu !== undefined;
+        it(`should ${isMenu ? "" : "not "}have menu`, () => {
           const node = makeNode({ menu });
           const wrapper = makeShallowWrapper(node);
           const children = wrapper.children();
-          expect(children).toHaveLength(menu ? 2 : 1);
-          if (menu) {
+          expect(children).toHaveLength(isMenu ? 2 : 1);
+          if (isMenu) {
             expect(children.at(1).hasClass("foo"));
           }
-        }),
-      );
+        });
+      });
     });
   });
 });

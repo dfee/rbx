@@ -1,11 +1,11 @@
-import React from "react";
+import * as React from "react";
 
-import { noop } from "../../utils";
+import { noop } from "src/utils";
 
 export interface ModalContextValue {
-  close: () => void;
   closeOnBlur: boolean;
   closeOnEsc: boolean;
+  close(): void;
 }
 
 export const initialValue: ModalContextValue = {

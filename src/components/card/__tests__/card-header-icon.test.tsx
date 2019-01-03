@@ -1,4 +1,4 @@
-import { CardHeaderIcon } from "../card-header-icon";
+import { CardHeaderIcon } from "src/components/card/card-header-icon";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = CardHeaderIcon;
 const COMPONENT_NAME = "CardHeaderIcon";

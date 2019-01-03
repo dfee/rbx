@@ -1,4 +1,4 @@
-import { ModalCardTitle } from "../modal-card-title";
+import { ModalCardTitle } from "src/components/modal/modal-card-title";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ModalCardTitle;
 const COMPONENT_NAME = "ModalCardTitle";

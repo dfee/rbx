@@ -1,10 +1,10 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { Colors, COLORS } from "src/base/helpers";
+import { tuple } from "src/utils";
 import { SelectOption } from "./select-option";
 
 export const SELECT_CONTAINER_SIZES = tuple("small", "medium", "large");
@@ -39,30 +39,40 @@ const mapSelectContainerChildren = (
   const mapped = React.Children.map(children, (child, i) => {
     if (
       typeof child === "object" &&
+      // tslint:disable-next-line:no-use-before-declare
       (child.type === "select" || child.type === Select)
     ) {
       classNameExtension = classNames({
-        "is-multiple": child.props.multiple,
+        "is-multiple": (child.props as React.SelectHTMLAttributes<Element>)
+          .multiple,
       });
       if (state === "focused" || state === "hovered") {
         return React.cloneElement(child, {
-          className: classNames(`is-${state}`, child.props.className),
+          className: classNames(
+            `is-${state}`,
+            (child.props as React.SelectHTMLAttributes<Element>).className,
+          ),
         });
       }
+
       return child;
     } else if (typeof child === "object" && child.type === React.Fragment) {
       const fragmentMapped = mapSelectContainerChildren(
-        child.props.children,
+        (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
+          .children,
         state,
       );
       classNameExtension = classNames(
         classNameExtension,
         fragmentMapped.classNameExtension,
       );
+
       return <React.Fragment children={fragmentMapped.children} />;
     }
+
     return child;
   });
+
   return { children: mapped, classNameExtension };
 };
 
@@ -73,6 +83,7 @@ export const SelectContainer = Object.assign(
       ref,
     ) => {
       const mapped = mapSelectContainerChildren(children, state);
+
       return (
         <Generic
           className={classNames(

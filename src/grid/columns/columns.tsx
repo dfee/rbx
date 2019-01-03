@@ -1,10 +1,10 @@
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import React from "react";
+import classNames from "classNames";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
-import { tuple } from "../../utils";
+import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { Breakpoints, BREAKPOINTS } from "src/base/helpers";
+import { tuple } from "src/utils";
 import { Column } from "./column";
 
 export const COLUMNS_GAP_SIZES = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);
@@ -85,15 +85,15 @@ export const Columns = Object.assign(
         widescreen,
       };
 
-      const gapClassNames = classNames(
+      const gapSizeClassNames = classNames(
         { [`is-${gapSize}`]: typeof gapSize === "number" },
         Object.keys(breakpoints)
-          .filter(key => breakpoints[key])
           .map(key => {
-            const value = breakpoints[key];
-            return {
-              [`is-${value.gapSize}-${key}`]: typeof value.gapSize === "number",
-            };
+            const value = breakpoints[key as Breakpoints];
+
+            return value === undefined
+              ? {}
+              : { [`is-${value.gapSize}-${key}`]: value.gapSize !== undefined };
           })
           .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       );
@@ -107,9 +107,9 @@ export const Columns = Object.assign(
               "is-centered": centered,
               "is-gapless": gapless,
               "is-multiline": multiline,
-              "is-variable ": !!gapClassNames,
+              "is-variable ": gapSizeClassNames !== "",
             },
-            gapClassNames,
+            gapSizeClassNames,
             className,
           )}
           ref={ref}

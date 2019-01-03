@@ -1,19 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import { canUseDOM } from "../../utils";
+import { canUseDOM } from "src/utils";
 import { ModalContextValue } from "./modal-context";
 import { ModalPortal } from "./modal-portal";
 
 export type ModalContainerProps = Partial<{
   active: boolean;
-  as: React.ReactType<any>;
+  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   children: React.ReactNode;
   closeOnBlur: ModalContextValue["closeOnBlur"];
   closeOnEsc: ModalContextValue["closeOnEsc"];
   containerClassName: string;
-  innerRef: React.Ref<any>;
-  onClose: () => void;
+  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
+  onClose(): void;
 }>;
 
 export interface ModalContainerState {
@@ -25,14 +25,14 @@ export class ModalContainer extends React.PureComponent<
   ModalContainerState
 > {
   public readonly state: ModalContainerState = { active: false };
-  private el: HTMLDivElement | undefined;
+  private readonly el: HTMLDivElement | undefined;
 
   constructor(props: ModalContainerProps) {
     super(props);
-    this.state = { active: !!this.props.active };
+    this.state = { active: this.props.active === true };
     if (canUseDOM()) {
       this.el = document.createElement("div");
-      if (props.containerClassName) {
+      if (props.containerClassName !== undefined) {
         this.el.className = props.containerClassName;
       }
     }
@@ -40,29 +40,36 @@ export class ModalContainer extends React.PureComponent<
 
   public componentDidMount() {
     if (canUseDOM()) {
-      document.body.appendChild(this.el!);
+      /* istanbul ignore else: typescript typeguard */
+      if (this.el !== undefined) {
+        document.body.appendChild(this.el);
+      }
     }
   }
 
   public componentWillUnmount() {
     if (canUseDOM()) {
-      document.body.removeChild(this.el!);
+      /* istanbul ignore else: typescript typeguard */
+      if (this.el !== undefined) {
+        document.body.removeChild(this.el);
+      }
     }
   }
 
   public render() {
     const { active, containerClassName, ...rest } = this.props;
-    return this.el && this.state.active
+
+    return this.el !== undefined && this.state.active
       ? ReactDOM.createPortal(
           <ModalPortal close={this.close} {...rest} />,
           this.el,
         )
-      : null;
+      : false;
   }
 
-  private close = () => {
+  private readonly close = () => {
     this.setState({ active: false });
-    if (this.props.onClose) {
+    if (this.props.onClose !== undefined) {
       this.props.onClose();
     }
   }

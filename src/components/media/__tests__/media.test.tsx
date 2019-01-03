@@ -1,5 +1,5 @@
-import { Media } from "../media";
-import { MediaItem } from "../media-item";
+import { Media } from "src/components/media/media";
+import { MediaItem } from "src/components/media/media-item";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Media;
 const COMPONENT_NAME = "Media";

@@ -1,8 +1,8 @@
-import { ModalCard } from "../modal-card";
-import { ModalCardBody } from "../modal-card-body";
-import { ModalCardFoot } from "../modal-card-foot";
-import { ModalCardHead } from "../modal-card-head";
-import { ModalCardTitle } from "../modal-card-title";
+import { ModalCard } from "src/components/modal/modal-card";
+import { ModalCardBody } from "src/components/modal/modal-card-body";
+import { ModalCardFoot } from "src/components/modal/modal-card-foot";
+import { ModalCardHead } from "src/components/modal/modal-card-head";
+import { ModalCardTitle } from "src/components/modal/modal-card-title";
 
 import {
   hasProperties,
@@ -10,7 +10,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ModalCard;
 const COMPONENT_NAME = "ModalCard";

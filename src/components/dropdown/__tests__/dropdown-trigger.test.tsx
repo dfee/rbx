@@ -1,15 +1,15 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
-} from "../../../base/theme";
+} from "src/base/theme";
 import {
   DropdownContextValue,
   initialValue as dropdownInitialValue,
-} from "../dropdown-context";
-import { DropdownTrigger } from "../dropdown-trigger";
+} from "src/components/dropdown/dropdown-context";
+import { DropdownTrigger } from "src/components/dropdown/dropdown-trigger";
 
 import {
   hasProperties,
@@ -17,7 +17,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validatePropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = DropdownTrigger;
 const COMPONENT_NAME = "DropdownTrigger";
@@ -31,12 +31,13 @@ const makeShallowWrapperInDropdownContextConsumer = (
   dropdownContextValue: DropdownContextValue = dropdownInitialValue,
 ) => {
   const dropdownContextConsumerWrapper = Enzyme.shallow(node);
-  const DropdownContextConsumerChildren = dropdownContextConsumerWrapper.props()
-    .children;
-  const dropdownContextConsumerChildrenWrapper = Enzyme.shallow(
+  const DropdownContextConsumerChildren = (dropdownContextConsumerWrapper.props() as {
+    children: React.FC<DropdownContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <DropdownContextConsumerChildren {...dropdownContextValue} />,
   );
-  return dropdownContextConsumerChildrenWrapper;
 };
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
@@ -49,12 +50,13 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
     dropdownContextValue,
   );
   const themeContextConsumerWrapper = dropdownContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as any)
-    .children;
-  const wrapper = Enzyme.shallow(
+  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
+    children: React.FC<ThemeContextValue>;
+  }).children;
+
+  return Enzyme.shallow(
     <ThemeContextConsumerChildren {...themeContextValue} />,
   );
-  return wrapper;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {
@@ -76,11 +78,11 @@ describe(`${COMPONENT_NAME} component`, () => {
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
-        { value: () => null, valid: true, descriptor: "func" },
+        { value: () => undefined, valid: true, descriptor: "func" },
         { value: "string", valid: false },
       ]);
 
-      [false, true].map(hasOnClick =>
+      [false, true].map(hasOnClick => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {
@@ -99,8 +101,8 @@ describe(`${COMPONENT_NAME} component`, () => {
           expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
           expect(setActive.mock.calls).toHaveLength(1);
           expect(setActive.mock.calls[0]).toEqual([true]);
-        }),
-      );
+        });
+      });
     });
   });
 });

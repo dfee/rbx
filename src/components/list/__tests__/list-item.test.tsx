@@ -1,4 +1,4 @@
-import { ListItem } from "../list-item";
+import { ListItem } from "src/components/list/list-item";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = ListItem;
 const COMPONENT_NAME = "ListItem";
@@ -36,13 +36,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active =>
+      [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = makeNode({ active });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
-        }),
-      );
+        });
+      });
     });
   });
 });

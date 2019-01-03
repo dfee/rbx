@@ -1,4 +1,4 @@
-import { DropdownDivider } from "../dropdown-divider";
+import { DropdownDivider } from "src/components/dropdown/dropdown-divider";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = DropdownDivider;
 const COMPONENT_NAME = "DropdownDivider";

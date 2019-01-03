@@ -1,4 +1,4 @@
-import { Checkbox } from "../checkbox";
+import { Checkbox } from "src/elements/form/checkbox";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-} from "../../../__tests__/testing";
+} from "src/__tests__/testing";
 
 const COMPONENT = Checkbox;
 const COMPONENT_NAME = "Checkbox";
@@ -32,6 +32,8 @@ describe(`${COMPONENT_NAME} component`, () => {
   it("should be a checkbox", () => {
     const node = makeNode({});
     const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-    expect(wrapper.props().type).toEqual("checkbox");
+    expect(
+      (wrapper.props() as React.InputHTMLAttributes<Element>).type,
+    ).toEqual("checkbox");
   });
 });
