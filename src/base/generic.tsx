@@ -18,8 +18,9 @@ export const Generic = Object.assign(
         {({ transform }) => {
           const transformed = transform(rest, "Generic");
 
-          // tslint:disable-next-line:no-non-null-assertion
-          return React.createElement(as!, { ref, ...transformed });
+          return as !== undefined
+            ? React.createElement(as, { ref, ...transformed })
+            : /* istanbul ignore next: typescript typecheck */ undefined;
         }}
       </ThemeContext.Consumer>
     ),

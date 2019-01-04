@@ -12,8 +12,7 @@ export type TagSizes = (typeof TAG_SIZES)[number];
 
 export type TagModifierProps = Partial<{
   color: Colors;
-  // tslint:disable-next-line:no-reserved-keywords
-  delete: boolean;
+  delete: boolean; // tslint:disable-line:no-reserved-keywords
   rounded: boolean;
   size: TagSizes;
 }>;

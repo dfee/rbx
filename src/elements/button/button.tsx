@@ -23,8 +23,7 @@ export type ButtonModifierProps = Partial<{
   selected: boolean;
   size: ButtonSizes;
   state: ButtonStates;
-  // tslint:disable-next-line:no-reserved-keywords
-  static: boolean;
+  static: boolean; // tslint:disable-line:no-reserved-keywords
   text: boolean;
 }>;
 

@@ -31,10 +31,8 @@ export type InputModifierProps = Partial<{
   rounded: boolean;
   size: InputSizes;
   state: InputStates;
-  // tslint:disable-next-line:no-reserved-keywords
-  static: boolean;
-  // tslint:disable-next-line:no-reserved-keywords
-  type: InputTypes;
+  static: boolean; // tslint:disable-line:no-reserved-keywords
+  type: InputTypes; // tslint:disable-line:no-reserved-keywords
 }>;
 
 export type InputProps = HelpersProps & InputModifierProps;

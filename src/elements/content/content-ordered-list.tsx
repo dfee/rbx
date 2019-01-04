@@ -15,8 +15,7 @@ export const CONTENT_ORDERED_LIST_TYPES = tuple(
 export type ContentOrderedListTypes = (typeof CONTENT_ORDERED_LIST_TYPES)[number];
 
 export type ContentOrderedListModifierProps = Partial<{
-  // tslint:disable-next-line:no-reserved-keywords
-  type: ContentOrderedListTypes;
+  type: ContentOrderedListTypes; // tslint:disable-line:no-reserved-keywords
 }>;
 
 export type ContentOrderedListProps = HelpersProps &
