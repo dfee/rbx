@@ -76,3 +76,6 @@ out*
 
 # Editor
 .vscode
+
+# docs
+docs/build
