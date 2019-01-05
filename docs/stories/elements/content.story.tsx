@@ -2,12 +2,12 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Content, Title } from "../../../src/elements";
-import { CONTENT_SIZES } from "../../../src/elements/content/content";
-import { CONTENT_ORDERED_LIST_TYPES } from "../../../src/elements/content/content-ordered-list";
+import { Content, Title } from "src/elements";
+import { CONTENT_SIZES } from "src/elements/content/content";
+import { CONTENT_ORDERED_LIST_TYPES } from "src/elements/content/content-ordered-list";
 
-import { Section } from "../../../src/layout";
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
+import { Section } from "src/layout";
 
 export const knobs = {
   orderedList: {
@@ -25,9 +25,12 @@ export const knobs = {
 storiesOf("Elements/Content", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const size = knobs.size();
+    const props = filterUndefined({
+      size: knobs.size(),
+    });
+
     return (
-      <Content size={size || undefined}>
+      <Content {...props}>
         <Title>Hello World</Title>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -55,10 +58,13 @@ storiesOf("Elements/Content", module)
     );
   })
   .add("Ordered lists", () => {
-    const orderedListType = knobs.orderedList.type();
+    const props = filterUndefined({
+      type: knobs.orderedList.type(),
+    });
+
     return (
       <Content>
-        <Content.OrderedList type={orderedListType || undefined}>
+        <Content.OrderedList {...props}>
           <Content.OrderedList.Item>Coffee</Content.OrderedList.Item>
           <Content.OrderedList.Item>Tea</Content.OrderedList.Item>
           <Content.OrderedList.Item>Milk</Content.OrderedList.Item>

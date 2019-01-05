@@ -15,17 +15,21 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { COLORS } from "../../../src/base/helpers";
-import { Button, Icon } from "../../../src/elements";
+import { COLORS } from "src/base/helpers";
+import { Button, Icon } from "src/elements";
 import {
   BUTTON_SIZES,
   BUTTON_STATES,
   ButtonSizes,
-} from "../../../src/elements/button/button";
-import { BUTTON_GROUP_POSITIONS } from "../../../src/elements/button/button-group";
-import { Section } from "../../../src/layout";
+} from "src/elements/button/button";
+import { BUTTON_GROUP_POSITIONS } from "src/elements/button/button-group";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject, titleize } from "../utils";
+import {
+  filterUndefined,
+  iterableToSelectObject,
+  titleize,
+} from "docs/stories/utils";
 
 export const knobs = {
   disabled: (title: string = "Disabled") => boolean(title, false),
@@ -44,7 +48,7 @@ export const knobs = {
 storiesOf("Elements/Button", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const { size, state, ...rest } = {
+    const props = filterUndefined({
       disabled: knobs.disabled(),
       fullwidth: knobs.fullwidth(),
       inverted: knobs.inverted(),
@@ -54,7 +58,7 @@ storiesOf("Elements/Button", module)
       state: knobs.state(),
       static: knobs.static(),
       text: knobs.text(),
-    };
+    });
 
     return (
       <Button.Group>
@@ -63,9 +67,7 @@ storiesOf("Elements/Button", module)
             color={color}
             onClick={action("Button Click")}
             onMouseEnter={action("Hover")}
-            size={size || undefined}
-            state={state || undefined}
-            {...rest}
+            {...props}
           >
             {titleize(color)}
           </Button>

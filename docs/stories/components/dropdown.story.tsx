@@ -5,24 +5,15 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Dropdown } from "../../../src/components";
-import { DROPDOWN_ALIGNMENTS } from "../../../src/components/dropdown/dropdown";
-import { Button, Icon } from "../../../src/elements";
-import { Section } from "../../../src/layout";
+import { Dropdown } from "src/components";
+import { DROPDOWN_ALIGNMENTS } from "src/components/dropdown/dropdown-container";
+import { Button, Icon } from "src/elements";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
-  active: (title: string = "Active") =>
-    select(
-      title,
-      {
-        "false (when managed)": "false",
-        "true (when managed)": "true",
-        undefined: "",
-      },
-      "",
-    ),
+  active: (title: string = "Active (when managed)") => boolean(title, false),
   align: (title: string = "Align") =>
     select(
       title,
@@ -37,33 +28,29 @@ export const knobs = {
 storiesOf("Components/Dropdown", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const { align, active, ...rest } = {
-      active: knobs.active() as string,
+    const { active, ...rest } = filterUndefined({
+      active: knobs.active(),
       align: knobs.align(),
       hoverable: knobs.hoverable(),
       managed: knobs.managed(),
       up: knobs.up(),
-    };
+    });
+
+    const dropdownIcon = rest.up ? faAngleUp : faAngleDown;
 
     return (
       <div
         style={{
-          marginLeft: align !== "" ? "54px" : 0,
+          marginLeft: rest.align !== "" ? "54px" : 0,
           marginTop: rest.up ? "200px" : 0,
         }}
       >
-        <Dropdown
-          active={
-            active === "true" ? true : active === "false" ? false : undefined
-          }
-          align={align || undefined}
-          {...rest}
-        >
+        <Dropdown active={active === true} {...rest}>
           <Dropdown.Trigger>
             <Button>
               <span>{rest.up ? "Dropup" : "Dropdown"} button</span>
               <Icon size="small">
-                <FontAwesomeIcon icon={rest.up ? faAngleUp : faAngleDown} />
+                <FontAwesomeIcon icon={dropdownIcon} />
               </Icon>
             </Button>
           </Dropdown.Trigger>
@@ -83,16 +70,20 @@ storiesOf("Components/Dropdown", module)
   })
   .add("Controlled", () => {
     interface State {
-      selected: string | null;
+      selected: string | undefined;
     }
     interface Props {
       items: string[];
-      onChange?: (name: string) => void;
+      onChange?(name: string): void;
     }
     class ControlledDropdown extends React.PureComponent<Props, State> {
-      public readonly state: State = { selected: null };
+      public readonly state: State = { selected: undefined };
       public render() {
-        const selected = this.state.selected || this.props.items[0];
+        const selected =
+          this.state.selected !== undefined
+            ? this.state.selected
+            : this.props.items[0];
+
         return (
           <Dropdown>
             <Dropdown.Trigger>
@@ -108,7 +99,7 @@ storiesOf("Components/Dropdown", module)
                 {this.props.items.map(item => (
                   <Dropdown.Item
                     active={item === selected}
-                    onClick={() => this.setSelected(item)}
+                    onClick={this.makeOnClickHandler(item)}
                   >
                     {item}
                   </Dropdown.Item>
@@ -118,9 +109,10 @@ storiesOf("Components/Dropdown", module)
           </Dropdown>
         );
       }
-      private setSelected(name: string) {
+
+      private readonly makeOnClickHandler = (name: string) => () => {
         this.setState({ selected: name });
-        if (this.props.onChange) {
+        if (this.props.onChange !== undefined) {
           this.props.onChange(name);
         }
       }

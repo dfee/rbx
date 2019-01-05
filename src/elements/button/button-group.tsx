@@ -1,4 +1,4 @@
-import classNames from "classNames";
+import classNames from "classnames";
 import * as PropTypes from "prop-types";
 import * as React from "react";
 
@@ -22,7 +22,7 @@ const propTypes = {
 
 export const ButtonGroup = Object.assign(
   forwardRefAs<ButtonGroupProps, "div">(
-    ({ children, className, hasAddons, position, ...rest }, ref) => (
+    ({ className, hasAddons, position, ...rest }, ref) => (
       <Generic
         className={classNames(
           "buttons",

@@ -20,11 +20,12 @@ import {
   Radio,
   Select,
   Textarea,
-} from "../../../../src/elements";
-import { Columns } from "../../../../src/grid";
+} from "src/elements";
+import { Columns } from "src/grid";
 
 storiesOf("Elements/Form", module)
   .addDecorator(story => <div style={{ margin: 50 }}>{story()}</div>)
+  // tslint:disable-next-line: max-func-body-length
   .add("Horizontal form", () => {
     return (
       <Columns>
@@ -161,6 +162,7 @@ storiesOf("Elements/Form", module)
       </Columns>
     );
   })
+  // tslint:disable-next-line: max-func-body-length
   .add("Vertical form", () => {
     return (
       <Columns>
@@ -240,7 +242,7 @@ storiesOf("Elements/Form", module)
               <Control>
                 <Label>
                   <Checkbox /> I agree to the{" "}
-                  <a href="#">terms and conditions</a>
+                  <a href="#terms">terms and conditions</a>
                 </Label>
               </Control>
             </Field>

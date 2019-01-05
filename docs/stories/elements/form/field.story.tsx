@@ -18,16 +18,16 @@ import {
   Input,
   Label,
   Select,
-} from "../../../../src/elements";
-import { CONTROL_SIZES } from "../../../../src/elements/form/control";
-import { FIELD_ALIGNMENTS } from "../../../../src/elements/form/field";
-import { INPUT_SIZES } from "../../../../src/elements/form/input";
-import { LABEL_SIZES } from "../../../../src/elements/form/label";
-import { Columns } from "../../../../src/grid";
-import { Section } from "../../../../src/layout";
+} from "src/elements";
+import { CONTROL_SIZES } from "src/elements/form/control";
+import { FIELD_ALIGNMENTS } from "src/elements/form/field";
+import { INPUT_SIZES } from "src/elements/form/input";
+import { LABEL_SIZES } from "src/elements/form/label";
+import { Columns } from "src/grid";
+import { Section } from "src/layout";
 
-import { colorKnob } from "../../common";
-import { iterableToSelectObject } from "../../utils";
+import { colorKnob } from "docs/stories/common";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   align: (title: string = "Alignment") =>
@@ -59,23 +59,31 @@ export const knobs = {
 storiesOf("Elements/Form/Field", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const controlLoading = knobs.control.loading("Control loading");
-    const controlSize = knobs.control.size("Control size (use with loading)");
-    const helpColor = colorKnob("Help color");
-    const inputColor = colorKnob("Input color");
-    const inputSize = knobs.input.size("Input size");
-    const labelSize = knobs.label.size("Label size");
+    const labelProps = filterUndefined({
+      size: knobs.label.size("Label size"),
+    });
+
+    const controlProps = filterUndefined({
+      loading: knobs.control.loading("Control loading"),
+      size: knobs.control.size("Control size (use with loading)"),
+    });
+
+    const inputProps = filterUndefined({
+      color: colorKnob("Input color"),
+      size: knobs.input.size("Input size"),
+    });
+
+    const helpProps = filterUndefined({
+      color: colorKnob("Help color"),
+    });
+
     return (
       <Field>
-        <Label size={labelSize || undefined}>Label</Label>
-        <Control size={controlSize || undefined} loading={controlLoading}>
-          <Input
-            color={inputColor || undefined}
-            placeholder="Text input"
-            size={inputSize || undefined}
-          />
+        <Label {...labelProps}>Label</Label>
+        <Control {...controlProps}>
+          <Input {...inputProps} placeholder="Text input" />
         </Control>
-        <Help color={helpColor || undefined}>This is a help text</Help>
+        <Help {...helpProps}>This is a help text</Help>
       </Field>
     );
   })
@@ -112,13 +120,19 @@ storiesOf("Elements/Form/Field", module)
 
           <Field>
             <Control iconLeft>
-              <Select>
-                <select>
-                  <option selected>Country</option>
-                  <option>Select dropdown</option>
-                  <option>With Options</option>
-                </select>
-              </Select>
+              <Select.Container>
+                <Select>
+                  <Select.Option selected aria-selected>
+                    Country
+                  </Select.Option>
+                  <Select.Option aria-selected={false}>
+                    Select dropdown
+                  </Select.Option>
+                  <Select.Option aria-selected={false}>
+                    With Options
+                  </Select.Option>
+                </Select>
+              </Select.Container>
               <Icon size="small" align="left">
                 <FontAwesomeIcon icon={faGlobe} />
               </Icon>
@@ -129,12 +143,18 @@ storiesOf("Elements/Form/Field", module)
     );
   })
   .add("Field addon", () => {
-    const align = knobs.align();
-    const controlExpanded = knobs.control.loading("Control expanded");
+    const fieldProps = filterUndefined({
+      align: knobs.align(),
+    });
+
+    const controlProps = {
+      expanded: knobs.control.expanded("Expanded (control"),
+    };
+
     return (
       <div>
-        <Field kind="addons" align={align || undefined}>
-          <Control expanded={controlExpanded}>
+        <Field kind="addons" {...fieldProps}>
+          <Control {...controlProps}>
             <Input placeholder="Find a repository" />
           </Control>
           <Control>
@@ -142,22 +162,46 @@ storiesOf("Elements/Form/Field", module)
           </Control>
         </Field>
 
-        <Field kind="addons" align={align || undefined}>
-          <Control expanded={controlExpanded}>
-            <Select.Container fullwidth={controlExpanded}>
+        <Field kind="addons" {...fieldProps}>
+          <Control {...controlProps}>
+            <Select.Container fullwidth={controlProps.expanded}>
               <select>
-                <option value="Argentina">Argentina</option>
-                <option value="Bolivia">Bolivia</option>
-                <option value="Brazil">Brazil</option>
-                <option value="Chile">Chile</option>
-                <option value="Colombia">Colombia</option>
-                <option value="Ecuador">Ecuador</option>
-                <option value="Guyana">Guyana</option>
-                <option value="Paraguay">Paraguay</option>
-                <option value="Peru">Peru</option>
-                <option value="Suriname">Suriname</option>
-                <option value="Uruguay">Uruguay</option>
-                <option value="Venezuela">Venezuela</option>
+                <option value="Argentina" aria-selected={false}>
+                  Argentina
+                </option>
+                <option value="Bolivia" aria-selected={false}>
+                  Bolivia
+                </option>
+                <option value="Brazil" aria-selected={false}>
+                  Brazil
+                </option>
+                <option value="Chile" aria-selected={false}>
+                  Chile
+                </option>
+                <option value="Colombia" aria-selected={false}>
+                  Colombia
+                </option>
+                <option value="Ecuador" aria-selected={false}>
+                  Ecuador
+                </option>
+                <option value="Guyana" aria-selected={false}>
+                  Guyana
+                </option>
+                <option value="Paraguay" aria-selected={false}>
+                  Paraguay
+                </option>
+                <option value="Peru" aria-selected={false}>
+                  Peru
+                </option>
+                <option value="Suriname" aria-selected={false}>
+                  Suriname
+                </option>
+                <option value="Uruguay" aria-selected={false}>
+                  Uruguay
+                </option>
+                <option value="Venezuela" aria-selected={false}>
+                  Venezuela
+                </option>
               </select>
             </Select.Container>
           </Control>
@@ -166,13 +210,13 @@ storiesOf("Elements/Form/Field", module)
           </Control>
         </Field>
 
-        <Field kind="addons" align={align || undefined}>
-          <Control expanded={controlExpanded}>
+        <Field kind="addons" {...fieldProps}>
+          <Control {...controlProps}>
             <Select.Container>
               <select>
-                <option>$</option>
-                <option>£</option>
-                <option>€</option>
+                <option aria-selected={false}>$</option>
+                <option aria-selected={false}>£</option>
+                <option aria-selected={false}>€</option>
               </select>
             </Select.Container>
           </Control>
@@ -187,11 +231,17 @@ storiesOf("Elements/Form/Field", module)
     );
   })
   .add("Field group", () => {
-    const align = knobs.align();
-    const expanded = knobs.control.expanded("Expanded (email)");
+    const fieldProps = filterUndefined({
+      align: knobs.align(),
+    });
+
+    const controlProps = {
+      expanded: knobs.control.expanded("Expanded (email)"),
+    };
+
     return (
-      <Field kind="group" align={align || undefined}>
-        <Control expanded={expanded}>
+      <Field kind="group" {...fieldProps}>
+        <Control {...controlProps}>
           <Input type="email" placeholder="Email address" />
         </Control>
         <Control>
@@ -204,7 +254,10 @@ storiesOf("Elements/Form/Field", module)
     );
   })
   .add("Field group (multiline)", () => {
-    const expanded = knobs.control.expanded("Expanded (email)");
+    const controlProps = {
+      expanded: knobs.control.expanded("Expanded (email)"),
+    };
+
     return (
       <Columns>
         <Columns.Column
@@ -237,7 +290,7 @@ storiesOf("Elements/Form/Field", module)
               "Nineteen",
               "Twenty",
             ].map(name => (
-              <Control expanded={expanded}>
+              <Control {...controlProps}>
                 <Button key={name}>{name}</Button>
               </Control>
             ))}

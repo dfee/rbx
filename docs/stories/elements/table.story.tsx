@@ -2,8 +2,8 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Table } from "../../../src/elements";
-import { Section } from "../../../src/layout";
+import { Table } from "src/elements";
+import { Section } from "src/layout";
 
 export const knobs = {
   bordered: (title: string = "Bordered") => boolean(title, false),
@@ -15,6 +15,7 @@ export const knobs = {
 
 storiesOf("Elements/Table", module)
   .addDecorator(story => <Section children={story()} />)
+  // tslint:disable-next-line: max-func-body-length
   .add("Default", () => {
     const props = {
       bordered: knobs.bordered(),

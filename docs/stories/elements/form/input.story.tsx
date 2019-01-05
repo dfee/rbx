@@ -2,18 +2,18 @@ import { boolean, select, text } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Input } from "../../../../src/elements";
+import { Control, Input } from "src/elements";
 import {
   INPUT_SIZES,
   INPUT_STATES,
   INPUT_TYPES,
   InputProps,
-} from "../../../../src/elements/form/input";
-import { Section } from "../../../../src/layout";
-import { Prefer } from "../../../../src/types";
+} from "src/elements/form/input";
+import { Section } from "src/layout";
+import { Prefer } from "src/types";
 
-import { colorKnob } from "../../common";
-import { iterableToSelectObject } from "../../utils";
+import { colorKnob } from "docs/stories/common";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export type ControlledInputProps = Prefer<
   InputProps,
@@ -32,22 +32,21 @@ export class ControlledInput extends React.PureComponent<
 
   constructor(props: ControlledInputProps) {
     super(props);
-    this.state = { value: props.value || "" };
+    this.state = { value: props.value !== undefined ? props.value : "" };
   }
 
   public render() {
     const { value, ...rest } = this.props;
+
     return (
       <Control>
-        <Input
-          {...rest}
-          value={this.state.value}
-          onChange={event =>
-            this.setState({ value: event.currentTarget.value })
-          }
-        />
+        <Input {...rest} value={this.state.value} onChange={this.onChange} />
       </Control>
     );
+  }
+
+  private readonly onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ value: event.currentTarget.value });
   }
 }
 
@@ -69,7 +68,7 @@ export const knobs = {
 storiesOf("Elements/Form/Input", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const { color, size, state, ...rest } = {
+    const props = filterUndefined({
       color: colorKnob(),
       disabled: knobs.disabled(),
       placeholder: knobs.placeholder(),
@@ -79,20 +78,16 @@ storiesOf("Elements/Form/Input", module)
       state: knobs.state(),
       static: knobs.static(),
       value: knobs.value(),
-    };
+    });
+
     return (
       <Control>
-        <Input
-          color={color || undefined}
-          state={state || undefined}
-          size={size || undefined}
-          {...rest}
-        />
+        <Input {...props} />
       </Control>
     );
   })
   .add("Controlled", () => {
-    const { color, size, state, type, ...rest } = {
+    const props = filterUndefined({
       color: colorKnob(),
       disabled: knobs.disabled(),
       placeholder: knobs.placeholder(),
@@ -102,14 +97,7 @@ storiesOf("Elements/Form/Input", module)
       state: knobs.state(),
       static: knobs.static(),
       type: knobs.type(),
-    };
-    return (
-      <ControlledInput
-        color={color || undefined}
-        size={size || undefined}
-        state={state || undefined}
-        type={type || undefined}
-        {...rest}
-      />
-    );
+    });
+
+    return <ControlledInput {...props} />;
   });

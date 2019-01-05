@@ -2,14 +2,14 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Pagination } from "../../../src/components";
+import { Pagination } from "src/components";
 import {
   PAGINATION_ALIGNMENTS,
   PAGINATION_SIZES,
-} from "../../../src/components/pagination/pagination";
-import { Section } from "../../../src/layout";
+} from "src/components/pagination/pagination";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   align: (title: string = "Position") =>
@@ -33,19 +33,18 @@ export const knobs = {
 storiesOf("Components/Pagination", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const align = knobs.align();
-    const rounded = knobs.rounded();
-    const size = knobs.size();
+    const props = filterUndefined({
+      align: knobs.align(),
+      rounded: knobs.rounded(),
+      size: knobs.size(),
+    });
+
     const linkProps = {
       current: knobs.link.current("Page 45: current"),
     };
 
     return (
-      <Pagination
-        align={align || undefined}
-        rounded={rounded}
-        size={size || undefined}
-      >
+      <Pagination {...props}>
         <Pagination.Previous />
         <Pagination.Next />
         <Pagination.List>

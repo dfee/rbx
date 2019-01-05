@@ -1,9 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Menu } from "../../../src/components";
-import { Columns } from "../../../src/grid";
-import { Section } from "../../../src/layout";
+import { Menu } from "src/components";
+import { Columns } from "src/grid";
+import { Section } from "src/layout";
 
 storiesOf("Components/Menu", module)
   .addDecorator(story => (

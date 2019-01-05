@@ -2,12 +2,12 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Delete, Field, Tag } from "../../../src/elements";
-import { TAG_SIZES } from "../../../src/elements/tag/tag";
-import { Section } from "../../../src/layout";
+import { Control, Delete, Field, Tag } from "src/elements";
+import { TAG_SIZES } from "src/elements/tag/tag";
+import { Section } from "src/layout";
 
-import { colorKnob } from "../common";
-import { iterableToSelectObject } from "../utils";
+import { colorKnob } from "docs/stories/common";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   delete: (title: string = "Delete") => boolean(title, false),
@@ -23,17 +23,14 @@ export const knobs = {
 storiesOf("Elements/Tag", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const { color, size, ...rest } = {
+    const props = filterUndefined({
       color: colorKnob(),
       delete: knobs.delete(),
       rounded: knobs.rounded(),
       size: knobs.size(),
-    };
-    return (
-      <Tag color={color || undefined} size={size || undefined} {...rest}>
-        Tag Text
-      </Tag>
-    );
+    });
+
+    return <Tag {...props}>Tag Text</Tag>;
   })
   .add("Combinations", () => (
     <React.Fragment>

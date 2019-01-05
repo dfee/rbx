@@ -3,14 +3,14 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { Image } from "../../../src/elements";
+import { Image } from "src/elements";
 import {
   IMAGE_CONTAINER_SIZES,
   ImageContainerSizes,
-} from "../../../src/elements/image/image-container";
+} from "src/elements/image/image-container";
 
-import { Section } from "../../../src/layout";
-import { iterableToSelectObject } from "../utils";
+import { iterableToSelectObject } from "docs/stories/utils";
+import { Section } from "src/layout";
 
 export const knobs = {
   container: {
@@ -39,11 +39,12 @@ storiesOf("Elements/Image", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => (
     <Image.Container size={128}>
-      <Image src="http://bulma.io/images/placeholders/128x128.png" />
+      <Image src="https://bulma.io/images/placeholders/128x128.png" />
     </Image.Container>
   ))
   .add("Fixed square", () => {
     const size = knobs.container.fixedSize();
+
     return (
       <Image.Container size={parseInt(size, 10) as ImageContainerSizes}>
         <Image

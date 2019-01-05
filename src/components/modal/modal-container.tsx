@@ -16,20 +16,11 @@ export type ModalContainerProps = Partial<{
   onClose(): void;
 }>;
 
-export interface ModalContainerState {
-  active: boolean;
-}
-
-export class ModalContainer extends React.PureComponent<
-  ModalContainerProps,
-  ModalContainerState
-> {
-  public readonly state: ModalContainerState = { active: false };
+export class ModalContainer extends React.PureComponent<ModalContainerProps> {
   private readonly el: HTMLDivElement | undefined;
 
   constructor(props: ModalContainerProps) {
     super(props);
-    this.state = { active: this.props.active === true };
     if (canUseDOM()) {
       this.el = document.createElement("div");
       if (props.containerClassName !== undefined) {
@@ -59,18 +50,8 @@ export class ModalContainer extends React.PureComponent<
   public render() {
     const { active, containerClassName, ...rest } = this.props;
 
-    return this.el !== undefined && this.state.active
-      ? ReactDOM.createPortal(
-          <ModalPortal close={this.close} {...rest} />,
-          this.el,
-        )
+    return this.el !== undefined && active === true
+      ? ReactDOM.createPortal(<ModalPortal {...rest} />, this.el)
       : false;
-  }
-
-  private readonly close = () => {
-    this.setState({ active: false });
-    if (this.props.onClose !== undefined) {
-      this.props.onClose();
-    }
   }
 }

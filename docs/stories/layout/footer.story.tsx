@@ -1,8 +1,8 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Content } from "../../../src/elements";
-import { Footer, Section } from "../../../src/layout";
+import { Content } from "src/elements";
+import { Footer, Section } from "src/layout";
 
 storiesOf("Layout/Footer", module)
   .addDecorator(story => <Section children={story()} />)
@@ -10,12 +10,14 @@ storiesOf("Layout/Footer", module)
     <Footer>
       <Content textAlignment="centered">
         <p>
-          <strong>Bulma</strong> by{" "}
-          <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is
-          licensed{" "}
-          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
-          website content is licensed{" "}
-          <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <strong>rbx</strong> by{" "}
+          <a href="https://github.com/dfee">Devin Fee</a>. The source code is
+          released under the{" "}
+          <a href="https://opensource.org/licenses/mit-license.php">
+            MIT License
+          </a>
+          . The website content is licensed{" "}
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
             CC BY NC SA 4.0
           </a>
           .

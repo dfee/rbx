@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { canUseDOM, combineRefs } from "src/utils";
+import { canUseDOM, combineRefs, noop } from "src/utils";
 
 import { withWindow } from "./testing";
 
@@ -60,6 +60,12 @@ describe("Utils", () => {
         combined(div);
         expect(refObj.current).toBe(div);
       });
+    });
+  });
+
+  describe("noop", () => {
+    it("should not error", () => {
+      noop();
     });
   });
 });

@@ -38,7 +38,7 @@
     "newline-per-chained-call": false,
     "no-angle-bracket-type-assertion": true,
     "no-implicit-dependencies": {
-      "options": ["dev", ["src", "classNames"]],
+      "options": ["dev", ["src", "docs", "classNames"]],
       "severity": "default"
     },
     "no-import-side-effect": {
@@ -52,7 +52,10 @@
     // We want to allow JSDoc
     // https://github.com/Microsoft/tslint-microsoft-contrib/issues/385
     "no-single-line-block-comment": false,
-    "no-submodule-imports": { "options": ["src"], "severity": "default" },
+    "no-submodule-imports": {
+      "options": ["src", "docs"],
+      "severity": "default"
+    },
     // We want `as` as a typecast instead of using <brackets>
     // https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#new-tsx-file-extension-and-as-operator
     "prefer-type-cast": false,

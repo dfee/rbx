@@ -2,15 +2,12 @@ import { boolean, number, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Textarea } from "../../../../src/elements/form";
-import {
-  TEXTAREA_SIZES,
-  TEXTAREA_STATES,
-} from "../../../../src/elements/form/textarea";
-import { Section } from "../../../../src/layout";
+import { Control, Textarea } from "src/elements/form";
+import { TEXTAREA_SIZES, TEXTAREA_STATES } from "src/elements/form/textarea";
+import { Section } from "src/layout";
 
-import { colorKnob } from "../../common";
-import { iterableToSelectObject } from "../../utils";
+import { colorKnob } from "docs/stories/common";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   disabled: (title: string = "Disabled") => boolean(title, false),
@@ -40,7 +37,7 @@ export const knobs = {
 storiesOf("Elements/Form/Textarea", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const { color, size, state, ...rest } = {
+    const props = filterUndefined({
       color: colorKnob(),
       disabled: knobs.disabled(),
       fixedSize: knobs.fixedSize(),
@@ -48,15 +45,11 @@ storiesOf("Elements/Form/Textarea", module)
       rows: knobs.rows(),
       size: knobs.size(),
       state: knobs.state(),
-    };
+    });
+
     return (
       <Control>
-        <Textarea
-          color={color || undefined}
-          state={state || undefined}
-          size={size || undefined}
-          {...rest}
-        />
+        <Textarea {...props} />
       </Control>
     );
   });

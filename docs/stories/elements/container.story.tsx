@@ -2,11 +2,11 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { BREAKPOINTS } from "../../../src/base/helpers";
-import { Container, Notification } from "../../../src/elements";
-import { Section } from "../../../src/layout";
+import { BREAKPOINTS } from "src/base/helpers";
+import { Container, Notification } from "src/elements";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   breakapoint: (title: string = "Breakpoint") =>
@@ -34,14 +34,19 @@ storiesOf("Elements/Container", module)
     </Section>
   ))
   .add("Breakpoint", () => {
-    const breakpoint = knobs.breakapoint();
+    const props = filterUndefined({
+      breakpoint: knobs.breakapoint(),
+    });
+
+    const breakpointText =
+      props.breakpoint === undefined ? "unset" : (props.breakpoint as string);
+
     return (
       <Section>
-        <Container breakpoint={breakpoint || undefined}>
+        <Container {...props}>
           <Notification>
             This container is <strong>fullwidth</strong> <em>until</em> the{" "}
-            <code>{breakpoint === "" ? "undefined" : breakpoint}</code>{" "}
-            breakpoint.
+            breakpoint: <code>{breakpointText}</code>
           </Notification>
         </Container>
       </Section>

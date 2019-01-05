@@ -1,22 +1,25 @@
-import classNames from "classNames";
+import classNames from "classnames";
 import * as React from "react";
 
 import { Generic } from "src/base";
 import { initialValue, ModalContext, ModalContextValue } from "./modal-context";
 
-export interface ModalPortalModifierProps {
-  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  className?: string;
-  close: ModalContextValue["close"];
-  closeOnBlur?: ModalContextValue["closeOnBlur"];
-  closeOnEsc?: ModalContextValue["closeOnEsc"];
-  innerRef?: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
-}
+export type ModalPortalModifierProps = Partial<{
+  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
+  className: string;
+  closeOnBlur: ModalContextValue["closeOnBlur"];
+  closeOnEsc: ModalContextValue["closeOnEsc"];
+  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
+  onClose: ModalContextValue["close"];
+}>;
 
 export type ModalPortalProps = ModalPortalModifierProps;
 
 export class ModalPortal extends React.PureComponent<ModalPortalProps> {
-  public static defaultProps = initialValue;
+  public static defaultProps = {
+    closeOnBlur: initialValue.closeOnBlur,
+    closeOnEsc: initialValue.closeOnEsc,
+  };
 
   public componentDidMount() {
     document.addEventListener("keydown", this.handleKeydown);
@@ -29,17 +32,17 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
   public render() {
     const {
       className,
-      close,
       closeOnBlur,
       closeOnEsc,
       innerRef,
+      onClose,
       ...rest
     } = this.props;
 
     return (
       <ModalContext.Provider
         value={{
-          close,
+          close: this.close,
           closeOnBlur: closeOnBlur === true,
           closeOnEsc: closeOnEsc === true,
         }}
@@ -53,9 +56,15 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
     );
   }
 
+  private readonly close = () => {
+    if (this.props.onClose !== undefined) {
+      this.props.onClose();
+    }
+  }
+
   private readonly handleKeydown = (event: KeyboardEvent) => {
     if (this.props.closeOnEsc === true && event.code === "Escape") {
-      this.props.close();
+      this.close();
     }
   }
 }

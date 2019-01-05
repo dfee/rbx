@@ -7,10 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Panel } from "../../../src/components";
-import { Button, Checkbox, Control, Icon, Input } from "../../../src/elements";
-import { Columns } from "../../../src/grid";
-import { Section } from "../../../src/layout";
+import { Panel } from "src/components";
+import { Button, Checkbox, Control, Icon, Input } from "src/elements";
+import { Columns } from "src/grid";
+import { Section } from "src/layout";
 
 storiesOf("Components/Panel", module)
   .addDecorator(story => (

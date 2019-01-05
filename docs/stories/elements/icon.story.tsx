@@ -1,20 +1,18 @@
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { Props as FAProps } from "@fortawesome/react-fontawesome";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  FontAwesomeIcon,
+  Props as FAProps,
+} from "@fortawesome/react-fontawesome";
 import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Icon } from "../../../src/elements";
-import {
-  ICON_ALIGNMENTS,
-  ICON_SIZES,
-  IconSizes,
-} from "../../../src/elements/icon/icon";
+import { Icon } from "src/elements";
+import { ICON_ALIGNMENTS, ICON_SIZES, IconSizes } from "src/elements/icon/icon";
 
-import { Section } from "../../../src/layout";
-import { colorKnob } from "../common";
-import { iterableToSelectObject } from "../utils";
+import { colorKnob } from "docs/stories/common";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
+import { Section } from "src/layout";
 
 const faSizeMap: { [k in IconSizes | "default"]: FAProps["size"] } = {
   default: "1x",
@@ -42,7 +40,6 @@ export const knobs = {
         "",
       ),
     inverse: (title: string = "Inverse") => boolean(title, false),
-    listItem: (title: string = "List item") => boolean(title, false),
     pulse: (title: string = "Pulse") => boolean(title, false),
     rotation: (title: string = "Rotate") =>
       select(
@@ -59,32 +56,34 @@ export const knobs = {
 storiesOf("Elements/Icon", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Font Awesome", () => {
-    const { align, color, flip, rotation, size, ...rest } = {
+    const iconProps = filterUndefined({
       align: knobs.align("Align (when in control)"),
-      border: knobs.fontAwesome.border(),
       color: colorKnob(),
+      size: knobs.size(),
+    });
+
+    const faIconProps = filterUndefined({
+      border: knobs.fontAwesome.border(),
       fixedWidth: knobs.fontAwesome.fixedWidth(),
       flip: knobs.fontAwesome.flip(),
       inverse: knobs.fontAwesome.inverse(),
-      listItem: knobs.fontAwesome.listItem(),
       pulse: knobs.fontAwesome.pulse(),
       rotation: knobs.fontAwesome.rotation(),
-      size: knobs.size(),
       spin: knobs.fontAwesome.spin(),
-    };
+    });
+
+    const faIconSize =
+      faSizeMap[
+        iconProps.size === undefined ? "default" : (iconProps.size as IconSizes)
+      ];
+
     return (
-      <Icon
-        align={align || undefined}
-        color={color || undefined}
-        size={size || undefined}
-      >
-        <FontAwesomeIcon
-          {...rest}
-          flip={flip || undefined}
-          icon={faHome}
-          rotation={rotation || undefined}
-          size={faSizeMap[size || "default"]}
-        />
-      </Icon>
+      <ul>
+        <li>
+          <Icon {...iconProps}>
+            <FontAwesomeIcon {...faIconProps} icon={faHome} size={faIconSize} />
+          </Icon>
+        </li>
+      </ul>
     );
   });

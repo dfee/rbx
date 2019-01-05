@@ -1,7 +1,6 @@
 import { select } from "@storybook/addon-knobs";
 
-import { COLORS } from "../../src/base/helpers";
-import { BREAKPOINTS } from "../../src/base/helpers";
+import { BREAKPOINTS, COLORS } from "src/base/helpers";
 
 import { iterableToSelectObject } from "./utils";
 

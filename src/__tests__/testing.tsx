@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-import classNames from "classNames";
+import classNames from "classnames";
 import * as Enzyme from "enzyme";
 import * as PropTypes from "prop-types";
 import * as React from "react";

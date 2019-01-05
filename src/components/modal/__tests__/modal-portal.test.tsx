@@ -44,7 +44,10 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(ModalPortal, {
-    defaultProps: modalInitialValue,
+    defaultProps: {
+      closeOnBlur: modalInitialValue.closeOnBlur,
+      closeOnEsc: modalInitialValue.closeOnEsc,
+    },
   });
 
   testForwardRefAsExoticComponentIntegration(
@@ -65,7 +68,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         const close = jest.fn();
         const ref = React.createRef<HTMLDivElement>();
         const wrapper = Enzyme.mount(
-          <ModalPortal closeOnEsc={closeOnEsc} innerRef={ref} close={close} />,
+          <ModalPortal closeOnEsc={closeOnEsc} innerRef={ref} onClose={close} />,
         );
 
         try {

@@ -2,16 +2,16 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Checkbox, Control, Label } from "../../../../src/elements";
-import { Section } from "../../../../src/layout";
-import { Omit } from "../../../../src/types";
+import { Checkbox, Control, Label } from "src/elements";
+import { Section } from "src/layout";
+import { Omit } from "src/types";
 
 export type ControlledCheckboxProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   "onChange"
 >;
 export interface ControlledCheckboxState {
-  checked?: boolean;
+  checked: boolean;
 }
 
 export class ControlledCheckbox extends React.PureComponent<
@@ -22,26 +22,29 @@ export class ControlledCheckbox extends React.PureComponent<
 
   constructor(props: ControlledCheckboxProps) {
     super(props);
-    this.state = { checked: props.checked || false };
+    this.state = { checked: props.checked === true };
   }
 
   public render() {
     const { children, name, value } = this.props;
+
     return (
       <Control>
         <Label disabled={this.props.disabled}>
           <Checkbox
             checked={this.state.checked}
             name={name}
-            onChange={() =>
-              this.setState(({ checked }) => ({ checked: !checked }))
-            }
+            onChange={this.toggle}
             value={value}
           />
           {children}
         </Label>
       </Control>
     );
+  }
+
+  private readonly toggle = () => {
+    this.setState(({ checked }) => ({ checked: !checked }));
   }
 }
 
@@ -55,11 +58,12 @@ storiesOf("Elements/Form/Checkbox", module)
   .add("Default", () => {
     const checked = knobs.checked();
     const disabled = knobs.disabled();
+
     return (
       <Control>
         <Label disabled={disabled}>
           <Checkbox checked={checked} disabled={disabled} /> I agree to the{" "}
-          <a href="#">terms and conditions</a>
+          <a href="#terms">terms and conditions</a>
         </Label>
       </Control>
     );
@@ -68,7 +72,7 @@ storiesOf("Elements/Form/Checkbox", module)
     return (
       <ControlledCheckbox name="agreed">
         {" "}
-        I agree to the <a href="#">terms and conditions</a>
+        I agree to the <a href="#terms">terms and conditions</a>
       </ControlledCheckbox>
     );
   });

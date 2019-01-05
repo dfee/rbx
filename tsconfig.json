@@ -18,8 +18,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "target": "es6"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "docs"]
-  // "include": ["src", "docs"],
-  // "exclude": ["node_modules", "dist"]
+  // "include": ["src"],
+  // "exclude": ["node_modules", "dist", "docs"]
+  "include": ["src", "docs"],
+  "exclude": ["node_modules", "dist"]
 }

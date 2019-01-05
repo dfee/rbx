@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Card, Media } from "../../../src/components";
-import { Content, Icon, Image, Title } from "../../../src/elements";
-import { Section } from "../../../src/layout";
+import { Card, Media } from "src/components";
+import { Content, Icon, Image, Title } from "src/elements";
+import { Section } from "src/layout";
 
 storiesOf("Components/Card", module)
   .addDecorator(story => (
@@ -17,7 +17,7 @@ storiesOf("Components/Card", module)
     <Card>
       <Card.Image>
         <Image.Container size="4by3">
-          <Image src="http://bulma.io/images/placeholders/1280x960.png" />
+          <Image src="https://bulma.io/images/placeholders/1280x960.png" />
         </Image.Container>
       </Card.Image>
       <Card.Content>
@@ -26,7 +26,7 @@ storiesOf("Components/Card", module)
             <Image.Container as="p" size={64}>
               <Image
                 alt="64x64"
-                src="http://bulma.io/images/placeholders/128x128.png"
+                src="https://bulma.io/images/placeholders/128x128.png"
               />
             </Image.Container>
           </Media.Item>
@@ -41,8 +41,8 @@ storiesOf("Components/Card", module)
         </Media>
         <Content>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-          iaculis mauris. <a>@bulmaio</a>. <a href="#1">#css</a>{" "}
-          <a href="#2">#responsive</a>
+          iaculis mauris. <a href="#@bulmaio">@bulmaio</a>.{" "}
+          <a href="#css">#css</a> <a href="#responsive">#responsive</a>
           <br />
           <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </Content>
@@ -62,8 +62,8 @@ storiesOf("Components/Card", module)
       <Card.Content>
         <Content>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-          iaculis mauris. <a>@bulmaio</a>. <a href="#1">#css</a>{" "}
-          <a href="#2">#responsive</a>
+          iaculis mauris. <a href="#@bulmaio">@bulmaio</a>.{" "}
+          <a href="#css">#css</a> <a href="#responsive">#responsive</a>
           <br />
           <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </Content>
@@ -93,15 +93,12 @@ storiesOf("Components/Card", module)
       <Card.Footer as="footer">
         <Card.Footer.Item as="p">
           <span>
-            View on{" "}
-            <a href="https://twitter.com/codinghorror/status/506010907021828096">
-              Twitter
-            </a>
+            View on <a href="#twitter">Twitter</a>
           </span>
         </Card.Footer.Item>
         <Card.Footer.Item as="p">
           <span>
-            Share on <a href="#">Facebook</a>
+            Share on <a href="#facebook">Facebook</a>
           </span>
         </Card.Footer.Item>
       </Card.Footer>

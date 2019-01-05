@@ -3,22 +3,23 @@ import {
   faHome,
   faPuzzlePiece,
   faThumbsUp,
+  IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Breadcrumb } from "../../../src/components";
+import { Breadcrumb } from "src/components";
 import {
   BREADCRUMB_ALIGNMENTS,
   BREADCRUMB_SEPARATORS,
   BREADCRUMB_SIZES,
-} from "../../../src/components/breadcrumb/breadcrumb";
-import { Icon } from "../../../src/elements";
-import { Section } from "../../../src/layout";
+} from "src/components/breadcrumb/breadcrumb";
+import { Icon } from "src/elements";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   align: (title: string = "Alignment") =>
@@ -42,36 +43,50 @@ export const knobs = {
     ),
 };
 
-const items = [
-  { href: "#1", name: "Bulma", icon: faHome },
-  { href: "#2", name: "Documentation", icon: faBook },
-  { href: "#2", name: "Components", icon: faPuzzlePiece },
-  { active: true, href: "#3", name: "Breadcrumbs", icon: faThumbsUp },
-];
-
 storiesOf("Components/Breadcrumb", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const align = knobs.align();
-    const separator = knobs.separator();
+    const props = filterUndefined({
+      align: knobs.align(),
+      separator: knobs.separator(),
+      size: knobs.size(),
+    });
     const hasIcon = knobs.hasIcon();
-    const size = knobs.size();
+
+    type BreadcrumbItemAttributes = {
+      active?: boolean;
+      href: string;
+      name: string;
+      icon: IconDefinition;
+    };
+
+    const breadcrumbItems: BreadcrumbItemAttributes[] = [
+      { href: "#1", name: "Bulma", icon: faHome },
+      { href: "#2", name: "Documentation", icon: faBook },
+      { href: "#2", name: "Components", icon: faPuzzlePiece },
+      { active: true, href: "#3", name: "Breadcrumbs", icon: faThumbsUp },
+    ];
+
+    const makeBreadcrumbItem = (attrs: BreadcrumbItemAttributes) => {
+      const icon = hasIcon ? (
+        <Icon size="small">
+          <FontAwesomeIcon icon={attrs.icon} />
+        </Icon>
+      ) : (
+        undefined
+      );
+
+      return (
+        <Breadcrumb.Item active={attrs.active} href={attrs.href}>
+          {icon}
+          {attrs.name}
+        </Breadcrumb.Item>
+      );
+    };
+
     return (
-      <Breadcrumb
-        align={align || undefined}
-        separator={separator || undefined}
-        size={size || undefined}
-      >
-        {items.map(({ active, href, icon, name }, i) => (
-          <Breadcrumb.Item active={active} href={href} key={i}>
-            {hasIcon && (
-              <Icon size="small">
-                <FontAwesomeIcon icon={icon} />
-              </Icon>
-            )}
-            {name}
-          </Breadcrumb.Item>
-        ))}
+      <Breadcrumb {...props}>
+        {breadcrumbItems.map(makeBreadcrumbItem)}
       </Breadcrumb>
     );
   });

@@ -2,15 +2,15 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Tabs } from "../../../src/components";
+import { Tabs } from "src/components";
 import {
   TABS_ALIGNMENTS,
   TABS_SIZES,
   TABS_TYPES,
-} from "../../../src/components/tabs/tabs";
-import { Section } from "../../../src/layout";
+} from "src/components/tabs/tabs";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   align: (title: string = "Align") =>
@@ -29,17 +29,15 @@ export const knobs = {
 storiesOf("Components/Tabs", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const align = knobs.align();
-    const fullwidth = knobs.fullwidth();
-    const size = knobs.size();
-    const type = knobs.type();
+    const props = filterUndefined({
+      align: knobs.align(),
+      fullwidth: knobs.fullwidth(),
+      size: knobs.size(),
+      type: knobs.type(),
+    });
+
     return (
-      <Tabs
-        align={align || undefined}
-        fullwidth={fullwidth}
-        size={size || undefined}
-        type={type || undefined}
-      >
+      <Tabs {...props}>
         <Tabs.Tab active>Test</Tabs.Tab>
         <Tabs.Tab>Test</Tabs.Tab>
         <Tabs.Tab>Test</Tabs.Tab>

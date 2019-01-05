@@ -2,7 +2,7 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Message } from "../../../src/components";
+import { Message } from "src/components";
 import {
   Block,
   Delete,
@@ -12,11 +12,11 @@ import {
   Notification,
   Numeric,
   Tag,
-} from "../../../src/elements";
-import { DELETE_SIZES } from "../../../src/elements/other/delete";
-import { Section } from "../../../src/layout";
+} from "src/elements";
+import { DELETE_SIZES } from "src/elements/other/delete";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   deleteSize: (title: string = "Size") =>
@@ -27,10 +27,13 @@ storiesOf("Elements/Other", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Block", () => <Block>block</Block>)
   .add("Delete", () => {
-    const size = knobs.deleteSize();
+    const props = filterUndefined({
+      size: knobs.deleteSize(),
+    });
+
     return (
       <div>
-        <Delete size={size || undefined} />
+        <Delete {...props} />
       </div>
     );
   })

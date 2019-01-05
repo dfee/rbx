@@ -2,11 +2,11 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Title } from "../../../src/elements";
-import { TITLE_SIZES } from "../../../src/elements/title/title";
+import { Title } from "src/elements";
+import { TITLE_SIZES } from "src/elements/title/title";
 
-import { Section } from "../../../src/layout";
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
+import { Section } from "src/layout";
 
 export const knobs = {
   size: (title: string = "Size") =>
@@ -17,16 +17,19 @@ export const knobs = {
 storiesOf("Elements/Title", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const titleSize = knobs.size("Title size");
-    const subtitleSize = knobs.size("Subtitle size");
-    const spaced = knobs.spaced();
+    const titleProps = filterUndefined({
+      size: knobs.size("Title size"),
+      spaced: knobs.spaced("Title spaced"),
+    });
+
+    const subtitleProps = filterUndefined({
+      size: knobs.size("Subtitle size"),
+    });
 
     return (
       <div>
-        <Title size={titleSize || undefined} spaced={spaced}>
-          Title
-        </Title>
-        <Title as="h2" size={subtitleSize || undefined} subtitle>
+        <Title {...titleProps}>Title</Title>
+        <Title as="h2" subtitle {...subtitleProps}>
           Subtitle
         </Title>
       </div>

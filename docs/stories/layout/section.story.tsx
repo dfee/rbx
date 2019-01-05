@@ -2,11 +2,11 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Container, Title } from "../../../src/elements";
-import { Section } from "../../../src/layout";
-import { SECTION_SIZES } from "../../../src/layout/section/section";
+import { Container, Title } from "src/elements";
+import { Section } from "src/layout";
+import { SECTION_SIZES } from "src/layout/section/section";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   size: (title: string = "Size") =>
@@ -14,10 +14,13 @@ export const knobs = {
 };
 
 storiesOf("Layout/Section", module).add("Default", () => {
-  const size = knobs.size();
+  const props = filterUndefined({
+    size: knobs.size(),
+  });
+
   return (
     <div>
-      <Section size={size || undefined}>
+      <Section {...props}>
         <Container>
           <Title>Section</Title>
           <Title as="h2" subtitle>

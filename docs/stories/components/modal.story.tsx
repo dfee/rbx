@@ -4,19 +4,11 @@ import { boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Level, Media, Modal } from "../../../src/components";
-import { ModalProps } from "../../../src/components/modal/modal";
-import {
-  Box,
-  Button,
-  Content,
-  Delete,
-  Icon,
-  Image,
-  Title,
-} from "../../../src/elements";
-import { Section } from "../../../src/layout";
-import { Omit } from "../../../src/types";
+import { Level, Media, Modal } from "src/components";
+import { ModalProps } from "src/components/modal/modal";
+import { Box, Button, Content, Delete, Icon, Image, Title } from "src/elements";
+import { Section } from "src/layout";
+import { Omit } from "src/types";
 
 interface OpenModalProps {
   modalProps: Omit<ModalProps, "onClose" | "active">;
@@ -49,8 +41,12 @@ class OpenModal extends React.Component<OpenModalProps, OpenModalState> {
     );
   }
 
-  private open = () => this.setState({ active: true });
-  private close = () => this.setState({ active: false });
+  private readonly close = () => {
+    this.setState({ active: false });
+  }
+  private readonly open = () => {
+    this.setState({ active: true });
+  }
 }
 
 export const knobs = {
@@ -65,6 +61,7 @@ storiesOf("Components/Modal", module)
       closeOnBlur: knobs.closeOnBlur(),
       closeOnEsc: knobs.closeOnEsc(),
     };
+
     return (
       <OpenModal modalProps={props}>
         <Modal.Background />
@@ -75,7 +72,7 @@ storiesOf("Components/Modal", module)
                 <Image.Container as="p" size={64}>
                   <Image
                     alt="64x64"
-                    src="http://bulma.io/images/placeholders/128x128.png"
+                    src="https://bulma.io/images/placeholders/128x128.png"
                   />
                 </Image.Container>
               </Media.Item>
@@ -117,6 +114,7 @@ storiesOf("Components/Modal", module)
       closeOnBlur: knobs.closeOnBlur(),
       closeOnEsc: knobs.closeOnEsc(),
     };
+
     return (
       <OpenModal modalProps={props}>
         <Modal.Background />
@@ -129,6 +127,7 @@ storiesOf("Components/Modal", module)
       </OpenModal>
     );
   })
+  // tslint:disable-next-line: max-func-body-length
   .add("Card", () => {
     const props = {
       closeOnBlur: knobs.closeOnBlur(),
@@ -178,8 +177,8 @@ storiesOf("Components/Modal", module)
               <Title as="h3">Third level</Title>
               <p>
                 Quisque ante lacus, malesuada ac auctor vitae, congue{" "}
-                <a href="#">non ante</a>. Phasellus lacus ex, semper ac tortor
-                nec, fringilla condimentum orci. Fusce eu rutrum tellus.
+                <a href="#non-ante">non ante</a>. Phasellus lacus ex, semper ac
+                tortor nec, fringilla condimentum orci. Fusce eu rutrum tellus.
               </p>
               <Content.OrderedList>
                 <Content.OrderedList.Item>

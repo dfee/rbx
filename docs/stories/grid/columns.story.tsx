@@ -2,19 +2,18 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Colors } from "../../../src/base/helpers";
-import { BREAKPOINTS } from "../../../src/base/helpers";
-import { Box, Notification, Title } from "../../../src/elements";
-import { Columns } from "../../../src/grid";
-import { ColumnProps } from "../../../src/grid/columns/column";
-import { COLUMN_SIZES, ColumnSizes } from "../../../src/grid/columns/column";
+import { BREAKPOINTS, Colors } from "src/base/helpers";
+import { Box, Notification, Title } from "src/elements";
+import { Columns } from "src/grid";
 import {
-  COLUMNS_GAP_SIZES,
-  ColumnsGapSizes,
-} from "../../../src/grid/columns/columns";
-import { Section } from "../../../src/layout";
+  COLUMN_SIZES,
+  ColumnProps,
+  ColumnSizes,
+} from "src/grid/columns/column";
+import { COLUMNS_GAP_SIZES, ColumnsGapSizes } from "src/grid/columns/columns";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject } from "../utils";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   breakpoint: (title: string = "Breakpoint") =>
@@ -31,6 +30,7 @@ export const knobs = {
 type ColumnNotificationProps = ColumnProps & { color?: Colors };
 const ColumnNotification: React.FC<ColumnNotificationProps> = props => {
   const { color, children, ...rest } = props;
+
   return (
     <Columns.Column {...rest}>
       <Notification textAlignment="centered" color={color}>
@@ -50,12 +50,17 @@ storiesOf("Grid/Columns", module)
     </Columns>
   ))
   .add("Sizes (by name)", () =>
-    COLUMN_SIZES.filter(size => typeof size === "string").map(size => (
-      <Columns key={size}>
-        <ColumnNotification color="primary" size={size} children={size} />
-        {size !== "full" && <ColumnNotification children="Auto" />}
-      </Columns>
-    )),
+    COLUMN_SIZES.filter(size => typeof size === "string").map(size => {
+      const remainder =
+        size !== "full" ? <ColumnNotification children="Auto" /> : undefined;
+
+      return (
+        <Columns key={size}>
+          <ColumnNotification color="primary" size={size} children={size} />
+          {remainder}
+        </Columns>
+      );
+    }),
   )
   .add("Sizes (by number)", () =>
     COLUMN_SIZES.filter(size => typeof size === "number").map(size => (
@@ -68,12 +73,13 @@ storiesOf("Grid/Columns", module)
     )),
   )
   .add("Offset", () => {
-    const permutations: Array<{ size: ColumnSizes; offset: ColumnSizes }> = [
+    const permutations: { size: ColumnSizes; offset: ColumnSizes }[] = [
       { size: "half", offset: "one-quarter" },
       { size: "three-fifths", offset: "one-fifth" },
       { size: 4, offset: 8 },
       { size: 11, offset: 1 },
     ];
+
     return permutations.map(({ size, offset }, i) => (
       <Columns key={i}>
         <ColumnNotification size={size} offset={offset} color="primary">
@@ -109,9 +115,12 @@ storiesOf("Grid/Columns", module)
     </Columns>
   ))
   .add("Responsiveness", () => {
-    const breakpoint = knobs.breakpoint();
+    const props = filterUndefined({
+      breakpoint: knobs.breakpoint(),
+    });
+
     return (
-      <Columns breakpoint={breakpoint === "" ? undefined : breakpoint}>
+      <Columns {...props}>
         {["First", "Second", "Third", "Fourth"].map(name => (
           <ColumnNotification color="primary" children={`${name} Column`} />
         ))}
@@ -169,6 +178,7 @@ storiesOf("Grid/Columns", module)
   ))
   .add("Gap", () => {
     const gapless = knobs.gapless();
+
     return (
       <Columns gapless={gapless}>
         {["First", "Second", "Third", "Fourth"].map(name => (
@@ -190,16 +200,21 @@ storiesOf("Grid/Columns", module)
       { size: "one-quarter" },
       {},
     ];
+
     return (
       <Columns breakpoint="mobile" gapless={gapless} multiline>
-        {permutations.map(({ size }, key) => (
-          <ColumnNotification
-            children={size ? `is-${size}` : "Auto"}
-            color="primary"
-            key={key}
-            size={size}
-          />
-        ))}
+        {permutations.map(({ size }, key) => {
+          const children = size === undefined ? "Auto" : `is-${size}`;
+
+          return (
+            <ColumnNotification
+              children={children}
+              color="primary"
+              key={key}
+              size={size}
+            />
+          );
+        })}
       </Columns>
     );
   })
@@ -207,6 +222,7 @@ storiesOf("Grid/Columns", module)
     const gap = knobs.gap();
     const normalizedGap =
       gap === "" ? undefined : (parseInt(gap, 10) as ColumnsGapSizes);
+
     return (
       <React.Fragment>
         <Columns gapSize={normalizedGap}>
@@ -252,7 +268,8 @@ storiesOf("Grid/Columns", module)
 
     const normalizedGap = Object.keys(gapSizes)
       .map(key => {
-        const value = gapSizes[key];
+        const value = gapSizes[key] as { gapSize: string };
+
         return {
           [key]: {
             gapSize:

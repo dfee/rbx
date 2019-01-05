@@ -4,15 +4,15 @@ import { boolean, number, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, Icon, Select } from "../../../../src/elements";
+import { Control, Icon, Select } from "src/elements";
 import {
   SELECT_CONTAINER_SIZES,
   SELECT_CONTAINER_STATES,
-} from "../../../../src/elements/form/select";
-import { Section } from "../../../../src/layout";
+} from "src/elements/form/select";
+import { Section } from "src/layout";
 
-import { colorKnob } from "../../common";
-import { iterableToSelectObject } from "../../utils";
+import { colorKnob } from "docs/stories/common";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   container: {
@@ -48,31 +48,39 @@ export const knobs = {
 storiesOf("Elements/Form/Select", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const containerColor = colorKnob("Container color");
-    const containerFullwidth = knobs.container.fullwidth("Container fullwidth");
-    const containerSize = knobs.container.size("Container size");
-    const containerState = knobs.container.state("Container state");
-    const containerRounded = knobs.container.rounded("Container rounded");
-    const controlHasIcon = knobs.control.hasIcon();
+    const controlProps = {
+      iconLeft: knobs.control.hasIcon(),
+    };
 
-    const selectDisabled = knobs.disabled();
-    const selectMultiple = knobs.multiple();
-    const selectSize = knobs.size();
+    const containerProps = filterUndefined({
+      color: colorKnob("Container color"),
+      fullwidth: knobs.container.fullwidth("Container fullwidth"),
+      size: knobs.container.size("Container size"),
+      state: knobs.container.state("Container state"),
+      rounded: knobs.container.rounded("Container rounded"),
+    });
+
+    const selectProps = filterUndefined({
+      disabled: knobs.disabled(),
+      multiple: knobs.multiple(),
+      size: knobs.size(),
+    });
+    if (selectProps.multiple === false) {
+      delete selectProps.size;
+    }
+
+    const icon = controlProps.iconLeft ? (
+      <Icon as="div" size="small" align="left">
+        <FontAwesomeIcon icon={faGlobe} />
+      </Icon>
+    ) : (
+      undefined
+    );
 
     return (
-      <Control iconLeft={controlHasIcon}>
-        <Select.Container
-          color={containerColor || undefined}
-          fullwidth={containerFullwidth}
-          rounded={containerRounded}
-          size={containerSize || undefined}
-          state={containerState || undefined}
-        >
-          <Select
-            disabled={selectDisabled}
-            multiple={selectMultiple}
-            size={(selectMultiple && selectSize) || undefined}
-          >
+      <Control {...controlProps}>
+        <Select.Container {...containerProps}>
+          <Select {...selectProps}>
             <Select.Option value="Argentina">Argentina</Select.Option>
             <Select.Option value="Bolivia">Bolivia</Select.Option>
             <Select.Option value="Brazil">Brazil</Select.Option>
@@ -87,11 +95,7 @@ storiesOf("Elements/Form/Select", module)
             <Select.Option value="Venezuela">Venezuela</Select.Option>
           </Select>
         </Select.Container>
-        {controlHasIcon && (
-          <Icon as="div" size="small" align="left">
-            <FontAwesomeIcon icon={faGlobe} />
-          </Icon>
-        )}
+        {icon}
       </Control>
     );
   });

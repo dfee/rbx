@@ -94,6 +94,7 @@ configureViewport({
 
 function loadStories() {
   const req = require.context("..", true, /\.story\.tsx$/);
+  // tslint:disable-next-line:no-unnecessary-callback-wrapper
   req.keys().forEach(filename => req(filename));
 }
 

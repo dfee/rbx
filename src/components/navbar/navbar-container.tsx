@@ -1,4 +1,4 @@
-import classNames from "classNames";
+import classNames from "classnames";
 import * as React from "react";
 
 import { Generic, HelpersProps } from "src/base";

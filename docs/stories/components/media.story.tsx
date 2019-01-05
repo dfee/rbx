@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Level, Media } from "../../../src/components";
+import { Level, Media } from "src/components";
 import {
   Button,
   Checkbox,
@@ -15,8 +15,8 @@ import {
   Image,
   Label,
   Textarea,
-} from "../../../src/elements";
-import { Section } from "../../../src/layout";
+} from "src/elements";
+import { Section } from "src/layout";
 
 storiesOf("Components/Media", module)
   .addDecorator(story => <Section children={story()} />)
@@ -26,7 +26,7 @@ storiesOf("Components/Media", module)
         <Image.Container as="p" size={64}>
           <Image
             alt="64x64"
-            src="http://bulma.io/images/placeholders/128x128.png"
+            src="https://bulma.io/images/placeholders/128x128.png"
           />
         </Image.Container>
       </Media.Item>
@@ -98,12 +98,13 @@ storiesOf("Components/Media", module)
       </Media.Item>
     </Media>
   ))
+  // tslint:disable-next-line: max-func-body-length
   .add("Nesting", () => (
     <React.Fragment>
       <Media as="article">
         <Media.Item position="left">
           <Image.Container as="p" size={64}>
-            <Image src="http://bulma.io/images/placeholders/128x128.png" />
+            <Image src="https://bulma.io/images/placeholders/128x128.png" />
           </Image.Container>
         </Media.Item>
         <Media.Item position="content">
@@ -117,7 +118,7 @@ storiesOf("Components/Media", module)
               turpis.
               <br />
               <small>
-                <a>Like</a> · <a>Reply</a> · 3 hrs
+                <a href="#like">Like</a> · <a href="#reply">Reply</a> · 3 hrs
               </small>
             </p>
           </Content>
@@ -125,7 +126,7 @@ storiesOf("Components/Media", module)
           <Media>
             <Media.Item position="left">
               <Image.Container as="p" size={48}>
-                <Image src="http://bulma.io/images/placeholders/128x128.png" />
+                <Image src="https://bulma.io/images/placeholders/128x128.png" />
               </Image.Container>
             </Media.Item>
             <Media.Item position="content">
@@ -139,7 +140,8 @@ storiesOf("Components/Media", module)
                   nulla sagittis, a lobortis leo feugiat.
                   <br />
                   <small>
-                    <a>Like</a> · <a>Reply</a> · 2 hrs
+                    <a href="#like">Like</a> · <a href="#reply">Reply</a> · 2
+                    hrs
                   </small>
                 </p>
               </Content>
@@ -160,7 +162,7 @@ storiesOf("Components/Media", module)
           <Media>
             <Media.Item position="left">
               <Image.Container as="p" size={48}>
-                <Image src="http://bulma.io/images/placeholders/96x96.png" />
+                <Image src="https://bulma.io/images/placeholders/96x96.png" />
               </Image.Container>
             </Media.Item>
             <Media.Item position="content">
@@ -175,7 +177,8 @@ storiesOf("Components/Media", module)
                   Phasellus lacinia non nisl id feugiat.
                   <br />
                   <small>
-                    <a>Like</a> · <a>Reply</a> · 2 hrs
+                    <a href="#like">Like</a> · <a href="#reply">Reply</a> · 2
+                    hrs
                   </small>
                 </p>
               </Content>
@@ -186,7 +189,7 @@ storiesOf("Components/Media", module)
       <Media as="article">
         <Media.Item position="left">
           <Image.Container as="p" size={64}>
-            <Image src="http://bulma.io/images/placeholders/128x128.png" />
+            <Image src="https://bulma.io/images/placeholders/128x128.png" />
           </Image.Container>
         </Media.Item>
         <Media.Item position="content">

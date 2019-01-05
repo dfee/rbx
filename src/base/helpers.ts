@@ -1,4 +1,4 @@
-import classNames from "classNames";
+import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
 import { Omit } from "src/types";

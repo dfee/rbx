@@ -1,25 +1,22 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Level } from "../../../src/components";
-import {
-  Button,
-  Control,
-  Field,
-  Heading,
-  Input,
-  Title,
-} from "../../../src/elements";
-import { Section } from "../../../src/layout";
+import { Level } from "src/components";
+import { Button, Control, Field, Heading, Input, Title } from "src/elements";
+import { Section } from "src/layout";
 
-import { breakpointKnob } from "../common";
+import { breakpointKnob } from "docs/stories/common";
+import { filterUndefined } from "docs/stories/utils";
 
 storiesOf("Components/Level", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const breakpoint = breakpointKnob();
+    const props = filterUndefined({
+      breakpoint: breakpointKnob(),
+    });
+
     return (
-      <Level breakpoint={breakpoint || undefined}>
+      <Level {...props}>
         <Level.Left>
           <Level.Item>
             <Title as="p" size={5} subtitle>
@@ -43,13 +40,13 @@ storiesOf("Components/Level", module)
             <strong>All</strong>
           </Level.Item>
           <Level.Item>
-            <a>Published</a>
+            <a href="#published">Published</a>
           </Level.Item>
           <Level.Item>
-            <a>Drafts</a>
+            <a href="#drafts">Drafts</a>
           </Level.Item>
           <Level.Item>
-            <a>Deleted</a>
+            <a href="#deleted">Deleted</a>
           </Level.Item>
           <Level.Item>
             <Button color="success">New</Button>
@@ -89,23 +86,32 @@ storiesOf("Components/Level", module)
   .add("Centered (2)", () => (
     <Level>
       <Level.Item as="p" textAlignment="centered">
-        <a className="link is-info">Home</a>
+        <a className="link is-info" href="#home">
+          Home
+        </a>
       </Level.Item>
       <Level.Item as="p" textAlignment="centered">
-        <a className="link is-info">Menu</a>
+        <a className="link is-info" href="#menu">
+          Menu
+        </a>
       </Level.Item>
       <Level.Item as="p" textAlignment="centered">
         <img
           src="https://bulma.io/images/bulma-type.png"
           alt=""
+          role="presentation"
           style={{ height: "30px" }}
         />
       </Level.Item>
       <Level.Item as="p" textAlignment="centered">
-        <a className="link is-info">Reservations</a>
+        <a className="link is-info" href="#reservations">
+          Reservations
+        </a>
       </Level.Item>
       <Level.Item as="p" textAlignment="centered">
-        <a className="link is-info">Contact</a>
+        <a className="link is-info" href="#contact">
+          Contact
+        </a>
       </Level.Item>
     </Level>
   ));

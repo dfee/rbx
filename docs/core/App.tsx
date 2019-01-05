@@ -14,20 +14,22 @@ import {
   Media,
   Navbar,
   Title,
-} from "../../src";
+} from "src/";
 
 import "./App.sass";
+// tslint:disable: match-default-export-name
 import BulmaLogo from "./assets/bulma.png";
 import GitHubLogo from "./assets/github.png";
 import NPMLogo from "./assets/npm.png";
 import ReactLogo from "./assets/react.png";
 import StorybookLogo from "./assets/storybook.png";
 import TypescriptLogo from "./assets/typescript.png";
+// tslint:enbale: match-default-export-name
 
 const PATH_ROOT = "/rbx";
 const PATH_STORIES = `${PATH_ROOT}/stories`;
 
-const AppNavbar: React.FC<{}> = () => (
+const AppNavbar: React.FC = () => (
   <Container>
     <Navbar>
       <Navbar.Brand>
@@ -59,7 +61,7 @@ const AppNavbar: React.FC<{}> = () => (
             <Navbar.Link>More</Navbar.Link>
             <Navbar.Dropdown right>
               <Navbar.Item href="https://bulma.io">Bulma</Navbar.Item>
-              <Navbar.Item href="http://typescriptlang.org/">
+              <Navbar.Item href="https://www.typescriptlang.org/">
                 Typescript
               </Navbar.Item>
               <Navbar.Divider />
@@ -74,7 +76,7 @@ const AppNavbar: React.FC<{}> = () => (
   </Container>
 );
 
-const AppHero: React.FC<{}> = () => (
+const AppHero: React.FC = () => (
   <Container>
     <Hero>
       <Hero.Body>
@@ -120,7 +122,7 @@ const Feature: React.FC<{
   </Columns.Column>
 );
 
-const AppFeatures: React.FC<{}> = () => (
+const AppFeatures: React.FC = () => (
   <Container>
     <Columns>
       <Feature to="https://reactjs.org/" imageSrc={ReactLogo} title="React 16+">
@@ -182,15 +184,17 @@ const AppFeatures: React.FC<{}> = () => (
   </Container>
 );
 
-const AppFooter: React.FC<{}> = () => (
+const AppFooter: React.FC = () => (
   <Footer>
     <Content textAlignment="centered">
       <p>
         <strong>rbx</strong> by <a href="https://github.com/dfee">Devin Fee</a>.
-        The source code is licensed{" "}
-        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
-        website content is licensed{" "}
-        <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+        The source code is released under the{" "}
+        <a href="https://opensource.org/licenses/mit-license.php">
+          MIT License
+        </a>
+        . The website content is licensed{" "}
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
           CC BY NC SA 4.0
         </a>
         .
@@ -199,7 +203,7 @@ const AppFooter: React.FC<{}> = () => (
   </Footer>
 );
 
-const App: React.FC<{}> = () => (
+export const App: React.FC = () => (
   <div className="App">
     <div style={{ minHeight: "calc(100vh - 168px)", paddingBottom: "100px" }}>
       <AppNavbar />
@@ -209,5 +213,3 @@ const App: React.FC<{}> = () => (
     <AppFooter />
   </div>
 );
-
-export default App;

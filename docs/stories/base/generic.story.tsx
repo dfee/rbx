@@ -1,14 +1,29 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Generic } from "../../../src/base";
-import { BREAKPOINTS } from "../../../src/base/helpers";
-import { Section } from "../../../src/layout";
+import { Generic } from "src/base";
+import {
+  BREAKPOINTS,
+  COLORS,
+  DISPLAYS,
+  FLOAT_PULLED_ALIGNMENTS,
+  GREY_COLORS,
+  TEXT_ALIGNMENTS,
+  TEXT_SIZES,
+  TEXT_TRANSFORMS,
+  TEXT_WEIGHTS,
+} from "src/base/helpers";
+import { Section } from "src/layout";
 
-import { iterableToSelectObject, selectFactory } from "../utils";
-import { helpersKnobs } from "./helpers";
+import {
+  booleanFactory,
+  filterUndefined,
+  iterableToSelectObject,
+  mapFactories,
+  selectFactory,
+} from "docs/stories/utils";
 
-const genericKnobs = {
+export const knobs = {
   as: selectFactory(
     "as",
     iterableToSelectObject(["a", "div", "h1", "p", "span"], {
@@ -16,77 +31,142 @@ const genericKnobs = {
     }),
     "div",
   ),
-};
+  color: {
+    backgroundColor: selectFactory(
+      "backgroundColor",
+      iterableToSelectObject([...COLORS, ...GREY_COLORS], { undefined: "" }),
+    ),
+    textColor: selectFactory(
+      "textColor",
+      iterableToSelectObject([...COLORS, ...GREY_COLORS], { undefined: "" }),
+    ),
+  },
+  helpers: {
+    float: {
+      clearfix: booleanFactory("clearfix", false),
+      pull: selectFactory(
+        "pull",
+        iterableToSelectObject(FLOAT_PULLED_ALIGNMENTS, { undefined: "" }),
+      ),
+    },
+    spacing: {
+      marginless: booleanFactory("marginless", false),
+      paddingless: booleanFactory("paddingless", false),
+    },
+    // tslint:disable-next-line:object-literal-sort-keys
+    other: {
+      clipped: booleanFactory("clipped", false),
+      hidden: booleanFactory("hidden", false),
+      invisible: booleanFactory("invisible", false),
+      overlay: booleanFactory("overlay", false),
+      radiusless: booleanFactory("radiusless", false),
+      shadowless: booleanFactory("shadowless", false),
+      srOnly: booleanFactory("srOnly", false),
+      unselectable: booleanFactory("unselectable", false),
+    },
+  },
+  responsive: {
+    ...BREAKPOINTS.map(breakpoint => {
+      const hasOnly = ["mobile", "fullhd", "touch"].indexOf(breakpoint) !== -1;
 
-const filterUndefined = (props: { [k: string]: any }) =>
-  Object.keys(props)
-    .filter(key => props[key] !== "")
-    .map(key => ({ [key]: props[key] }))
-    .reduce((acc, cv) => ({ ...acc, ...cv }), {});
-
-const filterResponsive = (props: {
-  [k: string]: { [k2: string]: { only?: boolean; value: string } };
-}) =>
-  Object.keys(props)
-    .map(key => {
-      const value = props[key];
-      return {
-        [key]: Object.keys(value)
-          .filter(key2 => value[key2].value !== "")
-          .map(key2 => ({ [key2]: value[key2] }))
-          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+      const display = {
+        value: selectFactory(
+          `${breakpoint}.display.value`,
+          iterableToSelectObject(DISPLAYS, { undefined: "" }),
+        ),
+        ...(hasOnly
+          ? { only: booleanFactory(`${breakpoint}.display.only`, false) }
+          : {}),
       };
-    })
-    .reduce((acc, cv) => ({ ...acc, ...cv }), {});
 
-export const mapFactories = <T extends object>(obj: T, group?: string) =>
-  Object.keys(obj)
-    .map(key => {
-      const factory = obj[key];
-      return { [key]: factory({ group }) };
-    })
-    .reduce((acc, cv) => ({ ...acc, ...cv }), {});
+      const hide = {
+        value: booleanFactory(`${breakpoint}.hide.value`, false),
+        ...(hasOnly
+          ? { only: booleanFactory(`${breakpoint}.hide.only`, false) }
+          : {}),
+      };
+
+      const textAlignment = {
+        value: selectFactory(
+          `${breakpoint}.textAlignemnt.value`,
+          iterableToSelectObject(TEXT_ALIGNMENTS, { undefined: "" }),
+        ),
+        ...(hasOnly
+          ? { only: booleanFactory(`${breakpoint}.textAlignment.only`, false) }
+          : {}),
+      };
+
+      const textSize = {
+        value: selectFactory(
+          `${breakpoint}.textSize.value`,
+          iterableToSelectObject(TEXT_SIZES, { undefined: "" }),
+        ),
+        ...(hasOnly
+          ? { only: booleanFactory(`${breakpoint}.textSize.only`, false) }
+          : {}),
+      };
+
+      return { [breakpoint]: { display, hide, textAlignment, textSize } };
+    }).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+  },
+  typography: {
+    italic: booleanFactory("italic", false),
+    textAlignment: selectFactory(
+      "textAlignemnt",
+      iterableToSelectObject(TEXT_ALIGNMENTS, { undefined: "" }),
+    ),
+    textSize: selectFactory(
+      "textSize",
+      iterableToSelectObject(TEXT_SIZES, { undefined: "" }),
+    ),
+    textTransform: selectFactory(
+      "textTransform",
+      iterableToSelectObject(TEXT_TRANSFORMS, { undefined: "" }),
+    ),
+    textWeight: selectFactory(
+      "textWeight",
+      iterableToSelectObject(TEXT_WEIGHTS, { undefined: "" }),
+    ),
+  },
+};
 
 storiesOf("Base", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Generic", () => {
-    const as = genericKnobs.as({ group: "as" });
     const props = filterUndefined({
+      // generic
+      as: knobs.as({ group: "as" }),
       // colors
-      ...mapFactories(helpersKnobs.color, "Color"),
+      ...mapFactories(knobs.color, "Color"),
       // helpers
-      ...mapFactories(helpersKnobs.helpers.float, "Helpers"),
-      ...mapFactories(helpersKnobs.helpers.spacing, "Helpers"),
-      ...mapFactories(helpersKnobs.helpers.other, "Helpers"),
+      ...mapFactories(knobs.helpers.float, "Helpers"),
+      ...mapFactories(knobs.helpers.spacing, "Helpers"),
+      ...mapFactories(knobs.helpers.other, "Helpers"),
       // responsive
-      responsive: filterResponsive(({
+      responsive: {
         ...BREAKPOINTS.map(breakpoint => ({
           [breakpoint]: {
             display: mapFactories(
-              helpersKnobs.responsive[breakpoint].display,
+              knobs.responsive[breakpoint].display,
               "Responsive",
             ),
-            hide: mapFactories(
-              helpersKnobs.responsive[breakpoint].hide,
-              "Responsive",
-            ),
+            hide: mapFactories(knobs.responsive[breakpoint].hide, "Responsive"),
             textAlignment: mapFactories(
-              helpersKnobs.responsive[breakpoint].textAlignment,
+              knobs.responsive[breakpoint].textAlignment,
               "Responsive",
             ),
             textSize: mapFactories(
-              helpersKnobs.responsive[breakpoint].textSize,
+              knobs.responsive[breakpoint].textSize,
               "Responsive",
             ),
           },
         })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-      } as unknown) as any),
-      ...mapFactories(helpersKnobs.helpers.other, "Helpers"),
-      // typography
-      ...mapFactories(helpersKnobs.typography, "Typography"),
+      },
+      ...mapFactories(knobs.typography, "Typography"),
     });
+
     return (
-      <Generic as={as as React.ReactType} {...props}>
+      <Generic {...props}>
         This is the Generic component.
         <br />
         It takes advantage of all the modifiers available with Bulma.

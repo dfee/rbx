@@ -4,16 +4,12 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Control, File } from "../../../../src/elements";
-import {
-  FILE_ALIGNMENTS,
-  FILE_SIZES,
-  FileProps,
-} from "../../../../src/elements/form/file";
-import { Section } from "../../../../src/layout";
+import { Control, File } from "src/elements";
+import { FILE_ALIGNMENTS, FILE_SIZES, FileProps } from "src/elements/form/file";
+import { Section } from "src/layout";
 
-import { colorKnob } from "../../common";
-import { iterableToSelectObject } from "../../utils";
+import { colorKnob } from "docs/stories/common";
+import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   align: (title: string = "Alignment") =>
@@ -49,7 +45,13 @@ export class ControlledFile extends React.PureComponent<
   }
   public render() {
     const { hasName, name, onChange, ...rest } = this.props;
-    const withName = hasName && this.state.filename ? true : false;
+
+    const withName = hasName === true && this.state.filename !== undefined;
+    const filename = withName ? (
+      <File.Name>{this.state.filename}</File.Name>
+    ) : (
+      undefined
+    );
 
     return (
       <Control>
@@ -62,19 +64,19 @@ export class ControlledFile extends React.PureComponent<
               </File.Icon>
               <File.Label as="span">Choose a File</File.Label>
             </File.CTA>
-            {withName && <File.Name>{this.state.filename}</File.Name>}
+            {filename}
           </File.Label>
         </File>
       </Control>
     );
   }
 
-  private select = (event: React.FormEvent<HTMLInputElement>) => {
+  private readonly select = (event: React.FormEvent<HTMLInputElement>) => {
     const { files } = event.currentTarget;
     this.setState({
-      filename: files && files.length > 0 ? files[0].name : undefined,
+      filename: files !== null && files.length > 0 ? files[0].name : undefined,
     });
-    if (this.props.onChange) {
+    if (this.props.onChange !== undefined) {
       this.props.onChange(event);
     }
   }
@@ -83,22 +85,24 @@ export class ControlledFile extends React.PureComponent<
 storiesOf("Elements/Form/File", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
-    const { align, color, size, ...rest } = {
+    const props = filterUndefined({
       align: knobs.align(),
       boxed: knobs.boxed(),
       color: colorKnob(),
       fullwidth: knobs.fullwidth(),
       hasName: knobs.hasName(),
       size: knobs.size(),
-    };
+    });
+
+    const filename = props.hasName ? (
+      <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+    ) : (
+      undefined
+    );
+
     return (
       <Control>
-        <File
-          align={align || undefined}
-          color={color || undefined}
-          {...rest}
-          size={size || undefined}
-        >
+        <File {...props}>
           <File.Label>
             <File.Input name="resume" />
             <File.CTA>
@@ -107,30 +111,21 @@ storiesOf("Elements/Form/File", module)
               </File.Icon>
               <File.Label as="span">Choose a File</File.Label>
             </File.CTA>
-            {rest.hasName && (
-              <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
-            )}
+            {filename}
           </File.Label>
         </File>
       </Control>
     );
   })
   .add("Controlled", () => {
-    const { align, color, size, ...rest } = {
+    const props = filterUndefined({
       align: knobs.align(),
       boxed: knobs.boxed(),
       color: colorKnob(),
       fullwidth: knobs.fullwidth(),
       hasName: knobs.hasName(),
       size: knobs.size(),
-    };
-    return (
-      <ControlledFile
-        align={align || undefined}
-        color={color || undefined}
-        name="resume"
-        size={size || undefined}
-        {...rest}
-      />
-    );
+    });
+
+    return <ControlledFile name="resume" {...props} />;
   });
