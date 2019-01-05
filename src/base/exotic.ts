@@ -10,11 +10,20 @@ export interface ForwardRefAsExoticComponent<
     React.ForwardRefExoticComponent<TDefaultComponent>,
     keyof React.ForwardRefExoticComponent<TDefaultComponent>
   > {
-  <TAsComponent extends React.ReactType = TDefaultComponent>(
+  <
+    TAsComponent extends
+      | React.ReactType
+      // tslint:disable-next-line: no-any
+      | ForwardRefAsExoticComponent<any, any> = TDefaultComponent
+  >(
     props: Prefer<
       // tslint:disable-next-line:no-reserved-keywords
       React.PropsWithoutRef<TOwnProps & { as?: TAsComponent }>,
-      React.ComponentPropsWithRef<TAsComponent>
+      // React.ComponentPropsWithRef<TAsComponent>
+      // tslint:disable-next-line: no-any
+      TAsComponent extends ForwardRefAsExoticComponent<infer P, any>
+        ? P
+        : React.ComponentPropsWithRef<TAsComponent>
     >,
   ): JSX.Element | null;
 }

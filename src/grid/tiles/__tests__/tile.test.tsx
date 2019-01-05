@@ -1,4 +1,3 @@
-import { COLORS } from "src/base/helpers";
 import { Tile, TILE_KINDS, TILE_SIZES } from "src/grid/tiles/tile";
 
 import {
@@ -35,18 +34,6 @@ describe(`${COMPONENT_NAME} component`, () => {
   describe("props", () => {
     const { propTypes } = COMPONENT;
 
-    describe("color", () => {
-      validateOneOfPropType(propTypes, "color", COLORS);
-
-      COLORS.map(color => {
-        it(`should be ${color}`, () => {
-          const node = makeNode({ color });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`is-${color}`)).toBe(true);
-        });
-      });
-    });
-
     describe("kind", () => {
       validateOneOfPropType(propTypes, "kind", TILE_KINDS);
 
@@ -55,18 +42,6 @@ describe(`${COMPONENT_NAME} component`, () => {
           const node = makeNode({ kind });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
-        });
-      });
-    });
-
-    describe("notification", () => {
-      validateBoolPropType(propTypes, "notification");
-
-      [false, true].map(notification => {
-        it(`should ${notification ? "" : "not "}be notification`, () => {
-          const node = makeNode({ notification });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass("notification")).toBe(notification);
         });
       });
     });

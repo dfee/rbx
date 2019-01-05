@@ -1147,9 +1147,7 @@ Object {
       "as": "div",
     },
     "propTypes": Object {
-      "color": [Function],
       "kind": [Function],
-      "notification": [Function],
       "size": [Function],
       "vertical": [Function],
     },

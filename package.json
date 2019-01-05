@@ -20,7 +20,7 @@
     "docs:storybook:build": "build-storybook -c docs/stories/.config -o docs/build/stories",
     "docs:storybook:dev": "start-storybook -p 9001 -c docs/stories/.config",
     "lint": "tslint --project .",
-    "test:cov": "tslint --project . && jest --coverage",
+    "test:cov": "npm run lint && jest --coverage",
     "test": "jest",
     "watch": "rollup -cw"
   },

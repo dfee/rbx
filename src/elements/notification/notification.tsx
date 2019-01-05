@@ -7,6 +7,7 @@ import { Colors, COLORS } from "src/base/helpers";
 
 export type NotificationModifierProps = Partial<{
   color: Colors;
+  other: boolean;
 }>;
 
 export type NotificationProps = HelpersProps & NotificationModifierProps;
