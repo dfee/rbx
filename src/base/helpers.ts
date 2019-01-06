@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import { Omit } from "src/types";
+import { Omit, Prefer } from "src/types";
 import { tuple } from "src/utils";
 
 /**
@@ -499,13 +499,18 @@ export const transformResponsiveHelpers: TransformFunc<
 /**
  * Union of helpers
  */
-export type HelpersProps = FloatHelpersProps &
-  OverflowHelpersProps &
-  OverlayHelpersProps &
-  TypographyHelpersProps &
-  VisibilityHelpersProps &
-  OtherHelpersProps &
-  ResponsiveHelpersProps & { className?: string };
+export type HelpersPropsOverrides = {};
+
+export type HelpersProps = Prefer<
+  HelpersPropsOverrides,
+  FloatHelpersProps &
+    OverflowHelpersProps &
+    OverlayHelpersProps &
+    TypographyHelpersProps &
+    VisibilityHelpersProps &
+    OtherHelpersProps &
+    ResponsiveHelpersProps & { className?: string }
+>;
 
 export const helpersPropTypes = {
   ...floatHelpersPropTypes,

@@ -54,15 +54,23 @@ export const goHomeLink = (
 
 To override the variables set by Bulma, install Bulma (`npm install bulma@0.7.2`), and [follow the Bulma instructions](https://bulma.io/documentation/customize/variables/).
 
-You will also need to import `rbx/rbx.sass` as it contains any pertinent bug fixes for Bulma.
+You will also need to import `rbx/dist/rbx.sass` as it contains any pertinent bug fixes for Bulma.
 
 A minimal example of `App.sass` might look like:
 
 ```sass
 $primary: #61dafb
 
-@import "~bulma/bulma.sass"
-@import "../src/index.sass"
+@import "~rbx/dist/index.sass"
+```
+
+Or, for further customization;
+
+```sass
+$primary: #61dafb
+
+@import "~bulma/bulma.sass" // alternatively, select which parts to include.
+@import "~rbx/dist/rbx.sass"
 ```
 
 Then, import this file somewhere in your project.

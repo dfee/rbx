@@ -13,6 +13,8 @@ import {
   TEXT_TRANSFORMS,
   TEXT_WEIGHTS,
 } from "src/base/helpers";
+import { Card } from "src/components";
+import { Notification } from "src/elements";
 import { Section } from "src/layout";
 
 import {
@@ -23,47 +25,73 @@ import {
   selectFactory,
 } from "docs/stories/utils";
 
+const asMap = {
+  undefined: undefined,
+  div: "div",
+  span: "span",
+  card: Card,
+  notification: Notification,
+};
+
 export const knobs = {
   as: selectFactory(
     "as",
-    iterableToSelectObject(["a", "div", "h1", "p", "span"], {
+    iterableToSelectObject(Object.keys(asMap), {
       undefined: "",
     }),
     "div",
   ),
-  color: {
+  float: {
+    clearfix: booleanFactory("clearfix", false),
+    pull: selectFactory(
+      "pull",
+      iterableToSelectObject(FLOAT_PULLED_ALIGNMENTS, { undefined: "" }),
+    ),
+  },
+  overflow: {
+    clipped: booleanFactory("clipped", false),
+  },
+  overlay: {
+    overlay: booleanFactory("overlay", false),
+  },
+  typograpahy: {
     backgroundColor: selectFactory(
       "backgroundColor",
       iterableToSelectObject([...COLORS, ...GREY_COLORS], { undefined: "" }),
+    ),
+    italic: booleanFactory("italic", false),
+    textAlignment: selectFactory(
+      "textAlignemnt",
+      iterableToSelectObject(TEXT_ALIGNMENTS, { undefined: "" }),
     ),
     textColor: selectFactory(
       "textColor",
       iterableToSelectObject([...COLORS, ...GREY_COLORS], { undefined: "" }),
     ),
+    textSize: selectFactory(
+      "textSize",
+      iterableToSelectObject(TEXT_SIZES, { undefined: "" }),
+    ),
+    textTransform: selectFactory(
+      "textTransform",
+      iterableToSelectObject(TEXT_TRANSFORMS, { undefined: "" }),
+    ),
+    textWeight: selectFactory(
+      "textWeight",
+      iterableToSelectObject(TEXT_WEIGHTS, { undefined: "" }),
+    ),
   },
-  helpers: {
-    float: {
-      clearfix: booleanFactory("clearfix", false),
-      pull: selectFactory(
-        "pull",
-        iterableToSelectObject(FLOAT_PULLED_ALIGNMENTS, { undefined: "" }),
-      ),
-    },
-    spacing: {
-      marginless: booleanFactory("marginless", false),
-      paddingless: booleanFactory("paddingless", false),
-    },
-    // tslint:disable-next-line:object-literal-sort-keys
-    other: {
-      clipped: booleanFactory("clipped", false),
-      hidden: booleanFactory("hidden", false),
-      invisible: booleanFactory("invisible", false),
-      overlay: booleanFactory("overlay", false),
-      radiusless: booleanFactory("radiusless", false),
-      shadowless: booleanFactory("shadowless", false),
-      srOnly: booleanFactory("srOnly", false),
-      unselectable: booleanFactory("unselectable", false),
-    },
+  visibility: {
+    hidden: booleanFactory("hidden", false),
+    invisible: booleanFactory("invisible", false),
+    srOnly: booleanFactory("srOnly", false),
+  },
+  other: {
+    marginless: booleanFactory("marginless", false),
+    paddingless: booleanFactory("paddingless", false),
+    radiusless: booleanFactory("radiusless", false),
+    shadowless: booleanFactory("shadowless", false),
+    unselectable: booleanFactory("unselectable", false),
   },
   responsive: {
     ...BREAKPOINTS.map(breakpoint => {
@@ -109,40 +137,19 @@ export const knobs = {
       return { [breakpoint]: { display, hide, textAlignment, textSize } };
     }).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
   },
-  typography: {
-    italic: booleanFactory("italic", false),
-    textAlignment: selectFactory(
-      "textAlignemnt",
-      iterableToSelectObject(TEXT_ALIGNMENTS, { undefined: "" }),
-    ),
-    textSize: selectFactory(
-      "textSize",
-      iterableToSelectObject(TEXT_SIZES, { undefined: "" }),
-    ),
-    textTransform: selectFactory(
-      "textTransform",
-      iterableToSelectObject(TEXT_TRANSFORMS, { undefined: "" }),
-    ),
-    textWeight: selectFactory(
-      "textWeight",
-      iterableToSelectObject(TEXT_WEIGHTS, { undefined: "" }),
-    ),
-  },
 };
 
 storiesOf("Base", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Generic", () => {
     const props = filterUndefined({
-      // generic
-      as: knobs.as({ group: "as" }),
-      // colors
-      ...mapFactories(knobs.color, "Color"),
-      // helpers
-      ...mapFactories(knobs.helpers.float, "Helpers"),
-      ...mapFactories(knobs.helpers.spacing, "Helpers"),
-      ...mapFactories(knobs.helpers.other, "Helpers"),
-      // responsive
+      as: asMap[knobs.as({ group: "as" })],
+      ...mapFactories(knobs.float, "Float"),
+      ...mapFactories(knobs.overflow, "Overflow"),
+      ...mapFactories(knobs.overlay, "Overlay"),
+      ...mapFactories(knobs.typograpahy, "Typography"),
+      ...mapFactories(knobs.visibility, "Visibility"),
+      ...mapFactories(knobs.other, "Other"),
       responsive: {
         ...BREAKPOINTS.map(breakpoint => ({
           [breakpoint]: {
@@ -162,21 +169,26 @@ storiesOf("Base", module)
           },
         })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       },
-      ...mapFactories(knobs.typography, "Typography"),
     });
 
     return (
       <Generic {...props}>
-        This is the Generic component.
-        <br />
-        It takes advantage of all the modifiers available with Bulma.
-        <br />
-        It supports ref forwarding (using the `ref` prop).
-        <br />
-        In addition, you can render this component as any other component (with
-        the `as` prop).
-        <br />
-        All components support these features.
+        <p>
+          This is the <strong>Generic</strong> component.
+          <br />
+          All components render through this – meaning that these props are
+          available to all components
+          <br />
+          It supports ref forwarding (using the <strong>`ref`</strong> prop).
+          <br />
+          In addition, you can render this component as any other component
+          (like a <strong>Card</strong> or <strong>Notification</strong>) or JSX
+          Element (like a <strong>div</strong> or <strong>span</strong>), using
+          the <strong>`as`</strong>
+          prop.
+        </p>
+        <hr />
+        <p>Customize this element with the knobs below.</p>
       </Generic>
     );
   });
