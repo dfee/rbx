@@ -4,12 +4,12 @@ import {
   DISPLAYS,
   FLOAT_PULLED_ALIGNMENTS,
   floatHelpersPropTypes,
-  GREY_COLORS,
   helpersPropTypes,
   otherHelpersPropTypes,
   overflowHelpersPropTypes,
   overlayHelpersPropTypes,
   responsiveHelpersPropTypes,
+  SHADES,
   TEXT_ALIGNMENTS,
   TEXT_SIZES,
   TEXT_TRANSFORMS,
@@ -159,13 +159,10 @@ describe("Typography modifiers", () => {
   const tfunc = transformTypographyHelpers;
 
   describe("propTypes", () => {
-    validateOneOfPropType(propTypes, "backgroundColor", [
-      ...COLORS,
-      ...GREY_COLORS,
-    ]);
+    validateOneOfPropType(propTypes, "backgroundColor", [...COLORS, ...SHADES]);
     validateBoolPropType(propTypes, "italic");
     validateOneOfPropType(propTypes, "textAlignment", TEXT_ALIGNMENTS);
-    validateOneOfPropType(propTypes, "textColor", [...COLORS, ...GREY_COLORS]);
+    validateOneOfPropType(propTypes, "textColor", [...COLORS, ...SHADES]);
     validateOneOfPropType(propTypes, "textSize", TEXT_SIZES);
     validateOneOfPropType(propTypes, "textTransform", TEXT_TRANSFORMS);
     validateOneOfPropType(propTypes, "textWeight", TEXT_WEIGHTS);
@@ -177,7 +174,7 @@ describe("Typography modifiers", () => {
     testItShouldNotSetClassNameOnEmpty(tfunc);
     testItShouldPreserveCustomClassName(tfunc);
 
-    [...COLORS, ...GREY_COLORS].map(color => {
+    [...COLORS, ...SHADES].map(color => {
       it(`should make background-color ${color}`, () => {
         expect(tfunc({ backgroundColor: color }, CNAME, LOC)).toEqual({
           className: `has-background-${color}`,
@@ -201,7 +198,7 @@ describe("Typography modifiers", () => {
       });
     });
 
-    [...COLORS, ...GREY_COLORS].map(color => {
+    [...COLORS, ...SHADES].map(color => {
       it(`should make text-color ${color}`, () => {
         expect(tfunc({ textColor: color }, CNAME, LOC)).toEqual({
           className: `has-text-${color}`,

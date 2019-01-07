@@ -130,7 +130,7 @@ export const COLORS = tuple(
 );
 export type Colors = (typeof COLORS)[number];
 
-export const GREY_COLORS = tuple(
+export const SHADES = tuple(
   "black-bis",
   "black-ter",
   "grey-darker",
@@ -141,7 +141,7 @@ export const GREY_COLORS = tuple(
   "white-ter",
   "white-bis",
 );
-export type GreyColors = (typeof GREY_COLORS)[number];
+export type Shades = (typeof SHADES)[number];
 
 export const TEXT_ALIGNMENTS = tuple("centered", "justified", "left", "right");
 export type TextAlignments = (typeof TEXT_ALIGNMENTS)[number];
@@ -156,20 +156,20 @@ export const TEXT_WEIGHTS = tuple("light", "normal", "semibold", "bold");
 export type TextWeights = (typeof TEXT_WEIGHTS)[number];
 
 export type TypographyHelpersProps = Partial<{
-  backgroundColor: Colors | GreyColors;
+  backgroundColor: Colors | Shades;
   italic: boolean;
   textAlignment: TextAlignments;
-  textColor: Colors | GreyColors;
+  textColor: Colors | Shades;
   textSize: TextSizes;
   textTransform: TextTransforms;
   textWeight: TextWeights;
 }>;
 
 export const typographyHelpersPropTypes = {
-  backgroundColor: PropTypes.oneOf([...COLORS, ...GREY_COLORS]),
+  backgroundColor: PropTypes.oneOf([...COLORS, ...SHADES]),
   italic: PropTypes.bool,
   textAlignment: PropTypes.oneOf(TEXT_ALIGNMENTS),
-  textColor: PropTypes.oneOf([...COLORS, ...GREY_COLORS]),
+  textColor: PropTypes.oneOf([...COLORS, ...SHADES]),
   textSize: PropTypes.oneOf(TEXT_SIZES),
   textTransform: PropTypes.oneOf(TEXT_TRANSFORMS),
   textWeight: PropTypes.oneOf(TEXT_WEIGHTS),

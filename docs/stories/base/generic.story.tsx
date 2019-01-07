@@ -7,7 +7,7 @@ import {
   COLORS,
   DISPLAYS,
   FLOAT_PULLED_ALIGNMENTS,
-  GREY_COLORS,
+  SHADES,
   TEXT_ALIGNMENTS,
   TEXT_SIZES,
   TEXT_TRANSFORMS,
@@ -57,7 +57,7 @@ export const knobs = {
   typograpahy: {
     backgroundColor: selectFactory(
       "backgroundColor",
-      iterableToSelectObject([...COLORS, ...GREY_COLORS], { undefined: "" }),
+      iterableToSelectObject([...COLORS, ...SHADES], { undefined: "" }),
     ),
     italic: booleanFactory("italic", false),
     textAlignment: selectFactory(
@@ -66,7 +66,7 @@ export const knobs = {
     ),
     textColor: selectFactory(
       "textColor",
-      iterableToSelectObject([...COLORS, ...GREY_COLORS], { undefined: "" }),
+      iterableToSelectObject([...COLORS, ...SHADES], { undefined: "" }),
     ),
     textSize: selectFactory(
       "textSize",
