@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 
-import { Generic, HelpersProps } from "src/base";
-import { Colors } from "src/base/helpers";
-import { canUseDOM, tuple } from "src/utils";
+import { Generic, HelpersProps } from "../../base";
+import { Colors } from "../../base/helpers";
+import { canUseDOM, tuple } from "../../utils";
 import { NavbarContext } from "./navbar-context";
 
 export const NAVBAR_FIXED_ALIGNMENTS = tuple("top", "bottom");

@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 
-import { Generic, HelpersProps } from "src/base";
-import { combineRefs, tuple } from "src/utils";
+import { Generic, HelpersProps } from "../../base";
+import { combineRefs, tuple } from "../../utils";
 import { DropdownContext } from "./dropdown-context";
 
 export const DROPDOWN_ALIGNMENTS = tuple("right");

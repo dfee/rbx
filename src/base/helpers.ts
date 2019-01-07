@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import { Omit, Prefer } from "src/types";
-import { tuple } from "src/utils";
+import { Omit, Prefer } from "../types";
+import { tuple } from "../utils";
 
 /**
  * Float
@@ -499,7 +499,8 @@ export const transformResponsiveHelpers: TransformFunc<
 /**
  * Union of helpers
  */
-export type HelpersPropsOverrides = {};
+// tslint:disable-next-line: no-empty-interface
+export interface HelpersPropsOverrides {}
 
 export type HelpersProps = Prefer<
   HelpersPropsOverrides,

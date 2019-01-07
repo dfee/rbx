@@ -1,7 +1,7 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { canUseDOM } from "src/utils";
+import { canUseDOM } from "../../utils";
 import { ModalContextValue } from "./modal-context";
 import { ModalPortal } from "./modal-portal";
 

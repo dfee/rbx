@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 
-import { Prefer } from "src/types";
+import { Prefer } from "../types";
 
 export interface ForwardRefAsExoticComponent<
   TOwnProps,

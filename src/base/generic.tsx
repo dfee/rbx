@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 
-import { renderablePropType } from "src/prop-types-extensions";
+import { renderablePropType } from "../prop-types-extensions";
 import { forwardRefAs } from "./exotic";
 import { HelpersProps } from "./helpers";
 import { ThemeContext } from "./theme";

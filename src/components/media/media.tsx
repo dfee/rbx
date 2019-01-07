@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { MediaItem } from "./media-item";
 
 export type MediaProps = HelpersProps;

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { HelpersProps, TransformFunc, transformHelpers } from "./helpers";
 
 export interface ThemeContextValue<T = HelpersProps> {

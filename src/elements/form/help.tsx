@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "src/base";
-import { Colors, COLORS } from "src/base/helpers";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Colors, COLORS } from "../../base/helpers";
 
 export type HelpModifierProps = Partial<{
   color: Colors;

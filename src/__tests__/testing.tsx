@@ -3,7 +3,7 @@ import crypto from "crypto";
 import classNames from "classnames";
 import * as Enzyme from "enzyme";
 import * as PropTypes from "prop-types";
-import * as React from "react";
+import React from "react";
 
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
 import {

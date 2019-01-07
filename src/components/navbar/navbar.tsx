@@ -1,9 +1,9 @@
 import * as PropTypes from "prop-types";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs } from "src/base";
-import { COLORS } from "src/base/helpers";
-import { Omit } from "src/types";
+import { forwardRefAs } from "../../base";
+import { COLORS } from "../../base/helpers";
+import { Omit } from "../../types";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
 import {

@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 
-import { Generic } from "src/base";
+import { Generic } from "../../base";
 import { initialValue, ModalContext, ModalContextValue } from "./modal-context";
 
 export type ModalPortalModifierProps = Partial<{

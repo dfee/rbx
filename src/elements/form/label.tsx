@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "src/base";
-import { tuple } from "src/utils";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { tuple } from "../../utils";
 import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
 

@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "src/base";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { CardHeaderIcon } from "./card-header-icon";
 import { CardHeaderTitle } from "./card-header-title";
 

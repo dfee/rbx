@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "src/base";
-import { Delete } from "src/elements";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Delete } from "../../elements";
 import { ModalContext, ModalContextValue } from "./modal-context";
 
 export type ModalCardHeadProps = HelpersProps;

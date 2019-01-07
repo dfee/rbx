@@ -45,10 +45,7 @@
       "options": { "ignore-module": "(\\.sass)$" },
       "severity": "default"
     },
-    "no-relative-imports": {
-      "options": ["allow-siblings"],
-      "severity": "default"
-    },
+    "no-relative-imports": false,
     // We want to allow JSDoc
     // https://github.com/Microsoft/tslint-microsoft-contrib/issues/385
     "no-single-line-block-comment": false,

@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "src/base";
-import { Breakpoints, BREAKPOINTS } from "src/base/helpers";
-import { tuple } from "src/utils";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
+import { tuple } from "../../utils";
 
 export const COLUMN_SIZES = tuple(
   1,

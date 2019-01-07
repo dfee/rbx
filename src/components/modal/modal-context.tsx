@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from "react";
 
-import { noop } from "src/utils";
+import { noop } from "../../utils";
 
 export interface ModalContextValue {
   closeOnBlur: boolean;

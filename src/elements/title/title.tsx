@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
-import * as React from "react";
+import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "src/base";
-import { tuple } from "src/utils";
+import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { tuple } from "../../utils";
 
 export const TITLE_SIZES = tuple(1, 2, 3, 4, 5, 6);
 export type TitleSizes = (typeof TITLE_SIZES)[number];

@@ -11,15 +11,12 @@
     "noUnusedLocals": true,
     "plugins": [{ "name": "typescript-tslint-plugin" }],
     "removeComments": true,
-    "rootDirs": ["src"],
     "sourceMap": true,
     "strictNullChecks": true,
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es6"
   },
-  // "include": ["src"],
-  // "exclude": ["node_modules", "dist", "docs"]
   "include": ["src", "docs"],
   "exclude": ["node_modules", "dist", "docs/build"]
 }
