@@ -1,11 +1,10 @@
-import sass from "rollup-plugin-sass";
 import { sizeSnapshot } from "rollup-plugin-size-snapshot";
 import sourceMaps from "rollup-plugin-sourcemaps";
-import typescript from "rollup-plugin-typescript2";
+import resolve from "rollup-plugin-node-resolve";
 
 import pkg from "./package.json";
 
-const input = "./src/index.ts";
+const input = "dist/index.js";
 
 const globals = {
   react: "React",
@@ -22,31 +21,11 @@ export default {
   ],
   output: [
     {
-      file: pkg.module,
-      format: "es",
-      globals,
-      sourcemap: true
-    },
-    {
-      file: pkg.main,
+      file: "dist/index.cjs.js",
       format: "cjs",
       globals,
       sourcemap: true
     }
   ],
-  plugins: [
-    typescript({
-      tsconfig: "tsconfig.json",
-      tsconfigOverride: {
-        compilerOptions: {
-          declaration: true
-        },
-        include: ["src"],
-        exclude: ["node_modules", "dist", "docs", "**/__tests__"]
-      }
-    }),
-    sass({ output: "dist/index.css" }),
-    sizeSnapshot(),
-    sourceMaps()
-  ]
+  plugins: [resolve(), sizeSnapshot(), sourceMaps()]
 };
