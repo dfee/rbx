@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers";
+import { Colors, COLORS } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 
 export const ICON_ALIGNMENTS = tuple("left", "right");

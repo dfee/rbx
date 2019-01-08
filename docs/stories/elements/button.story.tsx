@@ -15,7 +15,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import { Button, Icon } from "src/elements";
 import {
   BUTTON_SIZES,

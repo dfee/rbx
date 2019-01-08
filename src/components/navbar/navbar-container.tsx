@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 import { Generic, HelpersProps } from "../../base";
-import { Colors } from "../../base/helpers";
+import { Colors } from "../../base/helpers/variables";
 import { canUseDOM, tuple } from "../../utils";
 import { NavbarContext } from "./navbar-context";
 

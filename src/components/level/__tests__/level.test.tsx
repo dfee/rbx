@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "src/base/helpers";
+import { BREAKPOINTS } from "src/base/helpers/responsive";
 import { Level } from "src/components/level/level";
 import { LevelItem } from "src/components/level/level-item";
 import { LevelLeft } from "src/components/level/level-left";

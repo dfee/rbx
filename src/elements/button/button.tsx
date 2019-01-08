@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { COLORS, Colors } from "../../base/helpers";
+import { COLORS, Colors } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 import { ButtonGroup } from "./button-group";
 

@@ -2,7 +2,8 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { BREAKPOINTS, Colors } from "src/base/helpers";
+import { BREAKPOINTS } from "src/base/helpers/responsive";
+import { Colors } from "src/base/helpers/variables";
 import { Box, Notification, Title } from "src/elements";
 import { Columns } from "src/grid";
 import {

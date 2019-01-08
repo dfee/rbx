@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers";
+import { Breakpoints, BREAKPOINTS } from "../../base/helpers/responsive";
 import { LevelItem } from "./level-item";
 import { LevelLeft } from "./level-left";
 import { LevelRight } from "./level-right";

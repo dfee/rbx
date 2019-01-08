@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "src/base/helpers";
+import { BREAKPOINTS } from "src/base/helpers/responsive";
 import { Column } from "src/grid/columns/column";
 import { Columns, COLUMNS_GAP_SIZES } from "src/grid/columns/columns";
 

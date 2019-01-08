@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import {
   Progress,
   PROGRESS_SIZES,

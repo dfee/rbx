@@ -1,4 +1,4 @@
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import { File, FILE_ALIGNMENTS, FILE_SIZES } from "src/elements/form/file";
 
 import {

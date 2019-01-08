@@ -1,4 +1,4 @@
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import {
   Button,
   BUTTON_SIZES,

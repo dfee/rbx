@@ -1,4 +1,4 @@
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import { Icon, ICON_ALIGNMENTS, ICON_SIZES } from "src/elements/icon/icon";
 
 import {

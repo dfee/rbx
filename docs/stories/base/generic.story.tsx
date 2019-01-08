@@ -2,17 +2,16 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Generic } from "src/base";
+import { FLOAT_PULLED_ALIGNMENTS } from "src/base/helpers/float";
+import { BREAKPOINTS } from "src/base/helpers/responsive";
 import {
-  BREAKPOINTS,
-  COLORS,
-  DISPLAYS,
-  FLOAT_PULLED_ALIGNMENTS,
-  SHADES,
   TEXT_ALIGNMENTS,
   TEXT_SIZES,
   TEXT_TRANSFORMS,
   TEXT_WEIGHTS,
-} from "src/base/helpers";
+} from "src/base/helpers/typography";
+import { COLORS, SHADES } from "src/base/helpers/variables";
+import { DISPLAYS } from "src/base/helpers/visibility";
 import { Card } from "src/components";
 import { Notification } from "src/elements";
 import { Section } from "src/layout";

@@ -1,4 +1,4 @@
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import { Message, MESSAGE_SIZES } from "src/components/message/message";
 import { MessageBody } from "src/components/message/message-body";
 import { MessageHeader } from "src/components/message/message-header";

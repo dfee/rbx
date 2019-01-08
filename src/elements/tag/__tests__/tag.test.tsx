@@ -1,4 +1,4 @@
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import { Tag, TAG_SIZES } from "src/elements/tag/tag";
 import { TagGroup } from "src/elements/tag/tag-group";
 

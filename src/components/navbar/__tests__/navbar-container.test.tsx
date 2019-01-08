@@ -1,7 +1,7 @@
 import * as Enzyme from "enzyme";
 import * as React from "react";
 
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,

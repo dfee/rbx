@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "src/base/helpers";
+import { BREAKPOINTS } from "src/base/helpers/responsive";
 import { Container } from "src/elements/container/container";
 
 import {

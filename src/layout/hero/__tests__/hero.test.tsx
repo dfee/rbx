@@ -1,4 +1,4 @@
-import { COLORS } from "src/base/helpers";
+import { COLORS } from "src/base/helpers/variables";
 import { Hero, HERO_SIZES } from "src/layout/hero/hero";
 import { HeroBody } from "src/layout/hero/hero-body";
 import { HeroFoot } from "src/layout/hero/hero-foot";
