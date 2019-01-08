@@ -1,13 +1,12 @@
 ### Running
 
-`npm run docs:core:dev`
-`npm run docs:storybook:dev`
+`make run_core`
+`make run_storybook`
 
 ### Build
 
-`npm run docs:core:build`
-`npm run docs:storybook:build`
+`make`
 
 ### Deploy
 
-`npm run docs:deploy`
+`make publish`

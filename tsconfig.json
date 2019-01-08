@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "jsx": "react",
+    "importHelpers": true,
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
     "noErrorTruncation": true,
@@ -18,5 +19,5 @@
     "target": "es6"
   },
   "include": ["src", "docs"],
-  "exclude": ["node_modules", "dist", "docs/build"]
+  "exclude": ["node_modules", "dist", "docs/dist"]
 }

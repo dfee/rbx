@@ -38,9 +38,9 @@
     }
   },
   "dist/index.cjs.js": {
-    "bundled": 125209,
-    "minified": 87701,
-    "gzipped": 11691
+    "bundled": 79062,
+    "minified": 54439,
+    "gzipped": 10005
   },
   "dist/rbx.esm.js": {
     "bundled": 87646,
