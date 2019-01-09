@@ -7,13 +7,13 @@ import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
 export const MEDIA_ITEM_DEFAULTS = {
-  positions: tuple("content", "left", "right"),
+  alignments: tuple("content", "left", "right"),
 };
 
 export interface MediaItemVariablesOverrides {}
 
 export interface MediaItemVariablesDefaults {
-  positions: (typeof MEDIA_ITEM_DEFAULTS["positions"])[number];
+  alignments: (typeof MEDIA_ITEM_DEFAULTS["alignments"])[number];
 }
 
 export type MediaItemVariables = Prefer<
@@ -22,27 +22,27 @@ export type MediaItemVariables = Prefer<
 >;
 
 export type MediaItemModifierProps = Partial<{
-  position: MediaItemVariables["positions"];
+  align: MediaItemVariables["alignments"];
 }>;
 
 export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 
 const propTypes = {
-  position: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const MediaItem = Object.assign(
   forwardRefAs<MediaItemProps, "div">(
-    ({ className, position, ...rest }, ref) => (
+    ({ align, className, ...rest }, ref) => (
       <Generic
-        className={classNames({ [`media-${position}`]: position }, className)}
+        className={classNames({ [`media-${align}`]: align }, className)}
         ref={ref}
         {...rest}
       />
     ),
     {
+      align: "content",
       as: "div",
-      position: "content",
     },
   ),
   { propTypes },

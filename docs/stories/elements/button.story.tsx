@@ -255,8 +255,8 @@ storiesOf("Elements/Button", module)
       </Section>
 
       <Section>
-        {BUTTON_GROUP_DEFAULTS.positions.map(position => (
-          <Button.Group hasAddons position={position}>
+        {BUTTON_GROUP_DEFAULTS.alignments.map(align => (
+          <Button.Group hasAddons align={align}>
             <Button>Yes</Button>
             <Button>Maybe</Button>
             <Button>No</Button>

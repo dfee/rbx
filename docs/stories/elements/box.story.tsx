@@ -20,7 +20,7 @@ storiesOf("Elements/Box", module)
     return (
       <Box {...props}>
         <Media>
-          <Media.Item position="left">
+          <Media.Item align="left">
             <Image.Container size={64}>
               <Image
                 alt="Image"

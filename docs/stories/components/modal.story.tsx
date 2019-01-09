@@ -68,7 +68,7 @@ storiesOf("Components/Modal", module)
         <Modal.Content>
           <Box>
             <Media>
-              <Media.Item as="figure" position="left">
+              <Media.Item as="figure" align="left">
                 <Image.Container as="p" size={64}>
                   <Image
                     alt="64x64"

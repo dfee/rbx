@@ -22,8 +22,8 @@ const makeNode = makeNodeFactory(COMPONENT);
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: {
+      align: "content",
       as: DEFAULT_ELEMENT,
-      position: "content",
     },
   });
 
@@ -39,14 +39,14 @@ describe(`${COMPONENT_NAME} component`, () => {
   describe("propTypes", () => {
     const { propTypes } = COMPONENT;
 
-    describe("position", () => {
-      validateStringOrNumberPropType(propTypes, "position");
+    describe("align", () => {
+      validateStringOrNumberPropType(propTypes, "align");
 
-      MEDIA_ITEM_DEFAULTS.positions.map(position => {
-        it(`should be ${position}`, () => {
-          const node = makeNode({ position });
+      MEDIA_ITEM_DEFAULTS.alignments.map(align => {
+        it(`should be ${align}`, () => {
+          const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`media-${position}`)).toBe(true);
+          expect(wrapper.hasClass(`media-${align}`)).toBe(true);
         });
       });
     });

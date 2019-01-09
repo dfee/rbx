@@ -49,14 +49,14 @@ describe(`${COMPONENT_NAME} component`, () => {
       });
     });
 
-    describe("position", () => {
-      validateStringOrNumberPropType(propTypes, "position");
+    describe("align", () => {
+      validateStringOrNumberPropType(propTypes, "align");
 
-      BUTTON_GROUP_DEFAULTS.positions.map(position => {
-        it(`should be ${position}`, () => {
-          const node = makeNode({ position });
+      BUTTON_GROUP_DEFAULTS.alignments.map(align => {
+        it(`should be ${align}`, () => {
+          const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`is-${position}`)).toBe(true);
+          expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
     });

@@ -7,13 +7,13 @@ import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
 export const BUTTON_GROUP_DEFAULTS = {
-  positions: tuple("centered", "right"),
+  alignments: tuple("centered", "right"),
 };
 
 export interface ButtonGroupVariablesOverrides {}
 
 export interface ButtonGroupVariablesDefaults {
-  positions: (typeof BUTTON_GROUP_DEFAULTS["positions"])[number];
+  alignments: (typeof BUTTON_GROUP_DEFAULTS["alignments"])[number];
 }
 
 export type ButtonGroupVariables = Prefer<
@@ -23,25 +23,25 @@ export type ButtonGroupVariables = Prefer<
 
 export type ButtonGroupModifierProps = Partial<{
   hasAddons: boolean;
-  position: ButtonGroupVariables["positions"];
+  align: ButtonGroupVariables["alignments"];
 }>;
 
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
 const propTypes = {
   hasAddons: PropTypes.bool,
-  position: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const ButtonGroup = Object.assign(
   forwardRefAs<ButtonGroupProps, "div">(
-    ({ className, hasAddons, position, ...rest }, ref) => (
+    ({ align, className, hasAddons, ...rest }, ref) => (
       <Generic
         className={classNames(
           "buttons",
           {
             "has-addons": hasAddons,
-            [`is-${[position]}`]: position,
+            [`is-${[align]}`]: align,
           },
           className,
         )}
