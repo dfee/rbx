@@ -1,7 +1,7 @@
 import * as Enzyme from "enzyme";
 import * as React from "react";
 
-import { COLORS } from "src/base/helpers/variables";
+import { DEFAULTS } from "src/base/helpers/variables";
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
@@ -106,7 +106,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("color", () => {
-      COLORS.map(color => {
+      DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "src/base/helpers/responsive";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { Column } from "src/grid/columns/column";
 import { Columns, COLUMNS_GAP_SIZES } from "src/grid/columns/columns";
 
@@ -42,9 +42,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("breakpoints", () => {
-      validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
+      validateOneOfPropType(propTypes, "breakpoint", DEFAULTS.breakpoints);
 
-      BREAKPOINTS.map(breakpoint => {
+      DEFAULTS.breakpoints.map(breakpoint => {
         it(`should have breakpoint ${breakpoint}`, () => {
           const node = makeNode({ breakpoint });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -92,7 +92,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         });
       });
 
-      BREAKPOINTS.map(breakpoint => {
+      DEFAULTS.breakpoints.map(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
             ...COLUMNS_GAP_SIZES.map(value => ({

@@ -1,6 +1,6 @@
 import {
-  transformVisibilityHelpers,
-  visibilityHelpersPropTypes,
+  makePropTypes,
+  makeValidatingTransform,
 } from "src/base/helpers/visibility";
 
 import { validateBoolPropType } from "src/__tests__/testing";
@@ -15,24 +15,24 @@ const CNAME = "foo";
 const LOC = "prop";
 
 describe("Visibility helpers", () => {
-  const propTypes = visibilityHelpersPropTypes;
-  const tfunc = transformVisibilityHelpers;
+  const propTypes = makePropTypes();
+  const vtfunc = makeValidatingTransform();
 
   describe("propTypes", () => {
     validateBoolPropType(propTypes, "hidden");
     validateBoolPropType(propTypes, "invisible");
     validateBoolPropType(propTypes, "srOnly");
-    testItShouldUseDefaultLocationProp(tfunc, { hidden: "__UNKNOWN" });
+    testItShouldUseDefaultLocationProp(vtfunc, { hidden: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    testItShouldPreserveUnknown(tfunc);
-    testItShouldNotSetClassNameOnEmpty(tfunc);
-    testItShouldPreserveCustomClassName(tfunc);
+    testItShouldPreserveUnknown(vtfunc);
+    testItShouldNotSetClassNameOnEmpty(vtfunc);
+    testItShouldPreserveCustomClassName(vtfunc);
 
     [false, true].map(hidden => {
       it(`should ${hidden ? "" : "not "}be hidden`, () => {
-        expect(tfunc({ hidden }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ hidden }, CNAME, LOC)).toEqual({
           className: hidden ? "is-hidden" : "",
         });
       });
@@ -40,7 +40,7 @@ describe("Visibility helpers", () => {
 
     [false, true].map(invisible => {
       it(`should ${invisible ? "" : "not "}be invisible`, () => {
-        expect(tfunc({ invisible }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ invisible }, CNAME, LOC)).toEqual({
           className: invisible ? "is-invisible" : "",
         });
       });
@@ -48,7 +48,7 @@ describe("Visibility helpers", () => {
 
     [false, true].map(srOnly => {
       it(`should ${srOnly ? "" : "not "}be srOnly`, () => {
-        expect(tfunc({ srOnly }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ srOnly }, CNAME, LOC)).toEqual({
           className: srOnly ? "is-sr-only" : "",
         });
       });

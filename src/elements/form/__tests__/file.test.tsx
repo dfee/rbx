@@ -1,4 +1,4 @@
-import { COLORS } from "src/base/helpers/variables";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { File, FILE_ALIGNMENTS, FILE_SIZES } from "src/elements/form/file";
 
 import {
@@ -60,9 +60,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", COLORS);
+      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
 
-      COLORS.map(color => {
+      DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

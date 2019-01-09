@@ -1,28 +1,38 @@
 import { Prefer } from "../../types";
-import { TransformFunc } from "./types";
+import { MakeRootValidatingTransformFactory } from "./factory";
 
-import { FloatHelpersProps, transformFloatHelpers } from "./float";
-import { OtherHelpersProps, transformOtherHelpers } from "./other";
-import { OverflowHelpersProps, transformOverflowHelpers } from "./overflow";
-import { OverlayHelpersProps, transformOverlayHelpers } from "./overlay";
 import {
+  FloatHelpersProps,
+  makeValidatingTransform as floatMVT,
+} from "./float";
+import {
+  makeValidatingTransform as otherMVT,
+  OtherHelpersProps,
+} from "./other";
+import {
+  makeValidatingTransform as overflowMVT,
+  OverflowHelpersProps,
+} from "./overflow";
+import {
+  makeValidatingTransform as overlayMVT,
+  OverlayHelpersProps,
+} from "./overlay";
+import {
+  makeValidatingTransform as responsiveMVT,
   ResponsiveHelpersProps,
-  transformResponsiveHelpers,
 } from "./responsive";
 import {
-  transformTypographyHelpers,
+  makeValidatingTransform as typographyMVT,
   TypographyHelpersProps,
 } from "./typography";
 import {
-  transformVisibilityHelpers,
+  makeValidatingTransform as visibilityMVT,
   VisibilityHelpersProps,
 } from "./visibility";
 
-export { TransformFunc } from "./types";
+export { TransformFunction } from "./factory";
 
-/**
- * Union of helpers
- */
+/** Union of Helpers */
 // tslint:disable-next-line: no-empty-interface
 export interface HelpersPropsOverrides {}
 
@@ -37,22 +47,14 @@ export type HelpersProps = Prefer<
     ResponsiveHelpersProps & { className?: string }
 >;
 
-export const combineTransformFunctions = <TTransformProps>(
-  ...funcs: TransformFunc<any>[] // tslint:disable-line:no-any
-): TransformFunc<TTransformProps> => (
-  props,
-  componentName,
-  location = "prop",
-) =>
-  // tslint:disable-next-line:no-any
-  funcs.reduce((acc, func) => func(acc, componentName, location) as any, props);
-
-export const transformHelpers = combineTransformFunctions<HelpersProps>(
-  transformFloatHelpers,
-  transformOverflowHelpers,
-  transformOverlayHelpers,
-  transformTypographyHelpers,
-  transformVisibilityHelpers,
-  transformOtherHelpers,
-  transformResponsiveHelpers,
+export const makeRootValidatingTransform = MakeRootValidatingTransformFactory<
+  HelpersProps
+>(
+  floatMVT,
+  overflowMVT,
+  overlayMVT,
+  typographyMVT,
+  visibilityMVT,
+  otherMVT,
+  responsiveMVT,
 );

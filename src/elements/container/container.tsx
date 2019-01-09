@@ -3,17 +3,17 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers/responsive";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 
 export type ContainerModifierProps = Partial<{
-  breakpoint: Breakpoints;
+  breakpoint: Variables["Breakpoints"];
   fluid: boolean;
 }>;
 
 export type ContainerProps = HelpersProps & ContainerModifierProps;
 
 const propTypes = {
-  breakpoint: PropTypes.oneOf(BREAKPOINTS),
+  breakpoint: PropTypes.oneOf(DEFAULTS.breakpoints),
   fluid: PropTypes.bool,
 };
 

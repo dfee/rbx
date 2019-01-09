@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 import { TagGroup } from "./tag-group";
 
@@ -11,7 +11,7 @@ export const TAG_SIZES = tuple("normal", "medium", "large");
 export type TagSizes = (typeof TAG_SIZES)[number];
 
 export type TagModifierProps = Partial<{
-  color: Colors;
+  color: Variables["Colors"];
   delete: boolean; // tslint:disable-line:no-reserved-keywords
   rounded: boolean;
   size: TagSizes;
@@ -20,7 +20,7 @@ export type TagModifierProps = Partial<{
 export type TagProps = HelpersProps & TagModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   delete: PropTypes.bool,
   rounded: PropTypes.bool,
   size: PropTypes.oneOf(TAG_SIZES),

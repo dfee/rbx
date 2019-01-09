@@ -2,7 +2,7 @@ import { select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { BREAKPOINTS } from "src/base/helpers/responsive";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { Container, Notification } from "src/elements";
 import { Section } from "src/layout";
 
@@ -10,7 +10,11 @@ import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   breakapoint: (title: string = "Breakpoint") =>
-    select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(DEFAULTS.breakpoints, { undefined: "" }),
+      "",
+    ),
 };
 
 storiesOf("Elements/Container", module)

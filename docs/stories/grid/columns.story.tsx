@@ -2,8 +2,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { BREAKPOINTS } from "src/base/helpers/responsive";
-import { Colors } from "src/base/helpers/variables";
+import { DEFAULTS, Variables } from "src/base/helpers/variables";
 import { Box, Notification, Title } from "src/elements";
 import { Columns } from "src/grid";
 import {
@@ -18,7 +17,11 @@ import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   breakpoint: (title: string = "Breakpoint") =>
-    select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(DEFAULTS.breakpoints, { undefined: "" }),
+      "",
+    ),
   gap: (title: string = "Gap") =>
     select(
       title,
@@ -28,7 +31,7 @@ export const knobs = {
   gapless: (title: string = "Gapless") => boolean(title, false),
 };
 
-type ColumnNotificationProps = ColumnProps & { color?: Colors };
+type ColumnNotificationProps = ColumnProps & { color?: Variables["Colors"] };
 const ColumnNotification: React.FC<ColumnNotificationProps> = props => {
   const { color, children, ...rest } = props;
 

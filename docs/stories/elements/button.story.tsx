@@ -15,7 +15,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { COLORS } from "src/base/helpers/variables";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { Button, Icon } from "src/elements";
 import {
   BUTTON_SIZES,
@@ -62,7 +62,7 @@ storiesOf("Elements/Button", module)
 
     return (
       <Button.Group>
-        {COLORS.map(color => (
+        {DEFAULTS.colors.map(color => (
           <Button
             color={color}
             onClick={action("Button Click")}

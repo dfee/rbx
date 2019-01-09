@@ -6,12 +6,12 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
+import { HelpersProps } from "src/base/helpers";
+import { ValidatingTransformFunction } from "src/base/helpers/factory";
 import {
-  HelpersProps,
-  TransformFunc,
-  transformHelpers,
-} from "src/base/helpers";
-import { ThemeContextValue } from "src/base/theme";
+  initialValue as themeInitialValue,
+  ThemeContextValue,
+} from "src/base/theme";
 
 export const contextManager = <
   TContext extends object,
@@ -246,7 +246,7 @@ export const makeNodeFactory = <
  */
 export const makeGenericHOCShallowWrapperInContextConsumer = (
   node: JSX.Element,
-  themeContextValue: ThemeContextValue = { transform: transformHelpers },
+  themeContextValue: ThemeContextValue = themeInitialValue,
 ) => {
   const forwardRefWrapper = Enzyme.shallow(node);
   const themeContextConsumerWrapper = forwardRefWrapper.dive();
@@ -382,7 +382,7 @@ export const testThemeIntegration = (
         foo: PropTypes.oneOf(["bar", "baz"]),
       };
 
-      const transform: TransformFunc<CustomHelpersProps> = (
+      const transform: ValidatingTransformFunction<CustomHelpersProps> = (
         props,
         componentName,
         location = "prop",

@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 import { SelectOption } from "./select-option";
 
@@ -14,7 +14,7 @@ export const SELECT_CONTAINER_STATES = tuple("focused", "hovered", "loading");
 export type SelectContainerStates = (typeof SELECT_CONTAINER_STATES)[number];
 
 export type SelectContainerModifierProps = Partial<{
-  color: Colors;
+  color: Variables["Colors"];
   fullwidth: boolean;
   rounded: boolean;
   size: SelectContainerSizes;
@@ -24,7 +24,7 @@ export type SelectContainerModifierProps = Partial<{
 export type SelectContainerProps = HelpersProps & SelectContainerModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   fullwidth: PropTypes.bool,
   rounded: PropTypes.bool,
   size: PropTypes.oneOf(SELECT_CONTAINER_SIZES),

@@ -3,19 +3,19 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers/responsive";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { LevelItem } from "./level-item";
 import { LevelLeft } from "./level-left";
 import { LevelRight } from "./level-right";
 
 export type LevelModifierProps = Partial<{
-  breakpoint: Breakpoints;
+  breakpoint: Variables["Breakpoints"];
 }>;
 
 export type LevelProps = HelpersProps & LevelModifierProps;
 
 const propTypes = {
-  breakpoint: PropTypes.oneOf(BREAKPOINTS),
+  breakpoint: PropTypes.oneOf(DEFAULTS.breakpoints),
 };
 
 export const Level = Object.assign(

@@ -30,9 +30,9 @@ publish:
 	@echo "Publishing to NPM"
 	@cd $(BUILD_DIR) && npm publish
 
-test: test_lint test_unit
+test: lint test_unit
 
-test_lint:
+lint:
 	@echo "Running linter"
 	@npx tslint --project .
 
@@ -55,8 +55,8 @@ help:
 	@echo "  \`make build_pre\`:        create <BUILD_DIR>"
 
 	@echo "\nTEST"
-	@echo "  \`make test\`:             test all"
-	@echo "  \`make test_lint\`:        run tslint"
+	@echo "  \`make test\`:             test all (lint & unit)"
+	@echo "  \`make lint\`:             run tslint"
 	@echo "  \`make test_unit\`:        run jest unit tests"
 
 	@echo "\nETC"

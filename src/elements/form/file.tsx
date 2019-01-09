@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 
 import { FileCTA } from "./file-cta";
@@ -21,7 +21,7 @@ export type FileSizes = (typeof FILE_SIZES)[number];
 export type FileModifierProps = Partial<{
   align: FileAlignmnts;
   boxed: boolean;
-  color: Colors;
+  color: Variables["Colors"];
   fullwidth: boolean;
   hasName: boolean;
   size: FileSizes;
@@ -32,7 +32,7 @@ export type FileProps = HelpersProps & FileModifierProps;
 const propTypes = {
   align: PropTypes.oneOf(FILE_ALIGNMENTS),
   boxed: PropTypes.bool,
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   fullwidth: PropTypes.bool,
   hasName: PropTypes.bool,
   size: PropTypes.oneOf(FILE_SIZES),

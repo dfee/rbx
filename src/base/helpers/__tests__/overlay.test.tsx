@@ -1,6 +1,6 @@
 import {
-  overlayHelpersPropTypes,
-  transformOverlayHelpers,
+  makePropTypes,
+  makeValidatingTransform,
 } from "src/base/helpers/overlay";
 
 import { validateBoolPropType } from "src/__tests__/testing";
@@ -15,22 +15,22 @@ const CNAME = "foo";
 const LOC = "prop";
 
 describe("Overlay helpers", () => {
-  const propTypes = overlayHelpersPropTypes;
-  const tfunc = transformOverlayHelpers;
+  const propTypes = makePropTypes();
+  const vtfunc = makeValidatingTransform();
 
   describe("propTypes", () => {
     validateBoolPropType(propTypes, "overlay");
-    testItShouldUseDefaultLocationProp(tfunc, { overlay: "__UNKNOWN" });
+    testItShouldUseDefaultLocationProp(vtfunc, { overlay: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    testItShouldPreserveUnknown(tfunc);
-    testItShouldNotSetClassNameOnEmpty(tfunc);
-    testItShouldPreserveCustomClassName(tfunc);
+    testItShouldPreserveUnknown(vtfunc);
+    testItShouldNotSetClassNameOnEmpty(vtfunc);
+    testItShouldPreserveCustomClassName(vtfunc);
 
     [false, true].map(overlay => {
       it(`should ${overlay ? "" : "not "}be overlay`, () => {
-        expect(tfunc({ overlay }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ overlay }, CNAME, LOC)).toEqual({
           className: overlay ? "is-overlay" : "",
         });
       });

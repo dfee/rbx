@@ -1,10 +1,8 @@
 import {
-  BREAKPOINTS,
-  responsiveHelpersPropTypes,
-  transformResponsiveHelpers,
+  makePropTypes,
+  makeValidatingTransform,
 } from "src/base/helpers/responsive";
-import { TEXT_ALIGNMENTS, TEXT_SIZES } from "src/base/helpers/typography";
-import { DISPLAYS } from "src/base/helpers/visibility";
+import { DEFAULTS } from "src/base/helpers/variables";
 
 import { validatePropType } from "src/__tests__/testing";
 import {
@@ -17,9 +15,13 @@ import {
 const CNAME = "foo";
 const LOC = "prop";
 
+/** these sizes support the `only` prop. */
+const checkIsLimited = (breakpoint: string) =>
+  (DEFAULTS.breakpointsLimited as string[]).indexOf(breakpoint) !== -1;
+
 describe("Responsive modifiers", () => {
-  const propTypes = responsiveHelpersPropTypes;
-  const tfunc = transformResponsiveHelpers;
+  const propTypes = makePropTypes();
+  const vtfunc = makeValidatingTransform();
 
   describe("propTypes", () => {
     validatePropType(propTypes, "responsive", [
@@ -27,68 +29,73 @@ describe("Responsive modifiers", () => {
       { value: "string", valid: false },
     ]);
 
-    BREAKPOINTS.map(rvalue =>
+    DEFAULTS.breakpoints.map(breakpoint => {
+      const isLimited = checkIsLimited(breakpoint);
+
       validatePropType(propTypes, "responsive", [
-        ...DISPLAYS.map(value => ({
+        ...DEFAULTS.displays.map(value => ({
           valid: true,
-          value: { [rvalue]: { display: { value } } },
+          value: { [breakpoint]: { display: { value } } },
         })),
         {
           error: new RegExp(
-            `Warning.+Failed prop.+ \`responsive.${rvalue}.display.value\``,
+            `Warning.+Failed prop.+ \`responsive.${breakpoint}.display.value\``,
           ),
           valid: false,
-          value: { [rvalue]: { display: { value: "other" } } },
+          value: { [breakpoint]: { display: { value: "other" } } },
         },
         {
           error: new RegExp(
-            `Warning.+Failed prop.+ \`responsive.${rvalue}.display.value\`.+required`,
+            `Warning.+Failed prop.+ \`responsive.${breakpoint}.display.value\`.+required`,
           ),
           valid: false,
-          value: { [rvalue]: { display: {} } },
+          value: { [breakpoint]: { display: {} } },
         },
-      ]),
-    );
+      ]);
 
-    ["tablet", "desktop", "widescreen"].map(rvalue =>
-      validatePropType(propTypes, "responsive", [
-        ...[false, true].map(value => ({
-          valid: true,
-          value: { [rvalue]: { display: { value: "block", only: value } } },
-        })),
-        {
-          error: new RegExp(
-            `Warning.+Failed prop.+ \`responsive.${rvalue}.display.only\``,
-          ),
-          valid: false,
-          value: { [rvalue]: { display: { value: "block", only: "string" } } },
-        },
-      ]),
-    );
+      if (!isLimited) {
+        validatePropType(propTypes, "responsive", [
+          ...[false, true].map(value => ({
+            valid: true,
+            value: {
+              [breakpoint]: { display: { value: "block", only: value } },
+            },
+          })),
+          {
+            error: new RegExp(
+              `Warning.+Failed prop.+ \`responsive.${breakpoint}.display.only\``,
+            ),
+            valid: false,
+            value: {
+              [breakpoint]: { display: { value: "block", only: "string" } },
+            },
+          },
+        ]);
+      }
+    });
 
-    testItShouldUseDefaultLocationProp(tfunc, { responsive: "__UNKNOWN" });
+    testItShouldUseDefaultLocationProp(vtfunc, { responsive: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    testItShouldPreserveUnknown(tfunc);
-    testItShouldNotSetClassNameOnEmpty(tfunc);
-    testItShouldPreserveCustomClassName(tfunc);
+    testItShouldPreserveUnknown(vtfunc);
+    testItShouldNotSetClassNameOnEmpty(vtfunc);
+    testItShouldPreserveCustomClassName(vtfunc);
 
     // tslint:disable-next-line:max-func-body-length
-    BREAKPOINTS.map(breakpoint => {
-      // these sizes don't support the `only` prop.
-      const noOnly = ["mobile", "fullhd", "desktop"];
+    DEFAULTS.breakpoints.map(breakpoint => {
+      const isLimited = checkIsLimited(breakpoint);
 
       describe(`for ${breakpoint}`, () => {
-        DISPLAYS.map(value =>
+        DEFAULTS.displays.map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.indexOf(breakpoint) !== -1)
+            .filter(() => !isLimited)
             .map(only => {
               const isOnly = only === true;
               it(`should be display ${value} ${isOnly ? "only" : ""}`, () => {
                 const display = isOnly ? { only, value } : { value };
                 expect(
-                  tfunc(
+                  vtfunc(
                     {
                       responsive: { [breakpoint]: { display } },
                     },
@@ -104,7 +111,7 @@ describe("Responsive modifiers", () => {
 
         [false, true].map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.indexOf(breakpoint) !== -1)
+            .filter(() => !isLimited)
             .map(only => {
               const isOnly = only === true;
               it(`should ${value ? "" : "not "}be hidden ${
@@ -112,7 +119,7 @@ describe("Responsive modifiers", () => {
               }`, () => {
                 const hide = isOnly ? { only, value } : { value };
                 expect(
-                  tfunc({ responsive: { [breakpoint]: { hide } } }, CNAME, LOC),
+                  vtfunc({ responsive: { [breakpoint]: { hide } } }, CNAME, LOC),
                 ).toEqual({
                   className: value
                     ? `is-hidden-${breakpoint}${isOnly ? "-only" : ""}`
@@ -122,9 +129,9 @@ describe("Responsive modifiers", () => {
             }),
         );
 
-        TEXT_ALIGNMENTS.map(value =>
+        DEFAULTS.textAlignments.map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.indexOf(breakpoint) !== -1)
+            .filter(() => !isLimited)
             .map(only => {
               const isOnly = only === true;
               it(`should have text aligned ${value} ${
@@ -133,7 +140,7 @@ describe("Responsive modifiers", () => {
                 const textAlignment =
                   only === isOnly ? { only, value } : { value };
                 expect(
-                  tfunc(
+                  vtfunc(
                     { responsive: { [breakpoint]: { textAlignment } } },
                     CNAME,
                     LOC,
@@ -147,9 +154,9 @@ describe("Responsive modifiers", () => {
             }),
         );
 
-        TEXT_SIZES.map(value =>
+        DEFAULTS.textSizes.map(value =>
           [undefined, false, true]
-            .filter(() => noOnly.indexOf(breakpoint) !== -1)
+            .filter(() => !isLimited)
             .map(only => {
               const isOnly = only === true;
               it(`should have text size ${value} ${
@@ -157,7 +164,7 @@ describe("Responsive modifiers", () => {
               }`, () => {
                 const textSize = only === isOnly ? { only, value } : { value };
                 expect(
-                  tfunc(
+                  vtfunc(
                     { responsive: { [breakpoint]: { textSize } } },
                     CNAME,
                     LOC,

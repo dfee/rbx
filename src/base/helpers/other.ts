@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import { TransformFunc } from "./types";
+import {
+  makePropTypesFactory,
+  makeValidatingTransformFactory,
+  TransformFunction,
+} from "./factory";
 
-/**
- * Other
- * https://github.com/jgthms/bulma/blob/master/sass/base/helpers.sass
- */
 export type OtherHelpersProps = Partial<{
   /** Removes any margin */
   marginless: boolean;
@@ -20,27 +20,17 @@ export type OtherHelpersProps = Partial<{
   unselectable: boolean;
 }>;
 
-export const otherHelpersPropTypes = {
+// Factories
+export const makePropTypes = makePropTypesFactory(vars => ({
   marginless: PropTypes.bool,
   paddingless: PropTypes.bool,
   radiusless: PropTypes.bool,
   shadowless: PropTypes.bool,
   unselectable: PropTypes.bool,
-};
+}));
 
-export const transformOtherHelpers: TransformFunc<OtherHelpersProps> = (
-  props,
-  componentName,
-  location = "prop",
-) => {
-  PropTypes.checkPropTypes(
-    otherHelpersPropTypes,
-    props,
-    location,
-    componentName,
-  );
+export const transform: TransformFunction<OtherHelpersProps> = props => {
   const {
-    className,
     marginless,
     paddingless,
     radiusless,
@@ -48,18 +38,25 @@ export const transformOtherHelpers: TransformFunc<OtherHelpersProps> = (
     unselectable,
     ...rest
   } = props;
+  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
+  // https://github.com/Microsoft/TypeScript/pull/29121
+  // tslint:disable:no-any
+  // tslint:disable:no-unsafe-any
+  (rest as any).className = classNames(
+    {
+      "is-marginless": marginless,
+      "is-paddingless": paddingless,
+      "is-radiusless": radiusless,
+      "is-shadowless": shadowless,
+      "is-unselectable": unselectable,
+    },
+    (rest as any).className,
+  );
 
-  return {
-    className: classNames(
-      {
-        "is-marginless": marginless,
-        "is-paddingless": paddingless,
-        "is-radiusless": radiusless,
-        "is-shadowless": shadowless,
-        "is-unselectable": unselectable,
-      },
-      className,
-    ),
-    ...rest,
-  };
+  return rest;
 };
+
+export const makeValidatingTransform = makeValidatingTransformFactory(
+  makePropTypes,
+  transform,
+);

@@ -3,16 +3,16 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 
 export type HelpModifierProps = Partial<{
-  color: Colors;
+  color: Variables["Colors"];
 }>;
 
 export type HelpProps = HelpersProps & HelpModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
 };
 
 export const Help = Object.assign(

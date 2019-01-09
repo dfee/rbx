@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers/responsive";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 
 export const COLUMN_SIZES = tuple(
@@ -55,15 +55,18 @@ const ColumnSizeModifierPropTypes = {
 };
 
 export type ColumnModifierProps = Partial<
-  { [B in Breakpoints]: ColumnSizeModifierProps } & ColumnSizeModifierProps
+  { [B in Variables["Breakpoints"]]: ColumnSizeModifierProps } &
+    ColumnSizeModifierProps
 >;
 
 export type ColumnProps = HelpersProps & ColumnModifierProps;
 
 const propTypes = {
-  ...BREAKPOINTS.map(breakpoint => ({
-    [breakpoint]: PropTypes.shape(ColumnSizeModifierPropTypes),
-  })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+  ...DEFAULTS.breakpoints
+    .map(breakpoint => ({
+      [breakpoint]: PropTypes.shape(ColumnSizeModifierPropTypes),
+    }))
+    .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
   ...ColumnSizeModifierPropTypes,
 };
 
@@ -105,7 +108,8 @@ export const Column = Object.assign(
             },
             Object.keys(breakpoints)
               .map(breakpoint => {
-                const value = breakpoints[breakpoint as Breakpoints];
+                const value =
+                  breakpoints[breakpoint as Variables["Breakpoints"]];
 
                 return value === undefined
                   ? {}

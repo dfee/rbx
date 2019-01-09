@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 
 export const INPUT_SIZES = tuple("small", "medium", "large");
@@ -26,7 +26,7 @@ export const INPUT_TYPES = tuple(
 export type InputTypes = (typeof INPUT_TYPES)[number];
 
 export type InputModifierProps = Partial<{
-  color: Colors;
+  color: Variables["Colors"];
   readOnly: React.InputHTMLAttributes<HTMLInputElement>["readOnly"];
   rounded: boolean;
   size: InputSizes;
@@ -38,7 +38,7 @@ export type InputModifierProps = Partial<{
 export type InputProps = HelpersProps & InputModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   readOnly: PropTypes.bool,
   rounded: PropTypes.bool,
   size: PropTypes.oneOf(INPUT_SIZES),

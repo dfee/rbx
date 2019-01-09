@@ -1,4 +1,4 @@
-import { transformHelpers } from "src/base/helpers";
+import { makeRootValidatingTransform } from "src/base/helpers";
 
 import {
   testItShouldNotSetClassNameOnEmpty,
@@ -11,50 +11,51 @@ const LOC = "prop";
 
 describe("Modifiers", () => {
   describe("transform", () => {
-    const tfunc = transformHelpers;
-    testItShouldPreserveUnknown(tfunc);
-    testItShouldNotSetClassNameOnEmpty(tfunc);
-    testItShouldPreserveCustomClassName(tfunc);
+    const rvtfunc = makeRootValidatingTransform();
+
+    testItShouldPreserveUnknown(rvtfunc);
+    testItShouldNotSetClassNameOnEmpty(rvtfunc);
+    testItShouldPreserveCustomClassName(rvtfunc);
 
     it("should apply float transforms", () => {
-      expect(tfunc({ clearfix: true }, CNAME, LOC)).toEqual({
+      expect(rvtfunc({ clearfix: true }, CNAME, LOC)).toEqual({
         className: "is-clearfix",
       });
     });
 
     it("should apply overflow transforms", () => {
-      expect(tfunc({ clipped: true }, CNAME, LOC)).toEqual({
+      expect(rvtfunc({ clipped: true }, CNAME, LOC)).toEqual({
         className: "is-clipped",
       });
     });
 
     it("should apply overlay transforms", () => {
-      expect(tfunc({ overlay: true }, CNAME, LOC)).toEqual({
+      expect(rvtfunc({ overlay: true }, CNAME, LOC)).toEqual({
         className: "is-overlay",
       });
     });
 
     it("should apply typography transforms", () => {
-      expect(tfunc({ textSize: 1 }, CNAME, LOC)).toEqual({
+      expect(rvtfunc({ textSize: 1 }, CNAME, LOC)).toEqual({
         className: "is-size-1",
       });
     });
 
     it("should apply visibility transforms", () => {
-      expect(tfunc({ hidden: true }, CNAME, LOC)).toEqual({
+      expect(rvtfunc({ hidden: true }, CNAME, LOC)).toEqual({
         className: "is-hidden",
       });
     });
 
     it("should apply other transforms", () => {
-      expect(tfunc({ marginless: true }, CNAME, LOC)).toEqual({
+      expect(rvtfunc({ marginless: true }, CNAME, LOC)).toEqual({
         className: "is-marginless",
       });
     });
 
     it("should apply responsive transforms", () => {
       expect(
-        tfunc(
+        rvtfunc(
           { responsive: { mobile: { textSize: { value: 1 } } } },
           CNAME,
           LOC,

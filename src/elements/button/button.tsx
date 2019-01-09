@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { COLORS, Colors } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 import { ButtonGroup } from "./button-group";
 
@@ -14,7 +14,7 @@ export const BUTTON_STATES = tuple("hovered", "focused", "active", "loading");
 export type ButtonStates = (typeof BUTTON_STATES)[number];
 
 export type ButtonModifierProps = Partial<{
-  color: Colors;
+  color: Variables["Colors"];
   disabled: boolean;
   fullwidth: boolean;
   inverted: boolean;
@@ -30,7 +30,7 @@ export type ButtonModifierProps = Partial<{
 export type ButtonProps = HelpersProps & ButtonModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   disabled: PropTypes.bool,
   fullwidth: PropTypes.bool,
   inverted: PropTypes.bool,

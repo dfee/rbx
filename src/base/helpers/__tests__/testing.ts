@@ -1,12 +1,14 @@
-import { TransformFunc } from "src/base/helpers/types";
+import { ValidatingTransformFunction } from "src/base/helpers/factory";
 
 import { withMockError } from "src/__tests__/testing";
 
 const CNAME = "foo";
 const LOC = "prop";
 
-// tslint:disable-next-line:no-any
-export const testItShouldPreserveUnknown = (tfunc: TransformFunc<any>) => {
+export const testItShouldPreserveUnknown = (
+  // tslint:disable-next-line:no-any
+  tfunc: ValidatingTransformFunction<any>,
+) => {
   it("should preserve unknown props", () => {
     const props = { foo: "bar" };
     expect(tfunc(props, CNAME, LOC)).toEqual({ className: "", ...props });
@@ -15,7 +17,7 @@ export const testItShouldPreserveUnknown = (tfunc: TransformFunc<any>) => {
 
 export const testItShouldNotSetClassNameOnEmpty = (
   // tslint:disable-next-line:no-any
-  tfunc: TransformFunc<any>,
+  tfunc: ValidatingTransformFunction<any>,
 ) => {
   it("should not set className on empty", () => {
     expect(tfunc({}, CNAME, LOC)).toEqual({ className: "" });
@@ -24,7 +26,7 @@ export const testItShouldNotSetClassNameOnEmpty = (
 
 export const testItShouldPreserveCustomClassName = (
   // tslint:disable-next-line:no-any
-  tfunc: TransformFunc<any>,
+  tfunc: ValidatingTransformFunction<any>,
 ) => {
   it("should preserve custom className", () => {
     const className = "foo";
@@ -33,8 +35,10 @@ export const testItShouldPreserveCustomClassName = (
 };
 
 export const testItShouldUseDefaultLocationProp = (
-  tfunc: TransformFunc<any>, // tslint:disable-line:no-any
-  props: any, // tslint:disable-line:no-any
+  // tslint:disable-next-line:no-any
+  tfunc: ValidatingTransformFunction<any>,
+  // tslint:disable-next-line:no-any
+  props: any,
 ) => {
   it("should use propTypes location = 'prop' as default", () => {
     withMockError({}, ({ context: { error } }) => {

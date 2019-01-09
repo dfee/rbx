@@ -1,36 +1,38 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import { TransformFunc } from "./types";
+import {
+  makePropTypesFactory,
+  makeValidatingTransformFactory,
+  TransformFunction,
+} from "./factory";
 
-/**
- * Overflow
- * https://github.com/jgthms/bulma/blob/master/sass/base/helpers.sass
- */
 export type OverflowHelpersProps = Partial<{
   /** Adds overflow hidden */
   clipped: boolean;
 }>;
 
-export const overflowHelpersPropTypes = {
+// Factories
+export const makePropTypes = makePropTypesFactory(vars => ({
   clipped: PropTypes.bool,
-};
+}));
 
-export const transformOverflowHelpers: TransformFunc<OverflowHelpersProps> = (
-  props,
-  componentName,
-  location = "prop",
-) => {
-  PropTypes.checkPropTypes(
-    overflowHelpersPropTypes,
-    props,
-    location,
-    componentName,
+export const transform: TransformFunction<OverflowHelpersProps> = props => {
+  const { clipped, ...rest } = props;
+
+  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
+  // https://github.com/Microsoft/TypeScript/pull/29121
+  // tslint:disable:no-any
+  // tslint:disable:no-unsafe-any
+  (rest as any).className = classNames(
+    { "is-clipped": clipped },
+    (rest as any).className,
   );
-  const { className, clipped, ...rest } = props;
 
-  return {
-    className: classNames({ "is-clipped": clipped }, className),
-    ...rest,
-  };
+  return rest;
 };
+
+export const makeValidatingTransform = makeValidatingTransformFactory(
+  makePropTypes,
+  transform,
+);

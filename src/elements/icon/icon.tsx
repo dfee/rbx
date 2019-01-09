@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 
 export const ICON_ALIGNMENTS = tuple("left", "right");
@@ -14,7 +14,7 @@ export type IconSizes = (typeof ICON_SIZES)[number];
 
 export type IconModifierProps = Partial<{
   align: IconAlignments;
-  color: Colors;
+  color: Variables["Colors"];
   size: IconSizes;
 }>;
 
@@ -22,7 +22,7 @@ export type IconProps = HelpersProps & IconModifierProps;
 
 const propTypes = {
   align: PropTypes.oneOf(ICON_ALIGNMENTS),
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   size: PropTypes.oneOf(ICON_SIZES),
 };
 

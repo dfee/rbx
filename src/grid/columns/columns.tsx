@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Breakpoints, BREAKPOINTS } from "../../base/helpers/responsive";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 import { Column } from "./column";
 
@@ -22,11 +22,11 @@ const ColumnsBreakpointPropTypes = {
 };
 
 type ColumnsModifierProps = Partial<
-  { [B in Breakpoints]: ColumnsBreakpointProps } & {
+  { [B in Variables["Breakpoints"]]: ColumnsBreakpointProps } & {
     /**
      * Breakpoint where columns become stacked.
      */
-    breakpoint: Breakpoints;
+    breakpoint: Variables["Breakpoints"];
     /**
      * `true` you want the columns inside to be horizontaly centered
      */
@@ -46,11 +46,13 @@ type ColumnsModifierProps = Partial<
 export type ColumnsProps = HelpersProps & ColumnsModifierProps;
 
 const propTypes = {
-  ...BREAKPOINTS.map(breakpoint => ({
-    [breakpoint]: PropTypes.shape(ColumnsBreakpointPropTypes),
-  })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+  ...DEFAULTS.breakpoints
+    .map(breakpoint => ({
+      [breakpoint]: PropTypes.shape(ColumnsBreakpointPropTypes),
+    }))
+    .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
   ...ColumnsBreakpointPropTypes,
-  breakpoint: PropTypes.oneOf(BREAKPOINTS),
+  breakpoint: PropTypes.oneOf(DEFAULTS.breakpoints),
   centered: PropTypes.bool,
   gapless: PropTypes.bool,
   multiline: PropTypes.bool,
@@ -89,7 +91,7 @@ export const Columns = Object.assign(
         { [`is-${gapSize}`]: typeof gapSize === "number" },
         Object.keys(breakpoints)
           .map(key => {
-            const value = breakpoints[key as Breakpoints];
+            const value = breakpoints[key as Variables["Breakpoints"]];
 
             return value === undefined
               ? {}

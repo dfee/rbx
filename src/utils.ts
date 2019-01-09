@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Lit } from "./types";
+
 export const canUseDOM = () =>
   !(
     window === undefined ||
@@ -26,7 +28,5 @@ export const combineRefs = <T>(
 };
 
 export const noop = () => {}; // tslint:disable-line:no-empty
-
-export type Lit = string | number | boolean | undefined | null | void | {};
 
 export const tuple = <T extends Lit[]>(...args: T) => args;

@@ -1,12 +1,15 @@
 import { select } from "@storybook/addon-knobs";
 
-import { BREAKPOINTS } from "src/base/helpers/responsive";
-import { COLORS } from "src/base/helpers/variables";
+import { DEFAULTS } from "src/base/helpers/variables";
 
 import { iterableToSelectObject } from "./utils";
 
 export const colorKnob = (title: string = "Color") =>
-  select(title, iterableToSelectObject(COLORS, { undefined: "" }), "");
+  select(title, iterableToSelectObject(DEFAULTS.colors, { undefined: "" }), "");
 
 export const breakpointKnob = (title: string = "Breakpoint") =>
-  select(title, iterableToSelectObject(BREAKPOINTS, { undefined: "" }), "");
+  select(
+    title,
+    iterableToSelectObject(DEFAULTS.breakpoints, { undefined: "" }),
+    "",
+  );

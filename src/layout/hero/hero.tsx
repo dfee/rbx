@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 import { HeroBody } from "./hero-body";
 import { HeroFoot } from "./hero-foot";
@@ -18,7 +18,7 @@ export const HERO_SIZES = tuple(
 export type HeroSizes = (typeof HERO_SIZES)[number];
 
 export type HeroModifierProps = Partial<{
-  color: Colors;
+  color: Variables["Colors"];
   gradient: boolean;
   size: HeroSizes;
 }>;
@@ -26,7 +26,7 @@ export type HeroModifierProps = Partial<{
 export type HeroProps = HelpersProps & HeroModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   gradient: PropTypes.bool,
   size: PropTypes.oneOf(HERO_SIZES),
 };

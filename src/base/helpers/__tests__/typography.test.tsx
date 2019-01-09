@@ -1,12 +1,8 @@
 import {
-  TEXT_ALIGNMENTS,
-  TEXT_SIZES,
-  TEXT_TRANSFORMS,
-  TEXT_WEIGHTS,
-  transformTypographyHelpers,
-  typographyHelpersPropTypes,
+  makePropTypes,
+  makeValidatingTransform,
 } from "src/base/helpers/typography";
-import { COLORS, SHADES } from "src/base/helpers/variables";
+import { DEFAULTS } from "src/base/helpers/variables";
 
 import {
   validateBoolPropType,
@@ -23,28 +19,34 @@ const CNAME = "foo";
 const LOC = "prop";
 
 describe("Typography modifiers", () => {
-  const propTypes = typographyHelpersPropTypes;
-  const tfunc = transformTypographyHelpers;
+  const propTypes = makePropTypes();
+  const vtfunc = makeValidatingTransform();
 
   describe("propTypes", () => {
-    validateOneOfPropType(propTypes, "backgroundColor", [...COLORS, ...SHADES]);
+    validateOneOfPropType(propTypes, "backgroundColor", [
+      ...DEFAULTS.colors,
+      ...DEFAULTS.shades,
+    ]);
     validateBoolPropType(propTypes, "italic");
-    validateOneOfPropType(propTypes, "textAlignment", TEXT_ALIGNMENTS);
-    validateOneOfPropType(propTypes, "textColor", [...COLORS, ...SHADES]);
-    validateOneOfPropType(propTypes, "textSize", TEXT_SIZES);
-    validateOneOfPropType(propTypes, "textTransform", TEXT_TRANSFORMS);
-    validateOneOfPropType(propTypes, "textWeight", TEXT_WEIGHTS);
-    testItShouldUseDefaultLocationProp(tfunc, { textColor: "__UNKNOWN" });
+    validateOneOfPropType(propTypes, "textAlignment", DEFAULTS.textAlignments);
+    validateOneOfPropType(propTypes, "textColor", [
+      ...DEFAULTS.colors,
+      ...DEFAULTS.shades,
+    ]);
+    validateOneOfPropType(propTypes, "textSize", DEFAULTS.textSizes);
+    validateOneOfPropType(propTypes, "textTransform", DEFAULTS.textTransforms);
+    validateOneOfPropType(propTypes, "textWeight", DEFAULTS.textWeights);
+    testItShouldUseDefaultLocationProp(vtfunc, { textColor: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    testItShouldPreserveUnknown(tfunc);
-    testItShouldNotSetClassNameOnEmpty(tfunc);
-    testItShouldPreserveCustomClassName(tfunc);
+    testItShouldPreserveUnknown(vtfunc);
+    testItShouldNotSetClassNameOnEmpty(vtfunc);
+    testItShouldPreserveCustomClassName(vtfunc);
 
-    [...COLORS, ...SHADES].map(color => {
+    [...DEFAULTS.colors, ...DEFAULTS.shades].map(color => {
       it(`should make background-color ${color}`, () => {
-        expect(tfunc({ backgroundColor: color }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ backgroundColor: color }, CNAME, LOC)).toEqual({
           className: `has-background-${color}`,
         });
       });
@@ -52,47 +54,47 @@ describe("Typography modifiers", () => {
 
     [false, true].map(italic => {
       it(`should ${italic ? "" : "not "}be italic`, () => {
-        expect(tfunc({ italic }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ italic }, CNAME, LOC)).toEqual({
           className: italic ? "is-italic" : "",
         });
       });
     });
 
-    TEXT_ALIGNMENTS.map(align => {
+    DEFAULTS.textAlignments.map(align => {
       it(`should align ${align}`, () => {
-        expect(tfunc({ textAlignment: align }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ textAlignment: align }, CNAME, LOC)).toEqual({
           className: `has-text-${align}`,
         });
       });
     });
 
-    [...COLORS, ...SHADES].map(color => {
+    [...DEFAULTS.colors, ...DEFAULTS.shades].map(color => {
       it(`should make text-color ${color}`, () => {
-        expect(tfunc({ textColor: color }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ textColor: color }, CNAME, LOC)).toEqual({
           className: `has-text-${color}`,
         });
       });
     });
 
-    TEXT_SIZES.map(size => {
+    DEFAULTS.textSizes.map(size => {
       it(`should be size ${size}`, () => {
-        expect(tfunc({ textSize: size }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ textSize: size }, CNAME, LOC)).toEqual({
           className: `is-size-${size}`,
         });
       });
     });
 
-    TEXT_TRANSFORMS.map(textTransform => {
+    DEFAULTS.textTransforms.map(textTransform => {
       it(`should be ${textTransform}`, () => {
-        expect(tfunc({ textTransform }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ textTransform: textTransform }, CNAME, LOC)).toEqual({
           className: `is-${textTransform}`,
         });
       });
     });
 
-    TEXT_WEIGHTS.map(weight => {
+    DEFAULTS.textWeights.map(weight => {
       it(`should be ${weight}`, () => {
-        expect(tfunc({ textWeight: weight }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ textWeight: weight }, CNAME, LOC)).toEqual({
           className: `has-text-weight-${weight}`,
         });
       });

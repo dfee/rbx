@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "src/base/helpers/responsive";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { Column, COLUMN_SIZES } from "src/grid/columns/column";
 
 import {
@@ -46,7 +46,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         });
       });
 
-      BREAKPOINTS.map(breakpoint => {
+      DEFAULTS.breakpoints.map(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
             ...[false, true].map(value => ({
@@ -88,7 +88,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         });
       });
 
-      BREAKPOINTS.map(breakpoint => {
+      DEFAULTS.breakpoints.map(breakpoint => {
         validatePropType(propTypes, breakpoint, [
           ...COLUMN_SIZES.map(value => ({
             descriptor: `offset = ${value}`,
@@ -132,7 +132,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         });
       });
 
-      BREAKPOINTS.map(breakpoint => {
+      DEFAULTS.breakpoints.map(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
             ...COLUMN_SIZES.map(value => ({

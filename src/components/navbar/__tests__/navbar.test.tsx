@@ -1,7 +1,7 @@
 import * as Enzyme from "enzyme";
 import * as React from "react";
 
-import { COLORS } from "src/base/helpers/variables";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { Navbar } from "src/components/navbar/navbar";
 import { NavbarBrand } from "src/components/navbar/navbar-brand";
 import { NavbarBurger } from "src/components/navbar/navbar-burger";
@@ -72,9 +72,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", COLORS);
+      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
 
-      COLORS.map(color => {
+      DEFAULTS.colors.map(color => {
         testPropForwarding("color", color);
       });
     });

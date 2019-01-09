@@ -2,16 +2,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Generic } from "src/base";
-import { FLOAT_PULLED_ALIGNMENTS } from "src/base/helpers/float";
-import { BREAKPOINTS } from "src/base/helpers/responsive";
-import {
-  TEXT_ALIGNMENTS,
-  TEXT_SIZES,
-  TEXT_TRANSFORMS,
-  TEXT_WEIGHTS,
-} from "src/base/helpers/typography";
-import { COLORS, SHADES } from "src/base/helpers/variables";
-import { DISPLAYS } from "src/base/helpers/visibility";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { Card } from "src/components";
 import { Notification } from "src/elements";
 import { Section } from "src/layout";
@@ -44,7 +35,7 @@ export const knobs = {
     clearfix: booleanFactory("clearfix", false),
     pull: selectFactory(
       "pull",
-      iterableToSelectObject(FLOAT_PULLED_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(DEFAULTS.floatPulledAlignments, { undefined: "" }),
     ),
   },
   overflow: {
@@ -56,28 +47,32 @@ export const knobs = {
   typograpahy: {
     backgroundColor: selectFactory(
       "backgroundColor",
-      iterableToSelectObject([...COLORS, ...SHADES], { undefined: "" }),
+      iterableToSelectObject([...DEFAULTS.colors, ...DEFAULTS.shades], {
+        undefined: "",
+      }),
     ),
     italic: booleanFactory("italic", false),
     textAlignment: selectFactory(
       "textAlignemnt",
-      iterableToSelectObject(TEXT_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(DEFAULTS.textAlignments, { undefined: "" }),
     ),
     textColor: selectFactory(
       "textColor",
-      iterableToSelectObject([...COLORS, ...SHADES], { undefined: "" }),
+      iterableToSelectObject([...DEFAULTS.colors, ...DEFAULTS.shades], {
+        undefined: "",
+      }),
     ),
     textSize: selectFactory(
       "textSize",
-      iterableToSelectObject(TEXT_SIZES, { undefined: "" }),
+      iterableToSelectObject(DEFAULTS.textSizes, { undefined: "" }),
     ),
     textTransform: selectFactory(
       "textTransform",
-      iterableToSelectObject(TEXT_TRANSFORMS, { undefined: "" }),
+      iterableToSelectObject(DEFAULTS.textTransforms, { undefined: "" }),
     ),
     textWeight: selectFactory(
       "textWeight",
-      iterableToSelectObject(TEXT_WEIGHTS, { undefined: "" }),
+      iterableToSelectObject(DEFAULTS.textWeights, { undefined: "" }),
     ),
   },
   visibility: {
@@ -93,48 +88,53 @@ export const knobs = {
     unselectable: booleanFactory("unselectable", false),
   },
   responsive: {
-    ...BREAKPOINTS.map(breakpoint => {
-      const hasOnly = ["mobile", "fullhd", "touch"].indexOf(breakpoint) !== -1;
+    ...DEFAULTS.breakpoints
+      .map(breakpoint => {
+        const isLimited =
+          (DEFAULTS.breakpointsLimited as string[]).indexOf(breakpoint) !== -1;
 
-      const display = {
-        value: selectFactory(
-          `${breakpoint}.display.value`,
-          iterableToSelectObject(DISPLAYS, { undefined: "" }),
-        ),
-        ...(hasOnly
-          ? { only: booleanFactory(`${breakpoint}.display.only`, false) }
-          : {}),
-      };
+        const display = {
+          value: selectFactory(
+            `${breakpoint}.display.value`,
+            iterableToSelectObject(DEFAULTS.displays, { undefined: "" }),
+          ),
+          ...(isLimited
+            ? {}
+            : { only: booleanFactory(`${breakpoint}.display.only`, false) }),
+        };
 
-      const hide = {
-        value: booleanFactory(`${breakpoint}.hide.value`, false),
-        ...(hasOnly
-          ? { only: booleanFactory(`${breakpoint}.hide.only`, false) }
-          : {}),
-      };
+        const hide = {
+          value: booleanFactory(`${breakpoint}.hide.value`, false),
+          ...(isLimited
+            ? {}
+            : { only: booleanFactory(`${breakpoint}.hide.only`, false) }),
+        };
 
-      const textAlignment = {
-        value: selectFactory(
-          `${breakpoint}.textAlignemnt.value`,
-          iterableToSelectObject(TEXT_ALIGNMENTS, { undefined: "" }),
-        ),
-        ...(hasOnly
-          ? { only: booleanFactory(`${breakpoint}.textAlignment.only`, false) }
-          : {}),
-      };
+        const textAlignment = {
+          value: selectFactory(
+            `${breakpoint}.textAlignemnt.value`,
+            iterableToSelectObject(DEFAULTS.textAlignments, { undefined: "" }),
+          ),
+          ...(isLimited
+            ? {}
+            : {
+                only: booleanFactory(`${breakpoint}.textAlignment.only`, false),
+              }),
+        };
 
-      const textSize = {
-        value: selectFactory(
-          `${breakpoint}.textSize.value`,
-          iterableToSelectObject(TEXT_SIZES, { undefined: "" }),
-        ),
-        ...(hasOnly
-          ? { only: booleanFactory(`${breakpoint}.textSize.only`, false) }
-          : {}),
-      };
+        const textSize = {
+          value: selectFactory(
+            `${breakpoint}.textSize.value`,
+            iterableToSelectObject(DEFAULTS.textSizes, { undefined: "" }),
+          ),
+          ...(isLimited
+            ? {}
+            : { only: booleanFactory(`${breakpoint}.textSize.only`, false) }),
+        };
 
-      return { [breakpoint]: { display, hide, textAlignment, textSize } };
-    }).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+        return { [breakpoint]: { display, hide, textAlignment, textSize } };
+      })
+      .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
   },
 };
 
@@ -150,23 +150,28 @@ storiesOf("Base", module)
       ...mapFactories(knobs.visibility, "Visibility"),
       ...mapFactories(knobs.other, "Other"),
       responsive: {
-        ...BREAKPOINTS.map(breakpoint => ({
-          [breakpoint]: {
-            display: mapFactories(
-              knobs.responsive[breakpoint].display,
-              "Responsive",
-            ),
-            hide: mapFactories(knobs.responsive[breakpoint].hide, "Responsive"),
-            textAlignment: mapFactories(
-              knobs.responsive[breakpoint].textAlignment,
-              "Responsive",
-            ),
-            textSize: mapFactories(
-              knobs.responsive[breakpoint].textSize,
-              "Responsive",
-            ),
-          },
-        })).reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+        ...DEFAULTS.breakpoints
+          .map(breakpoint => ({
+            [breakpoint]: {
+              display: mapFactories(
+                knobs.responsive[breakpoint].display,
+                "Responsive",
+              ),
+              hide: mapFactories(
+                knobs.responsive[breakpoint].hide,
+                "Responsive",
+              ),
+              textAlignment: mapFactories(
+                knobs.responsive[breakpoint].textAlignment,
+                "Responsive",
+              ),
+              textSize: mapFactories(
+                knobs.responsive[breakpoint].textSize,
+                "Responsive",
+              ),
+            },
+          }))
+          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
       },
     });
 

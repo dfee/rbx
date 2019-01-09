@@ -1,7 +1,4 @@
-import {
-  otherHelpersPropTypes,
-  transformOtherHelpers,
-} from "src/base/helpers/other";
+import { makePropTypes, makeValidatingTransform } from "src/base/helpers/other";
 
 import { validateBoolPropType } from "src/__tests__/testing";
 import {
@@ -15,8 +12,8 @@ const CNAME = "foo";
 const LOC = "prop";
 
 describe("Other helpers", () => {
-  const propTypes = otherHelpersPropTypes;
-  const tfunc = transformOtherHelpers;
+  const propTypes = makePropTypes();
+  const vtfunc = makeValidatingTransform();
 
   describe("propTypes", () => {
     validateBoolPropType(propTypes, "marginless");
@@ -24,17 +21,17 @@ describe("Other helpers", () => {
     validateBoolPropType(propTypes, "radiusless");
     validateBoolPropType(propTypes, "shadowless");
     validateBoolPropType(propTypes, "unselectable");
-    testItShouldUseDefaultLocationProp(tfunc, { marginless: "__UNKNOWN" });
+    testItShouldUseDefaultLocationProp(vtfunc, { marginless: "__UNKNOWN" });
   });
 
   describe("transform", () => {
-    testItShouldPreserveUnknown(tfunc);
-    testItShouldNotSetClassNameOnEmpty(tfunc);
-    testItShouldPreserveCustomClassName(tfunc);
+    testItShouldPreserveUnknown(vtfunc);
+    testItShouldNotSetClassNameOnEmpty(vtfunc);
+    testItShouldPreserveCustomClassName(vtfunc);
 
     [false, true].map(marginless => {
       it(`should ${marginless ? "" : "not "}be marginless`, () => {
-        expect(tfunc({ marginless }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ marginless }, CNAME, LOC)).toEqual({
           className: marginless ? "is-marginless" : "",
         });
       });
@@ -42,7 +39,7 @@ describe("Other helpers", () => {
 
     [false, true].map(paddingless => {
       it(`should ${paddingless ? "" : "not "}be paddingless`, () => {
-        expect(tfunc({ paddingless }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ paddingless }, CNAME, LOC)).toEqual({
           className: paddingless ? "is-paddingless" : "",
         });
       });
@@ -50,7 +47,7 @@ describe("Other helpers", () => {
 
     [false, true].map(radiusless => {
       it(`should ${radiusless ? "" : "not "}be radiusless`, () => {
-        expect(tfunc({ radiusless }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ radiusless }, CNAME, LOC)).toEqual({
           className: radiusless ? "is-radiusless" : "",
         });
       });
@@ -58,7 +55,7 @@ describe("Other helpers", () => {
 
     [false, true].map(shadowless => {
       it(`should ${shadowless ? "" : "not "}be shadowless`, () => {
-        expect(tfunc({ shadowless }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ shadowless }, CNAME, LOC)).toEqual({
           className: shadowless ? "is-shadowless" : "",
         });
       });
@@ -66,7 +63,7 @@ describe("Other helpers", () => {
 
     [false, true].map(unselectable => {
       it(`should ${unselectable ? "" : "not "}be unselectable`, () => {
-        expect(tfunc({ unselectable }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ unselectable }, CNAME, LOC)).toEqual({
           className: unselectable ? "is-unselectable" : "",
         });
       });

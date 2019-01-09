@@ -2,7 +2,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs } from "../../base";
-import { COLORS } from "../../base/helpers/variables";
+import { DEFAULTS } from "../../base/helpers/variables";
 import { Omit } from "../../types";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
@@ -24,7 +24,7 @@ export type NavbarProps = Omit<NavbarContainerProps, "as" | "innerRef">;
 
 const propTypes = {
   active: PropTypes.bool,
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   fixed: PropTypes.oneOf(NAVBAR_FIXED_ALIGNMENTS),
   managed: PropTypes.bool,
   transparent: PropTypes.bool,

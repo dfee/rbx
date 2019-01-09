@@ -1,21 +1,11 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import { tuple } from "../../utils";
-import { TransformFunc } from "./types";
-
-/**
- * Visibility
- * https://github.com/jgthms/bulma/blob/master/sass/base/helpers.sass
- */
-export const DISPLAYS = tuple(
-  "block",
-  "flex",
-  "inline",
-  "inline-block",
-  "inline-flex",
-);
-export type Displays = (typeof DISPLAYS)[number];
+import {
+  makePropTypesFactory,
+  makeValidatingTransformFactory,
+  TransformFunction,
+} from "./factory";
 
 export type VisibilityHelpersProps = Partial<{
   /** Hides an element (unclear on where this is documented in Bulma) */
@@ -29,32 +19,33 @@ export type VisibilityHelpersProps = Partial<{
   srOnly: boolean;
 }>;
 
-export const visibilityHelpersPropTypes = {
+// Factories
+export const makePropTypes = makePropTypesFactory(vars => ({
   hidden: PropTypes.bool,
   invisible: PropTypes.bool,
   srOnly: PropTypes.bool,
-};
+}));
 
-export const transformVisibilityHelpers: TransformFunc<
-  VisibilityHelpersProps
-> = (props, componentName, location = "prop") => {
-  PropTypes.checkPropTypes(
-    visibilityHelpersPropTypes,
-    props,
-    location,
-    componentName,
+export const transform: TransformFunction<VisibilityHelpersProps> = props => {
+  const { hidden, invisible, srOnly, ...rest } = props;
+
+  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
+  // https://github.com/Microsoft/TypeScript/pull/29121
+  // tslint:disable:no-any
+  // tslint:disable:no-unsafe-any
+  (rest as any).className = classNames(
+    {
+      "is-hidden": hidden,
+      "is-invisible": invisible,
+      "is-sr-only": srOnly,
+    },
+    (rest as any).className,
   );
-  const { className, hidden, invisible, srOnly, ...rest } = props;
 
-  return {
-    className: classNames(
-      {
-        "is-hidden": hidden,
-        "is-invisible": invisible,
-        "is-sr-only": srOnly,
-      },
-      className,
-    ),
-    ...rest,
-  };
+  return rest;
 };
+
+export const makeValidatingTransform = makeValidatingTransformFactory(
+  makePropTypes,
+  transform,
+);

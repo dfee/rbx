@@ -1,48 +1,32 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import { tuple } from "../../utils";
-import { TransformFunc } from "./types";
 import {
-  TEXT_ALIGNMENTS,
-  TEXT_SIZES,
-  TextAlignments,
-  TextSizes,
-} from "./typography";
-import { DISPLAYS, Displays } from "./visibility";
+  makePropTypesFactory,
+  makeValidatingTransformFactory,
+  TransformFunction,
+} from "./factory";
+import { Variables } from "./variables";
 
-/**
- * Responsive
- */
-export const BREAKPOINTS = tuple(
-  "mobile",
-  "tablet",
-  "desktop",
-  "widescreen",
-  "fullhd",
-  "touch",
-);
-export type Breakpoints = (typeof BREAKPOINTS)[number];
-
-export type LimitiedResponsiveBreakpointProps = Partial<{
+export type LimitedResponsiveBreakpointProps = Partial<{
   display: {
-    value: Displays;
+    value: Variables["Displays"];
   };
   hide: {
     value: boolean;
   };
   textAlignment: {
-    value: TextAlignments;
+    value: Variables["TextAlignments"];
   };
   textSize: {
-    value: TextSizes;
+    value: Variables["TextSizes"];
   };
 }>;
 
 export type ResponsiveBreakpointProps = Partial<{
   display: {
     only?: boolean;
-    value: Displays;
+    value: Variables["Displays"];
   };
   hide: {
     only?: boolean;
@@ -50,29 +34,32 @@ export type ResponsiveBreakpointProps = Partial<{
   };
   textAlignment: {
     only?: boolean;
-    value: TextAlignments;
+    value: Variables["TextAlignments"];
   };
   textSize: {
     only?: boolean;
-    value: TextSizes;
+    value: Variables["TextSizes"];
   };
 }>;
 
 export type ResponsiveHelpersProps = Partial<{
-  responsive: Partial<{
-    mobile: LimitiedResponsiveBreakpointProps;
-    tablet: ResponsiveBreakpointProps;
-    desktop: ResponsiveBreakpointProps;
-    widescreen: ResponsiveBreakpointProps;
-    fullhd: LimitiedResponsiveBreakpointProps;
-    touch: LimitiedResponsiveBreakpointProps;
-  }>;
+  responsive: Partial<
+    {
+      [B in Variables["BreakpointsLimited"]]: LimitedResponsiveBreakpointProps
+    } &
+      {
+        [B in Exclude<
+          Variables["Breakpoints"],
+          Variables["BreakpointsLimited"]
+        >]: ResponsiveBreakpointProps
+      }
+  >;
 }>;
 
-export const responsiveBreakpointPropTypes = {
+export const makeResponsiveBreakpointPropTypes = makePropTypesFactory(vars => ({
   display: PropTypes.shape({
     only: PropTypes.bool,
-    value: PropTypes.oneOf(DISPLAYS).isRequired,
+    value: PropTypes.oneOf(vars.displays).isRequired,
   }),
   hide: PropTypes.shape({
     only: PropTypes.bool,
@@ -80,100 +67,98 @@ export const responsiveBreakpointPropTypes = {
   }),
   textAlignment: PropTypes.shape({
     only: PropTypes.bool,
-    value: PropTypes.oneOf(TEXT_ALIGNMENTS).isRequired,
+    value: PropTypes.oneOf(vars.textAlignments).isRequired,
   }),
   textSize: PropTypes.shape({
     only: PropTypes.bool,
-    value: PropTypes.oneOf(TEXT_SIZES).isRequired,
+    value: PropTypes.oneOf(vars.textSizes).isRequired,
   }),
-};
+}));
 
-export const limitedResponsiveBreakpointPropTypes = {
-  display: PropTypes.shape({
-    value: PropTypes.oneOf(DISPLAYS).isRequired,
+export const makeResponsiveBreakpointLimitedPropTypes = makePropTypesFactory(
+  vars => ({
+    display: PropTypes.shape({
+      value: PropTypes.oneOf(vars.displays).isRequired,
+    }),
+    hide: PropTypes.shape({
+      value: PropTypes.bool.isRequired,
+    }),
+    textAlignment: PropTypes.shape({
+      value: PropTypes.oneOf(vars.textAlignments).isRequired,
+    }),
+    textSize: PropTypes.shape({
+      value: PropTypes.oneOf(vars.textSizes).isRequired,
+    }),
   }),
-  hide: PropTypes.shape({
-    value: PropTypes.bool.isRequired,
-  }),
-  textAlignment: PropTypes.shape({
-    value: PropTypes.oneOf(TEXT_ALIGNMENTS).isRequired,
-  }),
-  textSize: PropTypes.shape({
-    value: PropTypes.oneOf(TEXT_SIZES).isRequired,
-  }),
-};
+);
 
-export const responsiveHelpersPropTypes = {
-  responsive: PropTypes.shape({
-    // tslint:disable:object-literal-sort-keys
-    mobile: PropTypes.shape(limitedResponsiveBreakpointPropTypes),
-    tablet: PropTypes.shape(responsiveBreakpointPropTypes),
-    desktop: PropTypes.shape(responsiveBreakpointPropTypes),
-    widescreen: PropTypes.shape(responsiveBreakpointPropTypes),
-    fullhd: PropTypes.shape(limitedResponsiveBreakpointPropTypes),
-    touch: PropTypes.shape(limitedResponsiveBreakpointPropTypes),
-    // tslint:enable:object-literal-sort-keys
-  }),
-};
+// Factories
+export const makePropTypes = makePropTypesFactory(vars => ({
+  responsive: PropTypes.shape(
+    vars.breakpoints
+      .map(breakpoint => ({
+        [breakpoint]: PropTypes.shape(
+          vars.breakpointsLimited.indexOf(breakpoint) === -1
+            ? makeResponsiveBreakpointPropTypes(vars)
+            : makeResponsiveBreakpointLimitedPropTypes(vars),
+        ),
+      }))
+      .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+  ),
+}));
 
-export const transformResponsiveHelpers: TransformFunc<
-  ResponsiveHelpersProps
-> = (props, componentName, location = "prop") => {
-  PropTypes.checkPropTypes(
-    responsiveHelpersPropTypes,
-    props,
-    location,
-    componentName,
+export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
+  const { responsive, ...rest } = props;
+  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
+  // https://github.com/Microsoft/TypeScript/pull/29121
+  // tslint:disable:no-any
+  // tslint:disable:no-unsafe-any
+  (rest as any).className = classNames(
+    responsive !== undefined
+      ? Object.keys(responsive)
+          .filter(breakpoint => responsive[breakpoint] !== undefined)
+          .map(breakpoint => {
+            const names = {};
+            const { display, hide, textAlignment, textSize } = responsive[
+              breakpoint
+            ] as ResponsiveBreakpointProps | LimitedResponsiveBreakpointProps;
+            if (display !== undefined) {
+              const value = display.value;
+              const only = "only" in display ? display.only === true : false;
+              names[`is-${value}-${breakpoint}${only ? "-only" : ""}`] = value;
+            }
+            if (hide !== undefined) {
+              const value = hide.value;
+              const only = "only" in hide ? hide.only === true : false;
+              names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
+            }
+            if (textAlignment !== undefined) {
+              const value = textAlignment.value;
+              const only =
+                "only" in textAlignment ? textAlignment.only === true : false;
+              names[
+                `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
+              ] = value;
+            }
+            if (textSize !== undefined) {
+              const value = textSize.value;
+              const only = "only" in textSize ? textSize.only === true : false;
+              names[
+                `is-size-${value}-${breakpoint}${only ? "-only" : ""}`
+              ] = value;
+            }
+
+            return names;
+          })
+          .reduce((acc, cv) => ({ ...acc, ...cv }), {})
+      : undefined,
+    (rest as any).className,
   );
-  const { className, responsive, ...rest } = props;
 
-  return {
-    className: classNames(
-      responsive !== undefined
-        ? Object.keys(responsive)
-            .filter(breakpoint => responsive[breakpoint] !== undefined)
-            .map(breakpoint => {
-              const names = {};
-              const { display, hide, textAlignment, textSize } = responsive[
-                breakpoint
-              ] as
-                | ResponsiveBreakpointProps
-                | LimitiedResponsiveBreakpointProps;
-              if (display !== undefined) {
-                const value = display.value;
-                const only = "only" in display ? display.only === true : false;
-                names[
-                  `is-${value}-${breakpoint}${only ? "-only" : ""}`
-                ] = value;
-              }
-              if (hide !== undefined) {
-                const value = hide.value;
-                const only = "only" in hide ? hide.only === true : false;
-                names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
-              }
-              if (textAlignment !== undefined) {
-                const value = textAlignment.value;
-                const only =
-                  "only" in textAlignment ? textAlignment.only === true : false;
-                names[
-                  `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
-                ] = value;
-              }
-              if (textSize !== undefined) {
-                const value = textSize.value;
-                const only =
-                  "only" in textSize ? textSize.only === true : false;
-                names[
-                  `is-size-${value}-${breakpoint}${only ? "-only" : ""}`
-                ] = value;
-              }
-
-              return names;
-            })
-            .reduce((acc, cv) => ({ ...acc, ...cv }), {})
-        : undefined,
-      className,
-    ),
-    ...rest,
-  };
+  return rest;
 };
+
+export const makeValidatingTransform = makeValidatingTransformFactory(
+  makePropTypes,
+  transform,
+);

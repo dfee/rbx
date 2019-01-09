@@ -1169,6 +1169,6 @@ Object {
   "genericPropTypes": Object {
     "as": [Function],
   },
-  "transformHelpers": [Function],
+  "makeRootValidatingTransform": [Function],
 }
 `;

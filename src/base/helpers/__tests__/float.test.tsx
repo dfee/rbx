@@ -1,8 +1,6 @@
-import {
-  FLOAT_PULLED_ALIGNMENTS,
-  floatHelpersPropTypes,
-  transformFloatHelpers,
-} from "src/base/helpers/float";
+import { makePropTypes, makeValidatingTransform } from "src/base/helpers/float";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { tuple } from "../../../utils";
 
 import {
   validateBoolPropType,
@@ -19,31 +17,44 @@ const CNAME = "foo";
 const LOC = "prop";
 
 describe("Float helpers", () => {
-  const propTypes = floatHelpersPropTypes;
-  const tfunc = transformFloatHelpers;
+  const propTypes = makePropTypes();
+  const vtfunc = makeValidatingTransform();
 
   describe("propTypes", () => {
     validateBoolPropType(propTypes, "clearfix");
-    validateOneOfPropType(propTypes, "pull", FLOAT_PULLED_ALIGNMENTS);
-    testItShouldUseDefaultLocationProp(tfunc, { clearfix: "__UNKNOWN" });
+    validateOneOfPropType(propTypes, "pull", DEFAULTS.floatPulledAlignments);
+    testItShouldUseDefaultLocationProp(vtfunc, { clearfix: "__UNKNOWN" });
+
+    describe("custom", () => {
+      const customFloatPulledAlignments = tuple("a", "b");
+      const customPropTypes = makePropTypes({
+        floatPulledAlignments: customFloatPulledAlignments,
+      });
+
+      validateOneOfPropType(
+        customPropTypes,
+        "pull",
+        customFloatPulledAlignments,
+      );
+    });
   });
 
   describe("transform", () => {
-    testItShouldPreserveUnknown(tfunc);
-    testItShouldNotSetClassNameOnEmpty(tfunc);
-    testItShouldPreserveCustomClassName(tfunc);
+    testItShouldPreserveUnknown(vtfunc);
+    testItShouldNotSetClassNameOnEmpty(vtfunc);
+    testItShouldPreserveCustomClassName(vtfunc);
 
     [false, true].map(clearfix => {
       it(`should ${clearfix ? "" : "not "}be clearfix`, () => {
-        expect(tfunc({ clearfix }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ clearfix }, CNAME, LOC)).toEqual({
           className: clearfix ? "is-clearfix" : "",
         });
       });
     });
 
-    FLOAT_PULLED_ALIGNMENTS.map(align => {
+    DEFAULTS.floatPulledAlignments.map(align => {
       it(`should pull ${align}`, () => {
-        expect(tfunc({ pull: align }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ pull: align }, CNAME, LOC)).toEqual({
           className: `is-pulled-${align}`,
         });
       });

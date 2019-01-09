@@ -2,8 +2,10 @@ import * as Enzyme from "enzyme";
 import * as React from "react";
 
 import { Generic } from "src/base/generic";
-import { transformHelpers } from "src/base/helpers";
-import { ThemeContextValue } from "src/base/theme";
+import {
+  initialValue as themeInitialValue,
+  ThemeContextValue,
+} from "src/base/theme";
 
 import {
   hasProperties,
@@ -21,7 +23,7 @@ const makeNode = makeNodeFactory(Generic);
 
 const makeShallowWrapperInThemeContextConsumer = (
   node: JSX.Element,
-  contextValue = { transform: transformHelpers },
+  contextValue: ThemeContextValue = themeInitialValue,
 ) => {
   const contextConsumerWrapper = Enzyme.shallow(node);
   const Children = (contextConsumerWrapper.props() as {

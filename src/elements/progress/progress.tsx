@@ -3,14 +3,14 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 
 export const PROGRESS_SIZES = tuple("small", "medium", "large");
 export type ProgressSizes = (typeof PROGRESS_SIZES)[number];
 
 export interface ProgressModifierProps {
-  color?: Colors;
+  color?: Variables["Colors"];
   max: number;
   size?: ProgressSizes;
   value: number;
@@ -19,7 +19,7 @@ export interface ProgressModifierProps {
 export type ProgressProps = HelpersProps & ProgressModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   max: PropTypes.number.isRequired,
   size: PropTypes.oneOf(PROGRESS_SIZES),
   value: PropTypes.number.isRequired,

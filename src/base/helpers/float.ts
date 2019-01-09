@@ -1,63 +1,45 @@
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import { tuple } from "../../utils";
-import { TransformFunc } from "./types";
-
-/**
- * Float
- * https://github.com/jgthms/bulma/blob/master/sass/base/helpers.sass
- */
-export const FLOAT_PULLED_ALIGNMENTS = tuple("left", "right");
-export type FloatPulledAlignments = (typeof FLOAT_PULLED_ALIGNMENTS)[number];
+import {
+  makePropTypesFactory,
+  makeValidatingTransformFactory,
+  TransformFunction,
+} from "./factory";
+import { Variables } from "./variables";
 
 export type FloatHelpersProps = Partial<{
   /** Fixes an element's floating children */
   clearfix: boolean;
   /** Moves an element to the left or right */
-  pull: FloatPulledAlignments;
+  pull: Variables["FloatPulledAlignments"];
 }>;
 
-export const makeFloatHelpersPropTypesDefaults = {
-  floatPulledAssignments: FLOAT_PULLED_ALIGNMENTS,
-};
+// Factories
+export const makePropTypes = makePropTypesFactory(vars => ({
+  clearfix: PropTypes.bool,
+  pull: PropTypes.oneOf(vars.floatPulledAlignments),
+}));
 
-export const makeFloatHelpersPropTypes = (
-  options: {
-    floatPulledAssignments?: string[];
-  } = makeFloatHelpersPropTypesDefaults,
-) => {
-  const values = { ...options, ...makeFloatHelpersPropTypesDefaults };
+export const transform: TransformFunction<FloatHelpersProps> = props => {
+  const { clearfix, pull, ...rest } = props;
 
-  return {
-    clearfix: PropTypes.bool,
-    pull: PropTypes.oneOf(values.floatPulledAssignments),
-  };
-};
-
-export const floatHelpersPropTypes = makeFloatHelpersPropTypes();
-
-export const transformFloatHelpers: TransformFunc<FloatHelpersProps> = (
-  props,
-  componentName,
-  location = "prop",
-) => {
-  PropTypes.checkPropTypes(
-    floatHelpersPropTypes,
-    props,
-    location,
-    componentName,
+  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
+  // https://github.com/Microsoft/TypeScript/pull/29121
+  // tslint:disable:no-any
+  // tslint:disable:no-unsafe-any
+  (rest as any).className = classNames(
+    {
+      "is-clearfix": clearfix,
+      [`is-pulled-${pull}`]: pull,
+    },
+    (rest as any).className,
   );
-  const { className, clearfix, pull, ...rest } = props;
 
-  return {
-    className: classNames(
-      {
-        "is-clearfix": clearfix,
-        [`is-pulled-${pull}`]: pull,
-      },
-      className,
-    ),
-    ...rest,
-  };
+  return rest;
 };
+
+export const makeValidatingTransform = makeValidatingTransformFactory(
+  makePropTypes,
+  transform,
+);

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { COLORS } from "src/base/helpers/variables";
+import { DEFAULTS } from "src/base/helpers/variables";
 import {
   Select,
   SELECT_CONTAINER_SIZES,
@@ -43,9 +43,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", COLORS);
+      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
 
-      COLORS.map(color => {
+      DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

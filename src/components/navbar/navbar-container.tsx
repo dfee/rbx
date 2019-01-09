@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 import { Generic, HelpersProps } from "../../base";
-import { Colors } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
 import { canUseDOM, tuple } from "../../utils";
 import { NavbarContext } from "./navbar-context";
 
@@ -13,7 +13,7 @@ export type NavbarContainerModifierProps = Partial<{
   /** * Determines whether the menu is displayed on mobile */
   active: boolean;
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  color: Colors;
+  color: Variables["Colors"];
   fixed: NavbarFixedAlignments;
   innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   managed: boolean;

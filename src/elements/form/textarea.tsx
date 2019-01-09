@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { Colors, COLORS } from "../../base/helpers/variables";
+import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { tuple } from "../../utils";
 
 export const TEXTAREA_SIZES = tuple("small", "medium", "large");
@@ -13,7 +13,7 @@ export const TEXTAREA_STATES = tuple("focused", "hovered");
 export type TextareaStates = (typeof TEXTAREA_STATES)[number];
 
 export type TextareaModifierProps = Partial<{
-  color: Colors;
+  color: Variables["Colors"];
   fixedSize: boolean;
   size: TextareaSizes;
   state: TextareaStates;
@@ -22,7 +22,7 @@ export type TextareaModifierProps = Partial<{
 export type TextareaProps = HelpersProps & TextareaModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(COLORS),
+  color: PropTypes.oneOf(DEFAULTS.colors),
   fixedSize: PropTypes.bool,
   size: PropTypes.oneOf(TEXTAREA_SIZES),
   state: PropTypes.oneOf(TEXTAREA_STATES),

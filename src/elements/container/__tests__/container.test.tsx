@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from "src/base/helpers/responsive";
+import { DEFAULTS } from "src/base/helpers/variables";
 import { Container } from "src/elements/container/container";
 
 import {
@@ -36,9 +36,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("breakpoint", () => {
-      validateOneOfPropType(propTypes, "breakpoint", BREAKPOINTS);
+      validateOneOfPropType(propTypes, "breakpoint", DEFAULTS.breakpoints);
 
-      BREAKPOINTS.map(breakpoint => {
+      DEFAULTS.breakpoints.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = makeNode({ breakpoint });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
