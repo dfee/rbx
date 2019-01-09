@@ -31,7 +31,7 @@ export const knobs = {
   gapless: (title: string = "Gapless") => boolean(title, false),
 };
 
-type ColumnNotificationProps = ColumnProps & { color?: Variables["Colors"] };
+type ColumnNotificationProps = ColumnProps & { color?: Variables["colors"] };
 const ColumnNotification: React.FC<ColumnNotificationProps> = props => {
   const { color, children, ...rest } = props;
 
