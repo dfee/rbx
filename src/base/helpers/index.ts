@@ -1,5 +1,5 @@
 import { Prefer } from "../../types";
-import { MakeRootValidatingTransformFactory } from "./factory";
+import { makeRootValidatingTransformFactory } from "./factory";
 
 import {
   FloatHelpersProps,
@@ -47,7 +47,7 @@ export type HelpersProps = Prefer<
     ResponsiveHelpersProps & { className?: string }
 >;
 
-export const makeRootValidatingTransform = MakeRootValidatingTransformFactory<
+export const makeRootValidatingTransform = makeRootValidatingTransformFactory<
   HelpersProps
 >(
   floatMVT,

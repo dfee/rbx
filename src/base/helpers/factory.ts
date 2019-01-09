@@ -34,7 +34,7 @@ export const makeValidatingTransformFactory = <T extends {}>(
   };
 };
 
-export const MakeRootValidatingTransformFactory = <TTransformProps extends {}>(
+export const makeRootValidatingTransformFactory = <TTransformProps extends {}>(
   // tslint:disable-next-line:no-any
   ...makeValidatingTransformFuncs: MakeValidatingTransformFunction<any>[]
 ): MakeValidatingTransformFunction<TTransformProps> => (

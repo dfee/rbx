@@ -77,9 +77,9 @@ export const DEFAULTS = {
 };
 
 // tslint:disable-next-line: no-empty-interface
-interface VariablesOverrides {}
+export interface VariablesOverrides {}
 
-interface VariablesDefaults {
+export interface VariablesDefaults {
   Colors: (typeof DEFAULTS.colors)[number];
   Shades: (typeof DEFAULTS.shades)[number];
 
