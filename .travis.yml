@@ -1,8 +1,12 @@
 language: node_js
 node_js:
   - "8"
+before_script:
+  - npm i -g increase-memory-limit
+  - increase-memory-limit
 script:
   - make test # run tests
   - make # ensure /src builds
   - cd docs && npm i && make # ensure /docs builds
-after_success: "make ci_publish"
+after_success:
+  - make ci_publish
