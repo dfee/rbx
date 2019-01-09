@@ -1,39 +1,51 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { SelectOption } from "./select-option";
 
-export const SELECT_CONTAINER_SIZES = tuple("small", "medium", "large");
-export type SelectContainerSizes = (typeof SELECT_CONTAINER_SIZES)[number];
+export const SELECT_CONTAINER_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+  states: tuple("focused", "hovered", "loading"),
+};
 
-export const SELECT_CONTAINER_STATES = tuple("focused", "hovered", "loading");
-export type SelectContainerStates = (typeof SELECT_CONTAINER_STATES)[number];
+export interface SelectContainerVariablesOverrides {}
+
+export interface SelectContainerVariablesDefaults {
+  sizes: (typeof SELECT_CONTAINER_DEFAULTS["sizes"])[number];
+  states: (typeof SELECT_CONTAINER_DEFAULTS["states"])[number];
+}
+
+export type SelectContainerVariables = Prefer<
+  SelectContainerVariablesOverrides,
+  SelectContainerVariablesDefaults
+>;
 
 export type SelectContainerModifierProps = Partial<{
   color: Variables["Colors"];
   fullwidth: boolean;
   rounded: boolean;
-  size: SelectContainerSizes;
-  state: SelectContainerStates;
+  size: SelectContainerVariables["sizes"];
+  state: SelectContainerVariables["states"];
 }>;
 
 export type SelectContainerProps = HelpersProps & SelectContainerModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fullwidth: PropTypes.bool,
   rounded: PropTypes.bool,
-  size: PropTypes.oneOf(SELECT_CONTAINER_SIZES),
-  state: PropTypes.oneOf(SELECT_CONTAINER_STATES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 const mapSelectContainerChildren = (
   children: React.ReactNode,
-  state?: SelectContainerStates,
+  state?: SelectContainerVariables["states"],
 ) => {
   let classNameExtension: string | undefined;
   const mapped = React.Children.map(children, (child, i) => {

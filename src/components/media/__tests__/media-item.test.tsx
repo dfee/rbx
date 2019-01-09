@@ -1,5 +1,5 @@
 import {
-  MEDIA_ITEM_POSITIONS,
+  MEDIA_ITEM_DEFAULTS,
   MediaItem,
 } from "src/components/media/media-item";
 
@@ -9,7 +9,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = MediaItem;
@@ -40,9 +40,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("position", () => {
-      validateOneOfPropType(propTypes, "position", MEDIA_ITEM_POSITIONS);
+      validateStringOrNumberPropType(propTypes, "position");
 
-      MEDIA_ITEM_POSITIONS.map(position => {
+      MEDIA_ITEM_DEFAULTS.positions.map(position => {
         it(`should be ${position}`, () => {
           const node = makeNode({ position });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

@@ -1,34 +1,42 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { HeroBody } from "./hero-body";
 import { HeroFoot } from "./hero-foot";
 import { HeroHead } from "./hero-head";
 
-export const HERO_SIZES = tuple(
-  "medium",
-  "large",
-  "fullheight",
-  "fullheight-with-navbar",
-);
-export type HeroSizes = (typeof HERO_SIZES)[number];
+export const HERO_DEFAULTS = {
+  sizes: tuple("medium", "large", "fullheight", "fullheight-with-navbar"),
+};
+
+export interface HeroVariablesOverrides {}
+
+export interface HeroVariablesDefaults {
+  sizes: (typeof HERO_DEFAULTS["sizes"])[number];
+}
+
+export type HeroVariables = Prefer<
+  HeroVariablesOverrides,
+  HeroVariablesDefaults
+>;
 
 export type HeroModifierProps = Partial<{
   color: Variables["Colors"];
   gradient: boolean;
-  size: HeroSizes;
+  size: HeroVariables["sizes"];
 }>;
 
 export type HeroProps = HelpersProps & HeroModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   gradient: PropTypes.bool,
-  size: PropTypes.oneOf(HERO_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Hero = Object.assign(

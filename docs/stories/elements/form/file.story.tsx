@@ -5,7 +5,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Control, File } from "src/elements";
-import { FILE_ALIGNMENTS, FILE_SIZES, FileProps } from "src/elements/form/file";
+import { FILE_DEFAULTS, FileProps } from "src/elements/form/file";
 import { Section } from "src/layout";
 
 import { colorKnob } from "docs/stories/common";
@@ -15,14 +15,18 @@ export const knobs = {
   align: (title: string = "Alignment") =>
     select(
       title,
-      iterableToSelectObject(FILE_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(FILE_DEFAULTS.alignments, { undefined: "" }),
       "",
     ),
   boxed: (title: string = "Boxed") => boolean(title, false),
   fullwidth: (title: string = "Fullwidth") => boolean(title, false),
   hasName: (title: string = "Has name") => boolean(title, true),
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(FILE_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(FILE_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
 };
 
 export type ControlledFileProps = Pick<

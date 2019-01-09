@@ -3,19 +3,16 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Pagination } from "src/components";
-import {
-  PAGINATION_ALIGNMENTS,
-  PAGINATION_SIZES,
-} from "src/components/pagination/pagination";
+import { PAGINATION_DEFAULTS } from "src/components/pagination/pagination";
 import { Section } from "src/layout";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
-  align: (title: string = "Position") =>
+  align: (title: string = "Alignment") =>
     select(
       title,
-      iterableToSelectObject(PAGINATION_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(PAGINATION_DEFAULTS.alignments, { undefined: "" }),
       "",
     ),
   link: {
@@ -25,7 +22,7 @@ export const knobs = {
   size: (title: string = "Size") =>
     select(
       title,
-      iterableToSelectObject(PAGINATION_SIZES, { undefined: "" }),
+      iterableToSelectObject(PAGINATION_DEFAULTS.sizes, { undefined: "" }),
       "",
     ),
 };

@@ -2,15 +2,28 @@ import classNames from "classnames";
 import React from "react";
 
 import { Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { combineRefs, tuple } from "../../utils";
 import { DropdownContext } from "./dropdown-context";
 
-export const DROPDOWN_ALIGNMENTS = tuple("right");
-export type DropdownAlignments = (typeof DROPDOWN_ALIGNMENTS)[number];
+export const DROPDOWN_DEFAULTS = {
+  alignments: tuple("right"),
+};
+
+export interface DropdownVariablesOverrides {}
+
+export interface DropdownVariablesDefaults {
+  alignments: (typeof DROPDOWN_DEFAULTS["alignments"])[number];
+}
+
+export type DropdownVariables = Prefer<
+  DropdownVariablesOverrides,
+  DropdownVariablesDefaults
+>;
 
 export type DropdownContainerModifierProps = Partial<{
   active: boolean;
-  align: DropdownAlignments;
+  align: DropdownVariables["alignments"];
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   hoverable: boolean;
   innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;

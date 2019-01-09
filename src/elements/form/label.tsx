@@ -1,25 +1,38 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
 
-export const LABEL_SIZES = tuple("small", "medium", "large");
-export type LabelSizes = (typeof LABEL_SIZES)[number];
+export const LABEL_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+};
+
+export interface LabelVariablesOverrides {}
+
+export interface LabelVariablesDefaults {
+  sizes: (typeof LABEL_DEFAULTS["sizes"])[number];
+}
+
+export type LabelVariables = Prefer<
+  LabelVariablesOverrides,
+  LabelVariablesDefaults
+>;
 
 export type LabelModifierProps = Partial<{
   disabled: boolean;
-  size: LabelSizes;
+  size: LabelVariables["sizes"];
 }>;
 
 export type LabelProps = HelpersProps & LabelModifierProps;
 
 const propTypes = {
   disabled: PropTypes.bool,
-  size: PropTypes.oneOf(LABEL_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 const identifyLabelDiscriminator = (children: React.ReactNode) => {

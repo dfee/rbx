@@ -1,29 +1,41 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const ICON_ALIGNMENTS = tuple("left", "right");
-export type IconAlignments = (typeof ICON_ALIGNMENTS)[number];
+export const ICON_DEFAULTS = {
+  alignments: tuple("left", "right"),
+  sizes: tuple("small", "medium", "large"),
+};
 
-export const ICON_SIZES = tuple("small", "medium", "large");
-export type IconSizes = (typeof ICON_SIZES)[number];
+export interface IconVariablesOverrides {}
+
+export interface IconVariablesDefaults {
+  alignments: (typeof ICON_DEFAULTS["alignments"])[number];
+  sizes: (typeof ICON_DEFAULTS["sizes"])[number];
+}
+
+export type IconVariables = Prefer<
+  IconVariablesOverrides,
+  IconVariablesDefaults
+>;
 
 export type IconModifierProps = Partial<{
-  align: IconAlignments;
+  align: IconVariables["alignments"];
   color: Variables["Colors"];
-  size: IconSizes;
+  size: IconVariables["sizes"];
 }>;
 
 export type IconProps = HelpersProps & IconModifierProps;
 
 const propTypes = {
-  align: PropTypes.oneOf(ICON_ALIGNMENTS),
-  color: PropTypes.oneOf(DEFAULTS.colors),
-  size: PropTypes.oneOf(ICON_SIZES),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Icon = Object.assign(

@@ -7,7 +7,7 @@ import {
   ThemeContextValue,
 } from "src/base/theme";
 import {
-  NAVBAR_FIXED_ALIGNMENTS,
+  NAVBAR_DEFAULTS,
   NavbarContainer,
   NavbarContainerProps,
   NavbarContainerState,
@@ -116,7 +116,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("fixed", () => {
-      NAVBAR_FIXED_ALIGNMENTS.map(fixed => {
+      NAVBAR_DEFAULTS.fixedAlignments.map(fixed => {
         it(`should be ${fixed}`, () => {
           const node = makeNode({ fixed });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

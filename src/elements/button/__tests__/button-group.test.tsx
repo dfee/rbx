@@ -1,5 +1,5 @@
 import {
-  BUTTON_GROUP_POSITIONS,
+  BUTTON_GROUP_DEFAULTS,
   ButtonGroup,
 } from "src/elements/button/button-group";
 
@@ -10,7 +10,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = ButtonGroup;
@@ -50,9 +50,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("position", () => {
-      validateOneOfPropType(propTypes, "position", BUTTON_GROUP_POSITIONS);
+      validateStringOrNumberPropType(propTypes, "position");
 
-      BUTTON_GROUP_POSITIONS.map(position => {
+      BUTTON_GROUP_DEFAULTS.positions.map(position => {
         it(`should be ${position}`, () => {
           const node = makeNode({ position });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

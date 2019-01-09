@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { Dropdown } from "src/components/dropdown/dropdown";
 import {
-  DROPDOWN_ALIGNMENTS,
+  DROPDOWN_DEFAULTS,
   DropdownContainer,
 } from "src/components/dropdown/dropdown-container";
 import { DropdownContent } from "src/components/dropdown/dropdown-content";
@@ -18,7 +18,7 @@ import {
   makeNodeFactory,
   makeTestPropForwarding,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Dropdown;
@@ -60,9 +60,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "align", DROPDOWN_ALIGNMENTS);
+      validateStringOrNumberPropType(propTypes, "align");
 
-      DROPDOWN_ALIGNMENTS.map(align => {
+      DROPDOWN_DEFAULTS.alignments.map(align => {
         testPropForwarding("align", align);
       });
     });

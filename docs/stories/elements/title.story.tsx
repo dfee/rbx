@@ -3,14 +3,18 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Title } from "src/elements";
-import { TITLE_SIZES } from "src/elements/title/title";
+import { TITLE_DEFAULTS } from "src/elements/title/title";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 import { Section } from "src/layout";
 
 export const knobs = {
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(TITLE_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(TITLE_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
   spaced: (title: string = "Spaced") => boolean(title, false),
 };
 

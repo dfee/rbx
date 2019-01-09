@@ -1,10 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import {
-  Input,
-  INPUT_SIZES,
-  INPUT_STATES,
-  INPUT_TYPES,
-} from "src/elements/form/input";
+import { Input, INPUT_DEFAULTS } from "src/elements/form/input";
 
 import {
   hasProperties,
@@ -13,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Input;
@@ -41,7 +36,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -77,9 +72,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", INPUT_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      INPUT_SIZES.map(size => {
+      INPUT_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -89,9 +84,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("state", () => {
-      validateOneOfPropType(propTypes, "state", INPUT_STATES);
+      validateStringOrNumberPropType(propTypes, "state");
 
-      INPUT_STATES.map(state => {
+      INPUT_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
           const node = makeNode({ state });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -114,9 +109,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("type", () => {
-      validateOneOfPropType(propTypes, "type", INPUT_TYPES);
+      validateStringOrNumberPropType(propTypes, "type");
 
-      INPUT_TYPES.map(isType => {
+      INPUT_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
           const node = makeNode({ type: isType });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

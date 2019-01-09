@@ -1,15 +1,28 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const TITLE_SIZES = tuple(1, 2, 3, 4, 5, 6);
-export type TitleSizes = (typeof TITLE_SIZES)[number];
+export const TITLE_DEFAULTS = {
+  sizes: tuple(1, 2, 3, 4, 5, 6),
+};
+
+export interface TitleVariablesOverrides {}
+
+export interface TitleVariablesDefaults {
+  sizes: (typeof TITLE_DEFAULTS["sizes"])[number];
+}
+
+export type TitleVariables = Prefer<
+  TitleVariablesOverrides,
+  TitleVariablesDefaults
+>;
 
 export type TitleModifierProps = Partial<{
-  size: TitleSizes;
+  size: TitleVariables["sizes"];
   spaced: boolean;
   subtitle: boolean;
 }>;
@@ -17,7 +30,7 @@ export type TitleModifierProps = Partial<{
 export type TitleProps = HelpersProps & TitleModifierProps;
 
 const propTypes = {
-  size: PropTypes.oneOf(TITLE_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   spaced: PropTypes.bool,
   subtitle: PropTypes.bool,
 };

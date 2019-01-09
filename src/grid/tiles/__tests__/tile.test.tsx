@@ -1,4 +1,4 @@
-import { Tile, TILE_KINDS, TILE_SIZES } from "src/grid/tiles/tile";
+import { Tile, TILE_DEFAULTS } from "src/grid/tiles/tile";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Tile;
@@ -35,9 +35,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("kind", () => {
-      validateOneOfPropType(propTypes, "kind", TILE_KINDS);
+      validateStringOrNumberPropType(propTypes, "kind");
 
-      TILE_KINDS.map(kind => {
+      TILE_DEFAULTS.kinds.map(kind => {
         it(`should be ${kind}`, () => {
           const node = makeNode({ kind });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -47,9 +47,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", TILE_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      TILE_SIZES.map(size => {
+      TILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

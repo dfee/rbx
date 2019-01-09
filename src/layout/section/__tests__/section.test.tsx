@@ -1,4 +1,4 @@
-import { Section, SECTION_SIZES } from "src/layout/section/section";
+import { Section, SECTION_DEFAULTS } from "src/layout/section/section";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Section;
@@ -34,9 +34,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", SECTION_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      SECTION_SIZES.map(size => {
+      SECTION_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

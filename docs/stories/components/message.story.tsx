@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Message } from "src/components";
-import { MESSAGE_SIZES } from "src/components/message/message";
+import { MESSAGE_DEFAULTS } from "src/components/message/message";
 import { Delete } from "src/elements";
 import { Section } from "src/layout";
 
@@ -12,7 +12,11 @@ import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(MESSAGE_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(MESSAGE_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
 };
 
 storiesOf("Components/Message", module)

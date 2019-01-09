@@ -11,11 +11,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Breadcrumb } from "src/components";
-import {
-  BREADCRUMB_ALIGNMENTS,
-  BREADCRUMB_SEPARATORS,
-  BREADCRUMB_SIZES,
-} from "src/components/breadcrumb/breadcrumb";
+import { BREADCRUMB_DEFAULTS } from "src/components/breadcrumb/breadcrumb";
 import { Icon } from "src/elements";
 import { Section } from "src/layout";
 
@@ -25,20 +21,20 @@ export const knobs = {
   align: (title: string = "Alignment") =>
     select(
       title,
-      iterableToSelectObject(BREADCRUMB_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(BREADCRUMB_DEFAULTS.alignments, { undefined: "" }),
       "",
     ),
   hasIcon: (title: string = "Has icon") => boolean(title, false),
   separator: (title: string = "Separator") =>
     select(
       title,
-      iterableToSelectObject(BREADCRUMB_SEPARATORS, { undefined: "" }),
+      iterableToSelectObject(BREADCRUMB_DEFAULTS.separators, { undefined: "" }),
       "",
     ),
   size: (title: string = "Size") =>
     select(
       title,
-      iterableToSelectObject(BREADCRUMB_SIZES, { undefined: "" }),
+      iterableToSelectObject(BREADCRUMB_DEFAULTS.sizes, { undefined: "" }),
       "",
     ),
 };

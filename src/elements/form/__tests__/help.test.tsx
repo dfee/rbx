@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Help;
@@ -35,7 +35,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {

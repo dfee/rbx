@@ -1,35 +1,46 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { Tab } from "./tab";
 
-export const TABS_ALIGNMENTS = tuple("centered", "right");
-export type TabsAlignments = (typeof TABS_ALIGNMENTS)[number];
+export const TABS_DEFAULTS = {
+  alignments: tuple("centered", "right"),
+  sizes: tuple("small", "medium", "large"),
+  types: tuple("boxed", "toggle", "toggle-rounded"),
+};
 
-export const TABS_SIZES = tuple("small", "medium", "large");
-export type TabsSizes = (typeof TABS_SIZES)[number];
+export interface TabsVariablesOverrides {}
 
-export const TABS_TYPES = tuple("boxed", "toggle", "toggle-rounded");
-export type TabsTypes = (typeof TABS_TYPES)[number];
+export interface TabsVariablesDefaults {
+  alignments: (typeof TABS_DEFAULTS["alignments"])[number];
+  sizes: (typeof TABS_DEFAULTS["sizes"])[number];
+  types: (typeof TABS_DEFAULTS["types"])[number];
+}
+
+export type TabsVariables = Prefer<
+  TabsVariablesOverrides,
+  TabsVariablesDefaults
+>;
 
 export type TabsModifierProps = Partial<{
-  align: TabsAlignments;
+  align: TabsVariables["alignments"];
   fullwidth: boolean;
-  size: TabsSizes;
+  size: TabsVariables["sizes"];
   /** * This is called style on Bulma documentation */
-  type: TabsTypes; // tslint:disable-line:no-reserved-keywords
+  type: TabsVariables["types"]; // tslint:disable-line:no-reserved-keywords
 }>;
 
 export type TabsProps = HelpersProps & TabsModifierProps;
 
 const propTypes = {
-  align: PropTypes.oneOf(TABS_ALIGNMENTS),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fullwidth: PropTypes.bool,
-  size: PropTypes.oneOf(TABS_SIZES),
-  type: PropTypes.oneOf(TABS_TYPES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Tabs = Object.assign(

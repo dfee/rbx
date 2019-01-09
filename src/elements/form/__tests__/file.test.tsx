@@ -1,5 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import { File, FILE_ALIGNMENTS, FILE_SIZES } from "src/elements/form/file";
+import { File, FILE_DEFAULTS } from "src/elements/form/file";
 
 import {
   hasProperties,
@@ -8,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = File;
@@ -36,9 +36,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "align", FILE_ALIGNMENTS);
+      validateStringOrNumberPropType(propTypes, "align");
 
-      FILE_ALIGNMENTS.map(align => {
+      FILE_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -60,7 +60,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -96,9 +96,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", FILE_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      FILE_SIZES.map(size => {
+      FILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

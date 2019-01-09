@@ -1,9 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import {
-  Textarea,
-  TEXTAREA_SIZES,
-  TEXTAREA_STATES,
-} from "src/elements/form/textarea";
+import { Textarea, TEXTAREA_DEFAULTS } from "src/elements/form/textarea";
 
 import {
   hasProperties,
@@ -12,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Textarea;
@@ -43,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -67,9 +63,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", TEXTAREA_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      TEXTAREA_SIZES.map(size => {
+      TEXTAREA_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -79,9 +75,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("state", () => {
-      validateOneOfPropType(propTypes, "state", TEXTAREA_STATES);
+      validateStringOrNumberPropType(propTypes, "state");
 
-      TEXTAREA_STATES.map(state => {
+      TEXTAREA_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
           const node = makeNode({ state });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

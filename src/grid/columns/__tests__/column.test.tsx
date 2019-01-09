@@ -1,5 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Column, COLUMN_SIZES } from "src/grid/columns/column";
+import { Column, COLUMN_DEFAULTS } from "src/grid/columns/column";
 
 import {
   hasProperties,
@@ -8,8 +8,8 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
   validatePropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Column;
@@ -78,9 +78,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("offset", () => {
-      validateOneOfPropType(propTypes, "offset", COLUMN_SIZES);
+      validateStringOrNumberPropType(propTypes, "offset");
 
-      COLUMN_SIZES.map(offset => {
+      COLUMN_DEFAULTS.sizes.map(offset => {
         it(`should be ${offset}`, () => {
           const node = makeNode({ offset });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -90,23 +90,23 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.breakpoints.map(breakpoint => {
         validatePropType(propTypes, breakpoint, [
-          ...COLUMN_SIZES.map(value => ({
+          ...["string", 1].map(value => ({
             descriptor: `offset = ${value}`,
             valid: true,
             value: { offset: value },
           })),
           {
-            descriptor: "offset = __UNKNOWN",
+            descriptor: "offset = obj",
             error: new RegExp(
               `Warning.+Failed prop.+ \`${breakpoint}.offset\``,
             ),
             valid: false,
-            value: { offset: "__UNKNOWN" },
+            value: { offset: {} },
           },
         ]);
 
         describe(breakpoint, () => {
-          COLUMN_SIZES.map(offset => {
+          COLUMN_DEFAULTS.sizes.map(offset => {
             it(`should be offset ${offset}`, () => {
               const node = makeNode({ [breakpoint]: { offset } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
@@ -122,9 +122,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", COLUMN_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      COLUMN_SIZES.map(size => {
+      COLUMN_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -135,22 +135,22 @@ describe(`${COMPONENT_NAME} component`, () => {
       DEFAULTS.breakpoints.map(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
-            ...COLUMN_SIZES.map(value => ({
+            ...["string", 1].map(value => ({
               descriptor: `size = ${value}`,
               valid: true,
               value: { size: value },
             })),
             {
-              descriptor: "size = __UNKNOWN",
+              descriptor: "size = object",
               error: new RegExp(
                 `Warning.+Failed prop.+ \`${breakpoint}.size\``,
               ),
               valid: false,
-              value: { size: "__UNKNOWN" },
+              value: { size: {} },
             },
           ]);
 
-          COLUMN_SIZES.map(size => {
+          COLUMN_DEFAULTS.sizes.map(size => {
             it(`should be ${size}`, () => {
               const node = makeNode({ [breakpoint]: { size } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(

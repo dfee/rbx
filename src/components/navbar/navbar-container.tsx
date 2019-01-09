@@ -3,18 +3,31 @@ import React from "react";
 
 import { Generic, HelpersProps } from "../../base";
 import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { canUseDOM, tuple } from "../../utils";
 import { NavbarContext } from "./navbar-context";
 
-export const NAVBAR_FIXED_ALIGNMENTS = tuple("top", "bottom");
-export type NavbarFixedAlignments = (typeof NAVBAR_FIXED_ALIGNMENTS)[number];
+export const NAVBAR_DEFAULTS = {
+  fixedAlignments: tuple("top", "bottom"),
+};
+
+export interface NavbarVariablesOverrides {}
+
+export interface NavbarVariablesDefaults {
+  fixedAlignments: (typeof NAVBAR_DEFAULTS["fixedAlignments"])[number];
+}
+
+export type NavbarVariables = Prefer<
+  NavbarVariablesOverrides,
+  NavbarVariablesDefaults
+>;
 
 export type NavbarContainerModifierProps = Partial<{
   /** * Determines whether the menu is displayed on mobile */
   active: boolean;
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   color: Variables["Colors"];
-  fixed: NavbarFixedAlignments;
+  fixed: NavbarVariables["fixedAlignments"];
   innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   managed: boolean;
   transparent: boolean;

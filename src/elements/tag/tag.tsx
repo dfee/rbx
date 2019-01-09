@@ -1,29 +1,39 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { TagGroup } from "./tag-group";
 
-export const TAG_SIZES = tuple("normal", "medium", "large");
-export type TagSizes = (typeof TAG_SIZES)[number];
+export const TAG_DEFAULTS = {
+  sizes: tuple("normal", "medium", "large"),
+};
+
+export interface TagVariablesOverrides {}
+
+export interface TagVariablesDefaults {
+  sizes: (typeof TAG_DEFAULTS["sizes"])[number];
+}
+
+export type TagVariables = Prefer<TagVariablesOverrides, TagVariablesDefaults>;
 
 export type TagModifierProps = Partial<{
   color: Variables["Colors"];
   delete: boolean; // tslint:disable-line:no-reserved-keywords
   rounded: boolean;
-  size: TagSizes;
+  size: TagVariables["sizes"];
 }>;
 
 export type TagProps = HelpersProps & TagModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   delete: PropTypes.bool,
   rounded: PropTypes.bool,
-  size: PropTypes.oneOf(TAG_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Tag = Object.assign(

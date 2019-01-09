@@ -3,8 +3,7 @@ import * as React from "react";
 import { DEFAULTS } from "src/base/helpers/variables";
 import {
   Select,
-  SELECT_CONTAINER_SIZES,
-  SELECT_CONTAINER_STATES,
+  SELECT_CONTAINER_DEFAULTS,
   SelectContainer,
 } from "src/elements/form/select";
 
@@ -15,7 +14,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = SelectContainer;
@@ -43,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -79,9 +78,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", SELECT_CONTAINER_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      SELECT_CONTAINER_SIZES.map(size => {
+      SELECT_CONTAINER_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -91,9 +90,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("state", () => {
-      validateOneOfPropType(propTypes, "state", SELECT_CONTAINER_STATES);
+      validateStringOrNumberPropType(propTypes, "state");
 
-      SELECT_CONTAINER_STATES.map(state => {
+      SELECT_CONTAINER_DEFAULTS.states.map(state => {
         [
           { discriminator: "select" },
           { discriminator: "component" },

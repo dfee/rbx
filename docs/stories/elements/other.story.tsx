@@ -13,14 +13,18 @@ import {
   Numeric,
   Tag,
 } from "src/elements";
-import { DELETE_SIZES } from "src/elements/other/delete";
+import { DELETE_DEFAULTS } from "src/elements/other/delete";
 import { Section } from "src/layout";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 
 export const knobs = {
   deleteSize: (title: string = "Size") =>
-    select(title, iterableToSelectObject(DELETE_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(DELETE_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
 };
 
 storiesOf("Elements/Other", module)

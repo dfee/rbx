@@ -1,5 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Hero, HERO_SIZES } from "src/layout/hero/hero";
+import { Hero, HERO_DEFAULTS } from "src/layout/hero/hero";
 import { HeroBody } from "src/layout/hero/hero-body";
 import { HeroFoot } from "src/layout/hero/hero-foot";
 import { HeroHead } from "src/layout/hero/hero-head";
@@ -11,7 +11,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Hero;
@@ -42,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -66,9 +66,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", HERO_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      HERO_SIZES.map(size => {
+      HERO_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

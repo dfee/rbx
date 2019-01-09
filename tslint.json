@@ -37,6 +37,8 @@
     // https://github.com/palantir/tslint/issues/3646
     "newline-per-chained-call": false,
     "no-angle-bracket-type-assertion": true,
+    // We want to support Overrides interfaces
+    "no-empty-interface": false,
     "no-implicit-dependencies": {
       "options": ["dev", ["src", "docs", "classNames"]],
       "severity": "default"

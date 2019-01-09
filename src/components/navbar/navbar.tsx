@@ -1,16 +1,11 @@
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs } from "../../base";
-import { DEFAULTS } from "../../base/helpers/variables";
 import { Omit } from "../../types";
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
-import {
-  NAVBAR_FIXED_ALIGNMENTS,
-  NavbarContainer,
-  NavbarContainerProps,
-} from "./navbar-container";
+import { NavbarContainer, NavbarContainerProps } from "./navbar-container";
 import { NavbarContext } from "./navbar-context";
 import { NavbarDivider } from "./navbar-divider";
 import { NavbarDropdown } from "./navbar-dropdown";
@@ -24,8 +19,8 @@ export type NavbarProps = Omit<NavbarContainerProps, "as" | "innerRef">;
 
 const propTypes = {
   active: PropTypes.bool,
-  color: PropTypes.oneOf(DEFAULTS.colors),
-  fixed: PropTypes.oneOf(NAVBAR_FIXED_ALIGNMENTS),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   managed: PropTypes.bool,
   transparent: PropTypes.bool,
 };

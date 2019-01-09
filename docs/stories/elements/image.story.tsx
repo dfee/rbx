@@ -5,8 +5,8 @@ import { storiesOf } from "@storybook/react";
 
 import { Image } from "src/elements";
 import {
-  IMAGE_CONTAINER_SIZES,
-  ImageContainerSizes,
+  IMAGE_CONTAINER_DEFAULTS,
+  ImageContainerVariables,
 } from "src/elements/image/image-container";
 
 import { iterableToSelectObject } from "docs/stories/utils";
@@ -18,7 +18,9 @@ export const knobs = {
       select(
         title,
         iterableToSelectObject(
-          IMAGE_CONTAINER_SIZES.filter(value => typeof value === "number"),
+          IMAGE_CONTAINER_DEFAULTS.sizes.filter(
+            value => typeof value === "number",
+          ),
           { undefined: "" },
         ),
         "128",
@@ -27,7 +29,9 @@ export const knobs = {
       select(
         title,
         iterableToSelectObject(
-          IMAGE_CONTAINER_SIZES.filter(value => typeof value === "string"),
+          IMAGE_CONTAINER_DEFAULTS.sizes.filter(
+            value => typeof value === "string",
+          ),
           { undefined: "" },
         ),
         "square",
@@ -46,7 +50,9 @@ storiesOf("Elements/Image", module)
     const size = knobs.container.fixedSize();
 
     return (
-      <Image.Container size={parseInt(size, 10) as ImageContainerSizes}>
+      <Image.Container
+        size={parseInt(size, 10) as ImageContainerVariables["sizes"]}
+      >
         <Image
           src={`https://bulma.io/images/placeholders/${size}x${size}.png`}
         />

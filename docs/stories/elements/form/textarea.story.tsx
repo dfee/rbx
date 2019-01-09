@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Control, Textarea } from "src/elements/form";
-import { TEXTAREA_SIZES, TEXTAREA_STATES } from "src/elements/form/textarea";
+import { TEXTAREA_DEFAULTS } from "src/elements/form/textarea";
 import { Section } from "src/layout";
 
 import { colorKnob } from "docs/stories/common";
@@ -23,13 +23,13 @@ export const knobs = {
   size: (title: string = "Size") =>
     select(
       title,
-      iterableToSelectObject(TEXTAREA_SIZES, { undefined: "" }),
+      iterableToSelectObject(TEXTAREA_DEFAULTS.sizes, { undefined: "" }),
       "",
     ),
   state: (title: string = "State") =>
     select(
       title,
-      iterableToSelectObject(TEXTAREA_STATES, { undefined: "" }),
+      iterableToSelectObject(TEXTAREA_DEFAULTS.states, { undefined: "" }),
       "",
     ),
 };

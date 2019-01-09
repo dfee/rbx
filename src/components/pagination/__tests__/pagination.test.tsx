@@ -1,7 +1,6 @@
 import {
   Pagination,
-  PAGINATION_ALIGNMENTS,
-  PAGINATION_SIZES,
+  PAGINATION_DEFAULTS,
 } from "src/components/pagination/pagination";
 import { PaginationEllipsis } from "src/components/pagination/pagination-ellipsis";
 import { PaginationLink } from "src/components/pagination/pagination-link";
@@ -16,7 +15,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Pagination;
@@ -49,9 +48,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "align", PAGINATION_ALIGNMENTS);
+      validateStringOrNumberPropType(propTypes, "align");
 
-      PAGINATION_ALIGNMENTS.map(align => {
+      PAGINATION_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -73,9 +72,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", PAGINATION_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      PAGINATION_SIZES.map(size => {
+      PAGINATION_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

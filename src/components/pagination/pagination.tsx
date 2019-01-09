@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { PaginationEllipsis } from "./pagination-ellipsis";
 import { PaginationLink } from "./pagination-link";
@@ -10,24 +11,35 @@ import { PaginationList } from "./pagination-list";
 import { PaginationNext } from "./pagination-next";
 import { PaginationPrevious } from "./pagination-previous";
 
-export const PAGINATION_ALIGNMENTS = tuple("centered", "right");
-export type PaginationAlignments = (typeof PAGINATION_ALIGNMENTS)[number];
+export const PAGINATION_DEFAULTS = {
+  alignments: tuple("centered", "right"),
+  sizes: tuple("small", "medium", "large"),
+};
 
-export const PAGINATION_SIZES = tuple("small", "medium", "large");
-export type PaginationSizes = (typeof PAGINATION_SIZES)[number];
+export interface PaginationVariablesOverrides {}
+
+export interface PaginationVariablesDefaults {
+  alignments: (typeof PAGINATION_DEFAULTS["alignments"])[number];
+  sizes: (typeof PAGINATION_DEFAULTS["sizes"])[number];
+}
+
+export type PaginationVariables = Prefer<
+  PaginationVariablesOverrides,
+  PaginationVariablesDefaults
+>;
 
 export type PaginationModifiers = Partial<{
-  align: PaginationAlignments;
+  align: PaginationVariables["alignments"];
   rounded: boolean;
-  size: PaginationSizes;
+  size: PaginationVariables["sizes"];
 }>;
 
 export type PaginationProps = HelpersProps & PaginationModifiers;
 
 const propTypes = {
-  align: PropTypes.oneOf(PAGINATION_ALIGNMENTS),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   rounded: PropTypes.bool,
-  size: PropTypes.oneOf(PAGINATION_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Pagination = Object.assign(

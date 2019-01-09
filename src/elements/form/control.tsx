@@ -1,19 +1,32 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const CONTROL_SIZES = tuple("small", "medium", "large");
-export type ControlSizes = (typeof CONTROL_SIZES)[number];
+export const CONTROL_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+};
+
+export interface ControlVariablesOverrides {}
+
+export interface ControlVariablesDefaults {
+  sizes: (typeof CONTROL_DEFAULTS["sizes"])[number];
+}
+
+export type ControlVariables = Prefer<
+  ControlVariablesOverrides,
+  ControlVariablesDefaults
+>;
 
 export type ControlModifierProps = Partial<{
   expanded: boolean;
   iconLeft: boolean;
   iconRight: boolean;
   loading: boolean;
-  size: ControlSizes;
+  size: ControlVariables["sizes"];
 }>;
 
 export type ControlProps = HelpersProps & ControlModifierProps;
@@ -23,7 +36,7 @@ const propTypes = {
   iconLeft: PropTypes.bool,
   iconRight: PropTypes.bool,
   loading: PropTypes.bool,
-  size: PropTypes.oneOf(CONTROL_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Control = Object.assign(

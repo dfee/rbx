@@ -8,7 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Container;
@@ -36,7 +36,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("breakpoint", () => {
-      validateOneOfPropType(propTypes, "breakpoint", DEFAULTS.breakpoints);
+      validateStringOrNumberPropType(propTypes, "breakpoint");
 
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {

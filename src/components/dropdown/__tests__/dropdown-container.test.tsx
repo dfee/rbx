@@ -6,7 +6,7 @@ import {
   ThemeContextValue,
 } from "src/base/theme";
 import {
-  DROPDOWN_ALIGNMENTS,
+  DROPDOWN_DEFAULTS,
   DropdownContainer,
   DropdownContainerProps,
   DropdownContainerState,
@@ -70,7 +70,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("align", () => {
-      DROPDOWN_ALIGNMENTS.map(align => {
+      DROPDOWN_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

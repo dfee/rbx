@@ -1,46 +1,58 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const IMAGE_CONTAINER_SIZES = tuple(
-  16,
-  24,
-  32,
-  48,
-  64,
-  96,
-  128,
-  "16by9",
-  "1by1",
-  "1by2",
-  "1by3",
-  "2by1",
-  "2by3",
-  "3by1",
-  "3by2",
-  "3by4",
-  "3by5",
-  "4by3",
-  "4by5",
-  "5by3",
-  "5by4",
-  "9by16",
-  "square",
-);
+export const IMAGE_CONTAINER_DEFAULTS = {
+  sizes: tuple(
+    16,
+    24,
+    32,
+    48,
+    64,
+    96,
+    128,
+    "16by9",
+    "1by1",
+    "1by2",
+    "1by3",
+    "2by1",
+    "2by3",
+    "3by1",
+    "3by2",
+    "3by4",
+    "3by5",
+    "4by3",
+    "4by5",
+    "5by3",
+    "5by4",
+    "9by16",
+    "square",
+  ),
+};
 
-export type ImageContainerSizes = (typeof IMAGE_CONTAINER_SIZES)[number];
+export interface ImageContainerVariablesOverrides {}
+
+export interface ImageContainerVariablesDefaults {
+  sizes: (typeof IMAGE_CONTAINER_DEFAULTS["sizes"])[number];
+}
+
+export type ImageContainerVariables = Prefer<
+  ImageContainerVariablesOverrides,
+  ImageContainerVariablesDefaults
+>;
 
 export type ImageContainerModifierProps = Partial<{
-  size: ImageContainerSizes;
+  size: ImageContainerVariables["sizes"];
 }>;
 
 export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 
 const propTypes = {
-  size: PropTypes.oneOf(IMAGE_CONTAINER_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const ImageContainer = Object.assign(

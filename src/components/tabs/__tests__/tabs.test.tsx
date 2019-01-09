@@ -1,12 +1,7 @@
 import * as React from "react";
 
 import { Tab } from "src/components/tabs/tab";
-import {
-  Tabs,
-  TABS_ALIGNMENTS,
-  TABS_SIZES,
-  TABS_TYPES,
-} from "src/components/tabs/tabs";
+import { Tabs, TABS_DEFAULTS } from "src/components/tabs/tabs";
 
 import {
   hasProperties,
@@ -15,7 +10,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Tabs;
@@ -44,9 +39,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "align", TABS_ALIGNMENTS);
+      validateStringOrNumberPropType(propTypes, "align");
 
-      TABS_ALIGNMENTS.map(align => {
+      TABS_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -79,9 +74,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", TABS_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      TABS_SIZES.map(size => {
+      TABS_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -91,9 +86,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("type", () => {
-      validateOneOfPropType(propTypes, "type", TABS_TYPES);
+      validateStringOrNumberPropType(propTypes, "type");
 
-      TABS_TYPES.map(isType => {
+      TABS_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
           const node = makeNode({ type: isType });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Checkbox } from "src/elements/form/checkbox";
 import { Input } from "src/elements/form/input";
-import { Label, LABEL_SIZES } from "src/elements/form/label";
+import { Label, LABEL_DEFAULTS } from "src/elements/form/label";
 import { Radio } from "src/elements/form/radio";
 
 import {
@@ -12,7 +12,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Label;
@@ -100,9 +100,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", LABEL_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      LABEL_SIZES.map(size => {
+      LABEL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

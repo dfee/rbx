@@ -1,27 +1,39 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const TILE_KINDS = tuple("ancestor", "parent", "child");
-export type TileKinds = (typeof TILE_KINDS)[number];
+export const TILE_DEFAULTS = {
+  kinds: tuple("ancestor", "parent", "child"),
+  sizes: tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+};
 
-export const TILE_SIZES = tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-export type TileSizes = (typeof TILE_SIZES)[number];
+export interface TileVariablesOverrides {}
+
+export interface TileVariablesDefaults {
+  kinds: (typeof TILE_DEFAULTS["kinds"])[number];
+  sizes: (typeof TILE_DEFAULTS["sizes"])[number];
+}
+
+export type TileVariables = Prefer<
+  TileVariablesOverrides,
+  TileVariablesDefaults
+>;
 
 export type TileModifierProps = Partial<{
-  kind: TileKinds;
-  size: TileSizes;
+  kind: TileVariables["kinds"];
+  size: TileVariables["sizes"];
   vertical: boolean;
 }>;
 
 export type TileProps = HelpersProps & TileModifierProps;
 
 const propTypes = {
-  kind: PropTypes.oneOf(TILE_KINDS),
-  size: PropTypes.oneOf(TILE_SIZES),
+  kind: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   vertical: PropTypes.bool,
 };
 

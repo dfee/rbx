@@ -6,7 +6,7 @@ import { Navbar } from "src/components/navbar/navbar";
 import { NavbarBrand } from "src/components/navbar/navbar-brand";
 import { NavbarBurger } from "src/components/navbar/navbar-burger";
 import {
-  NAVBAR_FIXED_ALIGNMENTS,
+  NAVBAR_DEFAULTS,
   NavbarContainer,
 } from "src/components/navbar/navbar-container";
 import { NavbarContext } from "src/components/navbar/navbar-context";
@@ -23,7 +23,7 @@ import {
   makeNodeFactory,
   makeTestPropForwarding,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Navbar;
@@ -72,7 +72,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         testPropForwarding("color", color);
@@ -80,9 +80,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("fixed", () => {
-      validateOneOfPropType(propTypes, "fixed", NAVBAR_FIXED_ALIGNMENTS);
+      validateStringOrNumberPropType(propTypes, "fixed");
 
-      NAVBAR_FIXED_ALIGNMENTS.map(fixed => {
+      NAVBAR_DEFAULTS.fixedAlignments.map(fixed => {
         testPropForwarding("fixed", fixed);
       });
     });

@@ -1,37 +1,43 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 
-export const BREADCRUMB_ALIGNMENTS = tuple("centered", "right");
-export type BreadacrumbAlignments = (typeof BREADCRUMB_ALIGNMENTS)[number];
+export const BREADCRUMB_DEFAULTS = {
+  alignments: tuple("centered", "right"),
+  separators: tuple("arrow", "bullet", "dot", "succeeds"),
+  sizes: tuple("small", "medium", "large"),
+};
 
-export const BREADCRUMB_SEPARATORS = tuple(
-  "arrow",
-  "bullet",
-  "dot",
-  "succeeds",
-);
-export type BreadcrumbSeparators = (typeof BREADCRUMB_SEPARATORS)[number];
+export interface BreadcrumbVariablesOverrides {}
 
-export const BREADCRUMB_SIZES = tuple("small", "medium", "large");
-export type BreadacrumbSizes = (typeof BREADCRUMB_SIZES)[number];
+export interface BreadcrumbVariablesDefaults {
+  alignments: (typeof BREADCRUMB_DEFAULTS["alignments"])[number];
+  separators: (typeof BREADCRUMB_DEFAULTS["separators"])[number];
+  sizes: (typeof BREADCRUMB_DEFAULTS["sizes"])[number];
+}
+
+export type BreadcrumbVariables = Prefer<
+  BreadcrumbVariablesOverrides,
+  BreadcrumbVariablesDefaults
+>;
 
 export type BreadcrumbModifierProps = Partial<{
-  align: BreadacrumbAlignments;
-  separator: BreadcrumbSeparators;
-  size: BreadacrumbSizes;
+  align: BreadcrumbVariables["alignments"];
+  separator: BreadcrumbVariables["separators"];
+  size: BreadcrumbVariables["sizes"];
 }>;
 
 export type BreadcrumbProps = HelpersProps & BreadcrumbModifierProps;
 
 const propTypes = {
-  align: PropTypes.oneOf(BREADCRUMB_ALIGNMENTS),
-  separator: PropTypes.oneOf(BREADCRUMB_SEPARATORS),
-  size: PropTypes.oneOf(BREADCRUMB_SIZES),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  separator: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Breadcrumb = Object.assign(

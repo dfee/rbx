@@ -1,5 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Message, MESSAGE_SIZES } from "src/components/message/message";
+import { Message, MESSAGE_DEFAULTS } from "src/components/message/message";
 import { MessageBody } from "src/components/message/message-body";
 import { MessageHeader } from "src/components/message/message-header";
 
@@ -9,7 +9,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Message;
@@ -39,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -51,9 +51,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", MESSAGE_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      MESSAGE_SIZES.map(size => {
+      MESSAGE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

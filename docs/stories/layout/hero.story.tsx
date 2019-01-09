@@ -7,7 +7,7 @@ import React from "react";
 import { Navbar, Tabs } from "src/components";
 import { Button, Container, Icon, Title } from "src/elements";
 import { Hero } from "src/layout";
-import { HERO_SIZES } from "src/layout/hero/hero";
+import { HERO_DEFAULTS } from "src/layout/hero/hero";
 
 import { colorKnob } from "docs/stories/common";
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
@@ -15,7 +15,11 @@ import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 export const knobs = {
   gradient: (title: string = "Gradient") => boolean(title, false),
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(HERO_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(HERO_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
 };
 
 storiesOf("Layout/Hero", module)

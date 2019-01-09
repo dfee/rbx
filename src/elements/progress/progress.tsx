@@ -1,27 +1,40 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const PROGRESS_SIZES = tuple("small", "medium", "large");
-export type ProgressSizes = (typeof PROGRESS_SIZES)[number];
+export const PROGRESS_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+};
+
+export interface ProgressVariablesOverrides {}
+
+export interface ProgressVariablesDefaults {
+  sizes: (typeof PROGRESS_DEFAULTS["sizes"])[number];
+}
+
+export type ProgressVariables = Prefer<
+  ProgressVariablesOverrides,
+  ProgressVariablesDefaults
+>;
 
 export interface ProgressModifierProps {
   color?: Variables["Colors"];
   max: number;
-  size?: ProgressSizes;
+  size?: ProgressVariables["sizes"];
   value: number;
 }
 
 export type ProgressProps = HelpersProps & ProgressModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   max: PropTypes.number.isRequired,
-  size: PropTypes.oneOf(PROGRESS_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: PropTypes.number.isRequired,
 };
 

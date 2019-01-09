@@ -1,4 +1,4 @@
-import { Control, CONTROL_SIZES } from "src/elements/form/control";
+import { Control, CONTROL_DEFAULTS } from "src/elements/form/control";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Control;
@@ -83,9 +83,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", CONTROL_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      CONTROL_SIZES.map(size => {
+      CONTROL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

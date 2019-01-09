@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
 
 export type NotificationModifierProps = Partial<{
   color: Variables["Colors"];
@@ -13,7 +13,7 @@ export type NotificationModifierProps = Partial<{
 export type NotificationProps = HelpersProps & NotificationModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Notification = Object.assign(

@@ -8,13 +8,15 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Icon } from "src/elements";
-import { ICON_ALIGNMENTS, ICON_SIZES, IconSizes } from "src/elements/icon/icon";
+import { ICON_DEFAULTS, IconVariables } from "src/elements/icon/icon";
 
 import { colorKnob } from "docs/stories/common";
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 import { Section } from "src/layout";
 
-const faSizeMap: { [k in IconSizes | "default"]: FAProps["size"] } = {
+const faSizeMap: {
+  [k in IconVariables["sizes"] | "default"]: FAProps["size"]
+} = {
   default: "1x",
   large: "3x",
   medium: "2x",
@@ -25,7 +27,7 @@ export const knobs = {
   align: (title: string = "Align") =>
     select(
       title,
-      iterableToSelectObject(ICON_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(ICON_DEFAULTS.alignments, { undefined: "" }),
       "",
     ),
   fontAwesome: {
@@ -50,7 +52,11 @@ export const knobs = {
     spin: (title: string = "Spin") => boolean(title, false),
   },
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(ICON_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(ICON_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
 };
 
 storiesOf("Elements/Icon", module)
@@ -74,7 +80,9 @@ storiesOf("Elements/Icon", module)
 
     const faIconSize =
       faSizeMap[
-        iconProps.size === undefined ? "default" : (iconProps.size as IconSizes)
+        iconProps.size === undefined
+          ? "default"
+          : (iconProps.size as IconVariables["sizes"])
       ];
 
     return (

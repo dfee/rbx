@@ -19,10 +19,10 @@ import {
   Label,
   Select,
 } from "src/elements";
-import { CONTROL_SIZES } from "src/elements/form/control";
-import { FIELD_ALIGNMENTS } from "src/elements/form/field";
-import { INPUT_SIZES } from "src/elements/form/input";
-import { LABEL_SIZES } from "src/elements/form/label";
+import { CONTROL_DEFAULTS } from "src/elements/form/control";
+import { FIELD_DEFAULTS } from "src/elements/form/field";
+import { INPUT_DEFAULTS } from "src/elements/form/input";
+import { LABEL_DEFAULTS } from "src/elements/form/label";
 import { Columns } from "src/grid";
 import { Section } from "src/layout";
 
@@ -33,7 +33,7 @@ export const knobs = {
   align: (title: string = "Alignment") =>
     select(
       title,
-      iterableToSelectObject(FIELD_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(FIELD_DEFAULTS.alignments, { undefined: "" }),
       "",
     ),
   control: {
@@ -42,17 +42,25 @@ export const knobs = {
     size: (title: string = "Size") =>
       select(
         title,
-        iterableToSelectObject(CONTROL_SIZES, { undefined: "" }),
+        iterableToSelectObject(CONTROL_DEFAULTS.sizes, { undefined: "" }),
         "",
       ),
   },
   input: {
     size: (title: string = "Size") =>
-      select(title, iterableToSelectObject(INPUT_SIZES, { undefined: "" }), ""),
+      select(
+        title,
+        iterableToSelectObject(INPUT_DEFAULTS.sizes, { undefined: "" }),
+        "",
+      ),
   },
   label: {
     size: (title: string = "Size") =>
-      select(title, iterableToSelectObject(LABEL_SIZES, { undefined: "" }), ""),
+      select(
+        title,
+        iterableToSelectObject(LABEL_DEFAULTS.sizes, { undefined: "" }),
+        "",
+      ),
   },
 };
 

@@ -1,9 +1,10 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
 import { FileCTA } from "./file-cta";
@@ -12,30 +13,41 @@ import { FileInput } from "./file-input";
 import { FileLabel } from "./file-label";
 import { FileName } from "./file-name";
 
-export const FILE_ALIGNMENTS = tuple("centered", "right");
-export type FileAlignmnts = (typeof FILE_ALIGNMENTS)[number];
+export const FILE_DEFAULTS = {
+  alignments: tuple("centered", "right"),
+  sizes: tuple("small", "medium", "large"),
+};
 
-export const FILE_SIZES = tuple("small", "medium", "large");
-export type FileSizes = (typeof FILE_SIZES)[number];
+export interface FileVariablesOverrides {}
+
+export interface FileVariablesDefaults {
+  alignments: (typeof FILE_DEFAULTS["alignments"])[number];
+  sizes: (typeof FILE_DEFAULTS["sizes"])[number];
+}
+
+export type FileVariables = Prefer<
+  FileVariablesOverrides,
+  FileVariablesDefaults
+>;
 
 export type FileModifierProps = Partial<{
-  align: FileAlignmnts;
+  align: FileVariables["alignments"];
   boxed: boolean;
   color: Variables["Colors"];
   fullwidth: boolean;
   hasName: boolean;
-  size: FileSizes;
+  size: FileVariables["sizes"];
 }>;
 
 export type FileProps = HelpersProps & FileModifierProps;
 
 const propTypes = {
-  align: PropTypes.oneOf(FILE_ALIGNMENTS),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   boxed: PropTypes.bool,
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fullwidth: PropTypes.bool,
   hasName: PropTypes.bool,
-  size: PropTypes.oneOf(FILE_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const File = Object.assign(

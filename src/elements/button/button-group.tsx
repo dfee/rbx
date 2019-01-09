@@ -1,23 +1,36 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const BUTTON_GROUP_POSITIONS = tuple("centered", "right");
-export type ButtonGroupPositions = (typeof BUTTON_GROUP_POSITIONS)[number];
+export const BUTTON_GROUP_DEFAULTS = {
+  positions: tuple("centered", "right"),
+};
+
+export interface ButtonGroupVariablesOverrides {}
+
+export interface ButtonGroupVariablesDefaults {
+  positions: (typeof BUTTON_GROUP_DEFAULTS["positions"])[number];
+}
+
+export type ButtonGroupVariables = Prefer<
+  ButtonGroupVariablesOverrides,
+  ButtonGroupVariablesDefaults
+>;
 
 export type ButtonGroupModifierProps = Partial<{
   hasAddons: boolean;
-  position: ButtonGroupPositions;
+  position: ButtonGroupVariables["positions"];
 }>;
 
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
 const propTypes = {
   hasAddons: PropTypes.bool,
-  position: PropTypes.oneOf(BUTTON_GROUP_POSITIONS),
+  position: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const ButtonGroup = Object.assign(

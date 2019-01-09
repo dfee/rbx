@@ -3,12 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Control, Input } from "src/elements";
-import {
-  INPUT_SIZES,
-  INPUT_STATES,
-  INPUT_TYPES,
-  InputProps,
-} from "src/elements/form/input";
+import { INPUT_DEFAULTS, InputProps } from "src/elements/form/input";
 import { Section } from "src/layout";
 import { Prefer } from "src/types";
 
@@ -56,12 +51,24 @@ export const knobs = {
   readOnly: (title: string = "Read only") => boolean(title, false),
   rounded: (title: string = "Rounded") => boolean(title, false),
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(INPUT_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(INPUT_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
   state: (title: string = "State") =>
-    select(title, iterableToSelectObject(INPUT_STATES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(INPUT_DEFAULTS.states, { undefined: "" }),
+      "",
+    ),
   static: (title: string = "Static") => boolean(title, false),
   type: (title: string = "Type") =>
-    select(title, iterableToSelectObject(INPUT_TYPES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(INPUT_DEFAULTS.types, { undefined: "" }),
+      "",
+    ),
   value: (title: string = "Value") => text(title, ""),
 };
 

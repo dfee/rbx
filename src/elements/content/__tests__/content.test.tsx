@@ -1,4 +1,4 @@
-import { Content, CONTENT_SIZES } from "src/elements/content/content";
+import { Content, CONTENT_DEFAULTS } from "src/elements/content/content";
 import { ContentOrderedList } from "src/elements/content/content-ordered-list";
 
 import {
@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Content;
@@ -36,9 +36,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", CONTENT_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      CONTENT_SIZES.map(size => {
+      CONTENT_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

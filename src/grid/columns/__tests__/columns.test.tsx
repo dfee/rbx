@@ -1,6 +1,6 @@
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Column } from "src/grid/columns/column";
-import { Columns, COLUMNS_GAP_SIZES } from "src/grid/columns/columns";
+import { Columns, COLUMNS_DEFAULTS } from "src/grid/columns/columns";
 
 import {
   hasProperties,
@@ -9,8 +9,8 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
   validatePropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Columns;
@@ -42,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("breakpoints", () => {
-      validateOneOfPropType(propTypes, "breakpoint", DEFAULTS.breakpoints);
+      validateStringOrNumberPropType(propTypes, "breakpoint");
 
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should have breakpoint ${breakpoint}`, () => {
@@ -81,9 +81,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("gapSize", () => {
-      validateOneOfPropType(propTypes, "gapSize", COLUMNS_GAP_SIZES);
+      validateStringOrNumberPropType(propTypes, "gapSize");
 
-      COLUMNS_GAP_SIZES.map(gapSize => {
+      COLUMNS_DEFAULTS.gapSizes.map(gapSize => {
         it(`should have gapSize ${gapSize}`, () => {
           const node = makeNode({ gapSize });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -95,22 +95,22 @@ describe(`${COMPONENT_NAME} component`, () => {
       DEFAULTS.breakpoints.map(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
-            ...COLUMNS_GAP_SIZES.map(value => ({
+            ...["string", 1].map(value => ({
               descriptor: `gapSize = ${value}`,
               valid: true,
               value: { gapSize: value },
             })),
             {
-              descriptor: "gapSize = 'string'",
+              descriptor: "gapSize = object",
               error: new RegExp(
                 `Warning.+Failed prop.+ \`${breakpoint}.gapSize\``,
               ),
               valid: false,
-              value: { gapSize: "__UNKNOWN" },
+              value: { gapSize: {} },
             },
           ]);
 
-          COLUMNS_GAP_SIZES.map(gapSize => {
+          COLUMNS_DEFAULTS.gapSizes.map(gapSize => {
             it(`should have gapSize ${gapSize}`, () => {
               const node = makeNode({ [breakpoint]: { gapSize } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(

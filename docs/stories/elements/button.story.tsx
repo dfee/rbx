@@ -17,12 +17,8 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Button, Icon } from "src/elements";
-import {
-  BUTTON_SIZES,
-  BUTTON_STATES,
-  ButtonSizes,
-} from "src/elements/button/button";
-import { BUTTON_GROUP_POSITIONS } from "src/elements/button/button-group";
+import { BUTTON_DEFAULTS } from "src/elements/button/button";
+import { BUTTON_GROUP_DEFAULTS } from "src/elements/button/button-group";
 import { Section } from "src/layout";
 
 import {
@@ -38,9 +34,17 @@ export const knobs = {
   outlined: (title: string = "Outlined") => boolean(title, false),
   rounded: (title: string = "Rounded") => boolean(title, false),
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(BUTTON_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(BUTTON_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
   state: (title: string = "State") =>
-    select(title, iterableToSelectObject(BUTTON_STATES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(BUTTON_DEFAULTS.states, { undefined: "" }),
+      "",
+    ),
   static: (title: string = "Static") => boolean(title, false),
   text: (title: string = "Text") => boolean(title, false),
 };
@@ -126,16 +130,14 @@ storiesOf("Elements/Button", module)
       </Button.Group>
 
       <Button.Group>
-        {(["small", undefined, "medium", "large"] as ButtonSizes[]).map(
-          (size, i) => (
-            <Button size={size} key={i}>
-              <Icon>
-                <FontAwesomeIcon icon={faGithub} />
-              </Icon>
-              <span>GitHub</span>
-            </Button>
-          ),
-        )}
+        {[...BUTTON_DEFAULTS.sizes, undefined].map((size, i) => (
+          <Button size={size} key={i}>
+            <Icon>
+              <FontAwesomeIcon icon={faGithub} />
+            </Icon>
+            <span>GitHub</span>
+          </Button>
+        ))}
       </Button.Group>
     </React.Fragment>
   ))
@@ -253,7 +255,7 @@ storiesOf("Elements/Button", module)
       </Section>
 
       <Section>
-        {BUTTON_GROUP_POSITIONS.map(position => (
+        {BUTTON_GROUP_DEFAULTS.positions.map(position => (
           <Button.Group hasAddons position={position}>
             <Button>Yes</Button>
             <Button>Maybe</Button>

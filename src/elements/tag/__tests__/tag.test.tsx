@@ -1,5 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Tag, TAG_SIZES } from "src/elements/tag/tag";
+import { Tag, TAG_DEFAULTS } from "src/elements/tag/tag";
 import { TagGroup } from "src/elements/tag/tag-group";
 
 import {
@@ -9,7 +9,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Tag;
@@ -38,7 +38,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -78,9 +78,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", TAG_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      TAG_SIZES.map(size => {
+      TAG_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

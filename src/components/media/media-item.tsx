@@ -1,21 +1,34 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const MEDIA_ITEM_POSITIONS = tuple("content", "left", "right");
-export type MediaItemPositions = (typeof MEDIA_ITEM_POSITIONS)[number];
+export const MEDIA_ITEM_DEFAULTS = {
+  positions: tuple("content", "left", "right"),
+};
+
+export interface MediaItemVariablesOverrides {}
+
+export interface MediaItemVariablesDefaults {
+  positions: (typeof MEDIA_ITEM_DEFAULTS["positions"])[number];
+}
+
+export type MediaItemVariables = Prefer<
+  MediaItemVariablesOverrides,
+  MediaItemVariablesDefaults
+>;
 
 export type MediaItemModifierProps = Partial<{
-  position: MediaItemPositions;
+  position: MediaItemVariables["positions"];
 }>;
 
 export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 
 const propTypes = {
-  position: PropTypes.oneOf(MEDIA_ITEM_POSITIONS),
+  position: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const MediaItem = Object.assign(

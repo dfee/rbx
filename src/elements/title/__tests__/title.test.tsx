@@ -1,4 +1,4 @@
-import { Title, TITLE_SIZES } from "src/elements/title/title";
+import { Title, TITLE_DEFAULTS } from "src/elements/title/title";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Title;
@@ -65,9 +65,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", TITLE_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      TITLE_SIZES.map(size => {
+      TITLE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

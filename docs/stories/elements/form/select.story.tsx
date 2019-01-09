@@ -5,10 +5,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Control, Icon, Select } from "src/elements";
-import {
-  SELECT_CONTAINER_SIZES,
-  SELECT_CONTAINER_STATES,
-} from "src/elements/form/select";
+import { SELECT_CONTAINER_DEFAULTS } from "src/elements/form/select";
 import { Section } from "src/layout";
 
 import { colorKnob } from "docs/stories/common";
@@ -21,13 +18,17 @@ export const knobs = {
     size: (title: string = "Size") =>
       select(
         title,
-        iterableToSelectObject(SELECT_CONTAINER_SIZES, { undefined: "" }),
+        iterableToSelectObject(SELECT_CONTAINER_DEFAULTS.sizes, {
+          undefined: "",
+        }),
         "",
       ),
     state: (title: string = "State") =>
       select(
         title,
-        iterableToSelectObject(SELECT_CONTAINER_STATES, { undefined: "" }),
+        iterableToSelectObject(SELECT_CONTAINER_DEFAULTS.states, {
+          undefined: "",
+        }),
         "",
       ),
   },

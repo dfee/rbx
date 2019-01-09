@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Navbar } from "src/components";
-import { NAVBAR_FIXED_ALIGNMENTS } from "src/components/navbar/navbar-container";
+import { NAVBAR_DEFAULTS } from "src/components/navbar/navbar-container";
 import { Button } from "src/elements";
 import { Section } from "src/layout";
 
@@ -19,7 +19,9 @@ export const knobs = {
   fixed: (title: string = "Fixed") =>
     select(
       title,
-      iterableToSelectObject(NAVBAR_FIXED_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(NAVBAR_DEFAULTS.fixedAlignments, {
+        undefined: "",
+      }),
       "",
     ),
   item: {

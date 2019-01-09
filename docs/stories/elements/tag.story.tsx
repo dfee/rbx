@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Control, Delete, Field, Tag } from "src/elements";
-import { TAG_SIZES } from "src/elements/tag/tag";
+import { TAG_DEFAULTS } from "src/elements/tag/tag";
 import { Section } from "src/layout";
 
 import { colorKnob } from "docs/stories/common";
@@ -15,7 +15,7 @@ export const knobs = {
   size: (title: string = "Size") =>
     select(
       title,
-      iterableToSelectObject(TAG_SIZES, { undefined: "" }),
+      iterableToSelectObject(TAG_DEFAULTS.sizes, { undefined: "" }),
       "normal",
     ),
 };

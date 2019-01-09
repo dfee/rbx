@@ -1,21 +1,34 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const FILED_LABEL_SIZES = tuple("small", "normal", "medium", "large");
-export type FieldLabelSizes = (typeof FILED_LABEL_SIZES)[number];
+export const FIELD_LABEL_DEFAULTS = {
+  sizes: tuple("small", "normal", "medium", "large"),
+};
+
+export interface FieldLabelVariablesOverrides {}
+
+export interface FieldLabelVariablesDefaults {
+  sizes: (typeof FIELD_LABEL_DEFAULTS["sizes"])[number];
+}
+
+export type FieldLabelVariables = Prefer<
+  FieldLabelVariablesOverrides,
+  FieldLabelVariablesDefaults
+>;
 
 export type FieldLabelModifierProps = Partial<{
-  size: FieldLabelSizes;
+  size: FieldLabelVariables["sizes"];
 }>;
 
 export type FieldLabelProps = HelpersProps & FieldLabelModifierProps;
 
 const propTypes = {
-  size: PropTypes.oneOf(FILED_LABEL_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const FieldLabel = Object.assign(

@@ -1,36 +1,49 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const COLUMN_SIZES = tuple(
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  "one-third",
-  "two-thirds",
-  "one-quarter",
-  "half",
-  "three-quarters",
-  "one-fifth",
-  "two-fifths",
-  "three-fifths",
-  "four-fifths",
-  "full",
-);
-export type ColumnSizes = (typeof COLUMN_SIZES)[number];
+export const COLUMN_DEFAULTS = {
+  sizes: tuple(
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    "one-third",
+    "two-thirds",
+    "one-quarter",
+    "half",
+    "three-quarters",
+    "one-fifth",
+    "two-fifths",
+    "three-fifths",
+    "four-fifths",
+    "full",
+  ),
+};
+
+export interface ColumnVariablesOverrides {}
+
+export interface ColumnVariablesDefaults {
+  sizes: (typeof COLUMN_DEFAULTS["sizes"])[number];
+}
+
+export type ColumnVariables = Prefer<
+  ColumnVariablesOverrides,
+  ColumnVariablesDefaults
+>;
 
 export type ColumnSizeModifierProps = Partial<{
   /**
@@ -41,17 +54,17 @@ export type ColumnSizeModifierProps = Partial<{
   /**
    * Create horizontal space around Column elements
    */
-  offset: ColumnSizes;
+  offset: ColumnVariables["sizes"];
   /**
    * The size of the column. the maximun size of a row is 12
    */
-  size: ColumnSizes;
+  size: ColumnVariables["sizes"];
 }>;
 
 const ColumnSizeModifierPropTypes = {
   narrow: PropTypes.bool,
-  offset: PropTypes.oneOf(COLUMN_SIZES),
-  size: PropTypes.oneOf(COLUMN_SIZES),
+  offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export type ColumnModifierProps = Partial<
@@ -61,6 +74,12 @@ export type ColumnModifierProps = Partial<
 
 export type ColumnProps = HelpersProps & ColumnModifierProps;
 
+/**
+ * Note: the default Breakpoints are typechecked (as it'll cover 99%+ of users)
+ * We can't validate custom Breakpoints with PropTypes (though they are checked
+ * by TypeScript).
+ * ∴ Custom breakpoint's won't be checked against ColumnSizeModifierPropTypes
+ */
 const propTypes = {
   ...DEFAULTS.breakpoints
     .map(breakpoint => ({

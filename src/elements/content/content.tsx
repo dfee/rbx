@@ -1,22 +1,35 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { ContentOrderedList } from "./content-ordered-list";
 
-export const CONTENT_SIZES = tuple("small", "medium", "large");
-export type ContentSizes = (typeof CONTENT_SIZES)[number];
+export const CONTENT_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+};
+
+export interface ContentVariablesOverrides {}
+
+export interface ContentVariablesDefaults {
+  sizes: (typeof CONTENT_DEFAULTS["sizes"])[number];
+}
+
+export type ContentVariables = Prefer<
+  ContentVariablesOverrides,
+  ContentVariablesDefaults
+>;
 
 export type ContentModifierProps = Partial<{
-  size: ContentSizes;
+  size: ContentVariables["sizes"];
 }>;
 
 export type ContentProps = HelpersProps & ContentModifierProps;
 
 const propTypes = {
-  size: PropTypes.oneOf(CONTENT_SIZES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Content = Object.assign(

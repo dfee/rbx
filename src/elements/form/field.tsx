@@ -1,23 +1,35 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
 
-export const FIELD_ALIGNMENTS = tuple("centered", "right");
-export type FieldAlignments = (typeof FIELD_ALIGNMENTS)[number];
+export const FIELD_DEFAULTS = {
+  alignments: tuple("centered", "right"),
+  kinds: tuple("addons", "group"),
+};
 
-export const FIELD_KINDS = tuple("addons", "group");
-export type FieldKinds = (typeof FIELD_KINDS)[number];
+export interface FieldVariablesOverrides {}
+
+export interface FieldVariablesDefaults {
+  alignments: (typeof FIELD_DEFAULTS["alignments"])[number];
+  kinds: (typeof FIELD_DEFAULTS["kinds"])[number];
+}
+
+export type FieldVariables = Prefer<
+  FieldVariablesOverrides,
+  FieldVariablesDefaults
+>;
 
 export type FieldModifierProps = Partial<{
-  align: FieldAlignments;
+  align: FieldVariables["alignments"];
   expanded: boolean;
   horizontal: boolean;
-  kind: FieldKinds;
+  kind: FieldVariables["kinds"];
   multiline: boolean;
   narrow: boolean;
 }>;
@@ -25,10 +37,10 @@ export type FieldModifierProps = Partial<{
 export type FieldProps = HelpersProps & FieldModifierProps;
 
 const propTypes = {
-  align: PropTypes.oneOf(FIELD_ALIGNMENTS),
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   expanded: PropTypes.bool,
   horizontal: PropTypes.bool,
-  kind: PropTypes.oneOf(FIELD_KINDS),
+  kind: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   multiline: PropTypes.bool,
   narrow: PropTypes.bool,
 };

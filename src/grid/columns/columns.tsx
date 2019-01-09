@@ -1,24 +1,37 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { Column } from "./column";
 
-export const COLUMNS_GAP_SIZES = tuple(0, 1, 2, 3, 4, 5, 6, 7, 8);
-export type ColumnsGapSizes = (typeof COLUMNS_GAP_SIZES)[number];
+export const COLUMNS_DEFAULTS = {
+  gapSizes: tuple(0, 1, 2, 3, 4, 5, 6, 7, 8),
+};
+
+export interface ColumnsVariablesOverrides {}
+
+export interface ColumnsVariablesDefaults {
+  gapSizes: (typeof COLUMNS_DEFAULTS["gapSizes"])[number];
+}
+
+export type ColumnsVariables = Prefer<
+  ColumnsVariablesOverrides,
+  ColumnsVariablesDefaults
+>;
 
 export type ColumnsBreakpointProps = Partial<{
   /**
    * The column gap size for Tablet devices (Between 769px and 1023px)
    */
-  gapSize: ColumnsGapSizes;
+  gapSize: ColumnsVariables["gapSizes"];
 }>;
 
 const ColumnsBreakpointPropTypes = {
-  gapSize: PropTypes.oneOf(COLUMNS_GAP_SIZES),
+  gapSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 type ColumnsModifierProps = Partial<
@@ -45,6 +58,12 @@ type ColumnsModifierProps = Partial<
 
 export type ColumnsProps = HelpersProps & ColumnsModifierProps;
 
+/**
+ * Note: the default Breakpoints are typechecked (as it'll cover 99%+ of users)
+ * We can't validate custom Breakpoints with PropTypes (though they are checked
+ * by TypeScript).
+ * ∴ Custom breakpoint's won't be checked against ColumnsBreakpointPropTypes
+ */
 const propTypes = {
   ...DEFAULTS.breakpoints
     .map(breakpoint => ({
@@ -52,7 +71,7 @@ const propTypes = {
     }))
     .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
   ...ColumnsBreakpointPropTypes,
-  breakpoint: PropTypes.oneOf(DEFAULTS.breakpoints),
+  breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   centered: PropTypes.bool,
   gapless: PropTypes.bool,
   multiline: PropTypes.bool,

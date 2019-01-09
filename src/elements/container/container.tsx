@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
 
 export type ContainerModifierProps = Partial<{
   breakpoint: Variables["Breakpoints"];
@@ -13,7 +13,7 @@ export type ContainerModifierProps = Partial<{
 export type ContainerProps = HelpersProps & ContainerModifierProps;
 
 const propTypes = {
-  breakpoint: PropTypes.oneOf(DEFAULTS.breakpoints),
+  breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fluid: PropTypes.bool,
 };
 

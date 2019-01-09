@@ -1,9 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import {
-  Button,
-  BUTTON_SIZES,
-  BUTTON_STATES,
-} from "src/elements/button/button";
+import { Button, BUTTON_DEFAULTS } from "src/elements/button/button";
 import { ButtonGroup } from "src/elements/button/button-group";
 
 import {
@@ -13,7 +9,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Button;
@@ -42,7 +38,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -126,7 +122,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("state", () => {
-      BUTTON_STATES.map(state => {
+      validateStringOrNumberPropType(propTypes, "state");
+
+      BUTTON_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
           const node = makeNode({ state });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -160,9 +158,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", BUTTON_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      BUTTON_SIZES.map(size => {
+      BUTTON_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

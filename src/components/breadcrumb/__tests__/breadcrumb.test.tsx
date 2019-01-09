@@ -2,9 +2,7 @@ import * as React from "react";
 
 import {
   Breadcrumb,
-  BREADCRUMB_ALIGNMENTS,
-  BREADCRUMB_SEPARATORS,
-  BREADCRUMB_SIZES,
+  BREADCRUMB_DEFAULTS,
 } from "src/components/breadcrumb/breadcrumb";
 import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 
@@ -14,7 +12,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Breadcrumb;
@@ -43,9 +41,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "align", BREADCRUMB_ALIGNMENTS);
+      validateStringOrNumberPropType(propTypes, "align");
 
-      BREADCRUMB_ALIGNMENTS.map(align => {
+      BREADCRUMB_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -76,9 +74,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("separator", () => {
-      validateOneOfPropType(propTypes, "separator", BREADCRUMB_SEPARATORS);
+      validateStringOrNumberPropType(propTypes, "separator");
 
-      BREADCRUMB_SEPARATORS.map(separator => {
+      BREADCRUMB_DEFAULTS.separators.map(separator => {
         it(`should be ${separator}`, () => {
           const node = makeNode({ separator });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -88,9 +86,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", BREADCRUMB_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      BREADCRUMB_SIZES.map(size => {
+      BREADCRUMB_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

@@ -3,8 +3,8 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Content, Title } from "src/elements";
-import { CONTENT_SIZES } from "src/elements/content/content";
-import { CONTENT_ORDERED_LIST_TYPES } from "src/elements/content/content-ordered-list";
+import { CONTENT_DEFAULTS } from "src/elements/content/content";
+import { CONTENT_ORDERED_LIST_DEFAULTS } from "src/elements/content/content-ordered-list";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 import { Section } from "src/layout";
@@ -14,12 +14,18 @@ export const knobs = {
     type: (title: string = "Ordered List Type") =>
       select(
         title,
-        iterableToSelectObject(CONTENT_ORDERED_LIST_TYPES, { undefined: "" }),
+        iterableToSelectObject(CONTENT_ORDERED_LIST_DEFAULTS.types, {
+          undefined: "",
+        }),
         "",
       ),
   },
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(CONTENT_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(CONTENT_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
 };
 
 storiesOf("Elements/Content", module)

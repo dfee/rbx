@@ -1,8 +1,8 @@
 import crypto from "crypto";
 
 import classNames from "classnames";
-import * as Enzyme from "enzyme";
-import * as PropTypes from "prop-types";
+import Enzyme from "enzyme";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
@@ -199,6 +199,17 @@ export const validateStringPropType = <T extends {}>(
   validatePropType(propTypes, propName, [
     { value: "string", valid: true, extras },
     { value: 1, valid: false, extras },
+  ]);
+
+export const validateStringOrNumberPropType = <T extends {}>(
+  propTypes: React.WeakValidationMap<T>,
+  propName: string,
+  extras?: Partial<T>,
+) =>
+  validatePropType(propTypes, propName, [
+    { value: "string", valid: true, extras },
+    { value: 1, valid: true, extras },
+    { value: {}, valid: false, extras, descriptor: "obj" },
   ]);
 
 export type MakeNodeFunction<

@@ -1,50 +1,61 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const INPUT_SIZES = tuple("small", "medium", "large");
-export type InputSizes = (typeof INPUT_SIZES)[number];
+export const INPUT_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+  states: tuple("focused", "hovered"),
+  types: tuple(
+    "text",
+    "email",
+    "tel",
+    "password",
+    "number",
+    "search",
+    "color",
+    "date",
+    "time",
+  ),
+};
 
-export const INPUT_STATES = tuple("focused", "hovered");
-export type InputStates = (typeof INPUT_STATES)[number];
+export interface InputVariablesOverrides {}
 
-export const INPUT_TYPES = tuple(
-  "text",
-  "email",
-  "tel",
-  "password",
-  "number",
-  "search",
-  "color",
-  "date",
-  "time",
-);
-export type InputTypes = (typeof INPUT_TYPES)[number];
+export interface InputVariablesDefaults {
+  sizes: (typeof INPUT_DEFAULTS["sizes"])[number];
+  states: (typeof INPUT_DEFAULTS["states"])[number];
+  types: (typeof INPUT_DEFAULTS["types"])[number];
+}
+
+export type InputVariables = Prefer<
+  InputVariablesOverrides,
+  InputVariablesDefaults
+>;
 
 export type InputModifierProps = Partial<{
   color: Variables["Colors"];
   readOnly: React.InputHTMLAttributes<HTMLInputElement>["readOnly"];
   rounded: boolean;
-  size: InputSizes;
-  state: InputStates;
+  size: InputVariables["sizes"];
+  state: InputVariables["states"];
   static: boolean; // tslint:disable-line:no-reserved-keywords
-  type: InputTypes; // tslint:disable-line:no-reserved-keywords
+  type: InputVariables["types"]; // tslint:disable-line:no-reserved-keywords
 }>;
 
 export type InputProps = HelpersProps & InputModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   readOnly: PropTypes.bool,
   rounded: PropTypes.bool,
-  size: PropTypes.oneOf(INPUT_SIZES),
-  state: PropTypes.oneOf(INPUT_STATES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   static: PropTypes.bool,
-  type: PropTypes.oneOf(INPUT_TYPES),
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Input = Object.assign(

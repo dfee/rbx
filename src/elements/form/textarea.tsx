@@ -1,31 +1,43 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
-export const TEXTAREA_SIZES = tuple("small", "medium", "large");
-export type TextareaSizes = (typeof TEXTAREA_SIZES)[number];
+export const TEXTAREA_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+  states: tuple("focused", "hovered"),
+};
 
-export const TEXTAREA_STATES = tuple("focused", "hovered");
-export type TextareaStates = (typeof TEXTAREA_STATES)[number];
+export interface TextareaVariablesOverrides {}
+
+export interface TextareaVariablesDefaults {
+  sizes: (typeof TEXTAREA_DEFAULTS["sizes"])[number];
+  states: (typeof TEXTAREA_DEFAULTS["states"])[number];
+}
+
+export type TextareaVariables = Prefer<
+  TextareaVariablesOverrides,
+  TextareaVariablesDefaults
+>;
 
 export type TextareaModifierProps = Partial<{
   color: Variables["Colors"];
   fixedSize: boolean;
-  size: TextareaSizes;
-  state: TextareaStates;
+  size: TextareaVariables["sizes"];
+  state: TextareaVariables["states"];
 }>;
 
 export type TextareaProps = HelpersProps & TextareaModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fixedSize: PropTypes.bool,
-  size: PropTypes.oneOf(TEXTAREA_SIZES),
-  state: PropTypes.oneOf(TEXTAREA_STATES),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Textarea = Object.assign(

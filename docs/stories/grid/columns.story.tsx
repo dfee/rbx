@@ -6,11 +6,11 @@ import { DEFAULTS, Variables } from "src/base/helpers/variables";
 import { Box, Notification, Title } from "src/elements";
 import { Columns } from "src/grid";
 import {
-  COLUMN_SIZES,
+  COLUMN_DEFAULTS,
   ColumnProps,
-  ColumnSizes,
+  ColumnVariables,
 } from "src/grid/columns/column";
-import { COLUMNS_GAP_SIZES, ColumnsGapSizes } from "src/grid/columns/columns";
+import { COLUMNS_DEFAULTS, ColumnsVariables } from "src/grid/columns/columns";
 import { Section } from "src/layout";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
@@ -25,7 +25,7 @@ export const knobs = {
   gap: (title: string = "Gap") =>
     select(
       title,
-      iterableToSelectObject(COLUMNS_GAP_SIZES, { undefined: "" }),
+      iterableToSelectObject(COLUMNS_DEFAULTS.gapSizes, { undefined: "" }),
       "",
     ),
   gapless: (title: string = "Gapless") => boolean(title, false),
@@ -54,30 +54,39 @@ storiesOf("Grid/Columns", module)
     </Columns>
   ))
   .add("Sizes (by name)", () =>
-    COLUMN_SIZES.filter(size => typeof size === "string").map(size => {
-      const remainder =
-        size !== "full" ? <ColumnNotification children="Auto" /> : undefined;
+    COLUMN_DEFAULTS.sizes
+      .filter(size => typeof size === "string")
+      .map(size => {
+        const remainder =
+          size !== "full" ? <ColumnNotification children="Auto" /> : undefined;
 
-      return (
-        <Columns key={size}>
-          <ColumnNotification color="primary" size={size} children={size} />
-          {remainder}
-        </Columns>
-      );
-    }),
+        return (
+          <Columns key={size}>
+            <ColumnNotification color="primary" size={size} children={size} />
+            {remainder}
+          </Columns>
+        );
+      }),
   )
   .add("Sizes (by number)", () =>
-    COLUMN_SIZES.filter(size => typeof size === "number").map(size => (
-      <Columns key={size}>
-        <ColumnNotification color="primary" size={size} children={size} />
-        {COLUMN_SIZES.filter(size2 => size2 > size).map(size2 => (
-          <ColumnNotification size={1} key={size2} children={1} />
-        ))}
-      </Columns>
-    )),
+    COLUMN_DEFAULTS.sizes
+      .filter(size => typeof size === "number")
+      .map(size => (
+        <Columns key={size}>
+          <ColumnNotification color="primary" size={size} children={size} />
+          {COLUMN_DEFAULTS.sizes
+            .filter(size2 => size2 > size)
+            .map(size2 => (
+              <ColumnNotification size={1} key={size2} children={1} />
+            ))}
+        </Columns>
+      )),
   )
   .add("Offset", () => {
-    const permutations: { size: ColumnSizes; offset: ColumnSizes }[] = [
+    const permutations: {
+      size: ColumnVariables["sizes"];
+      offset: ColumnVariables["sizes"];
+    }[] = [
       { size: "half", offset: "one-quarter" },
       { size: "three-fifths", offset: "one-fifth" },
       { size: 4, offset: 8 },
@@ -225,7 +234,9 @@ storiesOf("Grid/Columns", module)
   .add("Gap (variable)", () => {
     const gap = knobs.gap();
     const normalizedGap =
-      gap === "" ? undefined : (parseInt(gap, 10) as ColumnsGapSizes);
+      gap === ""
+        ? undefined
+        : (parseInt(gap, 10) as ColumnsVariables["gapSizes"]);
 
     return (
       <React.Fragment>

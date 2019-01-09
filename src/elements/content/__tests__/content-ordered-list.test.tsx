@@ -1,5 +1,5 @@
 import {
-  CONTENT_ORDERED_LIST_TYPES,
+  CONTENT_ORDERED_LIST_DEFAULTS,
   ContentOrderedList,
 } from "src/elements/content/content-ordered-list";
 import { ContentOrderedListItem } from "src/elements/content/content-ordered-list-item";
@@ -10,7 +10,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = ContentOrderedList;
@@ -39,9 +39,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("type", () => {
-      validateOneOfPropType(propTypes, "type", CONTENT_ORDERED_LIST_TYPES);
+      validateStringOrNumberPropType(propTypes, "type");
 
-      CONTENT_ORDERED_LIST_TYPES.map(isType => {
+      CONTENT_ORDERED_LIST_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
           const node = makeNode({ type: isType });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

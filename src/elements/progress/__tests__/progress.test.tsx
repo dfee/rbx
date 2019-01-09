@@ -3,7 +3,7 @@ import * as React from "react";
 import { DEFAULTS } from "src/base/helpers/variables";
 import {
   Progress,
-  PROGRESS_SIZES,
+  PROGRESS_DEFAULTS,
   ProgressProps,
 } from "src/elements/progress/progress";
 
@@ -13,7 +13,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateNumberPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Progress;
@@ -48,7 +48,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors, EXTRAS);
+      validateStringOrNumberPropType(propTypes, "color", EXTRAS);
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -73,9 +73,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", PROGRESS_SIZES, EXTRAS);
+      validateStringOrNumberPropType(propTypes, "size", EXTRAS);
 
-      PROGRESS_SIZES.map(size => {
+      PROGRESS_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size, max: 5, value: 10 });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

@@ -1,5 +1,5 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Icon, ICON_ALIGNMENTS, ICON_SIZES } from "src/elements/icon/icon";
+import { Icon, ICON_DEFAULTS } from "src/elements/icon/icon";
 
 import {
   hasProperties,
@@ -7,7 +7,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Icon;
@@ -35,7 +35,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateOneOfPropType(propTypes, "color", DEFAULTS.colors);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -47,9 +47,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "size", ICON_SIZES);
+      validateStringOrNumberPropType(propTypes, "align");
 
-      ICON_ALIGNMENTS.map(align => {
+      ICON_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -59,9 +59,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", ICON_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      ICON_SIZES.map(size => {
+      ICON_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

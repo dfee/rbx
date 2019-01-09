@@ -3,11 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Tabs } from "src/components";
-import {
-  TABS_ALIGNMENTS,
-  TABS_SIZES,
-  TABS_TYPES,
-} from "src/components/tabs/tabs";
+import { TABS_DEFAULTS } from "src/components/tabs/tabs";
 import { Section } from "src/layout";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
@@ -16,14 +12,22 @@ export const knobs = {
   align: (title: string = "Align") =>
     select(
       title,
-      iterableToSelectObject(TABS_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(TABS_DEFAULTS.alignments, { undefined: "" }),
       "",
     ),
   fullwidth: (title: string = "Fullwidth") => boolean(title, false),
   size: (title: string = "Size") =>
-    select(title, iterableToSelectObject(TABS_SIZES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(TABS_DEFAULTS.sizes, { undefined: "" }),
+      "",
+    ),
   type: (title: string = "Type") =>
-    select(title, iterableToSelectObject(TABS_TYPES, { undefined: "" }), ""),
+    select(
+      title,
+      iterableToSelectObject(TABS_DEFAULTS.types, { undefined: "" }),
+      "",
+    ),
 };
 
 storiesOf("Components/Tabs", module)

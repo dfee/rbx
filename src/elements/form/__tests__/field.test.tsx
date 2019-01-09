@@ -1,4 +1,4 @@
-import { Field, FIELD_ALIGNMENTS, FIELD_KINDS } from "src/elements/form/field";
+import { Field, FIELD_DEFAULTS } from "src/elements/form/field";
 import { FieldBody } from "src/elements/form/field-body";
 import { FieldLabel } from "src/elements/form/field-label";
 
@@ -9,7 +9,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Field;
@@ -39,10 +39,10 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("align", () => {
-      validateOneOfPropType(propTypes, "align", FIELD_ALIGNMENTS);
+      validateStringOrNumberPropType(propTypes, "align");
 
-      FIELD_ALIGNMENTS.map(align =>
-        FIELD_KINDS.map(kind => {
+      FIELD_DEFAULTS.alignments.map(align =>
+        FIELD_DEFAULTS.kinds.map(kind => {
           it(`should be aligned ${kind}-${align}`, () => {
             const node = makeNode({ align, kind });
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -83,9 +83,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("kind", () => {
-      validateOneOfPropType(propTypes, "kind", FIELD_KINDS);
+      validateStringOrNumberPropType(propTypes, "kind");
 
-      FIELD_KINDS.map(kind => {
+      FIELD_DEFAULTS.kinds.map(kind => {
         it(`should be kind ${kind}`, () => {
           const node = makeNode({ kind });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -100,7 +100,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       validateBoolPropType(propTypes, "multiline");
 
       [false, true].map(multiline =>
-        FIELD_KINDS.map(kind => {
+        FIELD_DEFAULTS.kinds.map(kind => {
           it(`should ${
             multiline && kind === "group" ? "" : "not "
           }be multiline when kind is ${kind} and multiline is ${multiline}`, () => {

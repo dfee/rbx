@@ -1,26 +1,39 @@
 import classNames from "classnames";
-import * as PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
-import { DEFAULTS, Variables } from "../../base/helpers/variables";
+import { Variables } from "../../base/helpers/variables";
+import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 import { MessageBody } from "./message-body";
 import { MessageHeader } from "./message-header";
 
-export const MESSAGE_SIZES = tuple("small", "medium", "large");
-export type MessageSizes = (typeof MESSAGE_SIZES)[number];
+export const MESSAGE_DEFAULTS = {
+  sizes: tuple("small", "medium", "large"),
+};
+
+export interface MessageVariablesOverrides {}
+
+export interface MessageVariablesDefaults {
+  sizes: (typeof MESSAGE_DEFAULTS["sizes"])[number];
+}
+
+export type MessageVariables = Prefer<
+  MessageVariablesOverrides,
+  MessageVariablesDefaults
+>;
 
 export type MessageModifierProps = Partial<{
   color: Variables["Colors"];
-  size: MessageSizes;
+  size: MessageVariables["sizes"];
 }>;
 
 export type MessageProps = HelpersProps & MessageModifierProps;
 
 const propTypes = {
-  color: PropTypes.oneOf(DEFAULTS.colors),
-  size: PropTypes.oneOf(MESSAGE_SIZES),
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export const Message = Object.assign(

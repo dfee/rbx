@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Progress } from "src/elements";
-import { PROGRESS_SIZES } from "src/elements/progress/progress";
+import { PROGRESS_DEFAULTS } from "src/elements/progress/progress";
 import { Section } from "src/layout";
 
 import { colorKnob } from "docs/stories/common";
@@ -15,7 +15,7 @@ export const knobs = {
   size: (title: string = "Size") =>
     select(
       title,
-      iterableToSelectObject(PROGRESS_SIZES, { undefined: "" }),
+      iterableToSelectObject(PROGRESS_DEFAULTS.sizes, { undefined: "" }),
       "",
     ),
   value: (title: string = "Value") =>

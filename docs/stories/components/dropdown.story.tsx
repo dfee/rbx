@@ -6,7 +6,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Dropdown } from "src/components";
-import { DROPDOWN_ALIGNMENTS } from "src/components/dropdown/dropdown-container";
+import { DROPDOWN_DEFAULTS } from "src/components/dropdown/dropdown-container";
 import { Button, Icon } from "src/elements";
 import { Section } from "src/layout";
 
@@ -17,7 +17,7 @@ export const knobs = {
   align: (title: string = "Align") =>
     select(
       title,
-      iterableToSelectObject(DROPDOWN_ALIGNMENTS, { undefined: "" }),
+      iterableToSelectObject(DROPDOWN_DEFAULTS.alignments, { undefined: "" }),
       "",
     ),
   hoverable: (title: string = "Hoverable") => boolean(title, false),

@@ -1,4 +1,4 @@
-import { Delete, DELETE_SIZES } from "src/elements/other/delete";
+import { Delete, DELETE_DEFAULTS } from "src/elements/other/delete";
 
 import {
   hasProperties,
@@ -6,7 +6,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateOneOfPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Delete;
@@ -34,9 +34,9 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("size", () => {
-      validateOneOfPropType(propTypes, "size", DELETE_SIZES);
+      validateStringOrNumberPropType(propTypes, "size");
 
-      DELETE_SIZES.map(size => {
+      DELETE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
