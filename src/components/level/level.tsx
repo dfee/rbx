@@ -5,8 +5,6 @@ import React from "react";
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Variables } from "../../base/helpers/variables";
 import { LevelItem } from "./level-item";
-import { LevelLeft } from "./level-left";
-import { LevelRight } from "./level-right";
 
 export type LevelModifierProps = Partial<{
   breakpoint: Variables["breakpoints"];
@@ -35,8 +33,6 @@ export const Level = Object.assign(
   ),
   {
     Item: LevelItem,
-    Left: LevelLeft,
-    Right: LevelRight,
     propTypes,
   },
 );

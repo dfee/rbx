@@ -17,7 +17,7 @@ storiesOf("Components/Level", module)
 
     return (
       <Level {...props}>
-        <Level.Left>
+        <Level.Item align="left">
           <Level.Item>
             <Title as="p" size={5} subtitle>
               <strong>123</strong> posts
@@ -33,9 +33,9 @@ storiesOf("Components/Level", module)
               </Control>
             </Field>
           </Level.Item>
-        </Level.Left>
+        </Level.Item>
 
-        <Level.Right>
+        <Level.Item align="right">
           <Level.Item>
             <strong>All</strong>
           </Level.Item>
@@ -51,7 +51,7 @@ storiesOf("Components/Level", module)
           <Level.Item>
             <Button color="success">New</Button>
           </Level.Item>
-        </Level.Right>
+        </Level.Item>
       </Level>
     );
   })

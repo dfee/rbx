@@ -43,7 +43,7 @@ const AppNavbar: React.FC = () => (
       </Navbar.Brand>
 
       <Navbar.Menu>
-        <Navbar.End>
+        <Navbar.Segment align="end">
           <Navbar.Item href={PATH_STORIES}>
             <Icon>
               <FontAwesomeIcon icon={faBook} />
@@ -59,7 +59,7 @@ const AppNavbar: React.FC = () => (
 
           <Navbar.Item dropdown>
             <Navbar.Link>More</Navbar.Link>
-            <Navbar.Dropdown right>
+            <Navbar.Dropdown align="right">
               <Navbar.Item href="https://bulma.io">Bulma</Navbar.Item>
               <Navbar.Item href="https://www.typescriptlang.org/">
                 Typescript
@@ -70,7 +70,7 @@ const AppNavbar: React.FC = () => (
               </Navbar.Item>
             </Navbar.Dropdown>
           </Navbar.Item>
-        </Navbar.End>
+        </Navbar.Segment>
       </Navbar.Menu>
     </Navbar>
   </Container>
@@ -100,13 +100,13 @@ const Feature: React.FC<{
 }> = ({ children, imageSrc, title, to }) => (
   <Columns.Column size="half" mobile={{ size: "full" }}>
     <Media>
-      <Media.Item as="figure" position="left">
+      <Media.Item as="figure" align="left">
         <Image.Container as="a" href={to} size={64} target="_blank">
           <Image src={imageSrc} />
         </Image.Container>
       </Media.Item>
 
-      <Media.Item position="content">
+      <Media.Item align="content">
         <Title
           as="a"
           href={to}

@@ -25,9 +25,9 @@ const BULMA_CLASS_NAME = "progress";
 const EXTRAS = { max: 10, value: 5 };
 
 const makeNode = (props: Partial<ProgressProps>) => {
-  const finalProps = { ...EXTRAS, ...props };
+  const propsWithDefaults = { ...EXTRAS, ...props };
 
-  return <Progress {...finalProps} />;
+  return <Progress {...propsWithDefaults} />;
 };
 
 describe(`${COMPONENT_NAME} component`, () => {

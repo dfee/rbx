@@ -46,8 +46,8 @@ Object {
         "as": "div",
       },
       "propTypes": Object {
+        "align": [Function],
         "hasAddons": [Function],
-        "position": [Function],
       },
       "render": [Function],
     },
@@ -536,19 +536,8 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
-      "render": [Function],
-    },
-    "Left": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "div",
-      },
-      "render": [Function],
-    },
-    "Right": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "div",
+      "propTypes": Object {
+        "align": [Function],
       },
       "render": [Function],
     },
@@ -593,11 +582,11 @@ Object {
     "Item": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
+        "align": "content",
         "as": "div",
-        "position": "content",
       },
       "propTypes": Object {
-        "position": [Function],
+        "align": [Function],
       },
       "render": [Function],
     },
@@ -825,15 +814,8 @@ Object {
         "as": "span",
       },
       "propTypes": Object {
+        "align": [Function],
         "boxed": [Function],
-        "right": [Function],
-      },
-      "render": [Function],
-    },
-    "End": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "div",
       },
       "render": [Function],
     },
@@ -871,10 +853,13 @@ Object {
       },
       "render": [Function],
     },
-    "Start": Object {
+    "Segment": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "as": "div",
+      },
+      "propTypes": Object {
+        "align": [Function],
       },
       "render": [Function],
     },
@@ -934,19 +919,13 @@ Object {
       },
       "render": [Function],
     },
-    "Next": Object {
+    "Step": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "as": "a",
-        "children": "Next page",
       },
-      "render": [Function],
-    },
-    "Previous": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "a",
-        "children": "Previous",
+      "propTypes": Object {
+        "direction": [Function],
       },
       "render": [Function],
     },

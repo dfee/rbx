@@ -5,8 +5,7 @@ import {
 import { PaginationEllipsis } from "src/components/pagination/pagination-ellipsis";
 import { PaginationLink } from "src/components/pagination/pagination-link";
 import { PaginationList } from "src/components/pagination/pagination-list";
-import { PaginationNext } from "src/components/pagination/pagination-next";
-import { PaginationPrevious } from "src/components/pagination/pagination-previous";
+import { PaginationStep } from "src/components/pagination/pagination-step";
 
 import {
   hasProperties,
@@ -30,8 +29,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     Ellipsis: PaginationEllipsis,
     Link: PaginationLink,
     List: PaginationList,
-    Next: PaginationNext,
-    Previous: PaginationPrevious,
+    Step: PaginationStep,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

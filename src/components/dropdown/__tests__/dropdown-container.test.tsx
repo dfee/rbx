@@ -27,9 +27,9 @@ const COMPONENT_NAME = "DropdownContainer";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "dropdown";
 
-const makeNode = (props: DropdownContainerProps) => {
-  return <DropdownContainer {...props} />;
-};
+const makeNode = (props: DropdownContainerProps) => (
+  <DropdownContainer {...props} />
+);
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
   node: JSX.Element,

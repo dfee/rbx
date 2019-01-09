@@ -42,8 +42,8 @@ storiesOf("Components/Pagination", module)
 
     return (
       <Pagination {...props}>
-        <Pagination.Previous />
-        <Pagination.Next />
+        <Pagination.Step direction="previous">Previous</Pagination.Step>
+        <Pagination.Step direction="next">Next page</Pagination.Step>
         <Pagination.List>
           <Pagination.Link>1</Pagination.Link>
           <Pagination.Ellipsis />

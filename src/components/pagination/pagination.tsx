@@ -8,8 +8,7 @@ import { tuple } from "../../utils";
 import { PaginationEllipsis } from "./pagination-ellipsis";
 import { PaginationLink } from "./pagination-link";
 import { PaginationList } from "./pagination-list";
-import { PaginationNext } from "./pagination-next";
-import { PaginationPrevious } from "./pagination-previous";
+import { PaginationStep } from "./pagination-step";
 
 export const PAGINATION_DEFAULTS = {
   alignments: tuple("centered", "right"),
@@ -65,8 +64,7 @@ export const Pagination = Object.assign(
     Ellipsis: PaginationEllipsis,
     Link: PaginationLink,
     List: PaginationList,
-    Next: PaginationNext,
-    Previous: PaginationPrevious,
+    Step: PaginationStep,
     propTypes,
   },
 );

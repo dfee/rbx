@@ -12,11 +12,10 @@ import {
 import { NavbarContext } from "src/components/navbar/navbar-context";
 import { NavbarDivider } from "src/components/navbar/navbar-divider";
 import { NavbarDropdown } from "src/components/navbar/navbar-dropdown";
-import { NavbarEnd } from "src/components/navbar/navbar-end";
 import { NavbarItem } from "src/components/navbar/navbar-item";
 import { NavbarLink } from "src/components/navbar/navbar-link";
 import { NavbarMenu } from "src/components/navbar/navbar-menu";
-import { NavbarStart } from "src/components/navbar/navbar-start";
+import { NavbarSegment } from "src/components/navbar/navbar-segment";
 
 import {
   hasProperties,
@@ -42,11 +41,10 @@ describe(`${COMPONENT_NAME} component`, () => {
     Context: NavbarContext,
     Divider: NavbarDivider,
     Dropdown: NavbarDropdown,
-    End: NavbarEnd,
     Item: NavbarItem,
     Link: NavbarLink,
     Menu: NavbarMenu,
-    Start: NavbarStart,
+    Segment: NavbarSegment,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

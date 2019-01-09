@@ -1,8 +1,6 @@
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Level } from "src/components/level/level";
 import { LevelItem } from "src/components/level/level-item";
-import { LevelLeft } from "src/components/level/level-left";
-import { LevelRight } from "src/components/level/level-right";
 
 import {
   hasProperties,
@@ -23,8 +21,6 @@ const makeNode = makeNodeFactory(COMPONENT);
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Item: LevelItem,
-    Left: LevelLeft,
-    Right: LevelRight,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

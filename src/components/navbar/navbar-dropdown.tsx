@@ -3,28 +3,45 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { Prefer } from "../../types";
+import { tuple } from "../../utils";
+
+export const NAVBAR_DROPDOWN_DEFAULTS = {
+  alignments: tuple("right"),
+};
+
+export interface NavbarDropdownVariablesOverrides {}
+
+export interface NavbarDropdownVariablesDefaults {
+  alignments: (typeof NAVBAR_DROPDOWN_DEFAULTS["alignments"])[number];
+}
+
+export type NavbarDropdownVariables = Prefer<
+  NavbarDropdownVariablesOverrides,
+  NavbarDropdownVariablesDefaults
+>;
 
 export type NavbarDropdownModifierProps = Partial<{
+  align: NavbarDropdownVariables["alignments"];
   boxed: boolean;
-  right: boolean;
 }>;
 
 export type NavbarDropdownProps = HelpersProps & NavbarDropdownModifierProps;
 
 const propTypes = {
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   boxed: PropTypes.bool,
-  right: PropTypes.bool,
 };
 
 export const NavbarDropdown = Object.assign(
   forwardRefAs<NavbarDropdownProps, "span">(
-    ({ boxed, className, right, ...rest }, ref) => (
+    ({ align, boxed, className, ...rest }, ref) => (
       <Generic
         className={classNames(
           "navbar-dropdown",
           {
+            [`is-${align}`]: align,
             "is-boxed": boxed,
-            "is-right": right,
           },
           className,
         )}

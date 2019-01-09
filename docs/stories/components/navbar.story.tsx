@@ -4,6 +4,7 @@ import React from "react";
 
 import { Navbar } from "src/components";
 import { NAVBAR_DEFAULTS } from "src/components/navbar/navbar-container";
+import { NAVBAR_DROPDOWN_DEFAULTS } from "src/components/navbar/navbar-dropdown";
 import { Button } from "src/elements";
 import { Section } from "src/layout";
 
@@ -13,8 +14,15 @@ import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
 export const knobs = {
   active: (title: string = "Active") => boolean(title, false),
   dropdown: {
+    align: (title: string = "align") =>
+      select(
+        title,
+        iterableToSelectObject(NAVBAR_DROPDOWN_DEFAULTS.alignments, {
+          undefined: "",
+        }),
+        "",
+      ),
     boxed: (title: string = "Boxed") => boolean(title, false),
-    right: (title: string = "Right") => boolean(title, false),
   },
   fixed: (title: string = "Fixed") =>
     select(
@@ -61,10 +69,10 @@ storiesOf("Components/Navbar", module)
       arrowless: knobs.link.arrowless("Navbar > Menu > Item > Link: arrowless"),
     };
 
-    const dropdownProps = {
+    const dropdownProps = filterUndefined({
+      align: knobs.dropdown.align("Navbar > Menu > Item > Dropdown: align"),
       boxed: knobs.dropdown.boxed("Navbar > Menu > Item > Dropdown: boxed"),
-      right: knobs.dropdown.right("Navbar > Menu > Item > Dropdown: right"),
-    };
+    });
 
     return (
       <Navbar {...navbarProps}>
@@ -82,7 +90,7 @@ storiesOf("Components/Navbar", module)
         </Navbar.Brand>
 
         <Navbar.Menu>
-          <Navbar.Start>
+          <Navbar.Segment align="start">
             <Navbar.Item>Home</Navbar.Item>
             <Navbar.Item>Documentation</Navbar.Item>
 
@@ -96,9 +104,9 @@ storiesOf("Components/Navbar", module)
                 <Navbar.Item>Report an issue</Navbar.Item>
               </Navbar.Dropdown>
             </Navbar.Item>
-          </Navbar.Start>
+          </Navbar.Segment>
 
-          <Navbar.End>
+          <Navbar.Segment align="end">
             <Navbar.Item>
               <Button.Group>
                 <Button color="primary">
@@ -107,7 +115,7 @@ storiesOf("Components/Navbar", module)
                 <Button color="light">Log in</Button>
               </Button.Group>
             </Navbar.Item>
-          </Navbar.End>
+          </Navbar.Segment>
         </Navbar.Menu>
       </Navbar>
     );

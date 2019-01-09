@@ -1,4 +1,7 @@
-import { NavbarDropdown } from "src/components/navbar/navbar-dropdown";
+import {
+  NAVBAR_DROPDOWN_DEFAULTS,
+  NavbarDropdown,
+} from "src/components/navbar/navbar-dropdown";
 
 import {
   hasProperties,
@@ -7,6 +10,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = NavbarDropdown;
@@ -33,6 +37,18 @@ describe(`${COMPONENT_NAME} component`, () => {
   describe("props", () => {
     const { propTypes } = COMPONENT;
 
+    describe("align", () => {
+      validateStringOrNumberPropType(propTypes, "align");
+
+      NAVBAR_DROPDOWN_DEFAULTS.alignments.map(align => {
+        it(`should be aligned ${align}`, () => {
+          const node = makeNode({ align });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass(`is-${align}`)).toBe(true);
+        });
+      });
+    });
+
     describe("boxed", () => {
       validateBoolPropType(propTypes, "boxed");
 
@@ -41,18 +57,6 @@ describe(`${COMPONENT_NAME} component`, () => {
           const node = makeNode({ boxed });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
-        });
-      });
-    });
-
-    describe("right", () => {
-      validateBoolPropType(propTypes, "right");
-
-      [false, true].map(right => {
-        it(`should ${right ? "" : "not "}be right`, () => {
-          const node = makeNode({ right });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass("is-right")).toBe(right);
         });
       });
     });

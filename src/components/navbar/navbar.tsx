@@ -9,11 +9,10 @@ import { NavbarContainer, NavbarContainerProps } from "./navbar-container";
 import { NavbarContext } from "./navbar-context";
 import { NavbarDivider } from "./navbar-divider";
 import { NavbarDropdown } from "./navbar-dropdown";
-import { NavbarEnd } from "./navbar-end";
 import { NavbarItem } from "./navbar-item";
 import { NavbarLink } from "./navbar-link";
 import { NavbarMenu } from "./navbar-menu";
-import { NavbarStart } from "./navbar-start";
+import { NavbarSegment } from "./navbar-segment";
 
 export type NavbarProps = Omit<NavbarContainerProps, "as" | "innerRef">;
 
@@ -37,11 +36,10 @@ export const Navbar = Object.assign(
     Context: NavbarContext,
     Divider: NavbarDivider,
     Dropdown: NavbarDropdown,
-    End: NavbarEnd,
     Item: NavbarItem,
     Link: NavbarLink,
     Menu: NavbarMenu,
-    Start: NavbarStart,
+    Segment: NavbarSegment,
     propTypes,
   },
 );
