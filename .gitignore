@@ -73,6 +73,3 @@ lib
 out*
 .cache
 .rpt2_cache
-
-# Editor
-.vscode
