@@ -6,7 +6,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Variables } from "../../base/helpers/variables";
 
 export type HelpModifierProps = Partial<{
-  color: Variables["Colors"];
+  color: Variables["colors"];
 }>;
 
 export type HelpProps = HelpersProps & HelpModifierProps;

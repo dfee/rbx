@@ -10,23 +10,23 @@ import { Variables } from "./variables";
 
 export type LimitedResponsiveBreakpointProps = Partial<{
   display: {
-    value: Variables["Displays"];
+    value: Variables["displays"];
   };
   hide: {
     value: boolean;
   };
   textAlignment: {
-    value: Variables["TextAlignments"];
+    value: Variables["textAlignments"];
   };
   textSize: {
-    value: Variables["TextSizes"];
+    value: Variables["textSizes"];
   };
 }>;
 
 export type ResponsiveBreakpointProps = Partial<{
   display: {
     only?: boolean;
-    value: Variables["Displays"];
+    value: Variables["displays"];
   };
   hide: {
     only?: boolean;
@@ -34,23 +34,23 @@ export type ResponsiveBreakpointProps = Partial<{
   };
   textAlignment: {
     only?: boolean;
-    value: Variables["TextAlignments"];
+    value: Variables["textAlignments"];
   };
   textSize: {
     only?: boolean;
-    value: Variables["TextSizes"];
+    value: Variables["textSizes"];
   };
 }>;
 
 export type ResponsiveHelpersProps = Partial<{
   responsive: Partial<
     {
-      [B in Variables["BreakpointsLimited"]]: LimitedResponsiveBreakpointProps
+      [B in Variables["breakpointsLimited"]]: LimitedResponsiveBreakpointProps
     } &
       {
         [B in Exclude<
-          Variables["Breakpoints"],
-          Variables["BreakpointsLimited"]
+          Variables["breakpoints"],
+          Variables["breakpointsLimited"]
         >]: ResponsiveBreakpointProps
       }
   >;

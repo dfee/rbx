@@ -33,7 +33,7 @@ export type FileVariables = Prefer<
 export type FileModifierProps = Partial<{
   align: FileVariables["alignments"];
   boxed: boolean;
-  color: Variables["Colors"];
+  color: Variables["colors"];
   fullwidth: boolean;
   hasName: boolean;
   size: FileVariables["sizes"];

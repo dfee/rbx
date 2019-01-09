@@ -26,7 +26,7 @@ export type IconVariables = Prefer<
 
 export type IconModifierProps = Partial<{
   align: IconVariables["alignments"];
-  color: Variables["Colors"];
+  color: Variables["colors"];
   size: IconVariables["sizes"];
 }>;
 

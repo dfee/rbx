@@ -25,7 +25,7 @@ export type TextareaVariables = Prefer<
 >;
 
 export type TextareaModifierProps = Partial<{
-  color: Variables["Colors"];
+  color: Variables["colors"];
   fixedSize: boolean;
   size: TextareaVariables["sizes"];
   state: TextareaVariables["states"];

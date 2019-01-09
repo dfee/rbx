@@ -35,11 +35,11 @@ const ColumnsBreakpointPropTypes = {
 };
 
 type ColumnsModifierProps = Partial<
-  { [B in Variables["Breakpoints"]]: ColumnsBreakpointProps } & {
+  { [B in Variables["breakpoints"]]: ColumnsBreakpointProps } & {
     /**
      * Breakpoint where columns become stacked.
      */
-    breakpoint: Variables["Breakpoints"];
+    breakpoint: Variables["breakpoints"];
     /**
      * `true` you want the columns inside to be horizontaly centered
      */
@@ -110,7 +110,7 @@ export const Columns = Object.assign(
         { [`is-${gapSize}`]: typeof gapSize === "number" },
         Object.keys(breakpoints)
           .map(key => {
-            const value = breakpoints[key as Variables["Breakpoints"]];
+            const value = breakpoints[key as Variables["breakpoints"]];
 
             return value === undefined
               ? {}

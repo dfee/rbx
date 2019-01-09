@@ -23,7 +23,7 @@ export type ProgressVariables = Prefer<
 >;
 
 export interface ProgressModifierProps {
-  color?: Variables["Colors"];
+  color?: Variables["colors"];
   max: number;
   size?: ProgressVariables["sizes"];
   value: number;

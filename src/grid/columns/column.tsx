@@ -68,7 +68,7 @@ const ColumnSizeModifierPropTypes = {
 };
 
 export type ColumnModifierProps = Partial<
-  { [B in Variables["Breakpoints"]]: ColumnSizeModifierProps } &
+  { [B in Variables["breakpoints"]]: ColumnSizeModifierProps } &
     ColumnSizeModifierProps
 >;
 
@@ -128,7 +128,7 @@ export const Column = Object.assign(
             Object.keys(breakpoints)
               .map(breakpoint => {
                 const value =
-                  breakpoints[breakpoint as Variables["Breakpoints"]];
+                  breakpoints[breakpoint as Variables["breakpoints"]];
 
                 return value === undefined
                   ? {}

@@ -26,7 +26,7 @@ export type NavbarContainerModifierProps = Partial<{
   /** * Determines whether the menu is displayed on mobile */
   active: boolean;
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  color: Variables["Colors"];
+  color: Variables["colors"];
   fixed: NavbarVariables["fixedAlignments"];
   innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   managed: boolean;

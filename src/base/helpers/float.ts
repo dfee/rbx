@@ -12,7 +12,7 @@ export type FloatHelpersProps = Partial<{
   /** Fixes an element's floating children */
   clearfix: boolean;
   /** Moves an element to the left or right */
-  pull: Variables["FloatPulledAlignments"];
+  pull: Variables["floatPulledAlignments"];
 }>;
 
 // Factories

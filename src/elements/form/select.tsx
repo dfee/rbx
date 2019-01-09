@@ -26,7 +26,7 @@ export type SelectContainerVariables = Prefer<
 >;
 
 export type SelectContainerModifierProps = Partial<{
-  color: Variables["Colors"];
+  color: Variables["colors"];
   fullwidth: boolean;
   rounded: boolean;
   size: SelectContainerVariables["sizes"];

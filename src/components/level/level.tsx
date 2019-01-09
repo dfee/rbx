@@ -9,7 +9,7 @@ import { LevelLeft } from "./level-left";
 import { LevelRight } from "./level-right";
 
 export type LevelModifierProps = Partial<{
-  breakpoint: Variables["Breakpoints"];
+  breakpoint: Variables["breakpoints"];
 }>;
 
 export type LevelProps = HelpersProps & LevelModifierProps;

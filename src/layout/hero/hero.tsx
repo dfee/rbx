@@ -26,7 +26,7 @@ export type HeroVariables = Prefer<
 >;
 
 export type HeroModifierProps = Partial<{
-  color: Variables["Colors"];
+  color: Variables["colors"];
   gradient: boolean;
   size: HeroVariables["sizes"];
 }>;

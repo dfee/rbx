@@ -25,7 +25,7 @@ export type MessageVariables = Prefer<
 >;
 
 export type MessageModifierProps = Partial<{
-  color: Variables["Colors"];
+  color: Variables["colors"];
   size: MessageVariables["sizes"];
 }>;
 

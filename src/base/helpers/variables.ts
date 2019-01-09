@@ -80,24 +80,24 @@ export const DEFAULTS = {
 export interface VariablesOverrides {}
 
 export interface VariablesDefaults {
-  Colors: (typeof DEFAULTS.colors)[number];
-  Shades: (typeof DEFAULTS.shades)[number];
+  colors: (typeof DEFAULTS.colors)[number];
+  shades: (typeof DEFAULTS.shades)[number];
 
   // Float
-  FloatPulledAlignments: (typeof DEFAULTS.floatPulledAlignments)[number];
+  floatPulledAlignments: (typeof DEFAULTS.floatPulledAlignments)[number];
 
   // Responsive
-  Breakpoints: (typeof DEFAULTS.breakpoints)[number];
-  BreakpointsLimited: (typeof DEFAULTS.breakpointsLimited)[number];
+  breakpoints: (typeof DEFAULTS.breakpoints)[number];
+  breakpointsLimited: (typeof DEFAULTS.breakpointsLimited)[number];
 
   // Typography
-  TextAlignments: (typeof DEFAULTS.textAlignments)[number];
-  TextSizes: (typeof DEFAULTS.textSizes)[number];
-  TextTransforms: (typeof DEFAULTS.textTransforms)[number];
-  TextWeights: (typeof DEFAULTS.textWeights)[number];
+  textAlignments: (typeof DEFAULTS.textAlignments)[number];
+  textSizes: (typeof DEFAULTS.textSizes)[number];
+  textTransforms: (typeof DEFAULTS.textTransforms)[number];
+  textWeights: (typeof DEFAULTS.textWeights)[number];
 
   // Visibility
-  Displays: (typeof DEFAULTS.displays)[number];
+  displays: (typeof DEFAULTS.displays)[number];
 }
 
 export type Variables = Prefer<VariablesOverrides, VariablesDefaults>;

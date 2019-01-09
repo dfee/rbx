@@ -37,7 +37,7 @@ export type InputVariables = Prefer<
 >;
 
 export type InputModifierProps = Partial<{
-  color: Variables["Colors"];
+  color: Variables["colors"];
   readOnly: React.InputHTMLAttributes<HTMLInputElement>["readOnly"];
   rounded: boolean;
   size: InputVariables["sizes"];

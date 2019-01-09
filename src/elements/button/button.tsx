@@ -26,7 +26,7 @@ export type ButtonVariables = Prefer<
 >;
 
 export type ButtonModifierProps = Partial<{
-  color: Variables["Colors"];
+  color: Variables["colors"];
   disabled: boolean;
   fullwidth: boolean;
   inverted: boolean;

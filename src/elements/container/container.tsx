@@ -6,7 +6,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Variables } from "../../base/helpers/variables";
 
 export type ContainerModifierProps = Partial<{
-  breakpoint: Variables["Breakpoints"];
+  breakpoint: Variables["breakpoints"];
   fluid: boolean;
 }>;
 

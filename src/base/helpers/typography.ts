@@ -9,13 +9,13 @@ import {
 import { Variables } from "./variables";
 
 export type TypographyHelpersProps = Partial<{
-  backgroundColor: Variables["Colors"] | Variables["Shades"];
+  backgroundColor: Variables["colors"] | Variables["shades"];
   italic: boolean;
-  textAlignment: Variables["TextAlignments"];
-  textColor: Variables["Colors"] | Variables["Shades"];
-  textSize: Variables["TextSizes"];
-  textTransform: Variables["TextTransforms"];
-  textWeight: Variables["TextWeights"];
+  textAlignment: Variables["textAlignments"];
+  textColor: Variables["colors"] | Variables["shades"];
+  textSize: Variables["textSizes"];
+  textTransform: Variables["textTransforms"];
+  textWeight: Variables["textWeights"];
 }>;
 
 // Factories
