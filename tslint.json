@@ -19,14 +19,6 @@
     // https://github.com/Microsoft/tslint-microsoft-contrib/issues/671 <issue>
     // https://github.com/Microsoft/tslint-microsoft-contrib/pull/669 <pr>
     "import-name": false,
-    // We want to be able to import default exports (e.g. classNames)
-    // "import-name": {
-    //   "options": {
-    //     "classnames": "classNames",
-    //     "enzyme-adapter-react-16": "ReactSixteenAdapter"
-    //   },
-    //   "severity": "default"
-    // },
     "interface-name": { "options": ["never-prefix"], "severity": "default" },
     "jsx-boolean-value": { "options": ["never"], "severity": "default" },
     "jsx-no-multiline-js": false,

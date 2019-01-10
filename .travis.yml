@@ -6,6 +6,6 @@ before_script:
 script:
   - make test # run tests
   - make # ensure /src builds
-  - cd docs && npm i && increase-memory-limit && make # ensure /docs builds
+  - cd docs && npm i && make test
 after_success:
   - make ci_publish

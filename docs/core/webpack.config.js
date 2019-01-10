@@ -1,14 +1,16 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 
 module.exports = {
+  devtool: "eval",
   devServer: {
     disableHostCheck: true
   },
   entry: __dirname + "/index.tsx",
   output: {
     path: __dirname + "/../dist",
-    filename: "index_bundle.js"
+    filename: "bundle.js"
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
@@ -19,7 +21,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: "ts-loader"
+        loader: "awesome-typescript-loader"
       },
       {
         test: /\.s[ac]ss$/,
@@ -36,28 +38,11 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader",
-            options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: "[name]_[local]_[hash:base64]",
-              sourceMap: true,
-              minimize: true
-            }
-          }
-        ]
       }
     ]
   },
   plugins: [
+    new ProgressBarPlugin(),
     new HtmlWebpackPlugin({
       template: __dirname + "/index.html"
     })

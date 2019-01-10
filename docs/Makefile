@@ -22,6 +22,12 @@ publish:
 	@echo "Publishing to GitHub pages"
 	@npx gh-pages -d dist -m \"Deploy Docs [skip ci]\"
 
+test: lint
+
+lint:
+	@echo "Running linter"
+	@npx tslint --project .
+
 run_core:
 	@echo "Running core"
 	@npx webpack-dev-server --config core/webpack.config.js --mode development --open
@@ -38,6 +44,10 @@ help:
 	@echo "  \`make build_core\`:       package core (homepage)"
 	@echo "  \`make build_storybook\`:  package storybook"
 	@echo "  \`make build_pre\`:        create <BUILD_DIR>"
+
+	@echo "\nTEST"
+	@echo "  \`make test\`:             test all (only lint for now)"
+	@echo "  \`make lint\`:             run tslint"
 
 	@echo "\nRUN"
 	@echo "  \`make run_core\`:         run core (homepage)"

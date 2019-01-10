@@ -6,7 +6,7 @@ module.exports = (baseConfig, env, config) => {
     {
       test: /\.tsx?$/,
       use: [
-        require.resolve("ts-loader"),
+        require.resolve("awesome-typescript-loader"),
         require.resolve("react-docgen-typescript-loader")
       ]
     },

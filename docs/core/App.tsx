@@ -14,17 +14,15 @@ import {
   Media,
   Navbar,
   Title,
-} from "src/";
+} from "@rbx";
 
 import "./App.sass";
-// tslint:disable: match-default-export-name
 import BulmaLogo from "./assets/bulma.png";
 import GitHubLogo from "./assets/github.png";
 import NPMLogo from "./assets/npm.png";
 import ReactLogo from "./assets/react.png";
 import StorybookLogo from "./assets/storybook.png";
 import TypescriptLogo from "./assets/typescript.png";
-// tslint:enbale: match-default-export-name
 
 const PATH_ROOT = "/rbx";
 const PATH_STORIES = `${PATH_ROOT}/stories`;

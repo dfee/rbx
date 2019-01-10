@@ -1,1 +1,6 @@
-../../.vscode/settings.json
+{
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "prettier.tslintIntegration": true
+}

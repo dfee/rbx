@@ -2,7 +2,5 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnType": true,
-  "prettier.tslintIntegration": true,
-  "tslint.autoFixOnSave": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "prettier.tslintIntegration": true
 }

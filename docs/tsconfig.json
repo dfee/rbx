@@ -1,4 +1,10 @@
 {
+  "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@rbx": ["src"]
+    }
+  },
   "extends": "../tsconfig.json",
   "include": ["core", "stories"],
   "exclude": ["node_modules"]
