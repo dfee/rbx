@@ -1,0 +1,591 @@
+---
+name: Button
+menu: Elements
+route: /elements/button
+---
+
+import { Playground } from "docz";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import {
+  faAlignCenter,
+  faAlignLeft,
+  faAlignRight,
+  faBold,
+  faCheck,
+  faHeading,
+  faItalic,
+  faTimes,
+  faUnderline
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { Button, BUTTON_DEFAULTS } from "../button";
+import { BUTTON_GROUP_DEFAULTS } from "../button-group";
+import { Icon } from "src/elements";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { SimplePropsTable, mapEnumerable } from "src/__docs__";
+
+# Buttons
+
+## Button
+
+### Basic usage
+
+<Playground>
+  <Button.Group>
+    <Button>Button</Button>
+    <Button as="a">Anchor</Button>
+  </Button.Group>
+</Playground>
+
+### Colors
+
+These are the colors you can specify using the `color` prop.
+
+When unspecified, Bulma styles a neutral button.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button color={color} key={color}>
+        {color}
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+### Sizes
+
+These are the sizes you can specify using the `size` prop.
+
+When unspecified, Bulma styles a `medium` button.
+
+<Playground>
+  <Button.Group>
+    {BUTTON_DEFAULTS.sizes.map(size => (
+      <Button size={size} key={size}>
+        {size}
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+### Displays
+
+Use the `fullwidth` prop to make a button fullwidth.
+
+<Playground>
+  <Button.Group>
+    {BUTTON_DEFAULTS.sizes.map(size => (
+      <Button fullwidth size={size} key={size}>
+        {size}
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+### Styles
+
+#### Outlined
+
+Use the `outlined` prop to outline a button.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button outlined color={color} key={color}>
+        Outlined
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+#### Inverted
+
+Use the `inverted` prop to invert a button.
+
+<Playground className="has-background-primary">
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button inverted color={color} key={color}>
+        Inverted
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+#### Outlined & Inverted
+
+Use the `outlined` and `inverted` props together to outline and invert a button.
+
+<Playground className="has-background-primary">
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button inverted outlined color={color} key={color}>
+        Invert Outlined
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+#### Rounded
+
+Use the `rounded` prop to round a button's edges.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button rounded color={color} key={color}>
+        Rounded
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+### States
+
+#### Normal
+
+When not specifying the `state` prop, buttons are normal.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button color={color} key={color}>
+        Normal
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+#### Hover
+
+Specifying `hovered` for the `state` prop produces hovered buttons.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button state="hovered" color={color} key={color}>
+        Hovered
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+#### Focus
+
+Specifying `focused` for the `state` prop produces focused buttons.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button state="focused" color={color} key={color}>
+        Focused
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+#### Active
+
+Specifying `active` for the `state` prop produces active buttons.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button state="active" color={color} key={color}>
+        Active
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+#### Loading
+
+Specifying `loading` for the `state` prop produces loading buttons.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button state="loading" color={color} key={color}>
+        Loading
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+### Static
+
+Using the `static` prop, you can make a button non-interactive.
+
+<Playground>
+  <Button static>Static</Button>
+</Playground>
+
+### Disabled
+
+Using the HTML standard `disabled` prop, you can disable a button.
+
+<Playground>
+  <Button.Group>
+    {DEFAULTS.colors.map(color => (
+      <Button disabled color={color} key={color}>
+        Disabled
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+### With Font Awesome icons
+
+<Playground>
+  <Button.Group>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faBold} />
+      </Icon>
+    </Button>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faItalic} />
+      </Icon>
+    </Button>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faUnderline} />
+      </Icon>
+    </Button>
+  </Button.Group>
+
+  <Button.Group>
+    <Button>
+      <Icon>
+        <FontAwesomeIcon icon={faGithub} />
+      </Icon>
+      <span>GitHub</span>
+    </Button>
+
+    <Button>
+      <Icon>
+        <FontAwesomeIcon icon={faTwitter} />
+      </Icon>
+      <span>Twitter</span>
+    </Button>
+
+    <Button color="success">
+      <Icon size="small">
+        <FontAwesomeIcon icon={faCheck} />
+      </Icon>
+      <span>Save</span>
+    </Button>
+
+    <Button color="danger" outlined>
+      <span>Delete</span>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faTimes} />
+      </Icon>
+    </Button>
+
+  </Button.Group>
+
+  <Button.Group>
+    {BUTTON_DEFAULTS.sizes.map((size, i) => (
+      <Button size={size} key={i}>
+        <Icon>
+          <FontAwesomeIcon icon={faGithub} />
+        </Icon>
+        <span>GitHub</span>
+      </Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+If the button only contains an icon, it will always remain _square_.
+
+<Playground>
+  <Button.Group>
+    <Button size="small">
+      <Icon size="small">
+        <FontAwesomeIcon icon={faHeading} />
+      </Icon>
+    </Button>
+  </Button.Group>
+
+  <Button.Group>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faHeading} />
+      </Icon>
+    </Button>
+
+    <Button>
+      <Icon>
+        <FontAwesomeIcon icon={faHeading} size="lg" />
+      </Icon>
+    </Button>
+
+  </Button.Group>
+
+  <Button.Group>
+    <Button size="medium">
+      <Icon size="small">
+        <FontAwesomeIcon icon={faHeading} />
+      </Icon>
+    </Button>
+
+    <Button size="medium">
+      <Icon>
+        <FontAwesomeIcon icon={faHeading} size="lg" />
+      </Icon>
+    </Button>
+
+    <Button size="medium">
+      <Icon size="medium">
+        <FontAwesomeIcon icon={faHeading} size="2x" />
+      </Icon>
+    </Button>
+
+  </Button.Group>
+
+  <Button.Group>
+    <Button size="large">
+      <Icon size="small">
+        <FontAwesomeIcon icon={faHeading} />
+      </Icon>
+    </Button>
+
+    <Button size="large">
+      <Icon>
+        <FontAwesomeIcon icon={faHeading} size="lg" />
+      </Icon>
+    </Button>
+
+    <Button size="large">
+      <Icon size="medium">
+        <FontAwesomeIcon icon={faHeading} size="2x" />
+      </Icon>
+    </Button>
+
+  </Button.Group>
+</Playground>
+
+## Button Group
+
+Group buttons together on a single line using a Button Group (available as `<Button.Group>`).
+
+<Playground>
+  <Button.Group>
+    <Button color="link">Save Changes</Button>
+    <Button>Cancel</Button>
+    <Button color="danger">Delete post</Button>
+  </Button.Group>
+</Playground>
+
+A long list of buttons will be wrapped while keeping the buttons evenly spaced.
+
+<Playground>
+  <Button.Group>
+    {[
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten",
+      "Eleven",
+      "Twelve",
+      "Thirteen",
+      "Fourteen",
+      "Fifteen",
+      "Sixteen",
+      "Seventeen",
+      "Eighteen",
+      "Nineteen",
+      "Twenty"
+    ].map(name => (
+      <Button key={name}>{name}</Button>
+    ))}
+  </Button.Group>
+</Playground>
+
+### Addons
+
+You can use the `hasAddons` prop to attach buttons together.
+
+<Playground>
+  <Button.Group hasAddons>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faBold} />
+      </Icon>
+      <span>Bold</span>
+    </Button>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faItalic} />
+      </Icon>
+      <span>Italic</span>
+    </Button>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faUnderline} />
+      </Icon>
+      <span>Underline</span>
+    </Button>
+  </Button.Group>
+
+  <Button.Group hasAddons>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faAlignLeft} />
+      </Icon>
+      <span>Left</span>
+    </Button>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faAlignCenter} />
+      </Icon>
+      <span>Center</span>
+    </Button>
+    <Button>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faAlignRight} />
+      </Icon>
+      <span>Right</span>
+    </Button>
+  </Button.Group>
+</Playground>
+
+### Alignment
+
+Use the `align` prop to align a button group.
+
+<Playground>
+  {() =>
+    [undefined, ...BUTTON_GROUP_DEFAULTS.alignments].map((align, i) => (
+      <Button.Group hasAddons align={align} key={i}>
+        <Button>Yes</Button>
+        <Button>Maybe</Button>
+        <Button>No</Button>
+      </Button.Group>
+    ))
+  }
+</Playground>
+
+### Customization
+
+Individual buttons can be tailored with different styles.
+You should use the `selected` prop of the button to ensure it's _above_ it's siblings.
+
+<Playground>
+  <Button.Group hasAddons>
+    <Button color="success" selected>
+      Yes
+    </Button>
+    <Button>Maybe</Button>
+    <Button>No</Button>
+  </Button.Group>
+
+<Button.Group hasAddons>
+  <Button>Yes</Button>
+  <Button color="info" selected>
+    Maybe
+  </Button>
+  <Button>No</Button>
+</Button.Group>
+
+  <Button.Group hasAddons>
+    <Button>Yes</Button>
+    <Button>Maybe</Button>
+    <Button color="danger">No</Button>
+  </Button.Group>
+</Playground>
+
+## Properties
+
+> The `as` prop enables components to wrap any other component.
+> Therefore, they will also accept all props for the `as` component.
+
+> These component also accepts all props supported by the `Generic` component.
+
+### Button
+
+<SimplePropsTable
+  props={{
+    as: {
+      defaultValue: "button",
+      description: "the color of the button",
+      typeName: "ReactType",
+      typeTip: "Any JSX Element (e.g. 'div' or 'span') or React Component"
+    },
+    color: {
+      description: "the color of the button",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    fullwidth: {
+      description: "whether the button occupies all horizontal space",
+      typeName: "boolean"
+    },
+    inverted: {
+      description: "whether the button is inverted",
+      typeName: "boolean"
+    },
+    outlined: {
+      description: "whether the button is outlined",
+      typeName: "boolean"
+    },
+    rounded: {
+      description: "whether the button is rounded",
+      typeName: "boolean"
+    },
+    selected: {
+      description: "whether the button is selected",
+      typeName: "boolean"
+    },
+    size: {
+      description: "the size of the button",
+      typeName: "string",
+      typeTip: mapEnumerable(BUTTON_DEFAULTS.sizes)
+    },
+    state: {
+      description: "the state of the button",
+      typeName: "string",
+      typeTip: mapEnumerable(BUTTON_DEFAULTS.states)
+    },
+    static: {
+      description: "whether the button responds to input",
+      typeName: "boolean"
+    },
+    text: {
+      description: "whether the button looks like text",
+      typeName: "boolean"
+    }
+  }}
+/>
+
+### Button.Group
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "the alignment of the button group",
+      typeName: "string",
+      typeTip: mapEnumerable(BUTTON_GROUP_DEFAULTS.alignments)
+    },
+    as: {
+      defaultValue: "button",
+      description: "the color of the button",
+      typeName: "ReactType",
+      typeTip: "Any JSX Element (e.g. 'div' or 'span') or React Component"
+    },
+    hasAddons: {
+      description: "whether the button group allows addons",
+      typeName: "boolean"
+    }
+  }}
+/>

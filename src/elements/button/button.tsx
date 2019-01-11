@@ -9,7 +9,7 @@ import { tuple } from "../../utils";
 import { ButtonGroup } from "./button-group";
 
 export const BUTTON_DEFAULTS = {
-  sizes: tuple("small", "medium", "large"),
+  sizes: tuple("small", "normal", "medium", "large"),
   states: tuple("hovered", "focused", "active", "loading"),
 };
 
@@ -27,7 +27,6 @@ export type ButtonVariables = Prefer<
 
 export type ButtonModifierProps = Partial<{
   color: Variables["colors"];
-  disabled: boolean;
   fullwidth: boolean;
   inverted: boolean;
   outlined: boolean;
@@ -43,7 +42,6 @@ export type ButtonProps = HelpersProps & ButtonModifierProps;
 
 const propTypes = {
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  disabled: PropTypes.bool,
   fullwidth: PropTypes.bool,
   inverted: PropTypes.bool,
   outlined: PropTypes.bool,

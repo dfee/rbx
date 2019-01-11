@@ -22,15 +22,15 @@ export type ButtonGroupVariables = Prefer<
 >;
 
 export type ButtonGroupModifierProps = Partial<{
-  hasAddons: boolean;
   align: ButtonGroupVariables["alignments"];
+  hasAddons: boolean;
 }>;
 
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
 const propTypes = {
-  hasAddons: PropTypes.bool,
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  hasAddons: PropTypes.bool,
 };
 
 export const ButtonGroup = Object.assign(
