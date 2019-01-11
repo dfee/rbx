@@ -6,7 +6,13 @@ route: /elements/container
 
 import { Playground } from "docz";
 
-import { Frame, SimplePropsTable, mapEnumerable } from "src/__docs__";
+import {
+  AsProp,
+  Frame,
+  SimplePropsTable,
+  mapEnumerable,
+  refDoc
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Notification } from "src/elements";
 import { Container } from "../container";
@@ -61,12 +67,7 @@ Use the `fluid` prop for the container to fit horizontally with padding.
 
 <SimplePropsTable
   props={{
-    as: {
-      defaultValue: "div",
-      description: "the default element to render as",
-      typeName: "React Type",
-      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
-    },
+    as: AsProp.makeDoc(Container.defaultProps.as),
     breakpoint: {
       description:
         "the responsive size at which this container is no longer fullwidth",
@@ -77,11 +78,9 @@ Use the `fluid` prop for the container to fit horizontally with padding.
       description:
         "whether the container expands to fit horizontally with padding",
       typeName: "boolean"
-    }
+    },
+    ref: refDoc
   }}
 />
 
-> The `as` prop enables components to wrap any other component.
-> Therefore, they will also accept all props for the `as` component.
-
-> These component also accept all props supported by the `Generic` component.
+<AsProp component={Container} componentName="Container" />

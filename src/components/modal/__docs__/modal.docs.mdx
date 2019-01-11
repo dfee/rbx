@@ -8,7 +8,7 @@ import { faHeart, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { Frame, SimplePropsTable } from "src/__docs__";
+import { AsProp, Frame, SimplePropsTable, refDoc } from "src/__docs__";
 import { Modal } from "../modal";
 import { Level, Media } from "src/components";
 import { Box, Button, Content, Delete, Icon, Image, Title } from "src/elements";
@@ -16,7 +16,7 @@ import { SimpleModalManager } from "./simple-modal-manager";
 
 # Modal
 
-## Modal
+### Example modal
 
 <Playground>
   <Frame forceHeight style={{ height: "350px" }}>
@@ -70,7 +70,25 @@ import { SimpleModalManager } from "./simple-modal-manager";
   </Frame>
 </Playground>
 
-### Image
+<div class="notification is-warning">
+  <strong>Note:</strong> the <code>{"<SimpleModalManager>"}</code> used in these
+  playgrounds is a reference implementation for the docs, and is not available
+  in the release. People are usually particular about how they want to implement
+  their modal workflows, so <strong>rbx</strong> provides a <em>foundation</em>,
+  not an <em>opinion</em>.
+  <br />
+  <br />
+  For more information about designing your modal workflow, <a
+    target="_blank"
+    href="https://stackoverflow.com/a/35641680/465164"
+  >
+    review Dan Abramov's suggestions on StackOverflow
+  </a>.
+</div>
+
+### Image modal
+
+Modals can contain anything, for example, an image.
 
 <Playground>
   <Frame forceHeight style={{ height: "500px" }}>
@@ -89,7 +107,11 @@ import { SimpleModalManager } from "./simple-modal-manager";
   </Frame>
 </Playground>
 
-### Card
+### Card modal
+
+This is a more classic modal with a _head_, _body_ and _foot_.
+
+Notice that the "close" button (the `<Delete>` component) in the card header automatically gains the ability to close the modal.
 
 <Playground>
   <Frame forceHeight style={{ height: "500px" }}>
@@ -238,22 +260,127 @@ import { SimpleModalManager } from "./simple-modal-manager";
   </Frame>
 </Playground>
 
-## Properties
-
-### Modal
+## Modal
 
 <SimplePropsTable
   props={{
-    as: {
-      defaultValue: "div",
-      description: "the default element to render as",
-      typeName: "React Type",
-      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
-    }
+    active: {
+      description: "whether the modal is visible",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Modal.defaultProps.as),
+    closeOnBlur: {
+      description:
+        "whether the modal should close when a click happens outside its element",
+      typeName: "boolean"
+    },
+    closeOnEsc: {
+      description:
+        "whether the modal should close when the <ESC> key is pressed",
+      defaultValue: "true",
+      typeName: "boolean"
+    },
+    containerClassName: {
+      description: "the name of the container for the React Portal to mount in",
+      typeName: "string"
+    },
+    document: {
+      description:
+        "the document to contain the portal (useful for launching in an iframe)",
+      typeName: "Document"
+    },
+    onClose: {
+      description:
+        "a callback when the Modal should be closed (usually due to closeOnBlur, closeOnEsc, or manually toggling a close button)",
+      typeName: "() => void"
+    },
+    ref: refDoc
   }}
 />
 
-> The `as` prop enables components to wrap any other component.
-> Therefore, they will also accept all props for the `as` component.
+<AsProp component={Modal} componentName="Modal" />
 
-> These component also accept all props supported by the `Generic` component.
+## Modal.Background
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Modal.Background.defaultProps.as),
+    onClick: {
+      description: "A callback when the component is clicked",
+      typeName: "(event: React.MouseEvent) => void"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Modal.Background} componentName="Modal.Background" />
+
+## Modal.Card.Body
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Modal.Card.Body.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Modal.Card.Body} componentName="Modal.Card.Body" />
+
+## Modal.Card.Foot
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Modal.Card.Foot.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Modal.Card.Foot} componentName="Modal.Card.Foot" />
+
+## Modal.Card.Title
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Modal.Card.Title.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Modal.Card.Title} componentName="Modal.Card.Title" />
+
+## Modal.Card
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Modal.Card.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Modal.Card} componentName="Modal.Card" />
+
+## Modal.Close
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Modal.Close.defaultProps.as),
+    onClick: {
+      description: "A callback when the component is clicked",
+      typeName: "(event: React.MouseEvent) => void"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Modal.Close} componentName="Modal.Close" />
+
+## Modal.Content
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Modal.Content.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Modal.Content} componentName="Modal.Content" />

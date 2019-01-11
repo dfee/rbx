@@ -19,7 +19,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { SimplePropsTable, mapEnumerable } from "src/__docs__";
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
 import { Button, BUTTON_DEFAULTS } from "../button";
@@ -511,12 +511,7 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
 
 <SimplePropsTable
   props={{
-    as: {
-      defaultValue: "button",
-      description: "the default element to render as",
-      typeName: "React Type",
-      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
-    },
+    as: AsProp.makeDoc(Button.defaultProps.as),
     color: {
       description: "the color of the button",
       typeName: "string",
@@ -534,6 +529,7 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
       description: "whether the button is outlined",
       typeName: "boolean"
     },
+    ref: refDoc,
     rounded: {
       description: "whether the button is rounded",
       typeName: "boolean"
@@ -563,6 +559,8 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
   }}
 />
 
+<AsProp component={Button} componentName="Button" />
+
 ### Button.Group
 
 <SimplePropsTable
@@ -572,20 +570,13 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
       typeName: "string",
       typeTip: mapEnumerable(BUTTON_GROUP_DEFAULTS.alignments)
     },
-    as: {
-      defaultValue: "button",
-      description: "the default element to render as",
-      typeName: "React Type",
-      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
-    },
+    as: AsProp.makeDoc(Button.Group.defaultProps.as),
     hasAddons: {
       description: "whether the button group allows addons",
       typeName: "boolean"
-    }
+    },
+    ref: refDoc
   }}
 />
 
-> The `as` prop enables components to wrap any other component.
-> Therefore, they will also accept all props for the `as` component.
-
-> These component also accept all props supported by the `Generic` component.
+<AsProp component={Button.Group} componentName="Button.Group" />

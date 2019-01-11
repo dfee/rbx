@@ -1,23 +1,20 @@
+// https://www.docz.site/documentation/project-configuration
+
 const path = require("path");
 
-// const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-
 export default {
+  base: "rbx",
+  // unfortnately, "too-many-modules"
+  // https://github.com/codesandbox/codesandboxer/blob/af013874f5a2f7bb6325c9608597883a8f5061ef/packages/codesandboxer-fs/src/assembleFiles.js#L120
+  codeSandbox: false,
+  description:
+    "The Comprehensive Bulma UI Framework for React. This is a lightweight, yet robust, React framework that enables rapid, beautiful web development.",
+  files: "**/*(.docs)?*.mdx",
+  htmlContext: {
+    favicon: "public/favicon.ico"
+  },
   modifyBundlerConfig: config => {
-    // const tsconfigPathsPlugin = new TsconfigPathsPlugin({
-    //   configFile: "./tsconfig.json"
-    // });
-
-    // if (config.resolve.plugins) {
-    //   config.resolve.plugins.push(tsconfigPathsPlugin);
-    // } else {
-    //   config.resolve.plugins = [tsconfigPathsPlugin];
-    // }
-
     config.resolve.alias["src"] = path.join(__dirname, "./src");
-    // config.resolve.alias["@rbx"] = path.join(__dirname, "../src");
-
-    // console.log(config);
 
     config.entry.app.push("src/index.sass");
     config.module.rules.push({
@@ -27,6 +24,9 @@ export default {
 
     return config;
   },
-  // src: "./src",
+  // we manually create them rather than relying on React-Docgen
+  propsParser: false,
+  public: "docs/public",
+  title: "👟 rbx",
   typescript: true
 };

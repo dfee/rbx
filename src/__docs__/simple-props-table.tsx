@@ -1,12 +1,8 @@
 // tslint:disable:no-submodule-imports
-// tslint:disable:no-reserved-keywords
-// tslint:disable:no-any
 // tslint:disable:strict-boolean-expressions
 // tslint:disable:no-null-keyword
-// tslint:disable:no-unsafe-any
 
 import { withMDXComponents } from "@mdx-js/tag/dist/mdx-provider";
-import capitalize from "capitalize";
 import { get } from "lodash/fp";
 import React, { ComponentType, CSSProperties, Fragment, SFC } from "react";
 
@@ -25,18 +21,18 @@ export type TooltipComponent = React.ComponentType<{
   children: React.ReactNode;
 }>;
 
+export type PropDoc = {
+  description?: string;
+  required?: boolean;
+  typeName: string;
+  typeTip?: string;
+  defaultValue?: string;
+};
+
 export type SimplePropsTable = {
-  props?: Record<
-    string,
-    {
-      description?: string;
-      required?: boolean;
-      typeName: string;
-      typeTip?: string;
-      defaultValue?: string;
-    }
-  >;
+  props?: Record<string, PropDoc>;
   components: {
+    // tslint:disable-next-line:no-any
     [key: string]: ComponentType<any>;
   };
 };
@@ -90,11 +86,9 @@ const BaseSimplePropsTable: SFC<SimplePropsTable> = ({ components, props }) => {
                   <Td>{name}</Td>
                   <Td>
                     {prop.typeTip ? (
-                      <Tooltip text={prop.typeTip}>
-                        {capitalize(prop.typeName)}
-                      </Tooltip>
+                      <Tooltip text={prop.typeTip}>{prop.typeName}</Tooltip>
                     ) : (
-                      capitalize(prop.typeName)
+                      prop.typeName
                     )}
                   </Td>
                   <Td>{prop.required ? String(prop.required) : "false"}</Td>
@@ -123,4 +117,5 @@ const BaseSimplePropsTable: SFC<SimplePropsTable> = ({ components, props }) => {
   );
 };
 
+// tslint:disable-next-line: no-unsafe-any
 export const SimplePropsTable = withMDXComponents(BaseSimplePropsTable);

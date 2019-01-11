@@ -8,7 +8,7 @@ import { faHeart, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { SimplePropsTable } from "src/__docs__";
+import { AsProp, SimplePropsTable, refDoc } from "src/__docs__";
 import { Level, Media } from "src/components";
 import { Content, Icon, Image } from "src/elements";
 import { Box } from "../box";
@@ -70,16 +70,9 @@ It's children can be images, media objects, or anything else.
 
 <SimplePropsTable
   props={{
-    as: {
-      defaultValue: "div",
-      description: "the default element to render as",
-      typeName: "React Type",
-      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
-    }
+    as: AsProp.makeDoc(Box.defaultProps.as),
+    ref: refDoc
   }}
 />
 
-> The `as` prop enables components to wrap any other component.
-> Therefore, they will also accept all props for the `as` component.
-
-> These component also accept all props supported by the `Generic` component.
+<AsProp component={Box} componentName="Box" />
