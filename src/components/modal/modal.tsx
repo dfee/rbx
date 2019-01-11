@@ -18,6 +18,7 @@ const propTypes = {
   closeOnBlur: PropTypes.bool,
   closeOnEsc: PropTypes.bool,
   containerClassName: PropTypes.string,
+  document: PropTypes.object, // todo test
   onClose: PropTypes.func,
 };
 

@@ -4,7 +4,6 @@ menu: Elements
 route: /elements/button
 ---
 
-import { Playground } from "docz";
 import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import {
   faAlignCenter,
@@ -18,14 +17,15 @@ import {
   faUnderline
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
 
+import { SimplePropsTable, mapEnumerable } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Icon } from "src/elements";
 import { Button, BUTTON_DEFAULTS } from "../button";
 import { BUTTON_GROUP_DEFAULTS } from "../button-group";
-import { Icon } from "src/elements";
-import { DEFAULTS } from "src/base/helpers/variables";
-import { SimplePropsTable, mapEnumerable } from "src/__docs__";
 
-# Buttons
+# Button
 
 ## Button
 
@@ -507,20 +507,15 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
 
 ## Properties
 
-> The `as` prop enables components to wrap any other component.
-> Therefore, they will also accept all props for the `as` component.
-
-> These component also accepts all props supported by the `Generic` component.
-
 ### Button
 
 <SimplePropsTable
   props={{
     as: {
       defaultValue: "button",
-      description: "the color of the button",
-      typeName: "ReactType",
-      typeTip: "Any JSX Element (e.g. 'div' or 'span') or React Component"
+      description: "the default element to render as",
+      typeName: "React Type",
+      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
     },
     color: {
       description: "the color of the button",
@@ -579,9 +574,9 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
     },
     as: {
       defaultValue: "button",
-      description: "the color of the button",
-      typeName: "ReactType",
-      typeTip: "Any JSX Element (e.g. 'div' or 'span') or React Component"
+      description: "the default element to render as",
+      typeName: "React Type",
+      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
     },
     hasAddons: {
       description: "whether the button group allows addons",
@@ -589,3 +584,8 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
     }
   }}
 />
+
+> The `as` prop enables components to wrap any other component.
+> Therefore, they will also accept all props for the `as` component.
+
+> These component also accept all props supported by the `Generic` component.

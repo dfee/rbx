@@ -1,0 +1,87 @@
+---
+name: Container
+menu: Elements
+route: /elements/container
+---
+
+import { Playground } from "docz";
+
+import { Frame, SimplePropsTable, mapEnumerable } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Notification } from "src/elements";
+import { Container } from "../container";
+
+# Container
+
+## Container
+
+The container centers its content horizontally.
+
+<Playground>
+  <Frame updateHeightDelay={0}>
+    <Container>
+      <Notification>
+        This container is <strong>centered</strong> on desktop.
+      </Notification>
+    </Container>
+  </Frame>
+</Playground>
+
+### Fluid
+
+Use the `fluid` prop for the container to fit horizontally with padding.
+
+<Playground>
+  <Container fluid>
+    <Notification>
+      This container is <strong>fluid</strong>: it will have a 32px gap on
+      either side, on any viewport size.
+    </Notification>
+  </Container>
+</Playground>
+
+### Breakpoint
+
+<Playground>
+  <Frame>
+    {DEFAULTS.breakpoints.map(breakpoint => (
+      <Container breakpoint={breakpoint} key={breakpoint}>
+        <Notification>
+          This container is <strong>fullwidth</strong> <em>until</em> the
+          <code>{breakpoint}</code> breakpoint.
+        </Notification>
+      </Container>
+    ))}
+  </Frame>
+</Playground>
+
+## Properties
+
+### Container
+
+<SimplePropsTable
+  props={{
+    as: {
+      defaultValue: "div",
+      description: "the default element to render as",
+      typeName: "React Type",
+      typeTip: 'Any JSX Element (e.g. "div" or "span"), or a React Component'
+    },
+    breakpoint: {
+      description:
+        "the responsive size at which this container is no longer fullwidth",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.breakpoints)
+    },
+    fluid: {
+      description:
+        "whether the container expands to fit horizontally with padding",
+      typeName: "boolean"
+    }
+  }}
+/>
+
+> The `as` prop enables components to wrap any other component.
+> Therefore, they will also accept all props for the `as` component.
+
+> These component also accept all props supported by the `Generic` component.

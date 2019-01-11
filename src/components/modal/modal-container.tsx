@@ -12,6 +12,7 @@ export type ModalContainerProps = Partial<{
   closeOnBlur: ModalContextValue["closeOnBlur"];
   closeOnEsc: ModalContextValue["closeOnEsc"];
   containerClassName: string;
+  document: Document;
   innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   onClose(): void;
 }>;
@@ -22,7 +23,7 @@ export class ModalContainer extends React.PureComponent<ModalContainerProps> {
   constructor(props: ModalContainerProps) {
     super(props);
     if (canUseDOM()) {
-      this.el = document.createElement("div");
+      this.el = this.document.createElement("div");
       if (props.containerClassName !== undefined) {
         this.el.className = props.containerClassName;
       }
@@ -33,7 +34,7 @@ export class ModalContainer extends React.PureComponent<ModalContainerProps> {
     if (canUseDOM()) {
       /* istanbul ignore else: typescript typeguard */
       if (this.el !== undefined) {
-        document.body.appendChild(this.el);
+        this.document.body.appendChild(this.el);
       }
     }
   }
@@ -42,7 +43,7 @@ export class ModalContainer extends React.PureComponent<ModalContainerProps> {
     if (canUseDOM()) {
       /* istanbul ignore else: typescript typeguard */
       if (this.el !== undefined) {
-        document.body.removeChild(this.el);
+        this.document.body.removeChild(this.el);
       }
     }
   }
@@ -51,7 +52,14 @@ export class ModalContainer extends React.PureComponent<ModalContainerProps> {
     const { active, containerClassName, ...rest } = this.props;
 
     return this.el !== undefined && active === true
-      ? ReactDOM.createPortal(<ModalPortal {...rest} />, this.el)
+      ? ReactDOM.createPortal(
+          <ModalPortal document={this.document} {...rest} />,
+          this.el,
+        )
       : false;
+  }
+
+  private get document() {
+    return this.props.document !== undefined ? this.props.document : document;
   }
 }

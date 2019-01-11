@@ -21,6 +21,9 @@ coverage
 # nyc test coverage
 .nyc_output
 
+# Docz intermediate storage
+.docz
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
