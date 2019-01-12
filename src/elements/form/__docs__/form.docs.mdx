@@ -1,0 +1,935 @@
+---
+name: Form
+menu: Elements
+route: /elements/form
+---
+
+import {
+  faCheck,
+  faEnvelope,
+  faExclamationTriangle,
+  faGlobe,
+  faLock,
+  faUser
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Button, Icon } from "src/elements";
+import { Checkbox } from "../checkbox";
+import { Control, CONTROL_DEFAULTS } from "../control";
+import { Field, FIELD_DEFAULTS } from "../field";
+import { FIELD_LABEL_DEFAULTS } from "../field-label";
+import { Help } from "../help";
+import { Input } from "../input";
+import { Label, LABEL_DEFAULTS } from "../label";
+import { Radio } from "../radio";
+import { Select } from "../select";
+import { Textarea } from "../textarea";
+
+# Form
+
+### Fields
+
+The `<Field>` component is a container for a `<Label>`, a `<Control>` and optional `<Help>` text.
+
+<Playground>
+  <Field>
+    <Label>Label</Label>
+    <Control>
+      <Input type="text" placeholder="Text input" />
+    </Control>
+    <Help>This is a help text</Help>
+  </Field>
+</Playground>
+
+Notice that the `<Field>` container allows for consistent spacing.
+
+<Playground>
+  <Field>
+    <Label>Name</Label>
+    <Control>
+      <Input type="text" placeholder="e.g. Alex Smith" />
+    </Control>
+  </Field>
+
+  <Field>
+    <Label>Email</Label>
+    <Control>
+      <Input type="email" placeholder="e.g. alexsmith@gmail.com" />
+    </Control>
+  </Field>
+</Playground>
+
+### Controls
+
+The `<Control>` component enhances a **single** form control.
+It has the same height as a control element and can _only_ contain an `<Input>`, a `<Select>`, a `<Button>` and an `<Icon>`.
+
+<Playground>
+  <Control>
+    <Input type="text" placeholder="Text input" />
+  </Control>
+</Playground>
+
+<Playground>
+  <Select.Container>
+    <Select>
+      <Select.Option>Select dropdown</Select.Option>
+      <Select.Option>With options</Select.Option>
+    </Select>
+  </Select.Container>
+</Playground>
+
+<Playground>
+  <Button color="primary">Submit</Button>
+</Playground>
+
+### Controls with icons
+
+Use the `iconLeft` and `iconRight` props to the `<Control>` and an `align` prop to `<Icon>` to enable icons in the control.
+
+<Playground>
+  <Field>
+    <Control iconLeft iconRight>
+      <Input type="email" placeholder="Email" />
+      <Icon size="small" align="left">
+        <FontAwesomeIcon icon={faEnvelope} />
+      </Icon>
+      <Icon size="small" align="right">
+        <FontAwesomeIcon icon={faCheck} />
+      </Icon>
+    </Control>
+  </Field>
+  <Field>
+    <Control iconLeft>
+      <Input type="password" placeholder="Password" />
+      <Icon size="small" align="left">
+        <FontAwesomeIcon icon={faLock} />
+      </Icon>
+    </Control>
+  </Field>
+  <Field>
+    <Control>
+      <Button color="success">Login</Button>
+    </Control>
+  </Field>
+</Playground>
+
+You can also append icons to `<Select>` components.
+
+<Playground>
+  <Field>
+    <Control iconLeft>
+      <Select.Container>
+        <Select>
+          <Select.Option selected aria-selected>
+            Country
+          </Select.Option>
+          <Select.Option aria-selected={false}>Select dropdown</Select.Option>
+          <Select.Option aria-selected={false}>With Options</Select.Option>
+        </Select>
+      </Select.Container>
+      <Icon size="small" align="left">
+        <FontAwesomeIcon icon={faGlobe} />
+      </Icon>
+    </Control>
+  </Field>
+</Playground>
+
+Controls containing an icon will keep them centered, regardless of the size of the input or icon.
+
+<Playground>
+  <Field>
+    <Label size="small">Small input</Label>
+    <Control iconLeft iconRight>
+      <Input size="small" type="email" placeholder="Normal" />
+      <Icon size="small" align="left">
+        <FontAwesomeIcon icon={faEnvelope} />
+      </Icon>
+      <Icon size="small" align="right">
+        <FontAwesomeIcon icon={faCheck} />
+      </Icon>
+    </Control>
+  </Field>
+
+<Field>
+  <Label>Normal input</Label>
+  <Control iconLeft iconRight>
+    <Input type="email" placeholder="Extra small" />
+    <Icon size="small" align="left">
+      <FontAwesomeIcon icon={faEnvelope} size="xs" />
+    </Icon>
+    <Icon size="small" align="right">
+      <FontAwesomeIcon icon={faCheck} size="xs" />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft iconRight>
+    <Input type="email" placeholder="Normal" />
+    <Icon size="small" align="left">
+      <FontAwesomeIcon icon={faEnvelope} />
+    </Icon>
+    <Icon size="small" align="right">
+      <FontAwesomeIcon icon={faCheck} />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Label size="medium">Medium input</Label>
+  <Control iconLeft iconRight>
+    <Input size="medium" type="email" placeholder="Extra small" />
+    <Icon size="small" align="left">
+      <FontAwesomeIcon icon={faEnvelope} size="xs" />
+    </Icon>
+    <Icon size="small" align="right">
+      <FontAwesomeIcon icon={faCheck} size="xs" />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft iconRight>
+    <Input size="medium" type="email" placeholder="Small" />
+    <Icon align="left">
+      <FontAwesomeIcon icon={faEnvelope} size="sm" />
+    </Icon>
+    <Icon align="right">
+      <FontAwesomeIcon icon={faCheck} size="sm" />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft iconRight>
+    <Input size="medium" type="email" placeholder="Normal" />
+    <Icon size="medium" align="left">
+      <FontAwesomeIcon icon={faEnvelope} />
+    </Icon>
+    <Icon size="medium" align="right">
+      <FontAwesomeIcon icon={faCheck} />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Label size="large">Large input</Label>
+  <Control iconLeft iconRight>
+    <Input size="large" type="email" placeholder="Extra small" />
+    <Icon size="small" align="left">
+      <FontAwesomeIcon icon={faEnvelope} size="xs" />
+    </Icon>
+    <Icon size="small" align="right">
+      <FontAwesomeIcon icon={faCheck} size="xs" />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft iconRight>
+    <Input size="large" type="email" placeholder="Small" />
+    <Icon align="left">
+      <FontAwesomeIcon icon={faEnvelope} size="sm" />
+    </Icon>
+    <Icon align="right">
+      <FontAwesomeIcon icon={faCheck} size="sm" />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft iconRight>
+    <Input size="large" type="email" placeholder="Normal" />
+    <Icon align="left">
+      <FontAwesomeIcon icon={faEnvelope} />
+    </Icon>
+    <Icon align="right">
+      <FontAwesomeIcon icon={faCheck} />
+    </Icon>
+  </Control>
+</Field>
+
+  <Field>
+    <Control iconLeft iconRight>
+      <Input size="large" type="email" placeholder="Normal" />
+      <Icon size="medium" align="left">
+        <FontAwesomeIcon icon={faEnvelope} size="lg" />
+      </Icon>
+      <Icon size="medium" align="right">
+        <FontAwesomeIcon icon={faCheck} size="lg" />
+      </Icon>
+    </Control>
+  </Field>
+</Playground>
+
+### Fields with addons
+
+Use the `kind` prop as `addons` on a `<Field>` component to attach controls together.
+
+<Playground>
+  <Field kind="addons">
+    <Control>
+      <Input placeholder="Find a repository" />
+    </Control>
+    <Control>
+      <Button color="info">Search</Button>
+    </Control>
+  </Field>
+</Playground>
+
+You can only attach `<Input>`s, `<Button>`s and `<Select>`s.
+
+<Playground>
+  <Field kind="addons">
+    <Control>
+      <Input type="text" placeholder="Your email" />
+    </Control>
+    <Control>
+      <Button static>@gmail.com</Button>
+    </Control>
+  </Field>
+</Playground>
+
+Use the `expanded` modifier of a `<Control>` to fill the remaining space.
+
+<Playground>
+  <Field kind="addons">
+    <Control>
+      <Select.Container>
+        <Select>
+          <Select.Option>$</Select.Option>
+          <Select.Option>£</Select.Option>
+          <Select.Option>€</Select.Option>
+        </Select>
+      </Select.Container>
+    </Control>
+    <Control>
+      <Input type="text" placeholder="Amount of money" />
+    </Control>
+    <Control>
+      <Button>Transfer</Button>
+    </Control>
+  </Field>
+
+  <Field kind="addons">
+    <Control>
+      <Select.Container>
+        <Select>
+          <Select.Option>$</Select.Option>
+          <Select.Option>£</Select.Option>
+          <Select.Option>€</Select.Option>
+        </Select>
+      </Select.Container>
+    </Control>
+    <Control>
+      <Input type="text" placeholder="Amount of money" />
+    </Control>
+    <Control>
+      <Button>Transfer</Button>
+    </Control>
+  </Field>
+</Playground>
+
+Use the `fullwidth` prop of `<Select.Container>`, with the `expanded` prop on `<Control>` to get a full width select dropdown.
+
+<Playground>
+  <Field kind="addons">
+    <Control expanded>
+      <Select.Container fullwidth>
+        <Select>
+          <Select.Option value="Argentina">Argentina</Select.Option>
+          <Select.Option value="Bolivia">Bolivia</Select.Option>
+          <Select.Option value="Brazil">Brazil</Select.Option>
+          <Select.Option value="Chile">Chile</Select.Option>
+          <Select.Option value="Colombia">Colombia</Select.Option>
+          <Select.Option value="Ecuador">Ecuador</Select.Option>
+          <Select.Option value="Guyana">Guyana</Select.Option>
+          <Select.Option value="Paraguay">Paraguay</Select.Option>
+          <Select.Option value="Peru">Peru</Select.Option>
+          <Select.Option value="Suriname">Suriname</Select.Option>
+          <Select.Option value="Uruguay">Uruguay</Select.Option>
+          <Select.Option value="Venezuela">Venezuela</Select.Option>
+        </Select>
+      </Select.Container>
+    </Control>
+    <Control>
+      <Button color="primary">Choose</Button>
+    </Control>
+  </Field>
+</Playground>
+
+Use the `align` prop of `<Field>` to alter the alignment.
+
+<Playground>
+  <Field kind="addons">
+    <Control>
+      <Select.Container>
+        <Select>
+          <Select.Option>$</Select.Option>
+          <Select.Option>£</Select.Option>
+          <Select.Option>€</Select.Option>
+        </Select>
+      </Select.Container>
+    </Control>
+    <Control>
+      <Input type="text" placeholder="Amount of money" />
+    </Control>
+    <Control>
+      <Button>Transfer</Button>
+    </Control>
+  </Field>
+
+<Field kind="addons" align="centered">
+  <Control>
+    <Select.Container>
+      <Select>
+        <Select.Option>$</Select.Option>
+        <Select.Option>£</Select.Option>
+        <Select.Option>€</Select.Option>
+      </Select>
+    </Select.Container>
+  </Control>
+  <Control>
+    <Input type="text" placeholder="Amount of money" />
+  </Control>
+  <Control>
+    <Button>Transfer</Button>
+  </Control>
+</Field>
+
+  <Field kind="addons" align="right">
+    <Control>
+      <Select.Container>
+        <Select>
+          <Select.Option>$</Select.Option>
+          <Select.Option>£</Select.Option>
+          <Select.Option>€</Select.Option>
+        </Select>
+      </Select.Container>
+    </Control>
+    <Control>
+      <Input type="text" placeholder="Amount of money" />
+    </Control>
+    <Control>
+      <Button>Transfer</Button>
+    </Control>
+  </Field>
+</Playground>
+
+### Form group
+
+Use the `kind` prop as `group` on `<Field>` to group controls together, and use the `align` prop on `<Field>` to alter the alignment.
+
+<Playground>
+  <Field kind="group">
+    <Control>
+      <Button color="primary">Submit</Button>
+    </Control>
+    <Control>
+      <Button color="light">Cancel</Button>
+    </Control>
+  </Field>
+
+<Field kind="group" align="centered">
+  <Control>
+    <Button color="primary">Submit</Button>
+  </Control>
+  <Control>
+    <Button color="light">Cancel</Button>
+  </Control>
+</Field>
+
+  <Field kind="group" align="right">
+    <Control>
+      <Button color="primary">Submit</Button>
+    </Control>
+    <Control>
+      <Button color="light">Cancel</Button>
+    </Control>
+  </Field>
+</Playground>
+
+Use the `expanded` prop on the `<Control>` to fill up the remaing space.
+
+<Playground>
+  <Field kind="group">
+    <Control expanded>
+      <Input placeholder="Find a repository" />
+    </Control>
+    <Control>
+      <Button color="info">Search</Button>
+    </Control>
+  </Field>
+</Playground>
+
+Use the `mutliline` prop on `<Field>` to fill up multiple lines (ideal for a long list of controls).
+
+<Playground>
+  <Field kind="group" multiline>
+    {[
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten",
+      "Eleven",
+      "Twelve",
+      "Thirteen",
+      "Fourteen",
+      "Fifteen",
+      "Sixteen",
+      "Seventeen",
+      "Eighteen",
+      "Nineteen",
+      "Twenty"
+    ].map(name => (
+      <Control>
+        <Button key={name}>{name}</Button>
+      </Control>
+    ))}
+  </Field>
+</Playground>
+
+### Form layouts
+
+Use the `horizontal` prop of a `<Field>` for horizontal form controls.
+
+You can still use the `kind` property on `<Field>`, but you should use `<Field.Label>` for the side label and `<Field.Body>` for the `<Input>`, `<Select>` or `<Textarea>` components.
+
+<Playground>
+  <form>
+    <Field horizontal>
+      <Field.Label size="normal">
+        <Label>From</Label>
+      </Field.Label>
+      <Field.Body>
+        <Field>
+          <Control expanded iconLeft>
+            <Input type="text" placeholder="Name" />
+            <Icon size="small" align="left">
+              <FontAwesomeIcon icon={faUser} />
+            </Icon>
+          </Control>
+        </Field>
+        <Field>
+          <Control expanded iconLeft iconRight>
+            <Input
+              color="success"
+              type="email"
+              placeholder="Email"
+              value="alex@smith.com"
+            />
+            <Icon size="small" align="left">
+              <FontAwesomeIcon icon={faEnvelope} />
+            </Icon>
+            <Icon size="small" align="right">
+              <FontAwesomeIcon icon={faCheck} />
+            </Icon>
+          </Control>
+        </Field>
+      </Field.Body>
+    </Field>
+
+    <Field horizontal>
+      <Field.Label />
+      <Field.Body>
+        <Field expanded>
+          <Field kind="addons">
+            <Control>
+              <Button static>+44</Button>
+            </Control>
+            <Control expanded>
+              <Input type="tel" placeholder="Your phone number" />
+            </Control>
+          </Field>
+          <Help>Do not enter the first zero</Help>
+        </Field>
+      </Field.Body>
+    </Field>
+
+    <Field horizontal>
+      <Field.Label size="normal">
+        <Label>Department</Label>
+      </Field.Label>
+      <Field.Body>
+        <Field narrow>
+          <Control>
+            <Select.Container fullwidth>
+              <Select>
+                <Select.Option>Business development</Select.Option>
+                <Select.Option>Marketing</Select.Option>
+                <Select.Option>Sales</Select.Option>
+              </Select>
+            </Select.Container>
+          </Control>
+        </Field>
+      </Field.Body>
+    </Field>
+
+    <Field horizontal>
+      <Field.Label>
+        <Label>Already a member?</Label>
+      </Field.Label>
+      <Field.Body>
+        <Field narrow>
+          <Control>
+            {["Yes", "No"].map(value => (
+              <Label>
+                <Radio name="member" value={value} /> {value}
+              </Label>
+            ))}
+          </Control>
+        </Field>
+      </Field.Body>
+    </Field>
+
+    <Field horizontal>
+      <Field.Label size="normal">
+        <Label>Subject</Label>
+      </Field.Label>
+      <Field.Body>
+        <Field>
+          <Control>
+            <Input
+              color="danger"
+              type="text"
+              placeholder="e.g. Partnership opportunity"
+            />
+          </Control>
+          <Help color="danger">This field is required</Help>
+        </Field>
+      </Field.Body>
+    </Field>
+
+    <Field horizontal>
+      <Field.Label size="normal">
+        <Label>Question</Label>
+      </Field.Label>
+      <Field.Body>
+        <Field>
+          <Control>
+            <Textarea placeholder="Explain how we can help you" />
+          </Control>
+        </Field>
+      </Field.Body>
+    </Field>
+
+    <Field horizontal>
+      <Field.Label /> {/* Left empty for spacing  */}
+      <Field.Body>
+        <Field>
+          <Control>
+            <Button color="primary">Send message</Button>
+          </Control>
+        </Field>
+      </Field.Body>
+    </Field>
+
+  </form>
+</Playground>
+
+To preserve the vertical alignment of `<Label>`s with each type and size of `<Control>`.
+
+<Playground>
+  <Field horizontal>
+    <Field.Label>
+      <Label>No padding</Label>
+    </Field.Label>
+    <Field.Body>
+      <Field>
+        <Control>
+          <Checkbox /> Checkbox
+        </Control>
+      </Field>
+    </Field.Body>
+  </Field>
+
+<Field horizontal>
+  <Field.Label size="small">
+    <Label>Small</Label>
+  </Field.Label>
+  <Field.Body>
+    <Field>
+      <Control>
+        <Input size="small" type="text" placeholder="Small sized input" />
+      </Control>
+    </Field>
+  </Field.Body>
+</Field>
+
+<Field horizontal>
+  <Field.Label size="normal">
+    <Label>Normal</Label>
+  </Field.Label>
+  <Field.Body>
+    <Field>
+      <Control>
+        <Input type="text" placeholder="Normal sized input" />
+      </Control>
+    </Field>
+  </Field.Body>
+</Field>
+
+<Field horizontal>
+  <Field.Label size="medium">
+    <Label>Medium</Label>
+  </Field.Label>
+  <Field.Body>
+    <Field>
+      <Control>
+        <Input size="medium" type="text" placeholder="Medium sized input" />
+      </Control>
+    </Field>
+  </Field.Body>
+</Field>
+
+<Field horizontal>
+  <Field.Label size="large">
+    <Label>Large</Label>
+  </Field.Label>
+  <Field.Body>
+    <Field>
+      <Control>
+        <Input size="large" type="text" placeholder="Large sized input" />
+      </Control>
+    </Field>
+  </Field.Body>
+</Field>
+</Playground>
+
+Vertical forms are also supported, and are simpler to compose.
+
+<Playground>
+  <form>
+    <Field>
+      <Label>Name</Label>
+      <Control>
+        <Input type="text" placeholder="Text input" />
+      </Control>
+    </Field>
+
+    <Field>
+      <Label>Username</Label>
+      <Control iconLeft iconRight>
+        <Input
+          color="success"
+          type="text"
+          placeholder="Text input"
+          value="bulma"
+        />
+        <Icon size="small" align="left">
+          <FontAwesomeIcon icon={faUser} />
+        </Icon>
+        <Icon size="small" align="right">
+          <FontAwesomeIcon icon={faCheck} />
+        </Icon>
+      </Control>
+      <Help color="success">This username is available</Help>
+    </Field>
+
+    <Field>
+      <Label>Email</Label>
+      <Control iconLeft iconRight>
+        <Input
+          color="danger"
+          type="email"
+          placeholder="Email input"
+          value="hello@"
+        />
+        <Icon size="small" align="left">
+          <FontAwesomeIcon icon={faEnvelope} />
+        </Icon>
+        <Icon size="small" align="right">
+          <FontAwesomeIcon icon={faExclamationTriangle} />
+        </Icon>
+      </Control>
+      <Help color="danger">This email is invalid</Help>
+    </Field>
+
+    <Field>
+      <Label>Subject</Label>
+      <Control>
+        <Select.Container fullwidth>
+          <Select>
+            <Select.Option>Select dropdown</Select.Option>
+            <Select.Option>With Select.Options</Select.Option>
+          </Select>
+        </Select.Container>
+      </Control>
+    </Field>
+
+    <Field>
+      <Label>Message</Label>
+      <Control>
+        <Textarea placeholder="Textarea" />
+      </Control>
+    </Field>
+
+    <Field>
+      <Control>
+        <Label>
+          <Checkbox /> I agree to the{" "}
+          <a href="#terms">terms and conditions</a>
+        </Label>
+      </Control>
+    </Field>
+
+    <Field>
+      <Control>
+        {["Yes", "No"].map(value => (
+          <Label>
+            <Radio name="question" value={value} /> {value}
+          </Label>
+        ))}
+      </Control>
+    </Field>
+
+    <Field kind="group">
+      <Control>
+        <Button color="link">Submit</Button>
+      </Control>
+      <Control>
+        <Button text>Cancel</Button>
+      </Control>
+    </Field>
+
+  </form>
+</Playground>
+
+## Control
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Field.defaultProps.as),
+    expanded: {
+      description: "expand the control to fill available horizontal space",
+      typeName: "boolean"
+    },
+    iconLeft: {
+      description: "enable an icon on the left",
+      typeName: "boolean"
+    },
+    iconRight: {
+      description: "enable an icon on the right",
+      typeName: "boolean"
+    },
+    loading: {
+      description: "display a loading spinner",
+      typeName: "boolean"
+    },
+    ref: refDoc,
+    size: {
+      description: "change the control's size",
+      typeName: "string",
+      typeTip: mapEnumerable(CONTROL_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Control} componentName="Control" />
+
+## Field
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "the alignment of the field",
+      typeName: "string",
+      typeTip: mapEnumerable(FIELD_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Field.defaultProps.as),
+    expanded: {
+      description: "expand the field to fill available horizontal space",
+      typeName: "boolean"
+    },
+    horizontal: {
+      description: "enable horizontal form controls",
+      typeName: "boolean"
+    },
+    kind: {
+      description: "support addons or groups",
+      typeName: "string",
+      typeTip: mapEnumerable(FIELD_DEFAULTS.kinds)
+    },
+    multiline: {
+      description: "wrap to multiple lines (when overflowing)",
+      typeName: "boolean"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Field} componentName="Field" />
+
+## Field.Body
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Field.Body.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Field.Body} componentName="Field.Body" />
+
+## Field.Label
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Field.Label.defaultProps.as),
+    size: {
+      description: "preserve vertical alignment with the <Field.Body>",
+      typeName: "string",
+      typeTip: mapEnumerable(FIELD_LABEL_DEFAULTS.sizes)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Field.Label} componentName="Field.Label" />
+
+## Help
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Help.defaultProps.as),
+    color: {
+      description: "the help's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Help} componentName="Help" />
+
+## Label
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Label.defaultProps.as),
+    disabled: {
+      description: "render the label disabled",
+      typeName: "boolean"
+    },
+    size: {
+      description: "the label's size",
+      typeName: "string",
+      typeTip: mapEnumerable(LABEL_DEFAULTS.sizes)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Label} componentName="Label" />

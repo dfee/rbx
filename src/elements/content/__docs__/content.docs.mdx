@@ -1,0 +1,137 @@
+---
+name: Content
+menu: Elements
+route: /elements/content
+---
+
+import { Playground } from "docz";
+
+import {
+  AsProp,
+  Frame,
+  SimplePropsTable,
+  mapEnumerable,
+  refDoc
+} from "src/__docs__";
+import { Title } from "src/elements";
+import { Content, CONTENT_DEFAULTS } from "../content";
+import { CONTENT_ORDERED_LIST_DEFAULTS } from "../content-ordered-list";
+
+# Content
+
+<Playground>
+  <Content>
+    <Title>Hello World</Title>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan,
+      metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum
+      justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio,
+      sollicitudin vel erat vel, interdum mattis neque.
+    </p>
+    <Title as="h2">Second Level</Title>
+    <p>
+      Curabitur accumsan turpis pharetra <strong>augue tincidunt</strong>{" "}
+      blandit. Quisque condimentum maximus mi, sit amet commodo arcu rutrum id.
+      Proin pretium urna vel cursus venenatis. Suspendisse potenti. Etiam mattis
+      sem rhoncus lacus dapibus facilisis. Donec at dignissim dui. Ut et neque
+      nisl.
+    </p>
+    <ul>
+      <li>In fermentum leo eu lectus mollis, quis dictum mi aliquet.</li>
+      <li>Morbi eu nulla lobortis, lobortis est in, fringilla felis.</li>
+      <li>
+        Aliquam nec felis in sapien venenatis viverra fermentum nec lectus.
+      </li>
+      <li>Ut non enim metus.</li>
+    </ul>
+  </Content>
+</Playground>
+
+### Sizing
+
+Use the `size` prop to adjust the size of the text within the `<Content>`.
+
+<Playground>
+  {() =>
+    CONTENT_DEFAULTS.sizes.map(size => (
+      <Content size={size} key={size}>
+        <Title>
+          Hello World <code>{size}</code>
+        </Title>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+          accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus,
+          nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat
+          odio, sollicitudin vel erat vel, interdum mattis neque.
+        </p>
+      </Content>
+    ))
+  }
+</Playground>
+
+### Ordered lists
+
+Use the `type` prop on `<Content.OrderedList>` to control the bullet styling of ordered lists.
+
+<Playground>
+  {() =>
+    CONTENT_ORDERED_LIST_DEFAULTS.types.map(type => (
+      <Content key={type}>
+        <Title as="h4" size="is-4">
+          Shopping list <code>{type}</code>
+        </Title>
+        <Content.OrderedList type={type}>
+          <Content.OrderedList.Item>Coffee</Content.OrderedList.Item>
+          <Content.OrderedList.Item>Tea</Content.OrderedList.Item>
+          <Content.OrderedList.Item>Milk</Content.OrderedList.Item>
+        </Content.OrderedList>
+      </Content>
+    ))
+  }
+</Playground>
+
+## Content
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Content.defaultProps.as),
+    ref: refDoc,
+    size: {
+      description: "changes the font-size",
+      typeName: "string",
+      typeTip: mapEnumerable(CONTENT_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Content} componentName="Content" />
+
+## Content.OrderedList
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Content.OrderedList.defaultProps.as),
+    ref: refDoc,
+    type: {
+      description: "changes the item marker of the list",
+      typeName: "string",
+      typeTip: mapEnumerable(CONTENT_ORDERED_LIST_DEFAULTS.types)
+    }
+  }}
+/>
+
+<AsProp component={Content.OrderedList} componentName="Content.OrderedList" />
+
+## Content.OrderedList.Item
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Content.OrderedList.Item.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp
+  component={Content.OrderedList.Item}
+  componentName="Content.OrderedList.Item"
+/>

@@ -31,7 +31,6 @@ export type FieldModifierProps = Partial<{
   horizontal: boolean;
   kind: FieldVariables["kinds"];
   multiline: boolean;
-  narrow: boolean;
 }>;
 
 export type FieldProps = HelpersProps & FieldModifierProps;
@@ -42,21 +41,12 @@ const propTypes = {
   horizontal: PropTypes.bool,
   kind: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   multiline: PropTypes.bool,
-  narrow: PropTypes.bool,
 };
 
 export const Field = Object.assign(
   forwardRefAs<FieldProps, "div">(
     (props, ref) => {
-      const {
-        align,
-        expanded,
-        horizontal,
-        kind,
-        multiline,
-        narrow,
-        ...rest
-      } = props;
+      const { align, expanded, horizontal, kind, multiline, ...rest } = props;
 
       let k: string | undefined;
       if (kind === "addons") {
@@ -73,7 +63,6 @@ export const Field = Object.assign(
           [`${k}-multiline`]: k === "is-grouped" && multiline === true,
           "is-expanded": expanded,
           "is-horizontal": horizontal,
-          "is-narrow": narrow,
         },
         rest.className,
       );
