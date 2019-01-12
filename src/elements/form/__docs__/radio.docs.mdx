@@ -1,0 +1,73 @@
+---
+name: Form / Radio
+menu: Elements
+route: /elements/form-radio
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Control } from "../control";
+import { Label } from "../label";
+import { Radio } from "../radio";
+
+# Radio
+
+This is the form radio input.
+It is intentionally not styled, as Bulma seeks to preserve cross-browser compatibility and user experience.
+
+Make sure that the linked radio buttons have the **same value** for their `name` prop.
+
+<Playground>
+  <Control>
+    <Label>
+      <Radio name="answer" /> Yes
+    </Label>
+    <Label>
+      <Radio name="answer" /> No
+    </Label>
+  </Control>
+</Playground>
+
+Use the standard `checked` prop to mark a radio button by default.
+
+<Playground>
+  <Control>
+    <Label>
+      <Radio name="foobar" /> Foo
+    </Label>
+    <Label>
+      <Radio name="foobar" checked /> Bar
+    </Label>
+  </Control>
+</Playground>
+
+### Disable
+
+Use the standard `disable` prop on the `<Radio>`, and the `disabled` prop on the `<Label>` to disable it.
+
+<Playground>
+  <Control>
+    <Label>
+      <Radio name="rsvp" /> Going
+    </Label>
+    <Label>
+      <Radio name="rsvp" /> Not going
+    </Label>
+    <Label disabled>
+      <Radio name="rsvp" disabled /> Maybe
+    </Label>
+  </Control>
+</Playground>
+
+## Radio
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Radio.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Radio} componentName="Radio" />

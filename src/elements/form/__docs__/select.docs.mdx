@@ -3,3 +3,252 @@ name: Form / Select
 menu: Elements
 route: /elements/form-select
 ---
+
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Icon } from "src/elements";
+import { Control } from "../control";
+import { Field } from "../field";
+import { Select, SELECT_CONTAINER_DEFAULTS } from "../select";
+
+# Select
+
+The `<Select>` Component includes a wrapping container, `<Select.Container>`.
+
+<Playground>
+  <Select.Container>
+    <Select>
+      <Select.Option>Select dropdown</Select.Option>
+      <Select.Option>With options</Select.Option>
+    </Select>
+  </Select.Container>
+</Playground>
+
+### Multiple select
+
+Use the `multiple` and `size` props of `<Select>` to enable a multiple select.
+
+<Playground>
+  <Select.Container>
+    <Select multiple size={4}>
+      <Select.Option value="Argentina">Argentina</Select.Option>
+      <Select.Option value="Bolivia">Bolivia</Select.Option>
+      <Select.Option value="Brazil">Brazil</Select.Option>
+      <Select.Option value="Chile">Chile</Select.Option>
+      <Select.Option value="Colombia">Colombia</Select.Option>
+      <Select.Option value="Ecuador">Ecuador</Select.Option>
+      <Select.Option value="Guyana">Guyana</Select.Option>
+      <Select.Option value="Paraguay">Paraguay</Select.Option>
+      <Select.Option value="Peru">Peru</Select.Option>
+      <Select.Option value="Suriname">Suriname</Select.Option>
+      <Select.Option value="Uruguay">Uruguay</Select.Option>
+      <Select.Option value="Venezuela">Venezuela</Select.Option>
+    </Select>
+  </Select.Container>
+</Playground>
+
+### Colors
+
+Use the `color` prop of `<Select.Container>` to change the component's color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Field key={color}>
+        <Control>
+          <Select.Container color={color}>
+            <Select>
+              <Select.Option>{color} select dropdown</Select.Option>
+              <Select.Option>With options</Select.Option>
+            </Select>
+          </Select.Container>
+        </Control>
+      </Field>
+    ))
+  }
+</Playground>
+
+### Styles
+
+Use the `rounded` prop of `<Select.Container>` for rounded edges.
+
+<Playground>
+  <Select.Container rounded>
+    <Select>
+      <Select.Option>Select dropdown</Select.Option>
+      <Select.Option>With options</Select.Option>
+    </Select>
+  </Select.Container>
+</Playground>
+
+### Sizes
+
+Use the `size` prop of `<Select.Container>` to change the component's size.
+
+<Playground>
+  {() =>
+    SELECT_CONTAINER_DEFAULTS.sizes.map(size => (
+      <Field key={size}>
+        <Control>
+          <Select.Container size={size}>
+            <Select>
+              <Select.Option>{size} select dropdown</Select.Option>
+              <Select.Option>With options</Select.Option>
+            </Select>
+          </Select.Container>
+        </Control>
+      </Field>
+    ))
+  }
+</Playground>
+
+### States
+
+Use the `state` prop of `<Select.Container>` to change the component's state.
+
+<Playground>
+  {() =>
+    SELECT_CONTAINER_DEFAULTS.states.map(state => (
+      <Field key={state}>
+        <Control>
+          <Select.Container state={state}>
+            <Select>
+              <Select.Option>{state} select dropdown</Select.Option>
+              <Select.Option>With options</Select.Option>
+            </Select>
+          </Select.Container>
+        </Control>
+      </Field>
+    ))
+  }
+</Playground>
+
+### Icons
+
+Use the `iconLeft` modifier on the `<Control>` holding the `<Select.Container>` to add an icon.
+You also need to set the `align` property of the `<Icon>` to `left`.
+
+The size of the `<Select>` will define the size of the `<Icon>`.
+
+<Playground>
+  <Field>
+    <Control iconLeft>
+      <Select.Container size="small">
+        <Select>
+          <Select.Option>Country</Select.Option>
+          <Select.Option>Select dropdown</Select.Option>
+          <Select.Option>With options</Select.Option>
+        </Select>
+      </Select.Container>
+      <Icon size="small" align="left">
+        <FontAwesomeIcon icon={faGlobe} />
+      </Icon>
+    </Control>
+  </Field>
+
+<Field>
+  <Control iconLeft>
+    <Select.Container>
+      <Select>
+        <Select.Option>Country</Select.Option>
+        <Select.Option>Select dropdown</Select.Option>
+        <Select.Option>With options</Select.Option>
+      </Select>
+    </Select.Container>
+    <Icon align="left">
+      <FontAwesomeIcon icon={faGlobe} />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft>
+    <Select.Container size="medium">
+      <Select>
+        <Select.Option>Country</Select.Option>
+        <Select.Option>Select dropdown</Select.Option>
+        <Select.Option>With options</Select.Option>
+      </Select>
+    </Select.Container>
+    <Icon size="medium" align="left">
+      <FontAwesomeIcon icon={faGlobe} />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft>
+    <Select.Container size="large">
+      <Select>
+        <Select.Option>Country</Select.Option>
+        <Select.Option>Select dropdown</Select.Option>
+        <Select.Option>With options</Select.Option>
+      </Select>
+    </Select.Container>
+    <Icon size="large" align="left">
+      <FontAwesomeIcon icon={faGlobe} />
+    </Icon>
+  </Control>
+</Field>
+
+</Playground>
+
+## Select
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Select.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Select} componentName="Select" />
+
+## Select.Container
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Select.Container.defaultProps.as),
+    color: {
+      description: "change the container's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    fullwidth: {
+      description: "expand to occupy all horizontal space",
+      typeName: "boolean"
+    },
+    rounded: {
+      description: "round the edges",
+      typeName: "boolean"
+    },
+    size: {
+      description: "change the container's size",
+      typeName: "string",
+      typeTip: mapEnumerable(SELECT_CONTAINER_DEFAULTS.sizes)
+    },
+    state: {
+      description: "change the container's state",
+      typeName: "string",
+      typeTip: mapEnumerable(SELECT_CONTAINER_DEFAULTS.states)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Select.Container} componentName="Select.Container" />
+
+## Select.Option
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Select.Option.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Select.Option} componentName="Select.Option" />

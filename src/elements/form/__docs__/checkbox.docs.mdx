@@ -1,0 +1,52 @@
+---
+name: Form / Checkbox
+menu: Elements
+route: /elements/form-checkbox
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Checkbox } from "../checkbox";
+import { Label } from "../label";
+
+# Checkbox
+
+This is the form checkbox input.
+It is intentionally not styled, as Bulma seeks to preserve cross-browser compatibility and user experience.
+
+<Playground>
+  <Label>
+    <Checkbox /> Remember me
+  </Label>
+</Playground>
+
+You can add **links** to it.
+
+<Playground>
+  <Label>
+    <Checkbox /> I agree to the <a href="#">terms and conditions</a>
+  </Label>
+</Playground>
+
+### Disable
+
+Use the standard `disable` prop to disable the checkbox.
+
+<Playground>
+  <Label disabled>
+    <Checkbox disabled /> Save my preferences
+  </Label>
+</Playground>
+
+## Checkbox
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Checkbox.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Checkbox} componentName="Checkbox" />

@@ -1,0 +1,294 @@
+---
+name: Form / Input
+menu: Elements
+route: /elements/form-input
+---
+
+import { faCheck, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Icon } from "src/elements";
+import { Control } from "../control";
+import { Field } from "../field";
+import { Label } from "../label";
+import { Input, INPUT_DEFAULTS } from "../input";
+
+# Input
+
+This is the standard form input.
+
+<Playground>
+  <Input type="text" placeholder="Text input" />
+</Playground>
+
+### Colors
+
+Use the `color` prop to change the `<Input>`'s color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Field key={color}>
+        <Control>
+          <Input type="text" color={color} placeholder={`${color} input`} />
+        </Control>
+      </Field>
+    ))
+  }
+</Playground>
+
+### Sizes
+
+Use the `size` prop to change the `<Input>`'s size.
+
+<Playground>
+  {() => {
+    const sizes = INPUT_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size}) => (
+      <Field key={size}>
+        <Control>
+          <Input type="text" size={size} placeholder={`${name} input`} />
+        </Control>
+      </Field>
+    ))
+
+}}
+
+</Playground>
+
+### Styles
+
+Use the `rounded` prop to round the edges of the `<Input>`.
+
+<Playground>
+  <Input type="text" rounded placeholder="rounded input" />
+</Playground>
+
+### States
+
+Use the `state` prop to change the `<Input>`'s state.
+
+<Playground>
+  {() => {
+    const states = INPUT_DEFAULTS.states.map(state => ({ name: state, state }));
+    states.splice(0, 0, { name: "normal", size: undefined });
+
+    return states.map(({ name, state}) => (
+      <Field key={state}>
+        <Control>
+          <Input type="text" state={state} placeholder={`${name} input`} />
+        </Control>
+      </Field>
+    ))
+
+}}
+
+</Playground>
+
+Use the `loading` prop on the `<Control>` that contains the `<Input>` to get a loading spinner.
+It's size can be adjusted by passing an appropriate `size` prop to the `<Control>` and `<Input>`.
+
+<Playground>
+  <Field>
+    <Control size="small" loading>
+      <Input type="text" size="small" placeholder="small loading input" />
+    </Control>
+  </Field>
+
+<Field>
+  <Control loading>
+    <Input type="text" placeholder="normal loading input" />
+  </Control>
+</Field>
+
+<Field>
+  <Control size="medium" loading>
+    <Input type="text" size="medium" placeholder="medium loading input" />
+  </Control>
+</Field>
+
+  <Field>
+    <Control size="large" loading>
+      <Input type="text" size="large" placeholder="large loading input" />
+    </Control>
+  </Field>
+</Playground>
+
+### Disabled
+
+Use the standard `disabled` prop on the `<Input>` to disable it.
+
+<Playground>
+  <Control>
+    <Input type="text" placeholder="Disabled" disabled />
+  </Control>
+</Playground>
+
+### Read-only
+
+Use the `readOnly` prop to mark an `<Input>` as read-only.
+It's not editable, and has no shadow.
+
+<Playground>
+  <Control>
+    <Input type="text" placeholder="This text is read-only" readOnly />
+  </Control>
+</Playground>
+
+### Static
+
+Use the `static` prop along with `readOnly` to mark an `<Input>` to remove the background, border, shadow and horizontal padding.
+The vertical spacing will be maintained, so you can align the input in any context – like a horizontal form.
+
+<Playground>
+  <Field horizontal>
+    <Field.Label size="normal">
+      <Label>From</Label>
+    </Field.Label>
+    <Field.Body>
+      <Control>
+        <Input type="email" value="me@example.com" readOnly static />
+      </Control>
+    </Field.Body>
+  </Field>
+
+  <Field horizontal>
+    <Field.Label>
+      <Label>To</Label>
+    </Field.Label>
+    <Field.Body>
+      <Control>
+        <Input type="email" placeholder="Recipient email" />
+      </Control>
+    </Field.Body>
+  </Field>
+</Playground>
+
+### With icons
+
+Use the `iconLeft` or `iconRight` prop on the `<Control>` that contains an `<Input>` to add icons.
+You'll also need to use the `align` property on the `<Icon>`.
+
+<Playground>
+  <Field>
+    <Control iconLeft iconRight>
+      <Input type="email" placeholder="Email" />
+      <Icon align="left">
+        <FontAwesomeIcon icon={faEnvelope} />
+      </Icon>
+      <Icon align="right">
+        <FontAwesomeIcon icon={faCheck} />
+      </Icon>
+    </Control>
+  </Field>
+
+  <Field>
+    <Control iconLeft>
+      <Input type="password" placeholder="Password" />
+      <Icon align="left">
+        <FontAwesomeIcon icon={faLock} />
+      </Icon>
+    </Control>
+  </Field>
+</Playground>
+
+If the control contains an icon, it will remain **centered** regardless of the size foo the `<Input>` or `<Icon>`.
+
+<Playground>
+  <Field>
+    <Control iconLeft iconRight>
+      <Input type="email" size="small" placeholder="Email" />
+      <Icon align="left" size="small">
+        <FontAwesomeIcon icon={faEnvelope} />
+      </Icon>
+      <Icon align="right" size="small">
+        <FontAwesomeIcon icon={faCheck} />
+      </Icon>
+    </Control>
+  </Field>
+
+<Field>
+  <Control iconLeft iconRight>
+    <Input type="email" placeholder="Email" />
+    <Icon align="left">
+      <FontAwesomeIcon icon={faEnvelope} />
+    </Icon>
+    <Icon align="right">
+      <FontAwesomeIcon icon={faCheck} />
+    </Icon>
+  </Control>
+</Field>
+
+<Field>
+  <Control iconLeft iconRight>
+    <Input type="email" size="medium" placeholder="Email" />
+    <Icon align="left">
+      <FontAwesomeIcon icon={faEnvelope} />
+    </Icon>
+    <Icon align="right">
+      <FontAwesomeIcon icon={faCheck} />
+    </Icon>
+  </Control>
+</Field>
+
+  <Field>
+    <Control iconLeft iconRight>
+      <Input type="email" size="large" placeholder="Email" />
+      <Icon align="left" size="medium">
+        <FontAwesomeIcon icon={faEnvelope} />
+      </Icon>
+      <Icon align="right" size="medium">
+        <FontAwesomeIcon icon={faCheck} />
+      </Icon>
+    </Control>
+  </Field>
+</Playground>
+
+## Input
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Input.defaultProps.as),
+    color: {
+      description: "change the input's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    readOnly: {
+      description: "make the input read-only",
+      typeName: "boolean"
+    },
+    rounded: {
+      description: "round the edges of the input",
+      typeName: "boolean"
+    },
+    size: {
+      description: "change the input's size",
+      typeName: "string",
+      typeTip: mapEnumerable(INPUT_DEFAULTS.sizes)
+    },
+    state: {
+      description: "change the input's state",
+      typeName: "string",
+      typeTip: mapEnumerable(INPUT_DEFAULTS.states)
+    },
+    static: {
+      description:
+        "remove the background, border, shadow and horizontal padding",
+      typeName: "boolean"
+    },
+    type: {
+      description: "set the input's type",
+      typeName: "string",
+      typeTip: mapEnumerable(INPUT_DEFAULTS.types)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Input} componentName="Input" />

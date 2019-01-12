@@ -1,0 +1,402 @@
+---
+name: Form / File
+menu: Elements
+route: /elements/form-file
+---
+
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Field } from "../field";
+import { File, FILE_DEFAULTS } from "../file";
+
+# File
+
+This component provides the blocks for building a dynamic file input.
+
+<Playground>
+  <File>
+    <File.Label>
+      <File.Input name="resume" />
+      <File.CTA>
+        <File.Icon>
+          <FontAwesomeIcon icon={faUpload} />
+        </File.Icon>
+        <File.Label as="span">Choose a File</File.Label>
+      </File.CTA>
+    </File.Label>
+  </File>
+</Playground>
+
+### With filename
+
+Use the `hasName` prop on `<File>` and add the `<File.Name>` component in the `<File.Label>` to add the filename.
+
+<Playground>
+  <File hasName>
+    <File.Label>
+      <File.Input name="resume" />
+      <File.CTA>
+        <File.Icon>
+          <FontAwesomeIcon icon={faUpload} />
+        </File.Icon>
+        <File.Label as="span">Choose a File</File.Label>
+      </File.CTA>
+      <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+    </File.Label>
+  </File>
+</Playground>
+
+### Alignment
+
+By default, the call-to-action (`<File.CTA>`) is aligned to the left, but you can move it to the right using the `align` prop of `<File>`.
+
+<Playground>
+  <File hasName align="right">
+    <File.Label>
+      <File.Input name="resume" />
+      <File.CTA>
+        <File.Icon>
+          <FontAwesomeIcon icon={faUpload} />
+        </File.Icon>
+        <File.Label as="span">Choose a File</File.Label>
+      </File.CTA>
+      <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+    </File.Label>
+  </File>
+</Playground>
+
+### Fullwidth
+
+Use the `fullwidth` prop of `<File>` to expand the container to occupy all available horizontal space.
+
+<Playground>
+  <File hasName fullwidth>
+    <File.Label>
+      <File.Input name="resume" />
+      <File.CTA>
+        <File.Icon>
+          <FontAwesomeIcon icon={faUpload} />
+        </File.Icon>
+        <File.Label as="span">Choose a File</File.Label>
+      </File.CTA>
+      <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+    </File.Label>
+  </File>
+</Playground>
+
+### Boxed
+
+Use the `boxed` prop of `<File>` to create a box container for file selection.
+
+<Playground>
+  <File boxed>
+    <File.Label>
+      <File.Input name="resume" />
+      <File.CTA>
+        <File.Icon>
+          <FontAwesomeIcon icon={faUpload} />
+        </File.Icon>
+        <File.Label as="span">Choose a File</File.Label>
+      </File.CTA>
+    </File.Label>
+  </File>
+</Playground>
+
+Use the `hasName` prop of `<File>` and add a `<File.Name>` component to add the filename.
+
+<Playground>
+  <File hasName boxed>
+    <File.Label>
+      <File.Input name="resume" />
+      <File.CTA>
+        <File.Icon>
+          <FontAwesomeIcon icon={faUpload} />
+        </File.Icon>
+        <File.Label as="span">Choose a File</File.Label>
+      </File.CTA>
+      <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+    </File.Label>
+  </File>
+</Playground>
+
+### Colors
+
+Use the `color` prop of `<File>` to change the color.
+
+<Playground>
+  {() => {
+    const permutations = [
+      { boxed: false, hasName: false, color: "primary" },
+      { boxed: false, hasName: true, color: "info" },
+      { boxed: true, hasName: false, color: "warning" },
+      { boxed: true, hasName: true, color: "danger" }
+    ];
+    return permutations.map(props => (
+      <Field>
+        <File {...props}>
+          <File.Label>
+            <File.Input name="resume" />
+            <File.CTA>
+              <File.Icon>
+                <FontAwesomeIcon icon={faUpload} />
+              </File.Icon>
+              <File.Label as="span">{`${props.color} file`}</File.Label>
+            </File.CTA>
+            {props.hasName && (
+              <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+            )}
+          </File.Label>
+        </File>
+      </Field>
+    ));
+  }}
+</Playground>
+
+### Sizes
+
+Use the `size` prop of `<File>` to change the size.
+
+<Playground>
+  {() => {
+    const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size }) => (
+      <Field>
+        <File size={size}>
+          <File.Label>
+            <File.Input name="resume" />
+            <File.CTA>
+              <File.Icon>
+                <FontAwesomeIcon icon={faUpload} />
+              </File.Icon>
+              <File.Label as="span">{`${name} file...`}</File.Label>
+            </File.CTA>
+          </File.Label>
+        </File>
+      </Field>
+    ));
+
+}}
+
+</Playground>
+
+The `size` prop of `<File>` also works with a filename.
+
+<Playground>
+  {() => {
+    const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size }) => (
+      <Field>
+        <File size={size} hasName>
+          <File.Label>
+            <File.Input name="resume" />
+            <File.CTA>
+              <File.Icon>
+                <FontAwesomeIcon icon={faUpload} />
+              </File.Icon>
+              <File.Label as="span">{`${name} file...`}</File.Label>
+            </File.CTA>
+            <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+          </File.Label>
+        </File>
+      </Field>
+    ));
+
+}}
+
+</Playground>
+
+The `size` prop of `<File>` also works when it's boxed.
+
+<Playground>
+  {() => {
+    const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size }) => (
+      <Field>
+        <File size={size} boxed>
+          <File.Label>
+            <File.Input name="resume" />
+            <File.CTA>
+              <File.Icon>
+                <FontAwesomeIcon icon={faUpload} />
+              </File.Icon>
+              <File.Label as="span">{`${name} file...`}</File.Label>
+            </File.CTA>
+          </File.Label>
+        </File>
+      </Field>
+    ));
+
+}}
+
+</Playground>
+
+The `size` prop of `<File>` also works when it's boxed and with a filename.
+
+<Playground>
+  {() => {
+    const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size }) => (
+      <Field>
+        <File size={size} boxed hasName>
+          <File.Label>
+            <File.Input name="resume" />
+            <File.CTA>
+              <File.Icon>
+                <FontAwesomeIcon icon={faUpload} />
+              </File.Icon>
+              <File.Label as="span">{`${name} file...`}</File.Label>
+            </File.CTA>
+            <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+          </File.Label>
+        </File>
+      </Field>
+    ));
+
+}}
+
+</Playground>
+
+### Alignment
+
+Use the `align` prop of `<File>` to **center** align a boxed file input.
+
+<Playground>
+  <Field>
+    <File align="centered" hasName boxed color="success">
+      <File.Label>
+        <File.Input name="resume" />
+        <File.CTA>
+          <File.Icon>
+            <FontAwesomeIcon icon={faUpload} />
+          </File.Icon>
+          <File.Label as="span">Centered file</File.Label>
+        </File.CTA>
+        <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+      </File.Label>
+    </File>
+  </Field>
+</Playground>
+
+Use the `align` prop of `<File>` to **right** align a file input.
+
+<Playground>
+  <Field>
+    <File align="right" hasName color="info">
+      <File.Label>
+        <File.Input name="resume" />
+        <File.CTA>
+          <File.Icon>
+            <FontAwesomeIcon icon={faUpload} />
+          </File.Icon>
+          <File.Label as="span">Right file</File.Label>
+        </File.CTA>
+        <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+      </File.Label>
+    </File>
+  </Field>
+</Playground>
+
+## File
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "set the file input's alignment",
+      typeName: "string",
+      typeTip: mapEnumerable(FILE_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(File.defaultProps.as),
+    boxed: {
+      description: "use a boxed layout for the file input",
+      typeName: "boolean"
+    },
+    color: {
+      description: "set the file input's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    fullwidth: {
+      description: "expand the input to occupy all available horizontal space",
+      typeName: "boolean"
+    },
+    hasName: {
+      description: "whether to show the file's name",
+      typeName: "boolean"
+    },
+    size: {
+      description: "set the file input's size",
+      typeName: "string",
+      typeTip: mapEnumerable(FILE_DEFAULTS.sizes)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={File} componentName="File" />
+
+## File.CTA
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(File.CTA.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={File.CTA} componentName="File.CTA" />
+
+## File.Icon
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(File.Icon.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={File.Icon} componentName="File.Icon" />
+
+## File.Input
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(File.Input.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={File.Input} componentName="File.Input" />
+
+## File.Label
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(File.Label.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={File.Label} componentName="File.Label" />
+
+## File.Name
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(File.Name.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={File.Name} componentName="File.Name" />

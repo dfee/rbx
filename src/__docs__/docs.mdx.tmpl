@@ -1,0 +1,23 @@
+---
+name: XXX
+menu: YYY
+route: /xxx/yyy
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+
+# XXX
+
+## XXX
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(XXX.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={XXX} componentName="XXX" />

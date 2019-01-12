@@ -1,0 +1,176 @@
+---
+name: Form / Textarea
+menu: Elements
+route: /elements/form-textarea
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Control } from "../control";
+import { Field } from "../field";
+import { Textarea, TEXTAREA_DEFAULTS } from "../textarea";
+
+# Textarea
+
+This is the standard textarea form input.
+
+<Playground>
+  <Textarea placeholder="e.g. Hello world" />
+</Playground>
+
+Using the standard `rows` prop, you can adjust the number of visibile rows.
+
+<Playground>
+  <Textarea rows={10} placeholder="10 lines of textarea" />
+</Playground>
+
+### Colors
+
+Use the `color` prop to set the color of the `<Textarea>`.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Field key={color}>
+        <Control>
+          <Textarea color={color} placeholder={`${color} textarea`} />
+        </Control>
+      </Field>
+    ))
+  }
+</Playground>
+
+### Sizes
+
+Use the `size` prop to set the size of the text in an `<Textarea>`.
+
+<Playground>
+  {() => {
+    const sizes = TEXTAREA_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size }) => (
+      <Field key={size}>
+        <Control>
+          <Textarea size={size} placeholder={`${name} textarea`} />
+        </Control>
+      </Field>
+    ))
+
+}}
+
+</Playground>
+
+### States
+
+Use the `state` prop to force the state of the `<Textarea>`.
+
+<Playground>
+  {() => {
+    const states = TEXTAREA_DEFAULTS.states.map(state => ({ name: state, state }));
+    states.splice(0, 0, { name: "normal", size: undefined });
+
+    return states.map(({ name, state }) => (
+      <Field key={state}>
+        <Control>
+          <Textarea state={state} placeholder={`${name} textarea`} />
+        </Control>
+      </Field>
+    ))
+
+}}
+
+</Playground>
+
+### Loading
+
+Use the `loading` prop on the `<Control>` that contains the `<Textarea>` to add a loading spinner.
+You can adjust the size of the spinner using the `size` prop on the `<Control>`.
+
+<Playground>
+  <Field>
+    <Control size="small" loading>
+      <Textarea size="small" placeholder="small loading textarea" />
+    </Control>
+  </Field>
+
+<Field>
+  <Control loading>
+    <Textarea placeholder="normal loading textarea" />
+  </Control>
+</Field>
+
+<Field>
+  <Control size="medium" loading>
+    <Textarea size="medium" placeholder="medium loading textarea" />
+  </Control>
+</Field>
+
+  <Field>
+    <Control size="large" loading>
+      <Textarea size="large" placeholder="large loading textarea" />
+    </Control>
+  </Field>
+</Playground>
+
+### Disabled
+
+Use the standard `disabled` prop to disable a `<Textarea>`.
+
+<Playground>
+  <Control>
+    <Textarea placeholder="Disabled textarea" disabled />
+  </Control>
+</Playground>
+
+### Read-only
+
+Use the standard `readOnly` prop to make a `<Textarea>` read-only.
+
+<Playground>
+  <Control>
+    <Textarea placeholder="Read-only textarea" readOnly />
+  </Control>
+</Playground>
+
+### Fixed-size
+
+Use the `fixedSize` prop of a `<Textarea>` to remove the user's ability to resize the textarea.
+
+<Playground>
+  <Control>
+    <Textarea placeholder="Fixed-size textarea" fixedSize />
+  </Control>
+</Playground>
+
+## Textarea
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Textarea.defaultProps.as),
+    color: {
+      description: "change the textarea's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    fixedSize: {
+      description: "remove the drag handle from the textarea",
+      typeName: "boolean"
+    },
+    size: {
+      description: "change the textarea's size",
+      typeName: "string",
+      typeTip: mapEnumerable(TEXTAREA_DEFAULTS.sizes)
+    },
+    state: {
+      description: "change the textarea's state",
+      typeName: "string",
+      typeTip: mapEnumerable(TEXTAREA_DEFAULTS.states)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Textarea} componentName="Textarea" />
