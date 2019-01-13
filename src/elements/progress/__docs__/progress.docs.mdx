@@ -1,0 +1,95 @@
+---
+name: Progress
+menu: Elements
+route: /elements/progress
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Table } from "src/elements";
+import { Progress, PROGRESS_DEFAULTS } from "../progress";
+
+# Progress
+
+The `<Progress>` component shows completion.
+
+<Playground>
+  <Progress value={15} max={100} />
+</Playground>
+
+### Colors
+
+Use the `color` prop on `<Progress>` to set the color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map((color, i) => (
+      <Progress color={color} key={color} max={100} value={20 + i * 5} />
+    ))
+  }
+</Playground>
+
+Use the `size` prop of `<Progress>` to change the height.
+
+<Playground>
+  {() => {
+    const sizes = PROGRESS_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "-", size: undefined });
+
+    return (
+      <Table bordered>
+        <thead>
+          <tr>
+            <th><code>Progress</code> size</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            sizes.map(({ size, name }, i) => (
+              <tr key={size}>
+                <td><code>{name}</code></td>
+                <td><Progress value={20 + i * 10} max={100} size={size} /></td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </Table>
+    );
+
+}}
+
+</Playground>
+
+## Progress
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Progress.defaultProps.as),
+    color: {
+      description: "set the progress bar's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    max: {
+      description: "the total completion amount (denominator)",
+      required: true,
+      typeName: "number"
+    },
+    ref: refDoc,
+    color: {
+      description: "set the progress bar's size",
+      typeName: "string",
+      typeTip: mapEnumerable(PROGRESS_DEFAULTS.sizes)
+    },
+    value: {
+      description: "the completion amount (numerator)",
+      required: true,
+      typeName: "number"
+    }
+  }}
+/>
+
+<AsProp component={Progress} componentName="Progress" />

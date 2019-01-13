@@ -52,7 +52,7 @@ Use the `size` prop of `<Delete>` to change its size.
         <tbody>
           {
             sizes.map(({size, name}) => (
-              <tr>
+              <tr key={name}>
                 <td><code>{name}</code></td>
                 <td><Delete size={size} /></td>
               </tr>
