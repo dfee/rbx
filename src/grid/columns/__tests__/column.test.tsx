@@ -1,5 +1,6 @@
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Column, COLUMN_DEFAULTS } from "src/grid/columns/column";
+import { ColumnGroup } from "src/grid/columns/column-group";
 
 import {
   hasProperties,
@@ -21,6 +22,7 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
+    Group: ColumnGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

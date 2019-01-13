@@ -56,7 +56,6 @@ Object {
     },
     "propTypes": Object {
       "color": [Function],
-      "disabled": [Function],
       "fullwidth": [Function],
       "inverted": [Function],
       "outlined": [Function],
@@ -132,20 +131,23 @@ Object {
     },
     "render": [Function],
   },
-  "Columns": Object {
+  "Column": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "Column": Object {
+    "Group": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "as": "div",
+        "multiline": true,
       },
       "propTypes": Object {
+        "breakpoint": [Function],
+        "centered": [Function],
         "desktop": [Function],
         "fullhd": [Function],
+        "gapSize": [Function],
+        "gapless": [Function],
         "mobile": [Function],
-        "narrow": [Function],
-        "offset": [Function],
-        "size": [Function],
+        "multiline": [Function],
         "tablet": [Function],
         "touch": [Function],
         "widescreen": [Function],
@@ -154,17 +156,14 @@ Object {
     },
     "defaultProps": Object {
       "as": "div",
-      "multiline": true,
     },
     "propTypes": Object {
-      "breakpoint": [Function],
-      "centered": [Function],
       "desktop": [Function],
       "fullhd": [Function],
-      "gapSize": [Function],
-      "gapless": [Function],
       "mobile": [Function],
-      "multiline": [Function],
+      "narrow": [Function],
+      "offset": [Function],
+      "size": [Function],
       "tablet": [Function],
       "touch": [Function],
       "widescreen": [Function],
@@ -752,6 +751,7 @@ Object {
       "closeOnBlur": [Function],
       "closeOnEsc": [Function],
       "containerClassName": [Function],
+      "document": [Function],
       "onClose": [Function],
     },
     "render": [Function],

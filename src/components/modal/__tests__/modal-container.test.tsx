@@ -1,4 +1,5 @@
 import * as Enzyme from "enzyme";
+import { JSDOM } from "jsdom";
 import * as React from "react";
 
 import {
@@ -91,6 +92,27 @@ describe(`${COMPONENT_NAME} component`, () => {
           withEnzymeMount({ node }, ({ context: { wrapper } }) => {
             const modalPortalWrapper = wrapper.find(ModalPortal);
             expect(modalPortalWrapper.props().closeOnEsc).toEqual(closeOnEsc);
+          });
+        });
+      });
+    });
+
+    describe("document", () => {
+      ["global", "provided"].map(docOpt => {
+        it(`should use the ${docOpt} document`, () => {
+          const ref = React.createRef<HTMLDivElement>();
+          const doc =
+            docOpt === "global" ? window.document : new JSDOM().window.document;
+          const node = makeNode({ active: true, document: doc, innerRef: ref });
+          withEnzymeMount({ node }, () => {
+            if (docOpt === "provided") {
+              // make sure we're doing this right.
+              expect(doc).not.toBe(window.document);
+            }
+            if (ref.current === null) {
+              throw new Error("ref should be set");
+            }
+            expect(ref.current.ownerDocument).toBe(doc);
           });
         });
       });

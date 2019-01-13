@@ -1,0 +1,36 @@
+---
+name: Columns
+menu: Grid
+route: /grid/columns
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Column, COLUMN_DEFAULTS } from "../column";
+import { COLUMNS_DEFAULTS } from "../column-group";
+
+# Columns
+
+## Column
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Column.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Column} componentName="Column" />
+
+## Column.Group
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Column.Group.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Column.Group} componentName="Column.Group" />

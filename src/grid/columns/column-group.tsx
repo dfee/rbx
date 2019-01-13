@@ -6,36 +6,35 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
 import { tuple } from "../../utils";
-import { Column } from "./column";
 
-export const COLUMNS_DEFAULTS = {
+export const COLUMN_GROUP_DEFAULTS = {
   gapSizes: tuple(0, 1, 2, 3, 4, 5, 6, 7, 8),
 };
 
-export interface ColumnsVariablesOverrides {}
+export interface ColumnGroupVariablesOverrides {}
 
-export interface ColumnsVariablesDefaults {
-  gapSizes: (typeof COLUMNS_DEFAULTS["gapSizes"])[number];
+export interface ColumnGroupVariablesDefaults {
+  gapSizes: (typeof COLUMN_GROUP_DEFAULTS["gapSizes"])[number];
 }
 
-export type ColumnsVariables = Prefer<
-  ColumnsVariablesOverrides,
-  ColumnsVariablesDefaults
+export type ColumnGroupVariables = Prefer<
+  ColumnGroupVariablesOverrides,
+  ColumnGroupVariablesDefaults
 >;
 
-export type ColumnsBreakpointProps = Partial<{
+export type ColumnGroupBreakpointProps = Partial<{
   /**
    * The column gap size for Tablet devices (Between 769px and 1023px)
    */
-  gapSize: ColumnsVariables["gapSizes"];
+  gapSize: ColumnGroupVariables["gapSizes"];
 }>;
 
-const ColumnsBreakpointPropTypes = {
+const ColumnGroupBreakpointPropTypes = {
   gapSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-type ColumnsModifierProps = Partial<
-  { [B in Variables["breakpoints"]]: ColumnsBreakpointProps } & {
+type ColumnGroupModifierProps = Partial<
+  { [B in Variables["breakpoints"]]: ColumnGroupBreakpointProps } & {
     /**
      * Breakpoint where columns become stacked.
      */
@@ -53,32 +52,32 @@ type ColumnsModifierProps = Partial<
      * elements that would fit in a single row.
      */
     multiline: boolean;
-  } & ColumnsBreakpointProps
+  } & ColumnGroupBreakpointProps
 >;
 
-export type ColumnsProps = HelpersProps & ColumnsModifierProps;
+export type ColumnGroupProps = HelpersProps & ColumnGroupModifierProps;
 
 /**
  * Note: the default Breakpoints are typechecked (as it'll cover 99%+ of users)
  * We can't validate custom Breakpoints with PropTypes (though they are checked
  * by TypeScript).
- * ∴ Custom breakpoint's won't be checked against ColumnsBreakpointPropTypes
+ * ∴ Custom breakpoint's won't be checked against ColumnGroupBreakpointPropTypes
  */
 const propTypes = {
   ...DEFAULTS.breakpoints
     .map(breakpoint => ({
-      [breakpoint]: PropTypes.shape(ColumnsBreakpointPropTypes),
+      [breakpoint]: PropTypes.shape(ColumnGroupBreakpointPropTypes),
     }))
     .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-  ...ColumnsBreakpointPropTypes,
+  ...ColumnGroupBreakpointPropTypes,
   breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   centered: PropTypes.bool,
   gapless: PropTypes.bool,
   multiline: PropTypes.bool,
 };
 
-export const Columns = Object.assign(
-  forwardRefAs<ColumnsProps, "div">(
+export const ColumnGroup = Object.assign(
+  forwardRefAs<ColumnGroupProps, "div">(
     (
       {
         className,
@@ -143,8 +142,5 @@ export const Columns = Object.assign(
       multiline: true,
     },
   ),
-  {
-    Column,
-    propTypes,
-  },
+  { propTypes },
 );

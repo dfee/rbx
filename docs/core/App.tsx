@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 import {
-  Columns,
+  Column,
   Container,
   Content,
   Footer,
@@ -96,7 +96,7 @@ const Feature: React.FC<{
   title: string;
   to: string;
 }> = ({ children, imageSrc, title, to }) => (
-  <Columns.Column size="half" mobile={{ size: "full" }}>
+  <Column size="half" mobile={{ size: "full" }}>
     <Media>
       <Media.Item as="figure" align="left">
         <Image.Container as="a" href={to} size={64} target="_blank">
@@ -117,12 +117,12 @@ const Feature: React.FC<{
         {children}
       </Media.Item>
     </Media>
-  </Columns.Column>
+  </Column>
 );
 
 const AppFeatures: React.FC = () => (
   <Container>
-    <Columns>
+    <Column.Group>
       <Feature to="https://reactjs.org/" imageSrc={ReactLogo} title="React 16+">
         <p>Built for the latest major version of React.</p>
         <p>
@@ -178,7 +178,7 @@ const AppFeatures: React.FC = () => (
       >
         <pre>npm install rbx # install it now!</pre>
       </Feature>
-    </Columns>
+    </Column.Group>
   </Container>
 );
 

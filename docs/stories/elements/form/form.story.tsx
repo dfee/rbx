@@ -21,15 +21,15 @@ import {
   Select,
   Textarea,
 } from "src/elements";
-import { Columns } from "src/grid";
+import { Column } from "src/grid";
 
 storiesOf("Elements/Form", module)
   .addDecorator(story => <div style={{ margin: 50 }}>{story()}</div>)
   // tslint:disable-next-line: max-func-body-length
   .add("Horizontal form", () => {
     return (
-      <Columns>
-        <Columns.Column tablet={{ size: "full" }} widescreen={{ size: "half" }}>
+      <Column.Group>
+        <Column tablet={{ size: "full" }} widescreen={{ size: "half" }}>
           <form>
             <Field horizontal>
               <Field.Label size="normal">
@@ -158,15 +158,15 @@ storiesOf("Elements/Form", module)
               </Field.Body>
             </Field>
           </form>
-        </Columns.Column>
-      </Columns>
+        </Column>
+      </Column.Group>
     );
   })
   // tslint:disable-next-line: max-func-body-length
   .add("Vertical form", () => {
     return (
-      <Columns>
-        <Columns.Column
+      <Column.Group>
+        <Column
           mobile={{ size: "full" }}
           tablet={{ size: "half" }}
           desktop={{ size: "one-third" }}
@@ -266,7 +266,7 @@ storiesOf("Elements/Form", module)
               </Control>
             </Field>
           </form>
-        </Columns.Column>
-      </Columns>
+        </Column>
+      </Column.Group>
     );
   });

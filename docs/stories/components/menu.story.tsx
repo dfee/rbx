@@ -2,17 +2,17 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Menu } from "src/components";
-import { Columns } from "src/grid";
+import { Column } from "src/grid";
 import { Section } from "src/layout";
 
 storiesOf("Components/Menu", module)
   .addDecorator(story => (
     <Section>
-      <Columns>
-        <Columns.Column desktop={{ size: "one-quarter" }} size="half">
+      <Column.Group>
+        <Column desktop={{ size: "one-quarter" }} size="half">
           {story()}
-        </Columns.Column>
-      </Columns>
+        </Column>
+      </Column.Group>
     </Section>
   ))
   .add("Default", () => (

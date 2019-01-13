@@ -49,18 +49,6 @@ describe(`${COMPONENT_NAME} component`, () => {
       });
     });
 
-    describe("disabled", () => {
-      validateBoolPropType(propTypes, "disabled");
-
-      [false, true].map(disabled => {
-        it(`should ${disabled ? "" : "not "}be disabled`, () => {
-          const node = makeNode({ disabled });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.prop("disabled")).toBe(disabled);
-        });
-      });
-    });
-
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 

@@ -4,13 +4,16 @@ import React from "react";
 
 import { DEFAULTS, Variables } from "src/base/helpers/variables";
 import { Box, Notification, Title } from "src/elements";
-import { Columns } from "src/grid";
+import { Column } from "src/grid";
 import {
   COLUMN_DEFAULTS,
   ColumnProps,
   ColumnVariables,
 } from "src/grid/columns/column";
-import { COLUMNS_DEFAULTS, ColumnsVariables } from "src/grid/columns/columns";
+import {
+  COLUMN_GROUP_DEFAULTS,
+  ColumnGroupVariables,
+} from "src/grid/columns/column-group";
 import { Section } from "src/layout";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
@@ -25,7 +28,7 @@ export const knobs = {
   gap: (title: string = "Gap") =>
     select(
       title,
-      iterableToSelectObject(COLUMNS_DEFAULTS.gapSizes, { undefined: "" }),
+      iterableToSelectObject(COLUMN_GROUP_DEFAULTS.gapSizes, { undefined: "" }),
       "",
     ),
   gapless: (title: string = "Gapless") => boolean(title, false),
@@ -36,22 +39,22 @@ const ColumnNotification: React.FC<ColumnNotificationProps> = props => {
   const { color, children, ...rest } = props;
 
   return (
-    <Columns.Column {...rest}>
+    <Column {...rest}>
       <Notification textAlignment="centered" color={color}>
         {children}
       </Notification>
-    </Columns.Column>
+    </Column>
   );
 };
 
 storiesOf("Grid/Columns", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Basics", () => (
-    <Columns>
+    <Column.Group>
       {["First", "Second", "Third", "Fourth"].map(name => (
         <ColumnNotification color="primary" children={`${name} Column`} />
       ))}
-    </Columns>
+    </Column.Group>
   ))
   .add("Sizes (by name)", () =>
     COLUMN_DEFAULTS.sizes
@@ -61,10 +64,10 @@ storiesOf("Grid/Columns", module)
           size !== "full" ? <ColumnNotification children="Auto" /> : undefined;
 
         return (
-          <Columns key={size}>
+          <Column.Group key={size}>
             <ColumnNotification color="primary" size={size} children={size} />
             {remainder}
-          </Columns>
+          </Column.Group>
         );
       }),
   )
@@ -72,14 +75,14 @@ storiesOf("Grid/Columns", module)
     COLUMN_DEFAULTS.sizes
       .filter(size => typeof size === "number")
       .map(size => (
-        <Columns key={size}>
+        <Column.Group key={size}>
           <ColumnNotification color="primary" size={size} children={size} />
           {COLUMN_DEFAULTS.sizes
             .filter(size2 => size2 > size)
             .map(size2 => (
               <ColumnNotification size={1} key={size2} children={1} />
             ))}
-        </Columns>
+        </Column.Group>
       )),
   )
   .add("Offset", () => {
@@ -94,18 +97,18 @@ storiesOf("Grid/Columns", module)
     ];
 
     return permutations.map(({ size, offset }, i) => (
-      <Columns key={i}>
+      <Column.Group key={i}>
         <ColumnNotification size={size} offset={offset} color="primary">
           <code className="html">is-{size}</code>
           <br />
           <code className="html">is-offset-{offset}</code>
         </ColumnNotification>
-      </Columns>
+      </Column.Group>
     ));
   })
   .add("Narrow", () => (
-    <Columns>
-      <Columns.Column narrow>
+    <Column.Group>
+      <Column narrow>
         <Box style={{ width: 200 }}>
           <Title as="p" size={5}>
             Narrow column
@@ -114,8 +117,8 @@ storiesOf("Grid/Columns", module)
             This column is only 200px wide.
           </Title>
         </Box>
-      </Columns.Column>
-      <Columns.Column>
+      </Column>
+      <Column>
         <Box>
           <Title size={5} as="p">
             Flexible column
@@ -124,8 +127,8 @@ storiesOf("Grid/Columns", module)
             This column will take up the remaining space available.
           </Title>
         </Box>
-      </Columns.Column>
-    </Columns>
+      </Column>
+    </Column.Group>
   ))
   .add("Responsiveness", () => {
     const props = filterUndefined({
@@ -133,15 +136,15 @@ storiesOf("Grid/Columns", module)
     });
 
     return (
-      <Columns {...props}>
+      <Column.Group {...props}>
         {["First", "Second", "Third", "Fourth"].map(name => (
           <ColumnNotification color="primary" children={`${name} Column`} />
         ))}
-      </Columns>
+      </Column.Group>
     );
   })
   .add("Responsiveness (by breakpoint)", () => (
-    <Columns breakpoint="mobile">
+    <Column.Group breakpoint="mobile">
       <ColumnNotification
         color="primary"
         mobile={{ size: "three-quarters" }}
@@ -163,41 +166,41 @@ storiesOf("Grid/Columns", module)
       {[2, 3, 4, 5].map(name => (
         <ColumnNotification color="primary" children={name} />
       ))}
-    </Columns>
+    </Column.Group>
   ))
   .add("Nesting", () => (
-    <Columns breakpoint="mobile">
-      <Columns.Column size="half">
+    <Column.Group breakpoint="mobile">
+      <Column size="half">
         <Notification color="info" textAlignment="centered">
           First Column
         </Notification>
-        <Columns>
+        <Column.Group>
           <ColumnNotification color="info" children="First Nested Column" />
           <ColumnNotification color="info" children="Second Nested Column" />
-        </Columns>
-      </Columns.Column>
+        </Column.Group>
+      </Column>
 
-      <Columns.Column size="half">
+      <Column size="half">
         <Notification color="info" textAlignment="centered">
           Second Column
         </Notification>
-        <Columns>
+        <Column.Group>
           <ColumnNotification color="danger" size="half" children="50%" />
           <ColumnNotification color="danger" children="Auto" />
           <ColumnNotification color="danger" children="Auto" />
-        </Columns>
-      </Columns.Column>
-    </Columns>
+        </Column.Group>
+      </Column>
+    </Column.Group>
   ))
   .add("Gap", () => {
     const gapless = knobs.gapless();
 
     return (
-      <Columns gapless={gapless}>
+      <Column.Group gapless={gapless}>
         {["First", "Second", "Third", "Fourth"].map(name => (
           <ColumnNotification color="primary" children={`${name} Column`} />
         ))}
-      </Columns>
+      </Column.Group>
     );
   })
   .add("Gap (multiline)", () => {
@@ -215,7 +218,7 @@ storiesOf("Grid/Columns", module)
     ];
 
     return (
-      <Columns breakpoint="mobile" gapless={gapless} multiline>
+      <Column.Group breakpoint="mobile" gapless={gapless} multiline>
         {permutations.map(({ size }, key) => {
           const children = size === undefined ? "Auto" : `is-${size}`;
 
@@ -228,7 +231,7 @@ storiesOf("Grid/Columns", module)
             />
           );
         })}
-      </Columns>
+      </Column.Group>
     );
   })
   .add("Gap (variable)", () => {
@@ -236,16 +239,16 @@ storiesOf("Grid/Columns", module)
     const normalizedGap =
       gap === ""
         ? undefined
-        : (parseInt(gap, 10) as ColumnsVariables["gapSizes"]);
+        : (parseInt(gap, 10) as ColumnGroupVariables["gapSizes"]);
 
     return (
       <React.Fragment>
-        <Columns gapSize={normalizedGap}>
+        <Column.Group gapSize={normalizedGap}>
           <ColumnNotification color="primary" children="Side" size={3} />
           <ColumnNotification color="primary" children="Main" size={9} />
-        </Columns>
+        </Column.Group>
 
-        <Columns gapSize={normalizedGap}>
+        <Column.Group gapSize={normalizedGap}>
           {[1, 2, 3].map(key => (
             <ColumnNotification
               children="Three columns"
@@ -254,9 +257,9 @@ storiesOf("Grid/Columns", module)
               size="one-third"
             />
           ))}
-        </Columns>
+        </Column.Group>
 
-        <Columns gapSize={normalizedGap}>
+        <Column.Group gapSize={normalizedGap}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(key => (
             <ColumnNotification
               children={key}
@@ -265,7 +268,7 @@ storiesOf("Grid/Columns", module)
               size={1}
             />
           ))}
-        </Columns>
+        </Column.Group>
       </React.Fragment>
     );
   })
@@ -295,10 +298,10 @@ storiesOf("Grid/Columns", module)
       .reduce((acc, cv) => ({ ...acc, ...cv }), {});
 
     return (
-      <Columns {...normalizedGap}>
+      <Column.Group {...normalizedGap}>
         {[1, 2, 3, 4, 5, 6].map(key => (
           <ColumnNotification children={key} color="primary" key={key} />
         ))}
-      </Columns>
+      </Column.Group>
     );
   });

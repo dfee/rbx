@@ -9,14 +9,14 @@ import React from "react";
 
 import { Panel } from "src/components";
 import { Button, Checkbox, Control, Icon, Input } from "src/elements";
-import { Columns } from "src/grid";
+import { Column } from "src/grid";
 import { Section } from "src/layout";
 
 storiesOf("Components/Panel", module)
   .addDecorator(story => (
     <Section>
-      <Columns>
-        <Columns.Column
+      <Column.Group>
+        <Column
           mobile={{ size: "full" }}
           tablet={{ size: "half" }}
           desktop={{ size: "one-third" }}
@@ -24,8 +24,8 @@ storiesOf("Components/Panel", module)
           fullhd={{ size: "one-fifth" }}
         >
           {story()}
-        </Columns.Column>
-      </Columns>
+        </Column>
+      </Column.Group>
     </Section>
   ))
   .add("Default", () => (

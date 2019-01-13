@@ -23,7 +23,7 @@ import { CONTROL_DEFAULTS } from "src/elements/form/control";
 import { FIELD_DEFAULTS } from "src/elements/form/field";
 import { INPUT_DEFAULTS } from "src/elements/form/input";
 import { LABEL_DEFAULTS } from "src/elements/form/label";
-import { Columns } from "src/grid";
+import { Column } from "src/grid";
 import { Section } from "src/layout";
 
 import { colorKnob } from "docs/stories/common";
@@ -97,8 +97,8 @@ storiesOf("Elements/Form/Field", module)
   })
   .add("With icons", () => {
     return (
-      <Columns>
-        <Columns.Column
+      <Column.Group>
+        <Column
           mobile={{ size: "full" }}
           tablet={{ size: "half" }}
           desktop={{ size: "one-third" }}
@@ -146,8 +146,8 @@ storiesOf("Elements/Form/Field", module)
               </Icon>
             </Control>
           </Field>
-        </Columns.Column>
-      </Columns>
+        </Column>
+      </Column.Group>
     );
   })
   .add("Field addon", () => {
@@ -267,8 +267,8 @@ storiesOf("Elements/Form/Field", module)
     };
 
     return (
-      <Columns>
-        <Columns.Column
+      <Column.Group>
+        <Column
           mobile={{ size: "full" }}
           tablet={{ size: "half" }}
           desktop={{ size: "one-third" }}
@@ -303,7 +303,7 @@ storiesOf("Elements/Form/Field", module)
               </Control>
             ))}
           </Field>
-        </Columns.Column>
-      </Columns>
+        </Column>
+      </Column.Group>
     );
   });

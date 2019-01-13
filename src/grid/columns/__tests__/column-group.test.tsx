@@ -1,6 +1,8 @@
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Column } from "src/grid/columns/column";
-import { Columns, COLUMNS_DEFAULTS } from "src/grid/columns/columns";
+import {
+  COLUMN_GROUP_DEFAULTS,
+  ColumnGroup,
+} from "src/grid/columns/column-group";
 
 import {
   hasProperties,
@@ -13,8 +15,8 @@ import {
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
-const COMPONENT = Columns;
-const COMPONENT_NAME = "Columns";
+const COMPONENT = ColumnGroup;
+const COMPONENT_NAME = "ColumnGroup";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "columns";
 
@@ -22,7 +24,6 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Column,
     defaultProps: {
       as: DEFAULT_ELEMENT,
       multiline: true,
@@ -83,7 +84,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("gapSize", () => {
       validateStringOrNumberPropType(propTypes, "gapSize");
 
-      COLUMNS_DEFAULTS.gapSizes.map(gapSize => {
+      COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => {
         it(`should have gapSize ${gapSize}`, () => {
           const node = makeNode({ gapSize });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -110,7 +111,7 @@ describe(`${COMPONENT_NAME} component`, () => {
             },
           ]);
 
-          COLUMNS_DEFAULTS.gapSizes.map(gapSize => {
+          COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => {
             it(`should have gapSize ${gapSize}`, () => {
               const node = makeNode({ [breakpoint]: { gapSize } });
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(

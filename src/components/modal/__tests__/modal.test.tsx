@@ -96,6 +96,15 @@ describe(`${COMPONENT_NAME} component`, () => {
       testPropForwarding("onClose", () => undefined);
     });
 
+    describe("document", () => {
+      validatePropType(propTypes, "document", [
+        { value: document, valid: true, descriptor: "obj" },
+        { value: "string", valid: false },
+      ]);
+
+      testPropForwarding("document", document);
+    });
+
     describe("ref", () => {
       testPropForwarding("ref", React.createRef(), "innerRef");
     });

@@ -27,9 +27,7 @@ import { BUTTON_GROUP_DEFAULTS } from "../button-group";
 
 # Button
 
-## Button
-
-### Basic usage
+The `<Button>` is a standard button on steroids.
 
 <Playground>
   <Button.Group>
@@ -84,9 +82,7 @@ Use the `fullwidth` prop to make a button fullwidth.
   </Button.Group>
 </Playground>
 
-### Styles
-
-#### Outlined
+### Outlined
 
 Use the `outlined` prop to outline a button.
 
@@ -100,7 +96,7 @@ Use the `outlined` prop to outline a button.
   </Button.Group>
 </Playground>
 
-#### Inverted
+### Inverted
 
 Use the `inverted` prop to invert a button.
 
@@ -114,8 +110,6 @@ Use the `inverted` prop to invert a button.
   </Button.Group>
 </Playground>
 
-#### Outlined & Inverted
-
 Use the `outlined` and `inverted` props together to outline and invert a button.
 
 <Playground className="has-background-primary">
@@ -128,7 +122,7 @@ Use the `outlined` and `inverted` props together to outline and invert a button.
   </Button.Group>
 </Playground>
 
-#### Rounded
+### Rounded
 
 Use the `rounded` prop to round a button's edges.
 
@@ -142,25 +136,9 @@ Use the `rounded` prop to round a button's edges.
   </Button.Group>
 </Playground>
 
-### States
+### Hovered
 
-#### Normal
-
-When not specifying the `state` prop, buttons are normal.
-
-<Playground>
-  <Button.Group>
-    {DEFAULTS.colors.map(color => (
-      <Button color={color} key={color}>
-        Normal
-      </Button>
-    ))}
-  </Button.Group>
-</Playground>
-
-#### Hover
-
-Specifying `hovered` for the `state` prop produces hovered buttons.
+Use the `hovered` value for the `state` prop to force hovered buttons.
 
 <Playground>
   <Button.Group>
@@ -172,9 +150,9 @@ Specifying `hovered` for the `state` prop produces hovered buttons.
   </Button.Group>
 </Playground>
 
-#### Focus
+#### Focused
 
-Specifying `focused` for the `state` prop produces focused buttons.
+Use the `focused` value for the `state` prop to force focused buttons.
 
 <Playground>
   <Button.Group>
@@ -186,9 +164,9 @@ Specifying `focused` for the `state` prop produces focused buttons.
   </Button.Group>
 </Playground>
 
-#### Active
+### Active
 
-Specifying `active` for the `state` prop produces active buttons.
+Use the `active` value for the `state` prop to force active buttons.
 
 <Playground>
   <Button.Group>
@@ -200,9 +178,9 @@ Specifying `active` for the `state` prop produces active buttons.
   </Button.Group>
 </Playground>
 
-#### Loading
+### Loading
 
-Specifying `loading` for the `state` prop produces loading buttons.
+Use the `loading` value for the `state` prop produces to get loading buttons.
 
 <Playground>
   <Button.Group>
@@ -216,7 +194,7 @@ Specifying `loading` for the `state` prop produces loading buttons.
 
 ### Static
 
-Using the `static` prop, you can make a button non-interactive.
+Use the `static` prop to make a button non-interactive.
 
 <Playground>
   <Button static>Static</Button>
@@ -224,7 +202,7 @@ Using the `static` prop, you can make a button non-interactive.
 
 ### Disabled
 
-Using the HTML standard `disabled` prop, you can disable a button.
+Use the HTML standard `disabled` prop to disable a button.
 
 <Playground>
   <Button.Group>
@@ -369,9 +347,9 @@ If the button only contains an icon, it will always remain _square_.
   </Button.Group>
 </Playground>
 
-## Button Group
+### Groups
 
-Group buttons together on a single line using a Button Group (available as `<Button.Group>`).
+Group buttons together on a single line using the `<Button.Group>` component.
 
 <Playground>
   <Button.Group>
@@ -505,9 +483,7 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
   </Button.Group>
 </Playground>
 
-## Properties
-
-### Button
+## Button
 
 <SimplePropsTable
   props={{
@@ -561,7 +537,7 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
 
 <AsProp component={Button} componentName="Button" />
 
-### Button.Group
+## Button.Group
 
 <SimplePropsTable
   props={{

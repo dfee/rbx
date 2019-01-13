@@ -1,2 +1,2 @@
-export { Columns } from "./columns";
+export { Column } from "./columns";
 export { Tile } from "./tiles";

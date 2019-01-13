@@ -23,7 +23,9 @@ const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "modal";
 
 const makeNode = (props: ModalPortalProps) => {
-  return <ModalPortal {...props} />;
+  const withDefaults = { document, ...props };
+
+  return <ModalPortal {...withDefaults} />;
 };
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
@@ -68,7 +70,12 @@ describe(`${COMPONENT_NAME} component`, () => {
         const close = jest.fn();
         const ref = React.createRef<HTMLDivElement>();
         const wrapper = Enzyme.mount(
-          <ModalPortal closeOnEsc={closeOnEsc} innerRef={ref} onClose={close} />,
+          <ModalPortal
+            document={document}
+            closeOnEsc={closeOnEsc}
+            innerRef={ref}
+            onClose={close}
+          />,
         );
 
         try {

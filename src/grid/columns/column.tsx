@@ -6,6 +6,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
 import { tuple } from "../../utils";
+import { ColumnGroup } from "./column-group";
 
 export const COLUMN_DEFAULTS = {
   sizes: tuple(
@@ -150,5 +151,8 @@ export const Column = Object.assign(
     },
     { as: "div" },
   ),
-  { propTypes },
+  {
+    Group: ColumnGroup,
+    propTypes,
+  },
 );
