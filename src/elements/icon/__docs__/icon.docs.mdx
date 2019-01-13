@@ -1,0 +1,232 @@
+---
+name: Icon
+menu: Elements
+route: /elements/icon
+---
+
+import {
+  faBan,
+  faCheckSquare,
+  faExclamationTriangle,
+  faHome,
+  faInfoCircle
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Table, Title } from "src/elements";
+import { Section } from "src/layout";
+import { Icon, ICON_DEFAULTS } from "../icon";
+
+# Icon
+
+The `<Icon>` component is a container for any type of **icon font**.
+If the icon takes a few seconds to load, the `<Icon>` container provides a reliable square that will prevent page jumps as loading occurs.
+
+<div class="notification is-warning">
+  <p>
+    <strong>Note:</strong> Because <strong>rbx</strong> doesn't provide any
+    icons itself, you'll need to bring your own. Here are some good choices:
+  </p>
+  <br />
+  <ul>
+    <li>
+      <a href="https://fontawesome.com/">Font Awesome</a>
+    </li>
+    <li>
+      <a href="https://materialdesignicons.com/">Material Design</a>
+    </li>
+    <li>
+      <a href="https://useiconic.com/open">Open Iconic</a>
+    </li>
+    <li>
+      <a href="http://ionicons.com/">Ionicons</a>
+    </li>
+  </ul>
+  <br />
+  <p>
+    The examples here use <strong>Font Awesome</strong> icons.
+  </p>
+</div>
+
+Here is basic usage, with the `<Icon>`'s `backgroundColor` prop set to highlight the icon.
+
+The `backgroundColor` prop is a `<Generic>` prop that the `<Icon>` component leverages.
+Read more about this in the props section below.
+
+<Playground>
+  <Icon backgroundColor="warning">
+    <FontAwesomeIcon icon={faHome} />
+  </Icon>
+</Playground>
+
+### Colors
+
+Use the `color` prop to add color to an icon.
+
+<Playground>
+  {() => {
+    const permutations = [
+      { color: "info", icon: faInfoCircle },
+      { color: "success", icon: faCheckSquare },
+      { color: "warning", icon: faExclamationTriangle },
+      { color: "danger", icon: faBan }
+    ];
+    return permutations.map(({ color, icon }) => (
+      <Icon color={color}>
+        <FontAwesomeIcon icon={icon} />
+      </Icon>
+    ));
+  }}
+</Playground>
+
+### Sizes
+
+Use the `size` prop on `<Icon>` to change the size.
+As before, the `backgroundColor` is set to provide additional indication of the `<Icon>` containers position.
+
+<Playground>
+  <Table bordered>
+    <thead>
+      <tr>
+        <th><code>Icon</code> size</th>
+        <th>Rendered size</th>
+        <th><code>FontAwesomeIcon</code> size</th>
+        <th><code>FAI</code> font size</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>small</code></td>
+        <td><code>1rem sq.</code></td>
+        <td><code>xs</code></td>
+        <td><code>0.75em</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="small">
+            <FontAwesomeIcon icon={faHome} size="xs" />
+          </Icon>
+        </td>
+      </tr>
+
+      <tr>
+        <td rowspan={2}><code>-</code></td>
+        <td rowspan={2}><code>1.5rem sq.</code></td>
+        <td><code>sm</code></td>
+        <td><code>0.875em</code></td>
+        <td>
+          <Icon backgroundColor="warning">
+            <FontAwesomeIcon icon={faHome} size="sm" />
+          </Icon>
+        </td>
+      </tr>
+      <tr>
+        <td><code>-</code></td>
+        <td><code>inherit</code></td>
+        <td>
+          <Icon backgroundColor="warning">
+            <FontAwesomeIcon icon={faHome} />
+          </Icon>
+        </td>
+      </tr>
+
+      <tr>
+        <td rowspan={3}><code>medium</code></td>
+        <td rowspan={3}><code>2rem sq.</code></td>
+        <td><code>sm</code></td>
+        <td><code>0.875em</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="medium">
+            <FontAwesomeIcon icon={faHome} size="sm" />
+          </Icon>
+        </td>
+      </tr>
+      <tr>
+        <td><code>-</code></td>
+        <td><code>inherit</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="medium">
+            <FontAwesomeIcon icon={faHome} />
+          </Icon>
+        </td>
+      </tr>
+      <tr>
+        <td><code>lg</code></td>
+        <td><code>1.333em</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="medium">
+            <FontAwesomeIcon icon={faHome} size="lg" />
+          </Icon>
+        </td>
+      </tr>
+
+      <tr>
+        <td rowspan={4}><code>large</code></td>
+        <td rowspan={4}><code>3rem sq.</code></td>
+        <td><code>sm</code></td>
+        <td><code>0.875em</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="large">
+            <FontAwesomeIcon icon={faHome} size="sm" />
+          </Icon>
+        </td>
+      </tr>
+      <tr>
+        <td><code>-</code></td>
+        <td><code>inherit</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="large">
+            <FontAwesomeIcon icon={faHome} />
+          </Icon>
+        </td>
+      </tr>
+      <tr>
+        <td><code>lg</code></td>
+        <td><code>1.333em</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="large">
+            <FontAwesomeIcon icon={faHome} size="lg" />
+          </Icon>
+        </td>
+      </tr>
+      <tr>
+        <td><code>2x</code></td>
+        <td><code>2em</code></td>
+        <td>
+          <Icon backgroundColor="warning" size="large">
+            <FontAwesomeIcon icon={faHome} size="2x" />
+          </Icon>
+        </td>
+      </tr>
+    </tbody>
+
+  </Table>
+</Playground>
+
+## Icon
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "set the alignment of the icon (for use in a form control)",
+      typeName: "string",
+      typeTip: mapEnumerable(ICON_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Icon.defaultProps.as),
+    color: {
+      description: "set the icon's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    ref: refDoc,
+    size: {
+      description: "set the icon's size",
+      typeName: "string",
+      typeTip: mapEnumerable(ICON_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Icon} componentName="Icon" />

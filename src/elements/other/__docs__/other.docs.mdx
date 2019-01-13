@@ -1,0 +1,164 @@
+---
+name: Other
+menu: Elements
+route: /elements/other
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { Table } from "src/elements";
+import { Block } from "../block";
+import { Delete, DELETE_DEFAULTS } from "../delete";
+import { Heading } from "../heading";
+import { Highlight } from "../highlight";
+import { Loader } from "../loader";
+import { Numeric } from "../numeric";
+
+# Other Components
+
+These are utility components for the Bulma library.
+Often, these components aren't useful on their own.
+
+### Block
+
+<Playground>
+  <Block>A block component</Block>
+</Playground>
+
+### Delete
+
+Frequently used with the `<Modal>` and `<Notification>` components.
+
+<Playground>
+  <Delete />
+</Playground>
+
+Use the `size` prop of `<Delete>` to change its size.
+
+<Playground>
+  {() => {
+    const sizes = DELETE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "-", size: undefined });
+
+    return (
+      <Table bordered>
+        <thead>
+          <tr>
+            <th><code>Delete</code> size</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            sizes.map(({size, name}) => (
+              <tr>
+                <td><code>{name}</code></td>
+                <td><Delete size={size} /></td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </Table>
+    );
+
+}}
+
+</Playground>
+
+### Heading
+
+<Playground>
+  <Heading>A heading component</Heading>
+</Playground>
+
+### Highlight
+
+<Playground>
+  <Highlight>A highlight component</Highlight>
+</Playground>
+
+### Loader
+
+Useful when a user is waiting for content to load.
+
+<Playground>
+  <Loader />
+</Playground>
+
+### Numeric
+
+<Playground>
+  <Numeric>42</Numeric>
+</Playground>
+
+## Block
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Block.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Block} componentName="Block" />
+
+## Delete
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Delete.defaultProps.as),
+    ref: refDoc,
+    size: {
+      description: "set the delete's size",
+      typeName: "string",
+      typeTip: mapEnumerable(DELETE_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Delete} componentName="Delete" />
+
+## Heading
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Heading.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Heading} componentName="Heading" />
+
+## Highlight
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Highlight.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Highlight} componentName="Highlight" />
+
+## Loader
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Loader.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Loader} componentName="Loader" />
+
+## Numeric
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Numeric.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Numeric} componentName="Numeric" />

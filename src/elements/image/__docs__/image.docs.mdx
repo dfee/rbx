@@ -1,0 +1,181 @@
+---
+name: Image
+menu: Elements
+route: /elements/image
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Table } from "src/elements";
+import { Image } from "../image";
+import { ImageContainer, IMAGE_CONTAINER_DEFAULTS } from "../image-container";
+
+# Image
+
+The `<Image.Container>` is a precisely **sized container** so your layout isn't broken because images are loading or missing.
+
+<Playground>
+  <Image.Container size={128}>
+    <Image src="https://bulma.io/images/placeholders/128x128.png" />
+  </Image.Container>
+</Playground>
+
+### Fixed square images
+
+Use the `size` prop on `<Image.Container>` to contain it's underlying image to a fixed square size, useful for **avatars**.
+
+_The `<Image.Container>` sizes that are **numbers** are fixed squares_
+
+<Playground>
+  <Table bordered>
+    <thead>
+      <tr>
+        <th>
+          <code>Image.Container</code> size
+        </th>
+        <th>Result</th>
+        <th>Dimmensions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {IMAGE_CONTAINER_DEFAULTS.sizes
+        .filter(size => typeof size === "number")
+        .map(size => (
+          <tr>
+            <td>
+              <code>{size}</code>
+            </td>
+            <td>
+              <Image.Container size={size}>
+                <Image
+                  src={`https://bulma.io/images/placeholders/${size}x${size}.png`}
+                />
+              </Image.Container>
+            </td>
+            <td>{size}px sq.</td>
+          </tr>
+        ))}
+    </tbody>
+  </Table>
+</Playground>
+
+### Rounded images
+
+Use the `rounded` prop on an `<Image>` to round it.
+
+<Playground>
+  <Image.Container size={128}>
+    <Image rounded src="https://bulma.io/images/placeholders/128x128.png" />
+  </Image.Container>
+</Playground>
+
+### Retina images
+
+Because the `<Image.Container>` fixes the size of the underlying image, you can use a higher resolution image and contain it down to a smaller size.
+
+For example, if you put an image with dimmensions `256x256` in an `<Image.Container>` with size `128` it'll be resized to `128x128`.
+
+<Playground>
+  <Image.Container size={128}>
+    <Image src="https://bulma.io/images/placeholders/256x256.png" />
+  </Image.Container>
+</Playground>
+
+### Responsive images
+
+Use the `size` prop on `<Image.Container>` to contain the underlying image to a known size ratio, useful when you dont' know the exact dimmensions.
+
+_The `<Image.Container>` sizes that are **strings** are responsive sizes_
+
+<Playground>
+  {() => {
+    const sizeMap = [
+      {size: "square", name: "480x480", description: "square (1 by 1)"},
+      {size: "1by1", name: "480x480", description: "1 by 1"},
+      {size: "5by4", name: "600x480", description: "5 by 4"},
+      {size: "4by3", name: "640x480", description: "4 by 3"},
+      {size: "3by2", name: "480x320", description: "3 by 2"},
+      {size: "5by3", name: "800x480", description: "5 by 3"},
+      {size: "16by9", name: "640x360", description: "16 by 9"},
+      {size: "2by1", name: "640x320", description: "2 by 1"},
+      {size: "3by1", name: "720x240", description: "3 by 1"},
+      {size: "4by5", name: "480x600", description: "4 by 5"},
+      {size: "3by4", name: "480x640", description: "3 by 4"},
+      {size: "2by3", name: "320x480", description: "2 by 3"},
+      {size: "3by5", name: "480x800", description: "3 by 5"},
+      {size: "9by16", name: "360x640", description: "9 by 16"},
+      {size: "1by2", name: "320x640", description: "1 by 2"},
+      {size: "1by3", name: "240x720", description: "1 by 3"},
+    ];
+
+    return (
+      <Table bordered>
+        <thead>
+          <tr>
+            <th>
+              <code>Image.Container</code> size
+            </th>
+            <th>Result</th>
+            <th>Dimmensions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sizeMap.map(({ size, name, description }) => (
+            <tr>
+              <td>
+                <code>{size}</code>
+              </td>
+              <td>
+                <Image.Container size={size}>
+                  <Image
+                    src={`https://bulma.io/images/placeholders/${name}.png`}
+                  />
+                </Image.Container>
+              </td>
+              <td>{description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
+
+
+
+    return <div>hi</div>;
+
+}}
+
+</Playground>
+
+## Image
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Image.defaultProps.as),
+    ref: refDoc,
+    rounded: {
+      description: "rounds the image",
+      typeName: "boolean"
+    }
+  }}
+/>
+
+<AsProp component={Image} componentName="Image" />
+
+## Image.Container
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Image.Container.defaultProps.as),
+    ref: refDoc,
+    size: {
+      description: "sets the dimmension of the contained image",
+      typeName: "string | number",
+      typeTip: mapEnumerable(IMAGE_CONTAINER_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Image.Container} componentName="Image.Container" />

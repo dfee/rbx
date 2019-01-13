@@ -12,6 +12,7 @@ import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Field } from "../field";
 import { File, FILE_DEFAULTS } from "../file";
+import { SimpleFileManager } from "./simple-file-manager";
 
 # File
 
@@ -307,6 +308,24 @@ Use the `align` prop of `<File>` to **right** align a file input.
     </File>
   </Field>
 </Playground>
+
+### Composition
+
+It is often helpful to compose a component in _your_ library that manages the `<File>` component.
+
+This implementation takes the same props as `<File>`, but allows for actual selection.
+
+<Playground>
+  <SimpleFileManager name="resume" hasName />
+</Playground>
+
+<div class="notification is-warning">
+  <strong>Note:</strong> the <code>{"<SimpleFileManager>"}</code> used in this
+  playground is a reference implementation for the docs, and is not available in
+  the release. People are usually particular about how they want to implement
+  their file inputs, so <strong>rbx</strong> provides a <em>foundation</em>, not
+  an <em>opinion</em>.
+</div>
 
 ## File
 
