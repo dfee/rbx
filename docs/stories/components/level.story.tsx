@@ -57,25 +57,25 @@ storiesOf("Components/Level", module)
   })
   .add("Centered", () => (
     <Level>
-      <Level.Item textAlignment="centered">
+      <Level.Item textAlign="centered">
         <div>
           <Heading>Tweets</Heading>
           <Title as="p">3,210</Title>
         </div>
       </Level.Item>
-      <Level.Item textAlignment="centered">
+      <Level.Item textAlign="centered">
         <div>
           <Heading>Following</Heading>
           <Title as="p">210</Title>
         </div>
       </Level.Item>
-      <Level.Item textAlignment="centered">
+      <Level.Item textAlign="centered">
         <div>
           <Heading>Followers</Heading>
           <Title as="p">321</Title>
         </div>
       </Level.Item>
-      <Level.Item textAlignment="centered">
+      <Level.Item textAlign="centered">
         <div>
           <Heading>Likes</Heading>
           <Title as="p">321K</Title>
@@ -85,17 +85,17 @@ storiesOf("Components/Level", module)
   ))
   .add("Centered (2)", () => (
     <Level>
-      <Level.Item as="p" textAlignment="centered">
+      <Level.Item as="p" textAlign="centered">
         <a className="link is-info" href="#home">
           Home
         </a>
       </Level.Item>
-      <Level.Item as="p" textAlignment="centered">
+      <Level.Item as="p" textAlign="centered">
         <a className="link is-info" href="#menu">
           Menu
         </a>
       </Level.Item>
-      <Level.Item as="p" textAlignment="centered">
+      <Level.Item as="p" textAlign="centered">
         <img
           src="https://bulma.io/images/bulma-type.png"
           alt=""
@@ -103,12 +103,12 @@ storiesOf("Components/Level", module)
           style={{ height: "30px" }}
         />
       </Level.Item>
-      <Level.Item as="p" textAlignment="centered">
+      <Level.Item as="p" textAlign="centered">
         <a className="link is-info" href="#reservations">
           Reservations
         </a>
       </Level.Item>
-      <Level.Item as="p" textAlignment="centered">
+      <Level.Item as="p" textAlign="centered">
         <a className="link is-info" href="#contact">
           Contact
         </a>

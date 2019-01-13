@@ -40,7 +40,7 @@ const ColumnNotification: React.FC<ColumnNotificationProps> = props => {
 
   return (
     <Column {...rest}>
-      <Notification textAlignment="centered" color={color}>
+      <Notification textAlign="centered" color={color}>
         {children}
       </Notification>
     </Column>
@@ -171,7 +171,7 @@ storiesOf("Grid/Columns", module)
   .add("Nesting", () => (
     <Column.Group breakpoint="mobile">
       <Column size="half">
-        <Notification color="info" textAlignment="centered">
+        <Notification color="info" textAlign="centered">
           First Column
         </Notification>
         <Column.Group>
@@ -181,7 +181,7 @@ storiesOf("Grid/Columns", module)
       </Column>
 
       <Column size="half">
-        <Notification color="info" textAlignment="centered">
+        <Notification color="info" textAlign="centered">
           Second Column
         </Notification>
         <Column.Group>

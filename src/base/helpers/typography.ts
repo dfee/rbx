@@ -11,7 +11,7 @@ import { Variables } from "./variables";
 export type TypographyHelpersProps = Partial<{
   backgroundColor: Variables["colors"] | Variables["shades"];
   italic: boolean;
-  textAlignment: Variables["textAlignments"];
+  textAlign: Variables["textAlignments"];
   textColor: Variables["colors"] | Variables["shades"];
   textSize: Variables["textSizes"];
   textTransform: Variables["textTransforms"];
@@ -22,7 +22,7 @@ export type TypographyHelpersProps = Partial<{
 export const makePropTypes = makePropTypesFactory(vars => ({
   backgroundColor: PropTypes.oneOf([...vars.colors, ...vars.shades]),
   italic: PropTypes.bool,
-  textAlignment: PropTypes.oneOf(vars.textAlignments),
+  textAlign: PropTypes.oneOf(vars.textAlignments),
   textColor: PropTypes.oneOf([...vars.colors, ...vars.shades]),
   textSize: PropTypes.oneOf(vars.textSizes),
   textTransform: PropTypes.oneOf(vars.textTransforms),
@@ -33,7 +33,7 @@ export const transform: TransformFunction<TypographyHelpersProps> = props => {
   const {
     backgroundColor,
     italic,
-    textAlignment,
+    textAlign,
     textColor,
     textSize,
     textTransform,
@@ -51,7 +51,7 @@ export const transform: TransformFunction<TypographyHelpersProps> = props => {
       [`has-text-${textColor}`]: textColor,
       "is-italic": italic,
       [`is-${textTransform}`]: textTransform,
-      [`has-text-${textAlignment}`]: textAlignment,
+      [`has-text-${textAlign}`]: textAlign,
       [`has-text-weight-${textWeight}`]: textWeight,
       [`is-size-${textSize}`]: textSize,
     },

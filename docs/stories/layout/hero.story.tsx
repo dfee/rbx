@@ -79,7 +79,7 @@ storiesOf("Layout/Hero", module)
 
       {/* Hero content: will be in the middle */}
       <Hero.Body>
-        <Container textAlignment="centered">
+        <Container textAlign="centered">
           <Title>Title</Title>
           <Title as="h2" subtitle>
             Subtitle

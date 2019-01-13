@@ -137,11 +137,10 @@ describe("Responsive modifiers", () => {
               it(`should have text aligned ${value} ${
                 isOnly ? "only" : ""
               }`, () => {
-                const textAlignment =
-                  only === isOnly ? { only, value } : { value };
+                const textAlign = only === isOnly ? { only, value } : { value };
                 expect(
                   vtfunc(
-                    { responsive: { [breakpoint]: { textAlignment } } },
+                    { responsive: { [breakpoint]: { textAlign } } },
                     CNAME,
                     LOC,
                   ),

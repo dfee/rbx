@@ -52,7 +52,7 @@ export const knobs = {
       }),
     ),
     italic: booleanFactory("italic", false),
-    textAlignment: selectFactory(
+    textAlign: selectFactory(
       "textAlignemnt",
       iterableToSelectObject(DEFAULTS.textAlignments, { undefined: "" }),
     ),
@@ -110,7 +110,7 @@ export const knobs = {
             : { only: booleanFactory(`${breakpoint}.hide.only`, false) }),
         };
 
-        const textAlignment = {
+        const textAlign = {
           value: selectFactory(
             `${breakpoint}.textAlignemnt.value`,
             iterableToSelectObject(DEFAULTS.textAlignments, { undefined: "" }),
@@ -118,7 +118,7 @@ export const knobs = {
           ...(isLimited
             ? {}
             : {
-                only: booleanFactory(`${breakpoint}.textAlignment.only`, false),
+                only: booleanFactory(`${breakpoint}.textAlign.only`, false),
               }),
         };
 
@@ -132,7 +132,7 @@ export const knobs = {
             : { only: booleanFactory(`${breakpoint}.textSize.only`, false) }),
         };
 
-        return { [breakpoint]: { display, hide, textAlignment, textSize } };
+        return { [breakpoint]: { display, hide, textAlign, textSize } };
       })
       .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
   },
@@ -161,8 +161,8 @@ storiesOf("Base", module)
                 knobs.responsive[breakpoint].hide,
                 "Responsive",
               ),
-              textAlignment: mapFactories(
-                knobs.responsive[breakpoint].textAlignment,
+              textAlign: mapFactories(
+                knobs.responsive[breakpoint].textAlign,
                 "Responsive",
               ),
               textSize: mapFactories(

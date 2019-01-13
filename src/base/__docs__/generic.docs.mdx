@@ -115,7 +115,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
       description: "makes the text italic",
       typeName: "boolean"
     },
-    textAlignment: {
+    textAlign: {
       description: "sets the alignment of the text",
       typeName: "string",
       typeTip: mapEnumerable(DEFAULTS.textAlignments)
@@ -196,7 +196,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     mobile: {
       description: "up to 768px",
-      typeName: "Limited Responsive Object"
+      typeName: "LimitedResponsive Object"
     },
     tablet: {
       description: "between 769px and 1023px",
@@ -212,17 +212,17 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
     },
     fullhd: {
       description: "1408px and above",
-      typeName: "Limited Responsive Object"
+      typeName: "LimitedResponsive Object"
     },
     touch: {
       description: "up to 1023px",
-      typeName: "Limited Responsive Object"
+      typeName: "LimitedResponsive Object"
     }
   }}
 />
 
 <div className="notification">
-  <h4 className="title is-4">Responsive Object & Limited Responsive Object</h4>
+  <h5 className="title is-5">Responsive Object & LimitedResponsive Object</h5>
   <p>
     The <strong>Rsponsive Object</strong> has the following structure:
     <pre
@@ -236,7 +236,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
             only: "boolean",
             value: "boolean"
           },
-          textAlignment: {
+          textAlign: {
             only: "boolean",
             value: mapEnumerable(DEFAULTS.textAlignments).replace(/["]/g, "'")
           },
@@ -273,11 +273,11 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
 
   <br />
   <h5 className="title is-5">
-    textAlignment
+    textAlign
   </h5>
   <p>
-    <code>textAlignment.value</code> specifies – for a specific breakpoint – the
-    alignment of the text, while <code>textAlignment.only</code> specifies if it
+    <code>textAlign.value</code> specifies – for a specific breakpoint – the
+    alignment of the text, while <code>textAlign.only</code> specifies if it
     should also be applied to bigger breakpoints.
   </p>
 
@@ -294,7 +294,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   <br />
   <p className="has-text-info">
     The only difference between the <strong>Responsive Object</strong> and the{" "}
-    <strong>Limited Responsive Object</strong>, is that the latter does not permit
+    <strong>LimitedResponsive Object</strong>, is that the latter does not permit
     the <code>only</code> property, as it semantically does not apply.
   </p>
 

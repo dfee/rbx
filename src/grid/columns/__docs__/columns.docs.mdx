@@ -8,19 +8,531 @@ import { Playground } from "docz";
 
 import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
+import { Box, Notification, Title } from "src/elements";
 import { Column, COLUMN_DEFAULTS } from "../column";
-import { COLUMNS_DEFAULTS } from "../column-group";
+import { COLUMN_GROUP_DEFAULTS } from "../column-group";
 
 # Columns
+
+Responsive columns powered by the flexbox.
+
+Building a **columns layout** is simple:
+
+1. Add a `<Column.Group>` component
+2. Add as many `<Column>` components as you want
+
+Each column will have an **equal width**, no matter the number of columns.
+
+<Playground>
+  <Column.Group>
+    {[1, 2, 3, 4].map(i => (
+      <Column key={i}>
+        <Notification color="primary" textAlign="centered">
+          Column {i}
+        </Notification>
+      </Column>
+    ))}
+  </Column.Group>
+</Playground>
+
+### Sizes
+
+Use the `size` of `<Column>` with a fractional string (predefined) to size your columns.
+
+<Playground>
+  {() => (
+    COLUMN_DEFAULTS.sizes
+      .filter(size => typeof size === "string")
+      .map(size => {
+        const remainder = size === "full" ? undefined : (
+          <Column>
+            <Notification textAlign="centered">
+              Auto
+            </Notification>
+          </Column>
+        )
+
+        return (
+          <Column.Group key={size}>
+            <Column size={size}>
+              <Notification color="primary" textAlign="centered">
+                <code>{size}</code>
+              </Notification>
+            </Column>
+            {remainder}
+          </Column.Group>
+        );
+      })
+
+)}
+
+</Playground>
+
+Use the `size` of `<Column>` with a number to build a 12-column system.
+
+<Playground>
+  {() => {
+    const buildRemainder = (size) => {
+      const nodes = [];
+      for (let i = size; i<12; i++) {
+        nodes.push(
+          <Column size={1}>
+            <Notification textAlign="centered">1</Notification>
+          </Column>
+        )
+      }
+      return nodes.length !== 0 ? nodes : undefined;
+    }
+
+    return COLUMN_DEFAULTS.sizes
+      .filter(size => typeof size === "number")
+      .map(size => (
+        <Column.Group key={size}>
+          <Column size={size}>
+            <Notification color="primary" textAlign="centered">
+              <code>{size}</code>
+            </Notification>
+          </Column>
+          {size < 12 && (
+            <Column size={12-size}>
+              <Notification textAlign="centered">
+                <code>{12 - size}</code>
+              </Notification>
+            </Column>
+          )}
+        </Column.Group>
+      ));
+
+}}
+
+</Playground>
+
+### Offset
+
+You can use empty `<Column>`s to create horizontal space around `<Column>`s that contain content, or you can use the `offset` prop of `<Column>`.
+
+It takes the same prop values as `<Column>`'s `size` prop.
+
+<Playground>
+  {() => {
+    const permutations = [
+      { size: "half", offset: "one-quarter" },
+      { size: "three-fifths", offset: "one-fifth" },
+      { size: 4, offset: 8 },
+      { size: 11, offset: 1 },
+    ];
+
+    return permutations.map(({ size, offset }, i) => (
+      <Column.Group key={i}>
+        <Column size={size} offset={offset}>
+          <Notification color="primary">
+            <code className="html">is-{size}</code>
+            <br />
+            <code className="html">is-offset-{offset}</code>
+          </Notification>
+        </Column>
+      </Column.Group>
+    ));
+
+}}
+
+</Playground>
+
+### Narrow
+
+Use the `narrow` prop of `<Column>` to only occupy the space needed.
+
+<Playground>
+  <Column.Group>
+    <Column narrow>
+      <Box style={{ width: "200px" }}>
+        <Title as="p" size={5}>
+          Narrow column
+        </Title>
+        <Title as="p" subtitle>
+          This column is only 200px wide.
+        </Title>
+      </Box>
+    </Column>
+    <Column>
+      <Box>
+        <Title as="p" size={5}>
+          Flexible column
+        </Title>
+        <Title as="p" subtitle>
+          This column will taakae up the remaining space available.
+        </Title>
+      </Box>
+    </Column>
+  </Column.Group>
+</Playground>
+
+### Responsiveness
+
+By default, columns are only activated from the `tablet` breakpoint onwards.
+If you want columns to work on `mobile` too, set the `breakpoint` prop of `<Column.Group>` to `mobile`.
+
+<Playground>
+  <Column.Group breakpoint="mobile">
+    {[1, 2, 3, 4].map(i => (
+      <Column key={i}>
+        <Notification color="primary" textAlign="centered">
+          {i}
+        </Notification>
+      </Column>
+    ))}
+  </Column.Group>
+</Playground>
+
+The breakpoint works with all responsive sizes.
+For example, if you only want columns to work on `desktop` and up, set the `breakpoint` prop of `<Column>` to `desktop`.
+
+Use the breakpoint-specific prop to set a `size`, `offset` or `narrow` containment (as described further in the props documentation below).
+
+<Playground>
+  <Column.Group>
+    <Column
+      mobile={{ size: "three-quarters" }}
+      tablet={{ size: "two-thirds" }}
+      desktop={{ size: "half" }}
+      widescreen={{ size: "one-third" }}
+      fullhd={{ size: "one-quarter" }}
+    >
+      <Notification color="primary" textAlign="centered">
+        <code>three-quarters-mobile</code>
+        <br />
+        <code>two-thirds-tablet</code>
+        <br />
+        <code>half-desktop</code>
+        <br />
+        <code>one-third-widescreen</code>
+        <br />
+        <code>one-quarter-fullhd</code>
+      </Notification>
+    </Column>
+    {[2, 3, 4, 5].map(name => (
+      <Column>
+        <Notification color="primary" textAlign="centered">
+          {name}
+        </Notification>
+      </Column>
+    ))}
+  </Column.Group>
+</Playground>
+
+### Nesting
+
+You can nest `<Column.Group>`s within `<Column>`s for more flexibility in your design.
+
+<Playground>
+  <Column.Group>
+    <Column>
+      <Notification color="info" textAlign="centered">
+        First Column
+      </Notification>
+      <Column.Group breakpoint="mobile">
+        <Column>
+          <Notification color="info" textAlign="centered">Nested 1</Notification>
+        </Column>
+        <Column>
+          <Notification color="info" textAlign="centered">Nested 2</Notification>
+        </Column>
+      </Column.Group>
+    </Column>
+
+    <Column>
+      <Notification color="danger" textAlign="centered">
+        Second Column
+      </Notification>
+      <Column.Group breakpoint="mobile">
+        <Column size="one-quarter">
+          <Notification color="danger" textAlign="centered">25%</Notification>
+        </Column>
+        <Column>
+          <Notification color="danger" textAlign="centered">Auto</Notification>
+        </Column>
+        <Column>
+          <Notification color="danger" textAlign="centered">Auto</Notification>
+        </Column>
+      </Column.Group>
+    </Column>
+
+  </Column.Group>
+</Playground>
+
+### Gapless
+
+By default, each gap is `0.75rem` as defined by **Bulma**.
+
+The gap is placed on _each side_ of the column, so the gap between two adjacent columns is double that – or `1.5rem`.
+
+Use the `gapless` prop of `<Column.Group>` to remove the space between columns.
+
+<Playground>
+  <Column.Group gapless>
+    {["First", "Second", "Third", "Fourth"].map(name => (
+      <Column>
+        <Notification color="primary">{name} Col</Notification>
+      </Column>
+    ))}
+  </Column.Group>
+</Playground>
+
+Use it with the `multiline` prop of `<Column.Group>` to continue to the next row.
+
+<Playground>
+  <Column.Group multiline gapless>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="center">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="center">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="center">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="center">25%</Notification>
+    </Column>
+
+    <Column size="half">
+      <Notification color="primary" textAlign="center">50%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="center">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="center">25%</Notification>
+    </Column>
+
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="center">25%</Notification>
+    </Column>
+    <Column>
+      <Notification color="primary" textAlign="center">Auto</Notification>
+    </Column>
+
+  </Column.Group>
+</Playground>
+
+### Variable gap
+
+Use the `gapSize` prop of `<Column.Group>` to specify the gap-size around the container.
+
+- `gapSize={0}` removes any gap (like `gapless`)
+- `gapSize={3}` is the default value, by default equivalent to `0.75rem`
+- `gapSize={8}` is the maximum value, equivalent to `2rem`
+
+Play with the code sample below and adjust the gap size from 0-8 to experiment.
+
+<Playground>
+  {() =>
+    COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => (
+      <Column.Group gapSize={gapSize}>
+        <Column size={4}>
+          <Notification color="primary" textAlign="centered">
+            gapSize
+          </Notification>
+        </Column>
+        <Column size={8}>
+          <Notification color="primary" textAlign="centered">
+            {gapSize}
+          </Notification>
+        </Column>
+      </Column.Group>
+    ))
+  }
+</Playground>
+
+You can also define a `gapSize` for each breakpoint using the `ColumnGroupBreakpointOptions` described below.
+
+<Playground>
+  <Column.Group
+    mobile={{ gapSize: 1 }}
+    mobile={{ tablet: 0 }}
+    mobile={{ desktop: 3 }}
+    mobile={{ widescreen: 8 }}
+    mobile={{ fullhd: 2 }}
+  >
+    {[1, 2, 3, 4, 5, 6].map(i => (
+      <Column key={i}>
+        <Notification color="primary" textAlign="centered">
+          Col
+        </Notification>
+      </Column>
+    ))}
+  </Column.Group>
+</Playground>
+
+### Vertical alignment
+
+Use the `vcentered` prop of `<Column.Group>` to align your `<Column>`s vertically.
+
+<Playground>
+  <Column.Group vcentered>
+    <Column>
+      <Notification color="primary" textAlign="centered">
+        First col
+      </Notification>
+    </Column>
+
+    <Column>
+      <Notification color="primary" textAlign="centered">
+        Second column with more content. This is so you can see the vertical alignment.
+      </Notification>
+    </Column>
+
+  </Column.Group>
+</Playground>
+
+### Multiline
+
+Use the `multiline` prop of `<Column.Group>` to wrap more columns than would normally fit on a single row.
+
+<Playground>
+  <Column.Group vcentered multiline>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="centered">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="centered">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="centered">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="centered">25%</Notification>
+    </Column>
+
+    <Column size="half">
+      <Notification color="primary" textAlign="centered">50%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="centered">25%</Notification>
+    </Column>
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="centered">25%</Notification>
+    </Column>
+
+    <Column size="one-quarter">
+      <Notification color="primary" textAlign="centered">25%</Notification>
+    </Column>
+    <Column>
+      <Notification color="primary" textAlign="centered">Auto</Notification>
+    </Column>
+
+  </Column.Group>
+</Playground>
+
+### Centered
+
+Use the `centered` prop on `<Column.Group>` to center its `<Column>` contents.
+
+<Playground>
+  <Column.Group centered>
+    <Column size="half">
+      <Notification color="primary" textAlign="centered">
+        50%
+      </Notification>
+    </Column>
+  </Column.Group>
+</Playground>
+
+Use with the `multiline` prop of `<Column.Group>` to create a flexible, centered list.
+
+Resize the playground below to see it in action.
+
+<Playground>
+  <Column.Group multiline centered>
+    {["first", "second", "third", "fourth", "fifth"].map(i => (
+      <Column narrow>
+        <Notification color="primary" textAlign="centered">
+          {i}
+        </Notification>
+      </Column>
+    ))}
+  </Column.Group>
+</Playground>
 
 ## Column
 
 <SimplePropsTable
   props={{
     as: AsProp.makeDoc(Column.defaultProps.as),
-    ref: refDoc
+    desktop: {
+      description: "options when the screen size is between 1024px and 1215px",
+      typeName: "ColumnBreakpointOptions"
+    },
+    fullhd: {
+      description: "options when the screen size is above 1408px",
+      typeName: "ColumnBreakpointOptions"
+    },
+    mobile: {
+      description: "options when the screen size is up to 768px wide",
+      typeName: "ColumnBreakpointOptions"
+    },
+    narrow: {
+      description: "only take up the needed space",
+      typeName: "boolean"
+    },
+    offset: {
+      description: "creates horizontal space before column",
+      typeName: "string",
+      typeTip: mapEnumerable(COLUMN_DEFAULTS.sizes)
+    },
+    ref: refDoc,
+    size: {
+      description: "determines the relative size of the column",
+      typeName: "string | number",
+      typeTip: mapEnumerable(COLUMN_DEFAULTS.sizes)
+    },
+    tablet: {
+      description: "options when the screen size is between 769px and 1023px",
+      typeName: "ColumnBreakpointOptions"
+    },
+    widescreen: {
+      description: "options when the screen size is between 1216px and 1407px",
+      typeName: "ColumnBreakpointOptions"
+    }
   }}
 />
+
+<div className="notification">
+  <h5 className="title is-5">ColumnBreakpointOptions Object</h5>
+  <p>
+    The <strong>ColumnBreakpointOptions Object</strong> has the following
+    structure:
+    <pre
+      children={JSON.stringify(
+        {
+          narrow: "boolean",
+          offset: mapEnumerable(COLUMN_DEFAULTS.sizes).replace(/["]/g, "'"),
+          size: mapEnumerable(COLUMN_DEFAULTS.sizes).replace(/["]/g, "'"),
+        },
+        null,
+        2
+      ).replace(/["]/g, "")}
+    />
+    <br />
+  </p>
+
+<p>
+  <code>narrow</code> specifies – for a specific breakpoint – whether the column
+  should only take up as much space as it needs.
+</p>
+
+  <br />
+  <p>
+    <code>offset</code> specifies – for a specific breakpoint – how much the
+    column should be offset from the left.
+  </p>
+
+  <br />
+  <p>
+    <code>size</code> specifies – for a specific breakpoint – the relative size
+    of the column.
+  </p>
+</div>
 
 <AsProp component={Column} componentName="Column" />
 
@@ -29,8 +541,81 @@ import { COLUMNS_DEFAULTS } from "../column-group";
 <SimplePropsTable
   props={{
     as: AsProp.makeDoc(Column.Group.defaultProps.as),
+    breakpoint: {
+      description: "the screen size at which the columns become stacked",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.breakpoints)
+    },
+    centered: {
+      description: "the columns will be horizontally centered",
+      typeName: "boolean"
+    },
+    desktop: {
+      description: "options when the screen size is between 1024px and 1215px",
+      typeName: "ColumnGroupBreakpointOptions"
+    },
+    fullhd: {
+      description: "options when the screen size is above 1408px",
+      typeName: "ColumnGroupBreakpointOptions"
+    },
+    gapless: {
+      description: "remove spacing between columns",
+      typeName: "boolean"
+    },
+    gapSize: {
+      description: "the gap-size between columns",
+      typeName: "number",
+      typeTip: mapEnumerable(COLUMN_GROUP_DEFAULTS.gapSizes)
+    },
+    mobile: {
+      description: "options when the screen size is up to 768px wide",
+      typeName: "ColumnGroupBreakpointOptions"
+    },
+    multiline: {
+      description: "columns may flow onto more than one line",
+      typeName: "boolean"
+    },
+    tablet: {
+      description: "options when the screen size is between 769px and 1023px",
+      typeName: "ColumnGroupBreakpointOptions"
+    },
+    widescreen: {
+      description: "sizing when the screen size is between 1216px and 1407px",
+      typeName: "ColumnGroupBreakpointOptions"
+    },
+    touch: {
+      description: "sizing when the screen is mobile or tablet",
+      typeName: "ColumnGroupBreakpointOptions"
+    },
+    vcentered: {
+      description: "the columns will be vertically centered",
+      typeName: "boolean"
+    },
     ref: refDoc
   }}
 />
+
+<div className="notification">
+  <h5 className="title is-5">ColumnGroupBreakpointOptions Object</h5>
+  <p>
+    The <strong>ColumnGroupBreakpointOptions Object</strong> has the following
+    structure:
+    <pre
+      children={JSON.stringify(
+        {
+          gapSize: mapEnumerable(COLUMN_GROUP_DEFAULTS.gapSizes).replace(/["]/g, "'"),
+        },
+        null,
+        2
+      ).replace(/["]/g, "")}
+    />
+    <br />
+  </p>
+
+  <p>
+    <code>gapSize</code> specifies – for a specific breakpoint – the gap-size
+    between columns.
+  </p>
+</div>
 
 <AsProp component={Column.Group} componentName="Column.Group" />

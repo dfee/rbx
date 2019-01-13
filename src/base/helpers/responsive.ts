@@ -15,7 +15,7 @@ export type LimitedResponsiveBreakpointProps = Partial<{
   hide: {
     value: boolean;
   };
-  textAlignment: {
+  textAlign: {
     value: Variables["textAlignments"];
   };
   textSize: {
@@ -32,7 +32,7 @@ export type ResponsiveBreakpointProps = Partial<{
     only?: boolean;
     value: boolean;
   };
-  textAlignment: {
+  textAlign: {
     only?: boolean;
     value: Variables["textAlignments"];
   };
@@ -65,7 +65,7 @@ export const makeResponsiveBreakpointPropTypes = makePropTypesFactory(vars => ({
     only: PropTypes.bool,
     value: PropTypes.bool.isRequired,
   }),
-  textAlignment: PropTypes.shape({
+  textAlign: PropTypes.shape({
     only: PropTypes.bool,
     value: PropTypes.oneOf(vars.textAlignments).isRequired,
   }),
@@ -83,7 +83,7 @@ export const makeResponsiveBreakpointLimitedPropTypes = makePropTypesFactory(
     hide: PropTypes.shape({
       value: PropTypes.bool.isRequired,
     }),
-    textAlignment: PropTypes.shape({
+    textAlign: PropTypes.shape({
       value: PropTypes.oneOf(vars.textAlignments).isRequired,
     }),
     textSize: PropTypes.shape({
@@ -119,7 +119,7 @@ export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
           .filter(breakpoint => responsive[breakpoint] !== undefined)
           .map(breakpoint => {
             const names = {};
-            const { display, hide, textAlignment, textSize } = responsive[
+            const { display, hide, textAlign, textSize } = responsive[
               breakpoint
             ] as ResponsiveBreakpointProps | LimitedResponsiveBreakpointProps;
             if (display !== undefined) {
@@ -132,10 +132,10 @@ export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
               const only = "only" in hide ? hide.only === true : false;
               names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
             }
-            if (textAlignment !== undefined) {
-              const value = textAlignment.value;
+            if (textAlign !== undefined) {
+              const value = textAlign.value;
               const only =
-                "only" in textAlignment ? textAlignment.only === true : false;
+                "only" in textAlign ? textAlign.only === true : false;
               names[
                 `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
               ] = value;

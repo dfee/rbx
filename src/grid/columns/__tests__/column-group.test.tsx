@@ -24,10 +24,7 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    defaultProps: {
-      as: DEFAULT_ELEMENT,
-      multiline: true,
-    },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(
@@ -135,6 +132,19 @@ describe(`${COMPONENT_NAME} component`, () => {
           const node = makeNode({ multiline });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-multiline")).toBe(multiline);
+          expect(wrapper.hasClass("is-variable")).toBe(false);
+        });
+      });
+    });
+
+    describe("vcentered", () => {
+      validateBoolPropType(propTypes, "vcentered");
+
+      [false, true].map(vcentered => {
+        it(`should ${vcentered ? "" : "not "}be vertically centered`, () => {
+          const node = makeNode({ vcentered });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("is-vcentered")).toBe(vcentered);
           expect(wrapper.hasClass("is-variable")).toBe(false);
         });
       });

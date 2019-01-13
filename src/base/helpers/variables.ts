@@ -52,12 +52,12 @@ export const DEFAULTS = {
 
   // Responsive
   breakpoints: tuple(
-    "mobile",
-    "tablet",
-    "desktop",
-    "widescreen",
-    "fullhd",
-    "touch",
+    "mobile", // up to 768px
+    "tablet", // between 769px and 1023px
+    "desktop", // between 1024px and 1215px
+    "widescreen", // between 1216px and 1407px
+    "fullhd", // 1408px and above
+    "touch", // mobile or tablet
   ),
   /**
    * Breakpoints that are limited don't support the `only` option, e.g.:

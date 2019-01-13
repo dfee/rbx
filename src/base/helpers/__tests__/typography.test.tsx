@@ -28,7 +28,7 @@ describe("Typography modifiers", () => {
       ...DEFAULTS.shades,
     ]);
     validateBoolPropType(propTypes, "italic");
-    validateOneOfPropType(propTypes, "textAlignment", DEFAULTS.textAlignments);
+    validateOneOfPropType(propTypes, "textAlign", DEFAULTS.textAlignments);
     validateOneOfPropType(propTypes, "textColor", [
       ...DEFAULTS.colors,
       ...DEFAULTS.shades,
@@ -62,7 +62,7 @@ describe("Typography modifiers", () => {
 
     DEFAULTS.textAlignments.map(align => {
       it(`should align ${align}`, () => {
-        expect(vtfunc({ textAlignment: align }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ textAlign: align }, CNAME, LOC)).toEqual({
           className: `has-text-${align}`,
         });
       });

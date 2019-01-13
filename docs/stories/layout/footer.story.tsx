@@ -8,7 +8,7 @@ storiesOf("Layout/Footer", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => (
     <Footer>
-      <Content textAlignment="centered">
+      <Content textAlign="centered">
         <p>
           <strong>rbx</strong> by{" "}
           <a href="https://github.com/dfee">Devin Fee</a>. The source code is

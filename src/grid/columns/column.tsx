@@ -46,7 +46,7 @@ export type ColumnVariables = Prefer<
   ColumnVariablesDefaults
 >;
 
-export type ColumnSizeModifierProps = Partial<{
+export type ColumnBreakpointOptions = Partial<{
   /**
    * If you want a column to only take the space it needs, use the narrow
    * modifier. The other column(s) will fill up the remaining space.
@@ -69,8 +69,8 @@ const ColumnSizeModifierPropTypes = {
 };
 
 export type ColumnModifierProps = Partial<
-  { [B in Variables["breakpoints"]]: ColumnSizeModifierProps } &
-    ColumnSizeModifierProps
+  { [B in Variables["breakpoints"]]: ColumnBreakpointOptions } &
+    ColumnBreakpointOptions
 >;
 
 export type ColumnProps = HelpersProps & ColumnModifierProps;

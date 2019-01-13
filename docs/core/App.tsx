@@ -184,7 +184,7 @@ const AppFeatures: React.FC = () => (
 
 const AppFooter: React.FC = () => (
   <Footer>
-    <Content textAlignment="centered">
+    <Content textAlign="centered">
       <p>
         <strong>rbx</strong> by <a href="https://github.com/dfee">Devin Fee</a>.
         The source code is released under the{" "}

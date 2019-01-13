@@ -22,9 +22,9 @@ export type ColumnGroupVariables = Prefer<
   ColumnGroupVariablesDefaults
 >;
 
-export type ColumnGroupBreakpointProps = Partial<{
+export type ColumnGroupBreakpointOptions = Partial<{
   /**
-   * The column gap size for Tablet devices (Between 769px and 1023px)
+   * The column gap size for a breakapoint
    */
   gapSize: ColumnGroupVariables["gapSizes"];
 }>;
@@ -34,7 +34,7 @@ const ColumnGroupBreakpointPropTypes = {
 };
 
 type ColumnGroupModifierProps = Partial<
-  { [B in Variables["breakpoints"]]: ColumnGroupBreakpointProps } & {
+  { [B in Variables["breakpoints"]]: ColumnGroupBreakpointOptions } & {
     /**
      * Breakpoint where columns become stacked.
      */
@@ -52,7 +52,11 @@ type ColumnGroupModifierProps = Partial<
      * elements that would fit in a single row.
      */
     multiline: boolean;
-  } & ColumnGroupBreakpointProps
+    /**
+     * `true` if you want the columns to be vertically centered.
+     */
+    vcentered: boolean;
+  } & ColumnGroupBreakpointOptions
 >;
 
 export type ColumnGroupProps = HelpersProps & ColumnGroupModifierProps;
@@ -74,6 +78,7 @@ const propTypes = {
   centered: PropTypes.bool,
   gapless: PropTypes.bool,
   multiline: PropTypes.bool,
+  vcentered: PropTypes.bool,
 };
 
 export const ColumnGroup = Object.assign(
@@ -92,6 +97,7 @@ export const ColumnGroup = Object.assign(
         tablet,
         widescreen,
         touch,
+        vcentered,
         ...rest
       },
       ref,
@@ -128,6 +134,7 @@ export const ColumnGroup = Object.assign(
               "is-gapless": gapless,
               "is-multiline": multiline,
               "is-variable ": gapSizeClassNames !== "",
+              "is-vcentered": vcentered,
             },
             gapSizeClassNames,
             className,
@@ -137,10 +144,7 @@ export const ColumnGroup = Object.assign(
         />
       );
     },
-    {
-      as: "div",
-      multiline: true,
-    },
+    { as: "div" },
   ),
   { propTypes },
 );
