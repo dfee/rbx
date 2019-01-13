@@ -1,0 +1,250 @@
+---
+name: Tag
+menu: Elements
+route: /elements/tag
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block, Control, Delete, Field } from "src/elements";
+import { Tag, TAG_DEFAULTS } from "../tag";
+import { TagGroup } from "../tag-group";
+
+# Tag
+
+The tag is simply a label.
+
+<Playground>
+  <Tag>Tag label</Tag>
+</Playground>
+
+### Colors
+
+Use the `color` prop of a `<Tag>` for variety.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Block>
+        <Tag key={color} color={color}>
+          {color}
+        </Tag>
+      </Block>
+    ))
+  }
+</Playground>
+
+### Sizes
+
+Use the `size` prop on `<Tag>` to change its size.
+
+<Playground>
+  {() =>
+    TAG_DEFAULTS.sizes.map(size => (
+      <Block>
+        <Tag key={size} size={size}>
+          {size}
+        </Tag>
+      </Block>
+    ))
+  }
+</Playground>
+
+### Rounding
+
+Use the `rounded` prop on `<Tag>` to round the edges.
+
+<Playground>
+  <Tag rounded>Rounded</Tag>
+</Playground>
+
+### Delete
+
+Use the `delete` prop on `<Tag>` to make it a delete button.
+
+<Playground>
+  <Tag delete />
+</Playground>
+
+Or use a `<Delete>` component to add a delete button in the tag.
+
+<Playground>
+  <Block>
+    <Tag color="success">
+      Bar
+      <Delete size="small" />
+    </Tag>
+  </Block>
+
+<Block>
+  <Tag color="warning" size="medium">
+    Hello
+    <Delete size="small" />
+  </Tag>
+</Block>
+
+  <Block>
+    <Tag color="danger" size="large">
+      World
+      <Delete />
+    </Tag>
+  </Block>
+</Playground>
+
+### List of tags
+
+Use the `<Tag.Group>` component to group tags together in a list.
+
+<Playground>
+  <Tag.Group>
+    <Tag>One</Tag>
+    <Tag>Two</Tag>
+    <Tag>Three</Tag>
+  </Tag.Group>
+</Playground>
+
+If the list is long, it will automatically wrap on multiple lines, while keeping the tags evenly spaced.
+
+<Playground>
+  <Tag.Group>
+    {[
+      "One",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten",
+      "Eleven",
+      "Twelve",
+      "Thirteen",
+      "Fourteen",
+      "Fifteen",
+      "Sixteen",
+      "Seventeen",
+      "Eighteen",
+      "Nineteen",
+      "Twenty"
+    ].map(name => (
+      <Tag key={name}>{name}</Tag>
+    ))}
+  </Tag.Group>
+</Playground>
+
+### Attach tags
+
+Use the `gapless` prop on `<Tag.Group>` to attach `<Tag>`s togther.
+
+<Playground>
+  <Tag.Group gapless>
+    <Tag>Package</Tag>
+    <Tag color="info">rbx</Tag>
+    <Tag color="primary">Bulma</Tag>
+  </Tag.Group>
+</Playground>
+
+You can attach a **text** and a **delete** tag together.
+
+<Playground>
+  <Tag.Group gapless>
+    <Tag color="danger">Alex Smith</Tag>
+    <Tag delete />
+  </Tag.Group>
+</Playground>
+
+To attach `gapless` `<Tag.Group>`s together, use the `<Field>` component to wrap them and provide the `<Field>` component the `kind="group"` and `multiline` props.
+
+<Playground>
+  <Field kind="group" multiline>
+    <Control>
+      <Tag.Group gapless>
+        <Tag color="dark">npm</Tag>
+        <Tag color="info">1.0.0</Tag>
+      </Tag.Group>
+    </Control>
+    <Control>
+      <Tag.Group gapless>
+        <Tag color="dark">build</Tag>
+        <Tag color="success">passing</Tag>
+      </Tag.Group>
+    </Control>
+    <Control>
+      <Tag.Group gapless>
+        <Tag color="dark">chat</Tag>
+        <Tag color="primary">#reactiflux</Tag>
+      </Tag.Group>
+    </Control>
+  </Field>
+</Playground>
+
+This can be useful for a long list of **blog tags**.
+
+<Playground>
+  <Field multiline kind="group">
+    {[
+      "Technology",
+      "CSS",
+      "Flexbox",
+      "Web Design",
+      "Open Source",
+      "Community",
+      "Documentation"
+    ].map(name => (
+      <Control key={name}>
+        <Tag.Group gapless>
+          <Tag color="link">{name}</Tag>
+          <Tag delete />
+        </Tag.Group>
+      </Control>
+    ))}
+  </Field>
+</Playground>
+
+## Tag
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Tag.defaultProps.as),
+    color: {
+      description: "set the tag's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    delete: {
+      description: "turn the tag into a delete button",
+      typeName: "boolean"
+    },
+    ref: refDoc,
+    rounded: {
+      description: "make the tag rounded",
+      typeName: "boolean"
+    },
+    size: {
+      description: "set the tag's size",
+      typeName: "string",
+      typeTip: mapEnumerable(TAG_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Tag} componentName="Tag" />
+
+## Tag.Group
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Tag.Group.defaultProps.as),
+    gapless: {
+      description: "attach tags together",
+      typeName: "boolean"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Tag.Group} componentName="Tag.Group" />

@@ -1,0 +1,105 @@
+---
+name: Title
+menu: Elements
+route: /elements/title
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block } from "src/elements";
+import { Title, TITLE_DEFAULTS } from "../title";
+
+# Title
+
+Use the `subtitle` prop on `<Title>` to make it into a subtitle.
+
+<Playground>
+  <Title>Title</Title>
+  <Title subtitle>Title</Title>
+</Playground>
+
+### Sizes
+
+Use the `size` prop on `<Title>` to adjust its size.
+
+<Playground>
+  {() =>
+    TITLE_DEFAULTS.sizes.map(size => (
+      <Title size={size} key={size}>
+        Title {size} {size === 3 ? "(default size)" : null}
+      </Title>
+    ))
+  }
+</Playground>
+
+<Playground>
+  {() =>
+    TITLE_DEFAULTS.sizes.map(size => (
+      <Title subtitle size={size} key={size}>
+        Subtitle {size} {size === 5 ? "(default size)" : null}
+      </Title>
+    ))
+  }
+</Playground>
+
+### Combining
+
+When you combine a title and a subtitle, they move closer together.
+
+As a rule of thumb, use a size difference of **two**. For example, if your title is `size={1}` then make your subtitle `size={3}`.
+
+<Playground>
+  {() =>
+    [1, 2, 3].map(tsize => (
+      <Block>
+        <Title size={tsize}>Title {tsize}</Title>
+        <Title size={tsize + 2} subtitle>
+          Subtitle {tsize + 2}
+        </Title>
+      </Block>
+    ))
+  }
+</Playground>
+
+Use the `spaced` prop on `<Title>` to maintain spacing between titles and subtitles.
+
+<Playground>
+  {() =>
+    [1, 2, 3].map(tsize => (
+      <Block>
+        <Title size={tsize} spaced>
+          Title {tsize}
+        </Title>
+        <Title size={tsize + 2} subtitle>
+          Subtitle {tsize + 2}
+        </Title>
+      </Block>
+    ))
+  }
+</Playground>
+
+## Title
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Title.defaultProps.as),
+    ref: refDoc,
+    size: {
+      description: "set the title's size",
+      typeName: "number",
+      typeTip: mapEnumerable(TITLE_DEFAULTS.sizes)
+    },
+    spaced: {
+      description: "add space below the title",
+      typeName: "boolean"
+    },
+    subtitle: {
+      description: "make it a subtitle",
+      typeName: "boolean"
+    }
+  }}
+/>
+
+<AsProp component={Title} componentName="Title" />
