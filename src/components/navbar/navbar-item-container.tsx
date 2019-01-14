@@ -12,11 +12,13 @@ export type NavbarItemContainerModifierProps = Partial<{
   active: boolean;
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   dropdown: boolean;
-  dropdownUp: boolean;
+  expanded: boolean;
   hoverable: boolean;
   innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   managed: boolean;
   onClick: React.MouseEventHandler;
+  tab: boolean;
+  up: boolean;
 }>;
 
 export type NavbarItemContainerProps = HelpersProps &
@@ -54,11 +56,13 @@ export class NavbarItemContainer extends React.PureComponent<
       active,
       className: initialClassName,
       dropdown,
-      dropdownUp,
+      expanded,
       hoverable,
       innerRef,
       managed,
       onClick,
+      tab,
+      up,
       ...rest
     } = this.props;
 
@@ -66,9 +70,11 @@ export class NavbarItemContainer extends React.PureComponent<
       "navbar-item",
       {
         "has-dropdown": dropdown,
-        "has-dropdown-up": dropdownUp,
+        "has-dropdown-up": up,
         "is-active": this.active,
+        "is-expanded": expanded,
         "is-hoverable": hoverable,
+        "is-tab": tab,
       },
       initialClassName,
     );

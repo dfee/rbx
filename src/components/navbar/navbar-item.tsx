@@ -13,10 +13,12 @@ export type NavbarItemProps = Omit<NavbarItemContainerProps, "as" | "innerRef">;
 const propTypes = {
   active: PropTypes.bool,
   dropdown: PropTypes.bool,
-  dropdownUp: PropTypes.bool,
+  expanded: PropTypes.bool,
   hoverable: PropTypes.bool,
   managed: PropTypes.bool,
   onClick: PropTypes.func,
+  tab: PropTypes.bool,
+  up: PropTypes.bool,
 };
 
 export const NavbarItem = Object.assign(

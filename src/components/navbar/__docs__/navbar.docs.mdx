@@ -1,0 +1,991 @@
+---
+name: Navbar
+menu: Components
+route: /components/navbar
+---
+
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import {
+  AsProp,
+  Frame,
+  SimplePropsTable,
+  mapEnumerable,
+  refDoc
+} from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import {
+  Block,
+  Button,
+  Control,
+  Container,
+  Field,
+  Icon,
+  Title
+} from "src/elements";
+import { Hero } from "src/layout";
+import { Navbar } from "../navbar";
+import { NAVBAR_DEFAULTS } from "../navbar-container";
+import { NAVBAR_DROPDOWN_DEFAULTS } from "../navbar-dropdown";
+import { NAVBAR_SEGMENT_DEFAULTS } from "../navbar-segment";
+
+# Navbar
+
+A responsive horizontal **navbar** that can support images, links, buttons, and dropdowns.
+
+<div className="content">
+  <p>
+    The <code>{"<Navbar>"}</code> component is a responsive and versatile
+    horizontal navigation bar with the following structure:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Navbar>"}</code> the <strong>main</strong> container
+      <ul>
+        <li>
+          <code>{"<Navbar.Brand>"}</code> the <strong>left side</strong>,{" "}
+          <strong className="has-text-success">always visible</strong>, which
+          usually contains the <strong>logo</strong> and optionally some links
+          or icons
+          <ul>
+            <li>
+              <code>{"<Navbar.Burger>"}</code> the <strong>hamburger</strong>{" "}
+              icon, which toggles the <code>{"<Navbar.Menu>"}</code> on touch
+              devices
+            </li>
+          </ul>
+        </li>
+        <li>
+          <code>{"<Navbar.Menu>"}</code> the <strong>right side</strong>, hidden
+          on touch devices, visible on desktop
+          <ul>
+            <li>
+              <code>{"<Navbar.Segment>"}</code> the <strong>left part</strong>{" "}
+              of the <code>{"<Navbar.Menu>"}</code>, which appears next to the{" "}
+              <code>{"<Navbar.Brand>"}</code> on desktop, or the{" "}
+              <strong>right part</strong> of the <code>{"<Navbar.Menu>"}</code>,
+              which appears at the end of the <code>{`<Navbar>`}</code>.
+              <ul>
+                <li>
+                  <code>{"<Navbar.Item>"}</code> each{" "}
+                  <strong>single item</strong> of the <code>{"<Navbar>"}</code>,
+                  which can either be an <code>a</code> or a <code>div</code>
+                  <ul>
+                    <li>
+                      <code>{"<Navbar.Link>"}</code> a <strong>link</strong> as
+                      the sibling of a <code>{"<Navbar.Dropdown>"}</code>, with
+                      an arrow
+                    </li>
+                    <li>
+                      <code>{"<Navbar.Dropdown>"}</code> the{" "}
+                      <strong>dropdown menu</strong>, which can include{" "}
+                      <code>{"<Navbar.Item>"}</code>s and{" "}
+                      <code>{"<Navbar.Divider>"}</code>s
+                      <ul>
+                        <li>
+                          <code>{"<Navbar.Divider>"}</code> a{" "}
+                          <strong>horizontal line</strong> to separate{" "}
+                          <code>{"<Navbar.Item>"}</code>s
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+### Basic navbar
+
+<Playground>
+  <Navbar>
+    <Navbar.Brand>
+      <Navbar.Item href="#">
+        <img
+          src="https://bulma.io/images/bulma-logo.png"
+          alt=""
+          role="presentation"
+          width="112"
+          height="28"
+        />
+      </Navbar.Item>
+      <Navbar.Burger />
+    </Navbar.Brand>
+
+    <Navbar.Menu>
+      <Navbar.Segment align="start">
+        <Navbar.Item>Home</Navbar.Item>
+        <Navbar.Item>Documentation</Navbar.Item>
+
+        <Navbar.Item dropdown>
+          <Navbar.Link>More</Navbar.Link>
+          <Navbar.Dropdown>
+            <Navbar.Item>About</Navbar.Item>
+            <Navbar.Item>Jobs</Navbar.Item>
+            <Navbar.Item>Contact</Navbar.Item>
+            <Navbar.Divider />
+            <Navbar.Item>Report an issue</Navbar.Item>
+          </Navbar.Dropdown>
+        </Navbar.Item>
+      </Navbar.Segment>
+
+      <Navbar.Segment align="end">
+        <Navbar.Item>
+          <Button.Group>
+            <Button color="primary">
+              <strong>Sign up</strong>
+            </Button>
+            <Button color="light">Log in</Button>
+          </Button.Group>
+        </Navbar.Item>
+      </Navbar.Segment>
+    </Navbar.Menu>
+
+  </Navbar>
+</Playground>
+
+### Navbar brand
+
+The `<Navbar.Brand>` is on the left side of the `<Navbar>`.
+It can contain `<Navbar.Item>`s and, as it's last child, a `<Navbar.Burger>`.
+
+It is **always visible**, so you should only use a few `<Navbar.Item>`s to avoid overflowing horizontally on small viewport devices.
+
+On viewports bigger than **touch** `>=1024px`, the `<Navbar.Brand>` will only take up the space it needs.
+
+<Playground>
+  <Navbar>
+    <Navbar.Brand>
+      <Navbar.Item href="https://bulma.io">
+        <img
+          src="https://bulma.io/images/bulma-logo.png"
+          alt="Bulma: Free, open source, & modern CSS framework based on Flexbox"
+          width="112"
+          height="28"
+        />
+      </Navbar.Item>
+      <Navbar.Burger />
+    </Navbar.Brand>
+  </Navbar>
+</Playground>
+
+<div className="notification">
+  Resize your browser window to see the <code>{"<Navbar.Burger>"}</code> appear.
+</div>
+
+### Navbar burger
+
+The `<Navbar.Burger>` is a hamburger menu that appears only on **touch** viewports.
+It must be the last child of the `<Navbar.Brand>`.
+
+### Navbar menu
+
+The `<Navbar.Menu>` is a **counterpart** of the `<Navbar.Brand>`.
+It must appear as a direct child of `<Navbar>`, and as a sibling of `<Navbar.Brand>`.
+
+It is hidden on **touch** viewports `<1024px`. Though you can use the `active` and `managed` props of `<Navbar>` to force it open or closed.
+
+On **desktop** and bigger viewports `>=1024px`, the `<Navbar.Menu>` will **fill up the sapce** available in the `<Navbar>`, leaving the `<Navbar.Brand>` just the space it needs.
+
+It needs two other components as children: `<Navbar.Segment align="start">` and `<Navbar.Segment align="end">`.
+
+### Start and end
+
+Use the `<Navbar.Segment>` component and its `align` prop as the direct (and only) descendents of `<Navbar.Menu>`.
+
+Each `<Navbar.Segment>` can contain any number of `<Navbar.Item>`s.
+
+### Navbar items
+
+The `<Navbar.Item>` is a versatile, repeatable component that can be:
+
+- a navigation **link** (`<Navbar.Link>`)
+- a container for the **brand logo** (a child of `<Navbar.Brand>`)
+- the parent of a **dropdown menu** (`<Navbar.Dropdown>`)
+- the child of a **navbar dropdown** (`<Navbar.Dropdown>`)
+- a container for almost **anything**, like a `<Field>`.
+
+By default it renders as an `<a>`, but you can use the `as` prop to make it an `div`.
+
+It can be the **direct child** of:
+
+- `<Navbar>`
+- `<Navbar.Brand>`
+- `<Navbar.Segment>`
+- `<Navbar.Dropdown>`
+
+Use the `expanded` prop of `<Navbar.Item>` to turn it into a full-width element.
+
+Use the `tab` prop of `<Navbar.Item>` to add a bottom border on hover.
+
+Use the `active` prop of `<Navbar.Item>` to force show the bottom border.
+
+### Transparent navbar
+
+Use the `transparent` prop on `<Navbar>` to seemlessly integrate it into any visual context.
+This will remove any hover or active background for the navbar items.
+
+<Playground>
+  <Navbar transparent>
+    <Navbar.Brand>
+      <Navbar.Item href="https://bulma.io">
+        <img
+          src="https://bulma.io/images/bulma-logo.png"
+          alt="Bulma: a modern CSS framework based on Flexbox"
+          width="112"
+          height="28"
+        />
+      </Navbar.Item>
+      <Navbar.Burger />
+    </Navbar.Brand>
+    <Navbar.Menu>
+      <Navbar.Segment align="start">
+        <Navbar.Item href="https://bulma.io/">Home</Navbar.Item>
+        <Navbar.Item dropdown hoverable>
+          <Navbar.Link href="https://bulma.io/documentation/overview/start/">
+            Docs
+          </Navbar.Link>
+          <Navbar.Dropdown boxed>
+            <Navbar.Item href="https://bulma.io/documentation/overview/start/">
+              Overview
+            </Navbar.Item>
+            <Navbar.Item href="https://bulma.io/documentation/modifiers/syntax/">
+              Modifiers
+            </Navbar.Item>
+            <Navbar.Item href="https://bulma.io/documentation/columns/basics/">
+              Columns
+            </Navbar.Item>
+            <Navbar.Item href="https://bulma.io/documentation/layout/container/">
+              Layout
+            </Navbar.Item>
+            <Navbar.Item href="https://bulma.io/documentation/form/general/">
+              Form
+            </Navbar.Item>
+            <Navbar.Divider />
+            <Navbar.Item href="https://bulma.io/documentation/elements/box/">
+              Elements
+            </Navbar.Item>
+            <Navbar.Item
+              active
+              href="https://bulma.io/documentation/components/breadcrumb/"
+            >
+              Components
+            </Navbar.Item>
+          </Navbar.Dropdown>
+        </Navbar.Item>
+      </Navbar.Segment>
+      <Navbar.Segment align="end">
+        <Navbar.Item as="div">
+          <Field kind="group">
+            <Control>
+              <Button as="a" color="info" href="https://twitter.com">
+                <Icon>
+                  <FontAwesomeIcon icon={faTwitter} />
+                </Icon>
+                <span>Tweet</span>
+              </Button>
+            </Control>
+            <Control>
+              <Button as="a" color="primary" href="https://github.com/dfee/rbx">
+                <Icon>
+                  <FontAwesomeIcon icon={faGithub} />
+                </Icon>
+                <span>GitHub</span>
+              </Button>
+            </Control>
+          </Field>
+        </Navbar.Item>
+      </Navbar.Segment>
+    </Navbar.Menu>
+  </Navbar>
+</Playground>
+
+### Fixed navbar
+
+Use the `fixed` prop of `<Navbar>` to fix the navbar to the **top** or **bottom** of the page.
+
+This will automatically add the `has-navbar-fixed-top` or `has-navbar-fixed-bottom` classes to the Document supplied in the `document`, or the Document upon which your app is mounted.
+This is useful for mounting in `iframe`s.
+
+<Playground>
+  <Frame style={{ height: "500px" }} forceHeight>
+    {({ document }) => (
+      <div>
+        {/* Top Navbar */}
+        <Navbar document={document} fixed="top" color="info">
+          <Navbar.Brand>
+            <Navbar.Item href="#">
+              <img
+                src="https://bulma.io/images/bulma-logo.png"
+                alt=""
+                role="presentation"
+                width="112"
+                height="28"
+              />
+            </Navbar.Item>
+            <Navbar.Burger />
+          </Navbar.Brand>
+
+          <Navbar.Menu>
+            <Navbar.Segment align="start">
+              <Navbar.Item>Home</Navbar.Item>
+              <Navbar.Item>Documentation</Navbar.Item>
+
+              <Navbar.Item dropdown>
+                <Navbar.Link>More</Navbar.Link>
+                <Navbar.Dropdown>
+                  <Navbar.Item>About</Navbar.Item>
+                  <Navbar.Item>Jobs</Navbar.Item>
+                  <Navbar.Item>Contact</Navbar.Item>
+                  <Navbar.Divider />
+                  <Navbar.Item>Report an issue</Navbar.Item>
+                </Navbar.Dropdown>
+              </Navbar.Item>
+            </Navbar.Segment>
+
+            <Navbar.Segment align="end">
+              <Navbar.Item>
+                <Button.Group>
+                  <Button color="primary">
+                    <strong>Sign up</strong>
+                  </Button>
+                  <Button color="light">Log in</Button>
+                </Button.Group>
+              </Navbar.Item>
+            </Navbar.Segment>
+          </Navbar.Menu>
+        </Navbar>
+
+        {/* the content */}
+        <Container style={{ margin: "100px" }}>
+          {[
+            'this',
+            'is',
+            'a',
+            'very',
+            'long',
+            'document',
+            'demonstrating',
+            'fixed',
+            'navbars'
+            ].map(word => <Title as="h6" children={word} />)}
+        </Container>
+
+        {/* Bottom Navbar */}
+        <Navbar document={document} fixed="bottom" color="warning">
+          <Navbar.Brand>
+            <Navbar.Item href="#">
+              <img
+                src="https://bulma.io/images/bulma-logo.png"
+                alt=""
+                role="presentation"
+                width="112"
+                height="28"
+              />
+            </Navbar.Item>
+            <Navbar.Burger />
+          </Navbar.Brand>
+
+          <Navbar.Menu>
+            <Navbar.Segment align="start">
+              <Navbar.Item>Home</Navbar.Item>
+              <Navbar.Item>Documentation</Navbar.Item>
+
+              <Navbar.Item dropdown up>
+                <Navbar.Link>More</Navbar.Link>
+                <Navbar.Dropdown>
+                  <Navbar.Item>About</Navbar.Item>
+                  <Navbar.Item>Jobs</Navbar.Item>
+                  <Navbar.Item>Contact</Navbar.Item>
+                  <Navbar.Divider />
+                  <Navbar.Item>Report an issue</Navbar.Item>
+                </Navbar.Dropdown>
+              </Navbar.Item>
+            </Navbar.Segment>
+
+            <Navbar.Segment align="end">
+              <Navbar.Item>
+                <Button.Group>
+                  <Button color="primary">
+                    <strong>Sign up</strong>
+                  </Button>
+                  <Button color="light">Log in</Button>
+                </Button.Group>
+              </Navbar.Item>
+            </Navbar.Segment>
+          </Navbar.Menu>
+        </Navbar>
+      </div>
+    )}
+
+  </Frame>
+</Playground>
+
+### Dropdown menu
+
+To create a **\*dropdown menu** you'll need the following **5** components:
+
+- `<Navbar.Item>` with the `dropdown` prop
+- `<Navbar.Link>` which contains the dropdown arrow
+- `<Navbar.Dropdown>` which contains instances of `<Navbar.Item> and`<Navbar.Divider>`
+
+<Playground>
+  <div style={{ height: "200px " }}>
+    <Navbar>
+      <Navbar.Item dropdown>
+        <Navbar.Link>Docs</Navbar.Link>
+        <Navbar.Dropdown>
+          <Navbar.Item>Overview</Navbar.Item>
+          <Navbar.Item>Elements</Navbar.Item>
+          <Navbar.Item>Components</Navbar.Item>
+          <Navbar.Divider />
+          <Navbar.Item>Version 1.0.0</Navbar.Item>
+        </Navbar.Dropdown>
+      </Navbar.Item>
+    </Navbar>
+  </div>
+</Playground>
+
+Use the `hoverable` prop of `<Navbar.Item>` to toggle the menu on mouse-over.
+
+<Playground>
+  <div style={{ height: "200px " }}>
+    <Navbar>
+      <Navbar.Item dropdown hoverable>
+        <Navbar.Link>Docs</Navbar.Link>
+        <Navbar.Dropdown>
+          <Navbar.Item>Overview</Navbar.Item>
+          <Navbar.Item>Elements</Navbar.Item>
+          <Navbar.Item>Components</Navbar.Item>
+          <Navbar.Divider />
+          <Navbar.Item>Version 1.0.0</Navbar.Item>
+        </Navbar.Dropdown>
+      </Navbar.Item>
+    </Navbar>
+  </div>
+</Playground>
+
+Use the `active` and `managed` props of `<Navbar.Item>` to override the toggle controls.
+
+<Playground>
+  <div style={{ height: "200px " }}>
+    <Navbar>
+      <Navbar.Item dropdown managed active={true}>
+        <Navbar.Link>Docs</Navbar.Link>
+        <Navbar.Dropdown>
+          <Navbar.Item>Overview</Navbar.Item>
+          <Navbar.Item>Elements</Navbar.Item>
+          <Navbar.Item>Components</Navbar.Item>
+          <Navbar.Divider />
+          <Navbar.Item>Version 1.0.0</Navbar.Item>
+        </Navbar.Dropdown>
+      </Navbar.Item>
+    </Navbar>
+  </div>
+</Playground>
+
+<div className="notification">
+  <strong>Note:</strong> you can edit the Playground above and change
+  <code>{"active={true}"}</code> to
+  <code>{"active={false}"}</code> to untoggle the menu.
+</div>
+
+### Dropdown menu alignment
+
+Use the `align` prop of `<Navbar.Item>` to change whether the menu is aligned **left** or **right**.
+
+<Playground>
+  <Navbar>
+    <Navbar.Menu>
+      <Navbar.Segment align="start">
+        <Navbar.Item dropdown managed active>
+          <Navbar.Link>Left</Navbar.Link>
+          <Navbar.Dropdown>
+            <Navbar.Item>Overview</Navbar.Item>
+            <Navbar.Item>Elements</Navbar.Item>
+            <Navbar.Item>Components</Navbar.Item>
+            <Navbar.Divider />
+            <Navbar.Item>Version 1.0.0</Navbar.Item>
+          </Navbar.Dropdown>
+        </Navbar.Item>
+      </Navbar.Segment>
+      <Navbar.Segment align="end">
+        <Navbar.Item dropdown managed active>
+          <Navbar.Link>Right</Navbar.Link>
+          <Navbar.Dropdown align="right">
+            <Navbar.Item>Overview</Navbar.Item>
+            <Navbar.Item>Elements</Navbar.Item>
+            <Navbar.Item>Components</Navbar.Item>
+            <Navbar.Divider />
+            <Navbar.Item>Version 1.0.0</Navbar.Item>
+          </Navbar.Dropdown>
+        </Navbar.Item>
+      </Navbar.Segment>
+    </Navbar.Menu>
+  </Navbar>
+  <Hero color="primary">
+    <Hero.Body>
+      <Title as="p">Documentation</Title>
+      <Title as="p" subtitle>
+        Everything you need to <strong>create a website</strong> with{" "}
+        <strong>rbx</strong>
+      </Title>
+    </Hero.Body>
+  </Hero>
+</Playground>
+
+### Dropup menu
+
+Use the `up` along with the `dropdown` prop on `<Navbar.Item>` to create a **dropup** menu.
+
+<Playground>
+  <Hero color="primary">
+    <Hero.Body>
+      <Title as="p">Documentation</Title>
+      <Title as="p" subtitle>
+        Everything you need to <strong>create a website</strong> with rbx
+      </Title>
+    </Hero.Body>
+  </Hero>
+  <Navbar>
+    <Navbar.Menu>
+      <Navbar.Segment align="start">
+        <Navbar.Item dropdown managed active up>
+          <Navbar.Link>Dropup</Navbar.Link>
+          <Navbar.Dropdown>
+            <Navbar.Item>Overview</Navbar.Item>
+            <Navbar.Item>Elements</Navbar.Item>
+            <Navbar.Item>Components</Navbar.Item>
+            <Navbar.Divider />
+            <Navbar.Item>Version 1.0.0</Navbar.Item>
+          </Navbar.Dropdown>
+        </Navbar.Item>
+      </Navbar.Segment>
+    </Navbar.Menu>
+  </Navbar>
+</Playground>
+
+### Dropdown without arrow
+
+Use the `arrowless` prop on `<Navbar.Link>` to create a dropdown without an arrow.
+
+<Playground>
+  <div style={{ height: "200px" }}>
+    <Navbar>
+      <Navbar.Menu>
+        <Navbar.Segment align="start">
+          <Navbar.Item dropdown hoverable>
+            <Navbar.Link arrowless>Link without arrow</Navbar.Link>
+            <Navbar.Dropdown>
+              <Navbar.Item>Overview</Navbar.Item>
+              <Navbar.Item>Elements</Navbar.Item>
+              <Navbar.Item>Components</Navbar.Item>
+              <Navbar.Divider />
+              <Navbar.Item>Version 1.0.0</Navbar.Item>
+            </Navbar.Dropdown>
+          </Navbar.Item>
+        </Navbar.Segment>
+      </Navbar.Menu>
+    </Navbar>
+  </div>
+</Playground>
+
+### Dropdown styles
+
+By default, the `<Navbar.Dropdown>` has a grey `border-top` and a `border-radius` at both bottom corners.
+
+<Playground>
+  <Navbar>
+    <Navbar.Item>
+      <img
+        src="https://bulma.io/images/bulma-logo.png"
+        alt="Bulma: Free, open source, & modern CSS framework based on Flexbox"
+        width="112"
+        height="28"
+      />
+    </Navbar.Item>
+    <Navbar.Item dropdown managed active>
+      <Navbar.Link>Docs</Navbar.Link>
+      <Navbar.Dropdown>
+        <Navbar.Item>Overview</Navbar.Item>
+        <Navbar.Item>Elements</Navbar.Item>
+        <Navbar.Item>Components</Navbar.Item>
+        <Navbar.Divider />
+        <Navbar.Item>Version 1.0.0</Navbar.Item>
+      </Navbar.Dropdown>
+    </Navbar.Item>
+  </Navbar>
+  <Hero color="primary">
+    <Hero.Body>
+      <Title as="p">Documentation</Title>
+      <Title as="p" subtitle>
+        Everything you need to <strong>create a website</strong> with rbx
+      </Title>
+    </Hero.Body>
+  </Hero>
+</Playground>
+
+When using the `transparent` prop on `<Navbar>`, it's preferable to also use the `boxed` prop on `<Navbar.Dropdown>` to create a boxed version of the dropdown.
+
+<Playground>
+  <Navbar transparent>
+    <Navbar.Item>
+      <img
+        src="https://bulma.io/images/bulma-logo.png"
+        alt="Bulma: Free, open source, & modern CSS framework based on Flexbox"
+        width="112"
+        height="28"
+      />
+    </Navbar.Item>
+    <Navbar.Item dropdown managed active>
+      <Navbar.Link>Docs</Navbar.Link>
+      <Navbar.Dropdown boxed>
+        <Navbar.Item>Overview</Navbar.Item>
+        <Navbar.Item>Elements</Navbar.Item>
+        <Navbar.Item>Components</Navbar.Item>
+        <Navbar.Divider />
+        <Navbar.Item>Version 1.0.0</Navbar.Item>
+      </Navbar.Dropdown>
+    </Navbar.Item>
+  </Navbar>
+  <Hero>
+    <Hero.Body>
+      <Title as="p">Documentation</Title>
+      <Title as="p" subtitle>
+        Everything you need to <strong>create a website</strong> with rbx
+      </Title>
+    </Hero.Body>
+  </Hero>
+</Playground>
+
+### Active dropdown navbar item
+
+Use the `active` prop of `<Navbar.Item>` to mark it as active in a `<Navbar.Dropdown>`.
+
+<Playground>
+  <Navbar>
+    <Navbar.Item>
+      <img
+        src="https://bulma.io/images/bulma-logo.png"
+        alt="Bulma: Free, open source, & modern CSS framework based on Flexbox"
+        width="112"
+        height="28"
+      />
+    </Navbar.Item>
+    <Navbar.Item dropdown managed active>
+      <Navbar.Link>Docs</Navbar.Link>
+      <Navbar.Dropdown>
+        <Navbar.Item>Overview</Navbar.Item>
+        <Navbar.Item active>Elements</Navbar.Item>
+        <Navbar.Item>Components</Navbar.Item>
+        <Navbar.Divider />
+        <Navbar.Item>Version 1.0.0</Navbar.Item>
+      </Navbar.Dropdown>
+    </Navbar.Item>
+  </Navbar>
+  <Hero color="primary">
+    <Hero.Body>
+      <Title as="p">Documentation</Title>
+      <Title as="p" subtitle>
+        Everything you need to <strong>create a website</strong> with rbx
+      </Title>
+    </Hero.Body>
+  </Hero>
+</Playground>
+
+### Dropdown divider
+
+Use the `<navbar.Divider>` component to segment your `<Dropdown>` menu as exemplified throughout this page.
+
+### Colors
+
+Use the `color` prop of the `<Navbar>` to change the color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Block key={color}>
+        <Navbar color={color}>
+          <Navbar.Brand>
+            <Navbar.Item href="https://bulma.io">
+              <img
+                src="https://bulma.io/images/bulma-logo.png"
+                alt="Bulma: a modern CSS framework based on Flexbox"
+                width="112"
+                height="28"
+              />
+            </Navbar.Item>
+            <Navbar.Burger />
+          </Navbar.Brand>
+          <Navbar.Menu>
+            <Navbar.Segment align="start">
+              <Navbar.Item href="https://bulma.io/">Home</Navbar.Item>
+              <Navbar.Item dropdown hoverable>
+                <Navbar.Link href="https://bulma.io/documentation/overview/start/">
+                  Docs
+                </Navbar.Link>
+                <Navbar.Dropdown boxed>
+                  <Navbar.Item href="https://bulma.io/documentation/overview/start/">
+                    Overview
+                  </Navbar.Item>
+                  <Navbar.Item href="https://bulma.io/documentation/modifiers/syntax/">
+                    Modifiers
+                  </Navbar.Item>
+                  <Navbar.Item href="https://bulma.io/documentation/columns/basics/">
+                    Columns
+                  </Navbar.Item>
+                  <Navbar.Item href="https://bulma.io/documentation/layout/container/">
+                    Layout
+                  </Navbar.Item>
+                  <Navbar.Item href="https://bulma.io/documentation/form/general/">
+                    Form
+                  </Navbar.Item>
+                  <Navbar.Divider />
+                  <Navbar.Item href="https://bulma.io/documentation/elements/box/">
+                    Elements
+                  </Navbar.Item>
+                  <Navbar.Item
+                    active
+                    href="https://bulma.io/documentation/components/breadcrumb/"
+                  >
+                    Components
+                  </Navbar.Item>
+                </Navbar.Dropdown>
+              </Navbar.Item>
+            </Navbar.Segment>
+            <Navbar.Segment align="end">
+              <Navbar.Item as="div">
+                <Field kind="group">
+                  <Control>
+                    <Button as="a" color="info" href="https://twitter.com">
+                      <Icon>
+                        <FontAwesomeIcon icon={faTwitter} />
+                      </Icon>
+                      <span>Tweet</span>
+                    </Button>
+                  </Control>
+                  <Control>
+                    <Button
+                      as="a"
+                      color="primary"
+                      href="https://github.com/dfee/rbx"
+                    >
+                      <Icon>
+                        <FontAwesomeIcon icon={faGithub} />
+                      </Icon>
+                      <span>GitHub</span>
+                    </Button>
+                  </Control>
+                </Field>
+              </Navbar.Item>
+            </Navbar.Segment>
+          </Navbar.Menu>
+        </Navbar>
+      </Block>
+    ))
+  }
+</Playground>
+
+## Navbar
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "activate the Navbar (on touch devices)",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Navbar.defaultProps.as),
+    color: {
+      description: "set the navbar's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    document: {
+      description:
+        "the document whose HTMLElement will receive the fixed className (useful with an iframe)",
+      typeName: "Document"
+    },
+    fixed: {
+      description: "fix the position to the top or bottom",
+      typeName: "string",
+      typeTip: mapEnumerable(NAVBAR_DEFAULTS.fixedAlignments)
+    },
+    managed: {
+      description:
+        "enable the usage of the `active` prop to open and close the dropdown menu",
+      typeName: "boolean"
+    },
+    ref: refDoc,
+    transparent: {
+      description:
+        "remove any hover or active background from the navbar items",
+      typeName: "boolean"
+    }
+  }}
+/>
+
+<AsProp component={Navbar} componentName="Navbar" />
+
+## Navbar.Brand
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Navbar.Brand.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Navbar.Brand} componentName="Navbar.Brand" />
+
+## Navbar.Burger
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Navbar.Burger.defaultProps.as),
+    onClick: {
+      description: "callback when the component is clicked",
+      typeName: "(event: React.MouseEvent) => void"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Navbar.Burger} componentName="Navbar.Burger" />
+
+## Navbar.Divider
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Navbar.Divider.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Navbar.Divider} componentName="Navbar.Divider" />
+
+## Navbar.Dropdown
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "align the menu to the left or right",
+      typeName: "string",
+      typeTip: mapEnumerable(NAVBAR_DROPDOWN_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Navbar.Dropdown.defaultProps.as),
+    boxed: {
+      description:
+        "use the boxed version of the dropdown (prefereable when using a transparent navbar)",
+      typeName: "boolean"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Navbar.Dropdown} componentName="Navbar.Dropdown" />
+
+## Navbar.Item
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "show the bottom border",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Navbar.Item.defaultProps.as),
+    dropdown: {
+      description: "set if the item has a dropdown",
+      typeName: "boolean"
+    },
+    expanded: {
+      description: "expand to fill all available space",
+      typeName: "boolean"
+    },
+    hoverable: {
+      description:
+        "set if the item has a dropdown which should open on on mouse-over",
+      typeName: "boolean"
+    },
+    managed: {
+      description:
+        "enable the usage of the `active` prop to open and close the dropdown menu",
+      typeName: "boolean"
+    },
+    onClick: {
+      description: "callback when the component is clicked",
+      typeName: "(event: React.MouseEvent) => void"
+    },
+    ref: refDoc,
+    tab: {
+      description: "add a bottom border on hover",
+      typeName: "boolean"
+    },
+    up: {
+      description: "set if the item has a dropdown up (along with dropdown)",
+      typeName: "boolean"
+    }
+  }}
+/>
+
+<div className="notification">
+  <strong>Note:</strong> if a <code>{"<Navbar.Item>"}</code> is created with the
+  <code>dropdown</code> prop, and <code>as</code> is unset, or supplied as
+  <code>a</code>, it'll be automatically overriden to <code>div</code> to
+  support Bulma's styling.
+</div>
+
+<AsProp component={Navbar.Item} componentName="Navbar.Item" />
+
+## Navbar.Link
+
+<SimplePropsTable
+  props={{
+    arrowless: {
+      description: "remove the dropdown or dropup arrow from the link",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Navbar.Link.defaultProps.as),
+    onClick: {
+      description: "callback when the component is clicked",
+      typeName: "(event: React.MouseEvent) => void"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Navbar.Link} componentName="Navbar.Link" />
+
+## Navbar.Menu
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Navbar.Menu.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Navbar.Menu} componentName="Navbar.Menu" />
+
+## Navbar.Segment
+
+<SimplePropsTable
+  props={{
+    align: {
+      description:
+        "set the content in the left or right side of the dropdown menu",
+      typeName: "string",
+      typeTip: mapEnumerable(NAVBAR_SEGMENT_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Navbar.Segment.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Navbar.Segment} componentName="Navbar.Segment" />

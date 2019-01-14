@@ -81,6 +81,16 @@ describe(`${COMPONENT_NAME} component`, () => {
       });
     });
 
+    describe("expanded", () => {
+      [false, true].map(expanded => {
+        it(`should ${expanded ? "" : "not "}be expanded`, () => {
+          const node = makeNode({ expanded });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("is-expanded")).toBe(expanded);
+        });
+      });
+    });
+
     describe("onClick", () => {
       [false, true].map(hasOnClick => {
         it(`should update context ${
@@ -101,6 +111,16 @@ describe(`${COMPONENT_NAME} component`, () => {
           expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
           expect(setActive.mock.calls).toHaveLength(1);
           expect(setActive.mock.calls[0]).toEqual([true]);
+        });
+      });
+    });
+
+    describe("tab", () => {
+      [false, true].map(tab => {
+        it(`should ${tab ? "" : "not "}be tab`, () => {
+          const node = makeNode({ tab });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("is-tab")).toBe(tab);
         });
       });
     });

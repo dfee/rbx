@@ -55,11 +55,11 @@ describe(`${COMPONENT_NAME} component`, () => {
       });
     });
 
-    describe("dropdownUp", () => {
-      validateBoolPropType(propTypes, "dropdownUp");
+    describe("expanded", () => {
+      validateBoolPropType(propTypes, "expanded");
 
-      [false, true].map(dropdownUp => {
-        testPropForwarding("dropdownUp", dropdownUp);
+      [false, true].map(expanded => {
+        testPropForwarding("expanded", expanded);
       });
     });
 
@@ -89,6 +89,22 @@ describe(`${COMPONENT_NAME} component`, () => {
 
     describe("ref", () => {
       testPropForwarding("ref", React.createRef(), "innerRef");
+    });
+
+    describe("tab", () => {
+      validateBoolPropType(propTypes, "tab");
+
+      [false, true].map(tab => {
+        testPropForwarding("tab", tab);
+      });
+    });
+
+    describe("up", () => {
+      validateBoolPropType(propTypes, "up");
+
+      [false, true].map(up => {
+        testPropForwarding("up", up);
+      });
     });
   });
 });

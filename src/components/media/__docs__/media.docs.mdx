@@ -1,0 +1,267 @@
+---
+name: Media
+menu: Components
+route: /components/media
+---
+
+import { faHeart, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Level } from "src/components";
+import {
+  Button,
+  Checkbox,
+  Content,
+  Control,
+  Delete,
+  Field,
+  Icon,
+  Image,
+  Label,
+  Textarea
+} from "src/elements";
+import { Media } from "../media";
+import { MEDIA_ITEM_DEFAULTS } from "../media-item";
+
+# Media
+
+The famous **media object** prevalent in social media interfaces, but useful in any context
+
+The example below adds a `1px` border to each `<Media.Item>` to depict the item's placement.
+
+<Playground>
+  <Media>
+    <Media.Item align="left" style={{ border: "1px solid black" }}>
+      <code>left</code>
+    </Media.Item>
+    <Media.Item align="content" style={{ border: "1px solid black" }}>
+      <code>content</code>
+    </Media.Item>
+    <Media.Item align="right" style={{ border: "1px solid black" }}>
+      <code>right</code>
+    </Media.Item>
+  </Media>
+</Playground>
+
+<Playground>
+  <Media>
+    <Media.Item as="figure" align="left">
+      <Image.Container as="p" size={64}>
+        <Image
+          alt="64x64"
+          src="https://bulma.io/images/placeholders/128x128.png"
+        />
+      </Image.Container>
+    </Media.Item>
+    <Media.Item align="content">
+      <Content>
+        <p>
+          <strong>John Smith</strong> <small>@johnsmith</small>{" "}
+          <small>31m</small>
+          <br />
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare
+          magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa
+          sem. Etiam finibus odio quis feugiat facilisis.
+        </p>
+      </Content>
+      <Level breakpoint="mobile">
+        <Level.Item align="left">
+          <Level.Item as="a">
+            <Icon size="small">
+              <FontAwesomeIcon icon={faReply} />
+            </Icon>
+          </Level.Item>
+          <Level.Item as="a">
+            <Icon size="small">
+              <FontAwesomeIcon icon={faRetweet} />
+            </Icon>
+          </Level.Item>
+          <Level.Item as="a">
+            <Icon size="small">
+              <FontAwesomeIcon icon={faHeart} />
+            </Icon>
+          </Level.Item>
+        </Level.Item>
+      </Level>
+    </Media.Item>
+    <Media.Item align="right">
+      <Delete />
+    </Media.Item>
+  </Media>
+</Playground>
+
+You can include _any_ other **rbx** component, like `<Input>`s, `<Textarea>`s, `<Icon>`s, `<Button>`s ... or even a `<Navbar>`.
+
+<Playground>
+  <Media>
+    <Media.Item as="figure" align="left">
+      <Image.Container as="p" size={64}>
+        <Image src="https://bulma.io/images/placeholders/128x128.png" />
+      </Image.Container>
+    </Media.Item>
+    <Media.Item align="content">
+      <Field>
+        <Control>
+          <Textarea placeholder="Add a comment..." />
+        </Control>
+      </Field>
+      <Level>
+        <Level.Item align="left">
+          <Level.Item>
+            <Button color="info" type="submit">
+              Submit
+            </Button>
+          </Level.Item>
+        </Level.Item>
+        <Level.Item align="right">
+          <Level.Item>
+            <Label>
+              <Checkbox /> Press enter to submit
+            </Label>
+          </Level.Item>
+        </Level.Item>
+      </Level>
+    </Media.Item>
+  </Media>
+</Playground>
+
+### Nesting
+
+You can nest `<Media>` objects up to 3 levels deep (without extending Bulma's SASS).
+
+<Playground>
+  <Media as="article">
+    <Media.Item align="left">
+      <Image.Container as="p" size={64}>
+        <Image src="https://bulma.io/images/placeholders/128x128.png" />
+      </Image.Container>
+    </Media.Item>
+    <Media.Item align="content">
+      <Content>
+        <p>
+          <strong>Barbara Middleton</strong>
+          <br />
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+          porta eros lacus, nec ultricies elit blandit non. Suspendisse
+          pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus
+          turpis.
+          <br />
+          <small>
+            <a href="#like">Like</a> · <a href="#reply">Reply</a> · 3 hrs
+          </small>
+        </p>
+      </Content>
+
+      <Media>
+        <Media.Item align="left">
+          <Image.Container as="p" size={48}>
+            <Image src="https://bulma.io/images/placeholders/128x128.png" />
+          </Image.Container>
+        </Media.Item>
+        <Media.Item align="content">
+          <Content>
+            <p>
+              <strong>Sean Brown</strong>
+              <br />
+              Donec sollicitudin urna eget eros malesuada sagittis.
+              Pellentesque habitant morbi tristique senectus et netus et
+              malesuada fames ac turpis egestas. Aliquam blandit nisl a
+              nulla sagittis, a lobortis leo feugiat.
+              <br />
+              <small>
+                <a href="#like">Like</a> · <a href="#reply">Reply</a> · 2
+                hrs
+              </small>
+            </p>
+          </Content>
+          <Media>
+            Vivamus quis semper metus, non tincidunt dolor. Vivamus in mi eu
+            lorem cursus ullamcorper sit amet nec massa.
+          </Media>
+          <Media>
+            Morbi vitae diam et purus tincidunt porttitor vel vitae augue.
+            Praesent malesuada metus sed pharetra euismod. Cras tellus odio,
+            tincidunt iaculis diam non, porta aliquet tortor.
+          </Media>
+        </Media.Item>
+      </Media>
+
+      <Media>
+        <Media.Item align="left">
+          <Image.Container as="p" size={48}>
+            <Image src="https://bulma.io/images/placeholders/96x96.png" />
+          </Image.Container>
+        </Media.Item>
+        <Media.Item align="content">
+          <Content>
+            <p>
+              <strong>Kayli Eunice </strong>
+              <br />
+              Sed convallis scelerisque mauris, non pulvinar nunc mattis
+              vel. Maecenas varius felis sit amet magna vestibulum euismod
+              malesuada cursus libero. Vestibulum ante ipsum primis in
+              faucibus orci luctus et ultrices posuere cubilia Curae;
+              Phasellus lacinia non nisl id feugiat.
+              <br />
+              <small>
+                <a href="#like">Like</a> · <a href="#reply">Reply</a> · 2
+                hrs
+              </small>
+            </p>
+          </Content>
+        </Media.Item>
+      </Media>
+    </Media.Item>
+
+  </Media>
+
+  <Media as="article">
+    <Media.Item align="left">
+      <Image.Container as="p" size={64}>
+        <Image src="https://bulma.io/images/placeholders/128x128.png" />
+      </Image.Container>
+    </Media.Item>
+    <Media.Item align="content">
+      <Field>
+        <Control as="p">
+          <Textarea placeholder="Add a comment..." />
+        </Control>
+      </Field>
+      <Field>
+        <Control as="p">
+          <Button>Post comment</Button>
+        </Control>
+      </Field>
+    </Media.Item>
+  </Media>
+</Playground>
+
+## Media
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Media.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Media} componentName="Media" />
+
+## Media.Item
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "change the position of the item inside the media container",
+      typeName: "string",
+      typeTip: mapEnumerable(MEDIA_ITEM_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Media.Item.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Media.Item} componentName="Media.Item" />

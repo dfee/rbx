@@ -157,22 +157,22 @@ describe(`${COMPONENT_NAME} component`, () => {
       );
     });
 
-    describe("dropdownUp", () => {
-      [false, true].map(dropdownUp => {
-        it(`should ${dropdownUp ? "" : "not "}have dropdown-up`, () => {
-          const node = makeNode({ dropdownUp });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass("has-dropdown-up")).toBe(dropdownUp);
-        });
-      });
-    });
-
     describe("hoverable", () => {
       [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = makeNode({ hoverable });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
+        });
+      });
+    });
+
+    describe("up", () => {
+      [false, true].map(up => {
+        it(`should ${up ? "" : "not "}have dropdown-up`, () => {
+          const node = makeNode({ up });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("has-dropdown-up")).toBe(up);
         });
       });
     });

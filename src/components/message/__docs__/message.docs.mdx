@@ -1,0 +1,159 @@
+---
+name: Message
+menu: Components
+route: /components/message
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Delete } from "src/elements";
+import { Message, MESSAGE_DEFAULTS } from "../message";
+
+# Message
+
+Colored **message** blocks, to emphasize part of your page.
+
+<Playground>
+  <Message>
+    <Message.Header>
+      <p>Hello world</p>
+      <Delete as="button" />
+    </Message.Header>
+    <Message.Body>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+      <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec
+      nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
+      diam, et dictum <a href="#felis">felis venenatis</a> efficitur. Aenean ac{" "}
+      <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
+      sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a
+      neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+    </Message.Body>
+  </Message>
+</Playground>
+
+### Colors
+
+Use the `color` prop on `<Message>` to set the color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Message color={color}>
+        <Message.Header>
+          <p>{color} message</p>
+          <Delete as="button" />
+        </Message.Header>
+        <Message.Body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+          <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta
+          nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida
+          purus diam, et dictum <a href="#felis">felis venenatis</a> efficitur.
+          Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales,
+          arcu et sollicitudin porttitor, tortor urna tempor ligula, id
+          porttitor mi magna a neque. Donec dui urna, vehicula et sem eget,
+          facilisis sodales sem.
+        </Message.Body>
+      </Message>
+    ))
+  }
+</Playground>
+
+### Message body only
+
+Omit the `<Message.Header>` to get a simpler `<Message>`.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Message color={color}>
+        <Message.Body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+          <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta
+          nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida
+          purus diam, et dictum <a href="#felis">felis venenatis</a> efficitur.
+          Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales,
+          arcu et sollicitudin porttitor, tortor urna tempor ligula, id
+          porttitor mi magna a neque. Donec dui urna, vehicula et sem eget,
+          facilisis sodales sem.
+        </Message.Body>
+      </Message>
+    ))
+  }
+</Playground>
+
+### Sizes
+
+Use the `size` prop on `<Message>` to set the size.
+
+<Playground>
+  {() => {
+    const sizes = MESSAGE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size }) => (
+      <Message size={size} key={name}>
+        <Message.Header>
+          <p>{name} message</p>
+          <Delete as="button" size={size} />
+        </Message.Header>
+        <Message.Body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+          <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta
+          nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida
+          purus diam, et dictum <a href="#felis">felis venenatis</a> efficitur.
+          Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales,
+          arcu et sollicitudin porttitor, tortor urna tempor ligula, id
+          porttitor mi magna a neque. Donec dui urna, vehicula et sem eget,
+          facilisis sodales sem.
+        </Message.Body>
+      </Message>
+    ));
+
+}}
+
+</Playground>
+
+## Message
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Message.defaultProps.as),
+    color: {
+      description: "set the message's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    ref: refDoc,
+    size: {
+      description: "set the message's size",
+      typeName: "string",
+      typeTip: mapEnumerable(MESSAGE_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Message} componentName="Message" />
+
+## Message.Body
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Message.Body.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Message.Body} componentName="Message.Body" />
+
+## Message.Header
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Message.Header.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Message.Header} componentName="Message.Header" />

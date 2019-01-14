@@ -112,27 +112,5 @@ describe(`${COMPONENT_NAME} component`, () => {
         expect(wrapper.prop("role")).toEqual("button");
       });
     });
-
-    describe("style", () => {
-      validatePropType(propTypes, "style", [
-        { value: {}, valid: true, descriptor: "obj" },
-        { value: "string", valid: false },
-      ]);
-
-      it("should preserve custom style", () => {
-        const node = makeNode({ style: { margin: "10px" } });
-        const wrapper = makeShallowWrapperInNavbarContextConsumer(node);
-        expect(wrapper.prop("style")).toHaveProperty("margin", "10px");
-        expect(wrapper.prop("style")).toHaveProperty("outline", "none");
-      });
-    });
-
-    describe("tabIndex", () => {
-      it("should have tabIndex", () => {
-        const node = makeNode({});
-        const wrapper = makeShallowWrapperInNavbarContextConsumer(node);
-        expect(wrapper.prop("tabIndex")).toEqual(0);
-      });
-    });
   });
 });

@@ -1,0 +1,105 @@
+---
+name: Menu
+menu: Components
+route: /components/menu
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Menu } from "../menu";
+
+# Menu
+
+A simple **menu**, for any type of vertical navigation
+
+<Playground>
+  <Menu>
+    <Menu.Label>General</Menu.Label>
+    <Menu.List>
+      <Menu.List.Item>Dashboard</Menu.List.Item>
+      <Menu.List.Item>Customer</Menu.List.Item>
+    </Menu.List>
+
+    <Menu.Label>Administration</Menu.Label>
+    <Menu.List>
+      <Menu.List.Item>Team Settings</Menu.List.Item>
+      <Menu.List.Item
+        active
+        menu={
+          <Menu.List>
+            <Menu.List.Item>Members</Menu.List.Item>
+            <Menu.List.Item active>Plugins</Menu.List.Item>
+            <Menu.List.Item>Add a member</Menu.List.Item>
+          </Menu.List>
+        }
+      >
+        Manage Your Teeam
+      </Menu.List.Item>
+      <Menu.List.Item>Invitations</Menu.List.Item>
+      <Menu.List.Item>Cloud Storage Environment Settings</Menu.List.Item>
+      <Menu.List.Item>Authentication</Menu.List.Item>
+    </Menu.List>
+
+    <Menu.Label>Transactions</Menu.Label>
+    <Menu.List>
+      <Menu.List.Item>Payments</Menu.List.Item>
+      <Menu.List.Item>Transfers</Menu.List.Item>
+      <Menu.List.Item>Balance</Menu.List.Item>
+    </Menu.List>
+
+  </Menu>
+</Playground>
+
+## Menu
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Menu.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Menu} componentName="Menu" />
+
+## Menu.Label
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Menu.Label.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Menu.Label} componentName="Menu.Label" />
+
+## Menu.List
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Menu.List.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Menu.List} componentName="Menu.List" />
+
+## Menu.List.Item
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "mark the item as currently active",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Menu.List.Item.defaultProps.as),
+    menu: {
+      description: "add a sub-menu to the item",
+      typeName: "<Menu.List>"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Menu.List.Item} componentName="Menu.List.Item" />

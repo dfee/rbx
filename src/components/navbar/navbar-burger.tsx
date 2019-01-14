@@ -7,14 +7,12 @@ import { NavbarContext, NavbarContextValue } from "./navbar-context";
 
 export type NavbarBurgerModifierProps = Partial<{
   onClick: React.MouseEventHandler;
-  style: React.CSSProperties;
 }>;
 
 export type NavbarBurgerProps = HelpersProps & NavbarBurgerModifierProps;
 
 const propTypes = {
   onClick: PropTypes.func,
-  style: PropTypes.object,
 };
 
 const onClickHandler = (
@@ -29,7 +27,7 @@ const onClickHandler = (
 
 export const NavbarBurger = Object.assign(
   forwardRefAs<NavbarBurgerProps, "div">(
-    ({ className, style, onClick, ...rest }, ref) => (
+    ({ className, onClick, ...rest }, ref) => (
       <NavbarContext.Consumer>
         {ctx => (
           <Generic
@@ -41,8 +39,6 @@ export const NavbarBurger = Object.assign(
             onClick={onClickHandler(onClick, ctx)}
             ref={ref}
             role="button"
-            style={{ outline: "none", ...style }}
-            tabIndex={0}
             {...rest}
           >
             <span />

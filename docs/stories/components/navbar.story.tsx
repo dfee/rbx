@@ -34,9 +34,9 @@ export const knobs = {
     ),
   item: {
     active: (title: string = "Active") => boolean(title, false),
-    dropdownUp: (title: string = "Dropdown up") => boolean(title, false),
     hoverable: (title: string = "Hoverable") => boolean(title, false),
     managed: (title: string = "Managed") => boolean(title, false),
+    up: (title: string = "Dropup") => boolean(title, false),
   },
   link: {
     arrowless: (title: string = "Arrowless") => boolean(title, false),
@@ -61,9 +61,9 @@ storiesOf("Components/Navbar", module)
 
     const itemProps = {
       active: knobs.item.active("Navbar > Menu > Item: active (when active)"),
-      dropdownUp: knobs.item.dropdownUp("Navbar > Menu > Item: dropdownUp"),
       hoverable: knobs.item.hoverable("Navbar > Menu > Item: hoverable"),
       managed: knobs.item.active("Navbar > Menu > Item: managed"),
+      up: knobs.item.up("Navbar > Menu > Item: dropup"),
     };
     const linkProps = {
       arrowless: knobs.link.arrowless("Navbar > Menu > Item > Link: arrowless"),

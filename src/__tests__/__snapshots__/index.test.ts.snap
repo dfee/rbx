@@ -105,6 +105,9 @@ Object {
         "defaultProps": Object {
           "as": "div",
         },
+        "propTypes": Object {
+          "align": [Function],
+        },
         "render": [Function],
       },
       "defaultProps": Object {
@@ -563,9 +566,6 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
-    "propTypes": Object {
-      "hoverable": [Function],
-    },
     "render": [Function],
   },
   "Loader": Object {
@@ -772,7 +772,6 @@ Object {
       },
       "propTypes": Object {
         "onClick": [Function],
-        "style": [Function],
       },
       "render": [Function],
     },
@@ -828,10 +827,12 @@ Object {
       "propTypes": Object {
         "active": [Function],
         "dropdown": [Function],
-        "dropdownUp": [Function],
+        "expanded": [Function],
         "hoverable": [Function],
         "managed": [Function],
         "onClick": [Function],
+        "tab": [Function],
+        "up": [Function],
       },
       "render": [Function],
     },
@@ -1046,6 +1047,30 @@ Object {
     },
     "render": [Function],
   },
+  "Tab": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "Group": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "div",
+      },
+      "propTypes": Object {
+        "align": [Function],
+        "fullwidth": [Function],
+        "size": [Function],
+        "type": [Function],
+      },
+      "render": [Function],
+    },
+    "defaultProps": Object {
+      "as": "a",
+    },
+    "propTypes": Object {
+      "active": [Function],
+      "style": [Function],
+    },
+    "render": [Function],
+  },
   "Table": Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
@@ -1060,7 +1085,6 @@ Object {
     },
     "render": [Function],
   },
-  "Tabs": undefined,
   "Tag": Object {
     "$$typeof": Symbol(react.forward_ref),
     "Group": Object {
