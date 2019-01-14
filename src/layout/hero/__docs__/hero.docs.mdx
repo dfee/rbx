@@ -16,7 +16,7 @@ import {
   refDoc
 } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Navbar, Tabs } from "src/components";
+import { Navbar, Tab } from "src/components";
 import { Block, Button, Container, Icon, Title } from "src/elements";
 import { Hero, HERO_DEFAULTS } from "../hero";
 
@@ -219,14 +219,14 @@ You can make a `<Hero>` that covers the whole height of the viewport by splittin
       {/* Hero footer: will stick at the bottom */}
       <Hero.Foot>
         <Container>
-          <Tabs as="nav" type="boxed" fullwidth>
-            <Tabs.Tab active>Overview</Tabs.Tab>
-            <Tabs.Tab>Modifiers</Tabs.Tab>
-            <Tabs.Tab>Grid</Tabs.Tab>
-            <Tabs.Tab>Elements</Tabs.Tab>
-            <Tabs.Tab>Components</Tabs.Tab>
-            <Tabs.Tab>Layout</Tabs.Tab>
-          </Tabs>
+          <Tab.Group as="nav" type="boxed" fullwidth>
+            <Tab active>Overview</Tab>
+            <Tab>Modifiers</Tab>
+            <Tab>Grid</Tab>
+            <Tab>Elements</Tab>
+            <Tab>Components</Tab>
+            <Tab>Layout</Tab>
+          </Tab.Group>
         </Container>
       </Hero.Foot>
 
