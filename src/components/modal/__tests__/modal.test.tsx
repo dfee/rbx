@@ -87,15 +87,6 @@ describe(`${COMPONENT_NAME} component`, () => {
       testPropForwarding("containerClassName", "foo");
     });
 
-    describe("onClose", () => {
-      validatePropType(propTypes, "onClose", [
-        { value: () => undefined, valid: true, descriptor: "func" },
-        { value: "string", valid: false },
-      ]);
-
-      testPropForwarding("onClose", () => undefined);
-    });
-
     describe("document", () => {
       validatePropType(propTypes, "document", [
         { value: document, valid: true, descriptor: "obj" },
@@ -103,6 +94,15 @@ describe(`${COMPONENT_NAME} component`, () => {
       ]);
 
       testPropForwarding("document", document);
+    });
+
+    describe("onClose", () => {
+      validatePropType(propTypes, "onClose", [
+        { value: () => undefined, valid: true, descriptor: "func" },
+        { value: "string", valid: false },
+      ]);
+
+      testPropForwarding("onClose", () => undefined);
     });
 
     describe("ref", () => {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { TabGroup } from "./tab-group";
 
 export type TabModifierProps = Partial<{
   active: boolean;
@@ -25,5 +26,8 @@ export const Tab = Object.assign(
     ),
     { as: "a" },
   ),
-  { propTypes },
+  {
+    Group: TabGroup,
+    propTypes,
+  },
 );

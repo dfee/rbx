@@ -137,7 +137,6 @@ Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "as": "div",
-        "multiline": true,
       },
       "propTypes": Object {
         "breakpoint": [Function],
@@ -150,6 +149,7 @@ Object {
         "multiline": [Function],
         "tablet": [Function],
         "touch": [Function],
+        "vcentered": [Function],
         "widescreen": [Function],
       },
       "render": [Function],
@@ -869,6 +869,7 @@ Object {
     "propTypes": Object {
       "active": [Function],
       "color": [Function],
+      "document": [Function],
       "fixed": [Function],
       "managed": [Function],
       "transparent": [Function],
@@ -1059,30 +1060,7 @@ Object {
     },
     "render": [Function],
   },
-  "Tabs": Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "Tab": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "a",
-      },
-      "propTypes": Object {
-        "active": [Function],
-        "style": [Function],
-      },
-      "render": [Function],
-    },
-    "defaultProps": Object {
-      "as": "div",
-    },
-    "propTypes": Object {
-      "align": [Function],
-      "fullwidth": [Function],
-      "size": [Function],
-      "type": [Function],
-    },
-    "render": [Function],
-  },
+  "Tabs": undefined,
   "Tag": Object {
     "$$typeof": Symbol(react.forward_ref),
     "Group": Object {

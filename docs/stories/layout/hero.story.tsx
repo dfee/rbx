@@ -4,7 +4,7 @@ import { boolean, select } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
-import { Navbar, Tabs } from "src/components";
+import { Navbar, Tab } from "src/components";
 import { Button, Container, Icon, Title } from "src/elements";
 import { Hero } from "src/layout";
 import { HERO_DEFAULTS } from "src/layout/hero/hero";
@@ -90,14 +90,14 @@ storiesOf("Layout/Hero", module)
       {/* Hero footer: will stick at the bottom */}
       <Hero.Foot>
         <Container>
-          <Tabs as="nav" type="boxed" fullwidth>
-            <Tabs.Tab active>Overview</Tabs.Tab>
-            <Tabs.Tab>Modifiers</Tabs.Tab>
-            <Tabs.Tab>Grid</Tabs.Tab>
-            <Tabs.Tab>Elements</Tabs.Tab>
-            <Tabs.Tab>Components</Tabs.Tab>
-            <Tabs.Tab>Layout</Tabs.Tab>
-          </Tabs>
+          <Tab.Group as="nav" type="boxed" fullwidth>
+            <Tab active>Overview</Tab>
+            <Tab>Modifiers</Tab>
+            <Tab>Grid</Tab>
+            <Tab>Elements</Tab>
+            <Tab>Components</Tab>
+            <Tab>Layout</Tab>
+          </Tab.Group>
         </Container>
       </Hero.Foot>
     </Hero>

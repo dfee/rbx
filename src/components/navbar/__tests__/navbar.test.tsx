@@ -22,6 +22,7 @@ import {
   makeNodeFactory,
   makeTestPropForwarding,
   validateBoolPropType,
+  validatePropType,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
@@ -75,6 +76,15 @@ describe(`${COMPONENT_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         testPropForwarding("color", color);
       });
+    });
+
+    describe("document", () => {
+      validatePropType(propTypes, "document", [
+        { value: document, valid: true, descriptor: "obj" },
+        { value: "string", valid: false },
+      ]);
+
+      testPropForwarding("document", document);
     });
 
     describe("fixed", () => {

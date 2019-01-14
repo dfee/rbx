@@ -1,0 +1,66 @@
+---
+name: Section
+menu: Layout
+route: /layout/section
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block, Container, Content, Title } from "src/elements";
+import { Section, SECTION_DEFAULTS } from "../section";
+
+# Section
+
+The `<Section>` component is a simple container to divide your page.
+
+<Playground>
+  <Container>
+    <Title>Section</Title>
+    <Title as="h2" subtitle>
+      A simple container to divide your page into <strong>sections</strong>,
+      like the one you are currently reading
+    </Title>
+  </Container>
+</Playground>
+
+### Sizing
+
+Use the `size` prop to resize the `<Section>`.
+
+<Playground>
+  {() => {
+    const sizes = SECTION_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(0, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({size, name}) => (
+      <Block>
+        <Section backgroundColor="primary" size={size}>
+          <Content backgroundColor="grey-light">
+            <code>{name}</code> size <code>{'<Section>'}</code> with a
+            grey child <code>{'<Content>'}</code> to depict padding.
+          </Content>
+        </Section>
+      </Block>
+    ));
+
+}}
+
+</Playground>
+
+## Section
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Section.defaultProps.as),
+    ref: refDoc,
+    size: {
+      description: "change the vertical spacing",
+      typeName: "string",
+      typeTip: mapEnumerable(SECTION_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Section} componentName="Section" />

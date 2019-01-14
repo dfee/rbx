@@ -19,6 +19,7 @@ export type NavbarProps = Omit<NavbarContainerProps, "as" | "innerRef">;
 const propTypes = {
   active: PropTypes.bool,
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  document: PropTypes.object,
   fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   managed: PropTypes.bool,
   transparent: PropTypes.bool,

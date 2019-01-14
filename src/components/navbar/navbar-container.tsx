@@ -27,6 +27,7 @@ export type NavbarContainerModifierProps = Partial<{
   active: boolean;
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   color: Variables["colors"];
+  document: Document;
   fixed: NavbarVariables["fixedAlignments"];
   innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
   managed: boolean;
@@ -57,7 +58,7 @@ export class NavbarContainer extends React.PureComponent<
   public componentWillUnmount() {
     if (canUseDOM()) {
       const { fixed } = this.props;
-      const html = document.querySelector("html");
+      const html = this.document.querySelector("html");
       /* istanbul ignore else: typeguard */
       if (html !== null) {
         html.classList.remove(`has-navbar-fixed-${fixed}`);
@@ -118,9 +119,13 @@ export class NavbarContainer extends React.PureComponent<
     }
   }
 
+  private get document() {
+    return this.props.document !== undefined ? this.props.document : document;
+  }
+
   private manageHtmlAttributes() {
     if (canUseDOM()) {
-      const html = document.querySelector("html");
+      const html = this.document.querySelector("html");
       /* istanbul ignore else: typeguard */
       if (html !== null) {
         html.classList.remove("has-navbar-fixed-top");

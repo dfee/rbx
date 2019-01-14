@@ -1,0 +1,294 @@
+---
+name: Hero
+menu: Layout
+route: /layout/hero
+---
+
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import {
+  AsProp,
+  Frame,
+  SimplePropsTable,
+  mapEnumerable,
+  refDoc
+} from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Navbar, Tabs } from "src/components";
+import { Block, Button, Container, Icon, Title } from "src/elements";
+import { Hero, HERO_DEFAULTS } from "../hero";
+
+# Hero
+
+The `<Hero>` component lets you add a **full width** banner to your webpage, which can optionally cover the full height of the page as well.
+
+The `<Hero>` must contain a child `<Hero.Body>` component, in which you can put your content.
+
+For a full height hero, you must also use the `<Hero.Head>` and `<Hero.Foot>` components, along with the `<Hero.Body>` component.
+
+<Playground>
+  <Hero>
+    <Hero.Body>
+      <Container>
+        <Title>Hero title</Title>
+        <Title as="h2" subtitle>
+          Hero Subtitle
+        </Title>
+      </Container>
+    </Hero.Body>
+  </Hero>
+</Playground>
+
+### Colors
+
+Use the `color` prop to specify the color of the `<Hero>`.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Block key={color}>
+        <Hero color={color}>
+          <Hero.Body>
+            <Container>
+              <Title>{color} hero's title</Title>
+              <Title as="h2" subtitle>
+                {color} hero's subtitle
+              </Title>
+            </Container>
+          </Hero.Body>
+        </Hero>
+      </Block>
+    ))
+  }
+</Playground>
+
+### Gradients
+
+Use the `gradient` prop to generate a subtle gradient.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map(color => (
+      <Block key={color}>
+        <Hero gradient color={color}>
+          <Hero.Body>
+            <Container>
+              <Title>{color} hero's title with gradient</Title>
+              <Title as="h2" subtitle>
+                {color} hero's subtitle with gradient
+              </Title>
+            </Container>
+          </Hero.Body>
+        </Hero>
+      </Block>
+    ))
+  }
+</Playground>
+
+### Sizes
+
+Use the `size` prop to make more imposing banners.
+
+<Playground>
+  {() => {
+    const sizes = HERO_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ size, name }) => (
+      <Block key={name}>
+        <Hero color="primary" size={size}>
+          <Hero.Body>
+            <Container>
+              <Title>{name} hero's title</Title>
+              <Title as="h2" subtitle>
+                {name} hero's subtitle
+              </Title>
+            </Container>
+          </Hero.Body>
+        </Hero>
+      </Block>
+    ));
+
+}}
+
+</Playground>
+
+The last `size` prop value is: `fullheight-with-navbar`.
+It's useful when you've got a `<Navbar>` with the `fixed` prop set.
+The `<Hero>` will occupy the full viewport height minus the `<Navbar>`'s height.
+
+<Playground>
+  <Frame>
+    {({ document }) => (
+      <div style={{ height: "500px" }}>
+        <Navbar fixed="top" color="warning" document={document}>
+          <Navbar.Brand>
+            <Navbar.Item href="#">
+              <img
+                src="https://bulma.io/images/bulma-logo.png"
+                alt=""
+                role="presentation"
+                width="112"
+                height="28"
+              />
+            </Navbar.Item>
+            <Navbar.Burger />
+          </Navbar.Brand>
+
+          <Navbar.Menu>
+            <Navbar.Segment align="start">
+              <Navbar.Item>Home</Navbar.Item>
+              <Navbar.Item>Documentation</Navbar.Item>
+            </Navbar.Segment>
+
+            <Navbar.Segment align="end">
+              <Navbar.Item>
+                <Button.Group>
+                  <Button color="dark">Github</Button>
+                  <Button color="link">Download</Button>
+                </Button.Group>
+              </Navbar.Item>
+            </Navbar.Segment>
+          </Navbar.Menu>
+        </Navbar>
+
+        <Hero color="primary" size="fullheight-with-navbar">
+          <Hero.Body>
+            <Container>
+              <Title>Fullheight hero with navbar</Title>
+            </Container>
+          </Hero.Body>
+        </Hero>
+      </div>
+    )}
+
+  </Frame>
+</Playground>
+
+### Full height hero in three parts
+
+You can make a `<Hero>` that covers the whole height of the viewport by splitting it into three parts, using: `<Hero.Head>`, `<Hero.Body>` and `<Hero.Foot>`.
+
+<Playground>
+  <Frame style={{ height: "500px" }}>
+    <Hero size="fullheight" color="primary">
+      {/* Hero head: will stick at the top */}
+      <Hero.Head>
+        <Navbar>
+          <Container>
+            <Navbar.Brand>
+              <Navbar.Item>
+                <img
+                  src="https://bulma.io/images/bulma-type-white.png"
+                  alt="Logo"
+                />
+              </Navbar.Item>
+              <Navbar.Burger />
+            </Navbar.Brand>
+            <Navbar.Menu>
+              <Navbar.Segment align="end">
+                <Navbar.Item active>Home</Navbar.Item>
+                <Navbar.Item>Examples</Navbar.Item>
+                <Navbar.Item>Documentation</Navbar.Item>
+                <Navbar.Item as="span">
+                  <Button color="primary" inverted>
+                    <Icon>
+                      <FontAwesomeIcon icon={faGithub} />
+                    </Icon>
+                    <span>Download</span>
+                  </Button>
+                </Navbar.Item>
+              </Navbar.Segment>
+            </Navbar.Menu>
+          </Container>
+        </Navbar>
+      </Hero.Head>
+
+      {/* Hero content: will be in the middle */}
+      <Hero.Body>
+        <Container textAlign="centered">
+          <Title>Title</Title>
+          <Title as="h2" subtitle>
+            Subtitle
+          </Title>
+        </Container>
+      </Hero.Body>
+
+      {/* Hero footer: will stick at the bottom */}
+      <Hero.Foot>
+        <Container>
+          <Tabs as="nav" type="boxed" fullwidth>
+            <Tabs.Tab active>Overview</Tabs.Tab>
+            <Tabs.Tab>Modifiers</Tabs.Tab>
+            <Tabs.Tab>Grid</Tabs.Tab>
+            <Tabs.Tab>Elements</Tabs.Tab>
+            <Tabs.Tab>Components</Tabs.Tab>
+            <Tabs.Tab>Layout</Tabs.Tab>
+          </Tabs>
+        </Container>
+      </Hero.Foot>
+
+    </Hero>
+
+  </Frame>
+</Playground>
+
+## Hero
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Hero.defaultProps.as),
+    color: {
+      description: "set the hero's color",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors)
+    },
+    gradient: {
+      description: "apply a standard gradient for the color scheme",
+      typeName: "boolean"
+    },
+    ref: refDoc,
+    size: {
+      description: "set the hero's size",
+      typeName: "string",
+      typeTip: mapEnumerable(HERO_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Hero} componentName="Hero" />
+
+## Hero.Body
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Hero.Body.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Hero.Body} componentName="Hero.Body" />
+
+## Hero.Foot
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Hero.Foot.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Hero.Foot} componentName="Hero.Foot" />
+
+## Hero.Head
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Hero.Head.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Hero.Head} componentName="Hero.Head" />

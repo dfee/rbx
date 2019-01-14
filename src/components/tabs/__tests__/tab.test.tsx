@@ -6,6 +6,7 @@ import {
   ThemeContextValue,
 } from "src/base/theme";
 import { Tab } from "src/components/tabs/tab";
+import { TabGroup } from "src/components/tabs/tab-group";
 
 import {
   hasProperties,
@@ -43,6 +44,7 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
+    Group: TabGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

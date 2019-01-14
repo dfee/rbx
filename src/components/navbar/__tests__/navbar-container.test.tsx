@@ -1,4 +1,5 @@
 import * as Enzyme from "enzyme";
+import { JSDOM } from "jsdom";
 import * as React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
@@ -111,6 +112,31 @@ describe(`${COMPONENT_NAME} component`, () => {
           const node = makeNode({ color });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
+        });
+      });
+    });
+
+    describe("document", () => {
+      ["global", "provided"].map(docOpt => {
+        it(`should use the ${docOpt} document`, () => {
+          const ref = React.createRef<HTMLElement>();
+          const doc =
+            docOpt === "global" ? window.document : new JSDOM().window.document;
+          const node = makeNode({ document: doc, innerRef: ref, fixed: "top" });
+          withEnzymeMount({ node }, () => {
+            if (docOpt === "provided") {
+              // make sure we're doing this right.
+              expect(doc).not.toBe(window.document);
+            }
+            if (ref.current === null) {
+              throw new Error("ref should be set");
+            }
+            const docHtml = doc.querySelector("html");
+            if (docHtml === null) {
+              throw new Error("doc html should exist");
+            }
+            expect(docHtml.className).toBe("has-navbar-fixed-top");
+          });
         });
       });
     });

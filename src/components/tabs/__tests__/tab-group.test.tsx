@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { Tab } from "src/components/tabs/tab";
-import { Tabs, TABS_DEFAULTS } from "src/components/tabs/tabs";
+import { TAB_GROUP_DEFAULTS, TabGroup } from "src/components/tabs/tab-group";
 
 import {
   hasProperties,
@@ -13,8 +12,8 @@ import {
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
-const COMPONENT = Tabs;
-const COMPONENT_NAME = "Tabs";
+const COMPONENT = TabGroup;
+const COMPONENT_NAME = "TabGroup";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "tabs";
 
@@ -22,7 +21,6 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Tab,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
@@ -41,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      TABS_DEFAULTS.alignments.map(align => {
+      TAB_GROUP_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -76,7 +74,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      TABS_DEFAULTS.sizes.map(size => {
+      TAB_GROUP_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = makeNode({ size });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -88,7 +86,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("type", () => {
       validateStringOrNumberPropType(propTypes, "type");
 
-      TABS_DEFAULTS.types.map(isType => {
+      TAB_GROUP_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
           const node = makeNode({ type: isType });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);

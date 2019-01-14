@@ -11,7 +11,13 @@ import { HeroFoot } from "./hero-foot";
 import { HeroHead } from "./hero-head";
 
 export const HERO_DEFAULTS = {
-  sizes: tuple("medium", "large", "fullheight", "fullheight-with-navbar"),
+  sizes: tuple(
+    "small",
+    "medium",
+    "large",
+    "fullheight",
+    "fullheight-with-navbar",
+  ),
 };
 
 export interface HeroVariablesOverrides {}

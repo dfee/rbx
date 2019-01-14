@@ -49,7 +49,7 @@ export class ModalContainer extends React.PureComponent<ModalContainerProps> {
   }
 
   public render() {
-    const { active, containerClassName, ...rest } = this.props;
+    const { active, containerClassName, document, ...rest } = this.props;
 
     return this.el !== undefined && active === true
       ? ReactDOM.createPortal(

@@ -5,36 +5,35 @@ import React from "react";
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { Prefer } from "../../types";
 import { tuple } from "../../utils";
-import { Tab } from "./tab";
 
-export const TABS_DEFAULTS = {
+export const TAB_GROUP_DEFAULTS = {
   alignments: tuple("centered", "right"),
   sizes: tuple("small", "medium", "large"),
   types: tuple("boxed", "toggle", "toggle-rounded"),
 };
 
-export interface TabsVariablesOverrides {}
+export interface TabGroupVariablesOverrides {}
 
-export interface TabsVariablesDefaults {
-  alignments: (typeof TABS_DEFAULTS["alignments"])[number];
-  sizes: (typeof TABS_DEFAULTS["sizes"])[number];
-  types: (typeof TABS_DEFAULTS["types"])[number];
+export interface TabGroupVariablesDefaults {
+  alignments: (typeof TAB_GROUP_DEFAULTS["alignments"])[number];
+  sizes: (typeof TAB_GROUP_DEFAULTS["sizes"])[number];
+  types: (typeof TAB_GROUP_DEFAULTS["types"])[number];
 }
 
-export type TabsVariables = Prefer<
-  TabsVariablesOverrides,
-  TabsVariablesDefaults
+export type TabGroupVariables = Prefer<
+  TabGroupVariablesOverrides,
+  TabGroupVariablesDefaults
 >;
 
-export type TabsModifierProps = Partial<{
-  align: TabsVariables["alignments"];
+export type TabGroupModifierProps = Partial<{
+  align: TabGroupVariables["alignments"];
   fullwidth: boolean;
-  size: TabsVariables["sizes"];
+  size: TabGroupVariables["sizes"];
   /** * This is called style on Bulma documentation */
-  type: TabsVariables["types"]; // tslint:disable-line:no-reserved-keywords
+  type: TabGroupVariables["types"]; // tslint:disable-line:no-reserved-keywords
 }>;
 
-export type TabsProps = HelpersProps & TabsModifierProps;
+export type TabGroupProps = HelpersProps & TabGroupModifierProps;
 
 const propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -43,8 +42,8 @@ const propTypes = {
   type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-export const Tabs = Object.assign(
-  forwardRefAs<TabsProps, "div">(
+export const TabGroup = Object.assign(
+  forwardRefAs<TabGroupProps, "div">(
     ({ align, children, className, fullwidth, size, type, ...rest }, ref) => (
       <Generic
         className={classNames(
@@ -66,8 +65,5 @@ export const Tabs = Object.assign(
     ),
     { as: "div" },
   ),
-  {
-    Tab,
-    propTypes,
-  },
+  { propTypes },
 );
