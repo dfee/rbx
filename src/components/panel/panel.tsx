@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 import { PanelBlock } from "./panel-block";
 import { PanelHeading } from "./panel-heading";
 import { PanelIcon } from "./panel-icon";
-import { PanelTabs } from "./panel-tabs";
+import { PanelTab } from "./panel-tab";
 
 export type PanelProps = HelpersProps;
 
@@ -20,6 +20,6 @@ export const Panel = Object.assign(
     Block: PanelBlock,
     Heading: PanelHeading,
     Icon: PanelIcon,
-    Tabs: PanelTabs,
+    Tab: PanelTab,
   },
 );

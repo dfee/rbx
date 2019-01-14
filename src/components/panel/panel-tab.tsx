@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { PanelTabGroup } from "./panel-tab-group";
 
 export type PanelTabModifierProps = Partial<{
   active: boolean;
@@ -25,5 +26,8 @@ export const PanelTab = Object.assign(
     ),
     { as: "a" },
   ),
-  { propTypes },
+  {
+    Group: PanelTabGroup,
+    propTypes,
+  },
 );

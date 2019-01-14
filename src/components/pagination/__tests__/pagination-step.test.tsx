@@ -21,7 +21,7 @@ const DEFAULT_ELEMENT = "a";
 
 const makeNode = (props: Partial<PaginationStepProps>) => {
   const propsWithDefaults = {
-    direction: "next" as PaginationStepProps["direction"],
+    align: "next" as PaginationStepProps["align"],
     ...props,
   };
 
@@ -45,14 +45,14 @@ describe(`${COMPONENT_NAME} component`, () => {
   describe("props", () => {
     const { propTypes } = COMPONENT;
 
-    describe("direction", () => {
-      validateStringOrNumberPropType(propTypes, "direction");
+    describe("align", () => {
+      validateStringOrNumberPropType(propTypes, "align");
 
-      PAGINATION_STEP_DEFAULTS.directions.map(direction => {
-        it(`should be ${direction}`, () => {
-          const node = makeNode({ direction });
+      PAGINATION_STEP_DEFAULTS.alignments.map(align => {
+        it(`should be ${align}`, () => {
+          const node = makeNode({ align });
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`pagination-${direction}`)).toBe(true);
+          expect(wrapper.hasClass(`pagination-${align}`)).toBe(true);
         });
       });
     });

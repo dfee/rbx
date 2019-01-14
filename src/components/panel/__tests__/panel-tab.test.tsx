@@ -1,4 +1,5 @@
 import { PanelTab } from "src/components/panel/panel-tab";
+import { PanelTabGroup } from "src/components/panel/panel-tab-group";
 
 import {
   hasProperties,
@@ -18,6 +19,7 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
+    Group: PanelTabGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

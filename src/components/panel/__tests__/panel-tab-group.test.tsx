@@ -1,5 +1,4 @@
-import { PanelTab } from "src/components/panel/panel-tab";
-import { PanelTabs } from "src/components/panel/panel-tabs";
+import { PanelTabGroup } from "src/components/panel/panel-tab-group";
 
 import {
   hasProperties,
@@ -9,8 +8,8 @@ import {
   testThemeIntegration,
 } from "src/__tests__/testing";
 
-const COMPONENT = PanelTabs;
-const COMPONENT_NAME = "PanelTabs";
+const COMPONENT = PanelTabGroup;
+const COMPONENT_NAME = "PanelTabGroup";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "panel-tabs";
 
@@ -18,7 +17,6 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Tab: PanelTab,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

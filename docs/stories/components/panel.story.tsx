@@ -39,13 +39,13 @@ storiesOf("Components/Panel", module)
           </Icon>
         </Control>
       </Panel.Block>
-      <Panel.Tabs className="panel-tabs">
-        <Panel.Tabs.Tab active>all</Panel.Tabs.Tab>
-        <Panel.Tabs.Tab>public</Panel.Tabs.Tab>
-        <Panel.Tabs.Tab>private</Panel.Tabs.Tab>
-        <Panel.Tabs.Tab>sources</Panel.Tabs.Tab>
-        <Panel.Tabs.Tab>forks</Panel.Tabs.Tab>
-      </Panel.Tabs>
+      <Panel.Tab.Group className="panel-tabs">
+        <Panel.Tab active>all</Panel.Tab>
+        <Panel.Tab>public</Panel.Tab>
+        <Panel.Tab>private</Panel.Tab>
+        <Panel.Tab>sources</Panel.Tab>
+        <Panel.Tab>forks</Panel.Tab>
+      </Panel.Tab.Group>
       <Panel.Block as="a" active>
         <Panel.Icon>
           <FontAwesomeIcon icon={faBook} />

@@ -7,13 +7,13 @@ import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
 export const PAGINATION_STEP_DEFAULTS = {
-  directions: tuple("next", "previous"),
+  alignments: tuple("next", "previous"),
 };
 
 export interface PaginationStepVariablesOverrides {}
 
 export interface PaginationStepVariablesDefaults {
-  directions: (typeof PAGINATION_STEP_DEFAULTS["directions"])[number];
+  alignments: (typeof PAGINATION_STEP_DEFAULTS["alignments"])[number];
 }
 
 export type PaginationStepVariables = Prefer<
@@ -22,24 +22,20 @@ export type PaginationStepVariables = Prefer<
 >;
 
 export type PaginationStepModifierProps = {
-  direction: PaginationStepVariables["directions"];
+  align: PaginationStepVariables["alignments"];
 };
 
 export type PaginationStepProps = HelpersProps & PaginationStepModifierProps;
 
 const propTypes = {
-  direction: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    .isRequired,
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export const PaginationStep = Object.assign(
   forwardRefAs<PaginationStepProps, "a">(
-    ({ className, direction, ...rest }, ref) => (
+    ({ align, className, ...rest }, ref) => (
       <Generic
-        className={classNames(
-          { [`pagination-${direction}`]: direction },
-          className,
-        )}
+        className={classNames({ [`pagination-${align}`]: align }, className)}
         ref={ref}
         {...rest}
       />

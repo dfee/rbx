@@ -2,7 +2,7 @@ import { Panel } from "src/components/panel/panel";
 import { PanelBlock } from "src/components/panel/panel-block";
 import { PanelHeading } from "src/components/panel/panel-heading";
 import { PanelIcon } from "src/components/panel/panel-icon";
-import { PanelTabs } from "src/components/panel/panel-tabs";
+import { PanelTab } from "src/components/panel/panel-tab";
 
 import {
   hasProperties,
@@ -24,7 +24,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     Block: PanelBlock,
     Heading: PanelHeading,
     Icon: PanelIcon,
-    Tabs: PanelTabs,
+    Tab: PanelTab,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

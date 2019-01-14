@@ -1,0 +1,208 @@
+---
+name: Panel
+menu: Components
+route: /components/panel
+---
+
+import {
+  faBook,
+  faCodeBranch,
+  faSearch
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { Button, Checkbox, Control, Icon, Input } from "src/elements";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Panel } from "../panel";
+
+# Panel
+
+A composable **panel**, for compact controls
+
+<div className="content">
+  <p>
+    The <code>{"<Panel>"}</code> is container for several types:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Panel.Heading>"}</code> as the first child
+    </li>
+    <li>
+      <code>{"<Panel.Tabs>"}</code> for navigation
+    </li>
+    <li>
+      <code>{"<Panel.Block>"}</code> which can contain other elements, like:
+      <ul>
+        <li>
+          <code>{"<Control>"}</code>
+        </li>
+        <li>
+          <code>{"<Input>"}</code>
+        </li>
+        <li>
+          <code>{"<Button>"}</code>
+        </li>
+        <li>
+          <code>{"<Panel.Icon>"}</code>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    The <code>{"<Panel.Block>"}</code> can be an anchor tag <code>{"<a>"}</code>{" "}
+    or a label <code>{"<label>"}</code> with a checkbox inside.
+  </p>
+</div>
+
+<Playground>
+  <Panel>
+    <Panel.Heading>repositories</Panel.Heading>
+    <Panel.Block>
+      <Control iconLeft>
+        <Input size="small" type="text" placeholder="search" />
+        <Icon size="small" className="is-left">
+          <FontAwesomeIcon icon={faSearch} />
+        </Icon>
+      </Control>
+    </Panel.Block>
+    <Panel.Tab.Group className="panel-tabs">
+      <Panel.Tab active>all</Panel.Tab>
+      <Panel.Tab>public</Panel.Tab>
+      <Panel.Tab>private</Panel.Tab>
+      <Panel.Tab>sources</Panel.Tab>
+      <Panel.Tab>forks</Panel.Tab>
+    </Panel.Tab.Group>
+    <Panel.Block as="a" active>
+      <Panel.Icon>
+        <FontAwesomeIcon icon={faBook} />
+      </Panel.Icon>
+      bulma
+    </Panel.Block>
+    <Panel.Block>
+      <Panel.Icon>
+        <FontAwesomeIcon icon={faBook} />
+      </Panel.Icon>
+      marksheet
+    </Panel.Block>
+    <Panel.Block>
+      <Panel.Icon>
+        <FontAwesomeIcon icon={faBook} />
+      </Panel.Icon>
+      minireset.css
+    </Panel.Block>
+    <Panel.Block>
+      <Panel.Icon>
+        <FontAwesomeIcon icon={faBook} />
+      </Panel.Icon>
+      jgthms.github.io
+    </Panel.Block>
+    <Panel.Block>
+      <Panel.Icon>
+        <FontAwesomeIcon icon={faCodeBranch} />
+      </Panel.Icon>
+      daniellowtw/infboard
+    </Panel.Block>
+    <Panel.Block>
+      <Panel.Icon>
+        <FontAwesomeIcon icon={faCodeBranch} />
+      </Panel.Icon>
+      mojs
+    </Panel.Block>
+    <Panel.Block as="label" className="panel-block">
+      <Checkbox />
+      remember me
+    </Panel.Block>
+    <Panel.Block>
+      <Button fullwidth color="link" outlined>
+        reset all filters
+      </Button>
+    </Panel.Block>
+  </Panel>
+</Playground>
+
+## Panel
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Panel.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Panel} componentName="Panel" />
+
+## Panel.Block
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Panel.Block.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Panel.Block} componentName="Panel.Block" />
+
+## Panel.Block
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "mark the block as currently active",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Panel.Block.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Panel.Block} componentName="Panel.Block" />
+
+## Panel.Heading
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Panel.Heading.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Panel.Heading} componentName="Panel.Heading" />
+
+## Panel.Icon
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Panel.Icon.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Panel.Icon} componentName="Panel.Icon" />
+
+## Panel.Tab
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "mark the tab as currently active",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Panel.Tab.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Panel.Tab} componentName="Panel.Tab" />
+
+## Panel.Tab.Group
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Panel.Tab.Group.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Panel.Tab.Group} componentName="Panel.Tab.Group" />

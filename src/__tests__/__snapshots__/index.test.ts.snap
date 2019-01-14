@@ -927,7 +927,7 @@ Object {
         "as": "a",
       },
       "propTypes": Object {
-        "direction": [Function],
+        "align": [Function],
       },
       "render": [Function],
     },
@@ -967,20 +967,20 @@ Object {
       },
       "render": [Function],
     },
-    "Tabs": Object {
+    "Tab": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "Tab": Object {
+      "Group": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
-          "as": "a",
-        },
-        "propTypes": Object {
-          "active": [Function],
+          "as": "div",
         },
         "render": [Function],
       },
       "defaultProps": Object {
-        "as": "div",
+        "as": "a",
+      },
+      "propTypes": Object {
+        "active": [Function],
       },
       "render": [Function],
     },

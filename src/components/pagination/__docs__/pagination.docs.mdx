@@ -1,0 +1,248 @@
+---
+name: Pagination
+menu: Components
+route: /components/pagination
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block, Title } from "src/elements";
+import { Pagination, PAGINATION_DEFAULTS } from "../pagination";
+import { PAGINATION_STEP_DEFAULTS } from "../pagination-step";
+
+# Pagination
+
+A responsive, usable, and flexible **pagination**.
+
+<div className="content">
+  <p>
+    The <code>{"<Pagination>"}</code> component contains several other
+    components:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Pagination.Step>"}</code> for incremental navigation
+    </li>
+    <li>
+      <code>{"<Pagination.List>"}</code> which displays page items:
+      <ul>
+        <li>
+          <code>{"<Pagination.Link>"}</code> for the page numbers
+        </li>
+        <li>
+          <code>{"<Pagination.Ellipsis>"}</code> for range separators
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    All components are optional, so you can compose your{" "}
+    <code>{"<Pagination>"}</code> as you wish.
+  </p>
+</div>
+
+<Playground>
+  <Pagination>
+    <Pagination.Step align="previous">Previous</Pagination.Step>
+    <Pagination.Step align="next">Next page</Pagination.Step>
+    <Pagination.List>
+      <Pagination.Link>1</Pagination.Link>
+      <Pagination.Ellipsis />
+      <Pagination.Link>45</Pagination.Link>
+      <Pagination.Link current>46</Pagination.Link>
+      <Pagination.Link>47</Pagination.Link>
+      <Pagination.Ellipsis />
+      <Pagination.Link>86</Pagination.Link>
+    </Pagination.List>
+  </Pagination>
+</Playground>
+
+Use the `anchor` standard `disabled` prop on `<Pagination.Step>` to disable it if it's not active.
+
+Use the `current` prop on `<Pagination.Link>` to set it as currently selected.
+
+<Playground>
+  <Pagination>
+    <Pagination.Step align="previous" disabled>
+      Previous
+    </Pagination.Step>
+    <Pagination.Step align="next">Next page</Pagination.Step>
+    <Pagination.List>
+      <Pagination.Link active>1</Pagination.Link>
+      <Pagination.Link>2</Pagination.Link>
+      <Pagination.Link>3</Pagination.Link>
+    </Pagination.List>
+  </Pagination>
+</Playground>
+
+### Alignments
+
+Use the `align` prop on `<Pagination>` to force the alignment of the pagination items: `<Pagination.List>` and `<Pagination.Step>`.
+
+By default on **touch** viewports `<1024px`, the `<Pagination.List>` is located on the _left_ and the `<Pagination.Step>`s are located on the `right`.
+
+<Playground>
+  {() => {
+    const alignments = PAGINATION_DEFAULTS.alignments.map(align => ({ align, name: align }));
+    alignments.splice(0, 0, { align: undefined, name: "left" });
+
+    return alignments.map(({ align, name }) => (
+      <Block key={name}>
+        <Title as="p" size={4}>{name}</Title>
+        <Pagination align={align}>
+          <Pagination.Step align="previous">Previous</Pagination.Step>
+          <Pagination.Step align="next">Next page</Pagination.Step>
+          <Pagination.List>
+            <Pagination.Link>1</Pagination.Link>
+            <Pagination.Ellipsis />
+            <Pagination.Link>45</Pagination.Link>
+            <Pagination.Link current>46</Pagination.Link>
+            <Pagination.Link>47</Pagination.Link>
+            <Pagination.Ellipsis />
+            <Pagination.Link>86</Pagination.Link>
+          </Pagination.List>
+        </Pagination>
+      </Block>
+    ));
+
+}}
+
+</Playground>
+
+### Rounded
+
+Use the `rounded` prop on `<Pagination>` to have rounded `<Pagination.Link>` and `<Pagination.Step>` items.
+
+<Playground>
+  <Pagination rounded>
+    <Pagination.Step align="previous">Previous</Pagination.Step>
+    <Pagination.Step align="next">Next page</Pagination.Step>
+    <Pagination.List>
+      <Pagination.Link>1</Pagination.Link>
+      <Pagination.Ellipsis />
+      <Pagination.Link>45</Pagination.Link>
+      <Pagination.Link current>46</Pagination.Link>
+      <Pagination.Link>47</Pagination.Link>
+      <Pagination.Ellipsis />
+      <Pagination.Link>86</Pagination.Link>
+    </Pagination.List>
+  </Pagination>
+</Playground>
+
+### Sizes
+
+Use the `size` prop on `<Pagination>` to change the size.
+
+<Playground>
+ {() => {
+    const sizes = PAGINATION_DEFAULTS.sizes.map(size => ({ size, name: size }));
+    sizes.splice(1, 0, { size: undefined, name: "normal" });
+
+    return sizes.map(({ size, name }) => (
+      <Block key={size}>
+        <Title as="p" size={4}>{name}</Title>
+        <Pagination size={size}>
+          <Pagination.Step align="previous">Previous</Pagination.Step>
+          <Pagination.Step align="next">Next page</Pagination.Step>
+          <Pagination.List>
+            <Pagination.Link>1</Pagination.Link>
+            <Pagination.Ellipsis />
+            <Pagination.Link>45</Pagination.Link>
+            <Pagination.Link current>46</Pagination.Link>
+            <Pagination.Link>47</Pagination.Link>
+            <Pagination.Ellipsis />
+            <Pagination.Link>86</Pagination.Link>
+          </Pagination.List>
+        </Pagination>
+      </Block>
+    ));
+
+}}
+
+</Playground>
+
+## Pagination
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "change the pagination's alignment of pagination items",
+      typeName: "string",
+      typeTip: mapEnumerable(PAGINATION_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Pagination.defaultProps.as),
+    ref: refDoc,
+    rounded: {
+      description: "round the pagination items",
+      typeName: "boolean"
+    },
+    size: {
+      description: "change the pagination's size",
+      typeName: "string",
+      typeTip: mapEnumerable(PAGINATION_DEFAULTS.alignments)
+    }
+  }}
+/>
+
+<AsProp component={Pagination} componentName="Pagination" />
+
+## Pagination.Ellipsis
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Pagination.Ellipsis.defaultProps.as),
+    children: {
+      defaultValue: "the ellipsis: …",
+      description: "the component's children",
+      typeName: "ReactNode"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Pagination.Ellipsis} componentName="Pagination.Ellipsis" />
+
+## Pagination.Link
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Pagination.Link.defaultProps.as),
+    current: {
+      description: "set the pagination link as currently selected",
+      typeName: "boolean"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Pagination.Link} componentName="Pagination.Link" />
+
+## Pagination.List
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Pagination.List.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Pagination.List} componentName="Pagination.List" />
+
+## Pagination.Step
+
+<SimplePropsTable
+  props={{
+    align: {
+      description:
+        "set the step as next or previous (positioning changes with pagination's align prop",
+      typeName: "string",
+      typeTip: mapEnumerable(PAGINATION_STEP_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Pagination.Step.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Pagination.Step} componentName="Pagination.Step" />
