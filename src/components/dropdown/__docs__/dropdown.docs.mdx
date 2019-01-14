@@ -1,0 +1,334 @@
+---
+name: Dropdown
+menu: Components
+route: /components/dropdown
+---
+
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Level } from "src/components";
+import { Button, Icon } from "src/elements";
+import { Dropdown } from "../dropdown";
+import { DROPDOWN_DEFAULTS } from "../dropdown-container";
+
+# Dropdown
+
+The `<Dropdown>` component reveals discoverable content.
+
+- `<Dropdown>`: the **main** container
+  - `<Dropdown.Trigger>`: the container for the `<Button>`
+  - `<Dropdown.Menu>`: the togglable **menu** (hidden by default)
+    - `<Dropdown.Content>`: the dropdown **box**, wiht a white background and shadow
+      - `<Dropdown.Item>`: each **single item** of the dropdown (by default an `a`, but can be a `div`)
+      - `<Dropdown.Divider>`: a **horizontal line** to separate dropdown items
+
+<Playground>
+  <div style={{ height: "250px" }}>
+    <Dropdown>
+      <Dropdown.Trigger>
+        <Button>
+          <span>Dropdown button</span>
+          <Icon size="small">
+            <FontAwesomeIcon icon={faAngleDown} />
+          </Icon>
+        </Button>
+      </Dropdown.Trigger>
+      <Dropdown.Menu>
+        <Dropdown.Content>
+          <Dropdown.Item>Dropdown item</Dropdown.Item>
+          <Dropdown.Item>Other dropdown item</Dropdown.Item>
+          <Dropdown.Item active>Active dropdown item</Dropdown.Item>
+          <Dropdown.Item>Other dropdown item</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item>With a divider</Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown.Menu>
+    </Dropdown>
+  </div>
+</Playground>
+
+### Content
+
+As with all components that leverage `<Generic>` props (more below), you can use the `as` prop of `<Dropdown.Item>` to render a `div`.
+
+<Playground>
+  <div style={{ height: "250px" }}>
+    <Dropdown>
+      <Dropdown.Trigger>
+        <Button>
+          <span>Content</span>
+          <Icon size="small">
+            <FontAwesomeIcon icon={faAngleDown} />
+          </Icon>
+        </Button>
+      </Dropdown.Trigger>
+      <Dropdown.Menu>
+        <Dropdown.Content>
+          <Dropdown.Item as="div">
+            <p>
+              You can insert <strong>any type of content</strong> within the
+              dropdown menu.
+            </p>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item as="div">
+            <p>
+              You simply need to use a <code>&lt;div&gt;</code> instead.
+            </p>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item>This is a link</Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown.Menu>
+    </Dropdown>
+  </div>
+</Playground>
+
+### Hoverable
+
+Use the `hoverable` prop on `<Dropdown>` to trigger the menu on mouse-over.
+
+<Playground>
+  <div style={{ height: "150px" }}>
+    <Dropdown hoverable>
+      <Dropdown.Trigger>
+        <Button>
+          <span>Hover me</span>
+          <Icon size="small">
+            <FontAwesomeIcon icon={faAngleDown} />
+          </Icon>
+        </Button>
+      </Dropdown.Trigger>
+      <Dropdown.Menu>
+        <Dropdown.Content>
+          <Dropdown.Item as="div">
+            <p>
+              You can insert <strong>any type of content</strong> within the
+              dropdown menu.
+            </p>
+          </Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown.Menu>
+    </Dropdown>
+  </div>
+</Playground>
+
+### Managed
+
+Use the `managed` prop on `<Dropdown>` to fully manage the dropdown using the `active` prop of the `<Dropdown>`.
+
+<Playground>
+  <div style={{ height: "150px" }}>
+    <Dropdown managed active={true}>
+      <Dropdown.Trigger>
+        <Button>
+          <span>Always open</span>
+          <Icon size="small">
+            <FontAwesomeIcon icon={faAngleDown} />
+          </Icon>
+        </Button>
+      </Dropdown.Trigger>
+      <Dropdown.Menu>
+        <Dropdown.Content>
+          <Dropdown.Item as="div">
+            <p>
+              Edit this playground and change <code>active={"{true}"}</code>
+              to <code>active={"{false}"}</code> to close.
+            </p>
+          </Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown.Menu>
+    </Dropdown>
+  </div>
+</Playground>
+
+### Alignment
+
+Use the `align` prop of `<Dropdown>` to align the menu to the left or right.
+
+<Playground>
+  <div style={{ height: "150px" }}>
+    <Level breakpoint="mobile">
+      <Level.Item align="left">
+        <Dropdown>
+          <Dropdown.Trigger>
+            <Button>
+              <span>Left aligned</span>
+              <Icon size="small">
+                <FontAwesomeIcon icon={faAngleDown} />
+              </Icon>
+            </Button>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Content>
+              <Dropdown.Item as="div">
+                <p>The dropdown is <strong>left-aligned</strong> by default.</p>
+              </Dropdown.Item>
+            </Dropdown.Content>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Level.Item>
+
+      <Level.Item align="right">
+        <Dropdown align="right">
+          <Dropdown.Trigger>
+            <Button>
+              <span>Right aligned</span>
+              <Icon size="small">
+                <FontAwesomeIcon icon={faAngleDown} />
+              </Icon>
+            </Button>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Content>
+              <Dropdown.Item as="div">
+                <p>Add the <code>align="right"</code> prop to the
+                <code>{'<Divider>'}</code> for a <strong>right-aligned</strong>
+                dropdown.</p>
+              </Dropdown.Item>
+            </Dropdown.Content>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Level.Item>
+    </Level>
+
+  </div>
+</Playground>
+
+### Dropup
+
+Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdown.Trigger>`.
+
+<Playground>
+  <div style={{ marginTop: "150px" }}>
+    <Dropdown up>
+      <Dropdown.Trigger>
+        <Button>
+          <span>Dropup button</span>
+          <Icon size="small">
+            <FontAwesomeIcon icon={faAngleUp} />
+          </Icon>
+        </Button>
+      </Dropdown.Trigger>
+      <Dropdown.Menu>
+        <Dropdown.Content>
+          <Dropdown.Item as="divj">
+            <p>
+              You can add the <code>up</code> prop to
+              <code>{"<Dropdown>"}</code> to have a dropdown menu that appears above
+              the dropdown button.
+            </p>
+          </Dropdown.Item>
+        </Dropdown.Content>
+      </Dropdown.Menu>
+    </Dropdown>
+  </div>
+</Playground>
+
+## Dropdown
+
+<SimplePropsTable
+  props={{
+    active: {
+      description:
+        "set the dropdown as active (useful with the `managed` prop)",
+      typeName: "boolean"
+    },
+    align: {
+      description: "set the dropdown menu's alignment",
+      typeName: "string",
+      typeTip: mapEnumerable(DROPDOWN_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Dropdown.defaultProps.as),
+    hoverable: {
+      description: "open the dropdown on mouse-over",
+      typeName: "boolean"
+    },
+    managed: {
+      description: "use the `active` prop to open and close the dropdown menu",
+      typeName: "boolean"
+    },
+    ref: refDoc,
+    up: {
+      description: "open the menu above the dropdown",
+      typeName: "boolean"
+    }
+  }}
+/>
+
+<AsProp component={Dropdown} componentName="Dropdown" />
+
+## Dropdown.Content
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Dropdown.Content.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Dropdown.Content} componentName="Dropdown.Content" />
+
+## Dropdown.Divider
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Dropdown.Divider.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Dropdown.Divider} componentName="Dropdown.Divider" />
+
+## Dropdown.Item
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "set the item as active",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Dropdown.Item.defaultProps.as),
+    onClick: {
+      description: "callback when the component is clicked",
+      typeName: "(event: React.MouseEvent) => void"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Dropdown.Item} componentName="Dropdown.Item" />
+
+## Dropdown.Menu
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Dropdown.Menu.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Dropdown.Menu} componentName="Dropdown.Menu" />
+
+## Dropdown.Trigger
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "set the item as active",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Dropdown.Trigger.defaultProps.as),
+    onClick: {
+      description: "callback when the component is clicked",
+      typeName: "(event: React.MouseEvent) => void"
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Dropdown.Trigger} componentName="Dropdown.Trigger" />

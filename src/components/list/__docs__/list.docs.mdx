@@ -1,0 +1,59 @@
+---
+name: List
+menu: Components
+route: /components/list
+---
+
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { List } from "../list";
+
+# List
+
+The `<List>` component is useful for building a simple visible list.
+
+Use the `active` prop of `<List.Item>` to mark an item as currently selected.
+
+<Playground>
+  <List>
+    <List.Item>Featured</List.Item>
+    <List.Item>All Posts</List.Item>
+    <List.Item active>Announcements</List.Item>
+    <List.Item>Business</List.Item>
+    <List.Item>Community</List.Item>
+    <List.Item>Data</List.Item>
+    <List.Item>Editor Tools</List.Item>
+    <List.Item>Education</List.Item>
+    <List.Item>Engineering</List.Item>
+    <List.Item>Events</List.Item>
+    <List.Item>Policy</List.Item>
+  </List>
+</Playground>
+
+## List
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(List.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={List} componentName="List" />
+
+## List.Item
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "mark the list-item as currently selected",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(List.Item.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={List.Item} componentName="List.Item" />

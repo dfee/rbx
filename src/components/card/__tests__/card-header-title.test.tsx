@@ -1,4 +1,7 @@
-import { CardHeaderTitle } from "src/components/card/card-header-title";
+import {
+  CARD_HEADER_TITLE_DEFAULTS,
+  CardHeaderTitle,
+} from "src/components/card/card-header-title";
 
 import {
   hasProperties,
@@ -6,6 +9,7 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = CardHeaderTitle;
@@ -28,4 +32,20 @@ describe(`${COMPONENT_NAME} component`, () => {
   );
 
   testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("align", () => {
+      validateStringOrNumberPropType(propTypes, "align");
+
+      CARD_HEADER_TITLE_DEFAULTS.alignments.map(align => {
+        it(`should be ${align}`, () => {
+          const node = makeNode({ align });
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass(`is-${align}`)).toBe(true);
+        });
+      });
+    });
+  });
 });

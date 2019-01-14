@@ -1,0 +1,220 @@
+---
+name: Card
+menu: Components
+route: /components/card
+---
+
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Media } from "src/components";
+import { Content, Icon, Image, Title } from "src/elements";
+import { Card } from "../card";
+import { CARD_HEADER_TITLE_DEFAULTS } from "../card-header-title";
+
+# Card
+
+The `<Card>` component is useful for featuring content.
+
+- `<Card>`: the main container
+  - `<Card.Header>`: a horizontal bar with a shadow
+    - `<Card.Header.Title>`: a left-aligned bold text
+    - `<Card.Header.Icon>`: a placeholder for an `<Icon>`
+  - `<Card.Image>`: a fullwidth container for a responsive `<Image>`
+  - `<Card.Content>`: a multi-purpose container for _any_ other element
+  - `<Card.Footer>`: a horizontal list of controls
+    - `<Card.Header.Icon>`: a repeatable list item
+
+<Playground>
+  <Card>
+    <Card.Image>
+      <Image.Container size="4by3">
+        <Image src="https://bulma.io/images/placeholders/1280x960.png" />
+      </Image.Container>
+    </Card.Image>
+    <Card.Content>
+      <Media>
+        <Media.Item as="figure" align="left">
+          <Image.Container as="p" size={64}>
+            <Image
+              alt="64x64"
+              src="https://bulma.io/images/placeholders/128x128.png"
+            />
+          </Image.Container>
+        </Media.Item>
+        <Media.Item>
+          <Title as="p" size={4}>
+            John Smith
+          </Title>
+          <Title as="p" subtitle size={6}>
+            @johnsmith
+          </Title>
+        </Media.Item>
+      </Media>
+      <Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
+        iaculis mauris. <a href="#@bulmaio">@bulmaio</a>.{" "}
+        <a href="#css">#css</a> <a href="#responsive">#responsive</a>
+        <br />
+        <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      </Content>
+    </Card.Content>
+  </Card>
+</Playground>
+
+### Header and footer
+
+<Playground>
+  <Card>
+    <Card.Header>
+      <Card.Header.Title>Component</Card.Header.Title>
+      <Card.Header.Icon as="a">
+        <Icon>
+          <FontAwesomeIcon icon={faAngleDown} />
+        </Icon>
+      </Card.Header.Icon>
+    </Card.Header>
+    <Card.Content>
+      <Content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
+        iaculis mauris. <a href="#@bulmaio">@bulmaio</a>.{" "}
+        <a href="#css">#css</a> <a href="#responsive">#responsive</a>
+        <br />
+        <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      </Content>
+    </Card.Content>
+    <Card.Footer>
+      <Card.Footer.Item as="a" href="#">
+        Save
+      </Card.Footer.Item>
+      <Card.Footer.Item as="a" href="#">
+        Edit
+      </Card.Footer.Item>
+      <Card.Footer.Item as="a" href="#">
+        Delete
+      </Card.Footer.Item>
+    </Card.Footer>
+  </Card>
+</Playground>
+
+### Footer
+
+<Playground>
+  <Card>
+    <Card.Content>
+      <Title>
+        “There are two hard things in computer science: cache invalidation,
+        naming things, and off-by-one errors.”
+      </Title>
+      <Title subtitle>Jeff Atwood</Title>
+    </Card.Content>
+    <Card.Footer as="footer">
+      <Card.Footer.Item as="p">
+        <span>
+          View on <a href="#twitter">Twitter</a>
+        </span>
+      </Card.Footer.Item>
+      <Card.Footer.Item as="p">
+        <span>
+          Share on <a href="#facebook">Facebook</a>
+        </span>
+      </Card.Footer.Item>
+    </Card.Footer>
+  </Card>
+</Playground>
+
+## Card
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card} componentName="Card" />
+
+## Card.Content
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.Content.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card.Content} componentName="Card.Content" />
+
+## Card.Footer
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.Footer.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card.Footer} componentName="Card.Footer" />
+
+## Card.Footer.Item
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.Footer.Item.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card.Footer.Item} componentName="Card.Footer.Item" />
+
+## Card.Header
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.Header.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card.Header} componentName="Card.Header" />
+
+## Card.Header.Icon
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.Header.Icon.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card.Header.Icon} componentName="Card.Header.Icon" />
+
+## Card.Header.Title
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.Header.Title.defaultProps.as),
+    align: {
+      description: "set the alignment of the title",
+      typeName: "string",
+      typeTip: mapEnumerable(CARD_HEADER_TITLE_DEFAULTS.alignments)
+    },
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card.Header.Title} componentName="Card.Header.Title" />
+
+## Card.Image
+
+<SimplePropsTable
+  props={{
+    as: AsProp.makeDoc(Card.Image.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Card.Image} componentName="Card.Image" />

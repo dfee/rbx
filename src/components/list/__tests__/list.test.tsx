@@ -7,7 +7,6 @@ import {
   makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
-  validateBoolPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = List;
@@ -31,20 +30,4 @@ describe(`${COMPONENT_NAME} component`, () => {
   );
 
   testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
-
-  describe("props", () => {
-    const { propTypes } = COMPONENT;
-
-    describe("hoverable", () => {
-      validateBoolPropType(propTypes, "hoverable");
-
-      [false, true].map(hoverable => {
-        it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
-          const node = makeNode({ hoverable });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
-        });
-      });
-    });
-  });
 });
