@@ -40,7 +40,7 @@ Use the `color` prop on `<Message>` to set the color.
 <Playground>
   {() =>
     DEFAULTS.colors.map(color => (
-      <Message color={color}>
+      <Message color={color} key={color}>
         <Message.Header>
           <p>{color} message</p>
           <Delete as="button" />
@@ -67,7 +67,7 @@ Omit the `<Message.Header>` to get a simpler `<Message>`.
 <Playground>
   {() =>
     DEFAULTS.colors.map(color => (
-      <Message color={color}>
+      <Message color={color} key={color}>
         <Message.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
           <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta

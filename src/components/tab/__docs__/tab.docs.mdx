@@ -47,7 +47,7 @@ Use the `align` prop of `<Tab.Group>` to align the tabs list.
     alignments.splice(0, 0, { align: undefined, name: "left" });
 
     return alignments.map(({ align, name }) => (
-      <Block>
+      <Block key={name}>
         <Title as="p" size={4}>{name}</Title>
         <Tab.Group align={align}>
           <Tab active>Pictures</Tab>
@@ -105,7 +105,7 @@ Use the `size` prop of `<Tab.Group>` to set the size.
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
     return sizes.map(({ size, name }) => (
-      <Block>
+      <Block key={name}>
         <Title as="p" size={4}>{name}</Title>
         <Tab.Group size={size}>
           <Tab active>Pictures</Tab>

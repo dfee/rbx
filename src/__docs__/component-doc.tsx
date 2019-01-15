@@ -79,7 +79,7 @@ const BaseForwardRefAsExoticComponentDoc: React.FC<
     },
     ref: {
       description: "a handle to the underlying React Component or JSX Element",
-      typeName: "React.RefObject",
+      typeName: "Ref",
     },
     ...props,
   };

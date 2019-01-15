@@ -8,7 +8,11 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  OptionBlock,
+  mapEnumerable
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Media } from "src/components";
 import { Content, Icon, Image, Title } from "src/elements";
@@ -201,6 +205,13 @@ An all-around flexible and composable component.
   component={Card.Header.Title}
   docPath="/components/card"
   name="Card.Header.Title"
+  props={{
+    align: {
+      description: "set the alignment of the title",
+      typeName: "string",
+      typeTip: mapEnumerable(CARD_HEADER_TITLE_DEFAULTS.alignments)
+    }
+  }}
 />
 
 <ForwardRefAsExoticComponentDoc

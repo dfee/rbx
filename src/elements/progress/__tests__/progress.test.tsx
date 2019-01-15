@@ -1,15 +1,12 @@
 import * as React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
-import {
-  Progress,
-  PROGRESS_DEFAULTS,
-  ProgressProps,
-} from "src/elements/progress/progress";
+import { Progress, PROGRESS_DEFAULTS } from "src/elements/progress/progress";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
+  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateNumberPropType,
@@ -21,18 +18,15 @@ const COMPONENT_NAME = "Progress";
 const DEFAULT_ELEMENT = "progress";
 const BULMA_CLASS_NAME = "progress";
 
-// these are required props. we provide them so we only get the errors we expect
-const EXTRAS = { max: 10, value: 5 };
-
-const makeNode = (props: Partial<ProgressProps>) => {
-  const propsWithDefaults = { ...EXTRAS, ...props };
-
-  return <Progress {...propsWithDefaults} />;
-};
+const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    defaultProps: { as: DEFAULT_ELEMENT },
+    defaultProps: {
+      as: DEFAULT_ELEMENT,
+      max: 100,
+      value: 0,
+    },
   });
 
   testForwardRefAsExoticComponentIntegration(
@@ -48,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     const { propTypes } = COMPONENT;
 
     describe("color", () => {
-      validateStringOrNumberPropType(propTypes, "color", EXTRAS);
+      validateStringOrNumberPropType(propTypes, "color");
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
@@ -60,7 +54,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("max", () => {
-      validateNumberPropType(propTypes, "max", { value: 5 });
+      validateNumberPropType(propTypes, "max");
 
       it("should have max", () => {
         const max = 20;
@@ -73,7 +67,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("size", () => {
-      validateStringOrNumberPropType(propTypes, "size", EXTRAS);
+      validateStringOrNumberPropType(propTypes, "size");
 
       PROGRESS_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
@@ -85,7 +79,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     describe("value", () => {
-      validateNumberPropType(propTypes, "value", { max: 10 });
+      validateNumberPropType(propTypes, "value");
 
       it("should have value", () => {
         const value = 0;

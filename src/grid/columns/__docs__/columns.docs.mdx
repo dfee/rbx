@@ -8,6 +8,7 @@ import { Playground } from "docz";
 
 import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
+import { Generic } from "src/base";
 import { Box, Content, Notification, Title } from "src/elements";
 import { Column, COLUMN_DEFAULTS } from "../column";
 import { COLUMN_GROUP_DEFAULTS } from "../column-group";
@@ -55,9 +56,9 @@ Use the `size` of `<Column>` with a fractional string (predefined) to size your 
   {() => (
     COLUMN_DEFAULTS.sizes
       .filter(size => typeof size === "string")
-      .map(size => {
+      .map((size, i) => {
         const remainder = size === "full" ? undefined : (
-          <Column>
+          <Column key={i}>
             <Notification textAlign="centered">
               Auto
             </Notification>
@@ -98,8 +99,8 @@ Use the `size` of `<Column>` with a number to build a 12-column system.
 
     return COLUMN_DEFAULTS.sizes
       .filter(size => typeof size === "number")
-      .map(size => (
-        <Column.Group key={size}>
+      .map((size, i) => (
+        <Column.Group key={i}>
           <Column size={size}>
             <Notification color="primary" textAlign="centered">
               <code>{size}</code>
@@ -223,7 +224,7 @@ Use the breakpoint-specific prop to set a `size`, `offset` or `narrow` containme
       </Notification>
     </Column>
     {[2, 3, 4, 5].map(name => (
-      <Column>
+      <Column key={name}>
         <Notification color="primary" textAlign="centered">
           {name}
         </Notification>
@@ -265,9 +266,14 @@ Use the breakpoint-specific prop to set a `size`, `offset` or `narrow` containme
       multiline columns
     </a>{" "}
     is the <strong>order</strong> in the HTML code: all the{" "}
-    <strong class="has-text-info">blue</strong> columns appear <em>before</em>{" "}
-    the <strong class="has-text-danger">red</strong> ones. Resize to a narrower
-    viewport to see the result.
+    <Generic as="strong" textColor="info">
+      blue
+    </Generic>{" "}
+    columns appear <em>before</em> the{" "}
+    <Generic as="strong" textColor="danger">
+      red
+    </Generic>{" "}
+    ones. Resize to a narrower viewport to see the result.
   </p>
 </Content>
 
@@ -318,7 +324,7 @@ Use the `gapless` prop of `<Column.Group>` to remove the space between columns.
 <Playground>
   <Column.Group gapless>
     {["First", "Second", "Third", "Fourth"].map(name => (
-      <Column>
+      <Column key={name}>
         <Notification color="primary">{name} Col</Notification>
       </Column>
     ))}
@@ -330,33 +336,33 @@ Use it with the `multiline` prop of `<Column.Group>` to continue to the next row
 <Playground>
   <Column.Group multiline gapless>
     <Column size="one-quarter">
-      <Notification color="primary" textAlign="center">25%</Notification>
+      <Notification color="primary" textAlign="centered">25%</Notification>
     </Column>
     <Column size="one-quarter">
-      <Notification color="primary" textAlign="center">25%</Notification>
+      <Notification color="primary" textAlign="centered">25%</Notification>
     </Column>
     <Column size="one-quarter">
-      <Notification color="primary" textAlign="center">25%</Notification>
+      <Notification color="primary" textAlign="centered">25%</Notification>
     </Column>
     <Column size="one-quarter">
-      <Notification color="primary" textAlign="center">25%</Notification>
+      <Notification color="primary" textAlign="centered">25%</Notification>
     </Column>
 
     <Column size="half">
-      <Notification color="primary" textAlign="center">50%</Notification>
+      <Notification color="primary" textAlign="centered">50%</Notification>
     </Column>
     <Column size="one-quarter">
-      <Notification color="primary" textAlign="center">25%</Notification>
+      <Notification color="primary" textAlign="centered">25%</Notification>
     </Column>
     <Column size="one-quarter">
-      <Notification color="primary" textAlign="center">25%</Notification>
+      <Notification color="primary" textAlign="centered">25%</Notification>
     </Column>
 
     <Column size="one-quarter">
-      <Notification color="primary" textAlign="center">25%</Notification>
+      <Notification color="primary" textAlign="centered">25%</Notification>
     </Column>
     <Column>
-      <Notification color="primary" textAlign="center">Auto</Notification>
+      <Notification color="primary" textAlign="centered">Auto</Notification>
     </Column>
 
   </Column.Group>
@@ -375,7 +381,7 @@ Play with the code sample below and adjust the gap size from 0-8 to experiment.
 <Playground>
   {() =>
     COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => (
-      <Column.Group gapSize={gapSize}>
+      <Column.Group gapSize={gapSize} key={gapSize}>
         <Column size={4}>
           <Notification color="primary" textAlign="centered">
             gapSize
@@ -492,7 +498,7 @@ Resize the playground below to see it in action.
 <Playground>
   <Column.Group multiline centered>
     {["first", "second", "third", "fourth", "fifth"].map(i => (
-      <Column narrow>
+      <Column narrow key={i}>
         <Notification color="primary" textAlign="centered">
           {i}
         </Notification>
@@ -547,9 +553,11 @@ Resize the playground below to see it in action.
 
 <Notification>
   <Title as="h5" size={5}>ColumnBreakpointOptions Object</Title>
-  <p>
-    The <strong>ColumnBreakpointOptions Object</strong> has the following
-    structure:
+  <div>
+    <p>
+      The <strong>ColumnBreakpointOptions Object</strong> has the following
+      structure:
+    </p>
     <pre
       children={JSON.stringify(
         {
@@ -562,7 +570,7 @@ Resize the playground below to see it in action.
       ).replace(/["]/g, "")}
     />
     <br />
-  </p>
+  </div>
 
 <p>
   <code>narrow</code> specifies – for a specific breakpoint – whether the column
@@ -644,9 +652,11 @@ Resize the playground below to see it in action.
 
 <Notification>
   <Title as="h5" size={5}>ColumnGroupBreakpointOptions Object</Title>
-  <p>
-    The <strong>ColumnGroupBreakpointOptions Object</strong> has the following
-    structure:
+  <div>
+    <p>
+      The <strong>ColumnGroupBreakpointOptions Object</strong> has the following
+      structure:
+    </p>
     <pre
       children={JSON.stringify(
         {
@@ -657,7 +667,7 @@ Resize the playground below to see it in action.
       ).replace(/["]/g, "")}
     />
     <br />
-  </p>
+  </div>
 
   <p>
     <code>gapSize</code> specifies – for a specific breakpoint – the gap-size

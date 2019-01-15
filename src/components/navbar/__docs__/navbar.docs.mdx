@@ -378,7 +378,7 @@ This is useful for mounting in `iframe`s.
             'demonstrating',
             'fixed',
             'navbars'
-            ].map(word => <Title as="h6" children={word} />)}
+            ].map(word => <Title as="h6" children={word} key={word} />)}
         </Container>
 
         {/* Bottom Navbar */}
@@ -956,6 +956,7 @@ Use the `color` prop of the `<Navbar>` to change the color.
     align: {
       description:
         "set the content in the left or right side of the dropdown menu",
+      required: true,
       typeName: "string",
       typeTip: mapEnumerable(NAVBAR_SEGMENT_DEFAULTS.alignments)
     }

@@ -3,6 +3,7 @@ import { withMDXComponents } from "@mdx-js/tag/dist/mdx-provider";
 import { get } from "lodash/fp";
 import React from "react";
 
+import { HelpersProps } from "src/base";
 import { Table } from "src/elements";
 
 const lexSortObj = <T extends object>(obj: { [K: string]: T }) =>
@@ -51,7 +52,7 @@ export class BaseSimplePropsTable extends React.Component<
     );
 
     return (
-      <Table bordered narrow hoverable>
+      <Table bordered narrow hoverable fullwidth>
         <thead>
           <tr>
             <th>Property</th>
@@ -61,7 +62,7 @@ export class BaseSimplePropsTable extends React.Component<
             {thDescription}
           </tr>
         </thead>
-        {this.renderTbody()}
+        {this.renderBody()}
       </Table>
     );
   }
@@ -80,7 +81,7 @@ export class BaseSimplePropsTable extends React.Component<
     });
   }
 
-  private readonly renderTbody = () => {
+  private readonly renderBody = () => {
     const { props } = this.props;
 
     if (props === undefined) {
@@ -90,54 +91,94 @@ export class BaseSimplePropsTable extends React.Component<
     return (
       <tbody>
         {lexSortObj(props).map(({ key: name, value: propDoc }) =>
-          this.renderTr(name, propDoc),
+          this.renderRow(name, propDoc),
         )}
       </tbody>
     );
   }
 
-  private readonly renderTr = (name: string, propDoc: PropDoc) => {
+  private readonly renderCellName = (name: string) => (
+    <Table.Cell>
+      <code>{name}</code>
+    </Table.Cell>
+  )
+
+  private readonly renderCellRequired = (required: boolean | undefined) => {
+    const props: {
+      children: React.ReactNode;
+      textColor: HelpersProps["textColor"];
+    } = {
+      children: required === true ? "true" : "false",
+      textColor: required === true ? "danger" : "grey-light",
+    };
+
+    return <Table.Cell {...props} />;
+  }
+
+  private readonly renderCellType = (
+    typeName: string,
+    typeTip: string | undefined,
+  ) => {
     const { components } = this.props;
     const Tooltip: TooltipComponent = components.tooltip;
 
-    const tdDescription = this.hasDescription ? (
-      propDoc.description !== undefined ? (
-        <td>{propDoc.description}</td>
+    const typeNode =
+      typeTip === undefined ? (
+        typeName
       ) : (
-        <td />
-      )
-    ) : (
-      undefined
-    );
+        <Tooltip text={typeTip}>{typeName}</Tooltip>
+      );
 
     return (
-      <tr key={name}>
-        <td>
-          <code>{name}</code>
-        </td>
-        <td>
-          {propDoc.typeTip !== undefined ? (
-            <Tooltip text={propDoc.typeTip}>{propDoc.typeName}</Tooltip>
-          ) : (
-            propDoc.typeName
-          )}
-        </td>
-        <td>{propDoc.required === true ? "true" : "false"}</td>
-        {propDoc.defaultValue === undefined ? (
-          <td>
-            <em>-</em>
-          </td>
-        ) : (
-          <td>
-            {propDoc.defaultValue === "''" ? (
-              <em>[Empty String]</em>
-            ) : (
-              <code>{propDoc.defaultValue.replace(/\'/g, "")}</code>
-            )}
-          </td>
-        )}
-        {tdDescription}
-      </tr>
+      <Table.Cell>
+        <code>{typeNode}</code>
+      </Table.Cell>
+    );
+  }
+
+  private readonly renderCellDescription = (
+    description: string | undefined,
+  ) => {
+    if (!this.hasDescription) {
+      return undefined;
+    } else if (description === undefined) {
+      return <Table.Cell />;
+    }
+
+    return <Table.Cell>{description}</Table.Cell>;
+  }
+
+  private readonly renderCellDefaultValue = (
+    defaultValue: PropDoc["defaultValue"],
+  ) => {
+    if (defaultValue === undefined) {
+      return (
+        <Table.Cell textColor="grey-light">
+          <em>-</em>
+        </Table.Cell>
+      );
+    }
+    const stringDefaultValue =
+      defaultValue === "''"
+        ? "[Empty String]"
+        : defaultValue.replace(/\'/g, "");
+
+    return (
+      <Table.Cell>
+        <code>{stringDefaultValue}</code>
+      </Table.Cell>
+    );
+  }
+
+  private readonly renderRow = (name: string, propDoc: PropDoc) => {
+    return (
+      <Table.Row key={name}>
+        {this.renderCellName(name)}
+        {this.renderCellType(propDoc.typeName, propDoc.typeTip)}
+        {this.renderCellRequired(propDoc.required)}
+        {this.renderCellDefaultValue(propDoc.defaultValue)}
+        {this.renderCellDescription(propDoc.description)}
+      </Table.Row>
     );
   }
 }

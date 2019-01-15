@@ -25,15 +25,13 @@ Small **tag labels** to insert anywhere.
 Use the `color` prop of a `<Tag>` for variety.
 
 <Playground>
-  {() =>
-    DEFAULTS.colors.map(color => (
-      <Block>
-        <Tag key={color} color={color}>
-          {color}
-        </Tag>
-      </Block>
-    ))
-  }
+  <Tag.Group>
+    {DEFAULTS.colors.map(color => (
+      <Tag key={color} color={color}>
+        {color}
+      </Tag>
+    ))}
+  </Tag.Group>
 </Playground>
 
 ### Sizes
@@ -43,7 +41,7 @@ Use the `size` prop on `<Tag>` to change its size.
 <Playground>
   {() =>
     TAG_DEFAULTS.sizes.map(size => (
-      <Block>
+      <Block key={size}>
         <Tag key={size} size={size}>
           {size}
         </Tag>

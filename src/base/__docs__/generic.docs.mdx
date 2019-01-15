@@ -36,9 +36,9 @@ This component apples standard _Bulma_ theming to any element or component.
 By changing the `as` prop (described in greater detail below), you can render a `<Generic>` component as any other component or JSX Element, as well as forward its props and a ref.
 
 <Playground>
-  <Generic as="p">
+  <Generic as="nav">
     <h2>
-      Hello World, I'm a <code>p</code>
+      Hello World, I'm a <code>nav</code>
     </h2>
     <span>
       I'm a <code>{"<Generic>"}</code>, and I render as the JSX Element{" "}
@@ -231,8 +231,10 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
 
 <Notification>
   <Title as="h5" size={5}>Responsive Object & LimitedResponsive Object</Title>
-  <p>
-    The <strong>Rsponsive Object</strong> has the following structure:
+  <div>
+    <p>
+      The <strong>Rsponsive Object</strong> has the following structure:
+    </p>
     <pre
       children={JSON.stringify(
         {
@@ -258,7 +260,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
       ).replace(/["]/g, "")}
     />
     <br />
-  </p>
+  </div>
 
   <Title as="h5" size={5}>
     display

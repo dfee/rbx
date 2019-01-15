@@ -70,7 +70,7 @@ Use the `current` prop on `<Pagination.Link>` to set it as currently selected.
     </Pagination.Step>
     <Pagination.Step align="next">Next page</Pagination.Step>
     <Pagination.List>
-      <Pagination.Link active>1</Pagination.Link>
+      <Pagination.Link current>1</Pagination.Link>
       <Pagination.Link>2</Pagination.Link>
       <Pagination.Link>3</Pagination.Link>
     </Pagination.List>
@@ -141,7 +141,7 @@ Use the `size` prop on `<Pagination>` to change the size.
     sizes.splice(1, 0, { size: undefined, name: "normal" });
 
     return sizes.map(({ size, name }) => (
-      <Block key={size}>
+      <Block key={name}>
         <Title as="p" size={4}>{name}</Title>
         <Pagination size={size}>
           <Pagination.Step align="previous">Previous</Pagination.Step>
@@ -226,6 +226,7 @@ Use the `size` prop on `<Pagination>` to change the size.
     align: {
       description:
         "set the step as next or previous (positioning changes with pagination's align prop",
+      required: true,
       typeName: "string",
       typeTip: mapEnumerable(PAGINATION_STEP_DEFAULTS.alignments)
     }

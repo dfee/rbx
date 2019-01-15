@@ -22,20 +22,20 @@ export type ProgressVariables = Prefer<
   ProgressVariablesDefaults
 >;
 
-export interface ProgressModifierProps {
-  color?: Variables["colors"];
+export type ProgressModifierProps = Partial<{
+  color: Variables["colors"];
   max: number;
-  size?: ProgressVariables["sizes"];
+  size: ProgressVariables["sizes"];
   value: number;
-}
+}>;
 
 export type ProgressProps = HelpersProps & ProgressModifierProps;
 
 const propTypes = {
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  max: PropTypes.number.isRequired,
+  max: PropTypes.number,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
 };
 
 export const Progress = Object.assign(
@@ -54,7 +54,11 @@ export const Progress = Object.assign(
         {...rest}
       />
     ),
-    { as: "progress" },
+    {
+      as: "progress",
+      max: 100,
+      value: 0,
+    },
   ),
   { propTypes },
 );

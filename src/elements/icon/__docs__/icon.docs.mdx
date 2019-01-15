@@ -59,7 +59,7 @@ Use the `color` prop to add color to an icon.
       { color: "danger", icon: faBan }
     ];
     return permutations.map(({ color, icon }) => (
-      <Icon color={color}>
+      <Icon color={color} key={color}>
         <FontAwesomeIcon icon={icon} />
       </Icon>
     ));
@@ -96,8 +96,8 @@ As before, the `backgroundColor` is set to provide additional indication of the 
       </tr>
 
       <tr>
-        <td rowspan={2}><code>-</code></td>
-        <td rowspan={2}><code>1.5rem sq.</code></td>
+        <td rowSpan={2}><code>-</code></td>
+        <td rowSpan={2}><code>1.5rem sq.</code></td>
         <td><code>sm</code></td>
         <td><code>0.875em</code></td>
         <td>
@@ -117,8 +117,8 @@ As before, the `backgroundColor` is set to provide additional indication of the 
       </tr>
 
       <tr>
-        <td rowspan={3}><code>medium</code></td>
-        <td rowspan={3}><code>2rem sq.</code></td>
+        <td rowSpan={3}><code>medium</code></td>
+        <td rowSpan={3}><code>2rem sq.</code></td>
         <td><code>sm</code></td>
         <td><code>0.875em</code></td>
         <td>
@@ -147,8 +147,8 @@ As before, the `backgroundColor` is set to provide additional indication of the 
       </tr>
 
       <tr>
-        <td rowspan={4}><code>large</code></td>
-        <td rowspan={4}><code>3rem sq.</code></td>
+        <td rowSpan={4}><code>large</code></td>
+        <td rowSpan={4}><code>3rem sq.</code></td>
         <td><code>sm</code></td>
         <td><code>0.875em</code></td>
         <td>

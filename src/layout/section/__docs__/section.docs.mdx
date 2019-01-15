@@ -35,7 +35,7 @@ Use the `size` prop to resize the `<Section>`.
     sizes.splice(0, 0, { name: "normal", size: undefined });
 
     return sizes.map(({size, name}) => (
-      <Block>
+      <Block key={name}>
         <Section backgroundColor="primary" size={size}>
           <Content backgroundColor="grey-light">
             <code>{name}</code> size <code>{'<Section>'}</code> with a

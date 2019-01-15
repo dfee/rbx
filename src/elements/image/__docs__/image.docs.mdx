@@ -44,8 +44,8 @@ _The `<Image.Container>` sizes that are **numbers** are fixed squares_
     <tbody>
       {IMAGE_CONTAINER_DEFAULTS.sizes
         .filter(size => typeof size === "number")
-        .map(size => (
-          <tr>
+        .map((size, i) => (
+          <tr key={i}>
             <td>
               <code>{size}</code>
             </td>
@@ -125,7 +125,7 @@ _The `<Image.Container>` sizes that are **strings** are responsive sizes_
         </thead>
         <tbody>
           {sizeMap.map(({ size, name, description }) => (
-            <tr>
+            <tr key={size}>
               <td>
                 <code>{size}</code>
               </td>

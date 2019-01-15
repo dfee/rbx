@@ -13,9 +13,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  OptionBlock,
+  mapEnumerable
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Block, Icon } from "src/elements";
+import { Block, Title, Icon } from "src/elements";
 import { Breadcrumb, BREADCRUMB_DEFAULTS } from "../breadcrumb";
 
 # Breadcrumb
@@ -34,23 +38,24 @@ A simple **breadcrumb** component to improve your navigation experience.
 ### Alignments
 
 Use the `align` prop to center or align-right the breadcrumbs.
+Leaving this prop unspecified, or setting it to `undefined`, causes it to be **left** aligned.
 
 <Playground>
   {() => {
-    const alignments = BREADCRUMB_DEFAULTS.alignments.map(align => ({
-      align,
-      name: align
-    }));
-    alignments.splice(0, 0, { align: undefined, name: 'left' })
+    const alignments = [
+      { align: undefined, name: "normal" },
+      ...BREADCRUMB_DEFAULTS.alignments.map(align => ({ align, name: align })),
+    ];
 
-    return alignments.map(({ align, name }) => (
-      <Block key={name}>
-        <Breadcrumb align={align}>
-          <Breadcrumb.Item>breadcrumb</Breadcrumb.Item>
-          <Breadcrumb.Item>aligned</Breadcrumb.Item>
-          <Breadcrumb.Item active>{name}</Breadcrumb.Item>
+    return alignments.map(({ align, name }, i) => (
+      <OptionBlock propName="align" name={name} value={align} index={i} key={i}>
+       <Breadcrumb align={align}>
+          <Breadcrumb.Item>rbx</Breadcrumb.Item>
+          <Breadcrumb.Item>Documentation</Breadcrumb.Item>
+          <Breadcrumb.Item>Components</Breadcrumb.Item>
+          <Breadcrumb.Item active>Breadcrumb</Breadcrumb.Item>
         </Breadcrumb>
-      </Block>
+      </OptionBlock>
     ));
 
 }}

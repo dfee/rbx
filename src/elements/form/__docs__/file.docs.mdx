@@ -179,18 +179,18 @@ Use the `color` prop of `<File>` to change the color.
       { boxed: true, hasName: false, color: "warning" },
       { boxed: true, hasName: true, color: "danger" }
     ];
-    return permutations.map(props => (
-      <Field>
-        <File {...props}>
+    return permutations.map(({ boxed, color, hasName }) => (
+      <Field key={color}>
+        <File boxed={boxed} color={color} hasName={hasName}>
           <File.Label>
             <File.Input name="resume" />
             <File.CTA>
               <File.Icon>
                 <FontAwesomeIcon icon={faUpload} />
               </File.Icon>
-              <File.Label as="span">{`${props.color} file`}</File.Label>
+              <File.Label as="span">{`${color} file`}</File.Label>
             </File.CTA>
-            {props.hasName && (
+            {hasName && (
               <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
             )}
           </File.Label>
@@ -210,7 +210,7 @@ Use the `size` prop of `<File>` to change the size.
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
     return sizes.map(({ name, size }) => (
-      <Field>
+      <Field key={name}>
         <File size={size}>
           <File.Label>
             <File.Input name="resume" />
@@ -237,7 +237,7 @@ The `size` prop of `<File>` also works with a filename.
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
     return sizes.map(({ name, size }) => (
-      <Field>
+      <Field key={name}>
         <File size={size} hasName>
           <File.Label>
             <File.Input name="resume" />
@@ -265,7 +265,7 @@ The `size` prop of `<File>` also works when it's boxed.
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
     return sizes.map(({ name, size }) => (
-      <Field>
+      <Field key={name}>
         <File size={size} boxed>
           <File.Label>
             <File.Input name="resume" />
@@ -292,7 +292,7 @@ The `size` prop of `<File>` also works when it's boxed and with a filename.
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
     return sizes.map(({ name, size }) => (
-      <Field>
+      <Field key={name}>
         <File size={size} boxed hasName>
           <File.Label>
             <File.Input name="resume" />

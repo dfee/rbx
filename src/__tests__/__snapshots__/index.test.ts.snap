@@ -993,6 +993,8 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "as": "progress",
+      "max": 100,
+      "value": 0,
     },
     "propTypes": Object {
       "color": [Function],

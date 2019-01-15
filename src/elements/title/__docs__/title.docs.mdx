@@ -55,7 +55,7 @@ As a rule of thumb, use a size difference of **two**. For example, if your title
 <Playground>
   {() =>
     [1, 2, 3].map(tsize => (
-      <Block>
+      <Block key={tsize}>
         <Title size={tsize}>Title {tsize}</Title>
         <Title size={tsize + 2} subtitle>
           Subtitle {tsize + 2}
@@ -70,7 +70,7 @@ Use the `spaced` prop on `<Title>` to maintain spacing between titles and subtit
 <Playground>
   {() =>
     [1, 2, 3].map(tsize => (
-      <Block>
+      <Block key={tsize}>
         <Title size={tsize} spaced>
           Title {tsize}
         </Title>

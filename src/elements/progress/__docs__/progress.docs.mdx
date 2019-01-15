@@ -51,7 +51,7 @@ Use the `size` prop of `<Progress>` to change the height.
         <tbody>
           {
             sizes.map(({ size, name }, i) => (
-              <tr key={size}>
+              <tr key={name}>
                 <td><code>{name}</code></td>
                 <td><Progress value={20 + i * 10} max={100} size={size} /></td>
               </tr>
@@ -78,8 +78,8 @@ Use the `size` prop of `<Progress>` to change the height.
       typeTip: mapEnumerable(DEFAULTS.colors)
     },
     max: {
+      defaultValue: 100,
       description: "the total completion amount (denominator)",
-      required: true,
       typeName: "number"
     },
     size: {
@@ -88,8 +88,8 @@ Use the `size` prop of `<Progress>` to change the height.
       typeTip: mapEnumerable(PROGRESS_DEFAULTS.sizes)
     },
     value: {
+      defaultValue: 0,
       description: "the completion amount (numerator)",
-      required: true,
       typeName: "number"
     }
   }}

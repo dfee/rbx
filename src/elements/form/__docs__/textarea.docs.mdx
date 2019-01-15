@@ -52,7 +52,7 @@ Use the `size` prop to set the size of the text in an `<Textarea>`.
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
     return sizes.map(({ name, size }) => (
-      <Field key={size}>
+      <Field key={name}>
         <Control>
           <Textarea size={size} placeholder={`${name} textarea`} />
         </Control>
@@ -73,7 +73,7 @@ Use the `state` prop to force the state of the `<Textarea>`.
     states.splice(0, 0, { name: "normal", size: undefined });
 
     return states.map(({ name, state }) => (
-      <Field key={state}>
+      <Field key={name}>
         <Control>
           <Textarea state={state} placeholder={`${name} textarea`} />
         </Control>

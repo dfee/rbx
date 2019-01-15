@@ -79,8 +79,8 @@ It has the same height as a control element and can _only_ contain an `<Input>`,
 <Playground>
   <Select.Container>
     <Select>
-      <Select.Option>Select dropdown</Select.Option>
-      <Select.Option>With options</Select.Option>
+      <Select.Option value="dropdown">Select dropdown</Select.Option>
+      <Select.Option value="options">With Options</Select.Option>
     </Select>
   </Select.Container>
 </Playground>
@@ -126,12 +126,10 @@ You can also append icons to `<Select>` components.
   <Field>
     <Control iconLeft>
       <Select.Container>
-        <Select>
-          <Select.Option selected aria-selected>
-            Country
-          </Select.Option>
-          <Select.Option aria-selected={false}>Select dropdown</Select.Option>
-          <Select.Option aria-selected={false}>With Options</Select.Option>
+        <Select defaultValue="country">
+          <Select.Option value="country">Country</Select.Option>
+          <Select.Option value="dropdown">Select dropdown</Select.Option>
+          <Select.Option value="options">With Options</Select.Option>
         </Select>
       </Select.Container>
       <Icon size="small" align="left">
@@ -304,9 +302,9 @@ Use the `expanded` modifier of a `<Control>` to fill the remaining space.
     <Control>
       <Select.Container>
         <Select>
-          <Select.Option>$</Select.Option>
-          <Select.Option>£</Select.Option>
-          <Select.Option>€</Select.Option>
+          <Select.Option value="usd">$</Select.Option>
+          <Select.Option value="gbp">£</Select.Option>
+          <Select.Option value="euro">€</Select.Option>
         </Select>
       </Select.Container>
     </Control>
@@ -322,9 +320,9 @@ Use the `expanded` modifier of a `<Control>` to fill the remaining space.
     <Control>
       <Select.Container>
         <Select>
-          <Select.Option>$</Select.Option>
-          <Select.Option>£</Select.Option>
-          <Select.Option>€</Select.Option>
+          <Select.Option value="usd">$</Select.Option>
+          <Select.Option value="gbp">£</Select.Option>
+          <Select.Option value="euro">€</Select.Option>
         </Select>
       </Select.Container>
     </Control>
@@ -372,9 +370,9 @@ Use the `align` prop of `<Field>` to alter the alignment.
     <Control>
       <Select.Container>
         <Select>
-          <Select.Option>$</Select.Option>
-          <Select.Option>£</Select.Option>
-          <Select.Option>€</Select.Option>
+          <Select.Option value="usd">$</Select.Option>
+          <Select.Option value="gbp">£</Select.Option>
+          <Select.Option value="euro">€</Select.Option>
         </Select>
       </Select.Container>
     </Control>
@@ -390,9 +388,9 @@ Use the `align` prop of `<Field>` to alter the alignment.
   <Control>
     <Select.Container>
       <Select>
-        <Select.Option>$</Select.Option>
-        <Select.Option>£</Select.Option>
-        <Select.Option>€</Select.Option>
+        <Select.Option value="usd">$</Select.Option>
+        <Select.Option value="gbp">£</Select.Option>
+        <Select.Option value="euro">€</Select.Option>
       </Select>
     </Select.Container>
   </Control>
@@ -408,9 +406,9 @@ Use the `align` prop of `<Field>` to alter the alignment.
     <Control>
       <Select.Container>
         <Select>
-          <Select.Option>$</Select.Option>
-          <Select.Option>£</Select.Option>
-          <Select.Option>€</Select.Option>
+          <Select.Option value="usd">$</Select.Option>
+          <Select.Option value="gbp">£</Select.Option>
+          <Select.Option value="euro">€</Select.Option>
         </Select>
       </Select.Container>
     </Control>
@@ -495,7 +493,7 @@ Use the `mutliline` prop on `<Field>` to fill up multiple lines (ideal for a lon
       "Nineteen",
       "Twenty"
     ].map(name => (
-      <Control>
+      <Control key={name}>
         <Button key={name}>{name}</Button>
       </Control>
     ))}
@@ -527,9 +525,9 @@ You can still use the `kind` property on `<Field>`, but you should use `<Field.L
           <Control expanded iconLeft iconRight>
             <Input
               color="success"
-              type="email"
+              defaultValue="alex@smith.com"
               placeholder="Email"
-              value="alex@smith.com"
+              type="email"
             />
             <Icon size="small" align="left">
               <FontAwesomeIcon icon={faEnvelope} />
@@ -568,9 +566,9 @@ You can still use the `kind` property on `<Field>`, but you should use `<Field.L
           <Control>
             <Select.Container fullwidth>
               <Select>
-                <Select.Option>Business development</Select.Option>
-                <Select.Option>Marketing</Select.Option>
-                <Select.Option>Sales</Select.Option>
+                <Select.Option value="bd">Business development</Select.Option>
+                <Select.Option value="mktg">Marketing</Select.Option>
+                <Select.Option value="sales">Sales</Select.Option>
               </Select>
             </Select.Container>
           </Control>
@@ -586,7 +584,7 @@ You can still use the `kind` property on `<Field>`, but you should use `<Field.L
         <Field narrow>
           <Control>
             {["Yes", "No"].map(value => (
-              <Label>
+              <Label key={value}>
                 <Radio name="member" value={value} /> {value}
               </Label>
             ))}
@@ -725,9 +723,9 @@ Vertical forms are also supported, and are simpler to compose.
       <Control iconLeft iconRight>
         <Input
           color="success"
-          type="text"
+          defaultValue="rbx"
           placeholder="Text input"
-          value="bulma"
+          type="text"
         />
         <Icon size="small" align="left">
           <FontAwesomeIcon icon={faUser} />
@@ -744,9 +742,9 @@ Vertical forms are also supported, and are simpler to compose.
       <Control iconLeft iconRight>
         <Input
           color="danger"
-          type="email"
+          defaultValue="hello@"
           placeholder="Email input"
-          value="hello@"
+          type="email"
         />
         <Icon size="small" align="left">
           <FontAwesomeIcon icon={faEnvelope} />
@@ -763,8 +761,8 @@ Vertical forms are also supported, and are simpler to compose.
       <Control>
         <Select.Container fullwidth>
           <Select>
-            <Select.Option>Select dropdown</Select.Option>
-            <Select.Option>With Select.Options</Select.Option>
+            <Select.Option value="dropdown">Select dropdown</Select.Option>
+            <Select.Option value="options">With Options</Select.Option>
           </Select>
         </Select.Container>
       </Control>
@@ -789,7 +787,7 @@ Vertical forms are also supported, and are simpler to compose.
     <Field>
       <Control>
         {["Yes", "No"].map(value => (
-          <Label>
+          <Label key={value}>
             <Radio name="question" value={value} /> {value}
           </Label>
         ))}

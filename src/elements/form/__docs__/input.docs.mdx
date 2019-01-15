@@ -50,7 +50,7 @@ Use the `size` prop to change the `<Input>`'s size.
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
     return sizes.map(({ name, size}) => (
-      <Field key={size}>
+      <Field key={name}>
         <Control>
           <Input type="text" size={size} placeholder={`${name} input`} />
         </Control>
@@ -79,7 +79,7 @@ Use the `state` prop to change the `<Input>`'s state.
     states.splice(0, 0, { name: "normal", size: undefined });
 
     return states.map(({ name, state}) => (
-      <Field key={state}>
+      <Field key={name}>
         <Control>
           <Input type="text" state={state} placeholder={`${name} input`} />
         </Control>

@@ -61,7 +61,7 @@ The inevitable HTML **table**, with special case cells.
 </Content>
 
 <Playground>
-  <Table>
+  <Table fullwidth narrow>
     <Table.Head>
       <Table.Row>
         <Table.Heading>
@@ -270,7 +270,7 @@ The inevitable HTML **table**, with special case cells.
           </a>
         </Table.Cell>
       </Table.Row>
-      <Tab.Row>
+      <Table.Row>
         <Table.Heading>6</Table.Heading>
         <Table.Cell>
           <a
@@ -297,8 +297,8 @@ The inevitable HTML **table**, with special case cells.
             Europa League group stage
           </a>
         </Table.Cell>
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>7</Table.Heading>
         <Table.Cell>
           <a
@@ -325,8 +325,8 @@ The inevitable HTML **table**, with special case cells.
             Europa League third qualifying round
           </a>
         </Table.Cell>
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>8</Table.Heading>
         <Table.Cell>
           <a
@@ -345,8 +345,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>+13</Table.Cell>
         <Table.Cell>60</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>9</Table.Heading>
         <Table.Cell>
           <a
@@ -365,8 +365,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>−14</Table.Cell>
         <Table.Cell>51</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>10</Table.Heading>
         <Table.Cell>
           <a
@@ -385,8 +385,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>+6</Table.Cell>
         <Table.Cell>50</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>11</Table.Heading>
         <Table.Cell>
           <a
@@ -405,8 +405,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>+4</Table.Cell>
         <Table.Cell>47</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>12</Table.Heading>
         <Table.Cell>
           <a
@@ -425,8 +425,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>−10</Table.Cell>
         <Table.Cell>47</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>13</Table.Heading>
         <Table.Cell>
           <a
@@ -445,8 +445,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>−10</Table.Cell>
         <Table.Cell>45</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>14</Table.Heading>
         <Table.Cell>
           <a
@@ -465,8 +465,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>−14</Table.Cell>
         <Table.Cell>43</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>15</Table.Heading>
         <Table.Cell>
           <a
@@ -485,8 +485,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>−12</Table.Cell>
         <Table.Cell>42</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>16</Table.Heading>
         <Table.Cell>
           <a
@@ -505,8 +505,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>−22</Table.Cell>
         <Table.Cell>42</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>17</Table.Heading>
         <Table.Cell>
           <a
@@ -525,8 +525,8 @@ The inevitable HTML **table**, with special case cells.
         <Table.Cell>−14</Table.Cell>
         <Table.Cell>39</Table.Cell>
         <Table.Cell />
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>18</Table.Heading>
         <Table.Cell>
           <a
@@ -554,8 +554,8 @@ The inevitable HTML **table**, with special case cells.
             Football League Championship
           </a>
         </Table.Cell>
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>19</Table.Heading>
         <Table.Cell>
           <a
@@ -583,8 +583,8 @@ The inevitable HTML **table**, with special case cells.
             Football League Championship
           </a>
         </Table.Cell>
-      </Tab.Row>
-      <Tab.Row>
+      </Table.Row>
+      <Table.Row>
         <Table.Heading>20</Table.Heading>
         <Table.Cell>
           <a
@@ -612,7 +612,7 @@ The inevitable HTML **table**, with special case cells.
             Football League Championship
           </a>
         </Table.Cell>
-      </Tab.Row>
+      </Table.Row>
     </Table.Body>
   </Table>
 </Playground>
@@ -624,16 +624,16 @@ Use the `bordered` prop on `<Table>` to add borders to all the cells.
 <Playground>
   <Table bordered>
     <Table.Head>
-      <Tab.Row>
+      <Table.Row>
         <Table.Heading>One</Table.Heading>
         <Table.Heading>Two</Table.Heading>
-      </Tab.Row>
+      </Table.Row>
     </Table.Head>
     <Table.Body>
-      <Tab.Row>
+      <Table.Row>
         <Table.Cell>Three</Table.Cell>
         <Table.Cell>Four</Table.Cell>
-      </Tab.Row>
+      </Table.Row>
     </Table.Body>
   </Table>
 </Playground>
@@ -645,10 +645,10 @@ Use the `striped` prop on `<Table>` to add stripes to alternating rows to make r
 <Playground>
   <Table striped>
     <Table.Head>
-      <Tab.Row>
+      <Table.Row>
         <Table.Heading>One</Table.Heading>
         <Table.Heading>Two</Table.Heading>
-      </Tab.Row>
+      </Table.Row>
     </Table.Head>
     <Table.Body>
       {[
@@ -657,11 +657,11 @@ Use the `striped` prop on `<Table>` to add stripes to alternating rows to make r
         ["Seven", "Eight"],
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
-      ].map(([v1, v2]) => (
-        <Tab.Row>
+      ].map(([v1, v2], i) => (
+        <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
           <Table.Cell>{v2}</Table.Cell>
-        </Tab.Row>
+        </Table.Row>
       ))}
     </Table.Body>
   </Table>
@@ -674,10 +674,10 @@ Use the `narrow` prop on `<Table>` to make the cells narrower.
 <Playground>
   <Table narrow>
     <Table.Head>
-      <Tab.Row>
+      <Table.Row>
         <Table.Heading>One</Table.Heading>
         <Table.Heading>Two</Table.Heading>
-      </Tab.Row>
+      </Table.Row>
     </Table.Head>
     <Table.Body>
       {[
@@ -686,11 +686,11 @@ Use the `narrow` prop on `<Table>` to make the cells narrower.
         ["Seven", "Eight"],
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
-      ].map(([v1, v2]) => (
-        <Tab.Row>
+      ].map(([v1, v2], i) => (
+        <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
           <Table.Cell>{v2}</Table.Cell>
-        </Tab.Row>
+        </Table.Row>
       ))}
     </Table.Body>
   </Table>
@@ -703,10 +703,10 @@ Use the `hover` prop on `<Table>` to highlight the cells on hover.
 <Playground>
   <Table hoverable>
     <Table.Head>
-      <Tab.Row>
+      <Table.Row>
         <Table.Heading>One</Table.Heading>
         <Table.Heading>Two</Table.Heading>
-      </Tab.Row>
+      </Table.Row>
     </Table.Head>
     <Table.Body>
       {[
@@ -715,11 +715,11 @@ Use the `hover` prop on `<Table>` to highlight the cells on hover.
         ["Seven", "Eight"],
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
-      ].map(([v1, v2]) => (
-        <Tab.Row>
+      ].map(([v1, v2], i) => (
+        <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
           <Table.Cell>{v2}</Table.Cell>
-        </Tab.Row>
+        </Table.Row>
       ))}
     </Table.Body>
   </Table>
@@ -732,10 +732,10 @@ Use the `fullwidth` prop on `<Table>` to expand it to occupy all available horiz
 <Playground>
   <Table fullwidth>
     <Table.Head>
-      <Tab.Row>
+      <Table.Row>
         <Table.Heading>One</Table.Heading>
         <Table.Heading>Two</Table.Heading>
-      </Tab.Row>
+      </Table.Row>
     </Table.Head>
     <Table.Body>
       {[
@@ -744,11 +744,11 @@ Use the `fullwidth` prop on `<Table>` to expand it to occupy all available horiz
         ["Seven", "Eight"],
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
-      ].map(([v1, v2]) => (
-        <Tab.Row>
+      ].map(([v1, v2], i) => (
+        <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
           <Table.Cell>{v2}</Table.Cell>
-        </Tab.Row>
+        </Table.Row>
       ))}
     </Table.Body>
   </Table>
@@ -759,10 +759,10 @@ You can combine any and all the props for expressive tables.
 <Playground>
   <Table bordered fullwidth hoverable narrow striped>
     <Table.Head>
-      <Tab.Row>
+      <Table.Row>
         <Table.Heading>One</Table.Heading>
         <Table.Heading>Two</Table.Heading>
-      </Tab.Row>
+      </Table.Row>
     </Table.Head>
     <Table.Body>
       {[
@@ -771,11 +771,11 @@ You can combine any and all the props for expressive tables.
         ["Seven", "Eight"],
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
-      ].map(([v1, v2]) => (
-        <Tab.Row>
+      ].map(([v1, v2], i) => (
+        <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
           <Table.Cell>{v2}</Table.Cell>
-        </Tab.Row>
+        </Table.Row>
       ))}
     </Table.Body>
   </Table>
