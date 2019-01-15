@@ -6,13 +6,15 @@ route: /elements/image
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Table } from "src/elements";
 import { Image } from "../image";
 import { ImageContainer, IMAGE_CONTAINER_DEFAULTS } from "../image-container";
 
 # Image
+
+A container for **responsive images**.
 
 The `<Image.Container>` is a precisely **sized container** so your layout isn't broken because images are loading or missing.
 
@@ -145,12 +147,13 @@ _The `<Image.Container>` sizes that are **strings** are responsive sizes_
 
 </Playground>
 
-## Image
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Image}
+  docPath="/elements/image"
+  name="Image"
   props={{
-    as: AsProp.makeDoc(Image.defaultProps.as),
-    ref: refDoc,
     rounded: {
       description: "rounds the image",
       typeName: "boolean"
@@ -158,14 +161,11 @@ _The `<Image.Container>` sizes that are **strings** are responsive sizes_
   }}
 />
 
-<AsProp component={Image} componentName="Image" />
-
-## Image.Container
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Image.Container}
+  docPath="/elements/image"
+  name="Image.Container"
   props={{
-    as: AsProp.makeDoc(Image.Container.defaultProps.as),
-    ref: refDoc,
     size: {
       description: "sets the dimmension of the contained image",
       typeName: "string | number",
@@ -173,5 +173,3 @@ _The `<Image.Container>` sizes that are **strings** are responsive sizes_
     }
   }}
 />
-
-<AsProp component={Image.Container} componentName="Image.Container" />

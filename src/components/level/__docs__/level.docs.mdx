@@ -6,9 +6,18 @@ route: /components/level
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Button, Control, Field, Heading, Input, Title } from "src/elements";
+import { Generic } from "src/base";
+import {
+  Button,
+  Content,
+  Control,
+  Field,
+  Heading,
+  Input,
+  Title
+} from "src/elements";
 import { Level } from "../level";
 import { LEVEL_ITEM_DEFAULTS } from "../level-item";
 
@@ -16,14 +25,48 @@ import { LEVEL_ITEM_DEFAULTS } from "../level-item";
 
 A multi-purpose **horizontal level**, which can contain almost any other element.
 
-The structure of a `<Level>` is:
+<Content>
+  <p>
+    The <strong>structure</strong> of a <code>{"<Level>"}</code> is the
+    following:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Level>"}</code>: main container
+      <ul>
+        <li>
+          <code>{"<Level.Item>"}</code> for the left or right side
+          <ul>
+            <li>
+              <code>{"<Level.Item>"}</code> for each individual element
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    In a <code>{"<Level.Item>"}</code>, you can then insert almost{" "}
+    <em>anything</em> you want: a <code>{"<Title>"}</code>, a{" "}
+    <code>{"<Button>"}</code>, an <code>{"<Input>"}</code>, or just simple text.
+    No matter what elements you put inside an <strong>rbx</strong>{" "}
+    <code>{"<Level>"}</code>, they will always be{" "}
+    <strong>vertically centered</strong>.
+  </p>
+</Content>
 
-- `<Level>`: main container
-  - `<Level.Item>`: for each individual element
-    - `<Level.Item>`
+The example below adds a `1px solid black` border to each `<Level.Item>` and a `1px dotted red` border to the `<Level>`, to depict the placement of the components.
 
-In a `<Level.Item>`, you can insert almost _anything_ you want: a `<Title>`, a `<Button>`, an `<Input>`, or just text.
-Regardless, these elements will always be **vertically centered**.
+<Playground>
+  <Level style={{ border: "1px dotted red" }}>
+    <Level.Item align="left" style={{ border: "1px solid black" }}>
+      <code>{'<Level.Item align="left">'}</code>
+    </Level.Item>
+    <Level.Item align="right" style={{ border: "1px solid black" }}>
+      <code>{'<Level.Item align="right">'}</code>
+    </Level.Item>
+  </Level>
+</Playground>
 
 <Playground>
   <Level>
@@ -102,14 +145,14 @@ If you don't use the `align` prop of `<Level.Item>`, you can include as many `<L
 <Playground>
   <Level>
     <Level.Item as="p" textAlign="centered">
-      <a className="link is-info" href="#home">
+      <Generic as="a" className="link" color="info" href="#home">
         Home
-      </a>
+      </Generic>
     </Level.Item>
     <Level.Item as="p" textAlign="centered">
-      <a className="link is-info" href="#menu">
+      <Generic as="a" className="link" color="info" href="#menu">
         Menu
-      </a>
+      </Generic>
     </Level.Item>
     <Level.Item as="p" textAlign="centered">
       <img
@@ -120,14 +163,14 @@ If you don't use the `align` prop of `<Level.Item>`, you can include as many `<L
       />
     </Level.Item>
     <Level.Item as="p" textAlign="centered">
-      <a className="link is-info" href="#reservations">
+      <Generic as="a" className="link" color="info" href="#reservations">
         Reservations
-      </a>
+      </Generic>
     </Level.Item>
     <Level.Item as="p" textAlign="centered">
-      <a className="link is-info" href="#contact">
+      <Generic as="a" className="link" color="info" href="#contact">
         Contact
-      </a>
+      </Generic>
     </Level.Item>
   </Level>
 </Playground>
@@ -167,35 +210,31 @@ For example, for a viewport size greater than `mobile` (up to 768px), these `<Le
   </Level>
 </Playground>
 
-## Level
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Level}
+  docPath="/layout/level"
+  name="Level"
   props={{
-    as: AsProp.makeDoc(Level.defaultProps.as),
     breakpoint: {
       description:
         'the viewport size at which the level is vertical (without overriding Bulma SASS, only "mobile" is supported)',
       typeName: "string",
       typeTip: mapEnumerable(DEFAULTS.breakpoints)
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Level} componentName="Level" />
-
-## Level.Item
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Level.Item}
+  docPath="/layout/level"
+  name="Level.Item"
   props={{
     align: {
       description: "the side of the level is placed",
       typeName: "string",
       typeTip: mapEnumerable(LEVEL_ITEM_DEFAULTS.alignments)
-    },
-    as: AsProp.makeDoc(Level.Item.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Level.Item} componentName="Level.Item" />

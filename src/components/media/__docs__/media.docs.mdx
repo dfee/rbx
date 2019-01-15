@@ -8,7 +8,7 @@ import { faHeart, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Level } from "src/components";
 import {
@@ -26,14 +26,14 @@ import {
 import { Media } from "../media";
 import { MEDIA_ITEM_DEFAULTS } from "../media-item";
 
-# Media
+# Media Object
 
-The famous **media object** prevalent in social media interfaces, but useful in any context
+The famous **media object** prevalent in social media interfaces, but useful in any context.
 
-The example below adds a `1px` border to each `<Media.Item>` to depict the item's placement.
+The example below adds a `1px solid black` border to each `<Media.Item>` and a `1px dotted red` border to the `<Media>`, to depict the placement of the components.
 
 <Playground>
-  <Media>
+  <Media style={{ border: "1px dotted red" }}>
     <Media.Item align="left" style={{ border: "1px solid black" }}>
       <code>left</code>
     </Media.Item>
@@ -239,29 +239,23 @@ You can nest `<Media>` objects up to 3 levels deep (without extending Bulma's SA
   </Media>
 </Playground>
 
-## Media
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Media.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Media}
+  docPath="/components/media-object"
+  name="Media"
 />
 
-<AsProp component={Media} componentName="Media" />
-
-## Media.Item
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Media.Item}
+  docPath="/components/media-object"
+  name="Media.Item"
   props={{
     align: {
       description: "change the position of the item inside the media container",
       typeName: "string",
       typeTip: mapEnumerable(MEDIA_ITEM_DEFAULTS.alignments)
-    },
-    as: AsProp.makeDoc(Media.Item.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Media.Item} componentName="Media.Item" />

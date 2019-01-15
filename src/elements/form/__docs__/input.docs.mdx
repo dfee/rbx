@@ -8,7 +8,7 @@ import { faCheck, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
 import { Control } from "../control";
@@ -18,7 +18,7 @@ import { Input, INPUT_DEFAULTS } from "../input";
 
 # Input
 
-This is the standard form input.
+The text **input** and its variations.
 
 <Playground>
   <Input type="text" placeholder="Text input" />
@@ -249,11 +249,13 @@ If the control contains an icon, it will remain **centered** regardless of the s
   </Field>
 </Playground>
 
-## Input
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Input}
+  docPath="/form/input"
+  name="Input"
   props={{
-    as: AsProp.makeDoc(Input.defaultProps.as),
     color: {
       description: "change the input's color",
       typeName: "string",
@@ -286,9 +288,6 @@ If the control contains an icon, it will remain **centered** regardless of the s
       description: "set the input's type",
       typeName: "string",
       typeTip: mapEnumerable(INPUT_DEFAULTS.types)
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Input} componentName="Input" />

@@ -6,7 +6,7 @@ route: /elements/form-textarea
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Control } from "../control";
 import { Field } from "../field";
@@ -14,7 +14,7 @@ import { Textarea, TEXTAREA_DEFAULTS } from "../textarea";
 
 # Textarea
 
-This is the standard textarea form input.
+The multiline **textarea** and its variations.
 
 <Playground>
   <Textarea placeholder="e.g. Hello world" />
@@ -145,11 +145,13 @@ Use the `fixedSize` prop of a `<Textarea>` to remove the user's ability to resiz
   </Control>
 </Playground>
 
-## Textarea
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Textarea}
+  docPath="/form/textarea"
+  name="Textarea"
   props={{
-    as: AsProp.makeDoc(Textarea.defaultProps.as),
     color: {
       description: "change the textarea's color",
       typeName: "string",
@@ -168,9 +170,6 @@ Use the `fixedSize` prop of a `<Textarea>` to remove the user's ability to resiz
       description: "change the textarea's state",
       typeName: "string",
       typeTip: mapEnumerable(TEXTAREA_DEFAULTS.states)
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Textarea} componentName="Textarea" />

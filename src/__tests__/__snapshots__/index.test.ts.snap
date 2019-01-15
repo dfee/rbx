@@ -1072,6 +1072,51 @@ Object {
   },
   "Table": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "Body": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "tbody",
+      },
+      "render": [Function],
+    },
+    "Cell": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "td",
+      },
+      "render": [Function],
+    },
+    "Foot": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "tfoot",
+      },
+      "render": [Function],
+    },
+    "Head": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "thead",
+      },
+      "render": [Function],
+    },
+    "Heading": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "th",
+      },
+      "render": [Function],
+    },
+    "Row": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "tr",
+      },
+      "propTypes": Object {
+        "selected": [Function],
+      },
+      "render": [Function],
+    },
     "defaultProps": Object {
       "as": "table",
     },

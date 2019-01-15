@@ -76,13 +76,21 @@ export const withEnzymeMount = contextManager(
   ({
     node,
     options,
+    makeWrappingNode,
   }: {
     node: JSX.Element;
     options?: Enzyme.MountRendererProps;
+    makeWrappingNode?(node: JSX.Element): JSX.Element;
   }) => {
     // Enzyme owns outer ref: https://github.com/airbnb/enzyme/issues/1852
     // So, mount in div
-    const outer = Enzyme.mount(<div children={node} />, options);
+    const wrappingNode =
+      makeWrappingNode !== undefined ? (
+        makeWrappingNode(node)
+      ) : (
+        <div children={node} />
+      );
+    const outer = Enzyme.mount(wrappingNode, options);
 
     return { context: { wrapper: outer.children() }, state: { outer } };
   },
@@ -277,6 +285,7 @@ export const testForwardRefAsExoticComponentIntegration = (
   defaultElement: keyof React.ReactHTML,
   bulmaClassName: string | undefined,
   refPropName: string = "ref",
+  makeWrappingNode?: (node: React.ReactNode) => JSX.Element,
 ) => {
   describe("ForwardRefAsExoticComponent [integration]", () => {
     it("should render as the default element", () => {
@@ -295,13 +304,16 @@ export const testForwardRefAsExoticComponentIntegration = (
     it("should forward ref", () => {
       const ref = React.createRef<HTMLElement>();
       const node = makeNodeFunc({ [refPropName]: ref });
-      withEnzymeMount({ node }, ({ context: { wrapper } }) => {
-        const selector =
-          bulmaClassName !== undefined
-            ? `${defaultElement}.${bulmaClassName}`
-            : defaultElement;
-        expect(ref.current).toBe(wrapper.find(selector).instance());
-      });
+      withEnzymeMount(
+        { node, makeWrappingNode },
+        ({ context: { wrapper } }) => {
+          const selector =
+            bulmaClassName !== undefined
+              ? `${defaultElement}.${bulmaClassName}`
+              : defaultElement;
+          expect(ref.current).toBe(wrapper.find(selector).instance());
+        },
+      );
     });
 
     if (bulmaClassName !== undefined) {

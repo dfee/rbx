@@ -6,7 +6,7 @@ route: /elements/tag
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Control, Delete, Field } from "src/elements";
 import { Tag, TAG_DEFAULTS } from "../tag";
@@ -14,7 +14,7 @@ import { TagGroup } from "../tag-group";
 
 # Tag
 
-The tag is simply a label.
+Small **tag labels** to insert anywhere.
 
 <Playground>
   <Tag>Tag label</Tag>
@@ -205,11 +205,13 @@ This can be useful for a long list of **blog tags**.
   </Field>
 </Playground>
 
-## Tag
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Tag}
+  docPath="/elements/tag"
+  name="Tag"
   props={{
-    as: AsProp.makeDoc(Tag.defaultProps.as),
     color: {
       description: "set the tag's color",
       typeName: "string",
@@ -219,7 +221,6 @@ This can be useful for a long list of **blog tags**.
       description: "turn the tag into a delete button",
       typeName: "boolean"
     },
-    ref: refDoc,
     rounded: {
       description: "make the tag rounded",
       typeName: "boolean"
@@ -232,19 +233,14 @@ This can be useful for a long list of **blog tags**.
   }}
 />
 
-<AsProp component={Tag} componentName="Tag" />
-
-## Tag.Group
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Tag.Group}
+  docPath="/elements/tag"
+  name="Tag.Group"
   props={{
-    as: AsProp.makeDoc(Tag.Group.defaultProps.as),
     gapless: {
       description: "attach tags together",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Tag.Group} componentName="Tag.Group" />

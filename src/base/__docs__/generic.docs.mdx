@@ -6,10 +6,16 @@ route: /base/generic
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, refDoc, mapEnumerable } from "src/__docs__";
+import {
+  ComponentFeatures,
+  SimplePropsTable,
+  asDoc,
+  mapEnumerable,
+  refDoc
+} from "src/__docs__";
 import { Generic } from "../generic";
 import { DEFAULTS } from "../helpers/variables";
-import { Notification } from "src/elements";
+import { Notification, Title } from "src/elements";
 
 # Generic
 
@@ -53,13 +59,15 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </Generic>
 </Playground>
 
-## Generic
+## API
+
+<ComponentFeatures asType={Generic.defaultProps.as} />
 
 ### Core properties
 
 <SimplePropsTable
   props={{
-    as: AsProp.makeDoc(Generic.defaultProps.as),
+    as: asDoc(Generic.defaultProps.as),
     ref: refDoc
   }}
 />
@@ -221,8 +229,8 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   }}
 />
 
-<div className="notification">
-  <h5 className="title is-5">Responsive Object & LimitedResponsive Object</h5>
+<Notification>
+  <Title as="h5" size={5}>Responsive Object & LimitedResponsive Object</Title>
   <p>
     The <strong>Rsponsive Object</strong> has the following structure:
     <pre
@@ -252,9 +260,9 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
     <br />
   </p>
 
-  <h5 className="title is-5">
+  <Title as="h5" size={5}>
     display
-  </h5>
+  </Title>
   <p>
     <code>display.value</code> specifies – for a specific breakpoint – the
     display style of the text, while
@@ -262,9 +270,9 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </p>
 
   <br />
-  <h5 className="title is-5">
+  <Title as="h5" size={5}>
     hide
-  </h5>
+  </Title>
   <p>
     <code>hide.value</code> specifies – for a specific breakpoint – whether the
     element should be hidden, while
@@ -272,9 +280,9 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </p>
 
   <br />
-  <h5 className="title is-5">
+  <Title as="h5" size={5}>
     textAlign
-  </h5>
+  </Title>
   <p>
     <code>textAlign.value</code> specifies – for a specific breakpoint – the
     alignment of the text, while <code>textAlign.only</code> specifies if it
@@ -282,9 +290,9 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </p>
 
   <br />
-  <h5 className="title is-5">
+  <Title as="h5" size={5}>
     textSize
-  </h5>
+  </Title>
   <p>
     <code>textSize.value</code> specifies – for a specific breakpoint – the size
     of the text, while <code>textSize.only</code> specifies if it should also be
@@ -292,12 +300,10 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </p>
 
   <br />
-  <p className="has-text-info">
+  <Generic as="p" textColor="info">
     The only difference between the <strong>Responsive Object</strong> and the{" "}
     <strong>LimitedResponsive Object</strong>, is that the latter does not permit
     the <code>only</code> property, as it semantically does not apply.
-  </p>
+  </Generic>
 
-</div>
-
-<AsProp component={Generic} componentName="Generic" />
+</Notification>

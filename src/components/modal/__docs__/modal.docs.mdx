@@ -8,15 +8,54 @@ import { faHeart, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, Frame, SimplePropsTable, refDoc } from "src/__docs__";
+import {
+  Frame,
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable
+} from "src/__docs__";
 import { Modal } from "../modal";
 import { Level, Media } from "src/components";
-import { Box, Button, Content, Delete, Icon, Image, Title } from "src/elements";
+import {
+  Box,
+  Button,
+  Content,
+  Delete,
+  Icon,
+  Image,
+  Notification,
+  Title
+} from "src/elements";
 import { SimpleModalManager } from "./simple-modal-manager";
 
 # Modal
 
 A classic **modal** overlay, in which you can include any content you want.
+
+<Content>
+  <p>
+    The <code>{"<Modal>"}</code> structure is very simple:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Modal>"}</code>: the main container
+      <ul>
+        <li>
+          <code>{"<Modal.Background>"}</code>: a transparent overlay that can
+          act as a click target to close the <code>{"<Modal>"}</code>
+        </li>
+        <li>
+          <code>{"<Modal.Content>"}</code>: a horizontally and vertically
+          centered container, with a maximum width of 640px, in which you can
+          include <em>any</em> content
+        </li>
+        <li>
+          <code>{"<Modal.Close>"}</code>: a simple cross located in the top
+          right corner
+        </li>
+      </ul>
+    </li>
+  </ul>
+</Content>
 
 ### Example modal
 
@@ -72,7 +111,7 @@ A classic **modal** overlay, in which you can include any content you want.
   </Frame>
 </Playground>
 
-<div class="notification is-warning">
+<Notification color="warning">
   <strong>Note:</strong> the <code>{"<SimpleModalManager>"}</code> used in these
   playgrounds is a reference implementation for the docs, and is not available
   in the release. People are usually particular about how they want to implement
@@ -86,7 +125,7 @@ A classic **modal** overlay, in which you can include any content you want.
   >
     review Dan Abramov's suggestions on StackOverflow
   </a>.
-</div>
+</Notification>
 
 ### Image modal
 
@@ -262,15 +301,17 @@ Notice that the "close" button (the `<Delete>` component) in the card header aut
   </Frame>
 </Playground>
 
-## Modal
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Modal}
+  docPath="/components/modal"
+  name="Modal"
   props={{
     active: {
       description: "whether the modal is visible",
       typeName: "boolean"
     },
-    as: AsProp.makeDoc(Modal.defaultProps.as),
     closeOnBlur: {
       description:
         "whether the modal should close when a click happens outside its element",
@@ -295,94 +336,60 @@ Notice that the "close" button (the `<Delete>` component) in the card header aut
       description:
         "a callback when the Modal should be closed (usually due to closeOnBlur, closeOnEsc, or manually toggling a close button)",
       typeName: "() => void"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Modal} componentName="Modal" />
-
-## Modal.Background
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Modal.Background}
+  docPath="/components/modal"
+  name="Modal.Background"
   props={{
-    as: AsProp.makeDoc(Modal.Background.defaultProps.as),
     onClick: {
       description: "callback when the component is clicked",
       typeName: "(event: React.MouseEvent) => void"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Modal.Background} componentName="Modal.Background" />
-
-## Modal.Card.Body
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Modal.Card.Body.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Modal.Card.Body}
+  docPath="/components/modal"
+  name="Modal.Card.Body"
 />
 
-<AsProp component={Modal.Card.Body} componentName="Modal.Card.Body" />
-
-## Modal.Card.Foot
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Modal.Card.Foot.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Modal.Card.Foot}
+  docPath="/components/modal"
+  name="Modal.Card.Body"
 />
 
-<AsProp component={Modal.Card.Foot} componentName="Modal.Card.Foot" />
-
-## Modal.Card.Title
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Modal.Card.Title.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Modal.Card.Title}
+  docPath="/components/modal"
+  name="Modal.Card.Title"
 />
 
-<AsProp component={Modal.Card.Title} componentName="Modal.Card.Title" />
-
-## Modal.Card
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Modal.Card.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Modal.Card}
+  docPath="/components/modal"
+  name="Modal.Card"
 />
 
-<AsProp component={Modal.Card} componentName="Modal.Card" />
-
-## Modal.Close
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Modal.Close}
+  docPath="/components/modal"
+  name="Modal.Close"
   props={{
-    as: AsProp.makeDoc(Modal.Close.defaultProps.as),
     onClick: {
       description: "callback when the component is clicked",
       typeName: "(event: React.MouseEvent) => void"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Modal.Close} componentName="Modal.Close" />
-
-## Modal.Content
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Modal.Content.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Modal.Content}
+  docPath="/components/modal"
+  name="Modal.Content"
 />
-
-<AsProp component={Modal.Content} componentName="Modal.Content" />

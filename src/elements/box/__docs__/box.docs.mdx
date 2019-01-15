@@ -8,14 +8,16 @@ import { faHeart, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { Level, Media } from "src/components";
 import { Content, Icon, Image } from "src/elements";
 import { Box } from "../box";
 
 # Box
 
-The box component is a container with a shadow, border, radius and some padding.
+A white box to contain other elements.
+
+The `<Box>` component is a container with a shadow, border, radius and some padding.
 It's children can be images, media objects, or anything else.
 
 <Playground>
@@ -62,13 +64,10 @@ It's children can be images, media objects, or anything else.
   </Box>
 </Playground>
 
-### Box
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Box.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Box}
+  docPath="/elements/box"
+  name="Box"
 />
-
-<AsProp component={Box} componentName="Box" />

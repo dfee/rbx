@@ -10,7 +10,7 @@ type AsPropProps = {
   defaultValue?: string;
 };
 
-const makeDoc = (defaultValue: string): PropDoc => ({
+export const asDoc = (defaultValue: string): PropDoc => ({
   defaultValue,
   description:
     'the React Component or JSX Element (e.g. "div" or "span") to render as',
@@ -61,7 +61,7 @@ export const AsProp: React.FC<AsPropProps> = Object.assign(
       </div>
     );
   },
-  { makeDoc },
+  { makeDoc: asDoc },
 );
 
 export const refDoc = {

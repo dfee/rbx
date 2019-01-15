@@ -19,7 +19,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
 import { Button, BUTTON_DEFAULTS } from "../button";
@@ -27,7 +27,7 @@ import { BUTTON_GROUP_DEFAULTS } from "../button-group";
 
 # Button
 
-The `<Button>` is a standard button on steroids.
+The classic button, in different colors, sizes, and states.
 
 <Playground>
   <Button.Group>
@@ -483,11 +483,13 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
   </Button.Group>
 </Playground>
 
-## Button
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Button}
+  docPath="/elements/button"
+  name="Button"
   props={{
-    as: AsProp.makeDoc(Button.defaultProps.as),
     color: {
       description: "the color of the button",
       typeName: "string",
@@ -505,7 +507,6 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
       description: "whether the button is outlined",
       typeName: "boolean"
     },
-    ref: refDoc,
     rounded: {
       description: "whether the button is rounded",
       typeName: "boolean"
@@ -535,24 +536,19 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
   }}
 />
 
-<AsProp component={Button} componentName="Button" />
-
-## Button.Group
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Button.Group}
+  docPath="/elements/button"
+  name="Button.Group"
   props={{
     align: {
       description: "the alignment of the button group",
       typeName: "string",
       typeTip: mapEnumerable(BUTTON_GROUP_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Button.Group.defaultProps.as),
     hasAddons: {
       description: "whether the button group allows addons",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Button.Group} componentName="Button.Group" />

@@ -6,15 +6,14 @@ route: /layout/footer
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Content } from "src/elements";
 import { Footer } from "../footer";
 
 # Footer
 
-The `<Footer>` component is simple and renders a responsive **footer**.
-It can include lists, headings, columns, icons, buttons, etc.
+A simple responsive **footer** which can include anything: lists, headings, columns, icons, buttons, etc.
 
 <Playground>
   <Footer>
@@ -25,23 +24,18 @@ It can include lists, headings, columns, icons, buttons, etc.
         <a href="https://opensource.org/licenses/mit-license.php">
           MIT License
         </a>
-        . The website content is licensed{" "}
-        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+        . The website content is licensed <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
           CC BY NC SA 4.0
-        </a>
-        .
+        </a>.
       </p>
     </Content>
   </Footer>
 </Playground>
 
-## Footer
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Footer.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Footer}
+  docPath="/layout/footer"
+  name="Footer"
 />
-
-<AsProp component={Footer} componentName="Footer" />

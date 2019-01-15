@@ -7,11 +7,9 @@ route: /elements/container
 import { Playground } from "docz";
 
 import {
-  AsProp,
   Frame,
-  SimplePropsTable,
-  mapEnumerable,
-  refDoc
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable
 } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Notification } from "src/elements";
@@ -19,7 +17,7 @@ import { Container } from "../container";
 
 # Container
 
-The container centers its content horizontally.
+A simple container to center your content horizontally.
 
 <Playground>
   <Frame updateHeightDelay={0}>
@@ -59,11 +57,13 @@ Use the `fluid` prop for the container to fit horizontally with padding.
   </Frame>
 </Playground>
 
-## Container
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Container}
+  docPath="/layout/container"
+  name="Container"
   props={{
-    as: AsProp.makeDoc(Container.defaultProps.as),
     breakpoint: {
       description:
         "the responsive size at which this container is no longer fullwidth",
@@ -74,9 +74,6 @@ Use the `fluid` prop for the container to fit horizontally with padding.
       description:
         "whether the container expands to fit horizontally with padding",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Container} componentName="Container" />

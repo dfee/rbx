@@ -14,7 +14,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Table, Title } from "src/elements";
 import { Section } from "src/layout";
@@ -22,34 +22,18 @@ import { Icon, ICON_DEFAULTS } from "../icon";
 
 # Icon
 
+**rbx** is compatible with all icon font libraries:
+[Font Awesome 5](https://fontawesome.com),
+[Font Awesome 4](http://fontawesome.io/),
+[Material Design Icons](https://materialdesignicons.com/),
+[Open Iconic](https://useiconic.com/open),
+[Ionicons](http://ionicons.com/),
+etc.
+
 The `<Icon>` component is a container for any type of **icon font**.
 If the icon takes a few seconds to load, the `<Icon>` container provides a reliable square that will prevent page jumps as loading occurs.
 
-<div class="notification is-warning">
-  <p>
-    <strong>Note:</strong> Because <strong>rbx</strong> doesn't provide any
-    icons itself, you'll need to bring your own. Here are some good choices:
-  </p>
-  <br />
-  <ul>
-    <li>
-      <a href="https://fontawesome.com/">Font Awesome</a>
-    </li>
-    <li>
-      <a href="https://materialdesignicons.com/">Material Design</a>
-    </li>
-    <li>
-      <a href="https://useiconic.com/open">Open Iconic</a>
-    </li>
-    <li>
-      <a href="http://ionicons.com/">Ionicons</a>
-    </li>
-  </ul>
-  <br />
-  <p>
-    The examples here use <strong>Font Awesome</strong> icons.
-  </p>
-</div>
+The examples here use **Font Awesome** icons.
 
 Here is basic usage, with the `<Icon>`'s `backgroundColor` prop set to highlight the icon.
 
@@ -205,22 +189,23 @@ As before, the `backgroundColor` is set to provide additional indication of the 
   </Table>
 </Playground>
 
-## Icon
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Icon}
+  docPath="/elements/icon"
+  name="Icon"
   props={{
     align: {
       description: "set the alignment of the icon (for use in a form control)",
       typeName: "string",
       typeTip: mapEnumerable(ICON_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Icon.defaultProps.as),
     color: {
       description: "set the icon's color",
       typeName: "string",
       typeTip: mapEnumerable(DEFAULTS.colors)
     },
-    ref: refDoc,
     size: {
       description: "set the icon's size",
       typeName: "string",
@@ -228,5 +213,3 @@ As before, the `backgroundColor` is set to provide additional indication of the 
     }
   }}
 />
-
-<AsProp component={Icon} componentName="Icon" />

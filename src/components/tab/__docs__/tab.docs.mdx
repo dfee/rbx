@@ -16,7 +16,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Icon, Title } from "src/elements";
 import { Tab } from "../tab";
@@ -313,37 +313,35 @@ And here are **fullwidth toggle** tabs:
   </Tab.Group>
 </Playground>
 
-## Tab
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Tab}
+  docPath="/components/tabs"
+  name="Tab"
   props={{
     active: {
       description: "set the tab as currently active",
       typeName: "boolean"
-    },
-    as: AsProp.makeDoc(Tab.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Tab} componentName="Tab" />
-
-## Tab.Group
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Tab.Group}
+  docPath="/components/tabs"
+  name="Tab.Group"
   props={{
     align: {
       description: "set the tab group's alignment",
       typeName: "string",
       typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Tab.Group.defaultProps.as),
     fullsize: {
       description:
         "expand the tab group to consume all available horizontal space",
       typeName: "boolean"
     },
-    ref: refDoc,
     size: {
       description: "set the tab group's size",
       typeName: "string",
@@ -356,5 +354,3 @@ And here are **fullwidth toggle** tabs:
     }
   }}
 />
-
-<AsProp component={Tab.Group} componentName="Tab.Group" />

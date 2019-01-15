@@ -6,14 +6,24 @@ route: /grid/tile
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Box, Content, Image, Notification, Title } from "src/elements";
+import {
+  Box,
+  Content,
+  Highlight,
+  Image,
+  Notification,
+  Title
+} from "src/elements";
+import { Message } from "src/components";
 import { Tile, TILE_DEFAULTS } from "../tile";
 
-# Tile
+# Tiles Powered by Flexbox
 
-The `<Tile>` is a single component that enables the building of [Metro-like](<https://en.wikipedia.org/wiki/Metro_(design_language)>) or [Pinterest-like](https://www.pinterest.com) grids.
+A **single tile** component to build 2-dimensional
+[Metro-like](<https://en.wikipedia.org/wiki/Metro_(design_language)>),
+[Pinterest-like](https://www.pinterest.com),
 
 <Playground>
   <Tile kind="ancestor">
@@ -154,14 +164,14 @@ For example, you can render a `<Tile>` as a `<Notification>` with: `<Tile as={No
   </Tile>
 </Playground>
 
-<article class="message is-danger">
-  <div class="message-header">3 levels deep at least...</div>
-  <div class="message-body">
-    <div class="content">
+<Message color="danger">
+  <Message.Header>3 levels deep at least...</Message.Header>
+  <Message.Body>
+    <Content>
       <p>
         You need at least <strong>3 levels</strong> of hierarchy:
       </p>
-      <figure class="highlight has-text-left">
+      <Highlight as="figure" textAlign="left">
         <pre>
           <code>
             {`<Tile kind="ancestor">
@@ -171,9 +181,17 @@ For example, you can render a `<Tile>` as a `<Notification>` with: `<Tile as={No
 </Tile>`}
           </code>
         </pre>
-      </figure>
+      </Highlight>
+    </Content>
+  </Message.Body>
+</Message>
+
+<Message color="success">
+  <Message.Header>... but more levels if you want!</Message.Header>
+  <Message.Body>
+    <Content>
       <p>You can, however, nest tiles deeper than that:</p>
-      <figure class="highlight has-text-left">
+      <Highlight as="figure" textAlign="left">
         <pre>
           <code>
             {`<Tile kind="ancestor">
@@ -194,15 +212,15 @@ For example, you can render a `<Tile>` as a `<Notification>` with: `<Tile as={No
 </Tile>`}
           </code>
         </pre>
-      </figure>
+      </Highlight>
       <p>
         Notice that only the <strong>direct</strong> parent of a{" "}
         <code>child</code> uses the
         <code>type="parent"</code> prop.
       </p>
-    </div>
-  </div>
-</article>
+    </Content>
+  </Message.Body>
+</Message>
 
 ### 3 columns
 
@@ -550,17 +568,18 @@ For example, you can render a `<Tile>` as a `<Notification>` with: `<Tile as={No
   </Tile>
 </Playground>
 
-## Tile
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Tile}
+  docPath="/layout/tiles"
+  name="Tile"
   props={{
-    as: AsProp.makeDoc(Tile.defaultProps.as),
     kind: {
       description: "the depth of the tile in the tree",
       typeName: "string",
       typeTip: mapEnumerable(TILE_DEFAULTS.kinds)
     },
-    ref: refDoc,
     size: {
       description: "the size of the tile",
       typeName: "number",
@@ -572,5 +591,3 @@ For example, you can render a `<Tile>` as a `<Notification>` with: `<Tile as={No
     }
   }}
 />
-
-<AsProp component={Tile} componentName="Tile" />

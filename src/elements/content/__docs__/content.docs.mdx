@@ -7,17 +7,17 @@ route: /elements/content
 import { Playground } from "docz";
 
 import {
-  AsProp,
   Frame,
-  SimplePropsTable,
-  mapEnumerable,
-  refDoc
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable
 } from "src/__docs__";
 import { Title } from "src/elements";
 import { Content, CONTENT_DEFAULTS } from "../content";
 import { CONTENT_ORDERED_LIST_DEFAULTS } from "../content-ordered-list";
 
 # Content
+
+A single class to handle **WYSIWYG** generated content, where only **HTML tags** are available
 
 <Playground>
   <Content>
@@ -90,12 +90,13 @@ Use the `type` prop on `<Content.OrderedList>` to control the bullet styling of 
   }
 </Playground>
 
-## Content
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Content}
+  docPath="/elements/content"
+  name="Content"
   props={{
-    as: AsProp.makeDoc(Content.defaultProps.as),
-    ref: refDoc,
     size: {
       description: "changes the font-size",
       typeName: "string",
@@ -104,14 +105,11 @@ Use the `type` prop on `<Content.OrderedList>` to control the bullet styling of 
   }}
 />
 
-<AsProp component={Content} componentName="Content" />
-
-## Content.OrderedList
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Content.OrderedList}
+  docPath="/elements/content"
+  name="Content.OrderedList"
   props={{
-    as: AsProp.makeDoc(Content.OrderedList.defaultProps.as),
-    ref: refDoc,
     type: {
       description: "changes the item marker of the list",
       typeName: "string",
@@ -120,18 +118,8 @@ Use the `type` prop on `<Content.OrderedList>` to control the bullet styling of 
   }}
 />
 
-<AsProp component={Content.OrderedList} componentName="Content.OrderedList" />
-
-## Content.OrderedList.Item
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Content.OrderedList.Item.defaultProps.as),
-    ref: refDoc
-  }}
-/>
-
-<AsProp
+<ForwardRefAsExoticComponentDoc
   component={Content.OrderedList.Item}
-  componentName="Content.OrderedList.Item"
+  docPath="/elements/content"
+  name="Content.OrderedList.Item"
 />

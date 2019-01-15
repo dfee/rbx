@@ -6,14 +6,14 @@ route: /layout/section
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Container, Content, Title } from "src/elements";
 import { Section, SECTION_DEFAULTS } from "../section";
 
 # Section
 
-The `<Section>` component is a simple container to divide your page.
+A simple container to divide your page into **sections**.
 
 <Playground>
   <Container>
@@ -49,12 +49,13 @@ Use the `size` prop to resize the `<Section>`.
 
 </Playground>
 
-## Section
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Section}
+  docPath="/layout/section"
+  name="Section"
   props={{
-    as: AsProp.makeDoc(Section.defaultProps.as),
-    ref: refDoc,
     size: {
       description: "change the vertical spacing",
       typeName: "string",
@@ -62,5 +63,3 @@ Use the `size` prop to resize the `<Section>`.
     }
   }}
 />
-
-<AsProp component={Section} componentName="Section" />

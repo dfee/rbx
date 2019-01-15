@@ -6,7 +6,7 @@ route: /elements/other
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { Table } from "src/elements";
 import { Block } from "../block";
 import { Delete, DELETE_DEFAULTS } from "../delete";
@@ -18,7 +18,7 @@ import { Numeric } from "../numeric";
 # Other Components
 
 These are utility components for the Bulma library.
-Often, these components aren't useful on their own.
+Often, these components aren't very useful on their own.
 
 ### Block
 
@@ -30,6 +30,8 @@ The `<Block>` component is useful for creating vertical space between unrelated 
 </Playground>
 
 ### Delete
+
+A versatile **delete** cross.
 
 Frequently used with the `<Modal>` and `<Notification>` components.
 
@@ -98,23 +100,15 @@ Useful when a user is waiting for content to load.
   <Numeric>42</Numeric>
 </Playground>
 
-## Block
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc component={Block} name="Block" />
+
+<ForwardRefAsExoticComponentDoc
+  component={Delete}
+  docPath="/elements/delete"
+  name="Delete"
   props={{
-    as: AsProp.makeDoc(Block.defaultProps.as),
-    ref: refDoc
-  }}
-/>
-
-<AsProp component={Block} componentName="Block" />
-
-## Delete
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Delete.defaultProps.as),
-    ref: refDoc,
     size: {
       description: "set the delete's size",
       typeName: "string",
@@ -123,48 +117,10 @@ Useful when a user is waiting for content to load.
   }}
 />
 
-<AsProp component={Delete} componentName="Delete" />
+<ForwardRefAsExoticComponentDoc component={Heading} name="Heading" />
 
-## Heading
+<ForwardRefAsExoticComponentDoc component={Highlight} name="Highlight" />
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Heading.defaultProps.as),
-    ref: refDoc
-  }}
-/>
+<ForwardRefAsExoticComponentDoc component={Loader} name="Loader" />
 
-<AsProp component={Heading} componentName="Heading" />
-
-## Highlight
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Highlight.defaultProps.as),
-    ref: refDoc
-  }}
-/>
-
-<AsProp component={Highlight} componentName="Highlight" />
-
-## Loader
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Loader.defaultProps.as),
-    ref: refDoc
-  }}
-/>
-
-<AsProp component={Loader} componentName="Loader" />
-
-## Numeric
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Numeric.defaultProps.as),
-    ref: refDoc
-  }}
-/>
-
-<AsProp component={Numeric} componentName="Numeric" />
+<ForwardRefAsExoticComponentDoc component={Numeric} name="Numeric" />

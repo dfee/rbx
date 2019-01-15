@@ -1,4 +1,10 @@
 import { Table } from "src/elements/table/table";
+import { TableBody } from "src/elements/table/table-body";
+import { TableCell } from "src/elements/table/table-cell";
+import { TableFoot } from "src/elements/table/table-foot";
+import { TableHead } from "src/elements/table/table-head";
+import { TableHeading } from "src/elements/table/table-heading";
+import { TableRow } from "src/elements/table/table-row";
 
 import {
   hasProperties,
@@ -18,6 +24,12 @@ const makeNode = makeNodeFactory(COMPONENT);
 
 describe(`${COMPONENT_NAME} component`, () => {
   hasProperties(COMPONENT, {
+    Body: TableBody,
+    Cell: TableCell,
+    Foot: TableFoot,
+    Head: TableHead,
+    Heading: TableHeading,
+    Row: TableRow,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 

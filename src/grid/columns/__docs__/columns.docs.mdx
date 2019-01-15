@@ -6,22 +6,34 @@ route: /grid/columns
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Box, Notification, Title } from "src/elements";
+import { Box, Content, Notification, Title } from "src/elements";
 import { Column, COLUMN_DEFAULTS } from "../column";
 import { COLUMN_GROUP_DEFAULTS } from "../column-group";
 
 # Columns
 
-Responsive columns powered by the flexbox.
+The power of Flexbox in a simple interface.
 
-Building a **columns layout** is simple:
-
-1. Add a `<Column.Group>` component
-2. Add as many `<Column>` components as you want
-
-Each column will have an **equal width**, no matter the number of columns.
+<Content>
+  <p>
+    Building a <strong>columns layout</strong> with <strong>rbx</strong> is very
+    simple:
+  </p>
+  <ol>
+    <li>
+      Add a <code>{"<Coluumn.Group>"}</code> container
+    </li>
+    <li>
+      Add as many <code>{"<Column>"}</code> components as you want
+    </li>
+  </ol>
+  <p>
+    Each <code>{"<Column>"}</code> will have an <strong>equal width</strong>, no
+    matter the number of <code>{"<Column>"}</code>s.
+  </p>
+</Content>
 
 <Playground>
   <Column.Group>
@@ -222,7 +234,42 @@ Use the breakpoint-specific prop to set a `size`, `offset` or `narrow` containme
 
 ### Nesting
 
-You can nest `<Column.Group>`s within `<Column>`s for more flexibility in your design.
+<Content>
+  <p>
+    You can <strong>nest</strong> <code>{"<Column>"}</code>s to have more
+    flexibility in your design. You only need to follow this structure:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Column.Group>"}</code>: top-level columns container
+      <ul>
+        <li>
+          <code>{"<Column>"}</code>
+          <ul>
+            <li>
+              <code>{"<Column.Group>"}</code>: nested columns
+              <ul>
+                <li>
+                  <code>{"<Column>"}</code> and so on…
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    The difference with{" "}
+    <a href="https://bulma.io/documentation/columns/options/#multiline">
+      multiline columns
+    </a>{" "}
+    is the <strong>order</strong> in the HTML code: all the{" "}
+    <strong class="has-text-info">blue</strong> columns appear <em>before</em>{" "}
+    the <strong class="has-text-danger">red</strong> ones. Resize to a narrower
+    viewport to see the result.
+  </p>
+</Content>
 
 <Playground>
   <Column.Group>
@@ -454,11 +501,13 @@ Resize the playground below to see it in action.
   </Column.Group>
 </Playground>
 
-## Column
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Column}
+  docPath="/columns"
+  name="Column"
   props={{
-    as: AsProp.makeDoc(Column.defaultProps.as),
     desktop: {
       description: "options when the screen size is between 1024px and 1215px",
       typeName: "ColumnBreakpointOptions"
@@ -480,7 +529,6 @@ Resize the playground below to see it in action.
       typeName: "string",
       typeTip: mapEnumerable(COLUMN_DEFAULTS.sizes)
     },
-    ref: refDoc,
     size: {
       description: "determines the relative size of the column",
       typeName: "string | number",
@@ -497,8 +545,8 @@ Resize the playground below to see it in action.
   }}
 />
 
-<div className="notification">
-  <h5 className="title is-5">ColumnBreakpointOptions Object</h5>
+<Notification>
+  <Title as="h5" size={5}>ColumnBreakpointOptions Object</Title>
   <p>
     The <strong>ColumnBreakpointOptions Object</strong> has the following
     structure:
@@ -532,15 +580,15 @@ Resize the playground below to see it in action.
     <code>size</code> specifies – for a specific breakpoint – the relative size
     of the column.
   </p>
-</div>
+</Notification>
 
-<AsProp component={Column} componentName="Column" />
+## API
 
-## Column.Group
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Column.Group}
+  docPath="/columns"
+  name="Column.Group"
   props={{
-    as: AsProp.makeDoc(Column.Group.defaultProps.as),
     breakpoint: {
       description: "the screen size at which the columns become stacked",
       typeName: "string",
@@ -590,13 +638,12 @@ Resize the playground below to see it in action.
     vcentered: {
       description: "the columns will be vertically centered",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<div className="notification">
-  <h5 className="title is-5">ColumnGroupBreakpointOptions Object</h5>
+<Notification>
+  <Title as="h5" size={5}>ColumnGroupBreakpointOptions Object</Title>
   <p>
     The <strong>ColumnGroupBreakpointOptions Object</strong> has the following
     structure:
@@ -616,6 +663,4 @@ Resize the playground below to see it in action.
     <code>gapSize</code> specifies – for a specific breakpoint – the gap-size
     between columns.
   </p>
-</div>
-
-<AsProp component={Column.Group} componentName="Column.Group" />
+</Notification>

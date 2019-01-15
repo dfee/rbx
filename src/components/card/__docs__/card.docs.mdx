@@ -8,7 +8,7 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Media } from "src/components";
 import { Content, Icon, Image, Title } from "src/elements";
@@ -17,16 +17,49 @@ import { CARD_HEADER_TITLE_DEFAULTS } from "../card-header-title";
 
 # Card
 
-The `<Card>` component is useful for featuring content.
+An all-around flexible and composable component.
 
-- `<Card>`: the main container
-  - `<Card.Header>`: a horizontal bar with a shadow
-    - `<Card.Header.Title>`: a left-aligned bold text
-    - `<Card.Header.Icon>`: a placeholder for an `<Icon>`
-  - `<Card.Image>`: a fullwidth container for a responsive `<Image>`
-  - `<Card.Content>`: a multi-purpose container for _any_ other element
-  - `<Card.Footer>`: a horizontal list of controls
-    - `<Card.Header.Icon>`: a repeatable list item
+<Content>
+  <p>
+    The <code>{"<Card>"}</code> component comprises several other components
+    that you can mix and match:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Card>"}</code>: the main container
+      <ul>
+        <li>
+          <code>{"<Card.Header>"}</code>: a horizontal bar with a shadow
+          <ul>
+            <li>
+              <code>{"<Card.Header.Title>"}</code>: a left-aligned bold text
+            </li>
+            <li>
+              <code>{"<Card.Header.Icon>"}</code>: a placeholder for an{" "}
+              <code>{"<Icon>"}</code>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <code>{"<Card.Image>"}</code>: a fullwidth container for a responsive
+          image
+        </li>
+        <li>
+          <code>{"<Card.Content>"}</code>: a multi-purpose container for{" "}
+          <em>any</em> other component
+        </li>
+        <li>
+          <code>{"<Card.Footer>"}</code>: a horizontal list of controls
+          <ul>
+            <li>
+              <code>{"<Card.Footer.Item>"}</code>: a repeatable list item
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</Content>
 
 <Playground>
   <Card>
@@ -126,95 +159,52 @@ The `<Card>` component is useful for featuring content.
   </Card>
 </Playground>
 
-## Card
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card}
+  docPath="/components/card"
+  name="Card"
 />
 
-<AsProp component={Card} componentName="Card" />
-
-## Card.Content
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.Content.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card.Content}
+  docPath="/components/card"
+  name="Card.Content"
 />
 
-<AsProp component={Card.Content} componentName="Card.Content" />
-
-## Card.Footer
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.Footer.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card.Footer}
+  docPath="/components/card"
+  name="Card.Footer"
 />
 
-<AsProp component={Card.Footer} componentName="Card.Footer" />
-
-## Card.Footer.Item
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.Footer.Item.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card.Footer.Item}
+  docPath="/components/card"
+  name="Card.Footer.Item"
 />
 
-<AsProp component={Card.Footer.Item} componentName="Card.Footer.Item" />
-
-## Card.Header
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.Header.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card.Header}
+  docPath="/components/card"
+  name="Card.Header"
 />
 
-<AsProp component={Card.Header} componentName="Card.Header" />
-
-## Card.Header.Icon
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.Header.Icon.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card.Header.Icon}
+  docPath="/components/card"
+  name="Card.Header.Icon"
 />
 
-<AsProp component={Card.Header.Icon} componentName="Card.Header.Icon" />
-
-## Card.Header.Title
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.Header.Title.defaultProps.as),
-    align: {
-      description: "set the alignment of the title",
-      typeName: "string",
-      typeTip: mapEnumerable(CARD_HEADER_TITLE_DEFAULTS.alignments)
-    },
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card.Header.Title}
+  docPath="/components/card"
+  name="Card.Header.Title"
 />
 
-<AsProp component={Card.Header.Title} componentName="Card.Header.Title" />
-
-## Card.Image
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Card.Image.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Card.Image}
+  docPath="/components/card"
+  name="Card.Image"
 />
-
-<AsProp component={Card.Image} componentName="Card.Image" />

@@ -6,86 +6,132 @@ route: /elements/table
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
+import { Content } from "src/elements";
 import { Table } from "../table";
 
 # Table
 
-The `<Table>` component is useful for organizing tabular data.
+The inevitable HTML **table**, with special case cells.
+
+<Content>
+  <p>
+    Use the single <code>{"<Table>"}</code> with the following structure:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Table>"}</code> the main <strong>container</strong>
+      <ul>
+        <li>
+          <code>{"<Table.Head>"}</code> the optional <strong>top</strong> part
+          of the <code>{"<Table>"}</code>
+        </li>
+        <li>
+          <code>{"<Table.Foot>"}</code> the optional <strong>bottom</strong>{" "}
+          part of the <code>{"<Table>"}</code>
+        </li>
+        <li>
+          <code>{"<Table.Body>"}</code> the main <strong>content</strong> of the{" "}
+          <code>{"<Table>"}</code>
+          <ul>
+            <li>
+              <code>{"<Table.Row>"}</code> each <code>{"<Table>"}</code>{" "}
+              <strong>row</strong>
+              <ul>
+                <li>
+                  <code>{"<Table.Heading>"}</code> a <code>{"<Table>"}</code>{" "}
+                  cell <strong>heading</strong>
+                </li>
+                <li>
+                  <code>{"<Table.Cell>"}</code> a <code>{"<Table>"}</code>{" "}
+                  <strong>cell</strong>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    You can set a <code>{"<Table.Row>"}</code> as <strong>selected</strong> by
+    using the <code>selected</code> prop.
+  </p>
+</Content>
 
 <Playground>
   <Table>
-    <thead>
-      <tr>
-        <th>
+    <Table.Head>
+      <Table.Row>
+        <Table.Heading>
           <abbr title="Position">Pos</abbr>
-        </th>
-        <th>Team</th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>Team</Table.Heading>
+        <Table.Heading>
           <abbr title="Played">Pld</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Won">W</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Drawn">D</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Lost">L</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Goals for">GF</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Goals against">GA</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Goal difference">GD</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Points">Pts</abbr>
-        </th>
-        <th>Qualification or relegation</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <th>
+        </Table.Heading>
+        <Table.Heading>Qualification or relegation</Table.Heading>
+      </Table.Row>
+    </Table.Head>
+    <Table.Foot>
+      <Table.Row>
+        <Table.Heading>
           <abbr title="Position">Pos</abbr>
-        </th>
-        <th>Team</th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>Team</Table.Heading>
+        <Table.Heading>
           <abbr title="Played">Pld</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Won">W</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Drawn">D</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Lost">L</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Goals for">GF</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Goals against">GA</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Goal difference">GD</abbr>
-        </th>
-        <th>
+        </Table.Heading>
+        <Table.Heading>
           <abbr title="Points">Pts</abbr>
-        </th>
-        <th>Qualification or relegation</th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <tr>
-        <th>1</th>
-        <td>
+        </Table.Heading>
+        <Table.Heading>Qualification or relegation</Table.Heading>
+      </Table.Row>
+    </Table.Foot>
+    <Table.Body>
+      <Table.Row>
+        <Table.Heading>1</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Leicester_City_F.C."
             title="Leicester City F.C."
@@ -93,16 +139,16 @@ The `<Table>` component is useful for organizing tabular data.
             Leicester City
           </a>{" "}
           <strong>(C)</strong>
-        </td>
-        <td>38</td>
-        <td>23</td>
-        <td>12</td>
-        <td>3</td>
-        <td>68</td>
-        <td>36</td>
-        <td>+32</td>
-        <td>81</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>23</Table.Cell>
+        <Table.Cell>12</Table.Cell>
+        <Table.Cell>3</Table.Cell>
+        <Table.Cell>68</Table.Cell>
+        <Table.Cell>36</Table.Cell>
+        <Table.Cell>+32</Table.Cell>
+        <Table.Cell>81</Table.Cell>
+        <Table.Cell>
           Qualification for the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage"
@@ -110,27 +156,27 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Champions League group stage
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>2</th>
-        <td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Heading>2</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Arsenal_F.C."
             title="Arsenal F.C."
           >
             Arsenal
           </a>
-        </td>
-        <td>38</td>
-        <td>20</td>
-        <td>11</td>
-        <td>7</td>
-        <td>65</td>
-        <td>36</td>
-        <td>+29</td>
-        <td>71</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>20</Table.Cell>
+        <Table.Cell>11</Table.Cell>
+        <Table.Cell>7</Table.Cell>
+        <Table.Cell>65</Table.Cell>
+        <Table.Cell>36</Table.Cell>
+        <Table.Cell>+29</Table.Cell>
+        <Table.Cell>71</Table.Cell>
+        <Table.Cell>
           Qualification for the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage"
@@ -138,27 +184,27 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Champions League group stage
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>3</th>
-        <td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Heading>3</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C."
             title="Tottenham Hotspur F.C."
           >
             Tottenham Hotspur
           </a>
-        </td>
-        <td>38</td>
-        <td>19</td>
-        <td>13</td>
-        <td>6</td>
-        <td>69</td>
-        <td>35</td>
-        <td>+34</td>
-        <td>70</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>19</Table.Cell>
+        <Table.Cell>13</Table.Cell>
+        <Table.Cell>6</Table.Cell>
+        <Table.Cell>69</Table.Cell>
+        <Table.Cell>35</Table.Cell>
+        <Table.Cell>+34</Table.Cell>
+        <Table.Cell>70</Table.Cell>
+        <Table.Cell>
           Qualification for the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage"
@@ -166,27 +212,27 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Champions League group stage
           </a>
-        </td>
-      </tr>
-      <tr className="is-selected">
-        <th>4</th>
-        <td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row selected>
+        <Table.Heading>4</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Manchester_City_F.C."
             title="Manchester City F.C."
           >
             Manchester City
           </a>
-        </td>
-        <td>38</td>
-        <td>19</td>
-        <td>9</td>
-        <td>10</td>
-        <td>71</td>
-        <td>41</td>
-        <td>+30</td>
-        <td>66</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>19</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>10</Table.Cell>
+        <Table.Cell>71</Table.Cell>
+        <Table.Cell>41</Table.Cell>
+        <Table.Cell>+30</Table.Cell>
+        <Table.Cell>66</Table.Cell>
+        <Table.Cell>
           Qualification for the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Play-off_round"
@@ -194,27 +240,27 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Champions League play-off round
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>5</th>
-        <td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Heading>5</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Manchester_United_F.C."
             title="Manchester United F.C."
           >
             Manchester United
           </a>
-        </td>
-        <td>38</td>
-        <td>19</td>
-        <td>9</td>
-        <td>10</td>
-        <td>49</td>
-        <td>35</td>
-        <td>+14</td>
-        <td>66</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>19</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>10</Table.Cell>
+        <Table.Cell>49</Table.Cell>
+        <Table.Cell>35</Table.Cell>
+        <Table.Cell>+14</Table.Cell>
+        <Table.Cell>66</Table.Cell>
+        <Table.Cell>
           Qualification for the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Europa_League#Group_stage"
@@ -222,27 +268,27 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Europa League group stage
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>6</th>
-        <td>
+        </Table.Cell>
+      </Table.Row>
+      <Tab.Row>
+        <Table.Heading>6</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Southampton_F.C."
             title="Southampton F.C."
           >
             Southampton
           </a>
-        </td>
-        <td>38</td>
-        <td>18</td>
-        <td>9</td>
-        <td>11</td>
-        <td>59</td>
-        <td>41</td>
-        <td>+18</td>
-        <td>63</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>18</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>11</Table.Cell>
+        <Table.Cell>59</Table.Cell>
+        <Table.Cell>41</Table.Cell>
+        <Table.Cell>+18</Table.Cell>
+        <Table.Cell>63</Table.Cell>
+        <Table.Cell>
           Qualification for the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Europa_League#Group_stage"
@@ -250,27 +296,27 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Europa League group stage
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>7</th>
-        <td>
+        </Table.Cell>
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>7</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/West_Ham_United_F.C."
             title="West Ham United F.C."
           >
             West Ham United
           </a>
-        </td>
-        <td>38</td>
-        <td>16</td>
-        <td>14</td>
-        <td>8</td>
-        <td>65</td>
-        <td>51</td>
-        <td>+14</td>
-        <td>62</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>16</Table.Cell>
+        <Table.Cell>14</Table.Cell>
+        <Table.Cell>8</Table.Cell>
+        <Table.Cell>65</Table.Cell>
+        <Table.Cell>51</Table.Cell>
+        <Table.Cell>+14</Table.Cell>
+        <Table.Cell>62</Table.Cell>
+        <Table.Cell>
           Qualification for the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Europa_League#Third_qualifying_round"
@@ -278,211 +324,211 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Europa League third qualifying round
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>8</th>
-        <td>
+        </Table.Cell>
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>8</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Liverpool_F.C."
             title="Liverpool F.C."
           >
             Liverpool
           </a>
-        </td>
-        <td>38</td>
-        <td>16</td>
-        <td>12</td>
-        <td>10</td>
-        <td>63</td>
-        <td>50</td>
-        <td>+13</td>
-        <td>60</td>
-        <td />
-      </tr>
-      <tr>
-        <th>9</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>16</Table.Cell>
+        <Table.Cell>12</Table.Cell>
+        <Table.Cell>10</Table.Cell>
+        <Table.Cell>63</Table.Cell>
+        <Table.Cell>50</Table.Cell>
+        <Table.Cell>+13</Table.Cell>
+        <Table.Cell>60</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>9</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Stoke_City_F.C."
             title="Stoke City F.C."
           >
             Stoke City
           </a>
-        </td>
-        <td>38</td>
-        <td>14</td>
-        <td>9</td>
-        <td>15</td>
-        <td>41</td>
-        <td>55</td>
-        <td>−14</td>
-        <td>51</td>
-        <td />
-      </tr>
-      <tr>
-        <th>10</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>14</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>15</Table.Cell>
+        <Table.Cell>41</Table.Cell>
+        <Table.Cell>55</Table.Cell>
+        <Table.Cell>−14</Table.Cell>
+        <Table.Cell>51</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>10</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Chelsea_F.C."
             title="Chelsea F.C."
           >
             Chelsea
           </a>
-        </td>
-        <td>38</td>
-        <td>12</td>
-        <td>14</td>
-        <td>12</td>
-        <td>59</td>
-        <td>53</td>
-        <td>+6</td>
-        <td>50</td>
-        <td />
-      </tr>
-      <tr>
-        <th>11</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>12</Table.Cell>
+        <Table.Cell>14</Table.Cell>
+        <Table.Cell>12</Table.Cell>
+        <Table.Cell>59</Table.Cell>
+        <Table.Cell>53</Table.Cell>
+        <Table.Cell>+6</Table.Cell>
+        <Table.Cell>50</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>11</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Everton_F.C."
             title="Everton F.C."
           >
             Everton
           </a>
-        </td>
-        <td>38</td>
-        <td>11</td>
-        <td>14</td>
-        <td>13</td>
-        <td>59</td>
-        <td>55</td>
-        <td>+4</td>
-        <td>47</td>
-        <td />
-      </tr>
-      <tr>
-        <th>12</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>11</Table.Cell>
+        <Table.Cell>14</Table.Cell>
+        <Table.Cell>13</Table.Cell>
+        <Table.Cell>59</Table.Cell>
+        <Table.Cell>55</Table.Cell>
+        <Table.Cell>+4</Table.Cell>
+        <Table.Cell>47</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>12</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Swansea_City_A.F.C."
             title="Swansea City A.F.C."
           >
             Swansea City
           </a>
-        </td>
-        <td>38</td>
-        <td>12</td>
-        <td>11</td>
-        <td>15</td>
-        <td>42</td>
-        <td>52</td>
-        <td>−10</td>
-        <td>47</td>
-        <td />
-      </tr>
-      <tr>
-        <th>13</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>12</Table.Cell>
+        <Table.Cell>11</Table.Cell>
+        <Table.Cell>15</Table.Cell>
+        <Table.Cell>42</Table.Cell>
+        <Table.Cell>52</Table.Cell>
+        <Table.Cell>−10</Table.Cell>
+        <Table.Cell>47</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>13</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Watford_F.C."
             title="Watford F.C."
           >
             Watford
           </a>
-        </td>
-        <td>38</td>
-        <td>12</td>
-        <td>9</td>
-        <td>17</td>
-        <td>40</td>
-        <td>50</td>
-        <td>−10</td>
-        <td>45</td>
-        <td />
-      </tr>
-      <tr>
-        <th>14</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>12</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>17</Table.Cell>
+        <Table.Cell>40</Table.Cell>
+        <Table.Cell>50</Table.Cell>
+        <Table.Cell>−10</Table.Cell>
+        <Table.Cell>45</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>14</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/West_Bromwich_Albion_F.C."
             title="West Bromwich Albion F.C."
           >
             West Bromwich Albion
           </a>
-        </td>
-        <td>38</td>
-        <td>10</td>
-        <td>13</td>
-        <td>15</td>
-        <td>34</td>
-        <td>48</td>
-        <td>−14</td>
-        <td>43</td>
-        <td />
-      </tr>
-      <tr>
-        <th>15</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>10</Table.Cell>
+        <Table.Cell>13</Table.Cell>
+        <Table.Cell>15</Table.Cell>
+        <Table.Cell>34</Table.Cell>
+        <Table.Cell>48</Table.Cell>
+        <Table.Cell>−14</Table.Cell>
+        <Table.Cell>43</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>15</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Crystal_Palace_F.C."
             title="Crystal Palace F.C."
           >
             Crystal Palace
           </a>
-        </td>
-        <td>38</td>
-        <td>11</td>
-        <td>9</td>
-        <td>18</td>
-        <td>39</td>
-        <td>51</td>
-        <td>−12</td>
-        <td>42</td>
-        <td />
-      </tr>
-      <tr>
-        <th>16</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>11</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>18</Table.Cell>
+        <Table.Cell>39</Table.Cell>
+        <Table.Cell>51</Table.Cell>
+        <Table.Cell>−12</Table.Cell>
+        <Table.Cell>42</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>16</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/A.F.C._Bournemouth"
             title="A.F.C. Bournemouth"
           >
             AFC Bournemouth
           </a>
-        </td>
-        <td>38</td>
-        <td>11</td>
-        <td>9</td>
-        <td>18</td>
-        <td>45</td>
-        <td>67</td>
-        <td>−22</td>
-        <td>42</td>
-        <td />
-      </tr>
-      <tr>
-        <th>17</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>11</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>18</Table.Cell>
+        <Table.Cell>45</Table.Cell>
+        <Table.Cell>67</Table.Cell>
+        <Table.Cell>−22</Table.Cell>
+        <Table.Cell>42</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>17</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Sunderland_A.F.C."
             title="Sunderland A.F.C."
           >
             Sunderland
           </a>
-        </td>
-        <td>38</td>
-        <td>9</td>
-        <td>12</td>
-        <td>17</td>
-        <td>48</td>
-        <td>62</td>
-        <td>−14</td>
-        <td>39</td>
-        <td />
-      </tr>
-      <tr>
-        <th>18</th>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>12</Table.Cell>
+        <Table.Cell>17</Table.Cell>
+        <Table.Cell>48</Table.Cell>
+        <Table.Cell>62</Table.Cell>
+        <Table.Cell>−14</Table.Cell>
+        <Table.Cell>39</Table.Cell>
+        <Table.Cell />
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>18</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Newcastle_United_F.C."
             title="Newcastle United F.C."
@@ -490,16 +536,16 @@ The `<Table>` component is useful for organizing tabular data.
             Newcastle United
           </a>{" "}
           <strong>(R)</strong>
-        </td>
-        <td>38</td>
-        <td>9</td>
-        <td>10</td>
-        <td>19</td>
-        <td>44</td>
-        <td>65</td>
-        <td>−21</td>
-        <td>37</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>10</Table.Cell>
+        <Table.Cell>19</Table.Cell>
+        <Table.Cell>44</Table.Cell>
+        <Table.Cell>65</Table.Cell>
+        <Table.Cell>−21</Table.Cell>
+        <Table.Cell>37</Table.Cell>
+        <Table.Cell>
           Relegation to the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_Football_League_Championship"
@@ -507,11 +553,11 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Football League Championship
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>19</th>
-        <td>
+        </Table.Cell>
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>19</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Norwich_City_F.C."
             title="Norwich City F.C."
@@ -519,16 +565,16 @@ The `<Table>` component is useful for organizing tabular data.
             Norwich City
           </a>{" "}
           <strong>(R)</strong>
-        </td>
-        <td>38</td>
-        <td>9</td>
-        <td>7</td>
-        <td>22</td>
-        <td>39</td>
-        <td>67</td>
-        <td>−28</td>
-        <td>34</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>9</Table.Cell>
+        <Table.Cell>7</Table.Cell>
+        <Table.Cell>22</Table.Cell>
+        <Table.Cell>39</Table.Cell>
+        <Table.Cell>67</Table.Cell>
+        <Table.Cell>−28</Table.Cell>
+        <Table.Cell>34</Table.Cell>
+        <Table.Cell>
           Relegation to the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_Football_League_Championship"
@@ -536,11 +582,11 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Football League Championship
           </a>
-        </td>
-      </tr>
-      <tr>
-        <th>20</th>
-        <td>
+        </Table.Cell>
+      </Tab.Row>
+      <Tab.Row>
+        <Table.Heading>20</Table.Heading>
+        <Table.Cell>
           <a
             href="https://en.wikipedia.org/wiki/Aston_Villa_F.C."
             title="Aston Villa F.C."
@@ -548,16 +594,16 @@ The `<Table>` component is useful for organizing tabular data.
             Aston Villa
           </a>{" "}
           <strong>(R)</strong>
-        </td>
-        <td>38</td>
-        <td>3</td>
-        <td>8</td>
-        <td>27</td>
-        <td>27</td>
-        <td>76</td>
-        <td>−49</td>
-        <td>17</td>
-        <td>
+        </Table.Cell>
+        <Table.Cell>38</Table.Cell>
+        <Table.Cell>3</Table.Cell>
+        <Table.Cell>8</Table.Cell>
+        <Table.Cell>27</Table.Cell>
+        <Table.Cell>27</Table.Cell>
+        <Table.Cell>76</Table.Cell>
+        <Table.Cell>−49</Table.Cell>
+        <Table.Cell>17</Table.Cell>
+        <Table.Cell>
           Relegation to the{" "}
           <a
             href="https://en.wikipedia.org/wiki/2016%E2%80%9317_Football_League_Championship"
@@ -565,9 +611,9 @@ The `<Table>` component is useful for organizing tabular data.
           >
             Football League Championship
           </a>
-        </td>
-      </tr>
-    </tbody>
+        </Table.Cell>
+      </Tab.Row>
+    </Table.Body>
   </Table>
 </Playground>
 
@@ -577,18 +623,18 @@ Use the `bordered` prop on `<Table>` to add borders to all the cells.
 
 <Playground>
   <Table bordered>
-    <thead>
-      <tr>
-        <th>One</th>
-        <th>Two</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Three</td>
-        <td>Four</td>
-      </tr>
-    </tbody>
+    <Table.Head>
+      <Tab.Row>
+        <Table.Heading>One</Table.Heading>
+        <Table.Heading>Two</Table.Heading>
+      </Tab.Row>
+    </Table.Head>
+    <Table.Body>
+      <Tab.Row>
+        <Table.Cell>Three</Table.Cell>
+        <Table.Cell>Four</Table.Cell>
+      </Tab.Row>
+    </Table.Body>
   </Table>
 </Playground>
 
@@ -598,13 +644,13 @@ Use the `striped` prop on `<Table>` to add stripes to alternating rows to make r
 
 <Playground>
   <Table striped>
-    <thead>
-      <tr>
-        <th>One</th>
-        <th>Two</th>
-      </tr>
-    </thead>
-    <tbody>
+    <Table.Head>
+      <Tab.Row>
+        <Table.Heading>One</Table.Heading>
+        <Table.Heading>Two</Table.Heading>
+      </Tab.Row>
+    </Table.Head>
+    <Table.Body>
       {[
         ["Three", "Four"],
         ["Five", "Six"],
@@ -612,12 +658,12 @@ Use the `striped` prop on `<Table>` to add stripes to alternating rows to make r
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
       ].map(([v1, v2]) => (
-        <tr>
-          <td>{v1}</td>
-          <td>{v2}</td>
-        </tr>
+        <Tab.Row>
+          <Table.Cell>{v1}</Table.Cell>
+          <Table.Cell>{v2}</Table.Cell>
+        </Tab.Row>
       ))}
-    </tbody>
+    </Table.Body>
   </Table>
 </Playground>
 
@@ -627,13 +673,13 @@ Use the `narrow` prop on `<Table>` to make the cells narrower.
 
 <Playground>
   <Table narrow>
-    <thead>
-      <tr>
-        <th>One</th>
-        <th>Two</th>
-      </tr>
-    </thead>
-    <tbody>
+    <Table.Head>
+      <Tab.Row>
+        <Table.Heading>One</Table.Heading>
+        <Table.Heading>Two</Table.Heading>
+      </Tab.Row>
+    </Table.Head>
+    <Table.Body>
       {[
         ["Three", "Four"],
         ["Five", "Six"],
@@ -641,12 +687,12 @@ Use the `narrow` prop on `<Table>` to make the cells narrower.
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
       ].map(([v1, v2]) => (
-        <tr>
-          <td>{v1}</td>
-          <td>{v2}</td>
-        </tr>
+        <Tab.Row>
+          <Table.Cell>{v1}</Table.Cell>
+          <Table.Cell>{v2}</Table.Cell>
+        </Tab.Row>
       ))}
-    </tbody>
+    </Table.Body>
   </Table>
 </Playground>
 
@@ -656,13 +702,13 @@ Use the `hover` prop on `<Table>` to highlight the cells on hover.
 
 <Playground>
   <Table hoverable>
-    <thead>
-      <tr>
-        <th>One</th>
-        <th>Two</th>
-      </tr>
-    </thead>
-    <tbody>
+    <Table.Head>
+      <Tab.Row>
+        <Table.Heading>One</Table.Heading>
+        <Table.Heading>Two</Table.Heading>
+      </Tab.Row>
+    </Table.Head>
+    <Table.Body>
       {[
         ["Three", "Four"],
         ["Five", "Six"],
@@ -670,12 +716,12 @@ Use the `hover` prop on `<Table>` to highlight the cells on hover.
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
       ].map(([v1, v2]) => (
-        <tr>
-          <td>{v1}</td>
-          <td>{v2}</td>
-        </tr>
+        <Tab.Row>
+          <Table.Cell>{v1}</Table.Cell>
+          <Table.Cell>{v2}</Table.Cell>
+        </Tab.Row>
       ))}
-    </tbody>
+    </Table.Body>
   </Table>
 </Playground>
 
@@ -685,13 +731,13 @@ Use the `fullwidth` prop on `<Table>` to expand it to occupy all available horiz
 
 <Playground>
   <Table fullwidth>
-    <thead>
-      <tr>
-        <th>One</th>
-        <th>Two</th>
-      </tr>
-    </thead>
-    <tbody>
+    <Table.Head>
+      <Tab.Row>
+        <Table.Heading>One</Table.Heading>
+        <Table.Heading>Two</Table.Heading>
+      </Tab.Row>
+    </Table.Head>
+    <Table.Body>
       {[
         ["Three", "Four"],
         ["Five", "Six"],
@@ -699,12 +745,12 @@ Use the `fullwidth` prop on `<Table>` to expand it to occupy all available horiz
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
       ].map(([v1, v2]) => (
-        <tr>
-          <td>{v1}</td>
-          <td>{v2}</td>
-        </tr>
+        <Tab.Row>
+          <Table.Cell>{v1}</Table.Cell>
+          <Table.Cell>{v2}</Table.Cell>
+        </Tab.Row>
       ))}
-    </tbody>
+    </Table.Body>
   </Table>
 </Playground>
 
@@ -712,13 +758,13 @@ You can combine any and all the props for expressive tables.
 
 <Playground>
   <Table bordered fullwidth hoverable narrow striped>
-    <thead>
-      <tr>
-        <th>One</th>
-        <th>Two</th>
-      </tr>
-    </thead>
-    <tbody>
+    <Table.Head>
+      <Tab.Row>
+        <Table.Heading>One</Table.Heading>
+        <Table.Heading>Two</Table.Heading>
+      </Tab.Row>
+    </Table.Head>
+    <Table.Body>
       {[
         ["Three", "Four"],
         ["Five", "Six"],
@@ -726,20 +772,22 @@ You can combine any and all the props for expressive tables.
         ["Nine", "Ten"],
         ["Eleven", "Twelve"]
       ].map(([v1, v2]) => (
-        <tr>
-          <td>{v1}</td>
-          <td>{v2}</td>
-        </tr>
+        <Tab.Row>
+          <Table.Cell>{v1}</Table.Cell>
+          <Table.Cell>{v2}</Table.Cell>
+        </Tab.Row>
       ))}
-    </tbody>
+    </Table.Body>
   </Table>
 </Playground>
 
-## Table
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Table}
+  docPath="/elements/table"
+  name="Table"
   props={{
-    as: AsProp.makeDoc(Table.defaultProps.as),
     bordered: {
       description: "add borders to all the cells",
       typeName: "boolean"
@@ -759,9 +807,48 @@ You can combine any and all the props for expressive tables.
     striped: {
       description: "add stripes to the table for scanability",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Table} componentName="Table" />
+<ForwardRefAsExoticComponentDoc
+  component={Table.Body}
+  docPath="/elements/table"
+  name="Table.Body"
+/>
+
+<ForwardRefAsExoticComponentDoc
+  component={Table.Cell}
+  docPath="/elements/table"
+  name="Table.Cell"
+/>
+
+<ForwardRefAsExoticComponentDoc
+  component={Table.Foot}
+  docPath="/elements/table"
+  name="Table.Foot"
+/>
+
+<ForwardRefAsExoticComponentDoc
+  component={Table.Head}
+  docPath="/elements/table"
+  name="Table.Head"
+/>
+
+<ForwardRefAsExoticComponentDoc
+  component={Table.Heading}
+  docPath="/elements/table"
+  name="Table.Heading"
+/>
+
+<ForwardRefAsExoticComponentDoc
+  component={Table.Row}
+  docPath="/elements/table"
+  name="Table.Row"
+  props={{
+    selected: {
+      description: "mark the row as selected",
+      typeName: "boolean"
+    }
+  }}
+/>

@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { TableBody } from "./table-body";
+import { TableCell } from "./table-cell";
+import { TableFoot } from "./table-foot";
+import { TableHead } from "./table-head";
+import { TableHeading } from "./table-heading";
+import { TableRow } from "./table-row";
 
 export type TableModifierProps = Partial<{
   bordered: boolean;
@@ -46,5 +52,13 @@ export const Table = Object.assign(
     ),
     { as: "table" },
   ),
-  { propTypes },
+  {
+    Body: TableBody,
+    Cell: TableCell,
+    Foot: TableFoot,
+    Head: TableHead,
+    Heading: TableHeading,
+    Row: TableRow,
+    propTypes,
+  },
 );

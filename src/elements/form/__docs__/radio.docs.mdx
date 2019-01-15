@@ -6,16 +6,18 @@ route: /elements/form-radio
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Control } from "../control";
 import { Label } from "../label";
 import { Radio } from "../radio";
 
-# Radio
+# Radio Button
 
-This is the form radio input.
-It is intentionally not styled, as Bulma seeks to preserve cross-browser compatibility and user experience.
+The mutually exclusive **radio buttons** in their native format.
+
+The `<Radio>` component is a simple wrapper around the `<input type="radio">` HTML elements.
+It is intentionally not styled, to preserve cross-browser compatibility and the user experience.
 
 Make sure that the linked radio buttons have the **same value** for their `name` prop.
 
@@ -61,13 +63,10 @@ Use the standard `disable` prop on the `<Radio>`, and the `disabled` prop on the
   </Control>
 </Playground>
 
-## Radio
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Radio.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Radio}
+  docPath="/form/radio"
+  name="Radio"
 />
-
-<AsProp component={Radio} componentName="Radio" />

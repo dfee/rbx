@@ -9,24 +9,42 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
 import {
-  AsProp,
   Frame,
-  SimplePropsTable,
-  mapEnumerable,
-  refDoc
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable
 } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Navbar, Tab } from "src/components";
-import { Block, Button, Container, Icon, Title } from "src/elements";
+import { Block, Button, Content, Container, Icon, Title } from "src/elements";
 import { Hero, HERO_DEFAULTS } from "../hero";
 
 # Hero
 
-The `<Hero>` component lets you add a **full width** banner to your webpage, which can optionally cover the full height of the page as well.
+An imposing **hero banner** to showcase something.
 
-The `<Hero>` must contain a child `<Hero.Body>` component, in which you can put your content.
-
-For a full height hero, you must also use the `<Hero.Head>` and `<Hero.Foot>` components, along with the `<Hero.Body>` component.
+<Content>
+  <p>
+    The <code>{"<Hero>"}</code> component allows you to add a{" "}
+    <strong>full width banner</strong> to your webpage, which can optionally
+    cover the full height of the page as well.
+  </p>
+  <p>The basic requirement of this component are:</p>
+  <ul>
+    <li>
+      <code>{"<Hero>"}</code> as the main container
+      <ul>
+        <li>
+          <code>{"<Hero.Body>"}</code> as a direct child, in which you can put
+          all your content
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+    For the full height <code>{"<Hero>"}</code> to work, you will also need a{" "}
+    <code>{"<Hero.Head>"}</code> and a <code>{"<Hero.Foot>"}</code>.
+  </p>
+</Content>
 
 <Playground>
   <Hero>
@@ -235,11 +253,13 @@ You can make a `<Hero>` that covers the whole height of the viewport by splittin
   </Frame>
 </Playground>
 
-## Hero
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Hero}
+  docPath="/layout/hero"
+  name="Hero"
   props={{
-    as: AsProp.makeDoc(Hero.defaultProps.as),
     color: {
       description: "set the hero's color",
       typeName: "string",
@@ -249,7 +269,6 @@ You can make a `<Hero>` that covers the whole height of the viewport by splittin
       description: "apply a standard gradient for the color scheme",
       typeName: "boolean"
     },
-    ref: refDoc,
     size: {
       description: "set the hero's size",
       typeName: "string",
@@ -258,37 +277,20 @@ You can make a `<Hero>` that covers the whole height of the viewport by splittin
   }}
 />
 
-<AsProp component={Hero} componentName="Hero" />
-
-## Hero.Body
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Hero.Body.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Hero.Body}
+  docPath="/layout/hero"
+  name="Hero.Body"
 />
 
-<AsProp component={Hero.Body} componentName="Hero.Body" />
-
-## Hero.Foot
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Hero.Foot.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Hero.Foot}
+  docPath="/layout/hero"
+  name="Hero.Foot"
 />
 
-<AsProp component={Hero.Foot} componentName="Hero.Foot" />
-
-## Hero.Head
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Hero.Head.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Hero.Head}
+  docPath="/layout/hero"
+  name="Hero.Head"
 />
-
-<AsProp component={Hero.Head} componentName="Hero.Head" />

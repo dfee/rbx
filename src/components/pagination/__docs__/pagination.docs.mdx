@@ -6,9 +6,9 @@ route: /components/pagination
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Block, Title } from "src/elements";
+import { Block, Content, Title } from "src/elements";
 import { Pagination, PAGINATION_DEFAULTS } from "../pagination";
 import { PAGINATION_STEP_DEFAULTS } from "../pagination-step";
 
@@ -16,7 +16,7 @@ import { PAGINATION_STEP_DEFAULTS } from "../pagination-step";
 
 A responsive, usable, and flexible **pagination**.
 
-<div className="content">
+<Content>
   <p>
     The <code>{"<Pagination>"}</code> component contains several other
     components:
@@ -41,7 +41,7 @@ A responsive, usable, and flexible **pagination**.
     All components are optional, so you can compose your{" "}
     <code>{"<Pagination>"}</code> as you wish.
   </p>
-</div>
+</Content>
 
 <Playground>
   <Pagination>
@@ -163,17 +163,18 @@ Use the `size` prop on `<Pagination>` to change the size.
 
 </Playground>
 
-## Pagination
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Pagination}
+  docPath="/components/pagination"
+  name="Pagination"
   props={{
     align: {
       description: "change the pagination's alignment of pagination items",
       typeName: "string",
       typeTip: mapEnumerable(PAGINATION_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Pagination.defaultProps.as),
-    ref: refDoc,
     rounded: {
       description: "round the pagination items",
       typeName: "boolean"
@@ -186,63 +187,47 @@ Use the `size` prop on `<Pagination>` to change the size.
   }}
 />
 
-<AsProp component={Pagination} componentName="Pagination" />
-
-## Pagination.Ellipsis
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Pagination.Ellipsis}
+  docPath="/components/pagination"
+  name="Pagination.Ellipsis"
   props={{
-    as: AsProp.makeDoc(Pagination.Ellipsis.defaultProps.as),
     children: {
       defaultValue: "the ellipsis: …",
       description: "the component's children",
       typeName: "ReactNode"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Pagination.Ellipsis} componentName="Pagination.Ellipsis" />
-
-## Pagination.Link
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Pagination.Link}
+  docPath="/components/pagination"
+  name="Pagination.Link"
   props={{
-    as: AsProp.makeDoc(Pagination.Link.defaultProps.as),
     current: {
       description: "set the pagination link as currently selected",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Pagination.Link} componentName="Pagination.Link" />
-
-## Pagination.List
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Pagination.List.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Pagination.List}
+  docPath="/components/pagination"
+  name="Pagination.List"
 />
 
-<AsProp component={Pagination.List} componentName="Pagination.List" />
-
-## Pagination.Step
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Pagination.Step}
+  docPath="/components/pagination"
+  name="Pagination.Step"
   props={{
     align: {
       description:
         "set the step as next or previous (positioning changes with pagination's align prop",
       typeName: "string",
       typeTip: mapEnumerable(PAGINATION_STEP_DEFAULTS.alignments)
-    },
-    as: AsProp.makeDoc(Pagination.Step.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Pagination.Step} componentName="Pagination.Step" />

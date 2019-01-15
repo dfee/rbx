@@ -6,13 +6,13 @@ route: /components/menu
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Menu } from "../menu";
 
 # Menu
 
-A simple **menu**, for any type of vertical navigation
+A simple **menu**, for any type of vertical navigation.
 
 <Playground>
   <Menu>
@@ -52,54 +52,38 @@ A simple **menu**, for any type of vertical navigation
   </Menu>
 </Playground>
 
-## Menu
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Menu.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Menu}
+  docPath="/components/menu"
+  name="Menu"
 />
 
-<AsProp component={Menu} componentName="Menu" />
-
-## Menu.Label
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Menu.Label.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Menu.Label}
+  docPath="/components/menu"
+  name="Menu.Label"
 />
 
-<AsProp component={Menu.Label} componentName="Menu.Label" />
-
-## Menu.List
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Menu.List.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Menu.List}
+  docPath="/components/menu"
+  name="Menu.List"
 />
 
-<AsProp component={Menu.List} componentName="Menu.List" />
-
-## Menu.List.Item
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Menu.List.Item}
+  docPath="/components/menu"
+  name="Menu.List.Item"
   props={{
     active: {
       description: "mark the item as currently active",
       typeName: "boolean"
     },
-    as: AsProp.makeDoc(Menu.List.Item.defaultProps.as),
     menu: {
       description: "add a sub-menu to the item",
       typeName: "<Menu.List>"
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Menu.List.Item} componentName="Menu.List.Item" />

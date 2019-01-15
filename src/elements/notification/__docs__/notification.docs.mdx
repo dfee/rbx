@@ -6,14 +6,14 @@ route: /elements/notification
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Delete } from "src/elements";
 import { Notification } from "../notification";
 
 # Notification
 
-The `<Notification>` is useful for alerting your users of something.
+Bold **notification** blocks, to alert your users of something.
 
 <Playground>
   <Notification {...props}>
@@ -28,7 +28,7 @@ The `<Notification>` is useful for alerting your users of something.
 
 ### Colors
 
-Use the `color` prop to specfiy the color of the notification.
+Use the `color` prop to specfiy the color of the `<Notification>`.
 
 <Playground>
   {() =>
@@ -45,18 +45,17 @@ Use the `color` prop to specfiy the color of the notification.
   }
 </Playground>
 
-## Notification
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Notification}
+  docPath="/elements/notification"
+  name="Notification"
   props={{
-    as: AsProp.makeDoc(Notification.defaultProps.as),
     color: {
       description: "the color of the notification",
       typeName: "string",
       typeTip: mapEnumerable(DEFAULTS.colors)
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Notification} componentName="Notification" />

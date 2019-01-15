@@ -1,20 +1,14 @@
 // tslint:disable:no-submodule-imports
-// tslint:disable:strict-boolean-expressions
-// tslint:disable:no-null-keyword
-
 import { withMDXComponents } from "@mdx-js/tag/dist/mdx-provider";
 import { get } from "lodash/fp";
-import React, { ComponentType, CSSProperties, Fragment, SFC } from "react";
+import React from "react";
 
-export interface StylesMap {
-  [s: string]: CSSProperties;
-}
+import { Table } from "src/elements";
 
-const styles: StylesMap = {
-  thead: {
-    textAlign: "left",
-  },
-};
+const lexSortObj = <T extends object>(obj: { [K: string]: T }) =>
+  Object.keys(obj)
+    .sort((a, b) => (a < b ? -1 : a === b ? 0 : 1))
+    .map(key => ({ key, value: obj[key] }));
 
 export type TooltipComponent = React.ComponentType<{
   text: React.ReactNode;
@@ -29,93 +23,124 @@ export type PropDoc = {
   defaultValue?: string;
 };
 
-export type SimplePropsTable = {
-  props?: Record<string, PropDoc>;
+export type WithMDXProps = {
   components: {
     // tslint:disable-next-line:no-any
-    [key: string]: ComponentType<any>;
+    [key: string]: React.ComponentType<any>;
   };
 };
 
-const BaseSimplePropsTable: SFC<SimplePropsTable> = ({ components, props }) => {
-  if (props === undefined) {
-    return null;
+export type BaseSimplePropsTableProps = {
+  props?: Record<string, PropDoc>;
+} & WithMDXProps;
+
+export class BaseSimplePropsTable extends React.Component<
+  BaseSimplePropsTableProps
+> {
+  public render() {
+    const { props } = this.props;
+
+    if (props === undefined) {
+      return undefined;
+    }
+
+    const thDescription = this.hasDescription ? (
+      <th style={{ width: "40%" }}>Description</th>
+    ) : (
+      undefined
+    );
+
+    return (
+      <Table bordered narrow hoverable>
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Default</th>
+            {thDescription}
+          </tr>
+        </thead>
+        {this.renderTbody()}
+      </Table>
+    );
   }
 
-  const hasDescription = Object.keys(props).some((name: string) => {
-    const description = get(`${name}.description`, props);
+  private get hasDescription() {
+    const { props } = this.props;
 
-    return Boolean(description) && Boolean(get("length", description));
-  });
+    if (props === undefined) {
+      return false;
+    }
 
-  const Table = components.table || "table";
-  const Thead = components.thead || "thead";
-  const Tr = components.tr || "tr";
-  const Th = components.th || "th";
-  const Tbody = components.tbody || "tbody";
-  const Td = components.td || "td";
-  const Tooltip: TooltipComponent = components.tooltip;
+    return Object.keys(props).some((name: string) => {
+      const description = get(`${name}.description`, props);
 
-  return (
-    <Fragment>
-      <Table className="PropsTable">
-        <Thead style={styles.thead}>
-          <Tr>
-            <Th className="PropsTable--property">Property</Th>
-            <Th className="PropsTable--type">Type</Th>
-            <Th className="PropsTable--required">Required</Th>
-            <Th className="PropsTable--default">Default</Th>
-            {hasDescription && (
-              <Th width="40%" className="PropsTable--description">
-                Description
-              </Th>
+      return Boolean(description) && Boolean(get("length", description));
+    });
+  }
+
+  private readonly renderTbody = () => {
+    const { props } = this.props;
+
+    if (props === undefined) {
+      return undefined;
+    }
+
+    return (
+      <tbody>
+        {lexSortObj(props).map(({ key: name, value: propDoc }) =>
+          this.renderTr(name, propDoc),
+        )}
+      </tbody>
+    );
+  }
+
+  private readonly renderTr = (name: string, propDoc: PropDoc) => {
+    const { components } = this.props;
+    const Tooltip: TooltipComponent = components.tooltip;
+
+    const tdDescription = this.hasDescription ? (
+      propDoc.description !== undefined ? (
+        <td>{propDoc.description}</td>
+      ) : (
+        <td />
+      )
+    ) : (
+      undefined
+    );
+
+    return (
+      <tr key={name}>
+        <td>
+          <code>{name}</code>
+        </td>
+        <td>
+          {propDoc.typeTip !== undefined ? (
+            <Tooltip text={propDoc.typeTip}>{propDoc.typeName}</Tooltip>
+          ) : (
+            propDoc.typeName
+          )}
+        </td>
+        <td>{propDoc.required === true ? "true" : "false"}</td>
+        {propDoc.defaultValue === undefined ? (
+          <td>
+            <em>-</em>
+          </td>
+        ) : (
+          <td>
+            {propDoc.defaultValue === "''" ? (
+              <em>[Empty String]</em>
+            ) : (
+              <code>{propDoc.defaultValue.replace(/\'/g, "")}</code>
             )}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {props &&
-            Object.keys(props).map((name: string) => {
-              const prop = props[name];
-
-              if (!prop.typeName) {
-                return null;
-              }
-
-              return (
-                <Tr key={name}>
-                  <Td>{name}</Td>
-                  <Td>
-                    {prop.typeTip ? (
-                      <Tooltip text={prop.typeTip}>{prop.typeName}</Tooltip>
-                    ) : (
-                      prop.typeName
-                    )}
-                  </Td>
-                  <Td>{prop.required ? String(prop.required) : "false"}</Td>
-                  {!prop.defaultValue ? (
-                    <Td>
-                      <em>-</em>
-                    </Td>
-                  ) : (
-                    <Td>
-                      {prop.defaultValue === "''" ? (
-                        <em>[Empty String]</em>
-                      ) : (
-                        prop.defaultValue.replace(/\'/g, "")
-                      )}
-                    </Td>
-                  )}
-                  {hasDescription && (
-                    <Td>{prop.description && prop.description}</Td>
-                  )}
-                </Tr>
-              );
-            })}
-        </Tbody>
-      </Table>
-    </Fragment>
-  );
-};
+          </td>
+        )}
+        {tdDescription}
+      </tr>
+    );
+  }
+}
 
 // tslint:disable-next-line: no-unsafe-any
 export const SimplePropsTable = withMDXComponents(BaseSimplePropsTable);

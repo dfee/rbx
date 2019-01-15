@@ -8,7 +8,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
 import { Control } from "../control";
@@ -16,6 +16,8 @@ import { Field } from "../field";
 import { Select, SELECT_CONTAINER_DEFAULTS } from "../select";
 
 # Select
+
+The browser built-in **select dropdown**, styled accordingly.
 
 The `<Select>` Component includes a wrapping container, `<Select.Container>`.
 
@@ -197,22 +199,19 @@ The size of the `<Select>` will define the size of the `<Icon>`.
 
 </Playground>
 
-## Select
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Select.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Select}
+  docPath="/form/select"
+  name="Select"
 />
 
-<AsProp component={Select} componentName="Select" />
-
-## Select.Container
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Select.Container}
+  docPath="/form/select"
+  name="Select.Container"
   props={{
-    as: AsProp.makeDoc(Select.Container.defaultProps.as),
     color: {
       description: "change the container's color",
       typeName: "string",
@@ -235,20 +234,12 @@ The size of the `<Select>` will define the size of the `<Icon>`.
       description: "change the container's state",
       typeName: "string",
       typeTip: mapEnumerable(SELECT_CONTAINER_DEFAULTS.states)
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Select.Container} componentName="Select.Container" />
-
-## Select.Option
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Select.Option.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Select.Option}
+  docPath="/form/select"
+  name="Select.Option"
 />
-
-<AsProp component={Select.Option} componentName="Select.Option" />

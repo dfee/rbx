@@ -8,15 +8,58 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
+import { Content, Notification } from "src/elements";
 import { Field } from "../field";
 import { File, FILE_DEFAULTS } from "../file";
 import { SimpleFileManager } from "./simple-file-manager";
 
-# File
+# File Upload
 
-This component provides the blocks for building a dynamic file input.
+A custom **file upload** input.
+
+<Content>
+  <p>
+    The <code>{"<File>"}</code> element is a simple{" "}
+    <strong>interactive label</strong> that wraps an{" "}
+    <code>&lt;input type="file"&gt;</code>. It comprises several sub-elements:
+  </p>
+  <ul>
+    <li>
+      <code>{"<File>"}</code> the main <strong>container</strong>
+      <ul>
+        <li>
+          <code>{"<File.Label>"}</code> the actual <strong>interactive</strong>{" "}
+          and clickable part of the component
+          <ul>
+            <li>
+              <code>{"<File.Input>"}</code> the <strong>native</strong> file
+              input, hidden for styling purposes
+            </li>
+            <li>
+              <code>{"<File.CTA>"}</code> the upload{" "}
+              <strong>call-to-action</strong>
+              <ul>
+                <li>
+                  <code>{"<File.Icon>"}</code> an optional{" "}
+                  <strong>upload</strong> icon
+                </li>
+                <li>
+                  <code>{"<File.Label>"}</code> the "Choose a file…" text
+                </li>
+              </ul>
+            </li>
+            <li>
+              <code>{"<File.Name>"}</code> a container for the{" "}
+              <strong>chosen file</strong> name
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</Content>
 
 <Playground>
   <File>
@@ -319,24 +362,26 @@ This implementation takes the same props as `<File>`, but allows for actual sele
   <SimpleFileManager name="resume" hasName />
 </Playground>
 
-<div class="notification is-warning">
+<Notification color="warning">
   <strong>Note:</strong> the <code>{"<SimpleFileManager>"}</code> used in this
   playground is a reference implementation for the docs, and is not available in
   the release. People are usually particular about how they want to implement
   their file inputs, so <strong>rbx</strong> provides a <em>foundation</em>, not
   an <em>opinion</em>.
-</div>
+</Notification>
 
-## File
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={File}
+  docPath="/form/file"
+  name="File"
   props={{
     align: {
       description: "set the file input's alignment",
       typeName: "string",
       typeTip: mapEnumerable(FILE_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(File.defaultProps.as),
     boxed: {
       description: "use a boxed layout for the file input",
       typeName: "boolean"
@@ -358,64 +403,36 @@ This implementation takes the same props as `<File>`, but allows for actual sele
       description: "set the file input's size",
       typeName: "string",
       typeTip: mapEnumerable(FILE_DEFAULTS.sizes)
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={File} componentName="File" />
-
-## File.CTA
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(File.CTA.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={File.CTA}
+  docPath="/form/file"
+  name="File.CTA"
 />
 
-<AsProp component={File.CTA} componentName="File.CTA" />
-
-## File.Icon
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(File.Icon.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={File.Icon}
+  docPath="/form/file"
+  name="File.Icon"
 />
 
-<AsProp component={File.Icon} componentName="File.Icon" />
-
-## File.Input
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(File.Input.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={File.Input}
+  docPath="/form/file"
+  name="File.Input"
 />
 
-<AsProp component={File.Input} componentName="File.Input" />
-
-## File.Label
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(File.Label.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={File.Label}
+  docPath="/form/file"
+  name="File.Label"
 />
 
-<AsProp component={File.Label} componentName="File.Label" />
-
-## File.Name
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(File.Name.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={File.Name}
+  docPath="/form/file"
+  name="File.Name"
 />
-
-<AsProp component={File.Name} componentName="File.Name" />

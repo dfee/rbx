@@ -8,23 +8,58 @@ import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { AsProp, SimplePropsTable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Level } from "src/components";
-import { Button, Icon } from "src/elements";
+import { Button, Content, Icon } from "src/elements";
 import { Dropdown } from "../dropdown";
 import { DROPDOWN_DEFAULTS } from "../dropdown-container";
 
 # Dropdown
 
-The `<Dropdown>` component reveals discoverable content.
+An interactive **dropdown menu** for discoverable content.
 
-- `<Dropdown>`: the **main** container
-  - `<Dropdown.Trigger>`: the container for the `<Button>`
-  - `<Dropdown.Menu>`: the togglable **menu** (hidden by default)
-    - `<Dropdown.Content>`: the dropdown **box**, wiht a white background and shadow
-      - `<Dropdown.Item>`: each **single item** of the dropdown (by default an `a`, but can be a `div`)
-      - `<Dropdown.Divider>`: a **horizontal line** to separate dropdown items
+<Content>
+  <p>
+    The <code>{"<Dropdown>"}</code> component is a container for a dropdown
+    button and a dropdown menu.
+  </p>
+  <ul>
+    <li>
+      <code>{"<Dropdown>"}</code> the <strong>main</strong> container
+      <ul>
+        <li>
+          <code>{"<Dropdown.Trigger>"}</code> the container for a{" "}
+          <code>{"<Button>"}</code>
+        </li>
+        <li>
+          <code>{"<Dropdown.Menu>"}</code> the toggable menu,{" "}
+          <strong>hidden</strong> by default
+          <ul>
+            <li>
+              <code>{"<Dropdown.Content>"}</code> the dropdown{" "}
+              <strong>box</strong>, with a white background and a shadow
+              <ul>
+                <li>
+                  <code>{"<Dropdown.Item>"}</code> each{" "}
+                  <strong>single item</strong> of the{" "}
+                  <code>{"<Dropdown>"}</code>, which can either be a{" "}
+                  <code>a</code> or a <code>div</code>
+                </li>
+                <li>
+                  <code>{"<Dropdown.Divider>"}</code> a{" "}
+                  <strong>horizontal line</strong> to separate{" "}
+                  <code>{"<Dropdown.Item>"}</code>s
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</Content>
 
 <Playground>
   <div style={{ height: "250px" }}>
@@ -229,9 +264,12 @@ Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdow
   </div>
 </Playground>
 
-## Dropdown
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Dropdown}
+  docPath="/components/dropdown"
+  name="Dropdown"
   props={{
     active: {
       description:
@@ -243,7 +281,6 @@ Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdow
       typeName: "string",
       typeTip: mapEnumerable(DROPDOWN_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Dropdown.defaultProps.as),
     hoverable: {
       description: "open the dropdown on mouse-over",
       typeName: "boolean"
@@ -253,7 +290,6 @@ Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdow
         "enable the usage of the `active` prop to open and close the dropdown menu",
       typeName: "boolean"
     },
-    ref: refDoc,
     up: {
       description: "open the menu above the dropdown",
       typeName: "boolean"
@@ -261,75 +297,52 @@ Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdow
   }}
 />
 
-<AsProp component={Dropdown} componentName="Dropdown" />
-
-## Dropdown.Content
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Dropdown.Content.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Dropdown.Content}
+  docPath="/components/dropdown"
+  name="Dropdown.Content"
 />
 
-<AsProp component={Dropdown.Content} componentName="Dropdown.Content" />
-
-## Dropdown.Divider
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Dropdown.Divider.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Dropdown.Divider}
+  docPath="/components/dropdown"
+  name="Dropdown.Divider"
 />
 
-<AsProp component={Dropdown.Divider} componentName="Dropdown.Divider" />
-
-## Dropdown.Item
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Dropdown.Item}
+  docPath="/components/dropdown"
+  name="Dropdown.Item"
   props={{
     active: {
       description: "set the item as active",
       typeName: "boolean"
     },
-    as: AsProp.makeDoc(Dropdown.Item.defaultProps.as),
     onClick: {
       description: "callback when the component is clicked",
       typeName: "(event: React.MouseEvent) => void"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Dropdown.Item} componentName="Dropdown.Item" />
-
-## Dropdown.Menu
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Dropdown.Menu.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Dropdown.Menu}
+  docPath="/components/dropdown"
+  name="Dropdown.Menu"
 />
 
-<AsProp component={Dropdown.Menu} componentName="Dropdown.Menu" />
-
-## Dropdown.Trigger
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Dropdown.Trigger}
+  docPath="/components/dropdown"
+  name="Dropdown.Trigger"
   props={{
     active: {
       description: "set the item as active",
       typeName: "boolean"
     },
-    as: AsProp.makeDoc(Dropdown.Trigger.defaultProps.as),
     onClick: {
       description: "callback when the component is clicked",
       typeName: "(event: React.MouseEvent) => void"
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Dropdown.Trigger} componentName="Dropdown.Trigger" />

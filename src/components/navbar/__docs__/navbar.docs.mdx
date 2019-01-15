@@ -9,20 +9,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
 import {
-  AsProp,
   Frame,
-  SimplePropsTable,
-  mapEnumerable,
-  refDoc
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable
 } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
+import { Generic } from "src/base";
 import {
   Block,
   Button,
+  Content,
   Control,
   Container,
   Field,
   Icon,
+  Notification,
   Title
 } from "src/elements";
 import { Hero } from "src/layout";
@@ -35,7 +36,7 @@ import { NAVBAR_SEGMENT_DEFAULTS } from "../navbar-segment";
 
 A responsive horizontal **navbar** that can support images, links, buttons, and dropdowns.
 
-<div className="content">
+<Content>
   <p>
     The <code>{"<Navbar>"}</code> component is a responsive and versatile
     horizontal navigation bar with the following structure:
@@ -46,9 +47,11 @@ A responsive horizontal **navbar** that can support images, links, buttons, and 
       <ul>
         <li>
           <code>{"<Navbar.Brand>"}</code> the <strong>left side</strong>,{" "}
-          <strong className="has-text-success">always visible</strong>, which
-          usually contains the <strong>logo</strong> and optionally some links
-          or icons
+          <Generic as="strong" textColor="success">
+            always visible
+          </Generic>
+          , which usually contains the <strong>logo</strong> and optionally some
+          links or icons
           <ul>
             <li>
               <code>{"<Navbar.Burger>"}</code> the <strong>hamburger</strong>{" "}
@@ -100,7 +103,7 @@ A responsive horizontal **navbar** that can support images, links, buttons, and 
       </ul>
     </li>
   </ul>
-</div>
+</Content>
 
 ### Basic navbar
 
@@ -176,9 +179,9 @@ On viewports bigger than **touch** `>=1024px`, the `<Navbar.Brand>` will only ta
   </Navbar>
 </Playground>
 
-<div className="notification">
+<Notification>
   Resize your browser window to see the <code>{"<Navbar.Burger>"}</code> appear.
-</div>
+</Notification>
 
 ### Navbar burger
 
@@ -491,11 +494,11 @@ Use the `active` and `managed` props of `<Navbar.Item>` to override the toggle c
   </div>
 </Playground>
 
-<div className="notification">
+<Notification>
   <strong>Note:</strong> you can edit the Playground above and change
   <code>{"active={true}"}</code> to
   <code>{"active={false}"}</code> to untoggle the menu.
-</div>
+</Notification>
 
 ### Dropdown menu alignment
 
@@ -793,15 +796,17 @@ Use the `color` prop of the `<Navbar>` to change the color.
   }
 </Playground>
 
-## Navbar
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Navbar}
+  docPath="/components/navbar"
+  name="Navbar"
   props={{
     active: {
       description: "activate the Navbar (on touch devices)",
       typeName: "boolean"
     },
-    as: AsProp.makeDoc(Navbar.defaultProps.as),
     color: {
       description: "set the navbar's color",
       typeName: "string",
@@ -822,7 +827,6 @@ Use the `color` prop of the `<Navbar>` to change the color.
         "enable the usage of the `active` prop to open and close the dropdown menu",
       typeName: "boolean"
     },
-    ref: refDoc,
     transparent: {
       description:
         "remove any hover or active background from the navbar items",
@@ -831,75 +835,57 @@ Use the `color` prop of the `<Navbar>` to change the color.
   }}
 />
 
-<AsProp component={Navbar} componentName="Navbar" />
-
-## Navbar.Brand
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Navbar.Brand.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Brand}
+  docPath="/components/navbar"
+  name="Navbar.Brand"
 />
 
-<AsProp component={Navbar.Brand} componentName="Navbar.Brand" />
-
-## Navbar.Burger
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Burger}
+  docPath="/components/navbar"
+  name="Navbar.Burger"
   props={{
-    as: AsProp.makeDoc(Navbar.Burger.defaultProps.as),
     onClick: {
       description: "callback when the component is clicked",
       typeName: "(event: React.MouseEvent) => void"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Navbar.Burger} componentName="Navbar.Burger" />
-
-## Navbar.Divider
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Navbar.Divider.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Divider}
+  docPath="/components/navbar"
+  name="Navbar.Divider"
 />
 
-<AsProp component={Navbar.Divider} componentName="Navbar.Divider" />
-
-## Navbar.Dropdown
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Dropdown}
+  docPath="/components/navbar"
+  name="Navbar.Dropdown"
   props={{
     align: {
       description: "align the menu to the left or right",
       typeName: "string",
       typeTip: mapEnumerable(NAVBAR_DROPDOWN_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Navbar.Dropdown.defaultProps.as),
     boxed: {
       description:
         "use the boxed version of the dropdown (prefereable when using a transparent navbar)",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Navbar.Dropdown} componentName="Navbar.Dropdown" />
-
-## Navbar.Item
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Item}
+  docPath="/components/navbar"
+  name="Navbar.Item"
   props={{
     active: {
       description: "show the bottom border",
       typeName: "boolean"
     },
-    as: AsProp.makeDoc(Navbar.Item.defaultProps.as),
     dropdown: {
       description: "set if the item has a dropdown",
       typeName: "boolean"
@@ -922,7 +908,6 @@ Use the `color` prop of the `<Navbar>` to change the color.
       description: "callback when the component is clicked",
       typeName: "(event: React.MouseEvent) => void"
     },
-    ref: refDoc,
     tab: {
       description: "add a bottom border on hover",
       typeName: "boolean"
@@ -934,58 +919,45 @@ Use the `color` prop of the `<Navbar>` to change the color.
   }}
 />
 
-<div className="notification">
+<Notification>
   <strong>Note:</strong> if a <code>{"<Navbar.Item>"}</code> is created with the
   <code>dropdown</code> prop, and <code>as</code> is unset, or supplied as
   <code>a</code>, it'll be automatically overriden to <code>div</code> to
   support Bulma's styling.
-</div>
+</Notification>
 
-<AsProp component={Navbar.Item} componentName="Navbar.Item" />
-
-## Navbar.Link
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Link}
+  docPath="/components/navbar"
+  name="Navbar.Link"
   props={{
     arrowless: {
       description: "remove the dropdown or dropup arrow from the link",
       typeName: "boolean"
     },
-    as: AsProp.makeDoc(Navbar.Link.defaultProps.as),
     onClick: {
       description: "callback when the component is clicked",
       typeName: "(event: React.MouseEvent) => void"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Navbar.Link} componentName="Navbar.Link" />
-
-## Navbar.Menu
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Navbar.Menu.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Menu}
+  docPath="/components/navbar"
+  name="Navbar.Menu"
 />
 
-<AsProp component={Navbar.Menu} componentName="Navbar.Menu" />
-
-## Navbar.Segment
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Navbar.Segment}
+  docPath="/components/navbar"
+  name="Navbar.Segment"
   props={{
     align: {
       description:
         "set the content in the left or right side of the dropdown menu",
       typeName: "string",
       typeTip: mapEnumerable(NAVBAR_SEGMENT_DEFAULTS.alignments)
-    },
-    as: AsProp.makeDoc(Navbar.Segment.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Navbar.Segment} componentName="Navbar.Segment" />

@@ -6,7 +6,7 @@ route: /components/message
 
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Delete } from "src/elements";
 import { Message, MESSAGE_DEFAULTS } from "../message";
@@ -115,17 +115,18 @@ Use the `size` prop on `<Message>` to set the size.
 
 </Playground>
 
-## Message
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Message}
+  docPath="/components/message"
+  name="Message"
   props={{
-    as: AsProp.makeDoc(Message.defaultProps.as),
     color: {
       description: "set the message's color",
       typeName: "string",
       typeTip: mapEnumerable(DEFAULTS.colors)
     },
-    ref: refDoc,
     size: {
       description: "set the message's size",
       typeName: "string",
@@ -134,26 +135,14 @@ Use the `size` prop on `<Message>` to set the size.
   }}
 />
 
-<AsProp component={Message} componentName="Message" />
-
-## Message.Body
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Message.Body.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Message.Body}
+  docPath="/components/message"
+  name="Message.Body"
 />
 
-<AsProp component={Message.Body} componentName="Message.Body" />
-
-## Message.Header
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Message.Header.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Message.Header}
+  docPath="/components/message"
+  name="Message.Header"
 />
-
-<AsProp component={Message.Header} componentName="Message.Header" />

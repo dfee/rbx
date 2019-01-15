@@ -13,14 +13,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Icon } from "src/elements";
 import { Breadcrumb, BREADCRUMB_DEFAULTS } from "../breadcrumb";
 
 # Breadcrumb
 
-The `<Breadcrumb>` component is useful for showing a user his or her relative location on your site.
+A simple **breadcrumb** component to improve your navigation experience.
 
 <Playground>
   <Breadcrumb>
@@ -44,7 +44,7 @@ Use the `align` prop to center or align-right the breadcrumbs.
     alignments.splice(0, 0, { align: undefined, name: 'left' })
 
     return alignments.map(({ align, name }) => (
-      <Block>
+      <Block key={name}>
         <Breadcrumb align={align}>
           <Breadcrumb.Item>breadcrumb</Breadcrumb.Item>
           <Breadcrumb.Item>aligned</Breadcrumb.Item>
@@ -127,17 +127,19 @@ Use the `size` prop on `<Breadcrumb>` to specify the size of the breadcrumbs.
 
 </Playground>
 
-## Breadcrumb
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Breadcrumb}
+  docPath="/components/breadcrumb"
+  extendable
+  name="Breadcrumb"
   props={{
     align: {
       description: "set the breadcrumb group's alignment",
       typeName: "string",
       typeTip: mapEnumerable(BREADCRUMB_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Breadcrumb.defaultProps.as),
-    ref: refDoc,
     separator: {
       description: "set the breadcrumb group's separator",
       typeName: "string",
@@ -151,19 +153,14 @@ Use the `size` prop on `<Breadcrumb>` to specify the size of the breadcrumbs.
   }}
 />
 
-<AsProp component={Breadcrumb} componentName="Breadcrumb" />
-
-## Breadcrumb.Item
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Breadcrumb.Item}
+  docPath="/components/breadcrumb"
+  name="Breadcrumb.Item"
   props={{
     active: {
       description: "marks the breadcrumb as active",
       typeName: "boolean"
-    },
-    as: AsProp.makeDoc(Breadcrumb.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Breadcrumb.Item} componentName="Breadcrumb.Item" />

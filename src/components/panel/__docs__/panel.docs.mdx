@@ -12,8 +12,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
-import { Button, Checkbox, Control, Icon, Input } from "src/elements";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import { Button, Checkbox, Content, Control, Icon, Input } from "src/elements";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Panel } from "../panel";
 
@@ -21,7 +21,7 @@ import { Panel } from "../panel";
 
 A composable **panel**, for compact controls
 
-<div className="content">
+<Content>
   <p>
     The <code>{"<Panel>"}</code> is container for several types:
   </p>
@@ -54,7 +54,7 @@ A composable **panel**, for compact controls
     The <code>{"<Panel.Block>"}</code> can be an anchor tag <code>{"<a>"}</code>{" "}
     or a label <code>{"<label>"}</code> with a checkbox inside.
   </p>
-</div>
+</Content>
 
 <Playground>
   <Panel>
@@ -122,87 +122,52 @@ A composable **panel**, for compact controls
   </Panel>
 </Playground>
 
-## Panel
+## API
 
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Panel.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Panel}
+  docPath="/components/panel"
+  name="Panel"
 />
 
-<AsProp component={Panel} componentName="Panel" />
-
-## Panel.Block
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Panel.Block.defaultProps.as),
-    ref: refDoc
-  }}
-/>
-
-<AsProp component={Panel.Block} componentName="Panel.Block" />
-
-## Panel.Block
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Panel.Block}
+  docPath="/components/panel"
+  name="Panel.Block"
   props={{
     active: {
       description: "mark the block as currently active",
       typeName: "boolean"
-    },
-    as: AsProp.makeDoc(Panel.Block.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Panel.Block} componentName="Panel.Block" />
-
-## Panel.Heading
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Panel.Heading.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Panel.Heading}
+  docPath="/components/panel"
+  name="Panel.Heading"
 />
 
-<AsProp component={Panel.Heading} componentName="Panel.Heading" />
-
-## Panel.Icon
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Panel.Icon.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Panel.Icon}
+  docPath="/components/panel"
+  name="Panel.Icon"
 />
 
-<AsProp component={Panel.Icon} componentName="Panel.Icon" />
-
-## Panel.Tab
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Panel.Tab}
+  docPath="/components/panel"
+  name="Panel.Tab"
   props={{
     active: {
       description: "mark the tab as currently active",
       typeName: "boolean"
-    },
-    as: AsProp.makeDoc(Panel.Tab.defaultProps.as),
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Panel.Tab} componentName="Panel.Tab" />
-
-## Panel.Tab.Group
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Panel.Tab.Group.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Panel.Tab.Group}
+  docPath="/components/panel"
+  name="Panel.Tab.Group"
 />
-
-<AsProp component={Panel.Tab.Group} componentName="Panel.Tab.Group" />

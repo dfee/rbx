@@ -15,7 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Button, Icon } from "src/elements";
 import { Checkbox } from "../checkbox";
@@ -29,7 +29,9 @@ import { Radio } from "../radio";
 import { Select } from "../select";
 import { Textarea } from "../textarea";
 
-# Form
+# Form Controls
+
+All generic **form controls**, designed for consistency.
 
 ### Fields
 
@@ -806,11 +808,13 @@ Vertical forms are also supported, and are simpler to compose.
   </form>
 </Playground>
 
-## Control
+## API
 
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Control}
+  docPath="/form/general"
+  name="Control"
   props={{
-    as: AsProp.makeDoc(Field.defaultProps.as),
     expanded: {
       description: "expand the control to fill available horizontal space",
       typeName: "boolean"
@@ -827,7 +831,6 @@ Vertical forms are also supported, and are simpler to compose.
       description: "display a loading spinner",
       typeName: "boolean"
     },
-    ref: refDoc,
     size: {
       description: "change the control's size",
       typeName: "string",
@@ -836,18 +839,16 @@ Vertical forms are also supported, and are simpler to compose.
   }}
 />
 
-<AsProp component={Control} componentName="Control" />
-
-## Field
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Field}
+  docPath="/form/general"
+  name="Field"
   props={{
     align: {
       description: "the alignment of the field",
       typeName: "string",
       typeTip: mapEnumerable(FIELD_DEFAULTS.alignments)
     },
-    as: AsProp.makeDoc(Field.defaultProps.as),
     expanded: {
       description: "expand the field to fill available horizontal space",
       typeName: "boolean"
@@ -869,61 +870,47 @@ Vertical forms are also supported, and are simpler to compose.
       description:
         "keep the field from expanding to fill space when horizontal",
       typeName: "boolean"
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Field} componentName="Field" />
-
-## Field.Body
-
-<SimplePropsTable
-  props={{
-    as: AsProp.makeDoc(Field.Body.defaultProps.as),
-    ref: refDoc
-  }}
+<ForwardRefAsExoticComponentDoc
+  component={Field.Body}
+  docPath="/form/general"
+  name="Field.Body"
 />
 
-<AsProp component={Field.Body} componentName="Field.Body" />
-
-## Field.Label
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Field.Label}
+  docPath="/form/general"
+  name="Field.Label"
   props={{
-    as: AsProp.makeDoc(Field.Label.defaultProps.as),
     size: {
       description: "preserve vertical alignment with the <Field.Body>",
       typeName: "string",
       typeTip: mapEnumerable(FIELD_LABEL_DEFAULTS.sizes)
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Field.Label} componentName="Field.Label" />
-
-## Help
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Help}
+  docPath="/form/general"
+  name="Help"
   props={{
-    as: AsProp.makeDoc(Help.defaultProps.as),
     color: {
       description: "the help's color",
       typeName: "string",
       typeTip: mapEnumerable(DEFAULTS.colors)
-    },
-    ref: refDoc
+    }
   }}
 />
 
-<AsProp component={Help} componentName="Help" />
-
-## Label
-
-<SimplePropsTable
+<ForwardRefAsExoticComponentDoc
+  component={Label}
+  docPath="/form/general"
+  name="Label"
   props={{
-    as: AsProp.makeDoc(Label.defaultProps.as),
     disabled: {
       description: "render the label disabled",
       typeName: "boolean"
@@ -932,9 +919,6 @@ Vertical forms are also supported, and are simpler to compose.
       description: "the label's size",
       typeName: "string",
       typeTip: mapEnumerable(LABEL_DEFAULTS.sizes)
-    },
-    ref: refDoc
+    }
   }}
 />
-
-<AsProp component={Label} componentName="Label" />
