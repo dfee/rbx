@@ -17,7 +17,7 @@ export type TooltipComponent = React.ComponentType<{
 }>;
 
 export type PropDoc = {
-  description?: string;
+  description?: React.ReactNode;
   required?: boolean;
   typeName: string;
   typeTip?: string;
@@ -103,7 +103,7 @@ export class BaseSimplePropsTable extends React.Component<
     </Table.Cell>
   )
 
-  private readonly renderCellRequired = (required: boolean | undefined) => {
+  private readonly renderCellRequired = (required: PropDoc["required"]) => {
     const props: {
       children: React.ReactNode;
       textColor: HelpersProps["textColor"];
@@ -116,8 +116,8 @@ export class BaseSimplePropsTable extends React.Component<
   }
 
   private readonly renderCellType = (
-    typeName: string,
-    typeTip: string | undefined,
+    typeName: PropDoc["typeName"],
+    typeTip: PropDoc["typeTip"],
   ) => {
     const { components } = this.props;
     const Tooltip: TooltipComponent = components.tooltip;
@@ -137,7 +137,7 @@ export class BaseSimplePropsTable extends React.Component<
   }
 
   private readonly renderCellDescription = (
-    description: string | undefined,
+    description: PropDoc["description"],
   ) => {
     if (!this.hasDescription) {
       return undefined;

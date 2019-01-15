@@ -72,7 +72,7 @@ export const DocFeature: React.FC<DocFeatureProps> = ({ docPath }) => {
     docPath !== undefined
       ? `https://bulma.io/documentation${docPath}`
       : undefined;
-  const secondaryName = docPath !== undefined ? "Bulma" : "-";
+  const secondaryName = docPath !== undefined ? "Bulma" : "n/a";
   const secondaryColor = docPath !== undefined ? "primary" : "dark";
 
   return (
@@ -86,19 +86,19 @@ export const DocFeature: React.FC<DocFeatureProps> = ({ docPath }) => {
   );
 };
 
-export type ExtendableFeatureProps = {
-  extendable?: boolean;
+export type OverridesFeatureProps = {
+  overrides?: boolean;
 };
 
-export const ExtendableFeature: React.FC<ExtendableFeatureProps> = ({
-  extendable,
+export const OverridesFeature: React.FC<OverridesFeatureProps> = ({
+  overrides,
 }) => {
-  const name = extendable === true ? "yes" : "no";
-  const color = extendable === true ? "success" : "danger";
+  const name = overrides === true ? "yes" : "no";
+  const color = overrides === true ? "success" : "danger";
 
   return (
     <Feature
-      primaryName="extendable"
+      primaryName="override"
       primaryColor="light"
       secondaryName={name}
       secondaryColor={color}
@@ -109,16 +109,16 @@ export const ExtendableFeature: React.FC<ExtendableFeatureProps> = ({
 
 export type ComponentFeaturesProps = AsDocProps &
   DocFeatureProps &
-  ExtendableFeatureProps;
+  OverridesFeatureProps;
 
 export const ComponentFeatures: React.FC<ComponentFeaturesProps> = ({
   asType,
   docPath,
-  extendable,
+  overrides,
 }) => (
   <Feature.Group>
     <AsDoc asType={asType} />
     <DocFeature docPath={docPath} />
-    <ExtendableFeature extendable={extendable} />
+    <OverridesFeature overrides={overrides} />
   </Feature.Group>
 );

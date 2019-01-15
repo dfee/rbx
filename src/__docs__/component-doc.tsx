@@ -15,8 +15,8 @@ export type BaseComponentDocProps = {
   asType: string;
   components: BaseSimplePropsTableProps["components"];
   docPath?: ComponentFeaturesProps["docPath"];
-  extendable?: ComponentFeaturesProps["extendable"];
   name: string;
+  overrides?: ComponentFeaturesProps["overrides"];
   props: BaseSimplePropsTableProps["props"];
 };
 
@@ -24,11 +24,11 @@ const BaseComponentDoc: React.FC<BaseComponentDocProps> = ({
   asType,
   components,
   docPath,
-  extendable,
   name,
+  overrides,
   props,
 }) => {
-  const componentFeaturesProps = { asType, docPath, extendable };
+  const componentFeaturesProps = { asType, docPath, overrides };
 
   return (
     <React.Fragment>
@@ -48,15 +48,15 @@ export type ForwardRefAsExoticComponentDoc = {
   // tslint:disable-next-line:no-any
   component: ForwardRefAsExoticComponent<any, any>;
   docPath?: ComponentFeaturesProps["docPath"];
-  extendable: BaseComponentDocProps["extendable"];
   components: BaseSimplePropsTableProps["components"];
+  overrides: BaseComponentDocProps["overrides"];
   name: string;
   props: BaseSimplePropsTableProps["props"];
 };
 
 const BaseForwardRefAsExoticComponentDoc: React.FC<
   ForwardRefAsExoticComponentDoc
-> = ({ component, components, docPath, extendable, name, props }) => {
+> = ({ component, components, docPath, name, overrides, props }) => {
   if (
     component.defaultProps === undefined ||
     component.defaultProps.as === undefined
@@ -73,12 +73,21 @@ const BaseForwardRefAsExoticComponentDoc: React.FC<
 
   const extendedProps: BaseSimplePropsTableProps["props"] = {
     as: {
-      description:
-        'the React Component or JSX Element (e.g. "div" or "span") to render as',
+      description: (
+        <span>
+          the React Component or JSX Element (e.g. <code>"div"</code> or{" "}
+          <code>span</code>) to render as
+        </span>
+      ),
       typeName: "ReactType",
     },
     ref: {
-      description: "a handle to the underlying React Component or JSX Element",
+      description: (
+        <span>
+          a handle to the underlying <code>React Component</code> or{" "}
+          <code>JSX Element</code>
+        </span>
+      ),
       typeName: "Ref",
     },
     ...props,
@@ -96,8 +105,8 @@ const BaseForwardRefAsExoticComponentDoc: React.FC<
       asType={asTypeString}
       docPath={docPath}
       components={components}
-      extendable={extendable}
       name={name}
+      overrides={overrides}
       props={extendedProps}
     />
   );
