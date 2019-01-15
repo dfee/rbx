@@ -1,6 +1,5 @@
 // tslint:disable:no-submodule-imports
 import { withMDXComponents } from "@mdx-js/tag/dist/mdx-provider";
-import { get } from "lodash/fp";
 import React from "react";
 
 import { HelpersProps } from "src/base";
@@ -74,11 +73,9 @@ export class BaseSimplePropsTable extends React.Component<
       return false;
     }
 
-    return Object.keys(props).some((name: string) => {
-      const description = get(`${name}.description`, props);
-
-      return Boolean(description) && Boolean(get("length", description));
-    });
+    return Object.keys(props).some(
+      (name: string) => props[name].description !== undefined,
+    );
   }
 
   private readonly renderBody = () => {
