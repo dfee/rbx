@@ -30,7 +30,7 @@ A composable **panel**, for compact controls
       <code>{"<Panel.Heading>"}</code> as the first child
     </li>
     <li>
-      <code>{"<Panel.Tabs>"}</code> for navigation
+      <code>{"<Panel.Tab.Group>"}</code> for navigation
     </li>
     <li>
       <code>{"<Panel.Block>"}</code> which can contain other elements, like:
@@ -62,12 +62,12 @@ A composable **panel**, for compact controls
     <Panel.Block>
       <Control iconLeft>
         <Input size="small" type="text" placeholder="search" />
-        <Icon size="small" className="is-left">
+        <Icon size="small" align="left">
           <FontAwesomeIcon icon={faSearch} />
         </Icon>
       </Control>
     </Panel.Block>
-    <Panel.Tab.Group className="panel-tabs">
+    <Panel.Tab.Group>
       <Panel.Tab active>all</Panel.Tab>
       <Panel.Tab>public</Panel.Tab>
       <Panel.Tab>private</Panel.Tab>
@@ -110,7 +110,7 @@ A composable **panel**, for compact controls
       </Panel.Icon>
       mojs
     </Panel.Block>
-    <Panel.Block as="label" className="panel-block">
+    <Panel.Block as="label">
       <Checkbox />
       remember me
     </Panel.Block>

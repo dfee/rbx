@@ -1,0 +1,360 @@
+---
+name: Tab
+menu: Components
+route: /components/tab
+---
+
+import {
+  faAngleLeft,
+  faAngleRight,
+  faAngleUp,
+  faFileAlt,
+  faFilm,
+  faImage,
+  faMusic
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Playground } from "docz";
+
+import { AsProp, SimplePropsTable, mapEnumerable, refDoc } from "src/__docs__";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block, Icon, Title } from "src/elements";
+import { Tab } from "../tab";
+import { TAB_GROUP_DEFAULTS } from "../tab-group";
+
+# Tab
+
+Simple responsive horizontal navigation **tabs**, with different styles.
+
+The default tabs style has a single border at the bottom.
+
+<Playground>
+  <Tab.Group>
+    <Tab active>Pictures</Tab>
+    <Tab>Music</Tab>
+    <Tab>Videos</Tab>
+    <Tab>Documents</Tab>
+  </Tab.Group>
+</Playground>
+
+### Alignments
+
+Use the `align` prop of `<Tab.Group>` to align the tabs list.
+
+<Playground>
+  {() => {
+    const alignments = TAB_GROUP_DEFAULTS.alignments.map(align => ({ align, name: align }));
+    alignments.splice(0, 0, { align: undefined, name: "left" });
+
+    return alignments.map(({ align, name }) => (
+      <Block>
+        <Title as="p" size={4}>{name}</Title>
+        <Tab.Group align={align}>
+          <Tab active>Pictures</Tab>
+          <Tab>Music</Tab>
+          <Tab>Videos</Tab>
+          <Tab>Documents</Tab>
+        </Tab.Group>
+      </Block>
+    ))
+
+}}
+
+</Playground>
+
+### Icons
+
+Use the `<Icon>` component to add icons.
+
+<Playground>
+  <Tab.Group align="centered">
+    <Tab active>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faImage} />
+      </Icon>
+      <span>Pictures</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faMusic} />
+      </Icon>
+      <span>Music</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFilm} />
+      </Icon>
+      <span>Videos</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFileAlt} />
+      </Icon>
+      <span>Documents</span>
+    </Tab>
+  </Tab.Group>
+</Playground>
+
+### Sizes
+
+Use the `size` prop of `<Tab.Group>` to set the size.
+
+<Playground>
+  {() => {
+    const sizes = TAB_GROUP_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ size, name }) => (
+      <Block>
+        <Title as="p" size={4}>{name}</Title>
+        <Tab.Group size={size}>
+          <Tab active>Pictures</Tab>
+          <Tab>Music</Tab>
+          <Tab>Videos</Tab>
+          <Tab>Documents</Tab>
+        </Tab.Group>
+      </Block>
+    ))
+
+}}
+
+</Playground>
+
+### Types
+
+Use the `type` prop on `<Tab.Group>` to change the styling of the tabs.
+
+With the `type` prop as `"boxed"`, you'll have classic style **borders**.
+
+<Playground>
+  <Tab.Group type="boxed">
+    <Tab active>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faImage} />
+      </Icon>
+      <span>Pictures</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faMusic} />
+      </Icon>
+      <span>Music</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFilm} />
+      </Icon>
+      <span>Videos</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFileAlt} />
+      </Icon>
+      <span>Documents</span>
+    </Tab>
+  </Tab.Group>
+
+</Playground>
+
+With the `type` prop as `"toggle"`, you'll have **mutually exclusive** tabs, like radio buttons.
+
+<Playground>
+  <Tab.Group type="toggle">
+    <Tab active>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faImage} />
+      </Icon>
+      <span>Pictures</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faMusic} />
+      </Icon>
+      <span>Music</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFilm} />
+      </Icon>
+      <span>Videos</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFileAlt} />
+      </Icon>
+      <span>Documents</span>
+    </Tab>
+  </Tab.Group>
+
+</Playground>
+
+With the `type` prop as `"toggle-rounded"`, the first and last items will be **rounded**
+
+<Playground>
+  <Tab.Group type="toggle-rounded">
+    <Tab active>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faImage} />
+      </Icon>
+      <span>Pictures</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faMusic} />
+      </Icon>
+      <span>Music</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFilm} />
+      </Icon>
+      <span>Videos</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFileAlt} />
+      </Icon>
+      <span>Documents</span>
+    </Tab>
+  </Tab.Group>
+
+</Playground>
+
+### Fullwidth
+
+Use the `fullwidth` prop on `<Tab.Group>` to expand the tabs to take up all available horizontal width.
+
+<Playground>
+  <Tab.Group fullwidth>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faAngleLeft} />
+      </Icon>
+      <span>Left</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faAngleUp} />
+      </Icon>
+      <span>Up</span>
+    </Tab>
+    <Tab>
+      <span>Right</span>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faAngleRight} />
+      </Icon>
+    </Tab>
+  </Tab.Group>
+</Playground>
+
+### Combining
+
+You can **combine** different modifiers to get interesting combinations.
+
+For example, here are **centered boxed** tabs:
+
+<Playground>
+  <Tab.Group align="centered" type="boxed">
+    <Tab active>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faImage} />
+      </Icon>
+      <span>Pictures</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faMusic} />
+      </Icon>
+      <span>Music</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFilm} />
+      </Icon>
+      <span>Videos</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFileAlt} />
+      </Icon>
+      <span>Documents</span>
+    </Tab>
+  </Tab.Group>
+</Playground>
+
+And here are **fullwidth toggle** tabs:
+
+<Playground>
+  <Tab.Group fullwidth type="toggle">
+    <Tab active>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faImage} />
+      </Icon>
+      <span>Pictures</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faMusic} />
+      </Icon>
+      <span>Music</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFilm} />
+      </Icon>
+      <span>Videos</span>
+    </Tab>
+    <Tab>
+      <Icon size="small">
+        <FontAwesomeIcon icon={faFileAlt} />
+      </Icon>
+      <span>Documents</span>
+    </Tab>
+  </Tab.Group>
+</Playground>
+
+## Tab
+
+<SimplePropsTable
+  props={{
+    active: {
+      description: "set the tab as currently active",
+      typeName: "boolean"
+    },
+    as: AsProp.makeDoc(Tab.defaultProps.as),
+    ref: refDoc
+  }}
+/>
+
+<AsProp component={Tab} componentName="Tab" />
+
+## Tab.Group
+
+<SimplePropsTable
+  props={{
+    align: {
+      description: "set the tab group's alignment",
+      typeName: "string",
+      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.alignments)
+    },
+    as: AsProp.makeDoc(Tab.Group.defaultProps.as),
+    fullsize: {
+      description:
+        "expand the tab group to consume all available horizontal space",
+      typeName: "boolean"
+    },
+    ref: refDoc,
+    size: {
+      description: "set the tab group's size",
+      typeName: "string",
+      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.sizes)
+    },
+    type: {
+      description: "set the tab group's styling",
+      typeName: "string",
+      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.sizes)
+    }
+  }}
+/>
+
+<AsProp component={Tab.Group} componentName="Tab.Group" />

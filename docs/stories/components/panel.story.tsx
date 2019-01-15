@@ -34,12 +34,12 @@ storiesOf("Components/Panel", module)
       <Panel.Block>
         <Control iconLeft>
           <Input size="small" type="text" placeholder="search" />
-          <Icon size="small" className="is-left">
+          <Icon size="small" align="left">
             <FontAwesomeIcon icon={faSearch} />
           </Icon>
         </Control>
       </Panel.Block>
-      <Panel.Tab.Group className="panel-tabs">
+      <Panel.Tab.Group>
         <Panel.Tab active>all</Panel.Tab>
         <Panel.Tab>public</Panel.Tab>
         <Panel.Tab>private</Panel.Tab>
@@ -83,7 +83,7 @@ storiesOf("Components/Panel", module)
         mojs
       </Panel.Block>
 
-      <Panel.Block as="label" className="panel-block">
+      <Panel.Block as="label">
         <Checkbox />
         remember me
       </Panel.Block>

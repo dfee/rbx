@@ -1067,7 +1067,6 @@ Object {
     },
     "propTypes": Object {
       "active": [Function],
-      "style": [Function],
     },
     "render": [Function],
   },

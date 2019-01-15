@@ -10,4 +10,4 @@ export { Modal } from "./modal";
 export { Navbar } from "./navbar";
 export { Pagination } from "./pagination";
 export { Panel } from "./panel";
-export { Tab } from "./tabs";
+export { Tab } from "./tab";

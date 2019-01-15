@@ -5,8 +5,8 @@ import {
   initialValue as themeInitialValue,
   ThemeContextValue,
 } from "src/base/theme";
-import { Tab } from "src/components/tabs/tab";
-import { TabGroup } from "src/components/tabs/tab-group";
+import { Tab } from "src/components/tab/tab";
+import { TabGroup } from "src/components/tab/tab-group";
 
 import {
   hasProperties,
@@ -14,7 +14,6 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
-  validatePropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Tab;
@@ -78,19 +77,6 @@ describe(`${COMPONENT_NAME} component`, () => {
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
       });
-    });
-
-    describe("style", () => {
-      it("should pass custom style to li", () => {
-        const node = makeNode({ style: { margin: "10px" } });
-        const wrapper = makeShallowWrapper(node);
-        expect(wrapper.prop("style")).toHaveProperty("margin", "10px");
-      });
-
-      validatePropType(propTypes, "style", [
-        { value: {}, valid: true, descriptor: "obj" },
-        { value: "string", valid: false },
-      ]);
     });
   });
 });

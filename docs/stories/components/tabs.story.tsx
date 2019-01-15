@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Tab } from "src/components";
-import { TAB_GROUP_DEFAULTS } from "src/components/tabs/tab-group";
+import { TAB_GROUP_DEFAULTS } from "src/components/tab/tab-group";
 import { Section } from "src/layout";
 
 import { filterUndefined, iterableToSelectObject } from "docs/stories/utils";
@@ -30,7 +30,7 @@ export const knobs = {
     ),
 };
 
-storiesOf("Components/Tabs", module)
+storiesOf("Components/Tab", module)
   .addDecorator(story => <Section children={story()} />)
   .add("Default", () => {
     const props = filterUndefined({
