@@ -177,9 +177,9 @@ If you don't use the `align` prop of `<Level.Item>`, you can include as many `<L
 
 ### Breakpoint
 
-Use the `breakpoint` prop of `<Level>` to change the viewport size at which `<Level.Item>`s are vertically placed rather than horizontal.
+Use the `breakpoint` prop of `<Level>` to change the responsive size at which `<Level.Item>`s are vertically placed rather than horizontal.
 
-For example, for a viewport size greater than `mobile` (up to 768px), these `<Level.Item>`s will be stacked.
+For example, for a responsive size greater than **mobile** (up to 768px), these `<Level.Item>`s will be stacked.
 
 <Playground>
   <Level breakpoint="fullhd">
@@ -219,7 +219,7 @@ For example, for a viewport size greater than `mobile` (up to 768px), these `<Le
   props={{
     breakpoint: {
       description:
-        'the viewport size at which the level is vertical (without overriding Bulma SASS, only "mobile" is supported)',
+        'the responsive size at which the level is vertical (without overriding Bulma SASS, only "mobile" is supported)',
       typeName: "string",
       typeTip: mapEnumerable(DEFAULTS.breakpoints)
     }

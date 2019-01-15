@@ -159,9 +159,9 @@ A responsive horizontal **navbar** that can support images, links, buttons, and 
 The `<Navbar.Brand>` is on the left side of the `<Navbar>`.
 It can contain `<Navbar.Item>`s and, as it's last child, a `<Navbar.Burger>`.
 
-It is **always visible**, so you should only use a few `<Navbar.Item>`s to avoid overflowing horizontally on small viewport devices.
+It is **always visible**, so you should only use a few `<Navbar.Item>`s to avoid overflowing horizontally on small **touch** devices.
 
-On viewports bigger than **touch** `>=1024px`, the `<Navbar.Brand>` will only take up the space it needs.
+On **desktop** `>=1024px`, the `<Navbar.Brand>` will only take up the space it needs.
 
 <Playground>
   <Navbar>
@@ -185,7 +185,7 @@ On viewports bigger than **touch** `>=1024px`, the `<Navbar.Brand>` will only ta
 
 ### Navbar burger
 
-The `<Navbar.Burger>` is a hamburger menu that appears only on **touch** viewports.
+The `<Navbar.Burger>` is a hamburger menu that appears only on **touch** devices.
 It must be the last child of the `<Navbar.Brand>`.
 
 ### Navbar menu
@@ -193,9 +193,9 @@ It must be the last child of the `<Navbar.Brand>`.
 The `<Navbar.Menu>` is a **counterpart** of the `<Navbar.Brand>`.
 It must appear as a direct child of `<Navbar>`, and as a sibling of `<Navbar.Brand>`.
 
-It is hidden on **touch** viewports `<1024px`. Though you can use the `active` and `managed` props of `<Navbar>` to force it open or closed.
+It is hidden on **touch** devices `<1024px`. Though you can use the `active` and `managed` props of `<Navbar>` to force it open or closed.
 
-On **desktop** and bigger viewports `>=1024px`, the `<Navbar.Menu>` will **fill up the sapce** available in the `<Navbar>`, leaving the `<Navbar.Brand>` just the space it needs.
+On **desktop** and bigger devices `>=1024px`, the `<Navbar.Menu>` will **fill up the sapce** available in the `<Navbar>`, leaving the `<Navbar.Brand>` just the space it needs.
 
 It needs two other components as children: `<Navbar.Segment align="start">` and `<Navbar.Segment align="end">`.
 
