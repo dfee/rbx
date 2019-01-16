@@ -1,0 +1,131 @@
+---
+name: Getting Started
+route: /
+---
+
+import { Column } from "src/grid";
+import { Block, Image, Notification, Title } from "src/elements";
+
+import { RbxFeature } from "./components/rbx-feature";
+import BulmaLogo from "./assets/bulma.png";
+import GitHubLogo from "./assets/github.png";
+import NPMLogo from "./assets/npm.png";
+import ReactLogo from "./assets/react.png";
+import TypescriptLogo from "./assets/typescript.png";
+
+# 👟 rbx
+
+### The Comprehensive _Bulma UI_ Framework for _React_
+
+[![Build Status](https://travis-ci.org/dfee/rbx.svg?branch=master)](https://travis-ci.org/dfee/rbx)
+[![Coverage Status](https://coveralls.io/repos/github/dfee/rbx/badge.svg?branch=master)](https://coveralls.io/github/dfee/rbx?branch=master)
+[![Release Version](https://img.shields.io/github/release/dfee/rbx.svg)](https://github.com/dfee/rbx)
+[![Npm Downloads](https://img.shields.io/npm/dm/rbx.svg)](https://www.npmjs.com/package/rbx)
+
+**rbx** is a complete implementation of the **latest** [Bulma UI Framework](http://bulma.io/) for [React](http://reactjs.org/).
+It's designed from the ground up to be robust _and_ easy to use.
+Check out the [design principles](/architecture/design) to learn more 🥤.
+
+<Column.Group multiline>
+  <RbxFeature to="https://reactjs.org/" imageSrc={ReactLogo} title="React 16+">
+    <p>
+      Built for the latest version of <em>React</em>.
+    </p>
+    <p>
+      All components are minimal but flexible, support ref-forwarding, and are
+      renderable as any other component.
+    </p>
+  </RbxFeature>
+  <RbxFeature to="https://bulma.io/" imageSrc={BulmaLogo} title="Bulma 0.7.2">
+    <p>
+      Fully compatible with the latest <em>Bulma</em>.
+    </p>
+    <p>
+      The grid and all layouts, elements, and components are fully supported.
+    </p>
+  </RbxFeature>
+  <RbxFeature
+    to="https://www.typescriptlang.org/"
+    imageSrc={TypescriptLogo}
+    title="Typescript 3"
+  >
+    <p>Written with type safety first.</p>
+    <p>
+      If you use <em>TypeScript</em>, be prepared for some awesome type support.
+      If not, <em>PropTypes</em> are built in.
+    </p>
+  </RbxFeature>
+  <RbxFeature
+    to="https://github.com/dfee/rbx"
+    imageSrc={GitHubLogo}
+    title="Available on GitHub"
+  >
+    <p>
+      Released under the <em>MIT License</em>.
+    </p>
+    <p>
+      In addition, the code carries thorough test coverage and is open for
+      contributions!
+    </p>
+  </RbxFeature>
+  <RbxFeature
+    to="https://www.npmjs.com/package/rbx"
+    imageSrc={NPMLogo}
+    size="full"
+    title="Published on NPM"
+  >
+    <pre>npm install rbx # get it now!</pre>
+  </RbxFeature>
+</Column.Group>
+
+<Block>
+  <Title as="h3" size={3}>
+    Getting started
+  </Title>
+  <p>
+    After you <code>npm install rbx</code>, you can simply import the CSS styles
+    and components from <strong>rbx</strong>:
+  </p>
+</Block>
+
+```
+import React from "react";
+import ReactDOM from "react-dom";
+
+import "rbx/index.css";
+import { Content } from "rbx";
+
+function App() {
+  return (
+    <Content>
+      Hello world from <strong>👟 rbx</strong>
+    </Content>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+<Column.Group>
+  <Column>
+    <Title as="h3" size={3}>
+      CodeSandbox
+    </Title>
+    <p>
+      The following CodeSandbox demo is a simple use case. Use it to experiment,
+      or fork it to provide a re-producible demo while reporting a bug.
+    </p>
+    <iframe
+      src="https://codesandbox.io/embed/2095j7ql0y"
+      style={{
+        width: "100%",
+        height: "500px",
+        border: 0,
+        borderRadius: "4px",
+        overflow: "hidden"
+      }}
+      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+    />
+  </Column>
+</Column.Group>

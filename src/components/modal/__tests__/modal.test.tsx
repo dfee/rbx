@@ -1,5 +1,5 @@
-import * as Enzyme from "enzyme";
-import * as React from "react";
+import Enzyme from "enzyme";
+import React from "react";
 
 import { Modal } from "src/components/modal/modal";
 import { ModalBackground } from "src/components/modal/modal-background";

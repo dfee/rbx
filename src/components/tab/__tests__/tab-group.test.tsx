@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { TAB_GROUP_DEFAULTS, TabGroup } from "src/components/tab/tab-group";
 

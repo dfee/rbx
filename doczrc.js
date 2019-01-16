@@ -27,6 +27,32 @@ export default {
   // we manually create them rather than relying on React-Docgen
   propsParser: false,
   public: "docs/public",
+  themeConfig: {
+    colors: {
+      white: "#FFFFFF",
+      grayExtraLight: "#dbdbdb",
+      grayLight: "#b5b5b5",
+      gray: "#7a7a7a",
+      grayDark: "#4a4a4a",
+      grayExtraDark: "#363636",
+      dark: "#242424",
+      negative: "#121212",
+      blue: "#3273dc",
+      skyBlue: "#209cee",
+      primary: "#00d1b2",
+      codeColor: "#ff3860",
+      codeBg: "#f5f5f5",
+      sidebarBg: "#f5f5f5",
+      text: "#4a4a4a",
+      link: "#3273dc"
+    },
+    styles: {
+      code: {
+        fontFamily: "monospace",
+        padding: "0.25em 0.5em"
+      }
+    }
+  },
   title: "👟 rbx",
   typescript: true
 };

@@ -1,0 +1,38 @@
+---
+name: Inversion of Control
+menu: Architecture
+route: /architecture/inversion-of-control
+---
+
+# Inversion of Control
+
+In a nutshell, pretty much every component renders through the `<Generic>` component.
+This means that those components take advantage of all the [Bulma modifiers](https://bulma.io/documentation/modifiers/), **by taking any prop that [`<Generic>`](/base/generic) accepts**.
+
+These components, created with `forwardRefAs` – a sort of wrapper on React's [`forwardRef`](https://reactjs.org/docs/forwarding-refs.html) - can render themselves as **any other component**, hence the [inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control) paradigm.
+
+## The `as` prop
+
+The `as` prop is what enables _inversion of control_ (IOC).
+You can pass any prop that the `as` component or JSX Element supports.
+
+For example, if you're using the `<Button>` component, and want to render it as an _HTML anchor_, you can supply `as="a"` and the `<Button>` component will then _also_ accept the `href` prop and any other props that an _HTML anchor_ accepts. It will no longer accept the props that an _HTML button_ accepts, however (like the `form` prop).
+
+You can also use the `as` prop to supply your components or other third-party components (that take the standard `className` prop!).
+
+For example, if you're using [React Router](https://reacttraining.com/react-router/), you can pass its `<Link>` component to `<Button>`, and use it's props:
+
+`<Button as={Link} to="/somewhere">Go somewhere</Button>`
+
+All components have a default `as` prop value, and that is called out in each component's _API Docs_, both in a _tag_ and in the _props table_.
+
+As an added bonus, _TypeScript_ will _also_ typecheck the props of the component or JSX Element that you've provided to the `as` prop!
+
+## Ref forwarding
+
+It can be frustrating when your refs get lost.
+That is, you want to control or access an underlying HTML element, but you can't access it, because you don't have access to it.
+
+All user-components support _ref forwarding_, so you can pass a React `Ref` (a function that has the shape `(target: HTMLElement) => void` or a `RefObject` as created by `React.createRef()`) – and then you'll have access t the underlying component or element.
+
+This is especially useful when working with forms!

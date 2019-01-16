@@ -1,0 +1,37 @@
+---
+name: Etc.
+route: /architecture/etc
+---
+
+# Other topical notes
+
+## Building & Commands
+
+You'll notice the `package.json` scripts are virtually empty.
+That's because the build instructions were getting complex, so they were moved into a [`Makefile`](https://github.com/dfee/rbx/blob/master/Makefile).
+
+By running the `make help` command in the root of a cloned repo, you'll see the available options (including building, testing, etc.)
+
+### Testing
+
+The robust way to test is with `make test`, which will:
+
+1. run `tslint` to verify the code
+2. run `jest` for unit and snapshot testing
+3. output a coverage report
+
+For convenience, you'll often want to use `npx jest the/file/to/test.ts` to run tests on a particular file.
+
+### Building
+
+The general way to build is to use `make build`, which will:
+
+1. compile the code into _ECMAScript 6_ with `tsc` into the '/dist' directory
+2. compile that _ES6_ code into _CommonJS_ code using `rollup` (with a `.cjs.js` extension).
+3. copy and compile the _SASS_ code into _CSS_, output to the `/dist` directory
+4. copy and modify the `package.json` so that it can be published to _npm_ without requiring imports from a root directory (i.e. `import { DEFAULTS } from 'rbx/base/helpers/variables';` rather than `import { DEFAULTS } from 'rbx/dist/base/helpers/variables`).
+
+### Publish
+
+**Important:** do not use `npm publish` to publish the code to _npm_.
+Rather, use `make publish` which will publish the build result in `/dist`.

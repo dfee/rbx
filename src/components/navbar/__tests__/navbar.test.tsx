@@ -1,5 +1,5 @@
-import * as Enzyme from "enzyme";
-import * as React from "react";
+import Enzyme from "enzyme";
+import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Navbar } from "src/components/navbar/navbar";

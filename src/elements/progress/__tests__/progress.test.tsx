@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Progress, PROGRESS_DEFAULTS } from "src/elements/progress/progress";

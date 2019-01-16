@@ -1,5 +1,5 @@
-import * as Enzyme from "enzyme";
-import * as React from "react";
+import Enzyme from "enzyme";
+import React from "react";
 
 import {
   hasProperties,

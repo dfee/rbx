@@ -1,0 +1,115 @@
+---
+name: Customize
+menu: Architecture
+route: /architecture/customize
+---
+
+# Customize rbx
+
+Sometimes the default [Bulma](https://bulma.io) styles aren't enough.
+That's a feature and not a bug, and the Bulma docs are quick to demonstrate [how to customize the SASS](https://bulma.io/documentation/customize/) to your liking.
+
+## Modifying SASS variables
+
+If you're modifying SASS values without introducing anything new, you don't have to keep reading. If you are **adding** or **removing** variables (or **adding** to or **removing** from SASS arrays), the following docs _are_ relevant.
+
+There are many places in **rbx** that leverage these variable overrides: the global modifier helpers (located at `/base/helpers`) as well as components like `<Button>` (and more than 20 others).
+
+## Overview
+
+Before we get on to an example, here's an overview of how we use _TypeScript_ to customize what props are supported.
+
+Take a look at the [source code for the **helpers variables**](https://github.com/dfee/rbx/blob/master/src/base/helpers/variables.ts), or the [source code for `<Button>`](https://github.com/dfee/rbx/blob/master/src/elements/button/button.tsx), and you'll notice two very important expressions:
+
+1. the `DEFAULTS` or `<COMPONOENT>_DEFAULTS` variable that defines the defaults in a `tuple()`
+2. a `Variables` or `<Component>Variables` `type` that uses those defaults to construct a _TypeScript_ type.
+
+Looking deeper at the **DEFFAULTS**, that's where the _Bulma_ defaults are defined in code.
+For example, `colors` on `DEFAULTS`, and `sizes` on `BUTTON_DEFAULTS`.
+
+Looking deeper at the **Variables**, you'll realize that `Variables` is actually just a merge of `VariablesDefaults` and `VariablesOverrides`.
+
+Below we'll talk more about how to override these.
+
+## An example: introducing a new color
+
+To add the color `"react"` (the React logo-color) so that all components can use it (across props like `textColor` and `backgroundColor` as well as with component-specific props like `color` on `<Button>`), you'll need to extend the `$colors` variable before import Bulma's SASS.
+
+Your new SASS file (imported somewhere in your App) will look something like this:
+
+```
+# App.sass
+
+@charset 'utf-8';
+
+@import "~bulma/sass/utilities/functions"
+
+// add new colors
+$react: #00d8ff !default
+$react-invert: findColorInvert($react) !default
+$custom-colors: ("react": ($react, $react-invert))
+
+// Import Bulma styles
+@import "~bulma/bulma"
+
+// Import rbx style fixes (**very simple**)
+@import "~rbx/rbx"
+```
+
+### Update the `<Theme>`
+
+If you've altered a [Bulma modifier](https://bulma.io/documentation/modifiers/), you'll need to update the `<Theme>` at the root of your App, so that [PropTypes](https://www.npmjs.com/package/prop-types) uses the proper values for prop type-checking.
+
+> **Note:** [_PropTypes_](https://www.npmjs.com/package/prop-types) only provides literal type-checks on the global helpers – those located in `base/helpers`. I.e. _PropTypes_ will check that your new `"react"` color is in fact a `textColor`, but it will _not_ check that `"react"` is a valid `color` for `<Button>`, due to limitations on `PropTypes`.
+> However, _TypeScript_ can perform this extended validation (as described in the next section).
+
+```
+// App.js
+
+import { makeRootValidatingTransform } from "rbx/base/helpers";
+import { DEFAULTS } from "rbx/base/helpers/variables";
+import { tuple } from "rbx/utils";
+
+import { MyAppNavbar } from "./components";
+import "./App.sass";
+
+const COLORS = tuple(...DEFAULTS.colors, "react");
+
+const themeValue = {
+  transform: makeRootValidatingTransform({ colors: COLORS })
+};
+
+const App = () => (
+  <ThemeContext.Provider value={themeValue}>
+    {/* supply your children components as you normally would */}
+    <MyAppNavbar />
+    <Button color="react">Hello world</Button>
+  </ThemeContext.Provider>
+);
+```
+
+If you're not modifying a _Bulma modifier_, but instead are extending a component's **\_DEFAULTS** (e.g. `BUTTON_DEFAULTS`), you don't need to explicitly set the `<Theme>`.
+
+If you're not using _TypeScript_, then **you're done**. Otherwise...
+
+### Updating the `TypeScript` types
+
+To continue providing type-safety and prop auto-completion with this new configuration, you'll need to add an `rbx.d.ts` file to your project.
+For adding a color (as demonstrated above), this file will look like:
+
+```
+// rbx.d.ts
+
+import "rbx/base/helpers/variables";
+import { VariablesDefaults } from "rbx/base/helpers/variables";
+
+declare module "rbx/base/helpers/variables" {
+  interface VariablesOverrides {
+    colors: VariablesDefaults["colors"] | "react"; // we added `react`!
+  }
+}
+```
+
+If you instead modify a component's defaults, and not a _Bulma modifier_, simply use the template above, but with the appropriate `<COMPONENT>_DEFAULTS`.
+
+Now, you'll continue to have auto-complete support, and type-safety while you develop.

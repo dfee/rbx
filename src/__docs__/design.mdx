@@ -1,0 +1,100 @@
+---
+name: Design
+menu: Architecture
+route: /architecture/design
+---
+
+# Design & Defense
+
+This document serves as both an architecture overview and a _design-defense_ of choices made while building **rbx**.
+
+**rbx** is written in a style that's minimal yet robust.
+It's common for JavaScript frameworks – and React UI Frameworks, especially – to include the kitchen sink.
+That is, everything you need and then more.
+
+This _UI framework_ is a sort of reaction to the idea of an opinionated UI Framework.
+My experience across languages and programming paradigms informs me that whenever _packages_, _modules_, or whatever they're called in the language your're using, are too deeply integrated, the barrier for entry is low, but so is the ceiling.
+
+Ever tried using [Formik](https://github.com/jaredpalmer/formik) with [ant.design](https://ant.design/)?
+How about switching to [Material Design Icons](https://materialdesignicons.com) with [Semantic UI React](https://react.semantic-ui.com/).
+If so, you know exactly what I'm talking about.
+Good luck swimming upstream.
+
+Too much of a good thing can definitely be a bad thing.
+And with **rbx**, I've tried to strike a perfect balance.
+
+**rbx** maintains a simple and complete wrapping of the most recent version of the [Bulma framework](https://bulma.io), while at the same time keeping the barrier for entry low.
+
+## Principles of design
+
+**rbx** is designed with these principles in mind:
+
+- easy to use (understand, and maintain)
+- largely unopinionated
+- lightweight, yet flexible
+- integrated, yet extendable
+- open-source (and easy to contribute)
+- well-documented and heavily tested
+
+### Easy to use (understand, and maintain)
+
+If you'd like to use **rbx**, simply include a css file, import some components, and get moving. If you want to customize the Bulma sass, **rbx** will get out of your way, so you can do that, too.
+
+Many componets are quite simple, and simply apply the appropriate styling to an underlying JSX Element (e.g. `div` or `span`).
+For the more complex ones (e.g. `<Dropdown>`, `<Modal>`, or `<Navbar>`), they come with basic state management built-in (using the modern [React Context](https://reactjs.org/docs/context.html) that you can easily override using the `managed` prop.
+
+### Largely unopinionated
+
+The code footprint of **rbx** is managable – it was written by a single developer (though, see "prior art" below).
+Therefore, it won't compete with [Redux](https://redux.js.org/), [Mobx](https://mobx.js.org/), [Formik](https://jaredpalmer.com/formik/), or any other specialized framework you bring.
+
+In fact, **it doesn't even include icons**(!).
+This is somewhat unprecented, but it allows you to bring your own favorite font icons from wherever you'd like – like [FontAwesome](https://fontawesome.com) or [Material Design Icon](https://materialdesignicons.com).
+
+### Lightweight, yet flexible
+
+All core components can render as any other component.
+For example, if you'd like to render a `<Button>` as an anchor tag: just supply the following prop `as="a"`:
+
+`<Button as="a" href="https://google.com">Visit Google</Button>`
+
+You can also supply React Components to the `as` prop, for example, if you're using [React Router](https://reacttraining.com/react-router/), you could leverage the `Link` component for your button:
+
+`<Button as={Link} to="https://google.com">Visit Google</Button>`
+
+In addition, these components forward the `ref` prop, so you can easily get access to the underlying DOM object.
+
+### Integrated, yet extendable
+
+Maybe you'd like to customize the Bulma SASS, but maybe not.
+If you don't want to customize the SASS, simply `import "rbx/index.css"` somewhere in your app.
+
+If you **do** want to customize the SASS, you can do so to your heart's delight. **rbx** will stay out of your way, and even help you revise the TypeScript types so that you can continue to be productive.
+
+All components with supporting, external documentation have a link alongside their API to the Bulma docs.
+
+### Open-source (and easy to contribute)
+
+I like open-source.
+And, I like the [MIT License](https://opensource.org/licenses/MIT)
+When something goes wrong, _you_ can fix it, and contribute those changes upstream.
+Please join in!
+
+### Well-documented and heavily tested
+
+These docs are canonical.
+They're updated alongside development.
+All user components are fully documented.
+
+As of this writing, the code has `100%` coverage – and not through Jest snapshots, either.
+If you ever need to understand a component's usage, feel free to refer to the tests.
+
+## Prior art
+
+My purpose for writing this code was born out of the TypeScript declaration file I wrote for [react-bulma-components](https://github.com/couds/react-bulma-components).
+It's seemingly impossible to create and maintain TypeScript typings for a project when the project's lead has no interest in integrating TypeScript into the package's core.
+
+In addition, having written the TypeScript declaration files for that package, I discovered just how many bugs were actually in the code – bugs that TypeScript simply won't allow.
+I wanted a package that was easy to understand, easy to maintain, and could be upgraded alongside `Bulma` **very easily**.
+
+So, with a hard fork of `react-bulma-components`, and 100% re-written from the ground-up, **rbx** was born.

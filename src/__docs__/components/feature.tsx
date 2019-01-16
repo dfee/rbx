@@ -59,7 +59,7 @@ export const AsDoc: React.FC<AsDocProps> = ({ asType }) => (
     primaryColor="light"
     secondaryName={asType}
     secondaryColor="warning"
-    url="/rbx/advanced/as-prop"
+    url="/rbx/architecture/inversion-of-control"
   />
 );
 
@@ -102,7 +102,7 @@ export const OverridesFeature: React.FC<OverridesFeatureProps> = ({
       primaryColor="light"
       secondaryName={name}
       secondaryColor={color}
-      url="/rbx/advanced/customize"
+      url="/rbx/architecture/customize"
     />
   );
 };

@@ -2,7 +2,7 @@ module.exports = {
   collectCoverageFrom: [
     "src/**/*.(ts|tsx)",
     "!**/node_modules/**",
-    "!**/__docs__/*",
+    "!**/__docs__/**",
     "!**/__tests__/*"
   ],
   coverageDirectory: "<rootDir>/.coverage",
