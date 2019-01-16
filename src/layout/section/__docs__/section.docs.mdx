@@ -6,7 +6,11 @@ route: /layout/section
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  OptionBlock,
+  mapEnumerable
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Container, Content, Title } from "src/elements";
 import { Section, SECTION_DEFAULTS } from "../section";
@@ -34,15 +38,16 @@ Use the `size` prop to resize the `<Section>`.
     const sizes = SECTION_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(0, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({size, name}) => (
-      <Block key={name}>
+    return sizes.map(({size, name}, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
         <Section backgroundColor="primary" size={size}>
-          <Content backgroundColor="grey-light">
-            <code>{name}</code> size <code>{'<Section>'}</code> with a
-            grey child <code>{'<Content>'}</code> to depict padding.
-          </Content>
+          <Title textColor="light">Section</Title>
+          <Title textColor="light" as="h2" subtitle>
+            A {name} container to divide your page into sections,
+            like the one you are currently reading
+          </Title>
         </Section>
-      </Block>
+      </OptionBlock>
     ));
 
 }}

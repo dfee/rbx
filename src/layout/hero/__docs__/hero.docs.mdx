@@ -11,6 +11,7 @@ import { Playground } from "docz";
 import {
   Frame,
   ForwardRefAsExoticComponentDoc,
+  OptionBlock,
   mapEnumerable
 } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
@@ -65,8 +66,8 @@ Use the `color` prop to specify the color of the `<Hero>`.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map(color => (
-      <Block key={color}>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
         <Hero color={color}>
           <Hero.Body>
             <Container>
@@ -77,7 +78,7 @@ Use the `color` prop to specify the color of the `<Hero>`.
             </Container>
           </Hero.Body>
         </Hero>
-      </Block>
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -88,8 +89,8 @@ Use the `gradient` prop to generate a subtle gradient.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map(color => (
-      <Block key={color}>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
         <Hero gradient color={color}>
           <Hero.Body>
             <Container>
@@ -100,7 +101,7 @@ Use the `gradient` prop to generate a subtle gradient.
             </Container>
           </Hero.Body>
         </Hero>
-      </Block>
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -114,8 +115,8 @@ Use the `size` prop to make more imposing banners.
     const sizes = HERO_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ size, name }) => (
-      <Block key={name}>
+    return sizes.map(({ size, name }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
         <Hero color="primary" size={size}>
           <Hero.Body>
             <Container>
@@ -126,7 +127,7 @@ Use the `size` prop to make more imposing banners.
             </Container>
           </Hero.Body>
         </Hero>
-      </Block>
+      </OptionBlock>
     ));
 
 }}

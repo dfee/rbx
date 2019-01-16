@@ -8,7 +8,11 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
 import { Control } from "../control";
@@ -59,17 +63,19 @@ Use the `color` prop of `<Select.Container>` to change the component's color.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map(color => (
-      <Field key={color}>
-        <Control>
-          <Select.Container color={color}>
-            <Select>
-              <Select.Option>{color} select dropdown</Select.Option>
-              <Select.Option>With options</Select.Option>
-            </Select>
-          </Select.Container>
-        </Control>
-      </Field>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Select.Container color={color}>
+              <Select>
+                <Select.Option>{color} select dropdown</Select.Option>
+                <Select.Option>With options</Select.Option>
+              </Select>
+            </Select.Container>
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -92,20 +98,27 @@ Use the `rounded` prop of `<Select.Container>` for rounded edges.
 Use the `size` prop of `<Select.Container>` to change the component's size.
 
 <Playground>
-  {() =>
-    SELECT_CONTAINER_DEFAULTS.sizes.map(size => (
-      <Field key={size}>
-        <Control>
-          <Select.Container size={size}>
-            <Select>
-              <Select.Option>{size} select dropdown</Select.Option>
-              <Select.Option>With options</Select.Option>
-            </Select>
-          </Select.Container>
-        </Control>
-      </Field>
+  {() => {
+    const sizes = SELECT_CONTAINER_DEFAULTS.sizes.map(size => ({ name: size, size}));
+    sizes.splice(1, 0, { name: "normal", size: undefined });
+
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Select.Container size={size}>
+              <Select>
+                <Select.Option>{name} select dropdown</Select.Option>
+                <Select.Option>With options</Select.Option>
+              </Select>
+            </Select.Container>
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
-  }
+
+}}
+
 </Playground>
 
 ### States
@@ -113,20 +126,29 @@ Use the `size` prop of `<Select.Container>` to change the component's size.
 Use the `state` prop of `<Select.Container>` to change the component's state.
 
 <Playground>
-  {() =>
-    SELECT_CONTAINER_DEFAULTS.states.map(state => (
-      <Field key={state}>
-        <Control>
-          <Select.Container state={state}>
-            <Select>
-              <Select.Option>{state} select dropdown</Select.Option>
-              <Select.Option>With options</Select.Option>
-            </Select>
-          </Select.Container>
-        </Control>
-      </Field>
+  {() => {
+    const states = [
+      { name: "normal", state: undefined },
+      ...SELECT_CONTAINER_DEFAULTS.states.map(state => ({ name: state, state }))
+    ];
+
+    return states.map(({name, state}, i) => (
+      <OptionBlock props={{ state }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Select.Container state={state}>
+              <Select>
+                <Select.Option>{name} select dropdown</Select.Option>
+                <Select.Option>With options</Select.Option>
+              </Select>
+            </Select.Container>
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
-  }
+
+}}
+
 </Playground>
 
 ### Icons

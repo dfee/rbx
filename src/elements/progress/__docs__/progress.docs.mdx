@@ -6,7 +6,11 @@ route: /elements/progress
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Table } from "src/elements";
 import { Progress, PROGRESS_DEFAULTS } from "../progress";
@@ -26,7 +30,9 @@ Use the `color` prop on `<Progress>` to set the color.
 <Playground>
   {() =>
     DEFAULTS.colors.map((color, i) => (
-      <Progress color={color} key={color} max={100} value={20 + i * 5} />
+      <OptionBlock props={{ color }} index={i} key={i}>
+        <Progress color={color} max={100} value={20 + i * 5} />
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -40,26 +46,11 @@ Use the `size` prop of `<Progress>` to change the height.
     const sizes = PROGRESS_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "-", size: undefined });
 
-    return (
-      <Table bordered>
-        <thead>
-          <tr>
-            <th><code>Progress</code> size</th>
-            <th>Result</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            sizes.map(({ size, name }, i) => (
-              <tr key={name}>
-                <td><code>{name}</code></td>
-                <td><Progress value={20 + i * 10} max={100} size={size} /></td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </Table>
-    );
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Progress value={20 + i * 10} max={100} size={size} />
+      </OptionBlock>
+    ))
 
 }}
 

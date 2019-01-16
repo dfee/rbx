@@ -6,7 +6,11 @@ route: /grid/columns
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Generic } from "src/base";
 import { Box, Content, Notification, Title } from "src/elements";
@@ -66,14 +70,16 @@ Use the `size` of `<Column>` with a fractional string (predefined) to size your 
         )
 
         return (
-          <Column.Group key={size}>
-            <Column size={size}>
-              <Notification color="primary" textAlign="centered">
-                <code>{size}</code>
-              </Notification>
-            </Column>
-            {remainder}
-          </Column.Group>
+          <OptionBlock props={{ size }} index={i} key={i}>
+            <Column.Group>
+              <Column size={size}>
+                <Notification color="primary" textAlign="centered">
+                  <code>{size}</code>
+                </Notification>
+              </Column>
+              {remainder}
+            </Column.Group>
+          </OptionBlock>
         );
       })
 
@@ -100,20 +106,22 @@ Use the `size` of `<Column>` with a number to build a 12-column system.
     return COLUMN_DEFAULTS.sizes
       .filter(size => typeof size === "number")
       .map((size, i) => (
-        <Column.Group key={i}>
-          <Column size={size}>
-            <Notification color="primary" textAlign="centered">
-              <code>{size}</code>
-            </Notification>
-          </Column>
-          {size < 12 && (
-            <Column size={12-size}>
-              <Notification textAlign="centered">
-                <code>{12 - size}</code>
+        <OptionBlock props={{ size }} index={i} key={i}>
+          <Column.Group>
+            <Column size={size}>
+              <Notification color="primary" textAlign="centered">
+                <code>{size}</code>
               </Notification>
             </Column>
-          )}
-        </Column.Group>
+            {size < 12 && (
+              <Column size={12-size}>
+                <Notification textAlign="centered">
+                  <code>{12 - size}</code>
+                </Notification>
+              </Column>
+            )}
+          </Column.Group>
+        </OptionBlock>
       ));
 
 }}
@@ -136,15 +144,17 @@ It takes the same prop values as `<Column>`'s `size` prop.
     ];
 
     return permutations.map(({ size, offset }, i) => (
-      <Column.Group key={i}>
-        <Column size={size} offset={offset}>
-          <Notification color="primary">
-            <code className="html">is-{size}</code>
-            <br />
-            <code className="html">is-offset-{offset}</code>
-          </Notification>
-        </Column>
-      </Column.Group>
+      <OptionBlock props={{ size, offset }} index={i} key={i}>
+        <Column.Group>
+          <Column size={size} offset={offset}>
+            <Notification color="primary">
+              <code className="html">size: {size}</code>
+              <br />
+              <code className="html">offset: {offset}</code>
+            </Notification>
+          </Column>
+        </Column.Group>
+      </OptionBlock>
     ));
 
 }}
@@ -370,29 +380,43 @@ Use it with the `multiline` prop of `<Column.Group>` to continue to the next row
 
 ### Variable gap
 
-Use the `gapSize` prop of `<Column.Group>` to specify the gap-size around the container.
-
-- `gapSize={0}` removes any gap (like `gapless`)
-- `gapSize={3}` is the default value, by default equivalent to `0.75rem`
-- `gapSize={8}` is the maximum value, equivalent to `2rem`
-
-Play with the code sample below and adjust the gap size from 0-8 to experiment.
+<Content>
+  <p>
+    Use the `gapSize` prop of <code>{"<Column.Group>"}</code> to specify the
+    gap-size around the container.
+  </p>
+  <ul>
+    <li>
+      <code>{"gapSize={0}"}</code> will remove any gap (similar to the{" "}
+      <code>gapless</code> prop)
+    </li>
+    <li>
+      <code>{"gapSize={3}"}</code> is the default size specified by Bulma, and
+      is equivalent to the <code>0.75rem</code> value
+    </li>
+    <li>
+      <code>{"gapSize={8}"}</code> is the maximum gap of <code>2rem</code>
+    </li>
+  </ul>
+</Content>
 
 <Playground>
   {() =>
-    COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => (
-      <Column.Group gapSize={gapSize} key={gapSize}>
-        <Column size={4}>
-          <Notification color="primary" textAlign="centered">
-            gapSize
-          </Notification>
-        </Column>
-        <Column size={8}>
-          <Notification color="primary" textAlign="centered">
-            {gapSize}
-          </Notification>
-        </Column>
-      </Column.Group>
+    COLUMN_GROUP_DEFAULTS.gapSizes.map((gapSize, i) => (
+      <OptionBlock props={{ gapSize }} index={i} key={i}>
+        <Column.Group gapSize={gapSize}>
+          <Column size={4}>
+            <Notification color="primary" textAlign="centered">
+              gapSize
+            </Notification>
+          </Column>
+          <Column size={8}>
+            <Notification color="primary" textAlign="centered">
+              {gapSize}
+            </Notification>
+          </Column>
+        </Column.Group>
+      </OptionBlock>
     ))
   }
 </Playground>

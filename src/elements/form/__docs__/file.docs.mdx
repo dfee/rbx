@@ -8,7 +8,11 @@ import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Content, Notification } from "src/elements";
 import { Field } from "../field";
@@ -179,23 +183,25 @@ Use the `color` prop of `<File>` to change the color.
       { boxed: true, hasName: false, color: "warning" },
       { boxed: true, hasName: true, color: "danger" }
     ];
-    return permutations.map(({ boxed, color, hasName }) => (
-      <Field key={color}>
-        <File boxed={boxed} color={color} hasName={hasName}>
-          <File.Label>
-            <File.Input name="resume" />
-            <File.CTA>
-              <File.Icon>
-                <FontAwesomeIcon icon={faUpload} />
-              </File.Icon>
-              <File.Label as="span">{`${color} file`}</File.Label>
-            </File.CTA>
-            {hasName && (
-              <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
-            )}
-          </File.Label>
-        </File>
-      </Field>
+    return permutations.map(({ boxed, color, hasName }, i) => (
+      <OptionBlock props={{ boxed, color, hasName }} index={i} key={i}>
+        <Field>
+          <File boxed={boxed} color={color} hasName={hasName}>
+            <File.Label>
+              <File.Input name="resume" />
+              <File.CTA>
+                <File.Icon>
+                  <FontAwesomeIcon icon={faUpload} />
+                </File.Icon>
+                <File.Label as="span">{`${color} file`}</File.Label>
+              </File.CTA>
+              {hasName && (
+                <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+              )}
+            </File.Label>
+          </File>
+        </Field>
+      </OptionBlock>
     ));
   }}
 </Playground>
@@ -209,20 +215,22 @@ Use the `size` prop of `<File>` to change the size.
     const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ name, size }) => (
-      <Field key={name}>
-        <File size={size}>
-          <File.Label>
-            <File.Input name="resume" />
-            <File.CTA>
-              <File.Icon>
-                <FontAwesomeIcon icon={faUpload} />
-              </File.Icon>
-              <File.Label as="span">{`${name} file...`}</File.Label>
-            </File.CTA>
-          </File.Label>
-        </File>
-      </Field>
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Field>
+          <File size={size}>
+            <File.Label>
+              <File.Input name="resume" />
+              <File.CTA>
+                <File.Icon>
+                  <FontAwesomeIcon icon={faUpload} />
+                </File.Icon>
+                <File.Label as="span">{`${name} file...`}</File.Label>
+              </File.CTA>
+            </File.Label>
+          </File>
+        </Field>
+      </OptionBlock>
     ));
 
 }}
@@ -236,21 +244,23 @@ The `size` prop of `<File>` also works with a filename.
     const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ name, size }) => (
-      <Field key={name}>
-        <File size={size} hasName>
-          <File.Label>
-            <File.Input name="resume" />
-            <File.CTA>
-              <File.Icon>
-                <FontAwesomeIcon icon={faUpload} />
-              </File.Icon>
-              <File.Label as="span">{`${name} file...`}</File.Label>
-            </File.CTA>
-            <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
-          </File.Label>
-        </File>
-      </Field>
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Field>
+          <File size={size} hasName>
+            <File.Label>
+              <File.Input name="resume" />
+              <File.CTA>
+                <File.Icon>
+                  <FontAwesomeIcon icon={faUpload} />
+                </File.Icon>
+                <File.Label as="span">{`${name} file...`}</File.Label>
+              </File.CTA>
+              <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+            </File.Label>
+          </File>
+        </Field>
+      </OptionBlock>
     ));
 
 }}
@@ -264,20 +274,22 @@ The `size` prop of `<File>` also works when it's boxed.
     const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ name, size }) => (
-      <Field key={name}>
-        <File size={size} boxed>
-          <File.Label>
-            <File.Input name="resume" />
-            <File.CTA>
-              <File.Icon>
-                <FontAwesomeIcon icon={faUpload} />
-              </File.Icon>
-              <File.Label as="span">{`${name} file...`}</File.Label>
-            </File.CTA>
-          </File.Label>
-        </File>
-      </Field>
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Field>
+          <File size={size} boxed>
+            <File.Label>
+              <File.Input name="resume" />
+              <File.CTA>
+                <File.Icon>
+                  <FontAwesomeIcon icon={faUpload} />
+                </File.Icon>
+                <File.Label as="span">{`${name} file...`}</File.Label>
+              </File.CTA>
+            </File.Label>
+          </File>
+        </Field>
+      </OptionBlock>
     ));
 
 }}
@@ -291,21 +303,23 @@ The `size` prop of `<File>` also works when it's boxed and with a filename.
     const sizes = FILE_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ name, size }) => (
-      <Field key={name}>
-        <File size={size} boxed hasName>
-          <File.Label>
-            <File.Input name="resume" />
-            <File.CTA>
-              <File.Icon>
-                <FontAwesomeIcon icon={faUpload} />
-              </File.Icon>
-              <File.Label as="span">{`${name} file...`}</File.Label>
-            </File.CTA>
-            <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
-          </File.Label>
-        </File>
-      </Field>
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Field>
+          <File size={size} boxed hasName>
+            <File.Label>
+              <File.Input name="resume" />
+              <File.CTA>
+                <File.Icon>
+                  <FontAwesomeIcon icon={faUpload} />
+                </File.Icon>
+                <File.Label as="span">{`${name} file...`}</File.Label>
+              </File.CTA>
+              <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+            </File.Label>
+          </File>
+        </Field>
+      </OptionBlock>
     ));
 
 }}
@@ -317,39 +331,43 @@ The `size` prop of `<File>` also works when it's boxed and with a filename.
 Use the `align` prop of `<File>` to **center** align a boxed file input.
 
 <Playground>
-  <Field>
-    <File align="centered" hasName boxed color="success">
-      <File.Label>
-        <File.Input name="resume" />
-        <File.CTA>
-          <File.Icon>
-            <FontAwesomeIcon icon={faUpload} />
-          </File.Icon>
-          <File.Label as="span">Centered file</File.Label>
-        </File.CTA>
-        <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
-      </File.Label>
-    </File>
-  </Field>
+  <OptionBlock props={{ align: "centered", boxed: true, hasName: true }}>
+    <Field>
+      <File align="centered" hasName boxed color="success">
+        <File.Label>
+          <File.Input name="resume" />
+          <File.CTA>
+            <File.Icon>
+              <FontAwesomeIcon icon={faUpload} />
+            </File.Icon>
+            <File.Label as="span">Centered file</File.Label>
+          </File.CTA>
+          <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+        </File.Label>
+      </File>
+    </Field>
+  </OptionBlock>
 </Playground>
 
 Use the `align` prop of `<File>` to **right** align a file input.
 
 <Playground>
-  <Field>
-    <File align="right" hasName color="info">
-      <File.Label>
-        <File.Input name="resume" />
-        <File.CTA>
-          <File.Icon>
-            <FontAwesomeIcon icon={faUpload} />
-          </File.Icon>
-          <File.Label as="span">Right file</File.Label>
-        </File.CTA>
-        <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
-      </File.Label>
-    </File>
-  </Field>
+  <OptionBlock props={{ align: "right", hasName: true }}>
+    <Field>
+      <File align="right" hasName color="info">
+        <File.Label>
+          <File.Input name="resume" />
+          <File.CTA>
+            <File.Icon>
+              <FontAwesomeIcon icon={faUpload} />
+            </File.Icon>
+            <File.Label as="span">Right file</File.Label>
+          </File.CTA>
+          <File.Name>Screen Shot 2017-07-29 at 15.54.25.png</File.Name>
+        </File.Label>
+      </File>
+    </Field>
+  </OptionBlock>
 </Playground>
 
 ### Composition

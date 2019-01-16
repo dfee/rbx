@@ -9,7 +9,28 @@ import { ComponentFeatures, ComponentFeaturesProps } from "./feature";
 import {
   BaseSimplePropsTable,
   BaseSimplePropsTableProps,
+  PropDoc,
 } from "./simple-props-table";
+
+export const asDoc: PropDoc = {
+  description: (
+    <span>
+      the React Component or JSX Element (e.g. <code>"div"</code> or{" "}
+      <code>span</code>) to render as
+    </span>
+  ),
+  typeName: "ReactType",
+};
+
+export const refDoc: PropDoc = {
+  description: (
+    <span>
+      a handle to the underlying <code>React Component</code> or{" "}
+      <code>JSX Element</code>
+    </span>
+  ),
+  typeName: "Ref",
+};
 
 export type BaseComponentDocProps = {
   asType: string;
@@ -20,7 +41,7 @@ export type BaseComponentDocProps = {
   props: BaseSimplePropsTableProps["props"];
 };
 
-const BaseComponentDoc: React.FC<BaseComponentDocProps> = ({
+export const BaseComponentDoc: React.FC<BaseComponentDocProps> = ({
   asType,
   components,
   docPath,
@@ -72,24 +93,8 @@ const BaseForwardRefAsExoticComponentDoc: React.FC<
       : JSON.stringify(asType);
 
   const extendedProps: BaseSimplePropsTableProps["props"] = {
-    as: {
-      description: (
-        <span>
-          the React Component or JSX Element (e.g. <code>"div"</code> or{" "}
-          <code>span</code>) to render as
-        </span>
-      ),
-      typeName: "ReactType",
-    },
-    ref: {
-      description: (
-        <span>
-          a handle to the underlying <code>React Component</code> or{" "}
-          <code>JSX Element</code>
-        </span>
-      ),
-      typeName: "Ref",
-    },
+    as: asDoc,
+    ref: refDoc,
     ...props,
   };
 

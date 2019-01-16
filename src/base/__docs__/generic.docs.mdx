@@ -67,7 +67,10 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
 
 <SimplePropsTable
   props={{
-    as: asDoc(Generic.defaultProps.as),
+    as: {
+      ...asDoc,
+      defaultValue: Generic.defaultProps.as
+    },
     ref: refDoc
   }}
 />
@@ -267,7 +270,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </Title>
   <p>
     <code>display.value</code> specifies – for a specific breakpoint – the
-    display style of the text, while
+    display style of the text and is <strong>required</strong>.
     <code>display.only</code> specifies if it should also be applied to bigger breakpoints.
   </p>
 
@@ -277,7 +280,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </Title>
   <p>
     <code>hide.value</code> specifies – for a specific breakpoint – whether the
-    element should be hidden, while
+    element should be hidden and is <strong>required</strong>.
     <code>hide.only</code> specifies if it should also be applied to bigger breakpoints.
   </p>
 
@@ -287,7 +290,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </Title>
   <p>
     <code>textAlign.value</code> specifies – for a specific breakpoint – the
-    alignment of the text, while <code>textAlign.only</code> specifies if it
+    alignment of the text and is <strong>required</strong>. <code>textAlign.only</code> specifies if it
     should also be applied to bigger breakpoints.
   </p>
 
@@ -297,7 +300,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   </Title>
   <p>
     <code>textSize.value</code> specifies – for a specific breakpoint – the size
-    of the text, while <code>textSize.only</code> specifies if it should also be
+    of the text and is <strong>required</strong>. <code>textSize.only</code> specifies if it should also be
     applied to bigger breakpoints.
   </p>
 

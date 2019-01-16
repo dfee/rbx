@@ -8,7 +8,11 @@ import { faCheck, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
 import { Control } from "../control";
@@ -30,12 +34,14 @@ Use the `color` prop to change the `<Input>`'s color.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map(color => (
-      <Field key={color}>
-        <Control>
-          <Input type="text" color={color} placeholder={`${color} input`} />
-        </Control>
-      </Field>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Input type="text" color={color} placeholder={`${color} input`} />
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -49,12 +55,14 @@ Use the `size` prop to change the `<Input>`'s size.
     const sizes = INPUT_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ name, size}) => (
-      <Field key={name}>
-        <Control>
-          <Input type="text" size={size} placeholder={`${name} input`} />
-        </Control>
-      </Field>
+    return sizes.map(({ name, size}, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Input type="text" size={size} placeholder={`${name} input`} />
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
 
 }}
@@ -78,12 +86,14 @@ Use the `state` prop to change the `<Input>`'s state.
     const states = INPUT_DEFAULTS.states.map(state => ({ name: state, state }));
     states.splice(0, 0, { name: "normal", size: undefined });
 
-    return states.map(({ name, state}) => (
-      <Field key={name}>
-        <Control>
-          <Input type="text" state={state} placeholder={`${name} input`} />
-        </Control>
-      </Field>
+    return states.map(({ name, state}, i) => (
+      <OptionBlock props={{ state }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Input type="text" state={state} placeholder={`${name} input`} />
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
 
 }}

@@ -16,7 +16,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Icon, Title } from "src/elements";
 import { Tab } from "../tab";
@@ -46,16 +50,15 @@ Use the `align` prop of `<Tab.Group>` to align the tabs list.
     const alignments = TAB_GROUP_DEFAULTS.alignments.map(align => ({ align, name: align }));
     alignments.splice(0, 0, { align: undefined, name: "left" });
 
-    return alignments.map(({ align, name }) => (
-      <Block key={name}>
-        <Title as="p" size={4}>{name}</Title>
+    return alignments.map(({ align, name }, i) => (
+      <OptionBlock props={{ align }} index={i} key={i}>
         <Tab.Group align={align}>
           <Tab active>Pictures</Tab>
           <Tab>Music</Tab>
           <Tab>Videos</Tab>
           <Tab>Documents</Tab>
         </Tab.Group>
-      </Block>
+      </OptionBlock>
     ))
 
 }}
@@ -104,16 +107,15 @@ Use the `size` prop of `<Tab.Group>` to set the size.
     const sizes = TAB_GROUP_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ size, name }) => (
-      <Block key={name}>
-        <Title as="p" size={4}>{name}</Title>
+    return sizes.map(({ size, name }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
         <Tab.Group size={size}>
           <Tab active>Pictures</Tab>
           <Tab>Music</Tab>
           <Tab>Videos</Tab>
           <Tab>Documents</Tab>
         </Tab.Group>
-      </Block>
+      </OptionBlock>
     ))
 
 }}

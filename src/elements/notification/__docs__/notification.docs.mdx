@@ -6,7 +6,11 @@ route: /elements/notification
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Delete } from "src/elements";
 import { Notification } from "../notification";
@@ -32,15 +36,17 @@ Use the `color` prop to specfiy the color of the `<Notification>`.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map(color => (
-      <Notification color={color} key={color}>
-        <Delete as="button" />
-        Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum
-        dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta
-        nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
-        diam, et dictum <a href="#felis">felis venenatis</a> efficitur. Sit amet,
-        consectetur adipiscing elit
-      </Notification>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
+        <Notification color={color}>
+          <Delete as="button" />
+          Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum
+          dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut,
+          porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida
+          purus diam, et dictum <a href="#felis">felis venenatis</a> efficitur. Sit
+          amet, consectetur adipiscing elit
+        </Notification>
+      </OptionBlock>
     ))
   }
 </Playground>

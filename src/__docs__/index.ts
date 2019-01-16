@@ -1,5 +1,9 @@
-export { AsProp, asDoc, refDoc } from "./common";
-export { ComponentDoc, ForwardRefAsExoticComponentDoc } from "./component-doc";
+export {
+  ComponentDoc,
+  ForwardRefAsExoticComponentDoc,
+  asDoc,
+  refDoc,
+} from "./component-doc";
 export { ComponentFeatures } from "./feature";
 export { Frame } from "./frame";
 export { OptionBlock } from "./option-block";

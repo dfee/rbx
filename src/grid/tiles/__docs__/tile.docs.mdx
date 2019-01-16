@@ -25,6 +25,45 @@ A **single tile** component to build 2-dimensional
 [Metro-like](<https://en.wikipedia.org/wiki/Metro_(design_language)>),
 [Pinterest-like](https://www.pinterest.com),
 
+<Content>
+  <p>
+    The <code>{"<Tile>"}</code> component has <strong>3 key props</strong>:
+  </p>
+  <ul>
+    <li>
+      <strong>1 contextal</strong> prop: <code>kind</code>:
+      <ul>
+        <li>
+          <code>"ancestor"</code>: the root <code>{"<Tile>"}</code> that wraps
+          all other <code>{"<Tile>"}</code>s
+        </li>
+        <li>
+          <code>"parent"</code>: a node <code>{"<Tile>"}</code> that is the
+          direct parent of other <code>{"<Tile>"}</code>s
+        </li>
+        <li>
+          <code>"child"</code>: the leaf <code>{"<Tile>"}</code> (it has no
+          children <code>{"<Tile>"}</code>s)
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>1 directional</strong> prop: <code>vertical</code>
+    </li>
+    <li>
+      <strong>1 horizontal size</strong> prop: <code>size</code>
+      <ul>
+        <li>
+          from <code>size={"{1"}}</code>
+        </li>
+        <li>
+          to <code>size={"{12}"}</code>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</Content>
+
 <Playground>
   <Tile kind="ancestor">
     <Tile size={8} vertical>
@@ -102,16 +141,12 @@ A **single tile** component to build 2-dimensional
 
 Use the `kind` prop of `<Tile>` to modify the context (position in the tree heirarchy)
 
-- `ancestor` (the root `<Tile>` that wraps all other tiles)
-- `parent` (a node `<Tile>` that is the direct parent of `child` `<Tile>`s)
-- `child` (the leaf-node of a `<Tile>` tree)
-
 Use the `vertical` prop of `<Tile>` to stack tiles vertically.
 
 Use the `size` prop to resize any tile according to a **12 column** grid.
-For example, supplying `size={4}` to `<Tile>` will occupy 1/3 of the horizontal space.
+For example, supplying `size={4}` to `<Tile>` will occupy **1/3** of the horizontal space.
 
-To add content to a tile, use the the `as` prop to render the `Tile` as another component.
+To add content to a tile, use the the `as` prop to render the `<Tile>` as another component.
 For example, you can render a `<Tile>` as a `<Notification>` with: `<Tile as={Notification} />`.
 
 <Playground>

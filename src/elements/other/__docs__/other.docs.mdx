@@ -6,7 +6,11 @@ route: /elements/other
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { Table } from "src/elements";
 import { Block } from "../block";
 import { Delete, DELETE_DEFAULTS } from "../delete";
@@ -46,26 +50,11 @@ Use the `size` prop of `<Delete>` to change its size.
     const sizes = DELETE_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "-", size: undefined });
 
-    return (
-      <Table bordered>
-        <thead>
-          <tr>
-            <th><code>Delete</code> size</th>
-            <th>Result</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            sizes.map(({size, name}) => (
-              <tr key={name}>
-                <td><code>{name}</code></td>
-                <td><Delete size={size} /></td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </Table>
-    );
+    return sizes.map(({ size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Delete size={size} />
+      </OptionBlock>
+    ))
 
 }}
 

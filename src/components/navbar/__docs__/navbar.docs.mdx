@@ -11,7 +11,8 @@ import { Playground } from "docz";
 import {
   Frame,
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
+  OptionBlock
 } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Generic } from "src/base";
@@ -207,28 +208,66 @@ Each `<Navbar.Segment>` can contain any number of `<Navbar.Item>`s.
 
 ### Navbar items
 
-The `<Navbar.Item>` is a versatile, repeatable component that can be:
-
-- a navigation **link** (`<Navbar.Link>`)
-- a container for the **brand logo** (a child of `<Navbar.Brand>`)
-- the parent of a **dropdown menu** (`<Navbar.Dropdown>`)
-- the child of a **navbar dropdown** (`<Navbar.Dropdown>`)
-- a container for almost **anything**, like a `<Field>`.
-
-By default it renders as an `<a>`, but you can use the `as` prop to make it an `div`.
-
-It can be the **direct child** of:
-
-- `<Navbar>`
-- `<Navbar.Brand>`
-- `<Navbar.Segment>`
-- `<Navbar.Dropdown>`
-
-Use the `expanded` prop of `<Navbar.Item>` to turn it into a full-width element.
-
-Use the `tab` prop of `<Navbar.Item>` to add a bottom border on hover.
-
-Use the `active` prop of `<Navbar.Item>` to force show the bottom border.
+<Content>
+  <p>
+    The <code>{"<Navbar.Item>"}</code> is a versatile, repeatable component that
+    can be:
+  </p>
+  <ul>
+    <li>
+      a navigation <strong>link</strong> (<code>{"<Navbar.Link>"}</code>)
+    </li>
+    <li>
+      a container for the <strong>brand logo</strong> (a child of{" "}
+      <code>{"<Navbar.Brand>"}</code>)
+    </li>
+    <li>
+      the parent of a <strong>dropdown menu</strong> (
+      <code>{"<Navbar.Dropdown>"}</code>)
+    </li>
+    <li>
+      the child of a <strong>navbar dropdown</strong> (
+      <code>{"<Navbar.Dropdown>"}</code>)
+    </li>
+    <li>
+      a container for almost <strong>anything</strong>, like a{" "}
+      <code>{"<Field>"}</code>
+    </li>
+  </ul>
+  <p>
+    By default it renders as an <code>"a"</code> (an anchor tag), but you can
+    use the <code>as</code> prop to make it an <code>"div"</code>.
+  </p>
+  <p>
+    It can be the <strong>direct child</strong> of:
+  </p>
+  <ul>
+    <li>
+      <code>{"<Navbar>"}</code>
+    </li>
+    <li>
+      <code>{"<Navbar.Brand>"}</code>
+    </li>
+    <li>
+      <code>{"<Navbar.Segment>"}</code>
+    </li>
+    <li>
+      <code>{"<Navbar.Dropdown>"}</code>
+    </li>
+  </ul>
+  <p>
+    Use the <code>expanded</code> prop of <code>{"<Navbar.Item>"}</code> to turn
+    it into a full-width element.
+  </p>
+  <p>
+    Use the <code>tab</code> prop of <code>{"<Navbar.Item>"}</code> to add a
+    bottom border on hover.
+  </p>
+  <p>
+    Use the <code>active</code> prop of <code>{"<Navbar.item>"}</code> to force
+    show the bottom border.
+  </p>
+</Content>
 
 ### Transparent navbar
 
@@ -713,8 +752,8 @@ Use the `color` prop of the `<Navbar>` to change the color.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map(color => (
-      <Block key={color}>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
         <Navbar color={color}>
           <Navbar.Brand>
             <Navbar.Item href="https://bulma.io">
@@ -791,7 +830,7 @@ Use the `color` prop of the `<Navbar>` to change the color.
             </Navbar.Segment>
           </Navbar.Menu>
         </Navbar>
-      </Block>
+      </OptionBlock>
     ))
   }
 </Playground>

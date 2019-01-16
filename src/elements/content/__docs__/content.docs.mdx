@@ -9,7 +9,8 @@ import { Playground } from "docz";
 import {
   Frame,
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
+  OptionBlock
 } from "src/__docs__";
 import { Title } from "src/elements";
 import { Content, CONTENT_DEFAULTS } from "../content";
@@ -52,21 +53,28 @@ A single class to handle **WYSIWYG** generated content, where only **HTML tags**
 Use the `size` prop to adjust the size of the text within the `<Content>`.
 
 <Playground>
-  {() =>
-    CONTENT_DEFAULTS.sizes.map(size => (
-      <Content size={size} key={size}>
-        <Title>
-          Hello World <code>{size}</code>
-        </Title>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-          accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus,
-          nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat
-          odio, sollicitudin vel erat vel, interdum mattis neque.
-        </p>
-      </Content>
+  {() => {
+    const sizes = CONTENT_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1, 0, { name: 'normal', size: undefined });
+
+    return sizes.map(({ size, name }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Content size={size}>
+          <Title>
+            {name} content
+          </Title>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+            accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus,
+            nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat
+            odio, sollicitudin vel erat vel, interdum mattis neque.
+          </p>
+        </Content>
+      </OptionBlock>
     ))
-  }
+
+}}
+
 </Playground>
 
 ### Ordered lists
@@ -75,17 +83,19 @@ Use the `type` prop on `<Content.OrderedList>` to control the bullet styling of 
 
 <Playground>
   {() =>
-    CONTENT_ORDERED_LIST_DEFAULTS.types.map(type => (
-      <Content key={type}>
-        <Title as="h4" size="is-4">
-          Shopping list <code>{type}</code>
-        </Title>
-        <Content.OrderedList type={type}>
-          <Content.OrderedList.Item>Coffee</Content.OrderedList.Item>
-          <Content.OrderedList.Item>Tea</Content.OrderedList.Item>
-          <Content.OrderedList.Item>Milk</Content.OrderedList.Item>
-        </Content.OrderedList>
-      </Content>
+    CONTENT_ORDERED_LIST_DEFAULTS.types.map((type, i) => (
+      <OptionBlock props={{ type }} index={i} key={i}>
+        <Content>
+          <Title as="h4" size="is-4">
+            Shopping list
+          </Title>
+          <Content.OrderedList type={type}>
+            <Content.OrderedList.Item>Coffee</Content.OrderedList.Item>
+            <Content.OrderedList.Item>Tea</Content.OrderedList.Item>
+            <Content.OrderedList.Item>Milk</Content.OrderedList.Item>
+          </Content.OrderedList>
+        </Content>
+      </OptionBlock>
     ))
   }
 </Playground>

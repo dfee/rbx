@@ -6,7 +6,11 @@ route: /elements/tag
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Control, Delete, Field } from "src/elements";
 import { Tag, TAG_DEFAULTS } from "../tag";
@@ -40,12 +44,10 @@ Use the `size` prop on `<Tag>` to change its size.
 
 <Playground>
   {() =>
-    TAG_DEFAULTS.sizes.map(size => (
-      <Block key={size}>
-        <Tag key={size} size={size}>
-          {size}
-        </Tag>
-      </Block>
+    TAG_DEFAULTS.sizes.map((size, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Tag size={size}>{size}</Tag>
+      </OptionBlock>
     ))
   }
 </Playground>

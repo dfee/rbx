@@ -6,7 +6,11 @@ route: /elements/form-textarea
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Control } from "../control";
 import { Field } from "../field";
@@ -32,12 +36,14 @@ Use the `color` prop to set the color of the `<Textarea>`.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map(color => (
-      <Field key={color}>
-        <Control>
-          <Textarea color={color} placeholder={`${color} textarea`} />
-        </Control>
-      </Field>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Textarea color={color} placeholder={`${color} textarea`} />
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -51,12 +57,14 @@ Use the `size` prop to set the size of the text in an `<Textarea>`.
     const sizes = TEXTAREA_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ name, size }) => (
-      <Field key={name}>
-        <Control>
-          <Textarea size={size} placeholder={`${name} textarea`} />
-        </Control>
-      </Field>
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Textarea size={size} placeholder={`${name} textarea`} />
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
 
 }}
@@ -72,12 +80,14 @@ Use the `state` prop to force the state of the `<Textarea>`.
     const states = TEXTAREA_DEFAULTS.states.map(state => ({ name: state, state }));
     states.splice(0, 0, { name: "normal", size: undefined });
 
-    return states.map(({ name, state }) => (
-      <Field key={name}>
-        <Control>
-          <Textarea state={state} placeholder={`${name} textarea`} />
-        </Control>
-      </Field>
+    return states.map(({ name, state }, i) => (
+      <OptionBlock props={{ state }} index={i} key={i}>
+        <Field>
+          <Control>
+            <Textarea state={state} placeholder={`${name} textarea`} />
+          </Control>
+        </Field>
+      </OptionBlock>
     ))
 
 }}

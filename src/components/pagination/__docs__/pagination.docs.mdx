@@ -6,7 +6,11 @@ route: /components/pagination
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Content, Title } from "src/elements";
 import { Pagination, PAGINATION_DEFAULTS } from "../pagination";
@@ -88,9 +92,8 @@ By default on **touch** devices `<1024px`, the `<Pagination.List>` is located on
     const alignments = PAGINATION_DEFAULTS.alignments.map(align => ({ align, name: align }));
     alignments.splice(0, 0, { align: undefined, name: "left" });
 
-    return alignments.map(({ align, name }) => (
-      <Block key={name}>
-        <Title as="p" size={4}>{name}</Title>
+    return alignments.map(({ align, name }, i) => (
+      <OptionBlock props={{ align }} index={i} key={i}>
         <Pagination align={align}>
           <Pagination.Step align="previous">Previous</Pagination.Step>
           <Pagination.Step align="next">Next page</Pagination.Step>
@@ -104,7 +107,7 @@ By default on **touch** devices `<1024px`, the `<Pagination.List>` is located on
             <Pagination.Link>86</Pagination.Link>
           </Pagination.List>
         </Pagination>
-      </Block>
+      </OptionBlock>
     ));
 
 }}
@@ -140,9 +143,8 @@ Use the `size` prop on `<Pagination>` to change the size.
     const sizes = PAGINATION_DEFAULTS.sizes.map(size => ({ size, name: size }));
     sizes.splice(1, 0, { size: undefined, name: "normal" });
 
-    return sizes.map(({ size, name }) => (
-      <Block key={name}>
-        <Title as="p" size={4}>{name}</Title>
+    return sizes.map(({ size, name }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
         <Pagination size={size}>
           <Pagination.Step align="previous">Previous</Pagination.Step>
           <Pagination.Step align="next">Next page</Pagination.Step>
@@ -156,7 +158,7 @@ Use the `size` prop on `<Pagination>` to change the size.
             <Pagination.Link>86</Pagination.Link>
           </Pagination.List>
         </Pagination>
-      </Block>
+      </OptionBlock>
     ));
 
 }}

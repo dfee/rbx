@@ -48,7 +48,7 @@ Leaving this prop unspecified, or setting it to `undefined`, causes it to be **l
     ];
 
     return alignments.map(({ align, name }, i) => (
-      <OptionBlock propName="align" name={name} value={align} index={i} key={i}>
+      <OptionBlock props={{ align }} index={i} key={i}>
        <Breadcrumb align={align}>
           <Breadcrumb.Item>rbx</Breadcrumb.Item>
           <Breadcrumb.Item>Documentation</Breadcrumb.Item>
@@ -100,15 +100,26 @@ You can use the `<Icon>` component within the `<Breadcrumb.Item>` for additional
 Use the `separator` prop of `<Breadcrumb>` to specify an alternative separator.
 
 <Playground>
-  {() =>
-    BREADCRUMB_DEFAULTS.separators.map(separator => (
-      <Breadcrumb key={separator} separator={separator}>
-        <Breadcrumb.Item>breadcrumb</Breadcrumb.Item>
-        <Breadcrumb.Item>separatror</Breadcrumb.Item>
-        <Breadcrumb.Item active>{separator}</Breadcrumb.Item>
-      </Breadcrumb>
-    ))
-  }
+  {() => {
+    const separators = [
+      { name: "forward-slash", separator: undefined },
+      ...BREADCRUMB_DEFAULTS.separators.map(separator => ({ name: separator, separator }))
+    ];
+
+    return separators.map(
+      ({name, separator}, i) => (
+        <OptionBlock props={{ separator }} index={i} key={i}>
+          <Breadcrumb separator={separator}>
+            <Breadcrumb.Item>breadcrumb</Breadcrumb.Item>
+            <Breadcrumb.Item>separator</Breadcrumb.Item>
+            <Breadcrumb.Item active>{name}</Breadcrumb.Item>
+          </Breadcrumb>
+        </OptionBlock>
+      )
+    );
+
+}}
+
 </Playground>
 
 ### Sizes
@@ -120,12 +131,14 @@ Use the `size` prop on `<Breadcrumb>` to specify the size of the breadcrumbs.
     const sizes = BREADCRUMB_DEFAULTS.sizes.map(size => ({ name: size, size }));
     sizes.splice(1, 0, { name: "normal", size: undefined });
 
-    return sizes.map(({ size, name }) => (
-      <Breadcrumb key={name} size={size}>
-        <Breadcrumb.Item>breadcrumb</Breadcrumb.Item>
-        <Breadcrumb.Item>size</Breadcrumb.Item>
-        <Breadcrumb.Item active>{name}</Breadcrumb.Item>
-      </Breadcrumb>
+    return sizes.map(({ size, name }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Breadcrumb size={size}>
+          <Breadcrumb.Item>breadcrumb</Breadcrumb.Item>
+          <Breadcrumb.Item>size</Breadcrumb.Item>
+          <Breadcrumb.Item active>{name}</Breadcrumb.Item>
+        </Breadcrumb>
+      </OptionBlock>
     ));
 
 }}

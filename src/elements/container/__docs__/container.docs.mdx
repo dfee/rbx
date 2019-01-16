@@ -9,7 +9,8 @@ import { Playground } from "docz";
 import {
   Frame,
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
+  OptionBlock
 } from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Notification } from "src/elements";
@@ -46,13 +47,15 @@ Use the `fluid` prop for the container to fit horizontally with padding.
 
 <Playground>
   <Frame>
-    {DEFAULTS.breakpoints.map(breakpoint => (
-      <Container breakpoint={breakpoint} key={breakpoint}>
-        <Notification>
-          This container is <strong>fullwidth</strong> <em>until</em> the
-          <code>{breakpoint}</code> breakpoint.
-        </Notification>
-      </Container>
+    {DEFAULTS.breakpoints.map((breakpoint, i) => (
+      <OptionBlock props={{ breakpoint }} index={i} key={i}>
+        <Container breakpoint={breakpoint}>
+          <Notification>
+            This container is <strong>fullwidth</strong> <em>until</em> the
+            <code>{breakpoint}</code> breakpoint.
+          </Notification>
+        </Container>
+      </OptionBlock>
     ))}
   </Frame>
 </Playground>

@@ -19,7 +19,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
 import { Button, BUTTON_DEFAULTS } from "../button";
@@ -445,11 +449,13 @@ Use the `align` prop to align a button group.
 <Playground>
   {() =>
     [undefined, ...BUTTON_GROUP_DEFAULTS.alignments].map((align, i) => (
-      <Button.Group hasAddons align={align} key={i}>
-        <Button>Yes</Button>
-        <Button>Maybe</Button>
-        <Button>No</Button>
-      </Button.Group>
+      <OptionBlock props={{ align }} index={i} key={i}>
+        <Button.Group hasAddons align={align}>
+          <Button>Yes</Button>
+          <Button>Maybe</Button>
+          <Button>No</Button>
+        </Button.Group>
+      </OptionBlock>
     ))
   }
 </Playground>

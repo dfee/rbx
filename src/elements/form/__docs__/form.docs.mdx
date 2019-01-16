@@ -15,7 +15,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Button, Icon } from "src/elements";
 import { Checkbox } from "../checkbox";
@@ -426,32 +430,20 @@ Use the `align` prop of `<Field>` to alter the alignment.
 Use the `kind` prop as `group` on `<Field>` to group controls together, and use the `align` prop on `<Field>` to alter the alignment.
 
 <Playground>
-  <Field kind="group">
-    <Control>
-      <Button color="primary">Submit</Button>
-    </Control>
-    <Control>
-      <Button color="light">Cancel</Button>
-    </Control>
-  </Field>
-
-<Field kind="group" align="centered">
-  <Control>
-    <Button color="primary">Submit</Button>
-  </Control>
-  <Control>
-    <Button color="light">Cancel</Button>
-  </Control>
-</Field>
-
-  <Field kind="group" align="right">
-    <Control>
-      <Button color="primary">Submit</Button>
-    </Control>
-    <Control>
-      <Button color="light">Cancel</Button>
-    </Control>
-  </Field>
+  {() =>
+    [undefined, ...FIELD_DEFAULTS.alignments].map((align, i) => (
+      <OptionBlock props={{ align }} index={i} key={i}>
+        <Field kind="group" align={align}>
+          <Control>
+            <Button color="primary">Submit</Button>
+          </Control>
+          <Control>
+            <Button color="light">Cancel</Button>
+          </Control>
+        </Field>
+      </OptionBlock>
+    ))
+  }
 </Playground>
 
 Use the `expanded` prop on the `<Control>` to fill up the remaing space.
@@ -494,7 +486,7 @@ Use the `mutliline` prop on `<Field>` to fill up multiple lines (ideal for a lon
       "Twenty"
     ].map(name => (
       <Control key={name}>
-        <Button key={name}>{name}</Button>
+        <Button>{name}</Button>
       </Control>
     ))}
   </Field>

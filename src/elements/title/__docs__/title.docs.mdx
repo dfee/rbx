@@ -6,7 +6,11 @@ route: /elements/title
 
 import { Playground } from "docz";
 
-import { ForwardRefAsExoticComponentDoc, mapEnumerable } from "src/__docs__";
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock
+} from "src/__docs__";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block } from "src/elements";
 import { Title, TITLE_DEFAULTS } from "../title";
@@ -28,20 +32,24 @@ Use the `size` prop on `<Title>` to adjust its size.
 
 <Playground>
   {() =>
-    TITLE_DEFAULTS.sizes.map(size => (
-      <Title size={size} key={size}>
-        Title {size} {size === 3 ? "(default size)" : null}
-      </Title>
+    TITLE_DEFAULTS.sizes.map((size, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Title size={size}>
+          Title {size} {size === 3 ? "(default size)" : null}
+        </Title>
+      </OptionBlock>
     ))
   }
 </Playground>
 
 <Playground>
   {() =>
-    TITLE_DEFAULTS.sizes.map(size => (
-      <Title subtitle size={size} key={size}>
-        Subtitle {size} {size === 5 ? "(default size)" : null}
-      </Title>
+    TITLE_DEFAULTS.sizes.map((size, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Title subtitle size={size}>
+          Subtitle {size} {size === 5 ? "(default size)" : null}
+        </Title>
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -54,13 +62,17 @@ As a rule of thumb, use a size difference of **two**. For example, if your title
 
 <Playground>
   {() =>
-    [1, 2, 3].map(tsize => (
-      <Block key={tsize}>
+    [1, 2, 3].map((tsize, i) => (
+      <OptionBlock
+        props={{ "title.size": tsize, "subtitle.size": tsize + 2 }}
+        index={i}
+        key={i}
+      >
         <Title size={tsize}>Title {tsize}</Title>
         <Title size={tsize + 2} subtitle>
           Subtitle {tsize + 2}
         </Title>
-      </Block>
+      </OptionBlock>
     ))
   }
 </Playground>
@@ -69,15 +81,19 @@ Use the `spaced` prop on `<Title>` to maintain spacing between titles and subtit
 
 <Playground>
   {() =>
-    [1, 2, 3].map(tsize => (
-      <Block key={tsize}>
+    [1, 2, 3].map((tsize, i) => (
+      <OptionBlock
+        props={{ "title.size": tsize, "subtitle.size": tsize + 2 }}
+        index={i}
+        key={i}
+      >
         <Title size={tsize} spaced>
           Title {tsize}
         </Title>
         <Title size={tsize + 2} subtitle>
           Subtitle {tsize + 2}
         </Title>
-      </Block>
+      </OptionBlock>
     ))
   }
 </Playground>
