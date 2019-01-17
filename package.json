@@ -64,8 +64,10 @@
     "docz-theme-default": "^0.13.7",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
+    "husky": "^1.3.1",
     "jest": "23.6.0",
     "jsdom": "13.0.0",
+    "lint-staged": "^8.1.0",
     "node-sass": "^4.11.0",
     "node-sass-tilde-importer": "^1.0.2",
     "react": "16.6.3",
@@ -86,5 +88,17 @@
     "tslint-react": "^3.6.0",
     "typescript": "3.2.2",
     "typescript-tslint-plugin": "^0.2.1"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,jsx,ts,tsx,json,css,sass,md}": [
+        "echo here",
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/public/*.min.js"
+    ]
   }
 }
