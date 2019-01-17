@@ -86,19 +86,19 @@ export const DocFeature: React.FC<DocFeatureProps> = ({ docPath }) => {
   );
 };
 
-export type OverridesFeatureProps = {
-  overrides?: boolean;
+export type CustomizeFeatureProps = {
+  customize?: boolean;
 };
 
-export const OverridesFeature: React.FC<OverridesFeatureProps> = ({
-  overrides,
+export const CustomizeFeature: React.FC<CustomizeFeatureProps> = ({
+  customize,
 }) => {
-  const name = overrides === true ? "yes" : "no";
-  const color = overrides === true ? "success" : "danger";
+  const name = customize === true ? "yes" : "no";
+  const color = customize === true ? "success" : "danger";
 
   return (
     <Feature
-      primaryName="override"
+      primaryName="customize"
       primaryColor="light"
       secondaryName={name}
       secondaryColor={color}
@@ -109,16 +109,16 @@ export const OverridesFeature: React.FC<OverridesFeatureProps> = ({
 
 export type ComponentFeaturesProps = AsDocProps &
   DocFeatureProps &
-  OverridesFeatureProps;
+  CustomizeFeatureProps;
 
 export const ComponentFeatures: React.FC<ComponentFeaturesProps> = ({
   asType,
   docPath,
-  overrides,
+  customize,
 }) => (
   <Feature.Group>
     <AsDoc asType={asType} />
+    <CustomizeFeature customize={customize} />
     <DocFeature docPath={docPath} />
-    <OverridesFeature overrides={overrides} />
   </Feature.Group>
 );

@@ -35,21 +35,21 @@ export const refDoc: PropDoc = {
 export type BaseComponentDocProps = {
   asType: string;
   components: BaseSimplePropsTableProps["components"];
+  customize?: ComponentFeaturesProps["customize"];
   docPath?: ComponentFeaturesProps["docPath"];
   name: string;
-  overrides?: ComponentFeaturesProps["overrides"];
   props: BaseSimplePropsTableProps["props"];
 };
 
 export const BaseComponentDoc: React.FC<BaseComponentDocProps> = ({
   asType,
   components,
+  customize,
   docPath,
   name,
-  overrides,
   props,
 }) => {
-  const componentFeaturesProps = { asType, docPath, overrides };
+  const componentFeaturesProps = { asType, customize, docPath };
 
   return (
     <React.Fragment>
@@ -68,16 +68,16 @@ export const ComponentDoc = withMDXComponents(BaseComponentDoc);
 export type ForwardRefAsExoticComponentDoc = {
   // tslint:disable-next-line:no-any
   component: ForwardRefAsExoticComponent<any, any>;
-  docPath?: ComponentFeaturesProps["docPath"];
   components: BaseSimplePropsTableProps["components"];
-  overrides: BaseComponentDocProps["overrides"];
+  customize: BaseComponentDocProps["customize"];
+  docPath?: ComponentFeaturesProps["docPath"];
   name: string;
   props: BaseSimplePropsTableProps["props"];
 };
 
 const BaseForwardRefAsExoticComponentDoc: React.FC<
   ForwardRefAsExoticComponentDoc
-> = ({ component, components, docPath, name, overrides, props }) => {
+> = ({ component, components, customize, docPath, name, props }) => {
   if (
     component.defaultProps === undefined ||
     component.defaultProps.as === undefined
@@ -108,10 +108,10 @@ const BaseForwardRefAsExoticComponentDoc: React.FC<
   return (
     <BaseComponentDoc
       asType={asTypeString}
-      docPath={docPath}
       components={components}
+      customize={customize}
+      docPath={docPath}
       name={name}
-      overrides={overrides}
       props={extendedProps}
     />
   );
