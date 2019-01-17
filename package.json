@@ -89,10 +89,14 @@
     "typescript": "3.2.2",
     "typescript-tslint-plugin": "^0.2.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && make test"
+    }
+  },
   "lint-staged": {
     "linters": {
       "*.{js,jsx,ts,tsx,json,css,sass,md}": [
-        "echo here",
         "prettier --write",
         "git add"
       ]
@@ -100,5 +104,8 @@
     "ignore": [
       "**/public/*.min.js"
     ]
+  },
+  "prettier": {
+    "trailingComma": "all"
   }
 }
