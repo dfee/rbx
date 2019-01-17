@@ -3,7 +3,7 @@
 const path = require("path");
 
 export default {
-  base: "rbx",
+  base: "/rbx",
   // unfortnately, "too-many-modules"
   // https://github.com/codesandbox/codesandboxer/blob/af013874f5a2f7bb6325c9608597883a8f5061ef/packages/codesandboxer-fs/src/assembleFiles.js#L120
   codeSandbox: false,
@@ -11,8 +11,9 @@ export default {
     "The Comprehensive Bulma UI Framework for React. This is a lightweight, yet robust, React framework that enables rapid, beautiful web development.",
   files: "**/*(.docs)?*.mdx",
   htmlContext: {
-    favicon: "public/favicon.ico"
+    favicon: "/rbx/public/favicon.ico"
   },
+  indexHtml: "src/__docs__/index.html",
   modifyBundlerConfig: config => {
     config.resolve.alias["src"] = path.join(__dirname, "./src");
 
@@ -26,7 +27,7 @@ export default {
   },
   // we manually create them rather than relying on React-Docgen
   propsParser: false,
-  public: "docs/public",
+  public: "src/__docs__/public",
   themeConfig: {
     colors: {
       white: "#FFFFFF",

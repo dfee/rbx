@@ -9,6 +9,13 @@
     "type": "git",
     "url": "git+https://github.com/dfee/rbx.git"
   },
+  "scripts": {
+    "build": "make build",
+    "docs:build": "make docs_build",
+    "docs": "make docs_dev",
+    "lint": "make lint",
+    "test": "make test"
+  },
   "keywords": [
     "react",
     "bulma",

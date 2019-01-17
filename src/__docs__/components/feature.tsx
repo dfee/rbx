@@ -1,4 +1,6 @@
+import { Link } from "docz";
 import React from "react";
+
 import { Variables } from "src/base/helpers/variables";
 import { Control, Field, Tag } from "src/elements";
 
@@ -26,20 +28,20 @@ export const Feature = Object.assign(
     secondaryColor,
     url,
   }: FeatureProps) => {
-    const asType: keyof JSX.IntrinsicElements | undefined =
-      url === undefined ? undefined : "a";
     const tagGroupProps =
       url === undefined
         ? {}
+        : /^\/[a-z]/.test(url) // Local path, e.g. '/somewhere'
+        ? { as: Link, to: url }
         : {
+            as: "a" as keyof JSX.IntrinsicElements,
             href: url,
-            // if path starts with '/[a-z]', assume local, else external
-            target: /^\/[a-z]/.test(url) ? undefined : "_blank",
+            target: "_blank",
           };
 
     return (
       <Control>
-        <Tag.Group as={asType} gapless {...tagGroupProps}>
+        <Tag.Group gapless {...tagGroupProps}>
           <Tag color={primaryColor}>{primaryName}</Tag>
           <Tag color={secondaryColor}>{secondaryName}</Tag>
         </Tag.Group>
@@ -59,7 +61,7 @@ export const AsDoc: React.FC<AsDocProps> = ({ asType }) => (
     primaryColor="light"
     secondaryName={asType}
     secondaryColor="warning"
-    url="/rbx/architecture/inversion-of-control"
+    url="/architecture/inversion-of-control"
   />
 );
 
@@ -102,7 +104,7 @@ export const CustomizeFeature: React.FC<CustomizeFeatureProps> = ({
       primaryColor="light"
       secondaryName={name}
       secondaryColor={color}
-      url="/rbx/architecture/customize"
+      url="/architecture/customize"
     />
   );
 };
