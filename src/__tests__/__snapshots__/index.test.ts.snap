@@ -1162,8 +1162,8 @@ Object {
       "propTypes": Object {
         "align": [Function],
         "fullwidth": [Function],
+        "kind": [Function],
         "size": [Function],
-        "type": [Function],
       },
       "render": [Function],
     },

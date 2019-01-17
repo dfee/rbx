@@ -67,6 +67,18 @@ describe(`${DISPLAY_NAME} component`, () => {
       });
     });
 
+    describe("kind", () => {
+      validateStringOrNumberPropType(propTypes, "kind");
+
+      TAB_GROUP_DEFAULTS.kinds.map(kind => {
+        it(`should be ${kind}`, () => {
+          const node = <TabGroup kind={kind} />;
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
+        });
+      });
+    });
+
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
@@ -75,18 +87,6 @@ describe(`${DISPLAY_NAME} component`, () => {
           const node = <TabGroup size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
-        });
-      });
-    });
-
-    describe("type", () => {
-      validateStringOrNumberPropType(propTypes, "type");
-
-      TAB_GROUP_DEFAULTS.types.map(isType => {
-        it(`should be ${isType}`, () => {
-          const node = <TabGroup type={isType} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`is-${isType}`)).toBe(true);
         });
       });
     });

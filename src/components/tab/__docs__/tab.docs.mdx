@@ -122,14 +122,14 @@ Use the `size` prop of `<Tab.Group>` to set the size.
 
 </Playground>
 
-### Types
+### Kinds
 
-Use the `type` prop on `<Tab.Group>` to change the styling of the tabs.
+Use the `kind` prop on `<Tab.Group>` to change the styling of the tabs.
 
-With the `type` prop as `"boxed"`, you'll have classic style **borders**.
+With the `kind` prop as `"boxed"`, you'll have classic style **borders**.
 
 <Playground>
-  <Tab.Group type="boxed">
+  <Tab.Group kind="boxed">
     <Tab active>
       <Icon size="small">
         <FontAwesomeIcon icon={faImage} />
@@ -158,10 +158,10 @@ With the `type` prop as `"boxed"`, you'll have classic style **borders**.
 
 </Playground>
 
-With the `type` prop as `"toggle"`, you'll have **mutually exclusive** tabs, like radio buttons.
+With the `kind` prop as `"toggle"`, you'll have **mutually exclusive** tabs, like radio buttons.
 
 <Playground>
-  <Tab.Group type="toggle">
+  <Tab.Group kind="toggle">
     <Tab active>
       <Icon size="small">
         <FontAwesomeIcon icon={faImage} />
@@ -190,10 +190,10 @@ With the `type` prop as `"toggle"`, you'll have **mutually exclusive** tabs, lik
 
 </Playground>
 
-With the `type` prop as `"toggle-rounded"`, the first and last items will be **rounded**
+With the `kind` prop as `"toggle-rounded"`, the first and last items will be **rounded**
 
 <Playground>
-  <Tab.Group type="toggle-rounded">
+  <Tab.Group kind="toggle-rounded">
     <Tab active>
       <Icon size="small">
         <FontAwesomeIcon icon={faImage} />
@@ -256,7 +256,7 @@ You can **combine** different modifiers to get interesting combinations.
 For example, here are **centered boxed** tabs:
 
 <Playground>
-  <Tab.Group align="centered" type="boxed">
+  <Tab.Group align="centered" kind="boxed">
     <Tab active>
       <Icon size="small">
         <FontAwesomeIcon icon={faImage} />
@@ -287,7 +287,7 @@ For example, here are **centered boxed** tabs:
 And here are **fullwidth toggle** tabs:
 
 <Playground>
-  <Tab.Group fullwidth type="toggle">
+  <Tab.Group fullwidth kind="toggle">
     <Tab active>
       <Icon size="small">
         <FontAwesomeIcon icon={faImage} />
@@ -343,13 +343,13 @@ And here are **fullwidth toggle** tabs:
         "expand the tab group to consume all available horizontal space",
       typeName: "boolean"
     },
+    kind: {
+      description: "set the tab group's styling",
+      typeName: "string",
+      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.kinds)
+    },
     size: {
       description: "set the tab group's size",
-      typeName: "string",
-      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.sizes)
-    },
-    type: {
-      description: "set the tab group's styling",
       typeName: "string",
       typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.sizes)
     }
