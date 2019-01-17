@@ -15,3 +15,5 @@ export const CardHeaderIcon = forwardRefAs<CardHeaderIconProps, "div">(
   ),
   { as: "div" },
 );
+
+CardHeaderIcon.displayName = "Card.Header.Icon";

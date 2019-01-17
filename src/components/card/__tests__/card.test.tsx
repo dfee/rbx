@@ -6,20 +6,16 @@ import { CardImage } from "src/components/card/card-image";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
 
 const COMPONENT = Card;
-const COMPONENT_NAME = "Card";
+const DISPLAY_NAME = "Card";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "card";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Content: CardContent,
     Footer: CardFooter,
@@ -28,12 +24,11 @@ describe(`${COMPONENT_NAME} component`, () => {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 });

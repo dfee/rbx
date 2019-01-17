@@ -41,15 +41,6 @@ export type FileModifierProps = Partial<{
 
 export type FileProps = HelpersProps & FileModifierProps;
 
-const propTypes = {
-  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  boxed: PropTypes.bool,
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  fullwidth: PropTypes.bool,
-  hasName: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const File = Object.assign(
   forwardRefAs<FileProps, "div">(
     (
@@ -81,6 +72,15 @@ export const File = Object.assign(
     Input: FileInput,
     Label: FileLabel,
     Name: FileName,
-    propTypes,
   },
 );
+
+File.displayName = "File";
+File.propTypes = {
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  boxed: PropTypes.bool,
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fullwidth: PropTypes.bool,
+  hasName: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

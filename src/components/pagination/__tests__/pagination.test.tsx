@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Pagination,
   PAGINATION_DEFAULTS,
@@ -10,7 +12,6 @@ import { PaginationStep } from "src/components/pagination/pagination-step";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -18,13 +19,11 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Pagination;
-const COMPONENT_NAME = "Pagination";
+const DISPLAY_NAME = "Pagination";
 const DEFAULT_ELEMENT = "nav";
 const BULMA_CLASS_NAME = "pagination";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Ellipsis: PaginationEllipsis,
     Link: PaginationLink,
@@ -33,14 +32,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -50,7 +48,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       PAGINATION_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <Pagination align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
@@ -62,7 +60,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
-          const node = makeNode({ rounded });
+          const node = <Pagination rounded={rounded} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
@@ -74,7 +72,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       PAGINATION_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Pagination size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

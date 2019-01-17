@@ -10,7 +10,6 @@ import { MenuListItem } from "src/components/menu/menu-list-item";
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -18,11 +17,9 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = MenuListItem;
-const COMPONENT_NAME = "MenuListItem";
+const DISPLAY_NAME = "Menu.List.Item";
 const DEFAULT_ELEMENT = "a";
 const BULMA_CLASS_NAME = undefined;
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapper = (node: JSX.Element) => Enzyme.shallow(node);
 
@@ -42,27 +39,29 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   describe("root", () => {
     it("should be li element", () => {
-      const node = makeNode({});
+      const node = <MenuListItem />;
       const wrapper = makeShallowWrapper(node);
       expect(wrapper.is("li")).toBe(true);
     });
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -72,7 +71,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
-          const node = makeNode({ active });
+          const node = <MenuListItem active={active} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
@@ -91,7 +90,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [<Menu key={1} className="foo" />, undefined].map(menu => {
         const isMenu = menu !== undefined;
         it(`should ${isMenu ? "" : "not "}have menu`, () => {
-          const node = makeNode({ menu });
+          const node = <MenuListItem menu={menu} />;
           const wrapper = makeShallowWrapper(node);
           const children = wrapper.children();
           expect(children).toHaveLength(isMenu ? 2 : 1);

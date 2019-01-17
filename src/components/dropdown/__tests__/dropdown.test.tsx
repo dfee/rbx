@@ -15,22 +15,19 @@ import { DropdownTrigger } from "src/components/dropdown/dropdown-trigger";
 
 import {
   hasProperties,
-  makeNodeFactory,
   makeTestPropForwarding,
   validateBoolPropType,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Dropdown;
-const COMPONENT_NAME = "Dropdown";
+const DISPLAY_NAME = "Dropdown";
 const DEFAULT_ELEMENT = "div";
-// const BULMA_CLASS_NAME = "dropdown";
+// const BULMA_CLASS_NAME = 'dropdown';
 
-const makeNode = makeNodeFactory(Dropdown);
+const testPropForwarding = makeTestPropForwarding(COMPONENT);
 
-const testPropForwarding = makeTestPropForwarding(makeNode);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Container: DropdownContainer,
     Content: DropdownContent,
@@ -43,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   });
 
   test("it renders a DropdownContainer", () => {
-    const node = makeNode({});
+    const node = <Dropdown />;
     const wrapper = Enzyme.shallow(node);
     expect(wrapper.is(DropdownContainer)).toBe(true);
   });

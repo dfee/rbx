@@ -1,9 +1,10 @@
+import React from "react";
+
 import { Tile, TILE_DEFAULTS } from "src/grid/tiles/tile";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -11,25 +12,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Tile;
-const COMPONENT_NAME = "Tile";
+const DISPLAY_NAME = "Tile";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "tile";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -39,7 +37,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       TILE_DEFAULTS.kinds.map(kind => {
         it(`should be ${kind}`, () => {
-          const node = makeNode({ kind });
+          const node = <Tile kind={kind} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
         });
@@ -51,7 +49,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       TILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Tile size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
@@ -63,7 +61,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
-          const node = makeNode({ vertical });
+          const node = <Tile vertical={vertical} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-vertical")).toBe(vertical);
         });

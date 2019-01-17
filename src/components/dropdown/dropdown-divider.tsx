@@ -15,3 +15,5 @@ export const DropdownDivider = forwardRefAs<DropdownDividerProps, "hr">(
   ),
   { as: "hr" },
 );
+
+DropdownDivider.displayName = "Dropdown.Divider";

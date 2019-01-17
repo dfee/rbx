@@ -15,3 +15,5 @@ export const List = Object.assign(
   ),
   { Item: ListItem },
 );
+
+List.displayName = "List";

@@ -1,10 +1,11 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Textarea, TEXTAREA_DEFAULTS } from "src/elements/form/textarea";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -12,13 +13,11 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Textarea;
-const COMPONENT_NAME = "Textarea";
+const DISPLAY_NAME = "Textarea";
 const DEFAULT_ELEMENT = "textarea";
 const BULMA_CLASS_NAME = "textarea";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: {
       as: DEFAULT_ELEMENT,
@@ -26,14 +25,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -43,7 +41,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <Textarea color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
@@ -55,7 +53,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(fixedSize => {
         it(`should ${fixedSize ? "" : "not "}be fixed size`, () => {
-          const node = makeNode({ fixedSize });
+          const node = <Textarea fixedSize={fixedSize} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
         });
@@ -67,7 +65,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       TEXTAREA_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Textarea size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
@@ -79,7 +77,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       TEXTAREA_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
-          const node = makeNode({ state });
+          const node = <Textarea state={state} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         });

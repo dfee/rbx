@@ -10,18 +10,15 @@ import { TabGroup } from "src/components/tab/tab-group";
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Tab;
-const COMPONENT_NAME = "Tab";
+const DISPLAY_NAME = "Tab";
 const DEFAULT_ELEMENT = "a";
 const BULMA_CLASS_NAME = undefined;
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapper = (node: JSX.Element) => Enzyme.shallow(node);
 
@@ -41,24 +38,26 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Group: TabGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("root", () => {
     it("should be li element", () => {
-      const node = makeNode({});
+      const node = <Tab />;
       const wrapper = makeShallowWrapper(node);
       expect(wrapper.is("li")).toBe(true);
     });
@@ -72,7 +71,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
-          const node = makeNode({ active });
+          const node = <Tab active={active} />;
           const wrapper = makeShallowWrapper(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
         });

@@ -20,14 +20,6 @@ export type TableModifierProps = Partial<{
 
 export type TableProps = HelpersProps & TableModifierProps;
 
-const propTypes = {
-  bordered: PropTypes.bool,
-  fullwidth: PropTypes.bool,
-  hoverable: PropTypes.bool,
-  narrow: PropTypes.bool,
-  striped: PropTypes.bool,
-};
-
 export const Table = Object.assign(
   forwardRefAs<TableProps, "table">(
     (
@@ -59,6 +51,14 @@ export const Table = Object.assign(
     Head: TableHead,
     Heading: TableHeading,
     Row: TableRow,
-    propTypes,
   },
 );
+
+Table.displayName = "Table";
+Table.propTypes = {
+  bordered: PropTypes.bool,
+  fullwidth: PropTypes.bool,
+  hoverable: PropTypes.bool,
+  narrow: PropTypes.bool,
+  striped: PropTypes.bool,
+};

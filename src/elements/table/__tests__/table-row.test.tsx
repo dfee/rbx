@@ -4,38 +4,33 @@ import { TableRow } from "src/elements/table/table-row";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = TableRow;
-const COMPONENT_NAME = "TableRow";
+const DISPLAY_NAME = "Table.Row";
 const DEFAULT_ELEMENT = "tr";
 const BULMA_CLASS_NAME = undefined;
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-    "ref",
-    node => (
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeWrappingNode: node => (
       <table>
         <tbody children={node} />
       </table>
     ),
-  );
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -45,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(selected => {
         it(`should ${selected ? "" : "not "}be selected`, () => {
-          const node = makeNode({ selected });
+          const node = <TableRow selected={selected} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-selected")).toBe(selected);
         });

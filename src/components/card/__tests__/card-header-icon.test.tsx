@@ -2,30 +2,25 @@ import { CardHeaderIcon } from "src/components/card/card-header-icon";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
 
 const COMPONENT = CardHeaderIcon;
-const COMPONENT_NAME = "CardHeaderIcon";
+const DISPLAY_NAME = "Card.Header.Icon";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "card-header-icon";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 });

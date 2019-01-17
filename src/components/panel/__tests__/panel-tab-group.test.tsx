@@ -2,30 +2,25 @@ import { PanelTabGroup } from "src/components/panel/panel-tab-group";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
 
 const COMPONENT = PanelTabGroup;
-const COMPONENT_NAME = "PanelTabGroup";
+const DISPLAY_NAME = "Panel.Tab.Group";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "panel-tabs";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 });

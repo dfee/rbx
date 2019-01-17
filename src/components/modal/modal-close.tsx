@@ -11,10 +11,6 @@ export type ModalCloseModifierProps = Partial<{
 
 export type ModalCloseProps = HelpersProps & ModalCloseModifierProps;
 
-const propTypes = {
-  onClick: PropTypes.func,
-};
-
 const onClickHandler = (
   onClick: ModalCloseProps["onClick"] | undefined,
   ctx: ModalContextValue,
@@ -25,22 +21,24 @@ const onClickHandler = (
   ctx.close();
 };
 
-export const ModalClose = Object.assign(
-  forwardRefAs<ModalCloseProps, "button">(
-    ({ className, onClick, ...rest }, ref) => (
-      <ModalContext.Consumer>
-        {ctx => (
-          <Generic
-            aria-label="close"
-            className={classNames("modal-close", "is-large", className)}
-            onClick={onClickHandler(onClick, ctx)}
-            ref={ref}
-            {...rest}
-          />
-        )}
-      </ModalContext.Consumer>
-    ),
-    { as: "button" },
+export const ModalClose = forwardRefAs<ModalCloseProps, "button">(
+  ({ className, onClick, ...rest }, ref) => (
+    <ModalContext.Consumer>
+      {ctx => (
+        <Generic
+          aria-label="close"
+          className={classNames("modal-close", "is-large", className)}
+          onClick={onClickHandler(onClick, ctx)}
+          ref={ref}
+          {...rest}
+        />
+      )}
+    </ModalContext.Consumer>
   ),
-  { propTypes },
+  { as: "button" },
 );
+
+ModalClose.displayName = "Modal.Close";
+ModalClose.propTypes = {
+  onClick: PropTypes.func,
+};

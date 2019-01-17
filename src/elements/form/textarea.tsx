@@ -33,35 +33,33 @@ export type TextareaModifierProps = Partial<{
 
 export type TextareaProps = HelpersProps & TextareaModifierProps;
 
-const propTypes = {
+export const Textarea = forwardRefAs<TextareaProps, "textarea">(
+  ({ className, color, fixedSize, size, state, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "textarea",
+        {
+          "has-fixed-size": fixedSize,
+          [`is-${color}`]: color,
+          [`is-${size}`]: size,
+          [`is-${state}`]: state,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  {
+    as: "textarea",
+    rows: 4,
+  },
+);
+
+Textarea.displayName = "Textarea";
+Textarea.propTypes = {
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fixedSize: PropTypes.bool,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const Textarea = Object.assign(
-  forwardRefAs<TextareaProps, "textarea">(
-    ({ className, color, fixedSize, size, state, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "textarea",
-          {
-            "has-fixed-size": fixedSize,
-            [`is-${color}`]: color,
-            [`is-${size}`]: size,
-            [`is-${state}`]: state,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    {
-      as: "textarea",
-      rows: 4,
-    },
-  ),
-  { propTypes },
-);

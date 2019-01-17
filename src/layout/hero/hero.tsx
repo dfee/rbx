@@ -39,12 +39,6 @@ export type HeroModifierProps = Partial<{
 
 export type HeroProps = HelpersProps & HeroModifierProps;
 
-const propTypes = {
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  gradient: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const Hero = Object.assign(
   forwardRefAs<HeroProps, "section">(
     ({ className, color, gradient, size, ...rest }, ref) => (
@@ -68,6 +62,12 @@ export const Hero = Object.assign(
     Body: HeroBody,
     Foot: HeroFoot,
     Head: HeroHead,
-    propTypes,
   },
 );
+
+Hero.displayName = "Hero";
+Hero.propTypes = {
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  gradient: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

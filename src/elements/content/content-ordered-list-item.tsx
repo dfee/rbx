@@ -8,3 +8,5 @@ export const ContentOrderedListItem = forwardRefAs<
   ContentOrderedListItemProps,
   "li"
 >((props, ref) => <Generic ref={ref} {...props} />, { as: "li" });
+
+ContentOrderedListItem.displayName = "Content.OrderedList.Item";

@@ -10,18 +10,16 @@ export interface BreadcrumbItemModifierProps {
 
 export type BreadcrumbItemProps = HelpersProps & BreadcrumbItemModifierProps;
 
-const propTypes = {
+export const BreadcrumbItem = forwardRefAs<BreadcrumbItemProps, "a">(
+  ({ active, ...rest }, ref) => (
+    <li className={classNames({ "is-active": active })}>
+      <Generic ref={ref} {...rest} />
+    </li>
+  ),
+  { as: "a" },
+);
+
+BreadcrumbItem.displayName = "Breadcrumb.Item";
+BreadcrumbItem.propTypes = {
   active: PropTypes.bool,
 };
-
-export const BreadcrumbItem = Object.assign(
-  forwardRefAs<BreadcrumbItemProps, "a">(
-    ({ active, ...rest }, ref) => (
-      <li className={classNames({ "is-active": active })}>
-        <Generic ref={ref} {...rest} />
-      </li>
-    ),
-    { as: "a" },
-  ),
-  { propTypes },
-);

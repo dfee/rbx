@@ -11,10 +11,6 @@ export type ModalBackgroundModifierProps = Partial<{
 
 export type ModalBackgroundProps = HelpersProps & ModalBackgroundModifierProps;
 
-const propTypes = {
-  onClick: PropTypes.func,
-};
-
 const onClickHandler = (
   onClick: ModalBackgroundProps["onClick"],
   ctx: ModalContextValue,
@@ -27,22 +23,24 @@ const onClickHandler = (
   }
 };
 
-export const ModalBackground = Object.assign(
-  forwardRefAs<ModalBackgroundProps, "div">(
-    ({ className, onClick, ...rest }, ref) => (
-      <ModalContext.Consumer>
-        {ctx => (
-          <Generic
-            className={classNames("modal-background", className)}
-            onClick={onClickHandler(onClick, ctx)}
-            ref={ref}
-            role="presentation"
-            {...rest}
-          />
-        )}
-      </ModalContext.Consumer>
-    ),
-    { as: "div" },
+export const ModalBackground = forwardRefAs<ModalBackgroundProps, "div">(
+  ({ className, onClick, ...rest }, ref) => (
+    <ModalContext.Consumer>
+      {ctx => (
+        <Generic
+          className={classNames("modal-background", className)}
+          onClick={onClickHandler(onClick, ctx)}
+          ref={ref}
+          role="presentation"
+          {...rest}
+        />
+      )}
+    </ModalContext.Consumer>
   ),
-  { propTypes },
+  { as: "div" },
 );
+
+ModalBackground.displayName = "Modal.Background";
+ModalBackground.propTypes = {
+  onClick: PropTypes.func,
+};

@@ -11,10 +11,6 @@ export type ImageModifierProps = Partial<{
 
 export type ImageProps = HelpersProps & ImageModifierProps;
 
-const propTypes = {
-  rounded: PropTypes.bool,
-};
-
 export const Image = Object.assign(
   forwardRefAs<ImageProps, "img">(
     ({ className, rounded, ...rest }, ref) => (
@@ -26,8 +22,10 @@ export const Image = Object.assign(
     ),
     { as: "img" },
   ),
-  {
-    Container: ImageContainer,
-    propTypes,
-  },
+  { Container: ImageContainer },
 );
+
+Image.displayName = "Image";
+Image.propTypes = {
+  rounded: PropTypes.bool,
+};

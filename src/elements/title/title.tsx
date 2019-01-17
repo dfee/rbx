@@ -29,30 +29,28 @@ export type TitleModifierProps = Partial<{
 
 export type TitleProps = HelpersProps & TitleModifierProps;
 
-const propTypes = {
+export const Title = forwardRefAs<TitleProps, "h1">(
+  ({ className, size, spaced, subtitle, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        {
+          [`is-${size}`]: size !== undefined,
+          "is-spaced": spaced === true && subtitle !== true,
+          subtitle,
+          title: subtitle !== true,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "h1" },
+);
+
+Title.displayName = "Title";
+Title.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   spaced: PropTypes.bool,
   subtitle: PropTypes.bool,
 };
-
-export const Title = Object.assign(
-  forwardRefAs<TitleProps, "h1">(
-    ({ className, size, spaced, subtitle, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          {
-            [`is-${size}`]: size !== undefined,
-            "is-spaced": spaced === true && subtitle !== true,
-            subtitle,
-            title: subtitle !== true,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "h1" },
-  ),
-  { propTypes },
-);

@@ -15,11 +15,6 @@ export type NavbarLinkModifierProps = Partial<{
 
 export type NavbarLinkProps = HelpersProps & NavbarLinkModifierProps;
 
-const propTypes = {
-  arrowless: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
 const handleOnClick = (
   onClick: NavbarLinkProps["onClick"] | undefined,
   ctx: NavbarItemContextValue,
@@ -30,25 +25,28 @@ const handleOnClick = (
   ctx.setActive(!ctx.active);
 };
 
-export const NavbarLink = Object.assign(
-  forwardRefAs<NavbarLinkProps, "span">(
-    ({ arrowless, className, onClick, ...rest }, ref) => (
-      <NavbarItemContext.Consumer>
-        {ctx => (
-          <Generic
-            className={classNames(
-              "navbar-link",
-              { "is-arrowless": arrowless },
-              className,
-            )}
-            onClick={handleOnClick(onClick, ctx)}
-            ref={ref}
-            {...rest}
-          />
-        )}
-      </NavbarItemContext.Consumer>
-    ),
-    { as: "span" },
+export const NavbarLink = forwardRefAs<NavbarLinkProps, "span">(
+  ({ arrowless, className, onClick, ...rest }, ref) => (
+    <NavbarItemContext.Consumer>
+      {ctx => (
+        <Generic
+          className={classNames(
+            "navbar-link",
+            { "is-arrowless": arrowless },
+            className,
+          )}
+          onClick={handleOnClick(onClick, ctx)}
+          ref={ref}
+          {...rest}
+        />
+      )}
+    </NavbarItemContext.Consumer>
   ),
-  { propTypes },
+  { as: "span" },
 );
+
+NavbarLink.displayName = "Navbar.Link";
+NavbarLink.propTypes = {
+  arrowless: PropTypes.bool,
+  onClick: PropTypes.func,
+};

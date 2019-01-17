@@ -34,12 +34,6 @@ export type BreadcrumbModifierProps = Partial<{
 
 export type BreadcrumbProps = HelpersProps & BreadcrumbModifierProps;
 
-const propTypes = {
-  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  separator: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const Breadcrumb = Object.assign(
   forwardRefAs<BreadcrumbProps, "nav">(
     ({ align, children, className, separator, size, ...rest }, ref) => (
@@ -61,8 +55,12 @@ export const Breadcrumb = Object.assign(
     ),
     { as: "nav" },
   ),
-  {
-    Item: BreadcrumbItem,
-    propTypes,
-  },
+  { Item: BreadcrumbItem },
 );
+
+Breadcrumb.displayName = "Breadcrumb";
+Breadcrumb.propTypes = {
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  separator: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

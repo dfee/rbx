@@ -10,20 +10,18 @@ export type TagGroupModifierProps = Partial<{
 
 export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 
-const propTypes = {
+export const TagGroup = forwardRefAs<TagGroupProps, "span">(
+  ({ className, gapless, ...rest }, ref) => (
+    <Generic
+      className={classNames("tags", { "has-addons": gapless }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "span" },
+);
+
+TagGroup.displayName = "Tag.Group";
+TagGroup.propTypes = {
   gapless: PropTypes.bool,
 };
-
-export const TagGroup = Object.assign(
-  forwardRefAs<TagGroupProps, "span">(
-    ({ className, gapless, ...rest }, ref) => (
-      <Generic
-        className={classNames("tags", { "has-addons": gapless }, className)}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "span" },
-  ),
-  { propTypes },
-);

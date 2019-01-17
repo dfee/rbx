@@ -8,3 +8,5 @@ export const Radio = forwardRefAs<RadioProps, "input">(
   (props, ref) => <Generic ref={ref} type="radio" {...props} />,
   { as: "input" },
 );
+
+Radio.displayName = "Radio";

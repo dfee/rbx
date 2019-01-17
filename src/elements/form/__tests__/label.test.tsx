@@ -8,7 +8,6 @@ import { Radio } from "src/elements/form/radio";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -16,25 +15,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Label;
-const COMPONENT_NAME = "Label";
+const DISPLAY_NAME = "Label";
 const DEFAULT_ELEMENT = "label";
 const BULMA_CLASS_NAME = "label";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -44,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(disabled => {
         it(`should ${disabled ? "" : "not "}be disabled`, () => {
-          const node = makeNode({ disabled });
+          const node = <Label disabled={disabled} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-disabled")).toBe(disabled);
         });
@@ -92,7 +88,7 @@ describe(`${COMPONENT_NAME} component`, () => {
           } else {
             children = discriminator;
           }
-          const node = makeNode({ children });
+          const node = <Label children={children} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(className)).toBe(true);
         });
@@ -104,7 +100,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       LABEL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Label size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

@@ -1,34 +1,32 @@
+import React from "react";
+
 import { Section, SECTION_DEFAULTS } from "src/layout/section/section";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Section;
-const COMPONENT_NAME = "Section";
+const DISPLAY_NAME = "Section";
 const DEFAULT_ELEMENT = "section";
 const BULMA_CLASS_NAME = "section";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -38,7 +36,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       SECTION_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Section size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

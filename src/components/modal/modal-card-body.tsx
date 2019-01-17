@@ -15,3 +15,5 @@ export const ModalCardBody = forwardRefAs<ModalCardBodyProps, "section">(
   ),
   { as: "section" },
 );
+
+ModalCardBody.displayName = "Modal.Card.Body";

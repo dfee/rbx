@@ -62,33 +62,12 @@ export type ColumnBreakpointOptions = Partial<{
   size: ColumnVariables["sizes"];
 }>;
 
-const ColumnSizeModifierPropTypes = {
-  narrow: PropTypes.bool,
-  offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export type ColumnModifierProps = Partial<
   { [B in Variables["breakpoints"]]: ColumnBreakpointOptions } &
     ColumnBreakpointOptions
 >;
 
 export type ColumnProps = HelpersProps & ColumnModifierProps;
-
-/**
- * Note: the default Breakpoints are typechecked (as it'll cover 99%+ of users)
- * We can't validate custom Breakpoints with PropTypes (though they are checked
- * by TypeScript).
- * ∴ Custom breakpoint's won't be checked against ColumnSizeModifierPropTypes
- */
-const propTypes = {
-  ...DEFAULTS.breakpoints
-    .map(breakpoint => ({
-      [breakpoint]: PropTypes.shape(ColumnSizeModifierPropTypes),
-    }))
-    .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-  ...ColumnSizeModifierPropTypes,
-};
 
 export const Column = Object.assign(
   forwardRefAs<ColumnProps, "div">(
@@ -151,8 +130,28 @@ export const Column = Object.assign(
     },
     { as: "div" },
   ),
-  {
-    Group: ColumnGroup,
-    propTypes,
-  },
+  { Group: ColumnGroup },
 );
+
+Column.displayName = "Column";
+
+const ColumnSizeModifierPropTypes = {
+  narrow: PropTypes.bool,
+  offset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+/**
+ * Note: the default Breakpoints are typechecked (as it'll cover 99%+ of users)
+ * We can't validate custom Breakpoints with PropTypes (though they are checked
+ * by TypeScript).
+ * ∴ Custom breakpoint's won't be checked against ColumnSizeModifierPropTypes
+ */
+Column.propTypes = {
+  ...DEFAULTS.breakpoints
+    .map(breakpoint => ({
+      [breakpoint]: PropTypes.shape(ColumnSizeModifierPropTypes),
+    }))
+    .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+  ...ColumnSizeModifierPropTypes,
+};

@@ -15,3 +15,5 @@ export const NavbarDivider = forwardRefAs<NavbarDividerProps, "div">(
   ),
   { as: "div" },
 );
+
+NavbarDivider.displayName = "Navbar.Divider";

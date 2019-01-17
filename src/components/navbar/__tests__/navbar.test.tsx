@@ -19,7 +19,6 @@ import { NavbarSegment } from "src/components/navbar/navbar-segment";
 
 import {
   hasProperties,
-  makeNodeFactory,
   makeTestPropForwarding,
   validateBoolPropType,
   validatePropType,
@@ -27,14 +26,13 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Navbar;
-const COMPONENT_NAME = "Navbar";
+const DISPLAY_NAME = "Navbar";
 const DEFAULT_ELEMENT = "nav";
 // const BULMA_CLASS_NAME = "navbar";
 
-const makeNode = makeNodeFactory(Navbar);
-const testPropForwarding = makeTestPropForwarding(makeNode);
+const testPropForwarding = makeTestPropForwarding(COMPONENT);
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Brand: NavbarBrand,
     Burger: NavbarBurger,
@@ -50,7 +48,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   });
 
   test("it renders a NavbarContainer", () => {
-    const node = makeNode({});
+    const node = <Navbar />;
     const wrapper = Enzyme.shallow(node);
     expect(wrapper.is(NavbarContainer)).toBe(true);
   });

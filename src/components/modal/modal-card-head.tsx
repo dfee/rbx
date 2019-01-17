@@ -56,3 +56,5 @@ export const ModalCardHead = forwardRefAs<ModalCardHeadProps, "header">(
   ),
   { as: "header" },
 );
+
+ModalCardHead.displayName = "Modal.Card.Head";

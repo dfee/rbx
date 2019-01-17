@@ -15,7 +15,7 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = PaginationStep;
-const COMPONENT_NAME = "PaginationStep";
+const DISPLAY_NAME = "Pagination.Step";
 const DEFAULT_ELEMENT = "a";
 // const BULMA_CLASS_NAME = "pagination-";
 
@@ -28,19 +28,19 @@ const makeNode = (props: Partial<PaginationStepProps>) => {
   return <PaginationStep {...propsWithDefaults} />;
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: "pagination-next",
+    defaultElement: DEFAULT_ELEMENT,
     makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    "pagination-next",
-  );
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, { makeNode });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;

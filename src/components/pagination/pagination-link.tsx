@@ -10,26 +10,24 @@ export type PaginationLinkModifiers = Partial<{
 
 export type PaginationLinkProps = HelpersProps & PaginationLinkModifiers;
 
-const propTypes = {
+export const PaginationLink = forwardRefAs<PaginationLinkProps, "a">(
+  ({ className, current, ...rest }, ref) => (
+    <li>
+      <Generic
+        className={classNames(
+          "pagination-link",
+          { "is-current": current },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    </li>
+  ),
+  { as: "a" },
+);
+
+PaginationLink.displayName = "Pagination.Link";
+PaginationLink.propTypes = {
   current: PropTypes.bool,
 };
-
-export const PaginationLink = Object.assign(
-  forwardRefAs<PaginationLinkProps, "a">(
-    ({ className, current, ...rest }, ref) => (
-      <li>
-        <Generic
-          className={classNames(
-            "pagination-link",
-            { "is-current": current },
-            className,
-          )}
-          ref={ref}
-          {...rest}
-        />
-      </li>
-    ),
-    { as: "a" },
-  ),
-  { propTypes },
-);

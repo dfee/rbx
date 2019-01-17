@@ -2,31 +2,44 @@ import React from "react";
 
 import { Prefer } from "../types";
 
-export interface ForwardRefAsExoticComponent<
+// tslint:disable:no-any
+// tslint:disable:no-reserved-keywords
+
+export type ForwardRefAsExoticComponent<
   TOwnProps,
   TDefaultComponent extends React.ReactType
->
-  extends Pick<
-    React.ForwardRefExoticComponent<TDefaultComponent>,
-    keyof React.ForwardRefExoticComponent<TDefaultComponent>
-  > {
+> = Pick<
+  React.ForwardRefExoticComponent<TDefaultComponent>,
+  Exclude<
+    keyof React.ForwardRefExoticComponent<TDefaultComponent>,
+    "defaultProps"
+  >
+> & {
   <
     TAsComponent extends
       | React.ReactType
-      // tslint:disable-next-line: no-any
       | ForwardRefAsExoticComponent<any, any> = TDefaultComponent
   >(
     props: Prefer<
-      // tslint:disable-next-line:no-reserved-keywords
       React.PropsWithoutRef<TOwnProps & { as?: TAsComponent }>,
-      // React.ComponentPropsWithRef<TAsComponent>
-      // tslint:disable-next-line: no-any
       TAsComponent extends ForwardRefAsExoticComponent<infer P, any>
         ? P
         : React.ComponentPropsWithRef<TAsComponent>
     >,
   ): JSX.Element | null;
-}
+  defaultProps: {
+    as: TDefaultComponent;
+  } & Partial<TOwnProps & React.ComponentPropsWithoutRef<TDefaultComponent>>;
+  displayName: string;
+  propTypes: React.WeakValidationMap<
+    {
+      [k in
+        | "as"
+        | keyof TOwnProps
+        | keyof React.ComponentPropsWithoutRef<TDefaultComponent>]: any
+    }
+  >;
+};
 
 export function forwardRefAs<
   TOwnProps,
@@ -34,12 +47,10 @@ export function forwardRefAs<
 >(
   factory: React.RefForwardingComponent<
     TDefaultElement,
-    // tslint:disable-next-line:no-reserved-keywords
-    TOwnProps & { as?: React.ReactType }
+    TOwnProps & { as: React.ReactType }
   >,
   defaultProps: Partial<
     Prefer<
-      // tslint:disable-next-line:no-reserved-keywords
       React.PropsWithoutRef<TOwnProps & { as: TDefaultElement }> &
         React.RefAttributes<TDefaultElement>,
       React.ComponentPropsWithoutRef<TDefaultElement>

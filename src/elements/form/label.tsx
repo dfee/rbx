@@ -30,11 +30,6 @@ export type LabelModifierProps = Partial<{
 
 export type LabelProps = HelpersProps & LabelModifierProps;
 
-const propTypes = {
-  disabled: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 const identifyLabelDiscriminator = (children: React.ReactNode) => {
   let discriminator = "label";
 
@@ -65,27 +60,30 @@ const identifyLabelDiscriminator = (children: React.ReactNode) => {
   return discriminator;
 };
 
-export const Label = Object.assign(
-  forwardRefAs<LabelProps, "label">(
-    ({ className, disabled, size, ...rest }, ref) => {
-      const discriminator = identifyLabelDiscriminator(rest.children);
+export const Label = forwardRefAs<LabelProps, "label">(
+  ({ className, disabled, size, ...rest }, ref) => {
+    const discriminator = identifyLabelDiscriminator(rest.children);
 
-      return (
-        <Generic
-          className={classNames(
-            {
-              [`${discriminator}`]: discriminator,
-              "is-disabled": disabled,
-              [`is-${size}`]: size,
-            },
-            className,
-          )}
-          ref={ref}
-          {...rest}
-        />
-      );
-    },
-    { as: "label" },
-  ),
-  { propTypes },
+    return (
+      <Generic
+        className={classNames(
+          {
+            [`${discriminator}`]: discriminator,
+            "is-disabled": disabled,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    );
+  },
+  { as: "label" },
 );
+
+Label.displayName = "Label";
+Label.propTypes = {
+  disabled: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

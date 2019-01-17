@@ -15,3 +15,5 @@ export const HeroFoot = forwardRefAs<HeroFootProps, "div">(
   ),
   { as: "div" },
 );
+
+HeroFoot.displayName = "Hero.Foot";

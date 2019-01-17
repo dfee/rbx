@@ -23,3 +23,5 @@ export const Card = Object.assign(
     Image: CardImage,
   },
 );
+
+Card.displayName = "Card";

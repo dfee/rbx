@@ -15,3 +15,5 @@ export const FileIcon = forwardRefAs<FileIconProps, "span">(
   ),
   { as: "span" },
 );
+
+FileIcon.displayName = "File.Icon";

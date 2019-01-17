@@ -48,7 +48,46 @@ export type InputModifierProps = Partial<{
 
 export type InputProps = HelpersProps & InputModifierProps;
 
-const propTypes = {
+export const Input = forwardRefAs<InputProps, "input">(
+  (
+    {
+      className,
+      color,
+      readOnly,
+      rounded,
+      size,
+      state,
+      static: isStatic,
+      ...rest
+    },
+    ref,
+  ) => {
+    const isReadOnly = readOnly === true || isStatic === true;
+
+    return (
+      <Generic
+        className={classNames(
+          "input",
+          {
+            [`is-${color}`]: color,
+            "is-rounded": rounded,
+            [`is-${size}`]: size,
+            "is-static": isStatic,
+            [`is-${state}`]: state,
+          },
+          className,
+        )}
+        readOnly={isReadOnly}
+        ref={ref}
+        {...rest}
+      />
+    );
+  },
+  { as: "input" },
+);
+
+Input.displayName = "Input";
+Input.propTypes = {
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   readOnly: PropTypes.bool,
   rounded: PropTypes.bool,
@@ -57,44 +96,3 @@ const propTypes = {
   static: PropTypes.bool,
   type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const Input = Object.assign(
-  forwardRefAs<InputProps, "input">(
-    (
-      {
-        className,
-        color,
-        readOnly,
-        rounded,
-        size,
-        state,
-        static: isStatic,
-        ...rest
-      },
-      ref,
-    ) => {
-      const isReadOnly = readOnly === true || isStatic === true;
-
-      return (
-        <Generic
-          className={classNames(
-            "input",
-            {
-              [`is-${color}`]: color,
-              "is-rounded": rounded,
-              [`is-${size}`]: size,
-              "is-static": isStatic,
-              [`is-${state}`]: state,
-            },
-            className,
-          )}
-          readOnly={isReadOnly}
-          ref={ref}
-          {...rest}
-        />
-      );
-    },
-    { as: "input" },
-  ),
-  { propTypes },
-);

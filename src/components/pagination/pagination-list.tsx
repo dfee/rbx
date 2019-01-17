@@ -15,3 +15,5 @@ export const PaginationList = forwardRefAs<PaginationListProps, "ul">(
   ),
   { as: "ul" },
 );
+
+PaginationList.displayName = "Pagination.List";

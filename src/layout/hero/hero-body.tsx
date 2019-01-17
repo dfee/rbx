@@ -15,3 +15,5 @@ export const HeroBody = forwardRefAs<HeroBodyProps, "div">(
   ),
   { as: "div" },
 );
+
+HeroBody.displayName = "Hero.Body";

@@ -20,6 +20,7 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
     closeOnBlur: initialValue.closeOnBlur,
     closeOnEsc: initialValue.closeOnEsc,
   };
+  public static displayName = "Modal.Portal";
 
   public componentDidMount() {
     this.props.document.addEventListener("keydown", this.handleKeydown);

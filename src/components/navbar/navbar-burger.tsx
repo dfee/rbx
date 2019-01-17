@@ -11,10 +11,6 @@ export type NavbarBurgerModifierProps = Partial<{
 
 export type NavbarBurgerProps = HelpersProps & NavbarBurgerModifierProps;
 
-const propTypes = {
-  onClick: PropTypes.func,
-};
-
 const onClickHandler = (
   onClick: NavbarBurgerProps["onClick"] | undefined,
   ctx: NavbarContextValue,
@@ -25,30 +21,32 @@ const onClickHandler = (
   ctx.setActive(!ctx.active);
 };
 
-export const NavbarBurger = Object.assign(
-  forwardRefAs<NavbarBurgerProps, "div">(
-    ({ className, onClick, ...rest }, ref) => (
-      <NavbarContext.Consumer>
-        {ctx => (
-          <Generic
-            className={classNames(
-              "navbar-burger",
-              { "is-active": ctx.active },
-              className,
-            )}
-            onClick={onClickHandler(onClick, ctx)}
-            ref={ref}
-            role="button"
-            {...rest}
-          >
-            <span />
-            <span />
-            <span />
-          </Generic>
-        )}
-      </NavbarContext.Consumer>
-    ),
-    { as: "div" },
+export const NavbarBurger = forwardRefAs<NavbarBurgerProps, "div">(
+  ({ className, onClick, ...rest }, ref) => (
+    <NavbarContext.Consumer>
+      {ctx => (
+        <Generic
+          className={classNames(
+            "navbar-burger",
+            { "is-active": ctx.active },
+            className,
+          )}
+          onClick={onClickHandler(onClick, ctx)}
+          ref={ref}
+          role="button"
+          {...rest}
+        >
+          <span />
+          <span />
+          <span />
+        </Generic>
+      )}
+    </NavbarContext.Consumer>
   ),
-  { propTypes },
+  { as: "div" },
 );
+
+NavbarBurger.displayName = "Navbar.Burger";
+NavbarBurger.propTypes = {
+  onClick: PropTypes.func,
+};

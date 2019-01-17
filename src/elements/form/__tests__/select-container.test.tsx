@@ -10,7 +10,6 @@ import {
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -18,25 +17,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = SelectContainer;
-const COMPONENT_NAME = "SelectContainer";
+const DISPLAY_NAME = "Select.Container";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "select";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -46,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <SelectContainer color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
@@ -58,7 +54,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
-          const node = makeNode({ fullwidth });
+          const node = <SelectContainer fullwidth={fullwidth} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
@@ -70,7 +66,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
-          const node = makeNode({ rounded });
+          const node = <SelectContainer rounded={rounded} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
@@ -82,7 +78,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       SELECT_CONTAINER_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <SelectContainer size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
@@ -107,7 +103,7 @@ describe(`${COMPONENT_NAME} component`, () => {
             } else {
               children = discriminator;
             }
-            const node = makeNode({ children, state });
+            const node = <SelectContainer children={children} state={state} />;
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
             if (state === "loading") {
               expect(wrapper.hasClass("is-loading")).toBe(true);
@@ -172,7 +168,7 @@ describe(`${COMPONENT_NAME} component`, () => {
               } else {
                 children = childType;
               }
-              const node = makeNode({ children });
+              const node = <SelectContainer children={children} />;
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
                 node,
               );

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Table } from "src/elements/table/table";
 import { TableBody } from "src/elements/table/table-body";
 import { TableCell } from "src/elements/table/table-cell";
@@ -9,20 +11,17 @@ import { TableRow } from "src/elements/table/table-row";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Table;
-const COMPONENT_NAME = "Table";
+const DISPLAY_NAME = "Table";
 const DEFAULT_ELEMENT = "table";
 const BULMA_CLASS_NAME = "table";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Body: TableBody,
     Cell: TableCell,
@@ -33,14 +32,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -50,7 +48,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(bordered => {
         it(`should ${bordered ? "" : "not "}be bordered`, () => {
-          const node = makeNode({ bordered });
+          const node = <Table bordered={bordered} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-bordered")).toBe(bordered);
         });
@@ -62,7 +60,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
-          const node = makeNode({ fullwidth });
+          const node = <Table fullwidth={fullwidth} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
@@ -74,7 +72,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
-          const node = makeNode({ hoverable });
+          const node = <Table hoverable={hoverable} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
         });
@@ -86,7 +84,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
-          const node = makeNode({ narrow });
+          const node = <Table narrow={narrow} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         });
@@ -98,7 +96,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(striped => {
         it(`should ${striped ? "" : "not "}be striped`, () => {
-          const node = makeNode({ striped });
+          const node = <Table striped={striped} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-striped")).toBe(striped);
         });

@@ -95,8 +95,8 @@ export const Button = Object.assign(
     ),
     { as: "button" },
   ),
-  {
-    Group: ButtonGroup,
-    propTypes,
-  },
+  { Group: ButtonGroup },
 );
+
+Button.displayName = "Button";
+Button.propTypes = propTypes;

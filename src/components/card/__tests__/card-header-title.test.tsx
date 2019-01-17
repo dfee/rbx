@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   CARD_HEADER_TITLE_DEFAULTS,
   CardHeaderTitle,
@@ -6,32 +8,28 @@ import {
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = CardHeaderTitle;
-const COMPONENT_NAME = "CardHeaderTitle";
+const DISPLAY_NAME = "Card.Header.Title";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "card-header-title";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -41,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       CARD_HEADER_TITLE_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <CardHeaderTitle align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });

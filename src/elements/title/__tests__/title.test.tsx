@@ -1,9 +1,10 @@
+import React from "react";
+
 import { Title, TITLE_DEFAULTS } from "src/elements/title/title";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -11,25 +12,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Title;
-const COMPONENT_NAME = "Title";
+const DISPLAY_NAME = "Title";
 const DEFAULT_ELEMENT = "h1";
 const BULMA_CLASS_NAME = "title";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -43,7 +41,7 @@ describe(`${COMPONENT_NAME} component`, () => {
           it(`should ${
             isSpaced ? "" : "not "
           }be spaced when spaced ${spaced} and subtitle ${subtitle}`, () => {
-            const node = makeNode({ spaced });
+            const node = <Title spaced={spaced} />;
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
             expect(wrapper.hasClass("is-spaced")).toBe(spaced);
           });
@@ -56,7 +54,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(subtitle => {
         it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
-          const node = makeNode({ subtitle });
+          const node = <Title subtitle={subtitle} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("subtitle")).toBe(subtitle);
           expect(wrapper.hasClass("title")).toBe(!subtitle);
@@ -69,7 +67,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       TITLE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Title size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

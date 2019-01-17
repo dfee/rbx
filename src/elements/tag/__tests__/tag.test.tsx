@@ -1,3 +1,5 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Tag, TAG_DEFAULTS } from "src/elements/tag/tag";
 import { TagGroup } from "src/elements/tag/tag-group";
@@ -5,7 +7,6 @@ import { TagGroup } from "src/elements/tag/tag-group";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -13,26 +14,23 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Tag;
-const COMPONENT_NAME = "Tag";
+const DISPLAY_NAME = "Tag";
 const DEFAULT_ELEMENT = "span";
 const BULMA_CLASS_NAME = "tag";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Group: TagGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -42,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <Tag color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
@@ -55,7 +53,7 @@ describe(`${COMPONENT_NAME} component`, () => {
       [false, true].map(isDelete => {
         it(`should ${isDelete ? "" : "not "}be delete`, () => {
           const children = "foo";
-          const node = makeNode({ children, delete: isDelete });
+          const node = <Tag children={children} delete={isDelete} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-delete")).toBe(isDelete);
           expect(
@@ -70,7 +68,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
-          const node = makeNode({ rounded });
+          const node = <Tag rounded={rounded} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
@@ -82,7 +80,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       TAG_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Tag size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

@@ -15,3 +15,5 @@ export const NavbarBrand = forwardRefAs<NavbarBrandProps, "div">(
   ),
   { as: "div" },
 );
+
+NavbarBrand.displayName = "Navbar.Brand";

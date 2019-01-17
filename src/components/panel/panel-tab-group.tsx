@@ -15,3 +15,5 @@ export const PanelTabGroup = forwardRefAs<PanelTabGroupProps, "div">(
   ),
   { as: "div" },
 );
+
+PanelTabGroup.displayName = "Panel.Tab.Group";

@@ -13,7 +13,6 @@ import { NavbarLink } from "src/components/navbar/navbar-link";
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -21,11 +20,9 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = NavbarLink;
-const COMPONENT_NAME = "NavbarLink";
+const DISPLAY_NAME = "Navbar.Link";
 const DEFAULT_ELEMENT = "span";
 const BULMA_CLASS_NAME = "navbar-link";
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapperInNavbarContextConsumer = (
   node: JSX.Element,
@@ -60,19 +57,21 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -82,7 +81,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(arrowless => {
         it(`should ${arrowless ? "" : "not "}be arrowless`, () => {
-          const node = makeNode({ arrowless });
+          const node = <NavbarLink arrowless={arrowless} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-arrowless")).toBe(arrowless);
         });
@@ -99,9 +98,9 @@ describe(`${COMPONENT_NAME} component`, () => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {
-          const onClick = jest.fn();
+          const onClick = hasOnClick ? jest.fn() : undefined;
           const setActive = jest.fn();
-          const node = makeNode({ onClick: hasOnClick ? onClick : undefined });
+          const node = <NavbarLink onClick={onClick} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
             node,
             themeInitialValue,
@@ -111,7 +110,9 @@ describe(`${COMPONENT_NAME} component`, () => {
             },
           );
           wrapper.simulate("click");
-          expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+          if (onClick !== undefined) {
+            expect(onClick.mock.calls).toHaveLength(1);
+          }
           expect(setActive.mock.calls).toHaveLength(1);
           expect(setActive.mock.calls[0]).toEqual([true]);
         });

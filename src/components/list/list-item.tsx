@@ -10,20 +10,18 @@ export type ListItemModifierProps = Partial<{
 
 export type ListItemProps = HelpersProps & ListItemModifierProps;
 
-const propTypes = {
+export const ListItem = forwardRefAs<ListItemProps, "a">(
+  ({ active, className, ...rest }, ref) => (
+    <Generic
+      className={classNames("list-item", { "is-active": active }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "a" },
+);
+
+ListItem.displayName = "List.Item";
+ListItem.propTypes = {
   active: PropTypes.bool,
 };
-
-export const ListItem = Object.assign(
-  forwardRefAs<ListItemProps, "a">(
-    ({ active, className, ...rest }, ref) => (
-      <Generic
-        className={classNames("list-item", { "is-active": active }, className)}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "a" },
-  ),
-  { propTypes },
-);

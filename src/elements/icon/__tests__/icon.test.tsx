@@ -1,35 +1,33 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon, ICON_DEFAULTS } from "src/elements/icon/icon";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Icon;
-const COMPONENT_NAME = "Icon";
+const DISPLAY_NAME = "Icon";
 const DEFAULT_ELEMENT = "span";
 const BULMA_CLASS_NAME = "icon";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -39,7 +37,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <Icon color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`has-text-${color}`)).toBe(true);
         });
@@ -51,7 +49,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       ICON_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <Icon align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
@@ -63,7 +61,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       ICON_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Icon size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

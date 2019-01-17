@@ -1,10 +1,11 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import { File, FILE_DEFAULTS } from "src/elements/form/file";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -12,25 +13,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = File;
-const COMPONENT_NAME = "File";
+const DISPLAY_NAME = "File";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "file";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -40,7 +38,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       FILE_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <File align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
@@ -52,7 +50,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
-          const node = makeNode({ boxed });
+          const node = <File boxed={boxed} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
         });
@@ -64,7 +62,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <File color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
@@ -76,7 +74,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
-          const node = makeNode({ fullwidth });
+          const node = <File fullwidth={fullwidth} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
@@ -88,7 +86,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(hasName => {
         it(`should ${hasName ? "" : "not "}have name`, () => {
-          const node = makeNode({ hasName });
+          const node = <File hasName={hasName} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-name")).toBe(hasName);
         });
@@ -100,7 +98,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       FILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <File size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

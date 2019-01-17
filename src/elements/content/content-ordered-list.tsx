@@ -29,10 +29,6 @@ export type ContentOrderedListModifierProps = Partial<{
 export type ContentOrderedListProps = HelpersProps &
   ContentOrderedListModifierProps;
 
-const propTypes = {
-  type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const ContentOrderedList = Object.assign(
   forwardRefAs<ContentOrderedListProps, "ol">(
     ({ className, type, ...rest }, ref) => (
@@ -44,8 +40,10 @@ export const ContentOrderedList = Object.assign(
     ),
     { as: "ol" },
   ),
-  {
-    Item: ContentOrderedListItem,
-    propTypes,
-  },
+  { Item: ContentOrderedListItem },
 );
+
+ContentOrderedList.displayName = "Content.OrderedList";
+ContentOrderedList.propTypes = {
+  type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

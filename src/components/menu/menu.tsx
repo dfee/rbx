@@ -19,3 +19,5 @@ export const Menu = Object.assign(
     List: MenuList,
   },
 );
+
+Menu.displayName = "Menu";

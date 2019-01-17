@@ -27,26 +27,24 @@ export type LevelItemModifierProps = Partial<{
 
 export type LevelItemProps = HelpersProps & LevelItemModifierProps;
 
-const propTypes = {
+export const LevelItem = forwardRefAs<LevelItemProps, "div">(
+  ({ align, className, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        {
+          "level-item": align === undefined,
+          [`level-${align}`]: align,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+LevelItem.displayName = "Level.Item";
+LevelItem.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const LevelItem = Object.assign(
-  forwardRefAs<LevelItemProps, "div">(
-    ({ align, className, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          {
-            "level-item": align === undefined,
-            [`level-${align}`]: align,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

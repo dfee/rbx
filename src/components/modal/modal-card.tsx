@@ -27,3 +27,5 @@ export const ModalCard = Object.assign(
     Title: ModalCardTitle,
   },
 );
+
+ModalCard.displayName = "Modal.Card";

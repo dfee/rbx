@@ -8,3 +8,5 @@ export const TableFoot = forwardRefAs<TableFootProps, "tfoot">(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "tfoot" },
 );
+
+TableFoot.displayName = "Table.Foot";

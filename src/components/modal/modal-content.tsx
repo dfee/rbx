@@ -15,3 +15,5 @@ export const ModalContent = forwardRefAs<ModalContentProps, "div">(
   ),
   { as: "div" },
 );
+
+ModalContent.displayName = "Modal.Content";

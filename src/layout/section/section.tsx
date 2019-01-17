@@ -27,20 +27,18 @@ export type SectionModifierProps = Partial<{
 
 export type SectionProps = HelpersProps & SectionModifierProps;
 
-const propTypes = {
+export const Section = forwardRefAs<SectionProps, "section">(
+  ({ className, size, ...rest }, ref) => (
+    <Generic
+      className={classNames("section", { [`is-${size}`]: size }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "section" },
+);
+
+Section.displayName = "Section";
+Section.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const Section = Object.assign(
-  forwardRefAs<SectionProps, "section">(
-    ({ className, size, ...rest }, ref) => (
-      <Generic
-        className={classNames("section", { [`is-${size}`]: size }, className)}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "section" },
-  ),
-  { propTypes },
-);

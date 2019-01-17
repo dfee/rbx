@@ -236,15 +236,10 @@ export type MakeShallowWrapperFunction = (
   contextValue?: ThemeContextValue,
 ) => Enzyme.ShallowWrapper<React.ReactType>;
 
-export const makeNodeFactory = <
-  // tslint:disable-next-line:no-any
-  TComponent extends ForwardRefAsExoticComponent<any, any>,
-  TComponentProps extends React.ComponentProps<TComponent> & {
-    as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  } = React.ComponentProps<TComponent>
->(
-  Component: TComponent,
-) => (props: TComponentProps) => React.createElement(Component, props);
+// tslint:disable-next-line: no-any
+export const makeNodeFactory = <T extends React.ComponentType<any>>(
+  Component: T,
+) => (props: React.ComponentProps<T>) => React.createElement(Component, props);
 
 /**
  * This function makes a shallow wrapper of a "generic" component in the Theme
@@ -278,32 +273,57 @@ export const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
+// tslint:disable-next-line: max-func-body-length
 export const testForwardRefAsExoticComponentIntegration = (
-  // tslint:disable-next-line:no-any
-  makeNodeFunc: MakeNodeFunction<any>,
-  makeShallowWrapperFunc: MakeShallowWrapperFunction,
-  defaultElement: keyof React.ReactHTML,
-  bulmaClassName: string | undefined,
-  refPropName: string = "ref",
-  makeWrappingNode?: (node: React.ReactNode) => JSX.Element,
+  //tslint:disable:no-any
+  component: React.ComponentType<any>,
+  options: {
+    bulmaClassName?: string;
+    defaultElement: keyof React.ReactHTML;
+    displayName: string;
+    makeShallowWrapper?: MakeShallowWrapperFunction;
+    refProp?: string;
+    makeNode?(props: any): JSX.Element;
+    makeWrappingNode?(node: React.ReactNode): JSX.Element;
+    //tslint:enable:no-any
+  },
 ) => {
+  const {
+    bulmaClassName,
+    defaultElement,
+    displayName,
+    makeNode,
+    makeShallowWrapper,
+    makeWrappingNode,
+    refProp,
+  } = {
+    makeNode: makeNodeFactory(component),
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    refProp: "ref",
+    ...options,
+  };
+
   describe("ForwardRefAsExoticComponent [integration]", () => {
+    it(`should have displayName: ${displayName}`, () => {
+      expect(component.displayName).toEqual(displayName);
+    });
+
     it("should render as the default element", () => {
-      const node = makeNodeFunc({});
-      const wrapper = makeShallowWrapperFunc(node);
+      const node = makeNode({});
+      const wrapper = makeShallowWrapper(node);
       expect(wrapper.is(defaultElement)).toBe(true);
     });
 
     it("should render as a custom component", () => {
       const asType = "span" as React.ReactType;
-      const node = makeNodeFunc({ as: asType });
-      const wrapper = makeShallowWrapperFunc(node);
+      const node = makeNode({ as: asType });
+      const wrapper = makeShallowWrapper(node);
       expect(wrapper.is(asType)).toBe(true);
     });
 
     it("should forward ref", () => {
       const ref = React.createRef<HTMLElement>();
-      const node = makeNodeFunc({ [refPropName]: ref });
+      const node = makeNode({ [refProp]: ref });
       withEnzymeMount(
         { node, makeWrappingNode },
         ({ context: { wrapper } }) => {
@@ -318,16 +338,16 @@ export const testForwardRefAsExoticComponentIntegration = (
 
     if (bulmaClassName !== undefined) {
       it("should have bulma className", () => {
-        const node = makeNodeFunc({});
-        const wrapper = makeShallowWrapperFunc(node);
+        const node = makeNode({});
+        const wrapper = makeShallowWrapper(node);
         expect(wrapper.hasClass(bulmaClassName)).toBe(true);
       });
     }
 
     it("should preserve custom className", () => {
       const className = "foo";
-      const node = makeNodeFunc({ className });
-      const wrapper = makeShallowWrapperFunc(node);
+      const node = makeNode({ className });
+      const wrapper = makeShallowWrapper(node);
       expect(wrapper.hasClass(className)).toBe(true);
     });
 
@@ -355,8 +375,8 @@ export const testForwardRefAsExoticComponentIntegration = (
         ].map(({ as, descriptor, valid }) => {
           it(`should ${valid ? "" : "not "}allow ${descriptor}`, () => {
             withMockError({}, ({ context: { error } }) => {
-              const node = makeNodeFunc({ as });
-              const wrapper = makeShallowWrapperFunc(node);
+              const node = makeNode({ as });
+              const wrapper = makeShallowWrapper(node);
               expect(wrapper.exists()).toBe(true);
               if (valid) {
                 expect(error.mock.calls).toHaveLength(0);
@@ -378,16 +398,27 @@ export const testForwardRefAsExoticComponentIntegration = (
 };
 
 export const testThemeIntegration = (
-  makeNodeFunc: MakeNodeFunction<any>, // tslint:disable-line:no-any
-  makeShallowWrapperFunc: MakeShallowWrapperFunction,
+  // tslint:disable:no-any
+  component: React.ComponentType<any>,
+  options?: {
+    makeNode?: MakeNodeFunction<any>;
+    makeShallowWrapper?: MakeShallowWrapperFunction;
+  },
+  // tslint:enable:no-any
 ) => {
+  const { makeNode, makeShallowWrapper } = {
+    makeNode: makeNodeFactory(component),
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    ...options,
+  };
+
   describe("theme [integration]", () => {
     it("default transform", () => {
       withMockError({}, ({ context: { error } }) => {
-        const node = makeNodeFunc({
+        const node = makeNode({
           pull: "__UNKNOWN" as HelpersProps["pull"],
         });
-        const wrapper = makeShallowWrapperFunc(node);
+        const wrapper = makeShallowWrapper(node);
         expect(wrapper.hasClass("is-pulled-__UNKNOWN")).toBe(true);
         expect(error.mock.calls).toHaveLength(1);
         expect(error.mock.calls[0][0]).toMatch(
@@ -425,15 +456,15 @@ export const testThemeIntegration = (
       };
 
       it("should transform prop", () => {
-        const node = makeNodeFunc({ foo: "bar" });
-        const wrapper = makeShallowWrapperFunc(node, { transform });
+        const node = makeNode({ foo: "bar" });
+        const wrapper = makeShallowWrapper(node, { transform });
         expect(wrapper.hasClass("foo-bar")).toBe(true);
       });
 
       it("should warn on invalid prop transform", () => {
         withMockError({}, ({ context }) => {
-          const node = makeNodeFunc({ foo: "qux" });
-          const wrapper = makeShallowWrapperFunc(node, { transform });
+          const node = makeNode({ foo: "qux" });
+          const wrapper = makeShallowWrapper(node, { transform });
           expect(wrapper.hasClass("foo-qux")).toBe(true);
           expect(context.error.mock.calls).toHaveLength(1);
           expect(context.error.mock.calls[0][0]).toMatch(
@@ -446,17 +477,21 @@ export const testThemeIntegration = (
 };
 
 export const makeTestPropForwarding = (
-  makeNodeFunc: MakeNodeFunction<any>, // tslint:disable-line:no-any
-) => (
-  propName: string,
-  propValue: any, // tslint:disable-line:no-any
-  mappedPropName?: string,
+  component: React.ComponentType<any>, // tslint:disable-line:no-any
 ) => {
-  it(`forwards ${propName}: ${propValue}`, () => {
-    const node = makeNodeFunc({ [propName]: propValue });
-    const wrapper = Enzyme.shallow(node);
-    expect(
-      wrapper.prop(mappedPropName !== undefined ? mappedPropName : propName),
-    ).toBe(propValue);
-  });
+  const makeNode = makeNodeFactory(component);
+
+  return (
+    propName: string,
+    propValue: any, // tslint:disable-line:no-any
+    mappedPropName?: string,
+  ) => {
+    it(`forwards ${propName}: ${propValue}`, () => {
+      const node = makeNode({ [propName]: propValue });
+      const wrapper = Enzyme.shallow(node);
+      expect(
+        wrapper.prop(mappedPropName !== undefined ? mappedPropName : propName),
+      ).toBe(propValue);
+    });
+  };
 };

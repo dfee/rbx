@@ -36,15 +36,6 @@ export type FieldModifierProps = Partial<{
 
 export type FieldProps = HelpersProps & FieldModifierProps;
 
-const propTypes = {
-  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  expanded: PropTypes.bool,
-  horizontal: PropTypes.bool,
-  kind: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  multiline: PropTypes.bool,
-  narrow: PropTypes.bool,
-};
-
 export const Field = Object.assign(
   forwardRefAs<FieldProps, "div">(
     (props, ref) => {
@@ -85,6 +76,15 @@ export const Field = Object.assign(
   {
     Body: FieldBody,
     Label: FieldLabel,
-    propTypes,
   },
 );
+
+Field.displayName = "Field";
+Field.propTypes = {
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  expanded: PropTypes.bool,
+  horizontal: PropTypes.bool,
+  kind: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  multiline: PropTypes.bool,
+  narrow: PropTypes.bool,
+};

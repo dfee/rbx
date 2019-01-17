@@ -11,3 +11,5 @@ export const Box = forwardRefAs<BoxProps, "div">(
   ),
   { as: "div" },
 );
+
+Box.displayName = "Box";

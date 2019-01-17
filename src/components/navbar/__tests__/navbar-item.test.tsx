@@ -3,7 +3,6 @@ import React from "react";
 
 import {
   hasProperties,
-  makeNodeFactory,
   makeTestPropForwarding,
   validateBoolPropType,
   validatePropType,
@@ -12,22 +11,20 @@ import { NavbarItem } from "src/components/navbar/navbar-item";
 import { NavbarItemContainer } from "src/components/navbar/navbar-item-container";
 
 const COMPONENT = NavbarItem;
-const COMPONENT_NAME = "NavbarItem";
+const DISPLAY_NAME = "Navbar.Item";
 const DEFAULT_ELEMENT = "a";
 // const BULMA_CLASS_NAME = "navbar-item";
 
-const makeNode = makeNodeFactory(NavbarItem);
+const testPropForwarding = makeTestPropForwarding(COMPONENT);
 
-const testPropForwarding = makeTestPropForwarding(makeNode);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Container: NavbarItemContainer,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   test("it renders a NavbarItemContainer", () => {
-    const node = makeNode({});
+    const node = <NavbarItem />;
     const wrapper = Enzyme.shallow(node);
     expect(wrapper.is(NavbarItemContainer)).toBe(true);
   });

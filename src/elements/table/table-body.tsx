@@ -8,3 +8,5 @@ export const TableBody = forwardRefAs<TableBodyProps, "tbody">(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "tbody" },
 );
+
+TableBody.displayName = "Table.Body";

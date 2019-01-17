@@ -15,3 +15,5 @@ export const MessageHeader = forwardRefAs<MessageHeaderProps, "div">(
   ),
   { as: "div" },
 );
+
+MessageHeader.displayName = "Message.Header";

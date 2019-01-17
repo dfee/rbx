@@ -44,6 +44,7 @@ export class DropdownContainer extends React.PureComponent<
   DropdownContainerProps,
   DropdownContainerState
 > {
+  public static displayName = "Dropdown.Container";
   public readonly state: DropdownContainerState;
   private readonly ref = React.createRef<HTMLElement>();
 

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Level } from "src/components/level/level";
 import { LevelItem } from "src/components/level/level-item";
@@ -5,33 +7,29 @@ import { LevelItem } from "src/components/level/level-item";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = Level;
-const COMPONENT_NAME = "Level";
+const DISPLAY_NAME = "Level";
 const DEFAULT_ELEMENT = "nav";
 const BULMA_CLASS_NAME = "level";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Item: LevelItem,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -41,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {
-          const node = makeNode({ breakpoint });
+          const node = <Level breakpoint={breakpoint} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
         });

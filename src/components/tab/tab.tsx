@@ -11,10 +11,6 @@ export type TabModifierProps = Partial<{
 
 export type TabProps = HelpersProps & TabModifierProps;
 
-const propTypes = {
-  active: PropTypes.bool,
-};
-
 export const Tab = Object.assign(
   forwardRefAs<TabProps, "a">(
     ({ active, ...rest }, ref) => (
@@ -24,8 +20,10 @@ export const Tab = Object.assign(
     ),
     { as: "a" },
   ),
-  {
-    Group: TabGroup,
-    propTypes,
-  },
+  { Group: TabGroup },
 );
+
+Tab.displayName = "Tab";
+Tab.propTypes = {
+  active: PropTypes.bool,
+};

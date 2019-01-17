@@ -8,3 +8,5 @@ export const TableHeading = forwardRefAs<TableHeadingProps, "th">(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "th" },
 );
+
+TableHeading.displayName = "Table.Heading";

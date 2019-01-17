@@ -1,3 +1,4 @@
+import React from "react";
 import {
   CONTENT_ORDERED_LIST_DEFAULTS,
   ContentOrderedList,
@@ -7,33 +8,29 @@ import { ContentOrderedListItem } from "src/elements/content/content-ordered-lis
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = ContentOrderedList;
-const COMPONENT_NAME = "ContentOrderedList";
+const DISPLAY_NAME = "Content.OrderedList";
 const DEFAULT_ELEMENT = "ol";
 const BULMA_CLASS_NAME = undefined;
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Item: ContentOrderedListItem,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -43,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       CONTENT_ORDERED_LIST_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
-          const node = makeNode({ type: isType });
+          const node = <ContentOrderedList type={isType} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${isType}`)).toBe(true);
         });

@@ -3,32 +3,26 @@ import { TableHead } from "src/elements/table/table-head";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
 
 const COMPONENT = TableHead;
-const COMPONENT_NAME = "TableHead";
+const DISPLAY_NAME = "Table.Head";
 const DEFAULT_ELEMENT = "thead";
 const BULMA_CLASS_NAME = undefined;
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-    "ref",
-    node => <table children={node} />,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeWrappingNode: node => <table children={node} />,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 });

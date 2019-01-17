@@ -11,10 +11,6 @@ export type PanelTabModifierProps = Partial<{
 
 export type PanelTabProps = HelpersProps & PanelTabModifierProps;
 
-const propTypes = {
-  active: PropTypes.bool,
-};
-
 export const PanelTab = Object.assign(
   forwardRefAs<PanelTabProps, "a">(
     ({ active, className, ...rest }, ref) => (
@@ -26,8 +22,10 @@ export const PanelTab = Object.assign(
     ),
     { as: "a" },
   ),
-  {
-    Group: PanelTabGroup,
-    propTypes,
-  },
+  { Group: PanelTabGroup },
 );
+
+PanelTab.displayName = "Panel.Tab";
+PanelTab.propTypes = {
+  active: PropTypes.bool,
+};

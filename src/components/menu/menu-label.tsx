@@ -15,3 +15,5 @@ export const MenuLabel = forwardRefAs<MenuLabelProps, "p">(
   ),
   { as: "p" },
 );
+
+MenuLabel.displayName = "Menu.Label";

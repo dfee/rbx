@@ -31,30 +31,28 @@ export type TileModifierProps = Partial<{
 
 export type TileProps = HelpersProps & TileModifierProps;
 
-const propTypes = {
+export const Tile = forwardRefAs<TileProps, "div">(
+  ({ className, kind, size, vertical, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "tile",
+        {
+          [`is-${kind}`]: kind,
+          [`is-${size}`]: size !== undefined,
+          "is-vertical": vertical,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+Tile.displayName = "Tile";
+Tile.propTypes = {
   kind: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   vertical: PropTypes.bool,
 };
-
-export const Tile = Object.assign(
-  forwardRefAs<TileProps, "div">(
-    ({ className, kind, size, vertical, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "tile",
-          {
-            [`is-${kind}`]: kind,
-            [`is-${size}`]: size !== undefined,
-            "is-vertical": vertical,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

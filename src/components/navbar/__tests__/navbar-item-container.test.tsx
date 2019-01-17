@@ -5,10 +5,7 @@ import {
   initialValue as themeInitialValue,
   ThemeContextValue,
 } from "src/base/theme";
-import {
-  NavbarItemContainer,
-  NavbarItemContainerProps,
-} from "src/components/navbar/navbar-item-container";
+import { NavbarItemContainer } from "src/components/navbar/navbar-item-container";
 import {
   initialValue as navbarItemInitialValue,
   NavbarItemContextValue,
@@ -19,14 +16,10 @@ import {
   testThemeIntegration,
 } from "src/__tests__/testing";
 
-// const COMPONENT = NavbarItemContainer;
-const COMPONENT_NAME = "NavbarItemContainer";
+const COMPONENT = NavbarItemContainer;
+const DISPLAY_NAME = "Navbar.Item.Container";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "navbar-item";
-
-const makeNode = (props: NavbarItemContainerProps) => (
-  <NavbarItemContainer {...props} />
-);
 
 const makeShallowWrapper = (
   node: JSX.Element,
@@ -59,22 +52,24 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-    "innerRef",
-  );
+describe(`${DISPLAY_NAME} component`, () => {
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    refProp: "innerRef",
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     describe("active", () => {
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
-          const node = makeNode({ active });
+          const node = <NavbarItemContainer active={active} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
@@ -84,7 +79,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("expanded", () => {
       [false, true].map(expanded => {
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
-          const node = makeNode({ expanded });
+          const node = <NavbarItemContainer expanded={expanded} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-expanded")).toBe(expanded);
         });
@@ -96,9 +91,9 @@ describe(`${COMPONENT_NAME} component`, () => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {
-          const onClick = jest.fn();
+          const onClick = hasOnClick ? jest.fn() : undefined;
           const setActive = jest.fn();
-          const node = makeNode({ onClick: hasOnClick ? onClick : undefined });
+          const node = <NavbarItemContainer onClick={onClick} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
             node,
             themeInitialValue,
@@ -108,7 +103,9 @@ describe(`${COMPONENT_NAME} component`, () => {
             },
           );
           wrapper.simulate("click");
-          expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+          if (onClick !== undefined) {
+            expect(onClick.mock.calls).toHaveLength(1);
+          }
           expect(setActive.mock.calls).toHaveLength(1);
           expect(setActive.mock.calls[0]).toEqual([true]);
         });
@@ -118,7 +115,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("tab", () => {
       [false, true].map(tab => {
         it(`should ${tab ? "" : "not "}be tab`, () => {
-          const node = makeNode({ tab });
+          const node = <NavbarItemContainer tab={tab} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-tab")).toBe(tab);
         });

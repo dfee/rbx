@@ -35,35 +35,33 @@ export type TabGroupModifierProps = Partial<{
 
 export type TabGroupProps = HelpersProps & TabGroupModifierProps;
 
-const propTypes = {
+export const TabGroup = forwardRefAs<TabGroupProps, "div">(
+  ({ align, children, className, fullwidth, size, type, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "tabs",
+        {
+          [`is-${align}`]: align,
+          [`is-${size}`]: size,
+          "is-fullwidth": fullwidth,
+          "is-toggle": type === "toggle" || type === "toggle-rounded",
+          "is-toggle-rounded": type === "toggle-rounded",
+          [`is-${type}`]: type,
+        },
+        className,
+      )}
+      children={<ul>{children}</ul>}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+TabGroup.displayName = "Tab.Group";
+TabGroup.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fullwidth: PropTypes.bool,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const TabGroup = Object.assign(
-  forwardRefAs<TabGroupProps, "div">(
-    ({ align, children, className, fullwidth, size, type, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "tabs",
-          {
-            [`is-${align}`]: align,
-            [`is-${size}`]: size,
-            "is-fullwidth": fullwidth,
-            "is-toggle": type === "toggle" || type === "toggle-rounded",
-            "is-toggle-rounded": type === "toggle-rounded",
-            [`is-${type}`]: type,
-          },
-          className,
-        )}
-        children={<ul>{children}</ul>}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

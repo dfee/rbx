@@ -8,3 +8,5 @@ export const SelectOption = forwardRefAs<SelectOptionProps, "option">(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "option" },
 );
+
+SelectOption.displayName = "Select.Option";

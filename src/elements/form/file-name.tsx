@@ -15,3 +15,5 @@ export const FileName = forwardRefAs<FileNameProps, "span">(
   ),
   { as: "span" },
 );
+
+FileName.displayName = "File.Name";

@@ -260,7 +260,6 @@ You can make a `<Hero>` that covers the whole height of the viewport by splittin
   component={Hero}
   customize
   docPath="/layout/hero"
-  name="Hero"
   props={{
     color: {
       description: "set the hero's color",
@@ -279,20 +278,8 @@ You can make a `<Hero>` that covers the whole height of the viewport by splittin
   }}
 />
 
-<ForwardRefAsExoticComponentDoc
-  component={Hero.Body}
-  docPath="/layout/hero"
-  name="Hero.Body"
-/>
+<ForwardRefAsExoticComponentDoc component={Hero.Body} docPath="/layout/hero" />
 
-<ForwardRefAsExoticComponentDoc
-  component={Hero.Foot}
-  docPath="/layout/hero"
-  name="Hero.Foot"
-/>
+<ForwardRefAsExoticComponentDoc component={Hero.Foot} docPath="/layout/hero" />
 
-<ForwardRefAsExoticComponentDoc
-  component={Hero.Head}
-  docPath="/layout/hero"
-  name="Hero.Head"
-/>
+<ForwardRefAsExoticComponentDoc component={Hero.Head} docPath="/layout/hero" />

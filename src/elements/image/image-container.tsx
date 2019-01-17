@@ -51,29 +51,27 @@ export type ImageContainerModifierProps = Partial<{
 
 export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 
-const propTypes = {
+export const ImageContainer = forwardRefAs<ImageContainerProps, "figure">(
+  ({ className, size, ...rest }, ref) => {
+    let s: string | undefined;
+    if (typeof size === "string") {
+      s = size;
+    } else if (typeof size === "number") {
+      s = `${size}x${size}`;
+    }
+
+    return (
+      <Generic
+        className={classNames("image", { [`is-${s}`]: s }, className)}
+        ref={ref}
+        {...rest}
+      />
+    );
+  },
+  { as: "figure" },
+);
+
+ImageContainer.displayName = "Image.Container";
+ImageContainer.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const ImageContainer = Object.assign(
-  forwardRefAs<ImageContainerProps, "figure">(
-    ({ className, size, ...rest }, ref) => {
-      let s: string | undefined;
-      if (typeof size === "string") {
-        s = size;
-      } else if (typeof size === "number") {
-        s = `${size}x${size}`;
-      }
-
-      return (
-        <Generic
-          className={classNames("image", { [`is-${s}`]: s }, className)}
-          ref={ref}
-          {...rest}
-        />
-      );
-    },
-    { as: "figure" },
-  ),
-  { propTypes },
-);

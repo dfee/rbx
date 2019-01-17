@@ -9,17 +9,14 @@ import {
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
 
 const COMPONENT = Generic;
-const COMPONENT_NAME = "Generic";
+const DISPLAY_NAME = "Generic";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = undefined;
-
-const makeNode = makeNodeFactory(Generic);
 
 const makeShallowWrapperInThemeContextConsumer = (
   node: JSX.Element,
@@ -33,17 +30,19 @@ const makeShallowWrapperInThemeContextConsumer = (
   return Enzyme.shallow(<Children {...contextValue} />);
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: "div" },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeShallowWrapperInThemeContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
+    makeShallowWrapper: makeShallowWrapperInThemeContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeShallowWrapperInThemeContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeShallowWrapperInThemeContextConsumer,
+  });
 });

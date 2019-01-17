@@ -11,3 +11,5 @@ export const Footer = forwardRefAs<FooterProps, "div">(
   ),
   { as: "div" },
 );
+
+Footer.displayName = "Footer";

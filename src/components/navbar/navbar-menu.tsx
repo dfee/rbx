@@ -24,3 +24,5 @@ export const NavbarMenu = forwardRefAs<NavbarMenuProps, "div">(
   ),
   { as: "div" },
 );
+
+NavbarMenu.displayName = "Navbar.Menu";

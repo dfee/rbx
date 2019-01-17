@@ -22,8 +22,8 @@ import {
   withEnzymeMount,
 } from "src/__tests__/testing";
 
-// const COMPONENT = NavbarItemContainer;
-const COMPONENT_NAME = "NavbarItemContainer";
+const COMPONENT = NavbarItemContainer;
+const DISPLAY_NAME = "Navbar.Item.Container";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "navbar-item";
 
@@ -53,21 +53,25 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
-  testForwardRefAsExoticComponentIntegration(
+describe(`${DISPLAY_NAME} component`, () => {
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
     makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-    "innerRef",
-  );
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    refProp: "innerRef",
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeNode,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     describe("as", () => {
       it("should force as to be div if a", () => {
-        const node = makeNode({ as: "a" });
+        const node = <NavbarItemContainer dropdown as="a" />;
         const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
         expect(wrapper.is("div")).toBe(true);
       });
@@ -81,7 +85,9 @@ describe(`${COMPONENT_NAME} component`, () => {
             isToggleable ? "" : "not "
           }be toggled when document is clicked and managed: ${managed} and active: ${active}
               `, () => {
-            const node = makeNode({ active, managed });
+            const node = (
+              <NavbarItemContainer dropdown active={active} managed={managed} />
+            );
             withEnzymeMount({ node }, ({ state: { outer } }) => {
               document.getElementsByTagName("body")[0].click();
               outer.update();
@@ -101,7 +107,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         root.setAttribute("id", "root");
         document.body.appendChild(root);
         const ref = React.createRef<HTMLDivElement>();
-        const node = makeNode({ active: true, innerRef: ref });
+        const node = <NavbarItemContainer dropdown active innerRef={ref} />;
         withEnzymeMount(
           { node, options: { attachTo: root } },
           ({ state: { outer } }) => {
@@ -160,7 +166,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("hoverable", () => {
       [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
-          const node = makeNode({ hoverable });
+          const node = <NavbarItemContainer dropdown hoverable={hoverable} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
         });
@@ -170,7 +176,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("up", () => {
       [false, true].map(up => {
         it(`should ${up ? "" : "not "}have dropdown-up`, () => {
-          const node = makeNode({ up });
+          const node = <NavbarItemContainer dropdown up={up} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-dropdown-up")).toBe(up);
         });

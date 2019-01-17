@@ -15,7 +15,7 @@ import { ModalPortal } from "src/components/modal/modal-portal";
 import { withEnzymeMount, withWindow } from "src/__tests__/testing";
 
 // const COMPONENT = ModalContainer;
-const COMPONENT_NAME = "ModalContainer";
+const DISPLAY_NAME = "Modal.Container";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "modal";
 
@@ -23,7 +23,7 @@ const makeNode = (props: ModalContainerProps) => {
   return <ModalContainer {...props} />;
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   describe("ssr", () => {
     it("should render without window being available (ssr)", () => {
       withWindow({}, () => {

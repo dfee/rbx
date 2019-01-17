@@ -15,3 +15,5 @@ export const Highlight = forwardRefAs<HighlightProps, "p">(
   ),
   { as: "p" },
 );
+
+Highlight.displayName = "Highlight";

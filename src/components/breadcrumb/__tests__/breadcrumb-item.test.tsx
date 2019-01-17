@@ -9,18 +9,15 @@ import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = BreadcrumbItem;
-const COMPONENT_NAME = "BreadcrumbItem";
+const DISPLAY_NAME = "Breadcrumb.Item";
 const DEFAULT_ELEMENT = "a";
 const BULMA_CLASS_NAME = undefined;
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapper = (node: JSX.Element) => Enzyme.shallow(node);
 
@@ -40,23 +37,25 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("root", () => {
     it("should be li element", () => {
-      const node = makeNode({});
+      const node = <BreadcrumbItem />;
       const wrapper = makeShallowWrapper(node);
       expect(wrapper.is("li")).toBe(true);
     });
@@ -70,7 +69,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
-          const node = makeNode({ active });
+          const node = <BreadcrumbItem active={active} />;
           const wrapper = makeShallowWrapper(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
         });

@@ -29,10 +29,6 @@ export type ColumnGroupBreakpointOptions = Partial<{
   gapSize: ColumnGroupVariables["gapSizes"];
 }>;
 
-const ColumnGroupBreakpointPropTypes = {
-  gapSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 type ColumnGroupModifierProps = Partial<
   { [B in Variables["breakpoints"]]: ColumnGroupBreakpointOptions } & {
     /**
@@ -61,13 +57,84 @@ type ColumnGroupModifierProps = Partial<
 
 export type ColumnGroupProps = HelpersProps & ColumnGroupModifierProps;
 
+export const ColumnGroup = forwardRefAs<ColumnGroupProps, "div">(
+  (
+    {
+      className,
+      breakpoint,
+      centered,
+      desktop,
+      fullhd,
+      gapless,
+      gapSize,
+      mobile,
+      multiline,
+      tablet,
+      widescreen,
+      touch,
+      vcentered,
+      ...rest
+    },
+    ref,
+  ) => {
+    const breakpoints = {
+      desktop,
+      fullhd,
+      mobile,
+      tablet,
+      touch,
+      widescreen,
+    };
+
+    const gapSizeClassNames = classNames(
+      { [`is-${gapSize}`]: typeof gapSize === "number" },
+      Object.keys(breakpoints)
+        .map(key => {
+          const value = breakpoints[key as Variables["breakpoints"]];
+
+          return value === undefined
+            ? {}
+            : { [`is-${value.gapSize}-${key}`]: value.gapSize !== undefined };
+        })
+        .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+    );
+
+    return (
+      <Generic
+        className={classNames(
+          "columns",
+          {
+            [`is-${breakpoint}`]: breakpoint,
+            "is-centered": centered,
+            "is-gapless": gapless,
+            "is-multiline": multiline,
+            "is-variable ": gapSizeClassNames !== "",
+            "is-vcentered": vcentered,
+          },
+          gapSizeClassNames,
+          className,
+        )}
+        ref={ref}
+        {...rest}
+      />
+    );
+  },
+  { as: "div" },
+);
+
+ColumnGroup.displayName = "Column.Group";
+
+const ColumnGroupBreakpointPropTypes = {
+  gapSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
 /**
  * Note: the default Breakpoints are typechecked (as it'll cover 99%+ of users)
  * We can't validate custom Breakpoints with PropTypes (though they are checked
  * by TypeScript).
  * ∴ Custom breakpoint's won't be checked against ColumnGroupBreakpointPropTypes
  */
-const propTypes = {
+ColumnGroup.propTypes = {
   ...DEFAULTS.breakpoints
     .map(breakpoint => ({
       [breakpoint]: PropTypes.shape(ColumnGroupBreakpointPropTypes),
@@ -80,71 +147,3 @@ const propTypes = {
   multiline: PropTypes.bool,
   vcentered: PropTypes.bool,
 };
-
-export const ColumnGroup = Object.assign(
-  forwardRefAs<ColumnGroupProps, "div">(
-    (
-      {
-        className,
-        breakpoint,
-        centered,
-        desktop,
-        fullhd,
-        gapless,
-        gapSize,
-        mobile,
-        multiline,
-        tablet,
-        widescreen,
-        touch,
-        vcentered,
-        ...rest
-      },
-      ref,
-    ) => {
-      const breakpoints = {
-        desktop,
-        fullhd,
-        mobile,
-        tablet,
-        touch,
-        widescreen,
-      };
-
-      const gapSizeClassNames = classNames(
-        { [`is-${gapSize}`]: typeof gapSize === "number" },
-        Object.keys(breakpoints)
-          .map(key => {
-            const value = breakpoints[key as Variables["breakpoints"]];
-
-            return value === undefined
-              ? {}
-              : { [`is-${value.gapSize}-${key}`]: value.gapSize !== undefined };
-          })
-          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-      );
-
-      return (
-        <Generic
-          className={classNames(
-            "columns",
-            {
-              [`is-${breakpoint}`]: breakpoint,
-              "is-centered": centered,
-              "is-gapless": gapless,
-              "is-multiline": multiline,
-              "is-variable ": gapSizeClassNames !== "",
-              "is-vcentered": vcentered,
-            },
-            gapSizeClassNames,
-            className,
-          )}
-          ref={ref}
-          {...rest}
-        />
-      );
-    },
-    { as: "div" },
-  ),
-  { propTypes },
-);

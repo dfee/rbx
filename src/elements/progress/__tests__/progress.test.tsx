@@ -6,7 +6,6 @@ import { Progress, PROGRESS_DEFAULTS } from "src/elements/progress/progress";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateNumberPropType,
@@ -14,13 +13,11 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Progress;
-const COMPONENT_NAME = "Progress";
+const DISPLAY_NAME = "Progress";
 const DEFAULT_ELEMENT = "progress";
 const BULMA_CLASS_NAME = "progress";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: {
       as: DEFAULT_ELEMENT,
@@ -29,14 +26,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -46,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <Progress color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
@@ -58,7 +54,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       it("should have max", () => {
         const max = 20;
-        const node = makeNode({ max });
+        const node = <Progress max={max} />;
         const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
         expect(
           (wrapper.props() as React.ProgressHTMLAttributes<Element>).max,
@@ -71,7 +67,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       PROGRESS_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size, max: 5, value: 10 });
+          const node = <Progress size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
@@ -83,7 +79,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       it("should have value", () => {
         const value = 0;
-        const node = makeNode({ value });
+        const node = <Progress value={value} />;
         const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
         expect(
           (wrapper.props() as React.ProgressHTMLAttributes<Element>).value,

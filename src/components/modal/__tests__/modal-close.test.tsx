@@ -13,18 +13,15 @@ import {
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validatePropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = ModalClose;
-const COMPONENT_NAME = "ModalClose";
+const DISPLAY_NAME = "Modal.Close";
 const DEFAULT_ELEMENT = "button";
 const BULMA_CLASS_NAME = "modal-close";
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapperInModalContextConsumer = (
   node: JSX.Element,
@@ -59,23 +56,25 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("extra", () => {
     it("should have aria-label", () => {
-      const node = makeNode({});
+      const node = <ModalClose />;
       const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
       expect(
         (wrapper.props() as React.HTMLAttributes<Element>)["aria-label"],
@@ -83,7 +82,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     });
 
     it("should be large", () => {
-      const node = makeNode({});
+      const node = <ModalClose />;
       const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
       expect(wrapper.hasClass("is-large")).toBe(true);
     });
@@ -103,11 +102,9 @@ describe(`${COMPONENT_NAME} component`, () => {
           it(`should ${closeOnBlur ? "" : "not "}update context ${
             hasOnClick ? "and call onClick" : ""
           }`, () => {
-            const onClick = jest.fn();
+            const onClick = hasOnClick ? jest.fn() : undefined;
             const close = jest.fn();
-            const node = makeNode({
-              onClick: hasOnClick ? onClick : undefined,
-            });
+            const node = <ModalClose onClick={onClick} />;
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
               node,
               themeInitialValue,
@@ -118,7 +115,7 @@ describe(`${COMPONENT_NAME} component`, () => {
               },
             );
             wrapper.simulate("click");
-            if (hasOnClick) {
+            if (onClick !== undefined) {
               expect(onClick.mock.calls).toHaveLength(1);
             }
             if (closeOnBlur) {

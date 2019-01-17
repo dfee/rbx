@@ -16,3 +16,5 @@ export const FileInput = forwardRefAs<FileInputProps, "input">(
   ),
   { as: "input" },
 );
+
+FileInput.displayName = "File.Input";

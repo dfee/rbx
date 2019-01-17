@@ -16,14 +16,6 @@ import { DropdownTrigger } from "./dropdown-trigger";
 
 export type DropdownProps = Omit<DropdownContainerProps, "as" | "innerRef">;
 
-const propTypes = {
-  active: PropTypes.bool,
-  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  hoverable: PropTypes.bool,
-  managed: PropTypes.bool,
-  up: PropTypes.bool,
-};
-
 export const Dropdown = Object.assign(
   forwardRefAs<DropdownProps, "div">(
     (props, ref) => <DropdownContainer innerRef={ref} {...props} />,
@@ -37,6 +29,14 @@ export const Dropdown = Object.assign(
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
-    propTypes,
   },
 );
+
+Dropdown.displayName = "Dropdown";
+Dropdown.propTypes = {
+  active: PropTypes.bool,
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  hoverable: PropTypes.bool,
+  managed: PropTypes.bool,
+  up: PropTypes.bool,
+};

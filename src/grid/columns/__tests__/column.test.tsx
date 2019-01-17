@@ -1,3 +1,5 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Column, COLUMN_DEFAULTS } from "src/grid/columns/column";
 import { ColumnGroup } from "src/grid/columns/column-group";
@@ -5,7 +7,6 @@ import { ColumnGroup } from "src/grid/columns/column-group";
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -14,26 +15,23 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Column;
-const COMPONENT_NAME = "Column";
+const DISPLAY_NAME = "Column";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "column";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Group: ColumnGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -42,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
-          const node = makeNode({ narrow });
+          const node = <Column narrow={narrow} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         });
@@ -68,7 +66,8 @@ describe(`${COMPONENT_NAME} component`, () => {
 
           [false, true].map(narrow => {
             it(`should ${narrow ? "" : "not "}be narrow`, () => {
-              const node = makeNode({ [breakpoint]: { narrow } });
+              const props = { [breakpoint]: { narrow } };
+              const node = <Column {...props} />;
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
                 node,
               );
@@ -84,7 +83,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       COLUMN_DEFAULTS.sizes.map(offset => {
         it(`should be ${offset}`, () => {
-          const node = makeNode({ offset });
+          const node = <Column offset={offset} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-offset-${offset}`)).toBe(true);
         });
@@ -110,7 +109,8 @@ describe(`${COMPONENT_NAME} component`, () => {
         describe(breakpoint, () => {
           COLUMN_DEFAULTS.sizes.map(offset => {
             it(`should be offset ${offset}`, () => {
-              const node = makeNode({ [breakpoint]: { offset } });
+              const props = { [breakpoint]: { offset } };
+              const node = <Column {...props} />;
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
                 node,
               );
@@ -128,7 +128,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       COLUMN_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Column size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
@@ -154,7 +154,8 @@ describe(`${COMPONENT_NAME} component`, () => {
 
           COLUMN_DEFAULTS.sizes.map(size => {
             it(`should be ${size}`, () => {
-              const node = makeNode({ [breakpoint]: { size } });
+              const props = { [breakpoint]: { size } };
+              const node = <Column {...props} />;
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
                 node,
               );

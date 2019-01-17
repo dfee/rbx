@@ -12,7 +12,6 @@ import { ModalPortal } from "src/components/modal/modal-portal";
 
 import {
   hasProperties,
-  makeNodeFactory,
   makeTestPropForwarding,
   validateBoolPropType,
   validatePropType,
@@ -20,15 +19,13 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Modal;
-const COMPONENT_NAME = "Modal";
+const DISPLAY_NAME = "Modal";
 const DEFAULT_ELEMENT = "div";
 // const BULMA_CLASS_NAME = "modal";
 
-const makeNode = makeNodeFactory(Modal);
+const testPropForwarding = makeTestPropForwarding(COMPONENT);
 
-const testPropForwarding = makeTestPropForwarding(makeNode);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Background: ModalBackground,
     Card: ModalCard,
@@ -41,7 +38,7 @@ describe(`${COMPONENT_NAME} component`, () => {
   });
 
   test("it renders a ModalContainer", () => {
-    const node = makeNode({});
+    const node = <Modal />;
     const wrapper = Enzyme.shallow(node);
     expect(wrapper.is(ModalContainer)).toBe(true);
   });

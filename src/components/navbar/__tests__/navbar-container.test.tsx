@@ -10,7 +10,6 @@ import {
 import {
   NAVBAR_DEFAULTS,
   NavbarContainer,
-  NavbarContainerProps,
   NavbarContainerState,
 } from "src/components/navbar/navbar-container";
 import {
@@ -25,14 +24,10 @@ import {
   withWindow,
 } from "src/__tests__/testing";
 
-// const COMPONENT = NavbarContainer;
-const COMPONENT_NAME = "NavbarContainer";
+const COMPONENT = NavbarContainer;
+const DISPLAY_NAME = "Navbar.Container";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "navbar";
-
-const makeNode = (props: NavbarContainerProps) => (
-  <NavbarContainer {...props} />
-);
 
 const makeShallowWrapper = (node: JSX.Element) => {
   // render in Context Provider
@@ -56,16 +51,18 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-    "innerRef",
-  );
+describe(`${DISPLAY_NAME} component`, () => {
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    refProp: "innerRef",
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("ssr", () => {
     it("should render without window being available (ssr)", () => {
@@ -109,7 +106,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("color", () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <NavbarContainer color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
@@ -122,7 +119,9 @@ describe(`${COMPONENT_NAME} component`, () => {
           const ref = React.createRef<HTMLElement>();
           const doc =
             docOpt === "global" ? window.document : new JSDOM().window.document;
-          const node = makeNode({ document: doc, innerRef: ref, fixed: "top" });
+          const node = (
+            <NavbarContainer document={doc} innerRef={ref} fixed="top" />
+          );
           withEnzymeMount({ node }, () => {
             if (docOpt === "provided") {
               // make sure we're doing this right.
@@ -144,7 +143,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("fixed", () => {
       NAVBAR_DEFAULTS.fixedAlignments.map(fixed => {
         it(`should be ${fixed}`, () => {
-          const node = makeNode({ fixed });
+          const node = <NavbarContainer fixed={fixed} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-fixed-${fixed}`)).toBe(true);
         });
@@ -196,7 +195,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("transparent", () => {
       [false, true].map(transparent => {
         it(`should ${transparent ? "" : "not "}be transparent`, () => {
-          const node = makeNode({ transparent });
+          const node = <NavbarContainer transparent={transparent} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-transparent")).toBe(transparent);
         });

@@ -27,23 +27,21 @@ export type MediaItemModifierProps = Partial<{
 
 export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 
-const propTypes = {
+export const MediaItem = forwardRefAs<MediaItemProps, "div">(
+  ({ align, className, ...rest }, ref) => (
+    <Generic
+      className={classNames({ [`media-${align}`]: align }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  {
+    align: "content",
+    as: "div",
+  },
+);
+
+MediaItem.displayName = "Media.Item";
+MediaItem.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const MediaItem = Object.assign(
-  forwardRefAs<MediaItemProps, "div">(
-    ({ align, className, ...rest }, ref) => (
-      <Generic
-        className={classNames({ [`media-${align}`]: align }, className)}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    {
-      align: "content",
-      as: "div",
-    },
-  ),
-  { propTypes },
-);

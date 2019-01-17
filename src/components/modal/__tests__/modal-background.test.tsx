@@ -13,18 +13,15 @@ import {
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validatePropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = ModalBackground;
-const COMPONENT_NAME = "ModalBackground";
+const DISPLAY_NAME = "Modal.Background";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "modal-background";
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapperInModalContextConsumer = (
   node: JSX.Element,
@@ -59,19 +56,21 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -87,11 +86,9 @@ describe(`${COMPONENT_NAME} component`, () => {
           it(`should ${closeOnBlur ? "" : "not "}update context ${
             hasOnClick ? "and call onClick" : ""
           }`, () => {
-            const onClick = jest.fn();
+            const onClick = hasOnClick ? jest.fn() : undefined;
             const close = jest.fn();
-            const node = makeNode({
-              onClick: hasOnClick ? onClick : undefined,
-            });
+            const node = <ModalBackground onClick={onClick} />;
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
               node,
               themeInitialValue,
@@ -102,7 +99,7 @@ describe(`${COMPONENT_NAME} component`, () => {
               },
             );
             wrapper.simulate("click");
-            if (hasOnClick) {
+            if (onClick !== undefined) {
               expect(onClick.mock.calls).toHaveLength(1);
             }
             if (closeOnBlur) {

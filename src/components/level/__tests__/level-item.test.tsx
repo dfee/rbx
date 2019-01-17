@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   LEVEL_ITEM_DEFAULTS,
   LevelItem,
@@ -6,32 +8,28 @@ import {
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = LevelItem;
-const COMPONENT_NAME = "LevelItem";
+const DISPLAY_NAME = "Level.Item";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "level-item";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -41,7 +39,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       LEVEL_ITEM_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <LevelItem align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(BULMA_CLASS_NAME)).not.toBe(true);
           expect(wrapper.hasClass(`level-${align}`)).toBe(true);

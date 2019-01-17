@@ -10,7 +10,16 @@ import {
 
 export type NavbarItemProps = Omit<NavbarItemContainerProps, "as" | "innerRef">;
 
-const propTypes = {
+export const NavbarItem = Object.assign(
+  forwardRefAs<NavbarItemProps, "a">(
+    (props, ref) => <NavbarItemContainer innerRef={ref} {...props} />,
+    { as: "a" },
+  ),
+  { Container: NavbarItemContainer },
+);
+
+NavbarItem.displayName = "Navbar.Item";
+NavbarItem.propTypes = {
   active: PropTypes.bool,
   dropdown: PropTypes.bool,
   expanded: PropTypes.bool,
@@ -20,14 +29,3 @@ const propTypes = {
   tab: PropTypes.bool,
   up: PropTypes.bool,
 };
-
-export const NavbarItem = Object.assign(
-  forwardRefAs<NavbarItemProps, "a">(
-    (props, ref) => <NavbarItemContainer innerRef={ref} {...props} />,
-    { as: "a" },
-  ),
-  {
-    Container: NavbarItemContainer,
-    propTypes,
-  },
-);

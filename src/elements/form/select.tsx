@@ -35,14 +35,6 @@ export type SelectContainerModifierProps = Partial<{
 
 export type SelectContainerProps = HelpersProps & SelectContainerModifierProps;
 
-const propTypes = {
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  fullwidth: PropTypes.bool,
-  rounded: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 const mapSelectContainerChildren = (
   children: React.ReactNode,
   state?: SelectContainerVariables["states"],
@@ -88,38 +80,44 @@ const mapSelectContainerChildren = (
   return { children: mapped, classNameExtension };
 };
 
-export const SelectContainer = Object.assign(
-  forwardRefAs<SelectContainerProps, "div">(
-    (
-      { className, children, color, fullwidth, rounded, size, state, ...rest },
-      ref,
-    ) => {
-      const mapped = mapSelectContainerChildren(children, state);
+export const SelectContainer = forwardRefAs<SelectContainerProps, "div">(
+  (
+    { className, children, color, fullwidth, rounded, size, state, ...rest },
+    ref,
+  ) => {
+    const mapped = mapSelectContainerChildren(children, state);
 
-      return (
-        <Generic
-          className={classNames(
-            "select",
-            {
-              [`is-${color}`]: color,
-              "is-fullwidth": fullwidth,
-              "is-loading": state === "loading",
-              "is-rounded": rounded,
-              [`is-${size}`]: size,
-            },
-            mapped.classNameExtension,
-            className,
-          )}
-          children={mapped.children}
-          ref={ref}
-          {...rest}
-        />
-      );
-    },
-    { as: "div" },
-  ),
-  { propTypes },
+    return (
+      <Generic
+        className={classNames(
+          "select",
+          {
+            [`is-${color}`]: color,
+            "is-fullwidth": fullwidth,
+            "is-loading": state === "loading",
+            "is-rounded": rounded,
+            [`is-${size}`]: size,
+          },
+          mapped.classNameExtension,
+          className,
+        )}
+        children={mapped.children}
+        ref={ref}
+        {...rest}
+      />
+    );
+  },
+  { as: "div" },
 );
+
+SelectContainer.displayName = "Select.Container";
+SelectContainer.propTypes = {
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fullwidth: PropTypes.bool,
+  rounded: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
 
 export type SelectProps = HelpersProps;
 
@@ -133,3 +131,5 @@ export const Select = Object.assign(
     Option: SelectOption,
   },
 );
+
+Select.displayName = "Select";

@@ -12,28 +12,26 @@ export type ContainerModifierProps = Partial<{
 
 export type ContainerProps = HelpersProps & ContainerModifierProps;
 
-const propTypes = {
+export const Container = forwardRefAs<ContainerProps, "div">(
+  ({ className, fluid, breakpoint, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "container",
+        {
+          [`is-${breakpoint}`]: breakpoint,
+          "is-fluid": fluid,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+Container.displayName = "Container";
+Container.propTypes = {
   breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fluid: PropTypes.bool,
 };
-
-export const Container = Object.assign(
-  forwardRefAs<ContainerProps, "div">(
-    ({ className, fluid, breakpoint, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "container",
-          {
-            [`is-${breakpoint}`]: breakpoint,
-            "is-fluid": fluid,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

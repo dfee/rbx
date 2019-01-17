@@ -13,18 +13,15 @@ import { DropdownTrigger } from "src/components/dropdown/dropdown-trigger";
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validatePropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = DropdownTrigger;
-const COMPONENT_NAME = "DropdownTrigger";
+const DISPLAY_NAME = "Dropdown.Trigger";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "dropdown-trigger";
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapperInDropdownContextConsumer = (
   node: JSX.Element,
@@ -59,19 +56,21 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    bulmaClassName: BULMA_CLASS_NAME,
+    displayName: DISPLAY_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -86,9 +85,9 @@ describe(`${COMPONENT_NAME} component`, () => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {
-          const onClick = jest.fn();
+          const onClick = hasOnClick ? jest.fn() : undefined;
           const setActive = jest.fn();
-          const node = makeNode({ onClick: hasOnClick ? onClick : undefined });
+          const node = <DropdownTrigger onClick={onClick} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
             node,
             themeInitialValue,
@@ -98,7 +97,9 @@ describe(`${COMPONENT_NAME} component`, () => {
             },
           );
           wrapper.simulate("click");
-          expect(onClick.mock.calls).toHaveLength(hasOnClick ? 1 : 0);
+          if (onClick !== undefined) {
+            expect(onClick.mock.calls).toHaveLength(1);
+          }
           expect(setActive.mock.calls).toHaveLength(1);
           expect(setActive.mock.calls[0]).toEqual([true]);
         });

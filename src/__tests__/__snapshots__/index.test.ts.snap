@@ -7,6 +7,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Block",
     "render": [Function],
   },
   "Box": Object {
@@ -14,6 +15,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Box",
     "render": [Function],
   },
   "Breadcrumb": Object {
@@ -23,6 +25,7 @@ Object {
       "defaultProps": Object {
         "as": "a",
       },
+      "displayName": "Breadcrumb.Item",
       "propTypes": Object {
         "active": [Function],
       },
@@ -31,6 +34,7 @@ Object {
     "defaultProps": Object {
       "as": "nav",
     },
+    "displayName": "Breadcrumb",
     "propTypes": Object {
       "align": [Function],
       "separator": [Function],
@@ -45,6 +49,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Button.Group",
       "propTypes": Object {
         "align": [Function],
         "hasAddons": [Function],
@@ -54,6 +59,7 @@ Object {
     "defaultProps": Object {
       "as": "button",
     },
+    "displayName": "Button",
     "propTypes": Object {
       "color": [Function],
       "fullwidth": [Function],
@@ -75,6 +81,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Card.Content",
       "render": [Function],
     },
     "Footer": Object {
@@ -84,11 +91,13 @@ Object {
         "defaultProps": Object {
           "as": "div",
         },
+        "displayName": "Card.Footer.Item",
         "render": [Function],
       },
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Card.Footer",
       "render": [Function],
     },
     "Header": Object {
@@ -98,6 +107,7 @@ Object {
         "defaultProps": Object {
           "as": "div",
         },
+        "displayName": "Card.Header.Icon",
         "render": [Function],
       },
       "Title": Object {
@@ -105,6 +115,7 @@ Object {
         "defaultProps": Object {
           "as": "div",
         },
+        "displayName": "Card.Header.Title",
         "propTypes": Object {
           "align": [Function],
         },
@@ -113,6 +124,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Card.Header",
       "render": [Function],
     },
     "Image": Object {
@@ -120,11 +132,13 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Card.Image",
       "render": [Function],
     },
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Card",
     "render": [Function],
   },
   "Checkbox": Object {
@@ -132,6 +146,7 @@ Object {
     "defaultProps": Object {
       "as": "input",
     },
+    "displayName": "Checkbox",
     "render": [Function],
   },
   "Column": Object {
@@ -141,6 +156,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Column.Group",
       "propTypes": Object {
         "breakpoint": [Function],
         "centered": [Function],
@@ -160,6 +176,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Column",
     "propTypes": Object {
       "desktop": [Function],
       "fullhd": [Function],
@@ -178,6 +195,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Container",
     "propTypes": Object {
       "breakpoint": [Function],
       "fluid": [Function],
@@ -193,11 +211,13 @@ Object {
         "defaultProps": Object {
           "as": "li",
         },
+        "displayName": "Content.OrderedList.Item",
         "render": [Function],
       },
       "defaultProps": Object {
         "as": "ol",
       },
+      "displayName": "Content.OrderedList",
       "propTypes": Object {
         "type": [Function],
       },
@@ -206,6 +226,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Content",
     "propTypes": Object {
       "size": [Function],
     },
@@ -216,6 +237,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Control",
     "propTypes": Object {
       "expanded": [Function],
       "iconLeft": [Function],
@@ -230,6 +252,7 @@ Object {
     "defaultProps": Object {
       "as": "a",
     },
+    "displayName": "Delete",
     "propTypes": Object {
       "size": [Function],
     },
@@ -243,6 +266,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Dropdown.Content",
       "render": [Function],
     },
     "Context": Object {
@@ -274,6 +298,7 @@ Object {
       "defaultProps": Object {
         "as": "hr",
       },
+      "displayName": "Dropdown.Divider",
       "render": [Function],
     },
     "Item": Object {
@@ -281,6 +306,7 @@ Object {
       "defaultProps": Object {
         "as": "a",
       },
+      "displayName": "Dropdown.Item",
       "propTypes": Object {
         "active": [Function],
         "onClick": [Function],
@@ -292,6 +318,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Dropdown.Menu",
       "render": [Function],
     },
     "Trigger": Object {
@@ -299,6 +326,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Dropdown.Trigger",
       "propTypes": Object {
         "onClick": [Function],
       },
@@ -307,6 +335,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Dropdown",
     "propTypes": Object {
       "active": [Function],
       "align": [Function],
@@ -323,6 +352,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Field.Body",
       "render": [Function],
     },
     "Label": Object {
@@ -330,6 +360,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Field.Label",
       "propTypes": Object {
         "size": [Function],
       },
@@ -338,6 +369,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Field",
     "propTypes": Object {
       "align": [Function],
       "expanded": [Function],
@@ -355,6 +387,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "File.CTA",
       "render": [Function],
     },
     "Icon": Object {
@@ -362,6 +395,7 @@ Object {
       "defaultProps": Object {
         "as": "span",
       },
+      "displayName": "File.Icon",
       "render": [Function],
     },
     "Input": Object {
@@ -369,6 +403,7 @@ Object {
       "defaultProps": Object {
         "as": "input",
       },
+      "displayName": "File.Input",
       "render": [Function],
     },
     "Label": Object {
@@ -376,6 +411,7 @@ Object {
       "defaultProps": Object {
         "as": "label",
       },
+      "displayName": "File.Label",
       "render": [Function],
     },
     "Name": Object {
@@ -383,11 +419,13 @@ Object {
       "defaultProps": Object {
         "as": "span",
       },
+      "displayName": "File.Name",
       "render": [Function],
     },
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "File",
     "propTypes": Object {
       "align": [Function],
       "boxed": [Function],
@@ -403,6 +441,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Footer",
     "render": [Function],
   },
   "Generic": Object {
@@ -410,6 +449,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Generic",
     "propTypes": Object {
       "as": [Function],
     },
@@ -420,6 +460,7 @@ Object {
     "defaultProps": Object {
       "as": "p",
     },
+    "displayName": "Heading",
     "render": [Function],
   },
   "Help": Object {
@@ -427,6 +468,7 @@ Object {
     "defaultProps": Object {
       "as": "p",
     },
+    "displayName": "Help",
     "propTypes": Object {
       "color": [Function],
     },
@@ -439,6 +481,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Hero.Body",
       "render": [Function],
     },
     "Foot": Object {
@@ -446,6 +489,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Hero.Foot",
       "render": [Function],
     },
     "Head": Object {
@@ -453,11 +497,13 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Hero.Head",
       "render": [Function],
     },
     "defaultProps": Object {
       "as": "section",
     },
+    "displayName": "Hero",
     "propTypes": Object {
       "color": [Function],
       "gradient": [Function],
@@ -470,6 +516,7 @@ Object {
     "defaultProps": Object {
       "as": "p",
     },
+    "displayName": "Highlight",
     "render": [Function],
   },
   "Icon": Object {
@@ -477,6 +524,7 @@ Object {
     "defaultProps": Object {
       "as": "span",
     },
+    "displayName": "Icon",
     "propTypes": Object {
       "align": [Function],
       "color": [Function],
@@ -491,6 +539,7 @@ Object {
       "defaultProps": Object {
         "as": "figure",
       },
+      "displayName": "Image.Container",
       "propTypes": Object {
         "size": [Function],
       },
@@ -499,6 +548,7 @@ Object {
     "defaultProps": Object {
       "as": "img",
     },
+    "displayName": "Image",
     "propTypes": Object {
       "rounded": [Function],
     },
@@ -509,6 +559,7 @@ Object {
     "defaultProps": Object {
       "as": "input",
     },
+    "displayName": "Input",
     "propTypes": Object {
       "color": [Function],
       "readOnly": [Function],
@@ -525,6 +576,7 @@ Object {
     "defaultProps": Object {
       "as": "label",
     },
+    "displayName": "Label",
     "propTypes": Object {
       "disabled": [Function],
       "size": [Function],
@@ -538,6 +590,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Level.Item",
       "propTypes": Object {
         "align": [Function],
       },
@@ -546,6 +599,7 @@ Object {
     "defaultProps": Object {
       "as": "nav",
     },
+    "displayName": "Level",
     "propTypes": Object {
       "breakpoint": [Function],
     },
@@ -558,6 +612,7 @@ Object {
       "defaultProps": Object {
         "as": "a",
       },
+      "displayName": "List.Item",
       "propTypes": Object {
         "active": [Function],
       },
@@ -566,6 +621,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "List",
     "render": [Function],
   },
   "Loader": Object {
@@ -574,6 +630,7 @@ Object {
       "as": "div",
       "children": false,
     },
+    "displayName": "Loader",
     "render": [Function],
   },
   "Media": Object {
@@ -584,6 +641,7 @@ Object {
         "align": "content",
         "as": "div",
       },
+      "displayName": "Media.Item",
       "propTypes": Object {
         "align": [Function],
       },
@@ -592,6 +650,7 @@ Object {
     "defaultProps": Object {
       "as": "article",
     },
+    "displayName": "Media",
     "render": [Function],
   },
   "Menu": Object {
@@ -601,6 +660,7 @@ Object {
       "defaultProps": Object {
         "as": "p",
       },
+      "displayName": "Menu.Label",
       "render": [Function],
     },
     "List": Object {
@@ -610,6 +670,7 @@ Object {
         "defaultProps": Object {
           "as": "a",
         },
+        "displayName": "Menu.List.Item",
         "propTypes": Object {
           "active": [Function],
           "menu": [Function],
@@ -619,11 +680,13 @@ Object {
       "defaultProps": Object {
         "as": "ul",
       },
+      "displayName": "Menu.List",
       "render": [Function],
     },
     "defaultProps": Object {
       "as": "aside",
     },
+    "displayName": "Menu",
     "render": [Function],
   },
   "Message": Object {
@@ -633,6 +696,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Message.Body",
       "render": [Function],
     },
     "Header": Object {
@@ -640,11 +704,13 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Message.Header",
       "render": [Function],
     },
     "defaultProps": Object {
       "as": "article",
     },
+    "displayName": "Message",
     "propTypes": Object {
       "color": [Function],
       "size": [Function],
@@ -658,6 +724,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Modal.Background",
       "propTypes": Object {
         "onClick": [Function],
       },
@@ -670,6 +737,7 @@ Object {
         "defaultProps": Object {
           "as": "section",
         },
+        "displayName": "Modal.Card.Body",
         "render": [Function],
       },
       "Foot": Object {
@@ -677,6 +745,7 @@ Object {
         "defaultProps": Object {
           "as": "footer",
         },
+        "displayName": "Modal.Card.Foot",
         "render": [Function],
       },
       "Head": Object {
@@ -684,6 +753,7 @@ Object {
         "defaultProps": Object {
           "as": "header",
         },
+        "displayName": "Modal.Card.Head",
         "render": [Function],
       },
       "Title": Object {
@@ -691,11 +761,13 @@ Object {
         "defaultProps": Object {
           "as": "p",
         },
+        "displayName": "Modal.Card.Title",
         "render": [Function],
       },
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Modal.Card",
       "render": [Function],
     },
     "Close": Object {
@@ -703,6 +775,7 @@ Object {
       "defaultProps": Object {
         "as": "button",
       },
+      "displayName": "Modal.Close",
       "propTypes": Object {
         "onClick": [Function],
       },
@@ -714,6 +787,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Modal.Content",
       "render": [Function],
     },
     "Context": Object {
@@ -763,6 +837,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Navbar.Brand",
       "render": [Function],
     },
     "Burger": Object {
@@ -770,6 +845,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Navbar.Burger",
       "propTypes": Object {
         "onClick": [Function],
       },
@@ -805,6 +881,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Navbar.Divider",
       "render": [Function],
     },
     "Dropdown": Object {
@@ -812,6 +889,7 @@ Object {
       "defaultProps": Object {
         "as": "span",
       },
+      "displayName": "Navbar.Dropdown",
       "propTypes": Object {
         "align": [Function],
         "boxed": [Function],
@@ -824,6 +902,7 @@ Object {
       "defaultProps": Object {
         "as": "a",
       },
+      "displayName": "Navbar.Item",
       "propTypes": Object {
         "active": [Function],
         "dropdown": [Function],
@@ -841,6 +920,7 @@ Object {
       "defaultProps": Object {
         "as": "span",
       },
+      "displayName": "Navbar.Link",
       "propTypes": Object {
         "arrowless": [Function],
         "onClick": [Function],
@@ -852,6 +932,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Navbar.Menu",
       "render": [Function],
     },
     "Segment": Object {
@@ -859,6 +940,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Navbar.Segment",
       "propTypes": Object {
         "align": [Function],
       },
@@ -867,6 +949,7 @@ Object {
     "defaultProps": Object {
       "as": "nav",
     },
+    "displayName": "Navbar",
     "propTypes": Object {
       "active": [Function],
       "color": [Function],
@@ -882,6 +965,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Notification",
     "propTypes": Object {
       "color": [Function],
     },
@@ -892,6 +976,7 @@ Object {
     "defaultProps": Object {
       "as": "p",
     },
+    "displayName": "Numeric",
     "render": [Function],
   },
   "Pagination": Object {
@@ -902,6 +987,7 @@ Object {
         "as": "span",
         "children": "…",
       },
+      "displayName": "Pagination.Ellipsis",
       "render": [Function],
     },
     "Link": Object {
@@ -909,6 +995,7 @@ Object {
       "defaultProps": Object {
         "as": "a",
       },
+      "displayName": "Pagination.Link",
       "propTypes": Object {
         "current": [Function],
       },
@@ -919,6 +1006,7 @@ Object {
       "defaultProps": Object {
         "as": "ul",
       },
+      "displayName": "Pagination.List",
       "render": [Function],
     },
     "Step": Object {
@@ -926,6 +1014,7 @@ Object {
       "defaultProps": Object {
         "as": "a",
       },
+      "displayName": "Pagination.Step",
       "propTypes": Object {
         "align": [Function],
       },
@@ -934,6 +1023,7 @@ Object {
     "defaultProps": Object {
       "as": "nav",
     },
+    "displayName": "Pagination",
     "propTypes": Object {
       "align": [Function],
       "rounded": [Function],
@@ -948,6 +1038,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Panel.Block",
       "propTypes": Object {
         "active": [Function],
       },
@@ -958,6 +1049,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Panel.Heading",
       "render": [Function],
     },
     "Icon": Object {
@@ -965,6 +1057,7 @@ Object {
       "defaultProps": Object {
         "as": "span",
       },
+      "displayName": "Panel.Icon",
       "render": [Function],
     },
     "Tab": Object {
@@ -974,11 +1067,13 @@ Object {
         "defaultProps": Object {
           "as": "div",
         },
+        "displayName": "Panel.Tab.Group",
         "render": [Function],
       },
       "defaultProps": Object {
         "as": "a",
       },
+      "displayName": "Panel.Tab",
       "propTypes": Object {
         "active": [Function],
       },
@@ -987,6 +1082,7 @@ Object {
     "defaultProps": Object {
       "as": "nav",
     },
+    "displayName": "Panel",
     "render": [Function],
   },
   "Progress": Object {
@@ -996,6 +1092,7 @@ Object {
       "max": 100,
       "value": 0,
     },
+    "displayName": "Progress",
     "propTypes": Object {
       "color": [Function],
       "max": [Function],
@@ -1009,6 +1106,7 @@ Object {
     "defaultProps": Object {
       "as": "input",
     },
+    "displayName": "Radio",
     "render": [Function],
   },
   "Section": Object {
@@ -1016,6 +1114,7 @@ Object {
     "defaultProps": Object {
       "as": "section",
     },
+    "displayName": "Section",
     "propTypes": Object {
       "size": [Function],
     },
@@ -1028,6 +1127,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Select.Container",
       "propTypes": Object {
         "color": [Function],
         "fullwidth": [Function],
@@ -1042,11 +1142,13 @@ Object {
       "defaultProps": Object {
         "as": "option",
       },
+      "displayName": "Select.Option",
       "render": [Function],
     },
     "defaultProps": Object {
       "as": "select",
     },
+    "displayName": "Select",
     "render": [Function],
   },
   "Tab": Object {
@@ -1056,6 +1158,7 @@ Object {
       "defaultProps": Object {
         "as": "div",
       },
+      "displayName": "Tab.Group",
       "propTypes": Object {
         "align": [Function],
         "fullwidth": [Function],
@@ -1067,6 +1170,7 @@ Object {
     "defaultProps": Object {
       "as": "a",
     },
+    "displayName": "Tab",
     "propTypes": Object {
       "active": [Function],
     },
@@ -1079,6 +1183,7 @@ Object {
       "defaultProps": Object {
         "as": "tbody",
       },
+      "displayName": "Table.Body",
       "render": [Function],
     },
     "Cell": Object {
@@ -1086,6 +1191,7 @@ Object {
       "defaultProps": Object {
         "as": "td",
       },
+      "displayName": "Table.Cell",
       "render": [Function],
     },
     "Foot": Object {
@@ -1093,6 +1199,7 @@ Object {
       "defaultProps": Object {
         "as": "tfoot",
       },
+      "displayName": "Table.Foot",
       "render": [Function],
     },
     "Head": Object {
@@ -1100,6 +1207,7 @@ Object {
       "defaultProps": Object {
         "as": "thead",
       },
+      "displayName": "Table.Head",
       "render": [Function],
     },
     "Heading": Object {
@@ -1107,6 +1215,7 @@ Object {
       "defaultProps": Object {
         "as": "th",
       },
+      "displayName": "Table.Heading",
       "render": [Function],
     },
     "Row": Object {
@@ -1114,6 +1223,7 @@ Object {
       "defaultProps": Object {
         "as": "tr",
       },
+      "displayName": "Table.Row",
       "propTypes": Object {
         "selected": [Function],
       },
@@ -1122,6 +1232,7 @@ Object {
     "defaultProps": Object {
       "as": "table",
     },
+    "displayName": "Table",
     "propTypes": Object {
       "bordered": [Function],
       "fullwidth": [Function],
@@ -1138,6 +1249,7 @@ Object {
       "defaultProps": Object {
         "as": "span",
       },
+      "displayName": "Tag.Group",
       "propTypes": Object {
         "gapless": [Function],
       },
@@ -1146,6 +1258,7 @@ Object {
     "defaultProps": Object {
       "as": "span",
     },
+    "displayName": "Tag",
     "propTypes": Object {
       "color": [Function],
       "delete": [Function],
@@ -1160,6 +1273,7 @@ Object {
       "as": "textarea",
       "rows": 4,
     },
+    "displayName": "Textarea",
     "propTypes": Object {
       "color": [Function],
       "fixedSize": [Function],
@@ -1173,6 +1287,7 @@ Object {
     "defaultProps": Object {
       "as": "div",
     },
+    "displayName": "Tile",
     "propTypes": Object {
       "kind": [Function],
       "size": [Function],
@@ -1185,6 +1300,7 @@ Object {
     "defaultProps": Object {
       "as": "h1",
     },
+    "displayName": "Title",
     "propTypes": Object {
       "size": [Function],
       "spaced": [Function],
@@ -1193,9 +1309,6 @@ Object {
     "render": [Function],
   },
   "forwardRefAs": [Function],
-  "genericPropTypes": Object {
-    "as": [Function],
-  },
   "makeRootValidatingTransform": [Function],
 }
 `;

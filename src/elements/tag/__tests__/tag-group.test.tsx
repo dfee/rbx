@@ -1,34 +1,32 @@
+import React from "react";
+
 import { TagGroup } from "src/elements/tag/tag-group";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = TagGroup;
-const COMPONENT_NAME = "TagGroup";
+const DISPLAY_NAME = "Tag.Group";
 const DEFAULT_ELEMENT = "span";
 const BULMA_CLASS_NAME = "tags";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -38,7 +36,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
-          const node = makeNode({ gapless });
+          const node = <TagGroup gapless={gapless} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-addons")).toBe(gapless);
         });

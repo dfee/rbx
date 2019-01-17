@@ -16,15 +16,6 @@ import { NavbarSegment } from "./navbar-segment";
 
 export type NavbarProps = Omit<NavbarContainerProps, "as" | "innerRef">;
 
-const propTypes = {
-  active: PropTypes.bool,
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  document: PropTypes.object,
-  fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  managed: PropTypes.bool,
-  transparent: PropTypes.bool,
-};
-
 export const Navbar = Object.assign(
   forwardRefAs<NavbarProps, "nav">(
     (props, ref) => <NavbarContainer innerRef={ref} {...props} />,
@@ -41,6 +32,15 @@ export const Navbar = Object.assign(
     Link: NavbarLink,
     Menu: NavbarMenu,
     Segment: NavbarSegment,
-    propTypes,
   },
 );
+
+Navbar.displayName = "Navbar";
+Navbar.propTypes = {
+  active: PropTypes.bool,
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  document: PropTypes.object,
+  fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  managed: PropTypes.bool,
+  transparent: PropTypes.bool,
+};

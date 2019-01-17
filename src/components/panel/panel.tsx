@@ -23,3 +23,5 @@ export const Panel = Object.assign(
     Tab: PanelTab,
   },
 );
+
+Panel.displayName = "Panel";

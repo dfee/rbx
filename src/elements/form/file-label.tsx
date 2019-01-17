@@ -15,3 +15,5 @@ export const FileLabel = forwardRefAs<FileLabelProps, "label">(
   ),
   { as: "label" },
 );
+
+FileLabel.displayName = "File.Label";

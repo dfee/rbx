@@ -1,9 +1,10 @@
+import React from "react";
+
 import { Control, CONTROL_DEFAULTS } from "src/elements/form/control";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -11,25 +12,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Control;
-const COMPONENT_NAME = "Control";
+const DISPLAY_NAME = "Control";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "control";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -39,7 +37,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(expanded => {
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
-          const node = makeNode({ expanded });
+          const node = <Control expanded={expanded} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-expanded")).toBe(expanded);
         });
@@ -51,7 +49,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(iconLeft => {
         it(`should ${iconLeft ? "" : "not "}have left icon`, () => {
-          const node = makeNode({ iconLeft });
+          const node = <Control iconLeft={iconLeft} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-icons-left")).toBe(iconLeft);
         });
@@ -63,7 +61,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(iconRight => {
         it(`should ${iconRight ? "" : "not "}have right icon`, () => {
-          const node = makeNode({ iconRight });
+          const node = <Control iconRight={iconRight} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-icons-right")).toBe(iconRight);
         });
@@ -75,7 +73,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(loading => {
         it(`should ${loading ? "" : "not "}be loading`, () => {
-          const node = makeNode({ loading });
+          const node = <Control loading={loading} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-loading")).toBe(loading);
         });
@@ -87,7 +85,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       CONTROL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Control size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });

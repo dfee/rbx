@@ -27,24 +27,22 @@ export type CardHeaderTitleModifierProps = Partial<{
 
 export type CardHeaderTitleProps = HelpersProps & CardHeaderTitleModifierProps;
 
-const propTypes = {
+export const CardHeaderTitle = forwardRefAs<CardHeaderTitleProps, "div">(
+  ({ align, className, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "card-header-title",
+        { [`is-${align}`]: align },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+CardHeaderTitle.displayName = "Card.Header.Title";
+CardHeaderTitle.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const CardHeaderTitle = Object.assign(
-  forwardRefAs<CardHeaderTitleProps, "div">(
-    ({ align, className, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "card-header-title",
-          { [`is-${align}`]: align },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

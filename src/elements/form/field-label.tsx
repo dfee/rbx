@@ -27,24 +27,18 @@ export type FieldLabelModifierProps = Partial<{
 
 export type FieldLabelProps = HelpersProps & FieldLabelModifierProps;
 
-const propTypes = {
+export const FieldLabel = forwardRefAs<FieldLabelProps, "div">(
+  ({ className, size, ...rest }, ref) => (
+    <Generic
+      className={classNames("field-label", { [`is-${size}`]: size }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+FieldLabel.displayName = "Field.Label";
+FieldLabel.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const FieldLabel = Object.assign(
-  forwardRefAs<FieldLabelProps, "div">(
-    ({ className, size, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "field-label",
-          { [`is-${size}`]: size },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

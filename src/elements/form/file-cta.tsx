@@ -15,3 +15,5 @@ export const FileCTA = forwardRefAs<FileCTAProps, "div">(
   ),
   { as: "div" },
 );
+
+FileCTA.displayName = "File.CTA";

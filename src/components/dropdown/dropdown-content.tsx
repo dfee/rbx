@@ -15,3 +15,5 @@ export const DropdownContent = forwardRefAs<DropdownContentProps, "div">(
   ),
   { as: "div" },
 );
+
+DropdownContent.displayName = "Dropdown.Content";

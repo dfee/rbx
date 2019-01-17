@@ -23,3 +23,5 @@ export const CardHeader = Object.assign(
     Title: CardHeaderTitle,
   },
 );
+
+CardHeader.displayName = "Card.Header";

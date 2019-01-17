@@ -71,19 +71,12 @@ export type ForwardRefAsExoticComponentDoc = {
   components: BaseSimplePropsTableProps["components"];
   customize: BaseComponentDocProps["customize"];
   docPath?: ComponentFeaturesProps["docPath"];
-  name: string;
   props: BaseSimplePropsTableProps["props"];
 };
 
 const BaseForwardRefAsExoticComponentDoc: React.FC<
   ForwardRefAsExoticComponentDoc
-> = ({ component, components, customize, docPath, name, props }) => {
-  if (
-    component.defaultProps === undefined ||
-    component.defaultProps.as === undefined
-  ) {
-    throw new Error("ForwardRefAsExpoticComponents have an `as` defaultProp");
-  }
+> = ({ component, components, customize, docPath, props }) => {
   const asType = component.defaultProps.as as React.ReactType;
   const asTypeString =
     typeof asType === "string"
@@ -111,7 +104,7 @@ const BaseForwardRefAsExoticComponentDoc: React.FC<
       components={components}
       customize={customize}
       docPath={docPath}
-      name={name}
+      name={component.displayName}
       props={extendedProps}
     />
   );

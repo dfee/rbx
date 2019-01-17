@@ -15,3 +15,5 @@ export const PanelIcon = forwardRefAs<PanelIconProps, "span">(
   ),
   { as: "span" },
 );
+
+PanelIcon.displayName = "Panel.Icon";

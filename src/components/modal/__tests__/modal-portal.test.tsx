@@ -17,8 +17,8 @@ import {
   testThemeIntegration,
 } from "src/__tests__/testing";
 
-// const COMPONENT = ModalPortal;
-const COMPONENT_NAME = "ModalPortal";
+const COMPONENT = ModalPortal;
+const DISPLAY_NAME = "Modal.Portal";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "modal";
 
@@ -44,7 +44,7 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(ModalPortal, {
     defaultProps: {
       closeOnBlur: modalInitialValue.closeOnBlur,
@@ -52,15 +52,19 @@ describe(`${COMPONENT_NAME} component`, () => {
     },
   });
 
-  testForwardRefAsExoticComponentIntegration(
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
     makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-    "innerRef",
-  );
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    refProp: "innerRef",
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeNode,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("extra", () => {
     [false, true].map(closeOnEsc => {

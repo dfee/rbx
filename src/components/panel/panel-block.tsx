@@ -10,24 +10,18 @@ export type PanelBlockModifierProps = Partial<{
 
 export type PanelBlockProps = HelpersProps & PanelBlockModifierProps;
 
-const propTypes = {
+export const PanelBlock = forwardRefAs<PanelBlockProps, "div">(
+  ({ active, className, ...rest }, ref) => (
+    <Generic
+      className={classNames("panel-block", { "is-active": active }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+PanelBlock.displayName = "Panel.Block";
+PanelBlock.propTypes = {
   active: PropTypes.bool,
 };
-
-export const PanelBlock = Object.assign(
-  forwardRefAs<PanelBlockProps, "div">(
-    ({ active, className, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "panel-block",
-          { "is-active": active },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

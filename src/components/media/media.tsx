@@ -15,3 +15,5 @@ export const Media = Object.assign(
   ),
   { Item: MediaItem },
 );
+
+Media.displayName = "Media";

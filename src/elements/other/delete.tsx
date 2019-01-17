@@ -27,20 +27,18 @@ export type DeleteModifierProps = Partial<{
 
 export type DeleteProps = HelpersProps & DeleteModifierProps;
 
-const propTypes = {
+export const Delete = forwardRefAs<DeleteProps, "a">(
+  ({ className, size, ...rest }, ref) => (
+    <Generic
+      className={classNames("delete", { [`is-${size}`]: size }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "a" },
+);
+
+Delete.displayName = "Delete";
+Delete.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const Delete = Object.assign(
-  forwardRefAs<DeleteProps, "a">(
-    ({ className, size, ...rest }, ref) => (
-      <Generic
-        className={classNames("delete", { [`is-${size}`]: size }, className)}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "a" },
-  ),
-  { propTypes },
-);

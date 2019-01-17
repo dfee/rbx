@@ -29,13 +29,6 @@ export type TagModifierProps = Partial<{
 
 export type TagProps = HelpersProps & TagModifierProps;
 
-const propTypes = {
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  delete: PropTypes.bool,
-  rounded: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const Tag = Object.assign(
   forwardRefAs<TagProps, "span">(
     (
@@ -64,8 +57,13 @@ export const Tag = Object.assign(
     },
     { as: "span" },
   ),
-  {
-    Group: TagGroup,
-    propTypes,
-  },
+  { Group: TagGroup },
 );
+
+Tag.displayName = "Tag";
+Tag.propTypes = {
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  delete: PropTypes.bool,
+  rounded: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

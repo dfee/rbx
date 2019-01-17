@@ -14,3 +14,5 @@ export const Loader = forwardRefAs<LoaderProps, "div">(
     children: false,
   },
 );
+
+Loader.displayName = "Loader";

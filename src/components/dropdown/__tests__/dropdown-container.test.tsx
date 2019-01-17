@@ -8,7 +8,6 @@ import {
 import {
   DROPDOWN_DEFAULTS,
   DropdownContainer,
-  DropdownContainerProps,
   DropdownContainerState,
 } from "src/components/dropdown/dropdown-container";
 import {
@@ -22,14 +21,10 @@ import {
   withEnzymeMount,
 } from "src/__tests__/testing";
 
-// const COMPONENT = DropdownContainer;
-const COMPONENT_NAME = "DropdownContainer";
+const COMPONENT = DropdownContainer;
+const DISPLAY_NAME = "Dropdown.Container";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "dropdown";
-
-const makeNode = (props: DropdownContainerProps) => (
-  <DropdownContainer {...props} />
-);
 
 const makeGenericHOCShallowWrapperInContextConsumer = (
   node: JSX.Element,
@@ -47,22 +42,24 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-    "innerRef",
-  );
+describe(`${DISPLAY_NAME} component`, () => {
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    refProp: "innerRef",
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     describe("active", () => {
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
-          const node = makeNode({ active });
+          const node = <DropdownContainer active={active} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
@@ -72,7 +69,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("align", () => {
       DROPDOWN_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <DropdownContainer align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
@@ -82,7 +79,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("hoverable", () => {
       [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
-          const node = makeNode({ hoverable });
+          const node = <DropdownContainer hoverable={hoverable} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
         });
@@ -97,7 +94,9 @@ describe(`${COMPONENT_NAME} component`, () => {
             isToggleable ? "" : "not "
           }be toggled when document is clicked and managed: ${managed} and active: ${active}
           `, () => {
-            const node = makeNode({ active, managed });
+            const node = (
+              <DropdownContainer active={active} managed={managed} />
+            );
             withEnzymeMount({ node }, ({ state: { outer } }) => {
               document.getElementsByTagName("body")[0].click();
               outer.update();
@@ -118,7 +117,7 @@ describe(`${COMPONENT_NAME} component`, () => {
         document.body.appendChild(root);
 
         const ref = React.createRef<HTMLDivElement>();
-        const node = makeNode({ active: true, innerRef: ref });
+        const node = <DropdownContainer active innerRef={ref} />;
 
         withEnzymeMount(
           { node, options: { attachTo: root } },
@@ -181,7 +180,7 @@ describe(`${COMPONENT_NAME} component`, () => {
     describe("up", () => {
       [false, true].map(up => {
         it(`should ${up ? "" : "not "}be up`, () => {
-          const node = makeNode({ up });
+          const node = <DropdownContainer up={up} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-up")).toBe(up);
         });

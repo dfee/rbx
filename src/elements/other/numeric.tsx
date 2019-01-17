@@ -11,3 +11,5 @@ export const Numeric = forwardRefAs<NumericProps, "p">(
   ),
   { as: "p" },
 );
+
+Numeric.displayName = "Numeric";

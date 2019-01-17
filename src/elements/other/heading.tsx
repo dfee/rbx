@@ -11,3 +11,5 @@ export const Heading = forwardRefAs<HeadingProps, "p">(
   ),
   { as: "p" },
 );
+
+Heading.displayName = "Heading";

@@ -31,11 +31,6 @@ export type MessageModifierProps = Partial<{
 
 export type MessageProps = HelpersProps & MessageModifierProps;
 
-const propTypes = {
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const Message = Object.assign(
   forwardRefAs<MessageProps, "article">(
     ({ className, color, size, ...rest }, ref) => (
@@ -57,6 +52,11 @@ export const Message = Object.assign(
   {
     Body: MessageBody,
     Header: MessageHeader,
-    propTypes,
   },
 );
+
+Message.displayName = "Message";
+Message.propTypes = {
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

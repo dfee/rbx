@@ -15,3 +15,5 @@ export const CardImage = forwardRefAs<CardImageProps, "div">(
   ),
   { as: "div" },
 );
+
+CardImage.displayName = "Card.Image";

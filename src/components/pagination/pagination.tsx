@@ -35,12 +35,6 @@ export type PaginationModifiers = Partial<{
 
 export type PaginationProps = HelpersProps & PaginationModifiers;
 
-const propTypes = {
-  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  rounded: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const Pagination = Object.assign(
   forwardRefAs<PaginationProps, "nav">(
     ({ align, className, rounded, size, ...rest }, ref) => (
@@ -65,6 +59,12 @@ export const Pagination = Object.assign(
     Link: PaginationLink,
     List: PaginationList,
     Step: PaginationStep,
-    propTypes,
   },
 );
+
+Pagination.displayName = "Pagination";
+Pagination.propTypes = {
+  align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  rounded: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

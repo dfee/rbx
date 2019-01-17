@@ -17,7 +17,7 @@ export const CardFooter = Object.assign(
     ),
     { as: "div" },
   ),
-  {
-    Item: CardFooterItem,
-  },
+  { Item: CardFooterItem },
 );
+
+CardFooter.displayName = "Card.Footer";

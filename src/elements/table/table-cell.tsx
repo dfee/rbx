@@ -8,3 +8,5 @@ export const TableCell = forwardRefAs<TableCellProps, "td">(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "td" },
 );
+
+TableCell.displayName = "Table.Cell";

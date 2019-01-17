@@ -15,3 +15,5 @@ export const FieldBody = forwardRefAs<FieldBodyProps, "div">(
   ),
   { as: "div" },
 );
+
+FieldBody.displayName = "Field.Body";

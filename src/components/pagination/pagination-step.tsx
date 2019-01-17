@@ -27,20 +27,18 @@ export type PaginationStepModifierProps = {
 
 export type PaginationStepProps = HelpersProps & PaginationStepModifierProps;
 
-const propTypes = {
+export const PaginationStep = forwardRefAs<PaginationStepProps, "a">(
+  ({ align, className, ...rest }, ref) => (
+    <Generic
+      className={classNames({ [`pagination-${align}`]: align }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "a" },
+);
+
+PaginationStep.displayName = "Pagination.Step";
+PaginationStep.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
-
-export const PaginationStep = Object.assign(
-  forwardRefAs<PaginationStepProps, "a">(
-    ({ align, className, ...rest }, ref) => (
-      <Generic
-        className={classNames({ [`pagination-${align}`]: align }, className)}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "a" },
-  ),
-  { propTypes },
-);

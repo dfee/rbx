@@ -7,24 +7,17 @@ import { ThemeContext } from "./theme";
 
 export type GenericProps = HelpersProps;
 
-export const propTypes = {
+export const Generic = forwardRefAs<GenericProps, "div">(
+  ({ as, ...rest }, ref) => (
+    <ThemeContext.Consumer>
+      {({ transform }) =>
+        React.createElement(as, { ref, ...transform(rest, "Generic") })}
+    </ThemeContext.Consumer>
+  ),
+  { as: "div" },
+);
+
+Generic.displayName = "Generic";
+Generic.propTypes = {
   as: renderablePropType,
 };
-
-export const Generic = Object.assign(
-  forwardRefAs<GenericProps, "div">(
-    ({ as, ...rest }, ref) => (
-      <ThemeContext.Consumer>
-        {({ transform }) => {
-          const transformed = transform(rest, "Generic");
-
-          return as !== undefined
-            ? React.createElement(as, { ref, ...transformed })
-            : /* istanbul ignore next: typescript typecheck */ undefined;
-        }}
-      </ThemeContext.Consumer>
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

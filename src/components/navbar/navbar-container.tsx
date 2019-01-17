@@ -47,6 +47,7 @@ export class NavbarContainer extends React.PureComponent<
   public static defaultProps = {
     transparent: false,
   };
+  public static displayName = "Navbar.Container";
 
   public readonly state: NavbarContainerState;
 

@@ -1,10 +1,11 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Input, INPUT_DEFAULTS } from "src/elements/form/input";
 
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -12,25 +13,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = Input;
-const COMPONENT_NAME = "Input";
+const DISPLAY_NAME = "Input";
 const DEFAULT_ELEMENT = "input";
 const BULMA_CLASS_NAME = "input";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -40,7 +38,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = makeNode({ color });
+          const node = <Input color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
@@ -52,7 +50,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(readOnly => {
         it(`should ${readOnly ? "" : "not "}be readOnly`, () => {
-          const node = makeNode({ readOnly });
+          const node = <Input readOnly={readOnly} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.prop("readOnly")).toBe(readOnly);
         });
@@ -64,7 +62,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
-          const node = makeNode({ rounded });
+          const node = <Input rounded={rounded} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
@@ -76,7 +74,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       INPUT_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
-          const node = makeNode({ size });
+          const node = <Input size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
@@ -88,7 +86,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       INPUT_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
-          const node = makeNode({ state });
+          const node = <Input state={state} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         });
@@ -100,7 +98,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(isStatic => {
         it(`should ${isStatic ? "" : "not "}be static`, () => {
-          const node = makeNode({ static: isStatic });
+          const node = <Input static={isStatic} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-static")).toBe(isStatic);
           expect(wrapper.prop("readOnly")).toBe(isStatic);
@@ -113,7 +111,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       INPUT_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
-          const node = makeNode({ type: isType });
+          const node = <Input type={isType} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(
             (wrapper.props() as React.InputHTMLAttributes<Element>).type,

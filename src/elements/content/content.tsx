@@ -28,10 +28,6 @@ export type ContentModifierProps = Partial<{
 
 export type ContentProps = HelpersProps & ContentModifierProps;
 
-const propTypes = {
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const Content = Object.assign(
   forwardRefAs<ContentProps, "div">(
     ({ className, size, ...rest }, ref) => (
@@ -43,8 +39,10 @@ export const Content = Object.assign(
     ),
     { as: "div" },
   ),
-  {
-    OrderedList: ContentOrderedList,
-    propTypes,
-  },
+  { OrderedList: ContentOrderedList },
 );
+
+Content.displayName = "Content";
+Content.propTypes = {
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

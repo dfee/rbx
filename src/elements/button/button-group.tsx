@@ -28,28 +28,26 @@ export type ButtonGroupModifierProps = Partial<{
 
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
-const propTypes = {
+export const ButtonGroup = forwardRefAs<ButtonGroupProps, "div">(
+  ({ align, className, hasAddons, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "buttons",
+        {
+          "has-addons": hasAddons,
+          [`is-${[align]}`]: align,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "div" },
+);
+
+ButtonGroup.displayName = "Button.Group";
+ButtonGroup.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hasAddons: PropTypes.bool,
 };
-
-export const ButtonGroup = Object.assign(
-  forwardRefAs<ButtonGroupProps, "div">(
-    ({ align, className, hasAddons, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "buttons",
-          {
-            "has-addons": hasAddons,
-            [`is-${[align]}`]: align,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "div" },
-  ),
-  { propTypes },
-);

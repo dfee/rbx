@@ -15,3 +15,5 @@ export const CardFooterItem = forwardRefAs<CardFooterItemProps, "div">(
   ),
   { as: "div" },
 );
+
+CardFooterItem.displayName = "Card.Footer.Item";

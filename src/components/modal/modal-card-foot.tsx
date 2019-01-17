@@ -15,3 +15,5 @@ export const ModalCardFoot = forwardRefAs<ModalCardFootProps, "footer">(
   ),
   { as: "footer" },
 );
+
+ModalCardFoot.displayName = "Modal.Card.Foot";

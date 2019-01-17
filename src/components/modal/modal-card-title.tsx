@@ -15,3 +15,5 @@ export const ModalCardTitle = forwardRefAs<ModalCardTitleProps, "p">(
   ),
   { as: "p" },
 );
+
+ModalCardTitle.displayName = "Modal.Card.Title";

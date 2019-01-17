@@ -9,17 +9,14 @@ import { PaginationEllipsis } from "src/components/pagination/pagination-ellipsi
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
 
 const COMPONENT = PaginationEllipsis;
-const COMPONENT_NAME = "PaginationEllipsis";
+const DISPLAY_NAME = "Pagination.Ellipsis";
 const DEFAULT_ELEMENT = "span";
 const BULMA_CLASS_NAME = "pagination-ellipsis";
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapper = (node: JSX.Element) => Enzyme.shallow(node);
 
@@ -39,7 +36,7 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: {
       as: DEFAULT_ELEMENT,
@@ -47,18 +44,20 @@ describe(`${COMPONENT_NAME} component`, () => {
     },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("root", () => {
     it("should be li element", () => {
-      const node = makeNode({});
+      const node = <PaginationEllipsis />;
       const wrapper = makeShallowWrapper(node);
       expect(wrapper.is("li")).toBe(true);
     });

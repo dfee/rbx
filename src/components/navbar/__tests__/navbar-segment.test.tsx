@@ -15,7 +15,7 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = NavbarSegment;
-const COMPONENT_NAME = "NavbarSegment";
+const DISPLAY_NAME = "Navbar.Segment";
 const DEFAULT_ELEMENT = "div";
 // const BULMA_CLASS_NAME = "navbar-";
 
@@ -28,19 +28,19 @@ const makeNode = (props: Partial<NavbarSegmentProps>) => {
   return <NavbarSegment {...propsWithDefaults} />;
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: "navbar-start",
+    defaultElement: DEFAULT_ELEMENT,
     makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    "navbar-start",
-  );
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, { makeNode });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;

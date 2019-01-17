@@ -30,8 +30,6 @@ import {
   VisibilityHelpersProps,
 } from "./visibility";
 
-export { TransformFunction } from "./factory";
-
 /** Union of Helpers */
 // tslint:disable-next-line: no-empty-interface
 export interface HelpersPropsOverrides {}

@@ -15,3 +15,5 @@ export const MessageBody = forwardRefAs<MessageBodyProps, "div">(
   ),
   { as: "div" },
 );
+
+MessageBody.displayName = "Message.Body";

@@ -18,6 +18,7 @@ export type ModalContainerProps = Partial<{
 }>;
 
 export class ModalContainer extends React.PureComponent<ModalContainerProps> {
+  public static displayName = "Modal.Container";
   private readonly el: HTMLDivElement | undefined;
 
   constructor(props: ModalContainerProps) {

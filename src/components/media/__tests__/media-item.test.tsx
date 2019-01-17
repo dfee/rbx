@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   MEDIA_ITEM_DEFAULTS,
   MediaItem,
@@ -6,20 +8,17 @@ import {
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = MediaItem;
-const COMPONENT_NAME = "MediaItem";
+const DISPLAY_NAME = "Media.Item";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "media-content";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: {
       align: "content",
@@ -27,14 +26,13 @@ describe(`${COMPONENT_NAME} component`, () => {
     },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("propTypes", () => {
     const { propTypes } = COMPONENT;
@@ -44,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       MEDIA_ITEM_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <MediaItem align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`media-${align}`)).toBe(true);
         });

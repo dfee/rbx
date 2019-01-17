@@ -1,3 +1,5 @@
+import React from "react";
+
 import { DEFAULTS } from "src/base/helpers/variables";
 import {
   COLUMN_GROUP_DEFAULTS,
@@ -7,7 +9,6 @@ import {
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -16,25 +17,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = ColumnGroup;
-const COMPONENT_NAME = "ColumnGroup";
+const DISPLAY_NAME = "Column.Group";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "columns";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -44,7 +42,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should have breakpoint ${breakpoint}`, () => {
-          const node = makeNode({ breakpoint });
+          const node = <ColumnGroup breakpoint={breakpoint} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
           expect(wrapper.hasClass("is-variable")).toBe(false);
@@ -57,7 +55,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(centered => {
         it(`should ${centered ? "" : "not "}be centered`, () => {
-          const node = makeNode({ centered });
+          const node = <ColumnGroup centered={centered} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-centered")).toBe(centered);
           expect(wrapper.hasClass("is-variable")).toBe(false);
@@ -70,7 +68,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
-          const node = makeNode({ gapless });
+          const node = <ColumnGroup gapless={gapless} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-gapless")).toBe(gapless);
           expect(wrapper.hasClass("is-variable")).toBe(false);
@@ -83,7 +81,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => {
         it(`should have gapSize ${gapSize}`, () => {
-          const node = makeNode({ gapSize });
+          const node = <ColumnGroup gapSize={gapSize} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${gapSize}`)).toBe(true);
           expect(wrapper.hasClass("is-variable")).toBe(true);
@@ -110,7 +108,8 @@ describe(`${COMPONENT_NAME} component`, () => {
 
           COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => {
             it(`should have gapSize ${gapSize}`, () => {
-              const node = makeNode({ [breakpoint]: { gapSize } });
+              const props = { [breakpoint]: { gapSize } };
+              const node = <ColumnGroup {...props} />;
               const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
                 node,
               );
@@ -129,7 +128,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(multiline => {
         it(`should ${multiline ? "" : "not "}be multiline`, () => {
-          const node = makeNode({ multiline });
+          const node = <ColumnGroup multiline={multiline} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-multiline")).toBe(multiline);
           expect(wrapper.hasClass("is-variable")).toBe(false);
@@ -142,7 +141,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(vcentered => {
         it(`should ${vcentered ? "" : "not "}be vertically centered`, () => {
-          const node = makeNode({ vcentered });
+          const node = <ColumnGroup vcentered={vcentered} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-vcentered")).toBe(vcentered);
           expect(wrapper.hasClass("is-variable")).toBe(false);

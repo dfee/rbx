@@ -32,30 +32,28 @@ export type IconModifierProps = Partial<{
 
 export type IconProps = HelpersProps & IconModifierProps;
 
-const propTypes = {
+export const Icon = forwardRefAs<IconProps, "span">(
+  ({ align, className, color, size, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "icon",
+        {
+          [`has-text-${color}`]: color,
+          [`is-${align}`]: align,
+          [`is-${size}`]: size,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "span" },
+);
+
+Icon.displayName = "Icon";
+Icon.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const Icon = Object.assign(
-  forwardRefAs<IconProps, "span">(
-    ({ align, className, color, size, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "icon",
-          {
-            [`has-text-${color}`]: color,
-            [`is-${align}`]: align,
-            [`is-${size}`]: size,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "span" },
-  ),
-  { propTypes },
-);

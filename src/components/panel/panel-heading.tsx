@@ -15,3 +15,5 @@ export const PanelHeading = forwardRefAs<PanelHeadingProps, "div">(
   ),
   { as: "div" },
 );
+
+PanelHeading.displayName = "Panel.Heading";

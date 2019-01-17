@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   NAVBAR_DROPDOWN_DEFAULTS,
   NavbarDropdown,
@@ -6,7 +8,6 @@ import {
 import {
   hasProperties,
   makeGenericHOCShallowWrapperInContextConsumer,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -14,25 +15,22 @@ import {
 } from "src/__tests__/testing";
 
 const COMPONENT = NavbarDropdown;
-const COMPONENT_NAME = "NavbarDropdown";
+const DISPLAY_NAME = "Navbar.Dropdown";
 const DEFAULT_ELEMENT = "span";
 const BULMA_CLASS_NAME = "navbar-dropdown";
 
-const makeNode = makeNodeFactory(COMPONENT);
-
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT);
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
@@ -42,7 +40,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       NAVBAR_DROPDOWN_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
-          const node = makeNode({ align });
+          const node = <NavbarDropdown align={align} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
@@ -54,7 +52,7 @@ describe(`${COMPONENT_NAME} component`, () => {
 
       [false, true].map(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
-          const node = makeNode({ boxed });
+          const node = <NavbarDropdown boxed={boxed} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
         });

@@ -32,6 +32,7 @@ export class NavbarItemContainer extends React.PureComponent<
   NavbarItemContainerProps,
   NavbarItemContainerState
 > {
+  public static displayName = "Navbar.Item.Container";
   public readonly state: NavbarItemContainerState;
   private readonly ref = React.createRef<HTMLElement>();
 

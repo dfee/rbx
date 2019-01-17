@@ -11,3 +11,5 @@ export const Block = forwardRefAs<BlockProps, "div">(
   ),
   { as: "div" },
 );
+
+Block.displayName = "Block";

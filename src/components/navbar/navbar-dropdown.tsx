@@ -28,28 +28,26 @@ export type NavbarDropdownModifierProps = Partial<{
 
 export type NavbarDropdownProps = HelpersProps & NavbarDropdownModifierProps;
 
-const propTypes = {
+export const NavbarDropdown = forwardRefAs<NavbarDropdownProps, "span">(
+  ({ align, boxed, className, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "navbar-dropdown",
+        {
+          [`is-${align}`]: align,
+          "is-boxed": boxed,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "span" },
+);
+
+NavbarDropdown.displayName = "Navbar.Dropdown";
+NavbarDropdown.propTypes = {
   align: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   boxed: PropTypes.bool,
 };
-
-export const NavbarDropdown = Object.assign(
-  forwardRefAs<NavbarDropdownProps, "span">(
-    ({ align, boxed, className, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "navbar-dropdown",
-          {
-            [`is-${align}`]: align,
-            "is-boxed": boxed,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "span" },
-  ),
-  { propTypes },
-);

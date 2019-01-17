@@ -12,10 +12,6 @@ export type LevelModifierProps = Partial<{
 
 export type LevelProps = HelpersProps & LevelModifierProps;
 
-const propTypes = {
-  breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
 export const Level = Object.assign(
   forwardRefAs<LevelProps, "nav">(
     ({ breakpoint, className, ...rest }, ref) => (
@@ -31,8 +27,10 @@ export const Level = Object.assign(
     ),
     { as: "nav" },
   ),
-  {
-    Item: LevelItem,
-    propTypes,
-  },
+  { Item: LevelItem },
 );
+
+Level.displayName = "Level";
+Level.propTypes = {
+  breakpoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

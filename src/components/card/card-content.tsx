@@ -15,3 +15,5 @@ export const CardContent = forwardRefAs<CardContentProps, "div">(
   ),
   { as: "div" },
 );
+
+CardContent.displayName = "Card.Content";

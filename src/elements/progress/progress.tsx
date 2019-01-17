@@ -31,34 +31,32 @@ export type ProgressModifierProps = Partial<{
 
 export type ProgressProps = HelpersProps & ProgressModifierProps;
 
-const propTypes = {
+export const Progress = forwardRefAs<ProgressProps, "progress">(
+  ({ className, color, size, ...rest }, ref) => (
+    <Generic
+      className={classNames(
+        "progress",
+        {
+          [`is-${color}`]: color,
+          [`is-${size}`]: size,
+        },
+        className,
+      )}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  {
+    as: "progress",
+    max: 100,
+    value: 0,
+  },
+);
+
+Progress.displayName = "Progress";
+Progress.propTypes = {
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   max: PropTypes.number,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: PropTypes.number,
 };
-
-export const Progress = Object.assign(
-  forwardRefAs<ProgressProps, "progress">(
-    ({ className, color, size, ...rest }, ref) => (
-      <Generic
-        className={classNames(
-          "progress",
-          {
-            [`is-${color}`]: color,
-            [`is-${size}`]: size,
-          },
-          className,
-        )}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    {
-      as: "progress",
-      max: 100,
-      value: 0,
-    },
-  ),
-  { propTypes },
-);

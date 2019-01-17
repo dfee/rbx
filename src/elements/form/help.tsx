@@ -11,20 +11,18 @@ export type HelpModifierProps = Partial<{
 
 export type HelpProps = HelpersProps & HelpModifierProps;
 
-const propTypes = {
+export const Help = forwardRefAs<HelpProps, "p">(
+  ({ className, color, ...rest }, ref) => (
+    <Generic
+      className={classNames("help", { [`is-${color}`]: color }, className)}
+      ref={ref}
+      {...rest}
+    />
+  ),
+  { as: "p" },
+);
+
+Help.displayName = "Help";
+Help.propTypes = {
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-export const Help = Object.assign(
-  forwardRefAs<HelpProps, "p">(
-    ({ className, color, ...rest }, ref) => (
-      <Generic
-        className={classNames("help", { [`is-${color}`]: color }, className)}
-        ref={ref}
-        {...rest}
-      />
-    ),
-    { as: "p" },
-  ),
-  { propTypes },
-);

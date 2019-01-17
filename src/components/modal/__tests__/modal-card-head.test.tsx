@@ -14,17 +14,14 @@ import { Delete } from "src/elements";
 
 import {
   hasProperties,
-  makeNodeFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
 
 const COMPONENT = ModalCardHead;
-const COMPONENT_NAME = "ModalCardHead";
+const DISPLAY_NAME = "Modal.Card.Head";
 const DEFAULT_ELEMENT = "header";
 const BULMA_CLASS_NAME = "modal-card-head";
-
-const makeNode = makeNodeFactory(COMPONENT);
 
 const makeShallowWrapperInModalContextConsumer = (
   node: JSX.Element,
@@ -59,19 +56,21 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
   );
 };
 
-describe(`${COMPONENT_NAME} component`, () => {
+describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
   });
 
-  testForwardRefAsExoticComponentIntegration(
-    makeNode,
-    makeGenericHOCShallowWrapperInContextConsumer,
-    DEFAULT_ELEMENT,
-    BULMA_CLASS_NAME,
-  );
+  testForwardRefAsExoticComponentIntegration(COMPONENT, {
+    displayName: DISPLAY_NAME,
+    bulmaClassName: BULMA_CLASS_NAME,
+    defaultElement: DEFAULT_ELEMENT,
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
-  testThemeIntegration(makeNode, makeGenericHOCShallowWrapperInContextConsumer);
+  testThemeIntegration(COMPONENT, {
+    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  });
 
   describe("props", () => {
     describe("children <delete button>", () => {
@@ -119,9 +118,11 @@ describe(`${COMPONENT_NAME} component`, () => {
           }for children: <${descriptor}>`, () => {
             const onClick = jest.fn();
             const close = jest.fn();
-            const node = makeNode({
-              children: factory(hasOnClick ? onClick : undefined),
-            });
+            const node = (
+              <ModalCardHead
+                children={factory(hasOnClick ? onClick : undefined)}
+              />
+            );
             const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
               node,
               themeInitialValue,
