@@ -10,7 +10,7 @@ import {
   faExclamationTriangle,
   faGlobe,
   faLock,
-  faUser
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
@@ -18,7 +18,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Button, Icon } from "src/elements";
@@ -483,7 +483,7 @@ Use the `mutliline` prop on `<Field>` to fill up multiple lines (ideal for a lon
       "Seventeen",
       "Eighteen",
       "Nineteen",
-      "Twenty"
+      "Twenty",
     ].map(name => (
       <Control key={name}>
         <Button>{name}</Button>
@@ -554,8 +554,8 @@ You can still use the `kind` property on `<Field>`, but you should use `<Field.L
         <Label>Department</Label>
       </Field.Label>
       <Field.Body>
-        <Field narrow>
-          <Control>
+        <Field>
+          <Control expanded>
             <Select.Container fullwidth>
               <Select>
                 <Select.Option value="bd">Business development</Select.Option>
@@ -807,25 +807,25 @@ Vertical forms are also supported, and are simpler to compose.
   props={{
     expanded: {
       description: "expand the control to fill available horizontal space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     iconLeft: {
       description: "enable an icon on the left",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     iconRight: {
       description: "enable an icon on the right",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     loading: {
       description: "display a loading spinner",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "change the control's size",
       typeName: "string",
-      typeTip: mapEnumerable(CONTROL_DEFAULTS.sizes)
-    }
+      typeTip: mapEnumerable(CONTROL_DEFAULTS.sizes),
+    },
   }}
 />
 
@@ -837,30 +837,30 @@ Vertical forms are also supported, and are simpler to compose.
     align: {
       description: "the alignment of the field",
       typeName: "string",
-      typeTip: mapEnumerable(FIELD_DEFAULTS.alignments)
+      typeTip: mapEnumerable(FIELD_DEFAULTS.alignments),
     },
     expanded: {
       description: "expand the field to fill available horizontal space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     horizontal: {
       description: "enable horizontal form controls",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     kind: {
       description: "support addons or groups",
       typeName: "string",
-      typeTip: mapEnumerable(FIELD_DEFAULTS.kinds)
+      typeTip: mapEnumerable(FIELD_DEFAULTS.kinds),
     },
     multiline: {
       description: "wrap to multiple lines (when overflowing)",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     narrow: {
       description:
         "keep the field from expanding to fill space when horizontal",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -877,8 +877,8 @@ Vertical forms are also supported, and are simpler to compose.
     size: {
       description: "preserve vertical alignment with the <Field.Body>",
       typeName: "string",
-      typeTip: mapEnumerable(FIELD_LABEL_DEFAULTS.sizes)
-    }
+      typeTip: mapEnumerable(FIELD_LABEL_DEFAULTS.sizes),
+    },
   }}
 />
 
@@ -890,8 +890,8 @@ Vertical forms are also supported, and are simpler to compose.
     color: {
       description: "the help's color",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
-    }
+      typeTip: mapEnumerable(DEFAULTS.colors),
+    },
   }}
 />
 
@@ -902,12 +902,12 @@ Vertical forms are also supported, and are simpler to compose.
   props={{
     disabled: {
       description: "render the label disabled",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "the label's size",
       typeName: "string",
-      typeTip: mapEnumerable(LABEL_DEFAULTS.sizes)
-    }
+      typeTip: mapEnumerable(LABEL_DEFAULTS.sizes),
+    },
   }}
 />

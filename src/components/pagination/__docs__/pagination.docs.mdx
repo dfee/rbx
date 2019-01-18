@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Content, Title } from "src/elements";
@@ -175,17 +175,17 @@ Use the `size` prop on `<Pagination>` to change the size.
     align: {
       description: "change the pagination's alignment of pagination items",
       typeName: "string",
-      typeTip: mapEnumerable(PAGINATION_DEFAULTS.alignments)
+      typeTip: mapEnumerable(PAGINATION_DEFAULTS.alignments),
     },
     rounded: {
       description: "round the pagination items",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "change the pagination's size",
       typeName: "string",
-      typeTip: mapEnumerable(PAGINATION_DEFAULTS.alignments)
-    }
+      typeTip: mapEnumerable(PAGINATION_DEFAULTS.sizes),
+    },
   }}
 />
 
@@ -196,8 +196,8 @@ Use the `size` prop on `<Pagination>` to change the size.
     children: {
       defaultValue: "the ellipsis: …",
       description: "the component's children",
-      typeName: "ReactNode"
-    }
+      typeName: "ReactNode",
+    },
   }}
 />
 
@@ -207,8 +207,8 @@ Use the `size` prop on `<Pagination>` to change the size.
   props={{
     current: {
       description: "set the pagination link as currently selected",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -227,7 +227,7 @@ Use the `size` prop on `<Pagination>` to change the size.
         "set the step as next or previous (positioning changes with pagination's align prop",
       required: true,
       typeName: "string",
-      typeTip: mapEnumerable(PAGINATION_STEP_DEFAULTS.alignments)
-    }
+      typeTip: mapEnumerable(PAGINATION_STEP_DEFAULTS.alignments),
+    },
   }}
 />

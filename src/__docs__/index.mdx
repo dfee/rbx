@@ -12,8 +12,15 @@ import GitHubLogo from "./assets/github.png";
 import NPMLogo from "./assets/npm.png";
 import ReactLogo from "./assets/react.png";
 import TypescriptLogo from "./assets/typescript.png";
+import LogoWide from "./public/logo-wide.svg";
 
-# 👟 rbx
+<Image.Container
+  as="a"
+  style={{ margin: "40px 0 30px", width: "210px" }}
+  href="https://github.com/dfee/rbx"
+>
+  <Image src={LogoWide} />
+</Image.Container>
 
 ### The Comprehensive _Bulma UI_ Framework for _React_
 
@@ -98,7 +105,7 @@ import { Content } from "rbx";
 function App() {
   return (
     <Content>
-      Hello world from <strong>👟 rbx</strong>
+      Hello world from <a href="https://github.com/dfee/rbx">rbx</a>!
     </Content>
   );
 }
@@ -123,7 +130,7 @@ ReactDOM.render(<App />, rootElement);
         height: "500px",
         border: 0,
         borderRadius: "4px",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
       sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
     />

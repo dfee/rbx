@@ -9,14 +9,14 @@ import {
   faCheckSquare,
   faExclamationTriangle,
   faHome,
-  faInfoCircle
+  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Table, Title } from "src/elements";
@@ -59,7 +59,7 @@ Use the `color` prop to add color to an icon.
       { color: "info", icon: faInfoCircle },
       { color: "success", icon: faCheckSquare },
       { color: "warning", icon: faExclamationTriangle },
-      { color: "danger", icon: faBan }
+      { color: "danger", icon: faBan },
     ];
     return permutations.map(({ color, icon }) => (
       <Icon color={color} key={color}>
@@ -203,17 +203,17 @@ As before, the `backgroundColor` is set to provide additional indication of the 
     align: {
       description: "set the alignment of the icon (for use in a form control)",
       typeName: "string",
-      typeTip: mapEnumerable(ICON_DEFAULTS.alignments)
+      typeTip: mapEnumerable(ICON_DEFAULTS.alignments),
     },
     color: {
       description: "set the icon's color",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     size: {
       description: "set the icon's size",
       typeName: "string",
-      typeTip: mapEnumerable(ICON_DEFAULTS.sizes)
-    }
+      typeTip: mapEnumerable(ICON_DEFAULTS.sizes),
+    },
   }}
 />

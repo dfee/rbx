@@ -1,7 +1,6 @@
-// https://www.docz.site/documentation/project-configuration
-
 const path = require("path");
 
+// https://www.docz.site/documentation/project-configuration
 export default {
   base: "/rbx",
   // unfortnately, "too-many-modules"
@@ -9,9 +8,9 @@ export default {
   codeSandbox: false,
   description:
     "The Comprehensive Bulma UI Framework for React. This is a lightweight, yet robust, React framework that enables rapid, beautiful web development.",
-  files: "**/*(.docs)?*.mdx",
+  files: "**/[^_]*(.docs)?*.mdx",
   htmlContext: {
-    favicon: "/rbx/public/favicon.ico"
+    favicon: "/rbx/public/favicon.ico",
   },
   indexHtml: "src/__docs__/index.html",
   modifyBundlerConfig: config => {
@@ -20,7 +19,7 @@ export default {
     config.entry.app.push("src/index.sass");
     config.module.rules.push({
       test: /\.s[ac]ss$/,
-      use: ["style-loader", "css-loader", "sass-loader"]
+      use: ["style-loader", "css-loader", "sass-loader"],
     });
 
     return config;
@@ -40,20 +39,24 @@ export default {
       negative: "#121212",
       blue: "#3273dc",
       skyBlue: "#209cee",
-      primary: "#00d1b2",
+      primary: "#3273dc",
       codeColor: "#ff3860",
       codeBg: "#f5f5f5",
       sidebarBg: "#f5f5f5",
       text: "#4a4a4a",
-      link: "#3273dc"
+      link: "#3273dc",
+    },
+    logo: {
+      src: "/rbx/public/logo-wide.svg",
+      width: "150px",
     },
     styles: {
       code: {
         fontFamily: "monospace",
-        padding: "0.25em 0.5em"
-      }
-    }
+        padding: "0.25em 0.5em",
+      },
+    },
   },
-  title: "👟 rbx",
-  typescript: true
+  title: "rbx",
+  typescript: true,
 };
