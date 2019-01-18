@@ -12,7 +12,7 @@ import {
   Frame,
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Generic } from "src/base";
@@ -25,7 +25,7 @@ import {
   Field,
   Icon,
   Notification,
-  Title
+  Title,
 } from "src/elements";
 import { Hero } from "src/layout";
 import { Navbar } from "../navbar";
@@ -488,7 +488,7 @@ To create a **\*dropdown menu** you'll need the following **5** components:
           <Navbar.Item>Elements</Navbar.Item>
           <Navbar.Item>Components</Navbar.Item>
           <Navbar.Divider />
-          <Navbar.Item>Version 1.0.0</Navbar.Item>
+          <Navbar.Item>Version 2.0.0</Navbar.Item>
         </Navbar.Dropdown>
       </Navbar.Item>
     </Navbar>
@@ -507,7 +507,7 @@ Use the `hoverable` prop of `<Navbar.Item>` to toggle the menu on mouse-over.
           <Navbar.Item>Elements</Navbar.Item>
           <Navbar.Item>Components</Navbar.Item>
           <Navbar.Divider />
-          <Navbar.Item>Version 1.0.0</Navbar.Item>
+          <Navbar.Item>Version 2.0.0</Navbar.Item>
         </Navbar.Dropdown>
       </Navbar.Item>
     </Navbar>
@@ -526,7 +526,7 @@ Use the `active` and `managed` props of `<Navbar.Item>` to override the toggle c
           <Navbar.Item>Elements</Navbar.Item>
           <Navbar.Item>Components</Navbar.Item>
           <Navbar.Divider />
-          <Navbar.Item>Version 1.0.0</Navbar.Item>
+          <Navbar.Item>Version 2.0.0</Navbar.Item>
         </Navbar.Dropdown>
       </Navbar.Item>
     </Navbar>
@@ -554,7 +554,7 @@ Use the `align` prop of `<Navbar.Item>` to change whether the menu is aligned **
             <Navbar.Item>Elements</Navbar.Item>
             <Navbar.Item>Components</Navbar.Item>
             <Navbar.Divider />
-            <Navbar.Item>Version 1.0.0</Navbar.Item>
+            <Navbar.Item>Version 2.0.0</Navbar.Item>
           </Navbar.Dropdown>
         </Navbar.Item>
       </Navbar.Segment>
@@ -566,7 +566,7 @@ Use the `align` prop of `<Navbar.Item>` to change whether the menu is aligned **
             <Navbar.Item>Elements</Navbar.Item>
             <Navbar.Item>Components</Navbar.Item>
             <Navbar.Divider />
-            <Navbar.Item>Version 1.0.0</Navbar.Item>
+            <Navbar.Item>Version 2.0.0</Navbar.Item>
           </Navbar.Dropdown>
         </Navbar.Item>
       </Navbar.Segment>
@@ -606,7 +606,7 @@ Use the `up` along with the `dropdown` prop on `<Navbar.Item>` to create a **dro
             <Navbar.Item>Elements</Navbar.Item>
             <Navbar.Item>Components</Navbar.Item>
             <Navbar.Divider />
-            <Navbar.Item>Version 1.0.0</Navbar.Item>
+            <Navbar.Item>Version 2.0.0</Navbar.Item>
           </Navbar.Dropdown>
         </Navbar.Item>
       </Navbar.Segment>
@@ -630,7 +630,7 @@ Use the `arrowless` prop on `<Navbar.Link>` to create a dropdown without an arro
               <Navbar.Item>Elements</Navbar.Item>
               <Navbar.Item>Components</Navbar.Item>
               <Navbar.Divider />
-              <Navbar.Item>Version 1.0.0</Navbar.Item>
+              <Navbar.Item>Version 2.0.0</Navbar.Item>
             </Navbar.Dropdown>
           </Navbar.Item>
         </Navbar.Segment>
@@ -660,7 +660,7 @@ By default, the `<Navbar.Dropdown>` has a grey `border-top` and a `border-radius
         <Navbar.Item>Elements</Navbar.Item>
         <Navbar.Item>Components</Navbar.Item>
         <Navbar.Divider />
-        <Navbar.Item>Version 1.0.0</Navbar.Item>
+        <Navbar.Item>Version 2.0.0</Navbar.Item>
       </Navbar.Dropdown>
     </Navbar.Item>
   </Navbar>
@@ -693,7 +693,7 @@ When using the `transparent` prop on `<Navbar>`, it's preferable to also use the
         <Navbar.Item>Elements</Navbar.Item>
         <Navbar.Item>Components</Navbar.Item>
         <Navbar.Divider />
-        <Navbar.Item>Version 1.0.0</Navbar.Item>
+        <Navbar.Item>Version 2.0.0</Navbar.Item>
       </Navbar.Dropdown>
     </Navbar.Item>
   </Navbar>
@@ -728,7 +728,7 @@ Use the `active` prop of `<Navbar.Item>` to mark it as active in a `<Navbar.Drop
         <Navbar.Item active>Elements</Navbar.Item>
         <Navbar.Item>Components</Navbar.Item>
         <Navbar.Divider />
-        <Navbar.Item>Version 1.0.0</Navbar.Item>
+        <Navbar.Item>Version 2.0.0</Navbar.Item>
       </Navbar.Dropdown>
     </Navbar.Item>
   </Navbar>
@@ -844,33 +844,33 @@ Use the `color` prop of the `<Navbar>` to change the color.
   props={{
     active: {
       description: "activate the Navbar (on touch devices)",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     color: {
       description: "set the navbar's color",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     document: {
       description:
         "the document whose HTMLElement will receive the fixed className (useful with an iframe)",
-      typeName: "Document"
+      typeName: "Document",
     },
     fixed: {
       description: "fix the position to the top or bottom",
       typeName: "string",
-      typeTip: mapEnumerable(NAVBAR_DEFAULTS.fixedAlignments)
+      typeTip: mapEnumerable(NAVBAR_DEFAULTS.fixedAlignments),
     },
     managed: {
       description:
         "enable the usage of the `active` prop to open and close the dropdown menu",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     transparent: {
       description:
         "remove any hover or active background from the navbar items",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -885,8 +885,8 @@ Use the `color` prop of the `<Navbar>` to change the color.
   props={{
     onClick: {
       description: "callback when the component is clicked",
-      typeName: "(event: React.MouseEvent) => void"
-    }
+      typeName: "(event: React.MouseEvent) => void",
+    },
   }}
 />
 
@@ -903,13 +903,13 @@ Use the `color` prop of the `<Navbar>` to change the color.
     align: {
       description: "align the menu to the left or right",
       typeName: "string",
-      typeTip: mapEnumerable(NAVBAR_DROPDOWN_DEFAULTS.alignments)
+      typeTip: mapEnumerable(NAVBAR_DROPDOWN_DEFAULTS.alignments),
     },
     boxed: {
       description:
         "use the boxed version of the dropdown (prefereable when using a transparent navbar)",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -919,38 +919,38 @@ Use the `color` prop of the `<Navbar>` to change the color.
   props={{
     active: {
       description: "show the bottom border",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     dropdown: {
       description: "set if the item has a dropdown",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     expanded: {
       description: "expand to fill all available space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     hoverable: {
       description:
         "set if the item has a dropdown which should open on on mouse-over",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     managed: {
       description:
         "enable the usage of the `active` prop to open and close the dropdown menu",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     onClick: {
       description: "callback when the component is clicked",
-      typeName: "(event: React.MouseEvent) => void"
+      typeName: "(event: React.MouseEvent) => void",
     },
     tab: {
       description: "add a bottom border on hover",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     up: {
       description: "set if the item has a dropdown up (along with dropdown)",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -967,12 +967,12 @@ Use the `color` prop of the `<Navbar>` to change the color.
   props={{
     arrowless: {
       description: "remove the dropdown or dropup arrow from the link",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     onClick: {
       description: "callback when the component is clicked",
-      typeName: "(event: React.MouseEvent) => void"
-    }
+      typeName: "(event: React.MouseEvent) => void",
+    },
   }}
 />
 
@@ -991,7 +991,7 @@ Use the `color` prop of the `<Navbar>` to change the color.
         "set the content in the left or right side of the dropdown menu",
       required: true,
       typeName: "string",
-      typeTip: mapEnumerable(NAVBAR_SEGMENT_DEFAULTS.alignments)
-    }
+      typeTip: mapEnumerable(NAVBAR_SEGMENT_DEFAULTS.alignments),
+    },
   }}
 />

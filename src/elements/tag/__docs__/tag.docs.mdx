@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Control, Delete, Field } from "src/elements";
@@ -129,7 +129,7 @@ If the list is long, it will automatically wrap on multiple lines, while keeping
       "Seventeen",
       "Eighteen",
       "Nineteen",
-      "Twenty"
+      "Twenty",
     ].map(name => (
       <Tag key={name}>{name}</Tag>
     ))}
@@ -164,7 +164,7 @@ To attach `gapless` `<Tag.Group>`s together, use the `<Field>` component to wrap
     <Control>
       <Tag.Group gapless>
         <Tag color="dark">npm</Tag>
-        <Tag color="info">1.0.0</Tag>
+        <Tag color="info">2.0.0</Tag>
       </Tag.Group>
     </Control>
     <Control>
@@ -193,7 +193,7 @@ This can be useful for a long list of **blog tags**.
       "Web Design",
       "Open Source",
       "Community",
-      "Documentation"
+      "Documentation",
     ].map(name => (
       <Control key={name}>
         <Tag.Group gapless>
@@ -215,21 +215,21 @@ This can be useful for a long list of **blog tags**.
     color: {
       description: "set the tag's color",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     delete: {
       description: "turn the tag into a delete button",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     rounded: {
       description: "make the tag rounded",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "set the tag's size",
       typeName: "string",
-      typeTip: mapEnumerable(TAG_DEFAULTS.sizes)
-    }
+      typeTip: mapEnumerable(TAG_DEFAULTS.sizes),
+    },
   }}
 />
 
@@ -239,7 +239,7 @@ This can be useful for a long list of **blog tags**.
   props={{
     gapless: {
       description: "attach tags together",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
