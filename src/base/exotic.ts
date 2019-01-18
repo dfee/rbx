@@ -15,16 +15,10 @@ export type ForwardRefAsExoticComponent<
     "defaultProps"
   >
 > & {
-  <
-    TAsComponent extends
-      | React.ReactType
-      | ForwardRefAsExoticComponent<any, any> = TDefaultComponent
-  >(
+  <TAsComponent extends React.ReactType = TDefaultComponent>(
     props: Prefer<
       React.PropsWithoutRef<TOwnProps & { as?: TAsComponent }>,
-      TAsComponent extends ForwardRefAsExoticComponent<infer P, any>
-        ? P
-        : React.ComponentPropsWithRef<TAsComponent>
+      React.ComponentPropsWithRef<TAsComponent>
     >,
   ): JSX.Element | null;
   defaultProps: {
