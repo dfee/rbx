@@ -1,24 +1,21 @@
-## rbx
-
-### The Comprehensive Bulma UI Framework for React
+## rbx – The Comprehensive Bulma UI Framework for React
 
 [![Build Status](https://travis-ci.org/dfee/rbx.svg?branch=master)](https://travis-ci.org/dfee/rbx)
 [![Coverage Status](https://coveralls.io/repos/github/dfee/rbx/badge.svg?branch=master)](https://coveralls.io/github/dfee/rbx?branch=master)
 [![Release Version](https://img.shields.io/github/release/dfee/rbx.svg)](https://github.com/dfee/rbx)
 [![Npm Downloads](https://img.shields.io/npm/dm/rbx.svg)](https://www.npmjs.com/package/rbx)
 
-`rbx` is a comprehensive library of React components for [Bulma 0.7.2](http://bulma.io).
-
-👟 **[Read the docs](https://dfee.github.io/rbx)**.
-🙃 _I'll wait, go check them out!_
-
 ![A quick look](src/__docs__/public/demo.png?raw=true "A quick look")
+
+### 👟 **[Read the docs](https://dfee.github.io/rbx)**.
+
+🙃 _I'll wait, go check them out!_
 
 ### Features
 
 - up-to-date Bulma implementation (0.7.2)
 - written with TypeScript 3 for React 16
-- well tested and documented
+- well tested and [documented](https://dfee.github.io/rbx)
 - extensive customization support
 - _quite unopinionated, if you ask me_
 - **very simple to get started**
