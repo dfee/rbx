@@ -4,28 +4,25 @@ import resolve from "rollup-plugin-node-resolve";
 
 import pkg from "./package.json";
 
-const input = "dist/index.js";
-
 const globals = {
   react: "React",
-  "react-dom": "ReactDOM"
+  "react-dom": "ReactDOM",
 };
 
 // todo: https://reactjs.org/docs/optimizing-performance.html#rollup
 export default {
-  entry: input,
-  input,
+  input: "dist/index.js",
   external: [
     ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {})
+    ...Object.keys(pkg.peerDependencies || {}),
   ],
   output: [
     {
       file: "dist/index.cjs.js",
       format: "cjs",
       globals,
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
-  plugins: [resolve(), sizeSnapshot(), sourceMaps()]
+  plugins: [resolve(), sizeSnapshot(), sourceMaps()],
 };

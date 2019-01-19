@@ -4,6 +4,6 @@ node_js:
 script:
   - make test # run tests
   - make build # ensure pkg builds
-  - make build_docs # ensure docz builds
+  - make docs_build # ensure docz builds
 after_success:
   - make ci_publish
