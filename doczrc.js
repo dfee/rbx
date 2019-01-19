@@ -1,5 +1,7 @@
 const path = require("path");
 
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
 // https://www.docz.site/documentation/project-configuration
 export default {
   base: "/rbx",
@@ -15,6 +17,9 @@ export default {
   indexHtml: "src/__docs__/index.html",
   modifyBundlerConfig: config => {
     config.resolve.alias["src"] = path.join(__dirname, "./src");
+    config.resolve.plugins = [
+      new TsconfigPathsPlugin({ configFile: "./tsconfig.json" }),
+    ];
 
     config.entry.app.push("src/index.sass");
     config.module.rules.push({

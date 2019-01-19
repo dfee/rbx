@@ -1,6 +1,7 @@
 import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic } from "../../base";
+import { HelpersProps } from "../../base/helpers";
 
 export type TableHeadingProps = HelpersProps;
 

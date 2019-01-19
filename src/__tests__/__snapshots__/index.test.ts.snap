@@ -1309,6 +1309,5 @@ Object {
     "render": [Function],
   },
   "forwardRefAs": [Function],
-  "makeRootValidatingTransform": [Function],
 }
 `;

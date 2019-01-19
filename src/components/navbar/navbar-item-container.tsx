@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { Generic, HelpersProps } from "../../base";
+import { Generic } from "../../base";
+import { HelpersProps } from "../../base/helpers";
 import { combineRefs } from "../../utils";
 import {
   NavbarItemContext,

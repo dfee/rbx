@@ -2,7 +2,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic } from "../../base";
+import { HelpersProps } from "../../base/helpers";
 import { TableBody } from "./table-body";
 import { TableCell } from "./table-cell";
 import { TableFoot } from "./table-foot";

@@ -2,7 +2,8 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { forwardRefAs, Generic, HelpersProps } from "../../base";
+import { forwardRefAs, Generic } from "../../base";
+import { HelpersProps } from "../../base/helpers";
 import { ModalContext, ModalContextValue } from "./modal-context";
 
 export type ModalBackgroundModifierProps = Partial<{

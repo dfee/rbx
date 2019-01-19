@@ -2,7 +2,7 @@
 import { withMDXComponents } from "@mdx-js/tag/dist/mdx-provider";
 import React from "react";
 
-import { HelpersProps } from "src/base";
+import { HelpersProps } from "src/base/helpers";
 import { Table } from "src/elements";
 
 const lexSortObj = <T extends object>(obj: { [K: string]: T }) =>
@@ -92,13 +92,13 @@ export class BaseSimplePropsTable extends React.Component<
         )}
       </tbody>
     );
-  }
+  };
 
   private readonly renderCellName = (name: string) => (
     <Table.Cell>
       <code>{name}</code>
     </Table.Cell>
-  )
+  );
 
   private readonly renderCellRequired = (required: PropDoc["required"]) => {
     const props: {
@@ -110,7 +110,7 @@ export class BaseSimplePropsTable extends React.Component<
     };
 
     return <Table.Cell {...props} />;
-  }
+  };
 
   private readonly renderCellType = (
     typeName: PropDoc["typeName"],
@@ -131,7 +131,7 @@ export class BaseSimplePropsTable extends React.Component<
         <code>{typeNode}</code>
       </Table.Cell>
     );
-  }
+  };
 
   private readonly renderCellDescription = (
     description: PropDoc["description"],
@@ -143,7 +143,7 @@ export class BaseSimplePropsTable extends React.Component<
     }
 
     return <Table.Cell>{description}</Table.Cell>;
-  }
+  };
 
   private readonly renderCellDefaultValue = (
     defaultValue: PropDoc["defaultValue"],
@@ -165,7 +165,7 @@ export class BaseSimplePropsTable extends React.Component<
         <code>{stringDefaultValue}</code>
       </Table.Cell>
     );
-  }
+  };
 
   private readonly renderRow = (name: string, propDoc: PropDoc) => {
     return (
@@ -177,7 +177,7 @@ export class BaseSimplePropsTable extends React.Component<
         {this.renderCellDescription(propDoc.description)}
       </Table.Row>
     );
-  }
+  };
 }
 
 // tslint:disable-next-line: no-unsafe-any

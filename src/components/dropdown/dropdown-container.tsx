@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import React from "react";
 
-import { Generic, HelpersProps } from "../../base";
+import { Generic } from "../../base";
+import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
 import { combineRefs, tuple } from "../../utils";
 import { DropdownContext } from "./dropdown-context";

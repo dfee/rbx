@@ -5,6 +5,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "importHelpers": true,
+    "isolatedModules": true,
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
     "noErrorTruncation": false,
