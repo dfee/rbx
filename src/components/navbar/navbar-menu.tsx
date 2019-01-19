@@ -6,7 +6,7 @@ import { NavbarContext } from "./navbar-context";
 
 export type NavbarMenuProps = HelpersProps;
 
-export const NavbarMenu = forwardRefAs<HTMLDivElement, NavbarMenuProps>(
+export const NavbarMenu = forwardRefAs<NavbarMenuProps>(
   ({ className, ...rest }, ref) => (
     <NavbarContext.Consumer>
       {({ active }) => (

@@ -57,7 +57,7 @@ type ColumnGroupModifierProps = Partial<
 
 export type ColumnGroupProps = HelpersProps & ColumnGroupModifierProps;
 
-export const ColumnGroup = forwardRefAs<HTMLDivElement, ColumnGroupProps>(
+export const ColumnGroup = forwardRefAs<ColumnGroupProps>(
   (
     {
       className,

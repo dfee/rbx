@@ -27,7 +27,7 @@ export type DeleteModifierProps = Partial<{
 
 export type DeleteProps = HelpersProps & DeleteModifierProps;
 
-export const Delete = forwardRefAs<HTMLAnchorElement, DeleteProps>(
+export const Delete = forwardRefAs<DeleteProps>(
   ({ className, size, ...rest }, ref) => (
     <Generic
       className={classNames("delete", { [`is-${size}`]: size }, className)}

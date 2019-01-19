@@ -28,7 +28,7 @@ export type ButtonGroupModifierProps = Partial<{
 
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
-export const ButtonGroup = forwardRefAs<HTMLDivElement, ButtonGroupProps>(
+export const ButtonGroup = forwardRefAs<ButtonGroupProps>(
   ({ align, className, hasAddons, ...rest }, ref) => (
     <Generic
       className={classNames(

@@ -29,7 +29,7 @@ export type TitleModifierProps = Partial<{
 
 export type TitleProps = HelpersProps & TitleModifierProps;
 
-export const Title = forwardRefAs<HTMLHeadingElement, TitleProps>(
+export const Title = forwardRefAs<TitleProps>(
   ({ className, size, spaced, subtitle, ...rest }, ref) => (
     <Generic
       className={classNames(

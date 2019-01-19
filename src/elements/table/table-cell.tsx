@@ -4,7 +4,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type TableCellProps = HelpersProps;
 
-export const TableCell = forwardRefAs<HTMLTableDataCellElement, TableCellProps>(
+export const TableCell = forwardRefAs<TableCellProps>(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "td" },
 );

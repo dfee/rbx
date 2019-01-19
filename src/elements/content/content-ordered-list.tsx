@@ -30,7 +30,7 @@ export type ContentOrderedListProps = HelpersProps &
   ContentOrderedListModifierProps;
 
 export const ContentOrderedList = Object.assign(
-  forwardRefAs<HTMLOListElement, ContentOrderedListProps>(
+  forwardRefAs<ContentOrderedListProps>(
     ({ className, type, ...rest }, ref) => (
       <Generic
         className={classNames({ [`is-${type}`]: type }, className)}

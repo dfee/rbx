@@ -23,7 +23,7 @@ const propTypes = {
 };
 
 export const Modal = Object.assign(
-  forwardRefAs<HTMLDivElement, ModalProps>(
+  forwardRefAs<ModalProps>(
     (props, ref) => <ModalContainer innerRef={ref} {...props} />,
     { as: "div" },
   ),

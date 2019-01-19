@@ -10,7 +10,7 @@ import { CardImage } from "./card-image";
 export type CardProps = HelpersProps;
 
 export const Card = Object.assign(
-  forwardRefAs<HTMLDivElement, CardProps>(
+  forwardRefAs<CardProps>(
     ({ className, ...rest }, ref) => (
       <Generic className={classNames("card", className)} ref={ref} {...rest} />
     ),

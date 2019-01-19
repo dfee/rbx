@@ -7,7 +7,7 @@ import { MediaItem } from "./media-item";
 export type MediaProps = HelpersProps;
 
 export const Media = Object.assign(
-  forwardRefAs<HTMLElement, MediaProps>(
+  forwardRefAs<MediaProps>(
     ({ className, ...rest }, ref) => (
       <Generic className={classNames("media", className)} ref={ref} {...rest} />
     ),

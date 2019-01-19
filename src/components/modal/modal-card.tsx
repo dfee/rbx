@@ -10,7 +10,7 @@ import { ModalCardTitle } from "./modal-card-title";
 export type ModalCardProps = HelpersProps;
 
 export const ModalCard = Object.assign(
-  forwardRefAs<HTMLDivElement, ModalCardProps>(
+  forwardRefAs<ModalCardProps>(
     ({ className, ...rest }, ref) => (
       <Generic
         className={classNames("modal-card", className)}

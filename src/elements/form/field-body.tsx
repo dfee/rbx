@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type FieldBodyProps = HelpersProps;
 
-export const FieldBody = forwardRefAs<HTMLDivElement, FieldBodyProps>(
+export const FieldBody = forwardRefAs<FieldBodyProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("field-body", className)}

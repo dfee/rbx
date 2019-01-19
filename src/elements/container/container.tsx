@@ -12,7 +12,7 @@ export type ContainerModifierProps = Partial<{
 
 export type ContainerProps = HelpersProps & ContainerModifierProps;
 
-export const Container = forwardRefAs<HTMLDivElement, ContainerProps>(
+export const Container = forwardRefAs<ContainerProps>(
   ({ className, fluid, breakpoint, ...rest }, ref) => (
     <Generic
       className={classNames(

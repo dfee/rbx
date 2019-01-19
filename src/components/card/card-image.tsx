@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type CardImageProps = HelpersProps;
 
-export const CardImage = forwardRefAs<HTMLDivElement, CardImageProps>(
+export const CardImage = forwardRefAs<CardImageProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("card-image", className)}

@@ -13,7 +13,7 @@ export type LevelModifierProps = Partial<{
 export type LevelProps = HelpersProps & LevelModifierProps;
 
 export const Level = Object.assign(
-  forwardRefAs<HTMLElement, LevelProps>(
+  forwardRefAs<LevelProps>(
     ({ breakpoint, className, ...rest }, ref) => (
       <Generic
         className={classNames(

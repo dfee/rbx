@@ -23,10 +23,7 @@ const onClickHandler = (
   }
 };
 
-export const ModalBackground = forwardRefAs<
-  HTMLDivElement,
-  ModalBackgroundProps
->(
+export const ModalBackground = forwardRefAs<ModalBackgroundProps>(
   ({ className, onClick, ...rest }, ref) => (
     <ModalContext.Consumer>
       {ctx => (

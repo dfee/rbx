@@ -25,7 +25,7 @@ const handleOnClick = (
   ctx.setActive(!ctx.active);
 };
 
-export const NavbarLink = forwardRefAs<HTMLSpanElement, NavbarLinkProps>(
+export const NavbarLink = forwardRefAs<NavbarLinkProps>(
   ({ arrowless, className, onClick, ...rest }, ref) => (
     <NavbarItemContext.Consumer>
       {ctx => (

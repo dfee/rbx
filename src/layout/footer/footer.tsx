@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type FooterProps = HelpersProps;
 
-export const Footer = forwardRefAs<HTMLDivElement, FooterProps>(
+export const Footer = forwardRefAs<FooterProps>(
   ({ className, ...rest }, ref) => (
     <Generic className={classNames("footer", className)} ref={ref} {...rest} />
   ),

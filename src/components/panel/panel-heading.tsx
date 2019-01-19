@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type PanelHeadingProps = HelpersProps;
 
-export const PanelHeading = forwardRefAs<HTMLDivElement, PanelHeadingProps>(
+export const PanelHeading = forwardRefAs<PanelHeadingProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("panel-heading", className)}

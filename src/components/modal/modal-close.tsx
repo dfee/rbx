@@ -21,7 +21,7 @@ const onClickHandler = (
   ctx.close();
 };
 
-export const ModalClose = forwardRefAs<HTMLButtonElement, ModalCloseProps>(
+export const ModalClose = forwardRefAs<ModalCloseProps>(
   ({ className, onClick, ...rest }, ref) => (
     <ModalContext.Consumer>
       {ctx => (

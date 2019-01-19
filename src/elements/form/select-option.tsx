@@ -4,7 +4,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type SelectOptionProps = HelpersProps;
 
-export const SelectOption = forwardRefAs<HTMLOptionElement, SelectOptionProps>(
+export const SelectOption = forwardRefAs<SelectOptionProps>(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "option" },
 );

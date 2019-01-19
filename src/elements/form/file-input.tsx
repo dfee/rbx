@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type FileInputProps = HelpersProps;
 
-export const FileInput = forwardRefAs<HTMLInputElement, FileInputProps>(
+export const FileInput = forwardRefAs<FileInputProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("file-input", className)}

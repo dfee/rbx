@@ -30,7 +30,7 @@ export type TagModifierProps = Partial<{
 export type TagProps = HelpersProps & TagModifierProps;
 
 export const Tag = Object.assign(
-  forwardRefAs<HTMLSpanElement, TagProps>(
+  forwardRefAs<TagProps>(
     (
       { children, className, color, delete: isDelete, rounded, size, ...rest },
       ref,

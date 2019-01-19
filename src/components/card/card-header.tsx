@@ -8,7 +8,7 @@ import { CardHeaderTitle } from "./card-header-title";
 export type CardHeaderProps = HelpersProps;
 
 export const CardHeader = Object.assign(
-  forwardRefAs<HTMLDivElement, CardHeaderProps>(
+  forwardRefAs<CardHeaderProps>(
     ({ className, ...rest }, ref) => (
       <Generic
         className={classNames("card-header", className)}

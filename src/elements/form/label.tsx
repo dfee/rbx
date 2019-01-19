@@ -60,7 +60,7 @@ const identifyLabelDiscriminator = (children: React.ReactNode) => {
   return discriminator;
 };
 
-export const Label = forwardRefAs<HTMLLabelElement, LabelProps>(
+export const Label = forwardRefAs<LabelProps>(
   ({ className, disabled, size, ...rest }, ref) => {
     const discriminator = identifyLabelDiscriminator(rest.children);
 

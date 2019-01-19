@@ -11,7 +11,7 @@ import {
 export type NavbarItemProps = Omit<NavbarItemContainerProps, "as" | "innerRef">;
 
 export const NavbarItem = Object.assign(
-  forwardRefAs<HTMLAnchorElement, NavbarItemProps>(
+  forwardRefAs<NavbarItemProps>(
     (props, ref) => <NavbarItemContainer innerRef={ref} {...props} />,
     { as: "a" },
   ),

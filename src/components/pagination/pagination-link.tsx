@@ -10,10 +10,7 @@ export type PaginationLinkModifiers = Partial<{
 
 export type PaginationLinkProps = HelpersProps & PaginationLinkModifiers;
 
-export const PaginationLink = forwardRefAs<
-  HTMLAnchorElement,
-  PaginationLinkProps
->(
+export const PaginationLink = forwardRefAs<PaginationLinkProps>(
   ({ className, current, ...rest }, ref) => (
     <li>
       <Generic

@@ -4,7 +4,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type TableFootProps = HelpersProps;
 
-export const TableFoot = forwardRefAs<HTMLElement, TableFootProps>(
+export const TableFoot = forwardRefAs<TableFootProps>(
   (props, ref) => <Generic ref={ref} {...props} />,
   { as: "tfoot" },
 );

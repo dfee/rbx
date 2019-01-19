@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type NavbarDividerProps = HelpersProps;
 
-export const NavbarDivider = forwardRefAs<HTMLDivElement, NavbarDividerProps>(
+export const NavbarDivider = forwardRefAs<NavbarDividerProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("navbar-divider", className)}

@@ -10,7 +10,7 @@ export type PanelBlockModifierProps = Partial<{
 
 export type PanelBlockProps = HelpersProps & PanelBlockModifierProps;
 
-export const PanelBlock = forwardRefAs<HTMLDivElement, PanelBlockProps>(
+export const PanelBlock = forwardRefAs<PanelBlockProps>(
   ({ active, className, ...rest }, ref) => (
     <Generic
       className={classNames("panel-block", { "is-active": active }, className)}
