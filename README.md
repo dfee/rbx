@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/dfee/rbx.svg?branch=master)](https://travis-ci.org/dfee/rbx)
 [![Coverage Status](https://coveralls.io/repos/github/dfee/rbx/badge.svg?branch=master)](https://coveralls.io/github/dfee/rbx?branch=master)
 [![Release Version](https://img.shields.io/github/release/dfee/rbx.svg)](https://github.com/dfee/rbx)
-[![Npm Downloads](https://img.shields.io/npm/dm/rbx.svg)](https://www.npmjs.com/package/rbx)
+[![Npm Downloads](https://img.shields.io/npm/dm/rbx.svg)](https://www.npmjs.com/package/rbx) [![Greenkeeper badge](https://badges.greenkeeper.io/dfee/rbx.svg)](https://greenkeeper.io/)
 
 ![A quick look](src/__docs__/public/demo.png?raw=true "A quick look")
 
