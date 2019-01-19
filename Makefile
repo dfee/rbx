@@ -31,6 +31,7 @@ help:
 ### Build
 build: clean build_esm build_cjs build_styles
 	@sed 's/"dist\//"/g' package.json > $(BUILD_DIR)/package.json
+	@sed -E 's/\[A quick look\]\(.+ "/[A quick look](https:\/\/raw.githubusercontent.com\/dfee\/rbx\/v2.0.0-beta.0\/src\/__docs__\/public\/demo.png "/' README.md > $(BUILD_DIR)/README.md
 
 build_pre:
 	@echo "Creating $(BUILD_DIR)"
