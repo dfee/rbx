@@ -51,7 +51,7 @@ export type ImageContainerModifierProps = Partial<{
 
 export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 
-export const ImageContainer = forwardRefAs<ImageContainerProps, "figure">(
+export const ImageContainer = forwardRefAs<HTMLElement, ImageContainerProps>(
   ({ className, size, ...rest }, ref) => {
     let s: string | undefined;
     if (typeof size === "string") {

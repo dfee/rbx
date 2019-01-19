@@ -4,7 +4,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type CheckboxProps = HelpersProps;
 
-export const Checkbox = forwardRefAs<CheckboxProps, "input">(
+export const Checkbox = forwardRefAs<HTMLInputElement, CheckboxProps>(
   (props, ref) => <Generic ref={ref} type="checkbox" {...props} />,
   { as: "input" },
 );

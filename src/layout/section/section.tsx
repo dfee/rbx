@@ -27,7 +27,7 @@ export type SectionModifierProps = Partial<{
 
 export type SectionProps = HelpersProps & SectionModifierProps;
 
-export const Section = forwardRefAs<SectionProps, "section">(
+export const Section = forwardRefAs<HTMLElement, SectionProps>(
   ({ className, size, ...rest }, ref) => (
     <Generic
       className={classNames("section", { [`is-${size}`]: size }, className)}

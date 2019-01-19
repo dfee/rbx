@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type FileIconProps = HelpersProps;
 
-export const FileIcon = forwardRefAs<FileIconProps, "span">(
+export const FileIcon = forwardRefAs<HTMLSpanElement, FileIconProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("file-icon", className)}

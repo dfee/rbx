@@ -17,7 +17,7 @@ import { DropdownTrigger } from "./dropdown-trigger";
 export type DropdownProps = Omit<DropdownContainerProps, "as" | "innerRef">;
 
 export const Dropdown = Object.assign(
-  forwardRefAs<DropdownProps, "div">(
+  forwardRefAs<HTMLDivElement, DropdownProps>(
     (props, ref) => <DropdownContainer innerRef={ref} {...props} />,
     { as: "div" },
   ),

@@ -12,7 +12,7 @@ export type PanelTabModifierProps = Partial<{
 export type PanelTabProps = HelpersProps & PanelTabModifierProps;
 
 export const PanelTab = Object.assign(
-  forwardRefAs<PanelTabProps, "a">(
+  forwardRefAs<HTMLAnchorElement, PanelTabProps>(
     ({ active, className, ...rest }, ref) => (
       <Generic
         className={classNames({ "is-active": active }, className)}

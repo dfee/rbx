@@ -29,7 +29,7 @@ export type NavbarContainerModifierProps = Partial<{
   color: Variables["colors"];
   document: Document;
   fixed: NavbarVariables["fixedAlignments"];
-  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
+  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
   managed: boolean;
   transparent: boolean;
 }>;

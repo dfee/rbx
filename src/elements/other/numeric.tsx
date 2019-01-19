@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type NumericProps = HelpersProps;
 
-export const Numeric = forwardRefAs<NumericProps, "p">(
+export const Numeric = forwardRefAs<HTMLParagraphElement, NumericProps>(
   ({ className, ...rest }, ref) => (
     <Generic className={classNames("number", className)} ref={ref} {...rest} />
   ),

@@ -17,7 +17,7 @@ import { NavbarSegment } from "./navbar-segment";
 export type NavbarProps = Omit<NavbarContainerProps, "as" | "innerRef">;
 
 export const Navbar = Object.assign(
-  forwardRefAs<NavbarProps, "nav">(
+  forwardRefAs<HTMLElement, NavbarProps>(
     (props, ref) => <NavbarContainer innerRef={ref} {...props} />,
     { as: "nav" },
   ),

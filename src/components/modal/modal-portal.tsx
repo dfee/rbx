@@ -9,7 +9,7 @@ export type ModalPortalModifierProps = Partial<{
   className: string;
   closeOnBlur: ModalContextValue["closeOnBlur"];
   closeOnEsc: ModalContextValue["closeOnEsc"];
-  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
+  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
   onClose: ModalContextValue["close"];
 }> & { document: Document };
 
@@ -61,11 +61,11 @@ export class ModalPortal extends React.PureComponent<ModalPortalProps> {
     if (this.props.onClose !== undefined) {
       this.props.onClose();
     }
-  }
+  };
 
   private readonly handleKeydown = (event: KeyboardEvent) => {
     if (this.props.closeOnEsc === true && event.code === "Escape") {
       this.close();
     }
-  }
+  };
 }

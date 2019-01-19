@@ -21,7 +21,7 @@ const onClickHandler = (
   ctx.setActive(!ctx.active);
 };
 
-export const NavbarBurger = forwardRefAs<NavbarBurgerProps, "div">(
+export const NavbarBurger = forwardRefAs<HTMLDivElement, NavbarBurgerProps>(
   ({ className, onClick, ...rest }, ref) => (
     <NavbarContext.Consumer>
       {ctx => (

@@ -1,16 +1,14 @@
 {
-  "extends": ["tslint-react", "tslint-microsoft-contrib"],
+  "extends": [
+    "tslint-react",
+    "tslint-microsoft-contrib",
+    "tslint-config-prettier"
+  ],
   "jsRules": {},
   "linterOptions": {
     "exclude": ["node_modules/**/*.ts"]
   },
   "rules": {
-    // VSCode overrides 'arguments'...
-    // https://github.com/Microsoft/TypeScript/issues/11629
-    "align": {
-      "options": ["elements", "members", "parameters", "statements"],
-      "severity": "default"
-    },
     "completed-docs": false,
     // We want to be able to export from index.ts
     "export-name": false,
@@ -50,19 +48,6 @@
     // We want `as` as a typecast instead of using <brackets>
     // https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#new-tsx-file-extension-and-as-operator
     "prefer-type-cast": false,
-    "quotemark": {
-      "options": ["double", "avoid-escape", "avoid-template"],
-      "severity": "default"
-    },
-    "semicolon": { "options": ["always"], "severity": "default" },
-    "trailing-comma": {
-      "options": {
-        "multiline": "always",
-        "singleline": "never",
-        "esSpecCompliant": true
-      },
-      "severity": "default"
-    },
     // This is insanely strict
     "typedef": false,
     "variable-name": {

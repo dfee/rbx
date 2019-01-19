@@ -13,7 +13,7 @@ export type ModalContainerProps = Partial<{
   closeOnEsc: ModalContextValue["closeOnEsc"];
   containerClassName: string;
   document: Document;
-  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
+  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
   onClose(): void;
 }>;
 

@@ -22,7 +22,7 @@ const onClickHandler = (
   ctx.setActive(false);
 };
 
-export const DropdownItem = forwardRefAs<DropdownItemProps, "a">(
+export const DropdownItem = forwardRefAs<HTMLAnchorElement, DropdownItemProps>(
   ({ active, className, onClick, ...rest }, ref) => (
     <DropdownContext.Consumer>
       {ctx => (

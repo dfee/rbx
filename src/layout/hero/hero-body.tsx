@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type HeroBodyProps = HelpersProps;
 
-export const HeroBody = forwardRefAs<HeroBodyProps, "div">(
+export const HeroBody = forwardRefAs<HTMLDivElement, HeroBodyProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("hero-body", className)}

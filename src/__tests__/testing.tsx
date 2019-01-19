@@ -5,7 +5,6 @@ import Enzyme from "enzyme";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { ForwardRefAsExoticComponent } from "src/base/exotic";
 import { HelpersProps } from "src/base/helpers";
 import { ValidatingTransformFunction } from "src/base/helpers/factory";
 import {
@@ -220,17 +219,6 @@ export const validateStringOrNumberPropType = <T extends {}>(
     { value: {}, valid: false, extras, descriptor: "obj" },
   ]);
 
-export type MakeNodeFunction<
-  TComponent extends ForwardRefAsExoticComponent<
-    TComponentProps,
-    TDefaultComponent
-  >,
-  TDefaultComponent extends React.ReactType = TComponent,
-  TComponentProps extends { className?: string } = React.ComponentProps<
-    TComponent
-  >
-> = (props?: TComponentProps) => JSX.Element;
-
 export type MakeShallowWrapperFunction = (
   node: JSX.Element,
   contextValue?: ThemeContextValue,
@@ -401,8 +389,8 @@ export const testThemeIntegration = (
   // tslint:disable:no-any
   component: React.ComponentType<any>,
   options?: {
-    makeNode?: MakeNodeFunction<any>;
     makeShallowWrapper?: MakeShallowWrapperFunction;
+    makeNode?(props: any): JSX.Element;
   },
   // tslint:enable:no-any
 ) => {

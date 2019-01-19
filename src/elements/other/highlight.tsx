@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type HighlightProps = HelpersProps;
 
-export const Highlight = forwardRefAs<HighlightProps, "p">(
+export const Highlight = forwardRefAs<HTMLParagraphElement, HighlightProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("highlight", className)}

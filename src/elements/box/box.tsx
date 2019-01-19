@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type BoxProps = HelpersProps;
 
-export const Box = forwardRefAs<BoxProps, "div">(
+export const Box = forwardRefAs<HTMLDivElement, BoxProps>(
   ({ className, ...rest }, ref) => (
     <Generic className={classNames("box", className)} ref={ref} {...rest} />
   ),

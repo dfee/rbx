@@ -7,11 +7,12 @@ import { ThemeContext } from "./theme";
 
 export type GenericProps = HelpersProps;
 
-export const Generic = forwardRefAs<GenericProps, "div">(
+export const Generic = forwardRefAs<HTMLDivElement, GenericProps>(
   ({ as, ...rest }, ref) => (
     <ThemeContext.Consumer>
       {({ transform }) =>
-        React.createElement(as, { ref, ...transform(rest, "Generic") })}
+        React.createElement(as, { ref, ...transform(rest, "Generic") })
+      }
     </ThemeContext.Consumer>
   ),
   { as: "div" },

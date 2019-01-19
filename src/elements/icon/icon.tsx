@@ -32,7 +32,7 @@ export type IconModifierProps = Partial<{
 
 export type IconProps = HelpersProps & IconModifierProps;
 
-export const Icon = forwardRefAs<IconProps, "span">(
+export const Icon = forwardRefAs<HTMLSpanElement, IconProps>(
   ({ align, className, color, size, ...rest }, ref) => (
     <Generic
       className={classNames(

@@ -10,7 +10,7 @@ export type ListItemModifierProps = Partial<{
 
 export type ListItemProps = HelpersProps & ListItemModifierProps;
 
-export const ListItem = forwardRefAs<ListItemProps, "a">(
+export const ListItem = forwardRefAs<HTMLAnchorElement, ListItemProps>(
   ({ active, className, ...rest }, ref) => (
     <Generic
       className={classNames("list-item", { "is-active": active }, className)}

@@ -7,7 +7,7 @@
     "importHelpers": true,
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
-    "noErrorTruncation": true,
+    "noErrorTruncation": false,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "plugins": [{ "name": "typescript-tslint-plugin" }],

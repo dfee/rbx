@@ -5,7 +5,10 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type PaginationListProps = HelpersProps;
 
-export const PaginationList = forwardRefAs<PaginationListProps, "ul">(
+export const PaginationList = forwardRefAs<
+  HTMLUListElement,
+  PaginationListProps
+>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("pagination-list", className)}

@@ -11,7 +11,7 @@ export type HelpModifierProps = Partial<{
 
 export type HelpProps = HelpersProps & HelpModifierProps;
 
-export const Help = forwardRefAs<HelpProps, "p">(
+export const Help = forwardRefAs<HTMLParagraphElement, HelpProps>(
   ({ className, color, ...rest }, ref) => (
     <Generic
       className={classNames("help", { [`is-${color}`]: color }, className)}

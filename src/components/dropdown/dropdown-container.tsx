@@ -26,7 +26,7 @@ export type DropdownContainerModifierProps = Partial<{
   align: DropdownVariables["alignments"];
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   hoverable: boolean;
-  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
+  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
   managed: boolean;
   up: boolean;
 }>;
@@ -123,5 +123,5 @@ export class DropdownContainer extends React.PureComponent<
         this.active = false;
       }
     }
-  }
+  };
 }

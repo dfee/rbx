@@ -5,7 +5,10 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type DropdownDividerProps = HelpersProps;
 
-export const DropdownDivider = forwardRefAs<DropdownDividerProps, "hr">(
+export const DropdownDivider = forwardRefAs<
+  HTMLHRElement,
+  DropdownDividerProps
+>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("dropdown-divider", className)}

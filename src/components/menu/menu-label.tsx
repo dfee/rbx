@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type MenuLabelProps = HelpersProps;
 
-export const MenuLabel = forwardRefAs<MenuLabelProps, "p">(
+export const MenuLabel = forwardRefAs<HTMLParagraphElement, MenuLabelProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("menu-label", className)}

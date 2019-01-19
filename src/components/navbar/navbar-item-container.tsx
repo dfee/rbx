@@ -14,7 +14,7 @@ export type NavbarItemContainerModifierProps = Partial<{
   dropdown: boolean;
   expanded: boolean;
   hoverable: boolean;
-  innerRef: React.Ref<HTMLElement | keyof JSX.IntrinsicElements>;
+  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
   managed: boolean;
   onClick: React.MouseEventHandler;
   tab: boolean;
@@ -137,7 +137,7 @@ export class NavbarItemContainer extends React.PureComponent<
         this.active = false;
       }
     }
-  }
+  };
 
   private readonly handleOnClick = (ctx: NavbarItemContextValue) => (
     event: React.MouseEvent,
@@ -146,5 +146,5 @@ export class NavbarItemContainer extends React.PureComponent<
       this.props.onClick(event);
     }
     ctx.setActive(!ctx.active);
-  }
+  };
 }

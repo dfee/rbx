@@ -7,7 +7,7 @@ import { ListItem } from "./list-item";
 export type ListProps = HelpersProps;
 
 export const List = Object.assign(
-  forwardRefAs<ListProps, "div">(
+  forwardRefAs<HTMLDivElement, ListProps>(
     ({ className, ...rest }, ref) => (
       <Generic className={classNames("list", className)} ref={ref} {...rest} />
     ),

@@ -21,7 +21,7 @@ export type TableModifierProps = Partial<{
 export type TableProps = HelpersProps & TableModifierProps;
 
 export const Table = Object.assign(
-  forwardRefAs<TableProps, "table">(
+  forwardRefAs<HTMLTableElement, TableProps>(
     (
       { bordered, className, fullwidth, hoverable, narrow, striped, ...rest },
       ref,

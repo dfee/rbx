@@ -35,7 +35,7 @@ export type BreadcrumbModifierProps = Partial<{
 export type BreadcrumbProps = HelpersProps & BreadcrumbModifierProps;
 
 export const Breadcrumb = Object.assign(
-  forwardRefAs<BreadcrumbProps, "nav">(
+  forwardRefAs<HTMLElement, BreadcrumbProps>(
     ({ align, children, className, separator, size, ...rest }, ref) => (
       <Generic
         className={classNames(

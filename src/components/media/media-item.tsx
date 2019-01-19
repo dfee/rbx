@@ -27,7 +27,7 @@ export type MediaItemModifierProps = Partial<{
 
 export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 
-export const MediaItem = forwardRefAs<MediaItemProps, "div">(
+export const MediaItem = forwardRefAs<HTMLDivElement, MediaItemProps>(
   ({ align, className, ...rest }, ref) => (
     <Generic
       className={classNames({ [`media-${align}`]: align }, className)}

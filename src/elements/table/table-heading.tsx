@@ -4,9 +4,9 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type TableHeadingProps = HelpersProps;
 
-export const TableHeading = forwardRefAs<TableHeadingProps, "th">(
-  (props, ref) => <Generic ref={ref} {...props} />,
-  { as: "th" },
-);
+export const TableHeading = forwardRefAs<
+  HTMLTableHeaderCellElement,
+  TableHeadingProps
+>((props, ref) => <Generic ref={ref} {...props} />, { as: "th" });
 
 TableHeading.displayName = "Table.Heading";

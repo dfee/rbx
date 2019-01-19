@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type MessageBodyProps = HelpersProps;
 
-export const MessageBody = forwardRefAs<MessageBodyProps, "div">(
+export const MessageBody = forwardRefAs<HTMLDivElement, MessageBodyProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("message-body", className)}

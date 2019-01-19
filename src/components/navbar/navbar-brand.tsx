@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type NavbarBrandProps = HelpersProps;
 
-export const NavbarBrand = forwardRefAs<NavbarBrandProps, "div">(
+export const NavbarBrand = forwardRefAs<HTMLDivElement, NavbarBrandProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("navbar-brand", className)}

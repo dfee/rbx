@@ -10,7 +10,10 @@ export interface BreadcrumbItemModifierProps {
 
 export type BreadcrumbItemProps = HelpersProps & BreadcrumbItemModifierProps;
 
-export const BreadcrumbItem = forwardRefAs<BreadcrumbItemProps, "a">(
+export const BreadcrumbItem = forwardRefAs<
+  HTMLAnchorElement,
+  BreadcrumbItemProps
+>(
   ({ active, ...rest }, ref) => (
     <li className={classNames({ "is-active": active })}>
       <Generic ref={ref} {...rest} />

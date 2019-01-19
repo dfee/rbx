@@ -10,7 +10,7 @@ export type TagGroupModifierProps = Partial<{
 
 export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 
-export const TagGroup = forwardRefAs<TagGroupProps, "span">(
+export const TagGroup = forwardRefAs<HTMLSpanElement, TagGroupProps>(
   ({ className, gapless, ...rest }, ref) => (
     <Generic
       className={classNames("tags", { "has-addons": gapless }, className)}

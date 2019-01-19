@@ -5,7 +5,7 @@ import { forwardRefAs, Generic, HelpersProps } from "../../base";
 
 export type ModalCardFootProps = HelpersProps;
 
-export const ModalCardFoot = forwardRefAs<ModalCardFootProps, "footer">(
+export const ModalCardFoot = forwardRefAs<HTMLElement, ModalCardFootProps>(
   ({ className, ...rest }, ref) => (
     <Generic
       className={classNames("modal-card-foot", className)}
