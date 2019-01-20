@@ -1,15 +1,12 @@
 import { sizeSnapshot } from "rollup-plugin-size-snapshot";
-import sourceMaps from "rollup-plugin-sourcemaps";
+import replace from "rollup-plugin-replace";
 import resolve from "rollup-plugin-node-resolve";
+import { terser } from "rollup-plugin-terser";
 
 import pkg from "./package.json";
 
-const globals = {
-  react: "React",
-  "react-dom": "ReactDOM",
-};
+const env = process.env.NODE_ENV;
 
-// todo: https://reactjs.org/docs/optimizing-performance.html#rollup
 export default {
   input: "dist/index.js",
   external: [
@@ -18,11 +15,22 @@ export default {
   ],
   output: [
     {
-      file: "dist/index.cjs.js",
-      format: "cjs",
-      globals,
+      file: "dist/rbx.umd.js",
+      format: "umd",
+      globals: {
+        classnames: "classNames",
+        react: "React",
+        "react-dom": "ReactDOM",
+        "prop-types": "PropTypes",
+      },
+      name: "rbx",
       sourcemap: true,
     },
   ],
-  plugins: [resolve(), sizeSnapshot(), sourceMaps()],
+  plugins: [
+    resolve(),
+    replace({ "process.env.NODE_ENV": JSON.stringify(env) }),
+    sizeSnapshot(),
+    env === "production" && terser(),
+  ],
 };

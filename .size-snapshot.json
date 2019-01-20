@@ -74,5 +74,15 @@
         "code": 43632
       }
     }
+  },
+  "dist/index.umd.js": {
+    "bundled": 88870,
+    "minified": 44907,
+    "gzipped": 9217
+  },
+  "dist/rbx.umd.js": {
+    "bundled": 88870,
+    "minified": 44907,
+    "gzipped": 9219
   }
 }
