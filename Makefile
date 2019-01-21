@@ -1,4 +1,4 @@
-BUILD_DIR=dist
+build_dir = dist
 
 .PHONY: all build_pre build_esm build_cjs build_styles clean publish test test_lint test_unit ci_publish help
 
@@ -88,3 +88,27 @@ docs_build:
 docs_publish:
 	@echo "Publishing to GitHub pages"
 	@npx gh-pages -d .docz/dist -m \"Deploy Docs [skip ci]\"
+
+### Example
+examples_test: examples_test_with_create_react_app \
+	examples_test_with_create_react_app_typescript \
+	examples_test_with_customization \
+	examples_test_with_script
+
+examples_test_with_create_react_app:
+	@cd examples/with-create-react-app/ && npm i
+	@cd examples/with-create-react-app/ && CI=true npm run test
+
+examples_test_with_create_react_app_typescript:
+	@cd examples/with-create-react-app-typescript/ && npm i
+	@cd examples/with-create-react-app-typescript/ && CI=true npm run test
+
+examples_test_with_customization:
+	@cd examples/with-customization/ && npm i
+	@cd examples/with-customization/ && CI=true npm run test
+
+examples_test_with_script:
+	@cd examples/with-script/ && npm i
+	@cd examples/with-script/ && { npm run start & echo $$! > /tmp/example-with-script.pid; }
+	@cd examples/with-script/ && CI=true npm run test
+	@cat /tmp/example-with-script.pid | xargs kill

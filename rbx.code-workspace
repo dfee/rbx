@@ -2,6 +2,18 @@
   "folders": [
     {
       "path": "."
+    },
+    {
+      "path": "examples/with-create-react-app"
+    },
+    {
+      "path": "examples/with-create-react-app-typescript"
+    },
+    {
+      "path": "examples/with-customization"
+    },
+    {
+      "path": "examples/with-script"
     }
   ]
 }

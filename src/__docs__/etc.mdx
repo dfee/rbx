@@ -28,7 +28,7 @@ For convenience, you'll often want to use `npx jest the/file/to/test.ts` to run 
 The general way to build is to use `make build`, which will:
 
 1. compile the code into _ECMAScript 6_ with `tsc` into the '/dist' directory
-2. compile that _ES6_ code into _CommonJS_ code using `rollup` (with a `.cjs.js` extension).
+2. compile that _ES6_ code into _UMD_ (_Universal Module Definition_) code using `rollup` (as `rbx.umd.js` extension).
 3. copy and compile the _SASS_ code into _CSS_, output to the `/dist` directory
 4. copy and modify the `package.json` so that it can be published to _npm_ without requiring imports from a root directory (i.e. `import { DEFAULTS } from 'rbx/base/helpers/variables';` rather than `import { DEFAULTS } from 'rbx/dist/base/helpers/variables`).
 
