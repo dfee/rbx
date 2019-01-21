@@ -4,7 +4,7 @@
   "description": "rbx example using script tags (no bundler)",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "jest"
   },
   "author": "",
@@ -20,10 +20,10 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
     "jest-puppeteer": "^3.8.0",
     "puppeteer": "^1.11.0"
