@@ -15,12 +15,15 @@ class HelloWorldNotification extends React.Component {
 
   render() {
     if (!this.state.active) {
-      return e("span", {}, "You've closed the notification 👟");
+      return e("div", {}, [
+        e("span", {}, "You've closed the notification "),
+        e("span", { role: "img", "aria-label": "shoe" }, "👟"),
+      ]);
     }
     const children = [
       e("span", { key: 0 }, "Welcome to "),
-      e("span", { key: 1, role: "img", "aria-label": "shoe" }, "👟 "),
-      e("span", { key: 2 }, e("strong", {}, "rbx")),
+      e("span", { key: 1, role: "img", "aria-label": "shoe" }, "👟"),
+      e("span", { key: 2 }, e("strong", {}, " rbx")),
       e(rbx.Delete, { key: 3, onClick: this.onClose }),
     ];
     return e(rbx.Notification, { color: "primary" }, children);

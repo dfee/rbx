@@ -32,12 +32,13 @@ describe("HelloWorldNotification", () => {
     const node = <HelloWorldNotification />;
     const wrapper = Enzyme.shallow(node);
     expect(wrapper.is(Notification)).toBe(true);
+    expect(wrapper.text()).toEqual("Welcome to 👟 rbx");
   });
 
-  it('is renders nothing on "Delete" click', () => {
+  it('is renders a message on "Delete" click', () => {
     const node = <HelloWorldNotification />;
     const wrapper = Enzyme.shallow(node);
     wrapper.find(Delete).simulate("click");
-    expect(wrapper.isEmptyRender()).toBe(true);
+    expect(wrapper.text()).toEqual("You've closed the notification 👟");
   });
 });

@@ -23,16 +23,23 @@ export class HelloWorldNotification extends React.Component<
 
   render() {
     if (!this.state.active) {
-      return null;
+      return (
+        <div>
+          <span>You've closed the notification </span>
+          <span role="img" aria-label="shoe">
+            👟
+          </span>
+        </div>
+      );
     }
 
     return (
       <Notification color="react">
-        Welcome to{" "}
+        <span>Welcome to </span>
         <span role="img" aria-label="shoe">
           👟
-        </span>{" "}
-        <strong>rbx</strong>
+        </span>
+        <strong> rbx</strong>
         <Delete onClick={this.onClose} />
       </Notification>
     );

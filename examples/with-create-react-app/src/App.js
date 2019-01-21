@@ -15,7 +15,14 @@ export class HelloWorldNotification extends React.Component {
 
   render() {
     if (!this.state.active) {
-      return null;
+      return (
+        <div>
+          <span>You've closed the notification </span>
+          <span role="img" aria-label="shoe">
+            👟
+          </span>
+        </div>
+      );
     }
 
     return (
