@@ -3,7 +3,8 @@ node_js:
   - "8"
 script:
   - make test # run tests
-  - make build # ensure pkg builds
-  - make docs_build # ensure docz builds
+  - make # ensure pkg builds
+  - make docs # ensure docs builds
+  - make examples-test # ensure examples still build
 after_success:
   - make ci_publish

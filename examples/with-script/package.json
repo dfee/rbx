@@ -10,7 +10,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "classnames": "^2.2.6",
+    "express": "^4.16.4",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
