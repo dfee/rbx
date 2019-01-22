@@ -1,6 +1,6 @@
 {
   "name": "rbx",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0",
   "description": "The Comprehensive Bulma UI Framework for React",
   "main": "dist/rbx.umd.js",
   "module": "dist/index.js",
