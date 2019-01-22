@@ -1,5 +1,8 @@
 {
   "groups": {
+    "src": {
+      "packages": ["package.json"]
+    },
     "examples": {
       "packages": [
         "examples/with-create-react-app/package.json",
