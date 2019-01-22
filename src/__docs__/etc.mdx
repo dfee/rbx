@@ -11,7 +11,7 @@ route: /architecture/etc
 You'll notice the `package.json` scripts are very simple.
 That's because the build instructions were getting complex, so they were moved into a [`Makefile`](https://github.com/dfee/rbx/blob/master/Makefile).
 
-By running the `make` command in the root of a cloned repo, you'll see the available options (including building, testing, etc.)
+By running the `make help` command in the root of a cloned repo, you'll see the available options (including building, testing, etc.)
 
 ### Testing
 
@@ -25,7 +25,7 @@ For convenience, you'll often want to use `npx jest the/file/to/test.ts` to run 
 
 ### Building
 
-The general way to build is to use `make build`, which will:
+The general way to build is to use `make`, which will:
 
 1. compile the code into _ECMAScript 6_ with `tsc` into the '/dist' directory
 2. compile that _ES6_ code into _UMD_ (_Universal Module Definition_) code using `rollup` (as `rbx.umd.js` extension).
