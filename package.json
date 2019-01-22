@@ -81,7 +81,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "ts-jest": "^23.10.5",
-    "ts-node": "^7.0.1",
+    "ts-node": "^8.0.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "tslib": "^1.9.3",
     "tslint": "^5.11.0",
@@ -89,7 +89,7 @@
     "tslint-microsoft-contrib": "^6.0.0",
     "tslint-react": "^3.6.0",
     "typescript": "3.2.4",
-    "typescript-tslint-plugin": "^0.2.1"
+    "typescript-tslint-plugin": "^0.3.0"
   },
   "husky": {
     "hooks": {
