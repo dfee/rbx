@@ -14,8 +14,19 @@ describe("Utils", () => {
       expect(canUseDOM()).toBe(true);
     });
 
-    it("should return false without window", () => {
+    it("should return false when window is not defined (SSR)", () => {
+      // tslint:disable-next-line:no-any
+      delete (global as any).window;
+
+      expect(() => {
+        window; // tslint:disable-line:no-unused-expression
+      }).toThrow(new ReferenceError("window is not defined"));
+      expect(canUseDOM()).toBe(false);
+    });
+
+    it("should return false when window is undefined", () => {
       withWindow({}, () => {
+        expect(window).toBeUndefined();
         expect(canUseDOM()).toBe(false);
       });
     });
