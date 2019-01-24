@@ -17,6 +17,7 @@ const propTypes = {
   active: PropTypes.bool,
   closeOnBlur: PropTypes.bool,
   closeOnEsc: PropTypes.bool,
+  clipped: PropTypes.bool,
   containerClassName: PropTypes.string,
   document: PropTypes.object,
   onClose: PropTypes.func,
@@ -25,7 +26,10 @@ const propTypes = {
 export const Modal = Object.assign(
   forwardRefAs<ModalProps>(
     (props, ref) => <ModalContainer innerRef={ref} {...props} />,
-    { as: "div" },
+    {
+      as: "div",
+      clipped: true,
+    },
   ),
   {
     Background: ModalBackground,

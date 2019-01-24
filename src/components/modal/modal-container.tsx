@@ -9,6 +9,7 @@ export type ModalContainerProps = Partial<{
   active: boolean;
   as: React.ReactType; // tslint:disable-line:no-reserved-keywords
   children: React.ReactNode;
+  clipped: boolean;
   closeOnBlur: ModalContextValue["closeOnBlur"];
   closeOnEsc: ModalContextValue["closeOnEsc"];
   containerClassName: string;

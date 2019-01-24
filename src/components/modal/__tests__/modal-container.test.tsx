@@ -73,6 +73,18 @@ describe(`${DISPLAY_NAME} component`, () => {
       );
     });
 
+    describe("clipped", () => {
+      [false, true].map(clipped => {
+        it(`should passthrough clipped as ${clipped}`, () => {
+          const node = makeNode({ active: true, clipped });
+          withEnzymeMount({ node }, ({ context: { wrapper } }) => {
+            const modalPortalWrapper = wrapper.find(ModalPortal);
+            expect(modalPortalWrapper.props().clipped).toEqual(clipped);
+          });
+        });
+      });
+    });
+
     describe("closeOnBlur", () => {
       [false, true].map(closeOnBlur => {
         it(`should passthrough closeOnBlur as ${closeOnBlur}`, () => {

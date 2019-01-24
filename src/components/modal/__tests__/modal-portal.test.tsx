@@ -1,4 +1,5 @@
 import Enzyme from "enzyme";
+import { JSDOM } from "jsdom";
 import React from "react";
 
 import {
@@ -15,6 +16,7 @@ import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
+  withEnzymeMount,
 } from "src/__tests__/testing";
 
 const COMPONENT = ModalPortal;
@@ -89,6 +91,29 @@ describe(`${DISPLAY_NAME} component`, () => {
         } finally {
           wrapper.unmount();
         }
+      });
+    });
+  });
+
+  describe("props", () => {
+    describe("clipped", () => {
+      [false, true].map(clipped => {
+        ["global", "provided"].map(docOpt => {
+          const doc =
+            docOpt === "global" ? window.document : new JSDOM().window.document;
+          it(`should ${
+            clipped ? "" : "not "
+          }set clipped on ${docOpt} document`, () => {
+            const node = <ModalPortal document={doc} clipped={clipped} />;
+            withEnzymeMount({ node }, () => {
+              const docHtml = doc.querySelector("html");
+              if (docHtml === null) {
+                throw new Error("doc html should exist");
+              }
+              expect(docHtml.className).toBe(clipped ? "is-clipped" : "");
+            });
+          });
+        });
       });
     });
   });

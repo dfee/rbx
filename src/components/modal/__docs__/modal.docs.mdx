@@ -11,7 +11,7 @@ import { Playground } from "docz";
 import {
   Frame,
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { Modal } from "../modal";
 import { Level, Media } from "src/components";
@@ -23,7 +23,7 @@ import {
   Icon,
   Image,
   Notification,
-  Title
+  Title,
 } from "src/elements";
 import { SimpleModalManager } from "./simple-modal-manager";
 
@@ -309,33 +309,37 @@ Notice that the "close" button (the `<Delete>` component) in the card header aut
   props={{
     active: {
       description: "whether the modal is visible",
-      typeName: "boolean"
+      typeName: "boolean",
+    },
+    clipped: {
+      description: "whether the underlying document should prevent scrolling",
+      typeName: "boolean",
     },
     closeOnBlur: {
       description:
         "whether the modal should close when a click happens outside its element",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     closeOnEsc: {
       description:
         "whether the modal should close when the <ESC> key is pressed",
       defaultValue: "true",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     containerClassName: {
       description: "the name of the container for the React Portal to mount in",
-      typeName: "string"
+      typeName: "string",
     },
     document: {
       description:
         "the document to contain the portal (useful for launching in an iframe)",
-      typeName: "Document"
+      typeName: "Document",
     },
     onClose: {
       description:
         "a callback when the Modal should be closed (usually due to closeOnBlur, closeOnEsc, or manually toggling a close button)",
-      typeName: "() => void"
-    }
+      typeName: "() => void",
+    },
   }}
 />
 
@@ -345,8 +349,8 @@ Notice that the "close" button (the `<Delete>` component) in the card header aut
   props={{
     onClick: {
       description: "callback when the component is clicked",
-      typeName: "(event: React.MouseEvent) => void"
-    }
+      typeName: "(event: React.MouseEvent) => void",
+    },
   }}
 />
 
@@ -376,8 +380,8 @@ Notice that the "close" button (the `<Delete>` component) in the card header aut
   props={{
     onClick: {
       description: "callback when the component is clicked",
-      typeName: "(event: React.MouseEvent) => void"
-    }
+      typeName: "(event: React.MouseEvent) => void",
+    },
   }}
 />
 

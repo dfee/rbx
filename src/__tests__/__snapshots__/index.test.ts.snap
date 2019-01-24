@@ -819,9 +819,11 @@ Object {
     "Portal": [Function],
     "defaultProps": Object {
       "as": "div",
+      "clipped": true,
     },
     "propTypes": Object {
       "active": [Function],
+      "clipped": [Function],
       "closeOnBlur": [Function],
       "closeOnEsc": [Function],
       "containerClassName": [Function],

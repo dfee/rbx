@@ -34,7 +34,10 @@ describe(`${DISPLAY_NAME} component`, () => {
     Content: ModalContent,
     Context: ModalContext,
     Portal: ModalPortal,
-    defaultProps: { as: DEFAULT_ELEMENT },
+    defaultProps: {
+      as: DEFAULT_ELEMENT,
+      clipped: true,
+    },
   });
 
   test("it renders a ModalContainer", () => {
@@ -60,6 +63,14 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("className", () => {
       testPropForwarding("className", "foo");
+    });
+
+    describe("clipped", () => {
+      validateBoolPropType(propTypes, "clipped");
+
+      [false, true].map(clipped => {
+        testPropForwarding("clipped", clipped);
+      });
     });
 
     describe("closeOnBlur", () => {
