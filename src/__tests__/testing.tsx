@@ -18,22 +18,26 @@ export const contextManager = <
   TState extends object
 >(
   enter: (params: TParams) => { context: TContext; state: TState },
-  exit: (
-    {
-      context,
-      params,
-      state,
-    }: { context: TContext; params: TParams; state: TState },
-  ) => void,
+  exit: ({
+    context,
+    params,
+    state,
+  }: {
+    context: TContext;
+    params: TParams;
+    state: TState;
+  }) => void,
 ) => (
   params: TParams,
-  inner: (
-    {
-      context,
-      params,
-      state,
-    }: { context: TContext; params: TParams; state: TState },
-  ) => void,
+  inner: ({
+    context,
+    params,
+    state,
+  }: {
+    context: TContext;
+    params: TParams;
+    state: TState;
+  }) => void,
 ) => {
   const { context, state } = enter(params);
   try {
@@ -48,7 +52,10 @@ export const withWindow = contextManager(
   ({ value }: { value?: undefined } = {}) => {
     const window = (global as any).window;
     delete (global as any).window;
-    (global as any).window = value;
+
+    if (value !== undefined) {
+      (global as any).window = value;
+    }
 
     return { context: {}, state: { window } };
   },

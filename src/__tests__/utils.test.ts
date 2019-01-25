@@ -14,8 +14,11 @@ describe("Utils", () => {
       expect(canUseDOM()).toBe(true);
     });
 
-    it("should return false without window", () => {
+    it("should return false without window (SSR)", () => {
       withWindow({}, () => {
+        expect(() => window).toThrow(
+          new ReferenceError("window is not defined"),
+        );
         expect(canUseDOM()).toBe(false);
       });
     });
