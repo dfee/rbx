@@ -35,7 +35,7 @@ const identifyLabelDiscriminator = (children: React.ReactNode) => {
   let discriminator = "label";
 
   React.Children.forEach(children, (child, i) => {
-    if (typeof child === "object") {
+    if (typeof child === "object" && child !== null && "type" in child) {
       if (
         child.type === Checkbox ||
         (child.type === "input" &&

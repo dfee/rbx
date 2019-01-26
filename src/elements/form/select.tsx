@@ -42,37 +42,36 @@ const mapSelectContainerChildren = (
 ) => {
   let classNameExtension: string | undefined;
   const mapped = React.Children.map(children, (child, i) => {
-    if (
-      typeof child === "object" &&
+    if (typeof child === "object" && child !== null && "type" in child) {
       // tslint:disable-next-line:no-use-before-declare
-      (child.type === "select" || child.type === Select)
-    ) {
-      classNameExtension = classNames({
-        "is-multiple": (child.props as React.SelectHTMLAttributes<Element>)
-          .multiple,
-      });
-      if (state === "focused" || state === "hovered") {
-        return React.cloneElement(child, {
-          className: classNames(
-            `is-${state}`,
-            (child.props as React.SelectHTMLAttributes<Element>).className,
-          ),
+      if (child.type === "select" || child.type === Select) {
+        classNameExtension = classNames({
+          "is-multiple": (child.props as React.SelectHTMLAttributes<Element>)
+            .multiple,
         });
+        if (state === "focused" || state === "hovered") {
+          return React.cloneElement(child, {
+            className: classNames(
+              `is-${state}`,
+              (child.props as React.SelectHTMLAttributes<Element>).className,
+            ),
+          });
+        }
+
+        return child;
+      } else if (child.type === React.Fragment) {
+        const fragmentMapped = mapSelectContainerChildren(
+          (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
+            .children,
+          state,
+        );
+        classNameExtension = classNames(
+          classNameExtension,
+          fragmentMapped.classNameExtension,
+        );
+
+        return <React.Fragment children={fragmentMapped.children} />;
       }
-
-      return child;
-    } else if (typeof child === "object" && child.type === React.Fragment) {
-      const fragmentMapped = mapSelectContainerChildren(
-        (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
-          .children,
-        state,
-      );
-      classNameExtension = classNames(
-        classNameExtension,
-        fragmentMapped.classNameExtension,
-      );
-
-      return <React.Fragment children={fragmentMapped.children} />;
     }
 
     return child;

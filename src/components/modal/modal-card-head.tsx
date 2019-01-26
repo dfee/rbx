@@ -13,7 +13,7 @@ const mapChildren = (
   close: ModalContextValue["close"],
 ) =>
   React.Children.map(children, (child, i) => {
-    if (typeof child === "object") {
+    if (typeof child === "object" && child !== null && "type" in child) {
       if (child.type === Delete) {
         const onClick = (child.props as React.HTMLAttributes<Element>).onClick;
 
