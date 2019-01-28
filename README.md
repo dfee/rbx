@@ -51,4 +51,4 @@ The sneaker logo is a modified version of the [Twitter Twemoji](https://github.c
 
 ### Prior Art
 
-This package was forked from [`react-bulma-components`](https://github.com/couds/react-bulma-components`), and re-written in its entirety to support the latest version of Bulma, use TypeScript, and fix many outstanding bugs.
+This package was forked from [`react-bulma-components`](https://github.com/couds/react-bulma-components), and re-written in its entirety to support the latest version of Bulma, use TypeScript, and fix many outstanding bugs.
