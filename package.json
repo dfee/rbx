@@ -54,7 +54,7 @@
     "@types/jest": "^23.3.10",
     "@types/jsdom": "^12.2.0",
     "@types/prop-types": "^15.5.8",
-    "@types/react": "^16.7.21",
+    "@types/react": "^16.8.0",
     "@types/react-dom": "^16.0.11",
     "@types/react-test-renderer": "^16.0.3",
     "bulma": "0.7.2",
