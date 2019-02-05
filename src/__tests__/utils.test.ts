@@ -43,7 +43,7 @@ describe("Utils", () => {
     it("should combine RefObject and ref callback", () => {
       const div = document.createElement("div");
       const refObj = React.createRef<HTMLDivElement>();
-      const refCallback = jest.fn();
+      const refCallback = jest.fn(e => undefined);
       const combined = combineRefs(refObj, refCallback);
 
       combined(div);
