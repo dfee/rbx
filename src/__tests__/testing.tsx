@@ -66,15 +66,16 @@ export const withWindow = contextManager(
 );
 
 export const withMockError = contextManager(
-  () => {
-    const context = { error: jest.fn() };
-    const state = { error: global.console.error };
-    global.console.error = context.error;
-
-    return { context, state };
-  },
-  ({ state: { error } }) => {
-    global.console.error = error;
+  () => ({
+    context: {
+      error: jest
+        .spyOn(global.console, "error")
+        .mockImplementation(() => undefined),
+    },
+    state: {},
+  }),
+  ({ context: { error } }) => {
+    error.mockClear();
   },
 );
 
