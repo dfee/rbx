@@ -28,7 +28,7 @@ describe("HelloWorldNotification", () => {
     expect(wrapper.text()).toEqual("Welcome to 👟 rbx");
   });
 
-  it('is renders nothing on "Delete" click', () => {
+  it('renders nothing on "Delete" click', () => {
     const node = <HelloWorldNotification />;
     const wrapper = Enzyme.shallow(node);
     wrapper.find(Delete).simulate("click");
