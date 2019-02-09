@@ -6,6 +6,7 @@ export {
   Checkbox,
   Control,
   Field,
+  Fieldset,
   File,
   Help,
   Input,

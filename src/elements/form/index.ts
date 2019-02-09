@@ -1,6 +1,7 @@
 export { Checkbox } from "./checkbox";
 export { Control } from "./control";
 export { Field } from "./field";
+export { Fieldset } from "./fieldset";
 export { File } from "./file";
 export { Help } from "./help";
 export { Input } from "./input";

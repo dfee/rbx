@@ -381,6 +381,17 @@ Object {
     },
     "render": [Function],
   },
+  "Fieldset": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "fieldset",
+    },
+    "displayName": "Fieldset",
+    "propTypes": Object {
+      "disabled": [Function],
+    },
+    "render": [Function],
+  },
   "File": Object {
     "$$typeof": Symbol(react.forward_ref),
     "CTA": Object {
