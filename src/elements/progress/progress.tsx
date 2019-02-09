@@ -50,7 +50,6 @@ export const Progress = forwardRefAs<ProgressProps>(
   {
     as: "progress",
     max: 100,
-    value: 0,
   },
 );
 

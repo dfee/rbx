@@ -58,5 +58,17 @@ describe(`${DISPLAY_NAME} component`, () => {
         });
       });
     });
+
+    describe("size", () => {
+      validateStringOrNumberPropType(propTypes, "size");
+
+      BUTTON_GROUP_DEFAULTS.sizes.map(size => {
+        it(`should be ${size}`, () => {
+          const node = <ButtonGroup size={size} />;
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass(`are-${size}`)).toBe(true);
+        });
+      });
+    });
   });
 });

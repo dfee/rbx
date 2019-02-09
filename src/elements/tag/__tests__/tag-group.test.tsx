@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TagGroup } from "src/elements/tag/tag-group";
+import { TAG_GROUP_DEFAULTS, TagGroup } from "src/elements/tag/tag-group";
 
 import {
   hasProperties,
@@ -8,6 +8,7 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
 const COMPONENT = TagGroup;
@@ -31,7 +32,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   describe("props", () => {
     const { propTypes } = COMPONENT;
 
-    describe("size", () => {
+    describe("gapless", () => {
       validateBoolPropType(propTypes, "gapless");
 
       [false, true].map(gapless => {
@@ -39,6 +40,18 @@ describe(`${DISPLAY_NAME} component`, () => {
           const node = <TagGroup gapless={gapless} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("has-addons")).toBe(gapless);
+        });
+      });
+    });
+
+    describe("size", () => {
+      validateStringOrNumberPropType(propTypes, "size");
+
+      TAG_GROUP_DEFAULTS.sizes.map(size => {
+        it(`should be ${size}`, () => {
+          const node = <TagGroup size={size} />;
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass(`are-${size}`)).toBe(true);
         });
       });
     });

@@ -8,14 +8,8 @@ import { Prefer } from "../../types";
 import { tuple } from "../../utils";
 
 export const IMAGE_CONTAINER_DEFAULTS = {
-  sizes: tuple(
-    16,
-    24,
-    32,
-    48,
-    64,
-    96,
-    128,
+  dimmensions: tuple(16, 24, 32, 48, 64, 96, 128),
+  ratios: tuple(
     "16by9",
     "1by1",
     "1by2",
@@ -38,7 +32,9 @@ export const IMAGE_CONTAINER_DEFAULTS = {
 export interface ImageContainerVariablesOverrides {}
 
 export interface ImageContainerVariablesDefaults {
-  sizes: (typeof IMAGE_CONTAINER_DEFAULTS["sizes"])[number];
+  sizes:
+    | (typeof IMAGE_CONTAINER_DEFAULTS["dimmensions"])[number]
+    | (typeof IMAGE_CONTAINER_DEFAULTS["ratios"])[number];
 }
 
 export type ImageContainerVariables = Prefer<
@@ -52,8 +48,43 @@ export type ImageContainerModifierProps = Partial<{
 
 export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 
+const mapImageContainerChildren = (
+  children: React.ReactNode,
+  size?: ImageContainerVariables["sizes"],
+) => {
+  // Check if size is a "ratio", but also support user overrides;
+  //   i.e.can't use IMAGE_CONTAINER_DEFAULTS["ratios"]
+  // ...assume that if it's a string, it's a ratio.
+  if (typeof size !== "string") {
+    return children;
+  }
+
+  return React.Children.map(children, (child, i) => {
+    if (typeof child === "object" && child !== null && "type" in child) {
+      if (child.type !== React.Fragment) {
+        return React.cloneElement(child, {
+          className: classNames(
+            "has-ratio",
+            (child.props as React.HTMLAttributes<Element>).className,
+          ),
+        });
+      } else {
+        const fragmentMapped = mapImageContainerChildren(
+          (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
+            .children,
+          size,
+        );
+
+        return <React.Fragment children={fragmentMapped} />;
+      }
+    }
+
+    return child;
+  });
+};
+
 export const ImageContainer = forwardRefAs<ImageContainerProps>(
-  ({ className, size, ...rest }, ref) => {
+  ({ children, className, size, ...rest }, ref) => {
     let s: string | undefined;
     if (typeof size === "string") {
       s = size;
@@ -63,6 +94,7 @@ export const ImageContainer = forwardRefAs<ImageContainerProps>(
 
     return (
       <Generic
+        children={mapImageContainerChildren(children, size)}
         className={classNames("image", { [`is-${s}`]: s }, className)}
         ref={ref}
         {...rest}

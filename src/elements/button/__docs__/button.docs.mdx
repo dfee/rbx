@@ -14,7 +14,7 @@ import {
   faHeading,
   faItalic,
   faTimes,
-  faUnderline
+  faUnderline,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
@@ -22,7 +22,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
@@ -69,6 +69,28 @@ When unspecified, Bulma styles a `medium` button.
         {size}
       </Button>
     ))}
+  </Button.Group>
+</Playground>
+
+Use the `size` prop on `<Button.Group>` to change the size of **multiple buttons** at once.
+
+<Playground>
+  <Button.Group size="medium">
+    <Button>All</Button>
+    <Button>Medium</Button>
+    <Button>Size</Button>
+  </Button.Group>
+</Playground>
+
+Use the `size` prop on `<Button>` to change the size of a **subset of buttons** in a `<Button.Group>` with a set `size` prop.
+
+<Playground>
+  <Button.Group size="small">
+    <Button>small</Button>
+    <Button>small</Button>
+    <Button>small</Button>
+    <Button size="normal">normal</Button>
+    <Button>small</Button>
   </Button.Group>
 </Playground>
 
@@ -387,7 +409,7 @@ A long list of buttons will be wrapped while keeping the buttons evenly spaced.
       "Seventeen",
       "Eighteen",
       "Nineteen",
-      "Twenty"
+      "Twenty",
     ].map(name => (
       <Button key={name}>{name}</Button>
     ))}
@@ -499,46 +521,46 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
     color: {
       description: "the color of the button",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     fullwidth: {
       description: "whether the button occupies all horizontal space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     inverted: {
       description: "whether the button is inverted",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     outlined: {
       description: "whether the button is outlined",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     rounded: {
       description: "whether the button is rounded",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     selected: {
       description: "whether the button is selected",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "the size of the button",
       typeName: "string",
-      typeTip: mapEnumerable(BUTTON_DEFAULTS.sizes)
+      typeTip: mapEnumerable(BUTTON_DEFAULTS.sizes),
     },
     state: {
       description: "the state of the button",
       typeName: "string",
-      typeTip: mapEnumerable(BUTTON_DEFAULTS.states)
+      typeTip: mapEnumerable(BUTTON_DEFAULTS.states),
     },
     static: {
       description: "whether the button responds to input",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     text: {
       description: "whether the button looks like text",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -550,11 +572,16 @@ You should use the `selected` prop of the button to ensure it's _above_ it's sib
     align: {
       description: "the alignment of the button group",
       typeName: "string",
-      typeTip: mapEnumerable(BUTTON_GROUP_DEFAULTS.alignments)
+      typeTip: mapEnumerable(BUTTON_GROUP_DEFAULTS.alignments),
     },
     hasAddons: {
       description: "whether the button group allows addons",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
+    size: {
+      description: "set the size of children buttons",
+      typeName: "string",
+      typeTip: mapEnumerable(BUTTON_GROUP_DEFAULTS.sizes),
+    },
   }}
 />

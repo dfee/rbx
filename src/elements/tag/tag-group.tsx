@@ -4,17 +4,42 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+import { Prefer } from "../../types";
+import { tuple } from "../../utils";
+
+export const TAG_GROUP_DEFAULTS = {
+  sizes: tuple("medium", "large"),
+};
+
+export interface TagGroupVariablesOverrides {}
+
+export interface TagGroupVariablesDefaults {
+  sizes: (typeof TAG_GROUP_DEFAULTS["sizes"])[number];
+}
+
+export type TagGroupVariables = Prefer<
+  TagGroupVariablesOverrides,
+  TagGroupVariablesDefaults
+>;
 
 export type TagGroupModifierProps = Partial<{
   gapless: boolean;
+  size: TagGroupVariables["sizes"];
 }>;
 
 export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 
 export const TagGroup = forwardRefAs<TagGroupProps>(
-  ({ className, gapless, ...rest }, ref) => (
+  ({ className, gapless, size, ...rest }, ref) => (
     <Generic
-      className={classNames("tags", { "has-addons": gapless }, className)}
+      className={classNames(
+        "tags",
+        {
+          [`are-${size}`]: size,
+          "has-addons": gapless,
+        },
+        className,
+      )}
       ref={ref}
       {...rest}
     />
@@ -25,4 +50,5 @@ export const TagGroup = forwardRefAs<TagGroupProps>(
 TagGroup.displayName = "Tag.Group";
 TagGroup.propTypes = {
   gapless: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

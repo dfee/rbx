@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bulma": "^0.7.2",
+    "bulma": "^0.7.4",
     "rbx": "file:../../dist",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

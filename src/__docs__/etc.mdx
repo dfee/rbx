@@ -36,3 +36,39 @@ The general way to build is to use `make`, which will:
 
 **Important:** do not use `npm publish` to publish the code to _npm_.
 Rather, use `make publish` which will publish the build result in `/dist`.
+
+## Contributing and releasing
+
+### Authoring a Pull Request (contributing)
+
+To participate in development, here is the contribution process:
+
+- [ ] fork `rbx` on GitHub
+- [ ] `git clone` (create the repo locally)
+- [ ] `git checkout master`
+- [ ] `git pull` (updating `master`)
+- [ ] `git checkout -b <new-branch>` (create _feature_ or _bug_ branch)
+- [ ] implement code changes
+- [ ] `make test` (for linting, unit tests, etc.)
+- [ ] `make` (generating updated `size-snapshot.json`)
+- [ ] `git add` and `git commit`
+- [ ] `git push origin <new-branch>`
+- [ ] ensure CI coverage passes
+- [ ] open pull request to master repo (`dfee/rbx`)
+
+### After the Pull Request (releasing)
+
+After an acceptable pull request is received, here is the release process:
+
+- [ ] `git checkout master`
+- [ ] `git pull`
+- [ ] `git merge <new-branch>`
+- [ ] `npm version` (update package version).
+- [ ] `git push master` and `git push origin <version-tag>`
+- [ ] ensure CI coverage passes (again)
+- [ ] `make` (create a new release with updated version)
+- [ ] `make publish` (publish to NPM)
+- [ ] `make docs` and `make docs-publish` (optional, build new docs for GitHub Pages)
+- [ ] publish release on GitHub (find tag, make release)
+- [ ] `git branch -d <new-branch>` (delete `<new-branch>` locally)
+- [ ] `git push --delete origin <new-branch>` (delete `<new-branch>` on remote)

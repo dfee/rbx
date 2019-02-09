@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Image } from "src/elements/image/image";
 import {
   IMAGE_CONTAINER_DEFAULTS,
   ImageContainer,
@@ -37,7 +38,10 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      IMAGE_CONTAINER_DEFAULTS.sizes.map(size => {
+      [
+        ...IMAGE_CONTAINER_DEFAULTS.dimmensions,
+        ...IMAGE_CONTAINER_DEFAULTS.ratios,
+      ].map(size => {
         it(`should be ${size}`, () => {
           const node = <ImageContainer size={size} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
@@ -47,6 +51,60 @@ describe(`${DISPLAY_NAME} component`, () => {
             expect(wrapper.hasClass(`is-${size}`)).toBe(true);
           }
         });
+      });
+
+      ["dimmension", "ratio"].map(sizeType => {
+        const size = sizeType === "dimmension" ? 16 : "square";
+        // tslint:disable-next-line: no-null-keyword
+        [undefined, null, "Image", "img", "div", "Fragment", "text"].map(
+          childType => {
+            const expectHasRatio =
+              childType !== null &&
+              childType !== undefined &&
+              childType !== "text" &&
+              sizeType === "ratio";
+
+            let children: React.ReactNode | undefined;
+            if (
+              childType === null ||
+              childType === undefined ||
+              childType === "text"
+            ) {
+              children = childType;
+            } else if (childType === "Image") {
+              children = <Image />;
+            } else if (childType === "img") {
+              children = <img role="presentation" alt="" />;
+            } else if (childType === "div") {
+              children = <div />;
+            } else if (childType === "Fragment") {
+              children = (
+                <React.Fragment>
+                  <div />
+                </React.Fragment>
+              );
+            }
+
+            it(`should ${
+              expectHasRatio ? "" : "not "
+            }have class 'has-ratio' for ${JSON.stringify(childType)}`, () => {
+              const node = <ImageContainer size={size} children={children} />;
+              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+                node,
+              );
+              const childWrapper = wrapper.children();
+              if (childType === null || childType === undefined) {
+                expect(childWrapper.length).toBe(0);
+              } else if (childType === "text") {
+                expect(wrapper.prop("children")).toEqual(
+                  sizeType === "dimmension" ? childType : [childType],
+                );
+              } else {
+                expect(childWrapper.hasClass("has-ratio")).toBe(expectHasRatio);
+              }
+            });
+          },
+        );
       });
     });
   });

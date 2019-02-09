@@ -53,6 +53,7 @@ Object {
       "propTypes": Object {
         "align": [Function],
         "hasAddons": [Function],
+        "size": [Function],
       },
       "render": [Function],
     },
@@ -1092,7 +1093,6 @@ Object {
     "defaultProps": Object {
       "as": "progress",
       "max": 100,
-      "value": 0,
     },
     "displayName": "Progress",
     "propTypes": Object {
@@ -1254,6 +1254,7 @@ Object {
       "displayName": "Tag.Group",
       "propTypes": Object {
         "gapless": [Function],
+        "size": [Function],
       },
       "render": [Function],
     },

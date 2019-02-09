@@ -25,6 +25,7 @@ import { Button, Icon } from "src/elements";
 import { Checkbox } from "../checkbox";
 import { Control, CONTROL_DEFAULTS } from "../control";
 import { Field, FIELD_DEFAULTS } from "../field";
+import { Fieldset } from "../fieldset";
 import { FIELD_LABEL_DEFAULTS } from "../field-label";
 import { Help } from "../help";
 import { Input } from "../input";
@@ -798,6 +799,27 @@ Vertical forms are also supported, and are simpler to compose.
   </form>
 </Playground>
 
+### Disabled fields
+
+Use the `disabled` prop on `<Fieldset>` to set all child fields as disabled.
+
+<Playground>
+  <Fieldset disabled>
+    <Field>
+      <Label>Name</Label>
+      <Control>
+        <Input type="text" placeholder="e.g. Alex Smith" />
+      </Control>
+    </Field>
+    <Field>
+      <Label>Email</Label>
+      <Control>
+        <Input type="email" placeholder="e.g. alexsmith@gmail.com" />
+      </Control>
+    </Field>
+  </Fieldset>
+</Playground>
+
 ## API
 
 <ForwardRefAsExoticComponentDoc
@@ -878,6 +900,18 @@ Vertical forms are also supported, and are simpler to compose.
       description: "preserve vertical alignment with the <Field.Body>",
       typeName: "string",
       typeTip: mapEnumerable(FIELD_LABEL_DEFAULTS.sizes),
+    },
+  }}
+/>
+
+<ForwardRefAsExoticComponentDoc
+  component={Fieldset}
+  customize
+  docPath="/form/general"
+  props={{
+    disabled: {
+      description: "disable all children fields",
+      typeName: "boolean",
     },
   }}
 />

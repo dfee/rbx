@@ -14,7 +14,7 @@ import {
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Control, Delete, Field } from "src/elements";
 import { Tag, TAG_DEFAULTS } from "../tag";
-import { TagGroup } from "../tag-group";
+import { TagGroup, TAG_GROUP_DEFAULTS } from "../tag-group";
 
 # Tag
 
@@ -50,6 +50,41 @@ Use the `size` prop on `<Tag>` to change its size.
       </OptionBlock>
     ))
   }
+</Playground>
+
+Use the `size` prop on `<Tag.Group>` to change the size of all `<Tag>`s in that group.
+
+<Playground>
+  {() => {
+    const sizes = [
+      { name: 'default', size: undefined },
+      ...TAG_GROUP_DEFAULTS.sizes.map(size => ({ name: size, size }))
+    ]
+
+    return sizes.map(({name, size}, i) => (
+      <OptionBlock key={i} index={i} props={{ size }}>
+        <Tag.Group size={size}>
+          <Tag>All</Tag>
+          <Tag>{name}</Tag>
+          <Tag>Size</Tag>
+        </Tag.Group>
+      </OptionBlock>
+    ))
+
+}}
+
+</Playground>
+
+Use the `size` prop on individual `<Tag>` elements to change their size within a `<Tag.Group>` that has a set `size` prop.
+
+<Playground>
+  <Tag.Group size="medium">
+    <Tag>medium</Tag>
+    <Tag size="normal">normal</Tag>
+    <Tag>medium</Tag>
+    <Tag size="large">large</Tag>
+    <Tag>medium</Tag>
+  </Tag.Group>
 </Playground>
 
 ### Rounding
@@ -235,11 +270,17 @@ This can be useful for a long list of **blog tags**.
 
 <ForwardRefAsExoticComponentDoc
   component={Tag.Group}
+  customize
   docPath="/elements/tag"
   props={{
     gapless: {
       description: "attach tags together",
       typeName: "boolean",
+    },
+    size: {
+      description: "set the size of children tags",
+      typeName: "string",
+      typeTip: mapEnumerable(TAG_GROUP_DEFAULTS.sizes),
     },
   }}
 />

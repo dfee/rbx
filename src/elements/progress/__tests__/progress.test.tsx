@@ -22,7 +22,6 @@ describe(`${DISPLAY_NAME} component`, () => {
     defaultProps: {
       as: DEFAULT_ELEMENT,
       max: 100,
-      value: 0,
     },
   });
 

@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Table } from "src/elements";
@@ -56,6 +56,30 @@ Use the `size` prop of `<Progress>` to change the height.
 
 </Playground>
 
+### Indeterminate
+
+If you don't provide the `value` prop for `<Progress>`, then the progress bar will be _indeterminate_.
+This is useful for showing that some progress is going on, but the actual duration is not yet determined.
+
+<Playground>
+  {() => {
+    const permutations = [
+      {size: 'small', color: 'primary'},
+      {color: 'danger'},
+      {size: 'medium', color: 'dark'},
+      {size: 'large', color: 'info'},
+    ];
+
+    return permutations.map((props, i) => (
+      <OptionBlock props={props} key={i} index={i}>
+        <Progress {...props} />
+      </OptionBlock>
+    ))
+
+}}
+
+</Playground>
+
 ## API
 
 <ForwardRefAsExoticComponentDoc
@@ -66,22 +90,21 @@ Use the `size` prop of `<Progress>` to change the height.
     color: {
       description: "set the progress bar's color",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     max: {
       defaultValue: 100,
       description: "the total completion amount (denominator)",
-      typeName: "number"
+      typeName: "number",
     },
     size: {
       description: "set the progress bar's size",
       typeName: "string",
-      typeTip: mapEnumerable(PROGRESS_DEFAULTS.sizes)
+      typeTip: mapEnumerable(PROGRESS_DEFAULTS.sizes),
     },
     value: {
-      defaultValue: 0,
       description: "the completion amount (numerator)",
-      typeName: "number"
-    }
+      typeName: "number",
+    },
   }}
 />
