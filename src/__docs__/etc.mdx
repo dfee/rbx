@@ -66,11 +66,10 @@ After an acceptable pull request is received, here is the release process:
 - [ ] `git pull`
 - [ ] `git merge <new-branch>`
 - [ ] `npm version` (update package version).
-- [ ] `git push master` and `git push origin <version-tag>`
+- [ ] `git push` and `git push origin <version-tag>`
 - [ ] ensure CI coverage passes (again)
-- [ ] `make` (create a new release with updated version)
-- [ ] `make publish` (publish to NPM)
-- [ ] `make docs` and `make docs-publish` (optional, build new docs for GitHub Pages)
-- [ ] publish release on GitHub (find tag, make release)
+- [ ] `make` and `make publish` (create a new release with updated version, and publish to NPM)
+- [ ] `make docs` and `make docs-publish` (optional, build and publish docs to GitHub Pages)
+- [ ] create release on GitHub (find tag -> "Create release")
 - [ ] `git branch -d <new-branch>` (delete `<new-branch>` locally)
 - [ ] `git push --delete origin <new-branch>` (delete `<new-branch>` on remote)
