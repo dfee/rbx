@@ -12,7 +12,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "express": "^4.16.4",
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.7.1",
     "rbx": "file:../../dist",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
