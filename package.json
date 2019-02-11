@@ -30,7 +30,7 @@
   "homepage": "https://github.com/dfee/rbx#readme",
   "dependencies": {
     "classnames": "^2.2.6",
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.7.1"
   },
   "peerDependencies": {
     "react": "^16.8.1",
