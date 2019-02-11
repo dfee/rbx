@@ -23,7 +23,7 @@ module.exports = {
   },
   rootDir: ".",
   setupFiles: ["raf/polyfill"],
-  setupTestFrameworkScriptFile: "./src/__tests__/setup.ts",
+  setupFilesAfterEnv: ["./src/__tests__/setup.ts"],
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
   testPathIgnorePatterns: ["/node_modules/", "/examples/"],
   transform: { ".(ts|tsx)": "ts-jest" },
