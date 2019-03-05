@@ -7,9 +7,10 @@ import { Column, ColumnProps } from "src/grid/columns/column";
 export const RbxFeature: React.FC<{
   children: React.ReactNode;
   imageSrc: string;
+  // tslint:disable-next-line: react-unused-props-and-state
+  size?: ColumnProps["size"]; // false positive
   title: string;
   to: string;
-  size?: ColumnProps["size"];
 }> = ({ children, imageSrc, size: colSize, title, to }) => {
   const size = colSize !== undefined ? colSize : "half";
 
