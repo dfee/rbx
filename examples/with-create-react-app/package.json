@@ -6,7 +6,7 @@
     "rbx": "file:../../dist",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.6"
   },
   "scripts": {
     "start": "react-scripts start",
