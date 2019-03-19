@@ -51,7 +51,7 @@ export const withWindow = contextManager(
   // tslint:disable:no-any
   ({ value }: { value?: undefined } = {}) => {
     const window = (global as any).window;
-    delete (global as any).window;
+    // delete (global as any).window;
 
     if (value !== undefined) {
       (global as any).window = value;

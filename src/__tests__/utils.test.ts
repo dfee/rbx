@@ -15,12 +15,16 @@ describe("Utils", () => {
     });
 
     it("should return false without window (SSR)", () => {
-      withWindow({}, () => {
+      const initialWindow = window;
+      try {
+        delete (global as any).window; // tslint:disable-line:no-any
         expect(() => window).toThrow(
           new ReferenceError("window is not defined"),
         );
         expect(canUseDOM()).toBe(false);
-      });
+      } catch {
+        (global as any).window = initialWindow; // tslint:disable-line:no-any
+      }
     });
 
     it("should return false without document", () => {
