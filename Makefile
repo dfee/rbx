@@ -78,6 +78,7 @@ examples-test: \
 	examples-test-with-create-react-app \
 	examples-test-with-create-react-app-typescript \
 	examples-test-with-customization \
+	examples-test-with-nextjs \
 	examples-test-with-script
 .PHONY: examples-test
 
@@ -95,6 +96,11 @@ examples-test-with-customization:
 	@cd examples/with-customization/ && npm ci
 	@cd examples/with-customization/ && CI=true npm run test
 .PHONY: examples-test-with-customization
+
+examples-test-with-nextjs:
+	@cd examples/with-nextjs/ && npm ci
+	@cd examples/with-nextjs/ && CI=true npm run test
+.PHONY: examples-test-with-nextjs
 
 examples-test-with-script:
 	@cd examples/with-script/ && npm ci
