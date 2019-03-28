@@ -13,6 +13,9 @@
       "path": "examples/with-customization"
     },
     {
+      "path": "examples/with-nextjs"
+    },
+    {
       "path": "examples/with-script"
     }
   ]
