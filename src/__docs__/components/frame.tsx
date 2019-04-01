@@ -96,7 +96,7 @@ export class Frame extends React.Component<FrameProps> {
         );
       }
     }
-  }
+  };
 
   private readonly handleLoad = () => {
     if (
@@ -109,7 +109,7 @@ export class Frame extends React.Component<FrameProps> {
       this.forceUpdate();
       this.doUpdateHeight();
     }
-  }
+  };
 
   private readonly doUpdateHeight = () => {
     if (
@@ -123,7 +123,7 @@ export class Frame extends React.Component<FrameProps> {
       }px`;
     }
     this.updateHeight();
-  }
+  };
 
   private readonly updateHeight = () => {
     const { updateHeightDelay } = this.props;
@@ -136,5 +136,5 @@ export class Frame extends React.Component<FrameProps> {
     } else {
       this.updateHeightEnabled = false;
     }
-  }
+  };
 }
