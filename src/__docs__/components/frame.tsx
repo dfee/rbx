@@ -46,6 +46,7 @@ export class Frame extends React.Component<FrameProps> {
   public render() {
     const { children } = this.props;
 
+    // tslint:disable:react-a11y-iframes
     return (
       <iframe
         ref={this.ref}
@@ -71,6 +72,7 @@ export class Frame extends React.Component<FrameProps> {
           : undefined}
       </iframe>
     );
+    // tslint:enable:react-a11y-iframes
   }
 
   private readonly cloneStyles = () => {

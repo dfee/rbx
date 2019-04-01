@@ -79,7 +79,7 @@ export function forwardRefAs<
   >,
 ) {
   const forward = React.forwardRef(factory);
-  forward.defaultProps = defaultProps;
+  (forward as any).defaultProps = defaultProps;
 
   return forward as ForwardRefAsExoticComponent<TOwnProps, TDefaultComponent>;
 }
