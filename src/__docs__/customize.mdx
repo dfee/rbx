@@ -21,10 +21,10 @@ Before we get on to an example, here's an overview of how we use _TypeScript_ to
 
 Take a look at the [source code for the **helpers variables**](https://github.com/dfee/rbx/blob/master/src/base/helpers/variables.ts), or the [source code for `<Button>`](https://github.com/dfee/rbx/blob/master/src/elements/button/button.tsx), and you'll notice two very important expressions:
 
-1. the `DEFAULTS` or `<COMPONOENT>_DEFAULTS` variable that defines the defaults in a `tuple()`
+1. the `DEFAULTS` or `<COMPONENT>_DEFAULTS` variable that defines the defaults in a `tuple()`
 2. a `Variables` or `<Component>Variables` `type` that uses those defaults to construct a _TypeScript_ type.
 
-Looking deeper at the **DEFFAULTS**, that's where the _Bulma_ defaults are defined in code.
+Looking deeper at the **DEFAULTS**, that's where the _Bulma_ defaults are defined in code.
 For example, `colors` on `DEFAULTS`, and `sizes` on `BUTTON_DEFAULTS`.
 
 Looking deeper at the **Variables**, you'll realize that `Variables` is actually just a merge of `VariablesDefaults` and `VariablesOverrides`.
