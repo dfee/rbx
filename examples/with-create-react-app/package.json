@@ -25,6 +25,6 @@
   ],
   "devDependencies": {
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.9.1"
+    "enzyme-adapter-react-16": "^1.11.2"
   }
 }
