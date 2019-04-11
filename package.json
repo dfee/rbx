@@ -62,7 +62,7 @@
     "coveralls": "3.0.3",
     "css-loader": "^2.1.1",
     "docz": "latest",
-    "docz-theme-default": "^0.13.7",
+    "docz-theme-default": "^1.0.0",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.11.2",
     "fork-ts-checker-webpack-plugin": "^1.0.1",
