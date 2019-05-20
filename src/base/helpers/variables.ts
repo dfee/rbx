@@ -68,7 +68,7 @@ export const DEFAULTS = {
 
   // Typography
   textAlignments: tuple("centered", "justified", "left", "right"),
-  textSizes: tuple(1, 2, 3, 4, 5, 6),
+  textSizes: tuple(1, 2, 3, 4, 5, 6, 7),
   textTransforms: tuple("capitalized", "lowercase", "uppercase"),
   textWeights: tuple("light", "normal", "semibold", "bold"),
 
