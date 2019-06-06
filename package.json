@@ -59,7 +59,7 @@
     "@types/react-dom": "^16.8.3",
     "@types/react-test-renderer": "^16.8.1",
     "bulma": "0.7.4",
-    "coveralls": "3.0.3",
+    "coveralls": "3.0.4",
     "css-loader": "^2.1.1",
     "docz": "latest",
     "docz-theme-default": "^0.13.7",
