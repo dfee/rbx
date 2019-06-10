@@ -70,7 +70,7 @@ export const DEFAULTS = {
   textAlignments: tuple("centered", "justified", "left", "right"),
   textSizes: tuple(1, 2, 3, 4, 5, 6),
   textTransforms: tuple("capitalized", "lowercase", "uppercase"),
-  textWeights: tuple("light", "normal", "semibold", "bold"),
+  textWeights: tuple("light", "medium", "normal", "semibold", "bold"),
 
   // Visibility
   displays: tuple("block", "flex", "inline", "inline-block", "inline-flex"),
