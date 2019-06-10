@@ -11,6 +11,7 @@ import { ColumnGroup } from "./column-group";
 
 export const COLUMN_DEFAULTS = {
   sizes: tuple(
+    0,
     1,
     2,
     3,
