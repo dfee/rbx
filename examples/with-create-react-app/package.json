@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "rbx": "file:../../dist",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-scripts": "2.1.7"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,7 +24,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1"
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0"
   }
 }
