@@ -14,6 +14,8 @@ export type OtherHelpersProps = Partial<{
   paddingless: boolean;
   /** Removes any radius */
   radiusless: boolean;
+  /** Applies position: relative to the element */
+  relative: boolean;
   /** Removes any shadow */
   shadowless: boolean;
   /** Prevents the text from being selectable */
@@ -25,6 +27,7 @@ export const makePropTypes = makePropTypesFactory(vars => ({
   marginless: PropTypes.bool,
   paddingless: PropTypes.bool,
   radiusless: PropTypes.bool,
+  relative: PropTypes.bool,
   shadowless: PropTypes.bool,
   unselectable: PropTypes.bool,
 }));
@@ -34,6 +37,7 @@ export const transform: TransformFunction<OtherHelpersProps> = props => {
     marginless,
     paddingless,
     radiusless,
+    relative,
     shadowless,
     unselectable,
     ...rest
@@ -47,6 +51,7 @@ export const transform: TransformFunction<OtherHelpersProps> = props => {
       "is-marginless": marginless,
       "is-paddingless": paddingless,
       "is-radiusless": radiusless,
+      "is-relative": relative,
       "is-shadowless": shadowless,
       "is-unselectable": unselectable,
     },

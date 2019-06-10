@@ -11,7 +11,7 @@ import {
   SimplePropsTable,
   asDoc,
   mapEnumerable,
-  refDoc
+  refDoc,
 } from "src/__docs__/components";
 import { Generic } from "../generic";
 import { DEFAULTS } from "../helpers/variables";
@@ -69,9 +69,9 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     as: {
       ...asDoc,
-      defaultValue: Generic.defaultProps.as
+      defaultValue: Generic.defaultProps.as,
     },
-    ref: refDoc
+    ref: refDoc,
   }}
 />
 
@@ -81,13 +81,13 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     clearfix: {
       description: "fixes an element's floating children",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     pull: {
       description: "moves an element to the left or right",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.floatPulledAlignments)
-    }
+      typeTip: mapEnumerable(DEFAULTS.floatPulledAlignments),
+    },
   }}
 />
 
@@ -97,8 +97,8 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     clipped: {
       description: "adds overflow hidden",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -108,8 +108,8 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     overlay: {
       description: "completely covers the first positioned parent",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -120,37 +120,37 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
     backgroundColor: {
       description: "sets the background color",
       typeName: "string",
-      typeTip: mapEnumerable([...DEFAULTS.colors, ...DEFAULTS.shades])
+      typeTip: mapEnumerable([...DEFAULTS.colors, ...DEFAULTS.shades]),
     },
     italic: {
       description: "makes the text italic",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     textAlign: {
       description: "sets the alignment of the text",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.textAlignments)
+      typeTip: mapEnumerable(DEFAULTS.textAlignments),
     },
     textColor: {
       description: "sets the text color",
       typeName: "string",
-      typeTip: mapEnumerable([...DEFAULTS.colors, ...DEFAULTS.shades])
+      typeTip: mapEnumerable([...DEFAULTS.colors, ...DEFAULTS.shades]),
     },
     textSize: {
       description: "sets the text size",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.textSizes)
+      typeTip: mapEnumerable(DEFAULTS.textSizes),
     },
     textTransform: {
       description: "alters the text capitalization",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.textSizes)
+      typeTip: mapEnumerable(DEFAULTS.textSizes),
     },
     textWeight: {
       description: "sets the text weight",
       typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.textWeights)
-    }
+      typeTip: mapEnumerable(DEFAULTS.textWeights),
+    },
   }}
 />
 
@@ -160,17 +160,17 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     hidden: {
       description: "hides the element",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     invisible: {
       description: "adds visibility hidden",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     srOnly: {
       description:
         "Hide elements visually but keeps the element available to be announced by a screen reader",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -180,24 +180,28 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     marginless: {
       description: "removes any margin",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     paddingless: {
       description: "removes any padding",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     radiusless: {
       description: "removes any radius",
-      typeName: "boolean"
+      typeName: "boolean",
+    },
+    relative: {
+      description: "applies position: relative to the element",
+      typeName: "boolean",
     },
     shadowless: {
       description: "removes any shadow",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     unselectable: {
       description: "prevents the text from being selectable",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -207,28 +211,28 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     mobile: {
       description: "up to 768px",
-      typeName: "LimitedResponsive Object"
+      typeName: "LimitedResponsive Object",
     },
     tablet: {
       description: "between 769px and 1023px",
-      typeName: "Responsive Object"
+      typeName: "Responsive Object",
     },
     desktop: {
       description: "between 1024px and 1215px",
-      typeName: "Responsive Object"
+      typeName: "Responsive Object",
     },
     widescreen: {
       description: "between 1216px and 1407px",
-      typeName: "Responsive Object"
+      typeName: "Responsive Object",
     },
     fullhd: {
       description: "1408px and above",
-      typeName: "LimitedResponsive Object"
+      typeName: "LimitedResponsive Object",
     },
     touch: {
       description: "up to 1023px",
-      typeName: "LimitedResponsive Object"
-    }
+      typeName: "LimitedResponsive Object",
+    },
   }}
 />
 

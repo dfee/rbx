@@ -19,6 +19,7 @@ describe("Other helpers", () => {
     validateBoolPropType(propTypes, "marginless");
     validateBoolPropType(propTypes, "paddingless");
     validateBoolPropType(propTypes, "radiusless");
+    validateBoolPropType(propTypes, "relative");
     validateBoolPropType(propTypes, "shadowless");
     validateBoolPropType(propTypes, "unselectable");
     testItShouldUseDefaultLocationProp(vtfunc, { marginless: "__UNKNOWN" });
@@ -49,6 +50,14 @@ describe("Other helpers", () => {
       it(`should ${radiusless ? "" : "not "}be radiusless`, () => {
         expect(vtfunc({ radiusless }, CNAME, LOC)).toEqual({
           className: radiusless ? "is-radiusless" : "",
+        });
+      });
+    });
+
+    [false, true].map(relative => {
+      it(`should ${relative ? "" : "not "}be relative`, () => {
+        expect(vtfunc({ relative }, CNAME, LOC)).toEqual({
+          className: relative ? "is-relative" : "",
         });
       });
     });
