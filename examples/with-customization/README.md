@@ -19,7 +19,7 @@ Unless you're building `rbx` from scratch, you'll want to follow these instructi
 
 ```diff
   "dependencies": {
-    "bulma": "^0.7.4",
+    "bulma": "^0.7.5",
 -   "rbx": "file:../../dist",
 +   "rbx": "^2.0.0",
     "react": "^16.7.0",

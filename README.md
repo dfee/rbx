@@ -13,7 +13,7 @@
 
 ### Features
 
-- up-to-date Bulma implementation (0.7.4)
+- up-to-date Bulma implementation (0.7.5)
 - written with TypeScript 3 for React 16
 - well tested and [documented](https://dfee.github.io/rbx)
 - extensive customization support
