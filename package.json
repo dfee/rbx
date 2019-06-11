@@ -60,7 +60,7 @@
     "@types/react-test-renderer": "^16.8.1",
     "bulma": "0.7.4",
     "coveralls": "3.0.3",
-    "css-loader": "^2.1.1",
+    "css-loader": "^3.0.0",
     "docz": "latest",
     "docz-theme-default": "^0.13.7",
     "enzyme": "3.9.0",
