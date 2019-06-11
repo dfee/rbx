@@ -47,7 +47,6 @@
     "@fortawesome/free-brands-svg-icons": "^5.9.0",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@mdx-js/tag": "^0.20.3",
     "@types/classnames": "^2.2.8",
     "@types/enzyme": "^3.9.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
