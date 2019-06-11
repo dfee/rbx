@@ -3,7 +3,7 @@ import React from "react";
 
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
 
-import { ComponentFeaturesProps } from "../feature";
+import { ComponentFeaturesProps } from "../feature/component-features";
 import { SimplePropsTableProps } from "../simple-props-table/simple-props-table";
 import { ComponentDoc, ComponentDocProps } from "./component-doc";
 import { asDoc } from "./as-doc";

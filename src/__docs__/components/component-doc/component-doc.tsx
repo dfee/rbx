@@ -3,7 +3,10 @@ import React from "react";
 
 import { Title } from "src/elements";
 
-import { ComponentFeatures, ComponentFeaturesProps } from "../feature";
+import {
+  ComponentFeatures,
+  ComponentFeaturesProps,
+} from "../feature/component-features";
 import {
   SimplePropsTable,
   SimplePropsTableProps,
