@@ -61,7 +61,7 @@
     "bulma": "0.7.5",
     "coveralls": "3.0.4",
     "css-loader": "^2.1.1",
-    "docz": "latest",
+    "docz": "^1.2.0",
     "docz-theme-default": "^1.2.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
