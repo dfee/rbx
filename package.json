@@ -10,9 +10,9 @@
     "url": "git+https://github.com/dfee/rbx.git"
   },
   "scripts": {
-    "build": "make build",
-    "docs:build": "make docs_build",
-    "docs": "make docs_dev",
+    "build": "make",
+    "docs:build": "make docs",
+    "docs": "make docs-dev",
     "lint": "make lint",
     "test": "make test"
   },
