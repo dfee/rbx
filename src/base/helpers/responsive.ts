@@ -45,13 +45,13 @@ export type ResponsiveBreakpointProps = Partial<{
 export type ResponsiveHelpersProps = Partial<{
   responsive: Partial<
     {
-      [B in Variables["breakpointsLimited"]]: LimitedResponsiveBreakpointProps
+      [B in Variables["breakpointsLimited"]]: LimitedResponsiveBreakpointProps;
     } &
       {
         [B in Exclude<
           Variables["breakpoints"],
           Variables["breakpointsLimited"]
-        >]: ResponsiveBreakpointProps
+        >]: ResponsiveBreakpointProps;
       }
   >;
 }>;
@@ -109,11 +109,7 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 
 export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
   const { responsive, ...rest } = props;
-  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
-  // https://github.com/Microsoft/TypeScript/pull/29121
-  // tslint:disable:no-any
-  // tslint:disable:no-unsafe-any
-  (rest as any).className = classNames(
+  rest.className = classNames(
     responsive !== undefined
       ? Object.keys(responsive)
           .filter(breakpoint => responsive[breakpoint] !== undefined)
@@ -152,7 +148,7 @@ export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
           })
           .reduce((acc, cv) => ({ ...acc, ...cv }), {})
       : undefined,
-    (rest as any).className,
+    rest.className,
   );
 
   return rest;

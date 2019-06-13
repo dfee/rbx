@@ -19,14 +19,7 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 
 export const transform: TransformFunction<OverlayHelpersProps> = props => {
   const { overlay, ...rest } = props;
-  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
-  // https://github.com/Microsoft/TypeScript/pull/29121
-  // tslint:disable:no-any
-  // tslint:disable:no-unsafe-any
-  (rest as any).className = classNames(
-    { "is-overlay": overlay },
-    (rest as any).className,
-  );
+  rest.className = classNames({ "is-overlay": overlay }, rest.className);
 
   return rest;
 };

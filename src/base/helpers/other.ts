@@ -42,11 +42,7 @@ export const transform: TransformFunction<OtherHelpersProps> = props => {
     unselectable,
     ...rest
   } = props;
-  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
-  // https://github.com/Microsoft/TypeScript/pull/29121
-  // tslint:disable:no-any
-  // tslint:disable:no-unsafe-any
-  (rest as any).className = classNames(
+  rest.className = classNames(
     {
       "is-marginless": marginless,
       "is-paddingless": paddingless,
@@ -55,7 +51,7 @@ export const transform: TransformFunction<OtherHelpersProps> = props => {
       "is-shadowless": shadowless,
       "is-unselectable": unselectable,
     },
-    (rest as any).className,
+    rest.className,
   );
 
   return rest;

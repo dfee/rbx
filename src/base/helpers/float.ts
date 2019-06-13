@@ -24,16 +24,12 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 export const transform: TransformFunction<FloatHelpersProps> = props => {
   const { clearfix, pull, ...rest } = props;
 
-  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
-  // https://github.com/Microsoft/TypeScript/pull/29121
-  // tslint:disable:no-any
-  // tslint:disable:no-unsafe-any
-  (rest as any).className = classNames(
+  rest.className = classNames(
     {
       "is-clearfix": clearfix,
       [`is-pulled-${pull}`]: pull,
     },
-    (rest as any).className,
+    rest.className,
   );
 
   return rest;

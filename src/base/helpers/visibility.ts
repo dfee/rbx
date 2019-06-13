@@ -29,17 +29,13 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 export const transform: TransformFunction<VisibilityHelpersProps> = props => {
   const { hidden, invisible, srOnly, ...rest } = props;
 
-  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
-  // https://github.com/Microsoft/TypeScript/pull/29121
-  // tslint:disable:no-any
-  // tslint:disable:no-unsafe-any
-  (rest as any).className = classNames(
+  rest.className = classNames(
     {
       "is-hidden": hidden,
       "is-invisible": invisible,
       "is-sr-only": srOnly,
     },
-    (rest as any).className,
+    rest.className,
   );
 
   return rest;

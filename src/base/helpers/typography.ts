@@ -41,11 +41,7 @@ export const transform: TransformFunction<TypographyHelpersProps> = props => {
     ...rest
   } = props;
 
-  // Can remove "no-any" and "no-unsafe-any" with TypeScript 3.3
-  // https://github.com/Microsoft/TypeScript/pull/29121
-  // tslint:disable:no-any
-  // tslint:disable:no-unsafe-any
-  (rest as any).className = classNames(
+  rest.className = classNames(
     {
       [`has-background-${backgroundColor}`]: backgroundColor,
       [`has-text-${textColor}`]: textColor,
@@ -55,7 +51,7 @@ export const transform: TransformFunction<TypographyHelpersProps> = props => {
       [`has-text-weight-${textWeight}`]: textWeight,
       [`is-size-${textSize}`]: textSize,
     },
-    (rest as any).className,
+    rest.className,
   );
 
   return rest;
