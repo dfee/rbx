@@ -1,0 +1,119 @@
+---
+name: PageLoader
+menu: Extensions
+route: /extensions/page-loader
+---
+
+import { Playground } from "docz";
+
+import {
+  ForwardRefAsExoticComponentDoc,
+  Frame,
+  mapEnumerable,
+} from "src/__docs__/components";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Button, Notification, Title } from "src/elements";
+import { PageLoader, PAGE_LOADER_DEFAULTS } from "../page-loader";
+
+import { SimplePageLoaderManager } from "./simple-page-loader-manager";
+
+# PageLoader
+
+Display a **page-loader** to inform users that content is loading.
+
+<Playground>
+  <Frame style={{ height: "400px" }} forceHeight>
+    {/* SimplePageLoaderManager is a reference implementation for the docs! */}
+    <SimplePageLoaderManager
+      color="primary"
+      button={<Button>Toggle for 3 Seconds</Button>}
+    >
+      <Title as="span">PageLoader</Title>
+    </SimplePageLoaderManager>
+  </Frame>
+</Playground>
+
+<Notification color="warning">
+  <strong>Note:</strong> the <code>{"<SimplePageLoaderManager>"}</code> used in
+  these playgrounds is a reference implementation for the docs, and is not
+  available in the release.
+  <strong>rbx</strong> provides a <em>foundation</em>, not an <em>opinion</em> for
+  components.
+</Notification>
+
+### Colors
+
+Use the `color` prop on `<PageLoader>` to specify the color.
+
+<Playground>
+  <Frame style={{ height: "500px" }} forceHeight>
+    <Button.Group>
+      {DEFAULTS.colors.map((color, i) => (
+        <SimplePageLoaderManager
+          key={i}
+          color={color}
+          button={<Button color={color}>Toggle {color}</Button>}
+        >
+          <Title as="span">{color} PageLoader</Title>
+        </SimplePageLoaderManager>
+      ))}
+    </Button.Group>
+  </Frame>
+</Playground>
+
+### Direction
+
+Use the `direction` prop on `<PageLoader>` to specify the loading direction.
+
+<Playground>
+  <Frame style={{ height: "500px" }} forceHeight>
+    {() => {
+      const directions = [
+        { name: 'top-to-bottom (default)', direction: undefined},
+        ...PAGE_LOADER_DEFAULTS.directions.map(direction => ({
+          direction, name: direction
+        }))
+      ];
+
+      return (
+        <Button.Group>
+          {directions.map(({ direction, name }, i) => (
+            <SimplePageLoaderManager
+              key={i}
+              direction={direction}
+              button={<Button>Toggle {name}</Button>}
+            >
+              <Title as="span">{name} PageLoader</Title>
+            </SimplePageLoaderManager>
+          ))}
+        </Button.Group>
+      );
+    }}
+
+  </Frame>
+</Playground>
+
+## API
+
+<ForwardRefAsExoticComponentDoc
+  component={PageLoader}
+  customize
+  docUrl="https://wikiki.github.io/elements/pageloader/"
+  docProvider="Bulma-Extensions"
+  props={{
+    active: {
+      description: "show the page-loader",
+      typeName: "boolean",
+    },
+    color: {
+      description: "the color of the page-loader",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors),
+    },
+    direction: {
+      description: "the directinon from which the page-loader appears",
+      typeName: "string",
+      typeTip: mapEnumerable(PAGE_LOADER_DEFAULTS.directions),
+    },
+  }}
+/>

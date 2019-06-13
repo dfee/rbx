@@ -1,0 +1,66 @@
+---
+name: Divider
+menu: Extensions
+route: /extensions/divider
+---
+
+import { Playground } from "docz";
+
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock,
+} from "src/__docs__/components";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block, Button, Title } from "src/elements";
+import { Divider } from "../divider";
+
+# Divider
+
+Display a vertical or horizontal **divider** to segment your design.
+
+### Colors
+
+Use the `color` prop on `<Divider>` to specify the color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
+        <Divider color={color}>OR</Divider>
+      </OptionBlock>
+    ))
+  }
+</Playground>
+
+### Vertical
+
+Use the `vertical` prop of `<Divider>` to make it vertical.
+
+<Playground>
+  <Divider vertical>OR</Divider>
+</Playground>
+
+## API
+
+<ForwardRefAsExoticComponentDoc
+  component={Divider}
+  customize
+  docUrl="https://wikiki.github.io/layout/divider/"
+  docProvider="Bulma-Extensions"
+  props={{
+    children: {
+      description: "the content of the divider",
+      typeName: "string | number",
+    },
+    color: {
+      description: "the color of the divider",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors),
+    },
+    vertical: {
+      description: "make the divider vertically positioned",
+      typeName: "boolean",
+    },
+  }}
+/>

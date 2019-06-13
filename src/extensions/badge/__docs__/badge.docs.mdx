@@ -1,0 +1,162 @@
+---
+name: Badge
+menu: Extensions
+route: /extensions/badge
+---
+
+import { Playground } from "docz";
+
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock,
+} from "src/__docs__/components";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block, Button, Title } from "src/elements";
+import { Badge, BADGE_DEFAULTS } from "../badge";
+
+# Badge
+
+Display a **badge** element in front of another component.
+
+By default, it renders as a `span`.
+It can display number or strings.
+
+<Playground>
+  <Badge badgeContent="pending" badgeColor="warning">
+    Notifications
+  </Badge>
+</Playground>
+
+But you can use the `as` prop to render any component or JSX element, like a `<Button>`.
+
+<Playground>
+  <Badge as={Button} badgeContent={8} badgeColor="danger">
+    Button
+  </Badge>
+</Playground>
+
+Because the props are prefixed with `badge`, you can use `<Badge>` as a wrapping component using the `as` prop – without interferring with the props.
+
+<Playground>
+  <Badge
+    as={Button}
+    badgeContent={8}
+    badgeColor="danger"
+    badgeOutlined
+    color="danger"
+    outlined
+  >
+    Button
+  </Badge>
+</Playground>
+
+### Colors
+
+Use the `badgeColor` prop on `<Badge>` to specify the color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map((color, i) => (
+      <OptionBlock props={{ color }} index={i} key={i}>
+        <Badge badgeColor={color}>Notifications</Badge>
+      </OptionBlock>
+    ))
+  }
+</Playground>
+
+### Sizes
+
+Use the `badgeSize` prop on `<Badge>` to change the size.
+
+<Playground>
+  {() => {
+    const sizes = BADGE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    sizes.splice(1,0, { name: 'normal', size: undefined});
+
+    return sizes.map(({ name, size }, i) => (
+      <OptionBlock props={{ size }} index={i} key={i}>
+        <Badge badgeSize={size}>{name} badge</Badge>
+      </OptionBlock>
+    ))
+
+}}
+
+</Playground>
+
+### Styles
+
+Use the `badgeOutlined` prop of `<Badge>` to use an outlined badge.
+
+<Playground>
+  <Block>
+    <Title as="p" size={4}>
+      Span
+    </Title>
+    <Badge badgeOutlined badgeContent={50}>
+      Notifications
+    </Badge>
+  </Block>
+  <Block>
+    <Title as="p" size={4}>
+      Button
+    </Title>
+    <Button.Group>
+      <Badge as={Button} badgeOutlined badgeContent={50}>
+        Button
+      </Badge>
+    </Button.Group>
+  </Block>
+</Playground>
+
+Use the `badgeRounded` prop of `<Badge>` to round a badge.
+
+<Playground>
+  <Block>
+    <Title as="p" size={4}>
+      Span
+    </Title>
+    <Badge badgeRounded badgeContent={50}>
+      Notifications
+    </Badge>
+  </Block>
+  <Block>
+    <Title as="p" size={4}>
+      Button
+    </Title>
+    <Button.Group>
+      <Badge as={Button} badgeRounded badgeContent={50}>
+        Button
+      </Badge>
+    </Button.Group>
+  </Block>
+</Playground>
+
+## API
+
+<ForwardRefAsExoticComponentDoc
+  component={Badge}
+  customize
+  docUrl="https://wikiki.github.io/elements/badge/"
+  docProvider="Bulma-Extensions"
+  props={{
+    badgeContent: {
+      description: "the contents of the badge",
+      typeName: "number | string",
+    },
+    badgeColor: {
+      description: "the color of the badge",
+      typeName: "string",
+      typeTip: mapEnumerable(DEFAULTS.colors),
+    },
+    badgeOutlined: {
+      description: "outline the badge",
+      typeName: "boolean",
+    },
+    badgeSize: {
+      description: "the size of the badge",
+      typeName: "string",
+      typeTip: mapEnumerable(BADGE_DEFAULTS.sizes),
+    },
+  }}
+/>

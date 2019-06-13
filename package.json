@@ -29,6 +29,11 @@
   },
   "homepage": "https://github.com/dfee/rbx#readme",
   "dependencies": {
+    "bulma": "0.7.5",
+    "bulma-badge": "^3.0.1",
+    "bulma-divider": "^0.2.0",
+    "bulma-pageloader": "^2.1.0",
+    "bulma-tooltip": "^2.0.2",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2"
   },
@@ -57,7 +62,6 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-test-renderer": "^16.8.1",
-    "bulma": "0.7.5",
     "coveralls": "3.0.4",
     "css-loader": "^2.1.1",
     "docz": "^1.2.0",
