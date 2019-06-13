@@ -9,6 +9,7 @@ import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
+  validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 import {
   testItShouldNotSetClassNameOnEmpty,
@@ -25,6 +26,7 @@ describe("Tooltip helpers", () => {
   const vtfunc = makeValidatingTransform();
 
   describe("propTypes", () => {
+    validateStringOrNumberPropType(propTypes, "tooltip");
     validateBoolPropType(propTypes, "tooltipActive");
     validateOneOfPropType(propTypes, "tooltipColor", DEFAULTS.colors);
     validateBoolPropType(propTypes, "tooltipMultiline");

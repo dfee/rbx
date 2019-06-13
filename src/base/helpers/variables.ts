@@ -5,6 +5,9 @@ export type VariablesDefinitions = {
   colors: (string | number)[];
   shades: (string | number)[];
 
+  // Badge
+  badgeSizes: (string | number)[];
+
   // Float
   floatPulledAlignments: (string | number)[];
 
@@ -50,6 +53,9 @@ export const DEFAULTS = {
     "white-bis",
   ),
 
+  // Badge
+  badgeSizes: tuple("small", "medium", "large"),
+
   // Float
   floatPulledAlignments: tuple("left", "right"),
 
@@ -88,6 +94,9 @@ export interface VariablesOverrides {}
 export interface VariablesDefaults {
   colors: (typeof DEFAULTS.colors)[number];
   shades: (typeof DEFAULTS.shades)[number];
+
+  // Badge
+  badgeSizes: (typeof DEFAULTS.badgeSizes)[number];
 
   // Float
   floatPulledAlignments: (typeof DEFAULTS.floatPulledAlignments)[number];

@@ -17,6 +17,13 @@ describe("Modifiers", () => {
     testItShouldNotSetClassNameOnEmpty(rvtfunc);
     testItShouldPreserveCustomClassName(rvtfunc);
 
+    it("should apply badge transforms", () => {
+      expect(rvtfunc({ badge: "asdf" }, CNAME, LOC)).toEqual({
+        className: "badge",
+        "data-badge": "asdf",
+      });
+    });
+
     it("should apply float transforms", () => {
       expect(rvtfunc({ clearfix: true }, CNAME, LOC)).toEqual({
         className: "is-clearfix",
@@ -32,6 +39,13 @@ describe("Modifiers", () => {
     it("should apply overlay transforms", () => {
       expect(rvtfunc({ overlay: true }, CNAME, LOC)).toEqual({
         className: "is-overlay",
+      });
+    });
+
+    it("should apply tooltip transforms", () => {
+      expect(rvtfunc({ tooltip: "asdf" }, CNAME, LOC)).toEqual({
+        className: "tooltip",
+        "data-tooltip": "asdf",
       });
     });
 

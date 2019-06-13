@@ -2,6 +2,10 @@ import { Prefer } from "../../types";
 import { makeRootValidatingTransformFactory } from "./factory";
 
 import {
+  BadgeHelpersProps,
+  makeValidatingTransform as badgeMVT,
+} from "./badge";
+import {
   FloatHelpersProps,
   makeValidatingTransform as floatMVT,
 } from "./float";
@@ -40,7 +44,8 @@ export interface HelpersPropsOverrides {}
 
 export type HelpersProps = Prefer<
   HelpersPropsOverrides,
-  FloatHelpersProps &
+  BadgeHelpersProps &
+    FloatHelpersProps &
     OverflowHelpersProps &
     OverlayHelpersProps &
     TooltipHelpersProps &
@@ -53,6 +58,7 @@ export type HelpersProps = Prefer<
 export const makeRootValidatingTransform = makeRootValidatingTransformFactory<
   HelpersProps
 >(
+  badgeMVT,
   floatMVT,
   overflowMVT,
   overlayMVT,
