@@ -1,0 +1,27 @@
+---
+name: Tooltip
+menu: Extensions
+route: /extensions/tooltip
+---
+
+import { Playground } from "docz";
+
+import {
+  ForwardRefAsExoticComponentDoc,
+  mapEnumerable,
+  OptionBlock,
+} from "src/__docs__/components";
+import { DEFAULTS } from "src/base/helpers/variables";
+import { Block, Button, Title } from "src/elements";
+
+# Tooltip
+
+Display a **tooltip** attached to any kind of element with different positioning.
+
+It can display number or strings.
+
+<Playground>
+  <Button badgeContent="pending" badgeColor="warning" tooltip="Tooltip Text">
+    Notifications
+  </Button>
+</Playground>

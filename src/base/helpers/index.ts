@@ -22,6 +22,10 @@ import {
   ResponsiveHelpersProps,
 } from "./responsive";
 import {
+  TooltipHelpersProps,
+  makeValidatingTransform as tooltipMVT,
+} from "./tooltip";
+import {
   makeValidatingTransform as typographyMVT,
   TypographyHelpersProps,
 } from "./typography";
@@ -39,6 +43,7 @@ export type HelpersProps = Prefer<
   FloatHelpersProps &
     OverflowHelpersProps &
     OverlayHelpersProps &
+    TooltipHelpersProps &
     TypographyHelpersProps &
     VisibilityHelpersProps &
     OtherHelpersProps &
@@ -51,6 +56,7 @@ export const makeRootValidatingTransform = makeRootValidatingTransformFactory<
   floatMVT,
   overflowMVT,
   overlayMVT,
+  tooltipMVT,
   typographyMVT,
   visibilityMVT,
   otherMVT,

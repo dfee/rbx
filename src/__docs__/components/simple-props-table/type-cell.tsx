@@ -1,7 +1,7 @@
 import React from "react";
 
+import { Generic } from "src/base";
 import { Table } from "src/elements";
-import { Tooltip } from "./tooltip";
 
 import { PropDoc } from "./types";
 
@@ -10,17 +10,10 @@ export type TypeCellProps = {
   typeTip: PropDoc["typeTip"];
 };
 
-export const TypeCell = ({ typeName, typeTip }: TypeCellProps) => {
-  const typeNode =
-    typeTip === undefined ? (
-      typeName
-    ) : (
-      <Tooltip text={typeTip}>{typeName}</Tooltip>
-    );
-
-  return (
-    <Table.Cell>
-      <code>{typeNode}</code>
-    </Table.Cell>
-  );
-};
+export const TypeCell = ({ typeName, typeTip }: TypeCellProps) => (
+  <Table.Cell>
+    <Generic as="code" tooltip={typeTip} tooltipMultiline>
+      {typeName}
+    </Generic>
+  </Table.Cell>
+);

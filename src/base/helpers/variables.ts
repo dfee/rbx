@@ -12,6 +12,9 @@ export type VariablesDefinitions = {
   breakpoints: (string | number)[];
   breakpointsLimited: (string | number)[];
 
+  // Tooltip
+  tooltipPositions: (string | number)[];
+
   // Typography
   textAlignments: (string | number)[];
   textSizes: (string | number)[];
@@ -66,6 +69,9 @@ export const DEFAULTS = {
    */
   breakpointsLimited: tuple("mobile", "fullhd", "touch"),
 
+  // Tooltips:
+  tooltipPositions: tuple("top", "right", "bottom", "left"),
+
   // Typography
   textAlignments: tuple("centered", "justified", "left", "right"),
   textSizes: tuple(1, 2, 3, 4, 5, 6, 7),
@@ -89,6 +95,9 @@ export interface VariablesDefaults {
   // Responsive
   breakpoints: (typeof DEFAULTS.breakpoints)[number];
   breakpointsLimited: (typeof DEFAULTS.breakpointsLimited)[number];
+
+  // Typography
+  tooltipPositions: (typeof DEFAULTS.tooltipPositions)[number];
 
   // Typography
   textAlignments: (typeof DEFAULTS.textAlignments)[number];
