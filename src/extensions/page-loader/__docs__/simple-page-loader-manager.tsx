@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Button } from "src/elements/button/button";
-import { Omit } from "src/types";
 import { PageLoader, PageLoaderProps } from "../page-loader";
 
 export type SimplePageLoaderManagerProps = Omit<PageLoaderProps, "active"> & {

@@ -14,7 +14,6 @@ import {
   NavbarItemContext,
   NavbarItemContextValue,
 } from "src/components/navbar/navbar-item-context";
-import { Omit } from "src/types";
 
 import {
   testForwardRefAsExoticComponentIntegration,

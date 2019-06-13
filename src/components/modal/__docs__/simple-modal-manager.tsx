@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Button } from "src/elements/button";
-import { Omit } from "src/types";
 import { Modal, ModalProps } from "../modal";
 
 interface SimpleModalManagerProps {
@@ -40,8 +39,8 @@ export class SimpleModalManager extends React.Component<
 
   private readonly close = () => {
     this.setState({ active: false });
-  }
+  };
   private readonly open = () => {
     this.setState({ active: true });
-  }
+  };
 }

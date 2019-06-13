@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { forwardRefAs } from "../../base";
-import { Omit } from "../../types";
 import {
   DropdownContainer,
   DropdownContainerProps,
