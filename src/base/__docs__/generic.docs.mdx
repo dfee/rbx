@@ -15,7 +15,7 @@ import {
 } from "src/__docs__/components";
 import { Generic } from "../generic";
 import { DEFAULTS } from "../helpers/variables";
-import { Notification, Title } from "src/elements";
+import { Notification, Table, Title } from "src/elements";
 
 # Generic
 
@@ -207,35 +207,12 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
 
 ### Responsive properties
 
-## todo:
-
-the documentation for this prop ought to reflect that these are keys of the `responsive` prop, not props themselves.
-
 <SimplePropsTable
   props={{
-    mobile: {
-      description: "up to 768px",
-      typeName: "LimitedResponsive Object",
-    },
-    tablet: {
-      description: "between 769px and 1023px",
-      typeName: "Responsive Object",
-    },
-    desktop: {
-      description: "between 1024px and 1215px",
-      typeName: "Responsive Object",
-    },
-    widescreen: {
-      description: "between 1216px and 1407px",
-      typeName: "Responsive Object",
-    },
-    fullhd: {
-      description: "1408px and above",
-      typeName: "LimitedResponsive Object",
-    },
-    touch: {
-      description: "up to 1023px",
-      typeName: "LimitedResponsive Object",
+    responsive: {
+      description:
+        "a mapping of breakpoints to Responsive or LimitedResponsive objects",
+      typeName: "{ [Responsive Key]?: <Responsive> | <LimitedResponsive> }",
     },
   }}
 />
@@ -251,27 +228,96 @@ the documentation for this prop ought to reflect that these are keys of the `res
         {
           display: {
             only: "boolean",
-            value: mapEnumerable(DEFAULTS.displays).replace(/["]/g, "'")
+            value: mapEnumerable(DEFAULTS.displays).replace(/["]/g, "'"),
           },
           hide: {
             only: "boolean",
-            value: "boolean"
+            value: "boolean",
           },
           textAlign: {
             only: "boolean",
-            value: mapEnumerable(DEFAULTS.textAlignments).replace(/["]/g, "'")
+            value: mapEnumerable(DEFAULTS.textAlignments).replace(/["]/g, "'"),
           },
           textSize: {
             only: "boolean",
-            value: mapEnumerable(DEFAULTS.textSizes).replace(/["]/g, "'")
-          }
+            value: mapEnumerable(DEFAULTS.textSizes).replace(/["]/g, "'"),
+          },
         },
         null,
-        2
+        2,
       ).replace(/["]/g, "")}
     />
     <br />
   </div>
+
+  <Title as="h5" size={5}>
+    <code>responsive</code> keys
+  </Title>
+  <p>
+    By default, these are the keys and sizes supplied by Bulma.
+    You can customize them by overriding variables in the Bulma sass.
+  </p>
+  <Table bordered narrow striped fullwidth>
+    <Table.Head>
+      <Table.Row>
+        <Table.Heading>key</Table.Heading>
+        <Table.Heading>value type</Table.Heading>
+        <Table.Heading>description</Table.Heading>
+      </Table.Row>
+    </Table.Head>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell><code>mobile</code></Table.Cell>
+        <Table.Cell><code>LimitedResponsive</code> object</Table.Cell>
+        <Table.Cell>up to <code>768px</code></Table.Cell>
+      </Table.Row>
+
+      <Table.Row>
+        <Table.Cell><code>tablet</code></Table.Cell>
+        <Table.Cell><code>Responsive</code> object</Table.Cell>
+        <Table.Cell>between<code>769px</code> and <code>1023px</code></Table.Cell>
+      </Table.Row>
+
+      <Table.Row>
+        <Table.Cell><code>touch</code></Table.Cell>
+        <Table.Cell><code>LimitedResponsive</code> object</Table.Cell>
+        <Table.Cell>up to <code>1023px</code> (in place of <code>mobile</code> or <code>tablet</code>)</Table.Cell>
+      </Table.Row>
+
+      <Table.Row>
+        <Table.Cell><code>desktop</code></Table.Cell>
+        <Table.Cell><code>Responsive</code> object</Table.Cell>
+        <Table.Cell>between<code>1024px</code> and <code>1215px</code></Table.Cell>
+      </Table.Row>
+
+      <Table.Row>
+        <Table.Cell><code>widescreen</code></Table.Cell>
+        <Table.Cell><code>Responsive</code> object</Table.Cell>
+        <Table.Cell>between<code>1216px</code> and <code>1407px</code></Table.Cell>
+      </Table.Row>
+
+      <Table.Row>
+        <Table.Cell><code>fullhd</code></Table.Cell>
+        <Table.Cell><code>LimitedResponsive</code> object</Table.Cell>
+        <Table.Cell><code>1408px</code> and above</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+
+  </Table>
+
+  <p>
+    A simple example of this prop value might look like this:
+  </p>
+  <pre
+    children={JSON.stringify(
+      {
+        touch: { hide: { value: true } },
+        desktop: { display: { only: true, value: "'block'" }}
+      },
+      null,
+      2,
+    ).replace(/["]/g, "")}
+  />
 
   <Title as="h5" size={5}>
     display

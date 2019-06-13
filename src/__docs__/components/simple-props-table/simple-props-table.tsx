@@ -21,23 +21,23 @@ export const SimplePropsTable = ({ props }: SimplePropsTableProps) => {
   );
 
   const thDescription = hasDescription ? (
-    <th style={{ width: "40%" }}>Description</th>
+    <Table.Heading style={{ width: "40%" }}>Description</Table.Heading>
   ) : (
     undefined
   );
 
   return (
     <Table bordered narrow hoverable fullwidth>
-      <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Required</th>
-          <th>Default</th>
+      <Table.Head>
+        <Table.Row>
+          <Table.Heading>Property</Table.Heading>
+          <Table.Heading>Type</Table.Heading>
+          <Table.Heading>Required</Table.Heading>
+          <Table.Heading>Default</Table.Heading>
           {thDescription}
-        </tr>
-      </thead>
-      <tbody>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
         {lexSortObj(props).map(({ key: name, value: propDoc }) => (
           <SimplePropsTableRow
             key={name}
@@ -46,7 +46,7 @@ export const SimplePropsTable = ({ props }: SimplePropsTableProps) => {
             propDoc={propDoc}
           />
         ))}
-      </tbody>
+      </Table.Body>
     </Table>
   );
 };
