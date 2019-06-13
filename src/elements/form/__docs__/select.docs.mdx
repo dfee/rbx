@@ -11,7 +11,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
@@ -232,27 +232,27 @@ The size of the `<Select>` will define the size of the `<Icon>`.
   props={{
     color: {
       description: "change the container's color",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     fullwidth: {
       description: "expand to occupy all horizontal space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     rounded: {
       description: "round the edges",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "change the container's size",
-      typeName: "string",
-      typeTip: mapEnumerable(SELECT_CONTAINER_DEFAULTS.sizes)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(SELECT_CONTAINER_DEFAULTS.sizes),
     },
     state: {
       description: "change the container's state",
-      typeName: "string",
-      typeTip: mapEnumerable(SELECT_CONTAINER_DEFAULTS.states)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(SELECT_CONTAINER_DEFAULTS.states),
+    },
   }}
 />
 

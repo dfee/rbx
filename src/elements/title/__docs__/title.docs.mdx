@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block } from "src/elements";
@@ -107,16 +107,16 @@ Use the `spaced` prop on `<Title>` to maintain spacing between titles and subtit
   props={{
     size: {
       description: "set the title's size",
-      typeName: "number",
-      typeTip: mapEnumerable(TITLE_DEFAULTS.sizes)
+      typeName: "number (literal)",
+      typeTip: mapEnumerable(TITLE_DEFAULTS.sizes),
     },
     spaced: {
       description: "add space below the title",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     subtitle: {
       description: "make it a subtitle",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />

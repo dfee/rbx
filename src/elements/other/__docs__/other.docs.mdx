@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { Table } from "src/elements";
 import { Block } from "../block";
@@ -100,9 +100,9 @@ Useful when a user is waiting for content to load.
   props={{
     size: {
       description: "set the delete's size",
-      typeName: "string",
-      typeTip: mapEnumerable(DELETE_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DELETE_DEFAULTS.sizes),
+    },
   }}
 />
 

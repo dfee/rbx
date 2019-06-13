@@ -848,7 +848,7 @@ Use the `color` prop of the `<Navbar>` to change the color.
     },
     color: {
       description: "set the navbar's color",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(DEFAULTS.colors),
     },
     document: {
@@ -858,7 +858,7 @@ Use the `color` prop of the `<Navbar>` to change the color.
     },
     fixed: {
       description: "fix the position to the top or bottom",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(NAVBAR_DEFAULTS.fixedAlignments),
     },
     managed: {
@@ -902,7 +902,7 @@ Use the `color` prop of the `<Navbar>` to change the color.
   props={{
     align: {
       description: "align the menu to the left or right",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(NAVBAR_DROPDOWN_DEFAULTS.alignments),
     },
     boxed: {
@@ -990,7 +990,7 @@ Use the `color` prop of the `<Navbar>` to change the color.
       description:
         "set the content in the left or right side of the dropdown menu",
       required: true,
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(NAVBAR_SEGMENT_DEFAULTS.alignments),
     },
   }}

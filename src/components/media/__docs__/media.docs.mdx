@@ -10,7 +10,7 @@ import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Level } from "src/components";
@@ -24,7 +24,7 @@ import {
   Icon,
   Image,
   Label,
-  Textarea
+  Textarea,
 } from "src/elements";
 import { Media } from "../media";
 import { MEDIA_ITEM_DEFAULTS } from "../media-item";
@@ -256,8 +256,8 @@ You can nest `<Media>` objects up to 3 levels deep (without extending Bulma's SA
   props={{
     align: {
       description: "change the position of the item inside the media container",
-      typeName: "string",
-      typeTip: mapEnumerable(MEDIA_ITEM_DEFAULTS.alignments)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(MEDIA_ITEM_DEFAULTS.alignments),
+    },
   }}
 />

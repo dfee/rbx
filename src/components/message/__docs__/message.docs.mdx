@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Delete } from "src/elements";
@@ -134,14 +134,14 @@ Use the `size` prop on `<Message>` to set the size.
   props={{
     color: {
       description: "set the message's color",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     size: {
       description: "set the message's size",
-      typeName: "string",
-      typeTip: mapEnumerable(MESSAGE_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(MESSAGE_DEFAULTS.sizes),
+    },
   }}
 />
 

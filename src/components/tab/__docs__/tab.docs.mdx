@@ -11,7 +11,7 @@ import {
   faFileAlt,
   faFilm,
   faImage,
-  faMusic
+  faMusic,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
@@ -19,7 +19,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Icon, Title } from "src/elements";
@@ -323,8 +323,8 @@ And here are **fullwidth toggle** tabs:
   props={{
     active: {
       description: "set the tab as currently active",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -335,23 +335,23 @@ And here are **fullwidth toggle** tabs:
   props={{
     align: {
       description: "set the tab group's alignment",
-      typeName: "string",
-      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.alignments)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.alignments),
     },
     fullsize: {
       description:
         "expand the tab group to consume all available horizontal space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     kind: {
       description: "set the tab group's styling",
-      typeName: "string",
-      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.kinds)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.kinds),
     },
     size: {
       description: "set the tab group's size",
-      typeName: "string",
-      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(TAB_GROUP_DEFAULTS.sizes),
+    },
   }}
 />

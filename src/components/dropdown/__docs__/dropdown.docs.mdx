@@ -10,7 +10,7 @@ import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Level } from "src/components";
@@ -276,26 +276,26 @@ Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdow
     active: {
       description:
         "set the dropdown as active (useful with the `managed` prop)",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     align: {
       description: "set the dropdown menu's alignment",
-      typeName: "string",
-      typeTip: mapEnumerable(DROPDOWN_DEFAULTS.alignments)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DROPDOWN_DEFAULTS.alignments),
     },
     hoverable: {
       description: "open the dropdown on mouse-over",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     managed: {
       description:
         "enable the usage of the `active` prop to open and close the dropdown menu",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     up: {
       description: "open the menu above the dropdown",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -315,12 +315,12 @@ Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdow
   props={{
     active: {
       description: "set the item as active",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     onClick: {
       description: "callback when the component is clicked",
-      typeName: "(event: React.MouseEvent) => void"
-    }
+      typeName: "(event: React.MouseEvent) => void",
+    },
   }}
 />
 
@@ -335,11 +335,11 @@ Use the `up` prop on `<Dropdown>` for the menu to appear **above** the `<Dropdow
   props={{
     active: {
       description: "set the item as active",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     onClick: {
       description: "callback when the component is clicked",
-      typeName: "(event: React.MouseEvent) => void"
-    }
+      typeName: "(event: React.MouseEvent) => void",
+    },
   }}
 />

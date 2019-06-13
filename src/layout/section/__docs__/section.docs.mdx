@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   OptionBlock,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Container, Content, Title } from "src/elements";
@@ -63,8 +63,8 @@ Use the `size` prop to resize the `<Section>`.
   props={{
     size: {
       description: "change the vertical spacing",
-      typeName: "string",
-      typeTip: mapEnumerable(SECTION_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(SECTION_DEFAULTS.sizes),
+    },
   }}
 />

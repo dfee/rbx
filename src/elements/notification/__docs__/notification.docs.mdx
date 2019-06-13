@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Delete } from "src/elements";
@@ -60,8 +60,8 @@ Use the `color` prop to specfiy the color of the `<Notification>`.
   props={{
     color: {
       description: "the color of the notification",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
+    },
   }}
 />

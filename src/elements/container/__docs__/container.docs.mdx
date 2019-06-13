@@ -10,7 +10,7 @@ import {
   Frame,
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Notification } from "src/elements";
@@ -70,13 +70,13 @@ Use the `fluid` prop for the container to fit horizontally with padding.
     breakpoint: {
       description:
         "the responsive size at which this container is no longer fullwidth",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.breakpoints)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.breakpoints),
     },
     fluid: {
       description:
         "whether the container expands to fit horizontally with padding",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />

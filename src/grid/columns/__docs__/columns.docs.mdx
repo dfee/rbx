@@ -9,7 +9,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Generic } from "src/base";
@@ -540,38 +540,38 @@ Resize the playground below to see it in action.
   props={{
     desktop: {
       description: "options when the screen size is between 1024px and 1215px",
-      typeName: "ColumnBreakpointOptions"
+      typeName: "ColumnBreakpointOptions",
     },
     fullhd: {
       description: "options when the screen size is above 1408px",
-      typeName: "ColumnBreakpointOptions"
+      typeName: "ColumnBreakpointOptions",
     },
     mobile: {
       description: "options when the screen size is up to 768px wide",
-      typeName: "ColumnBreakpointOptions"
+      typeName: "ColumnBreakpointOptions",
     },
     narrow: {
       description: "only take up the needed space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     offset: {
       description: "creates horizontal space before column",
-      typeName: "string",
-      typeTip: mapEnumerable(COLUMN_DEFAULTS.sizes)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(COLUMN_DEFAULTS.sizes),
     },
     size: {
       description: "determines the relative size of the column",
-      typeName: "string | number",
-      typeTip: mapEnumerable(COLUMN_DEFAULTS.sizes)
+      typeName: "string | number (literal)",
+      typeTip: mapEnumerable(COLUMN_DEFAULTS.sizes),
     },
     tablet: {
       description: "options when the screen size is between 769px and 1023px",
-      typeName: "ColumnBreakpointOptions"
+      typeName: "ColumnBreakpointOptions",
     },
     widescreen: {
       description: "options when the screen size is between 1216px and 1407px",
-      typeName: "ColumnBreakpointOptions"
-    }
+      typeName: "ColumnBreakpointOptions",
+    },
   }}
 />
 
@@ -621,54 +621,54 @@ Resize the playground below to see it in action.
   props={{
     breakpoint: {
       description: "the screen size at which the columns become stacked",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.breakpoints)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.breakpoints),
     },
     centered: {
       description: "the columns will be horizontally centered",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     desktop: {
       description: "options when the screen size is between 1024px and 1215px",
-      typeName: "ColumnGroupBreakpointOptions"
+      typeName: "ColumnGroupBreakpointOptions",
     },
     fullhd: {
       description: "options when the screen size is above 1408px",
-      typeName: "ColumnGroupBreakpointOptions"
+      typeName: "ColumnGroupBreakpointOptions",
     },
     gapless: {
       description: "remove spacing between columns",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     gapSize: {
       description: "the gap-size between columns",
-      typeName: "number",
-      typeTip: mapEnumerable(COLUMN_GROUP_DEFAULTS.gapSizes)
+      typeName: "number (literal)",
+      typeTip: mapEnumerable(COLUMN_GROUP_DEFAULTS.gapSizes),
     },
     mobile: {
       description: "options when the screen size is up to 768px wide",
-      typeName: "ColumnGroupBreakpointOptions"
+      typeName: "ColumnGroupBreakpointOptions",
     },
     multiline: {
       description: "columns may flow onto more than one line",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     tablet: {
       description: "options when the screen size is between 769px and 1023px",
-      typeName: "ColumnGroupBreakpointOptions"
+      typeName: "ColumnGroupBreakpointOptions",
     },
     widescreen: {
       description: "sizing when the screen size is between 1216px and 1407px",
-      typeName: "ColumnGroupBreakpointOptions"
+      typeName: "ColumnGroupBreakpointOptions",
     },
     touch: {
       description: "sizing when the screen is mobile or tablet",
-      typeName: "ColumnGroupBreakpointOptions"
+      typeName: "ColumnGroupBreakpointOptions",
     },
     vcentered: {
       description: "the columns will be vertically centered",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 

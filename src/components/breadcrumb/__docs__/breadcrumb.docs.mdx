@@ -8,7 +8,7 @@ import {
   faBook,
   faHome,
   faPuzzlePiece,
-  faThumbsUp
+  faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Playground } from "docz";
@@ -16,7 +16,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   OptionBlock,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Title, Icon } from "src/elements";
@@ -154,19 +154,19 @@ Use the `size` prop on `<Breadcrumb>` to specify the size of the breadcrumbs.
   props={{
     align: {
       description: "set the breadcrumb group's alignment",
-      typeName: "string",
-      typeTip: mapEnumerable(BREADCRUMB_DEFAULTS.alignments)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(BREADCRUMB_DEFAULTS.alignments),
     },
     separator: {
       description: "set the breadcrumb group's separator",
-      typeName: "string",
-      typeTip: mapEnumerable(BREADCRUMB_DEFAULTS.separators)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(BREADCRUMB_DEFAULTS.separators),
     },
     size: {
       description: "set the breadcrumb group's size",
-      typeName: "string",
-      typeTip: mapEnumerable(BREADCRUMB_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(BREADCRUMB_DEFAULTS.sizes),
+    },
   }}
 />
 
@@ -176,7 +176,7 @@ Use the `size` prop on `<Breadcrumb>` to specify the size of the breadcrumbs.
   props={{
     active: {
       description: "marks the breadcrumb as active",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />

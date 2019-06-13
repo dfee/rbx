@@ -11,7 +11,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon } from "src/elements";
@@ -268,36 +268,36 @@ If the control contains an icon, it will remain **centered** regardless of the s
   props={{
     color: {
       description: "change the input's color",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     readOnly: {
       description: "make the input read-only",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     rounded: {
       description: "round the edges of the input",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "change the input's size",
-      typeName: "string",
-      typeTip: mapEnumerable(INPUT_DEFAULTS.sizes)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(INPUT_DEFAULTS.sizes),
     },
     state: {
       description: "change the input's state",
-      typeName: "string",
-      typeTip: mapEnumerable(INPUT_DEFAULTS.states)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(INPUT_DEFAULTS.states),
     },
     static: {
       description:
         "remove the background, border, shadow and horizontal padding",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     type: {
       description: "set the input's type",
-      typeName: "string",
-      typeTip: mapEnumerable(INPUT_DEFAULTS.types)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(INPUT_DEFAULTS.types),
+    },
   }}
 />

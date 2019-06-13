@@ -11,7 +11,7 @@ import { Playground } from "docz";
 import {
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Content, Notification } from "src/elements";
@@ -181,7 +181,7 @@ Use the `color` prop of `<File>` to change the color.
       { boxed: false, hasName: false, color: "primary" },
       { boxed: false, hasName: true, color: "info" },
       { boxed: true, hasName: false, color: "warning" },
-      { boxed: true, hasName: true, color: "danger" }
+      { boxed: true, hasName: true, color: "danger" },
     ];
     return permutations.map(({ boxed, color, hasName }, i) => (
       <OptionBlock props={{ boxed, color, hasName }} index={i} key={i}>
@@ -396,31 +396,31 @@ This implementation takes the same props as `<File>`, but allows for actual sele
   props={{
     align: {
       description: "set the file input's alignment",
-      typeName: "string",
-      typeTip: mapEnumerable(FILE_DEFAULTS.alignments)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(FILE_DEFAULTS.alignments),
     },
     boxed: {
       description: "use a boxed layout for the file input",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     color: {
       description: "set the file input's color",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     fullwidth: {
       description: "expand the input to occupy all available horizontal space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     hasName: {
       description: "whether to show the file's name",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "set the file input's size",
-      typeName: "string",
-      typeTip: mapEnumerable(FILE_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(FILE_DEFAULTS.sizes),
+    },
   }}
 />
 

@@ -12,7 +12,7 @@ import {
   Frame,
   ForwardRefAsExoticComponentDoc,
   OptionBlock,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Navbar, Tab } from "src/components";
@@ -263,18 +263,18 @@ You can make a `<Hero>` that covers the whole height of the viewport by splittin
   props={{
     color: {
       description: "set the hero's color",
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.colors)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
     },
     gradient: {
       description: "apply a standard gradient for the color scheme",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     size: {
       description: "set the hero's size",
-      typeName: "string",
-      typeTip: mapEnumerable(HERO_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(HERO_DEFAULTS.sizes),
+    },
   }}
 />
 

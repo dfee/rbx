@@ -8,7 +8,7 @@ import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import {
@@ -17,7 +17,7 @@ import {
   Highlight,
   Image,
   Notification,
-  Title
+  Title,
 } from "src/elements";
 import { Message } from "src/components";
 import { Tile, TILE_DEFAULTS } from "../tile";
@@ -615,17 +615,17 @@ For example, you can render a `<Tile>` as a `<Notification>` with: `<Tile as={No
   props={{
     kind: {
       description: "the depth of the tile in the tree",
-      typeName: "string",
-      typeTip: mapEnumerable(TILE_DEFAULTS.kinds)
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(TILE_DEFAULTS.kinds),
     },
     size: {
       description: "the size of the tile",
-      typeName: "number",
-      typeTip: mapEnumerable(TILE_DEFAULTS.sizes)
+      typeName: "number (literal)",
+      typeTip: mapEnumerable(TILE_DEFAULTS.sizes),
     },
     vertical: {
       description: "child tiles should be positioned vertically",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />

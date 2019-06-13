@@ -174,7 +174,7 @@ Use the `size` prop on `<Pagination>` to change the size.
   props={{
     align: {
       description: "change the pagination's alignment of pagination items",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(PAGINATION_DEFAULTS.alignments),
     },
     rounded: {
@@ -183,7 +183,7 @@ Use the `size` prop on `<Pagination>` to change the size.
     },
     size: {
       description: "change the pagination's size",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(PAGINATION_DEFAULTS.sizes),
     },
   }}
@@ -226,7 +226,7 @@ Use the `size` prop on `<Pagination>` to change the size.
       description:
         "set the step as next or previous (positioning changes with pagination's align prop",
       required: true,
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(PAGINATION_STEP_DEFAULTS.alignments),
     },
   }}

@@ -85,7 +85,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
     },
     pull: {
       description: "moves an element to the left or right",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(DEFAULTS.floatPulledAlignments),
     },
   }}
@@ -119,7 +119,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   props={{
     backgroundColor: {
       description: "sets the background color",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable([...DEFAULTS.colors, ...DEFAULTS.shades]),
     },
     italic: {
@@ -128,27 +128,27 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
     },
     textAlign: {
       description: "sets the alignment of the text",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(DEFAULTS.textAlignments),
     },
     textColor: {
       description: "sets the text color",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable([...DEFAULTS.colors, ...DEFAULTS.shades]),
     },
     textSize: {
       description: "sets the text size",
-      typeName: "string",
+      typeName: "number (literal)",
       typeTip: mapEnumerable(DEFAULTS.textSizes),
     },
     textTransform: {
       description: "alters the text capitalization",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(DEFAULTS.textSizes),
     },
     textWeight: {
       description: "sets the text weight",
-      typeName: "string",
+      typeName: "string (literal)",
       typeTip: mapEnumerable(DEFAULTS.textWeights),
     },
   }}

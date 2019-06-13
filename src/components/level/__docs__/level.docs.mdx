@@ -8,7 +8,7 @@ import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Generic } from "src/base";
@@ -19,7 +19,7 @@ import {
   Field,
   Heading,
   Input,
-  Title
+  Title,
 } from "src/elements";
 import { Level } from "../level";
 import { LEVEL_ITEM_DEFAULTS } from "../level-item";
@@ -223,9 +223,9 @@ For example, for a responsive size greater than **mobile** (up to 768px), these 
     breakpoint: {
       description:
         'the responsive size at which the level is vertical (without overriding Bulma SASS, only "mobile" is supported)',
-      typeName: "string",
-      typeTip: mapEnumerable(DEFAULTS.breakpoints)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.breakpoints),
+    },
   }}
 />
 
@@ -236,8 +236,8 @@ For example, for a responsive size greater than **mobile** (up to 768px), these 
   props={{
     align: {
       description: "the side of the level is placed",
-      typeName: "string",
-      typeTip: mapEnumerable(LEVEL_ITEM_DEFAULTS.alignments)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(LEVEL_ITEM_DEFAULTS.alignments),
+    },
   }}
 />

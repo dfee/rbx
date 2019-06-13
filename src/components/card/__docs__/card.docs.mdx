@@ -10,7 +10,7 @@ import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Media } from "src/components";
@@ -198,9 +198,9 @@ An all-around flexible and composable component.
   props={{
     align: {
       description: "set the alignment of the title",
-      typeName: "string",
-      typeTip: mapEnumerable(CARD_HEADER_TITLE_DEFAULTS.alignments)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(CARD_HEADER_TITLE_DEFAULTS.alignments),
+    },
   }}
 />
 

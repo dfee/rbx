@@ -10,7 +10,7 @@ import {
   Frame,
   ForwardRefAsExoticComponentDoc,
   mapEnumerable,
-  OptionBlock
+  OptionBlock,
 } from "src/__docs__/components";
 import { Title } from "src/elements";
 import { Content, CONTENT_DEFAULTS } from "../content";
@@ -109,9 +109,9 @@ Use the `type` prop on `<Content.OrderedList>` to control the bullet styling of 
   props={{
     size: {
       description: "changes the font-size",
-      typeName: "string",
-      typeTip: mapEnumerable(CONTENT_DEFAULTS.sizes)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(CONTENT_DEFAULTS.sizes),
+    },
   }}
 />
 
@@ -122,9 +122,9 @@ Use the `type` prop on `<Content.OrderedList>` to control the bullet styling of 
   props={{
     type: {
       description: "changes the item marker of the list",
-      typeName: "string",
-      typeTip: mapEnumerable(CONTENT_ORDERED_LIST_DEFAULTS.types)
-    }
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(CONTENT_ORDERED_LIST_DEFAULTS.types),
+    },
   }}
 />
 
