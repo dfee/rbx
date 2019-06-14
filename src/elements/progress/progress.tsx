@@ -6,10 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const PROGRESS_DEFAULTS = {
-  sizes: tuple("small", "medium", "large"),
+  sizes: ["small", "medium", "large"] as const,
 };
 
 export interface ProgressVariablesOverrides {}

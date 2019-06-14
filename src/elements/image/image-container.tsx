@@ -5,11 +5,10 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const IMAGE_CONTAINER_DEFAULTS = {
-  dimmensions: tuple(16, 24, 32, 48, 64, 96, 128),
-  ratios: tuple(
+  dimmensions: [16, 24, 32, 48, 64, 96, 128] as const,
+  ratios: [
     "16by9",
     "1by1",
     "1by2",
@@ -26,7 +25,7 @@ export const IMAGE_CONTAINER_DEFAULTS = {
     "5by4",
     "9by16",
     "square",
-  ),
+  ] as const,
 };
 
 export interface ImageContainerVariablesOverrides {}

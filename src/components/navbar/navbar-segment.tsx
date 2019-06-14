@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const NAVBAR_SEGMENT_DEFAULTS = {
-  alignments: tuple("start", "end"),
+  alignments: ["start", "end"] as const,
 };
 
 export interface NavbarSegmentVariablesOverrides {}

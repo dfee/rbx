@@ -5,11 +5,10 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const TILE_DEFAULTS = {
-  kinds: tuple("ancestor", "parent", "child"),
-  sizes: tuple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+  kinds: ["ancestor", "parent", "child"] as const,
+  sizes: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const,
 };
 
 export interface TileVariablesOverrides {}

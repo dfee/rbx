@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const SECTION_DEFAULTS = {
-  sizes: tuple("medium", "large"),
+  sizes: ["medium", "large"] as const,
 };
 
 export interface SectionVariablesOverrides {}

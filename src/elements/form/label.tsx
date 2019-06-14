@@ -5,12 +5,11 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
 
 export const LABEL_DEFAULTS = {
-  sizes: tuple("small", "medium", "large"),
+  sizes: ["small", "medium", "large"] as const,
 };
 
 export interface LabelVariablesOverrides {}

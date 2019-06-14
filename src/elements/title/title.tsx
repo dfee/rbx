@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const TITLE_DEFAULTS = {
-  sizes: tuple(1, 2, 3, 4, 5, 6),
+  sizes: [1, 2, 3, 4, 5, 6] as const,
 };
 
 export interface TitleVariablesOverrides {}

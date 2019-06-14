@@ -3,7 +3,6 @@ import {
   makeValidatingTransform,
 } from "src/base/helpers/tooltip";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { tuple } from "../../../utils";
 
 import {
   validateBoolPropType,
@@ -61,7 +60,7 @@ describe("Tooltip helpers", () => {
     });
 
     describe("custom", () => {
-      const customTooltipPositions = tuple("a", "b");
+      const customTooltipPositions = ["a", "b"] as const;
       const customPropTypes = makePropTypes({
         tooltipPositions: customTooltipPositions,
       });

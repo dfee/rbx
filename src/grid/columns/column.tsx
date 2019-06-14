@@ -6,11 +6,10 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { ColumnGroup } from "./column-group";
 
 export const COLUMN_DEFAULTS = {
-  sizes: tuple(
+  sizes: [
     0,
     1,
     2,
@@ -34,7 +33,7 @@ export const COLUMN_DEFAULTS = {
     "three-fifths",
     "four-fifths",
     "full",
-  ),
+  ] as const,
 };
 
 export interface ColumnVariablesOverrides {}

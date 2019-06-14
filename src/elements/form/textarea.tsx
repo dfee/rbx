@@ -6,11 +6,10 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const TEXTAREA_DEFAULTS = {
-  sizes: tuple("small", "medium", "large"),
-  states: tuple("focused", "hovered"),
+  sizes: ["small", "medium", "large"] as const,
+  states: ["focused", "hovered"] as const,
 };
 
 export interface TextareaVariablesOverrides {}

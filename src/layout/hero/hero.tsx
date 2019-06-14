@@ -6,19 +6,18 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { HeroBody } from "./hero-body";
 import { HeroFoot } from "./hero-foot";
 import { HeroHead } from "./hero-head";
 
 export const HERO_DEFAULTS = {
-  sizes: tuple(
+  sizes: [
     "small",
     "medium",
     "large",
     "fullheight",
     "fullheight-with-navbar",
-  ),
+  ] as const,
 };
 
 export interface HeroVariablesOverrides {}

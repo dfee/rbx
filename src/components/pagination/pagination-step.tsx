@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const PAGINATION_STEP_DEFAULTS = {
-  alignments: tuple("next", "previous"),
+  alignments: ["next", "previous"] as const,
 };
 
 export interface PaginationStepVariablesOverrides {}

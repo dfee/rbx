@@ -5,13 +5,12 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { BreadcrumbItem } from "./breadcrumb-item";
 
 export const BREADCRUMB_DEFAULTS = {
-  alignments: tuple("centered", "right"),
-  separators: tuple("arrow", "bullet", "dot", "succeeds"),
-  sizes: tuple("small", "medium", "large"),
+  alignments: ["centered", "right"] as const,
+  separators: ["arrow", "bullet", "dot", "succeeds"] as const,
+  sizes: ["small", "medium", "large"] as const,
 };
 
 export interface BreadcrumbVariablesOverrides {}

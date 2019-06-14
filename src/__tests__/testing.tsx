@@ -187,7 +187,7 @@ export const validateNumberPropType = <T extends {}>(
 export const validateOneOfPropType = <T extends {}>(
   propTypes: React.WeakValidationMap<T>,
   propName: string,
-  choices: (string | number)[],
+  choices: Readonly<(string | number)[]>,
   extras?: Partial<T>,
 ) =>
   validatePropType(propTypes, propName, [

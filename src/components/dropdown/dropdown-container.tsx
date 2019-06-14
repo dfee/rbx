@@ -4,11 +4,11 @@ import React from "react";
 import { Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { combineRefs, tuple } from "../../utils";
+import { combineRefs } from "../../utils";
 import { DropdownContext } from "./dropdown-context";
 
 export const DROPDOWN_DEFAULTS = {
-  alignments: tuple("right"),
+  alignments: ["right"] as const,
 };
 
 export interface DropdownVariablesOverrides {}

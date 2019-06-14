@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const CARD_HEADER_TITLE_DEFAULTS = {
-  alignments: tuple("centered"),
+  alignments: ["centered"] as const,
 };
 
 export interface CardHeaderTitleVariablesOverrides {}

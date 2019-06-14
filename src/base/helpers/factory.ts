@@ -79,8 +79,8 @@ export const makeRootValidatingTransformFactory = <
   T extends MakeValidatingTransformFunction<any, any>[]
 >(
   ...mvtfs: T
-) => (variables: VariablesDefinitions) => {
-  const vtfs = mvtfs.map(func => func(variables));
+) => (variables: Partial<VariablesDefinitions>) => {
+  const vtfs = mvtfs.map(func => func({ ...DEFAULTS, ...variables }));
   return <
     P extends { className?: string | undefined } & UnionToIntersection<
       ExtractTTransformProps<T[number]>

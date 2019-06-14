@@ -6,7 +6,6 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 import { FileCTA } from "./file-cta";
 import { FileIcon } from "./file-icon";
@@ -15,8 +14,8 @@ import { FileLabel } from "./file-label";
 import { FileName } from "./file-name";
 
 export const FILE_DEFAULTS = {
-  alignments: tuple("centered", "right"),
-  sizes: tuple("small", "medium", "large"),
+  alignments: ["centered", "right"] as const,
+  sizes: ["small", "medium", "large"] as const,
 };
 
 export interface FileVariablesOverrides {}

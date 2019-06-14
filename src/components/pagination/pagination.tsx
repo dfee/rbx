@@ -5,15 +5,14 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { PaginationEllipsis } from "./pagination-ellipsis";
 import { PaginationLink } from "./pagination-link";
 import { PaginationList } from "./pagination-list";
 import { PaginationStep } from "./pagination-step";
 
 export const PAGINATION_DEFAULTS = {
-  alignments: tuple("centered", "right"),
-  sizes: tuple("small", "medium", "large"),
+  alignments: ["centered", "right"] as const,
+  sizes: ["small", "medium", "large"] as const,
 };
 
 export interface PaginationVariablesOverrides {}

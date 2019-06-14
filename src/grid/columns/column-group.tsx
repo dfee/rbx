@@ -6,10 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const COLUMN_GROUP_DEFAULTS = {
-  gapSizes: tuple(0, 1, 2, 3, 4, 5, 6, 7, 8),
+  gapSizes: [0, 1, 2, 3, 4, 5, 6, 7, 8] as const,
 };
 
 export interface ColumnGroupVariablesOverrides {}

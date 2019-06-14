@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const FIELD_LABEL_DEFAULTS = {
-  sizes: tuple("small", "normal", "medium", "large"),
+  sizes: ["small", "normal", "medium", "large"] as const,
 };
 
 export interface FieldLabelVariablesOverrides {}

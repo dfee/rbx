@@ -5,11 +5,10 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { ContentOrderedListItem } from "./content-ordered-list-item";
 
 export const CONTENT_ORDERED_LIST_DEFAULTS = {
-  types: tuple("lower-alpha", "lower-roman", "upper-alpha", "upper-roman"),
+  types: ["lower-alpha", "lower-roman", "upper-alpha", "upper-roman"] as const,
 };
 
 export interface ContentOrderedListVariablesOverrides {}

@@ -6,11 +6,10 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const ICON_DEFAULTS = {
-  alignments: tuple("left", "right"),
-  sizes: tuple("small", "medium", "large"),
+  alignments: ["left", "right"] as const,
+  sizes: ["small", "medium", "large"] as const,
 };
 
 export interface IconVariablesOverrides {}

@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const LEVEL_ITEM_DEFAULTS = {
-  alignments: tuple("left", "right"),
+  alignments: ["left", "right"] as const,
 };
 
 export interface LevelItemVariablesOverrides {}

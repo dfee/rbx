@@ -5,13 +5,12 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
 
 export const FIELD_DEFAULTS = {
-  alignments: tuple("centered", "right"),
-  kinds: tuple("addons", "group"),
+  alignments: ["centered", "right"] as const,
+  kinds: ["addons", "group"] as const,
 };
 
 export interface FieldVariablesOverrides {}

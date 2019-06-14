@@ -6,12 +6,11 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { ButtonGroup } from "./button-group";
 
 export const BUTTON_DEFAULTS = {
-  sizes: tuple("small", "normal", "medium", "large"),
-  states: tuple("hovered", "focused", "active", "loading"),
+  sizes: ["small", "normal", "medium", "large"] as const,
+  states: ["hovered", "focused", "active", "loading"] as const,
 };
 
 export interface ButtonVariablesOverrides {}

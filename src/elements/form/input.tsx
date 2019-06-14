@@ -6,12 +6,11 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const INPUT_DEFAULTS = {
-  sizes: tuple("small", "medium", "large"),
-  states: tuple("focused", "hovered"),
-  types: tuple(
+  sizes: ["small", "medium", "large"] as const,
+  states: ["focused", "hovered"] as const,
+  types: [
     "text",
     "email",
     "tel",
@@ -21,7 +20,7 @@ export const INPUT_DEFAULTS = {
     "color",
     "date",
     "time",
-  ),
+  ] as const,
 };
 
 export interface InputVariablesOverrides {}

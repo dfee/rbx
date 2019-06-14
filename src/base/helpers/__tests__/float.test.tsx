@@ -1,6 +1,5 @@
 import { makePropTypes, makeValidatingTransform } from "src/base/helpers/float";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { tuple } from "../../../utils";
 
 import {
   validateBoolPropType,
@@ -26,7 +25,7 @@ describe("Float helpers", () => {
     testItShouldUseDefaultLocationProp(vtfunc, { clearfix: "__UNKNOWN" });
 
     describe("custom", () => {
-      const customFloatPulledAlignments = tuple("a", "b");
+      const customFloatPulledAlignments = ["a", "b"] as const;
       const customPropTypes = makePropTypes({
         floatPulledAlignments: customFloatPulledAlignments,
       });

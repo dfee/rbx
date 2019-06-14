@@ -1,35 +1,34 @@
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export type VariablesDefinitions = {
-  colors: (string | number)[];
-  shades: (string | number)[];
+  colors: Readonly<(string | number)[]>;
+  shades: Readonly<(string | number)[]>;
 
   // Badge
-  badgeSizes: (string | number)[];
+  badgeSizes: Readonly<(string | number)[]>;
 
   // Float
-  floatPulledAlignments: (string | number)[];
+  floatPulledAlignments: Readonly<(string | number)[]>;
 
   // Responsive
-  breakpoints: (string | number)[];
-  breakpointsLimited: (string | number)[];
+  breakpoints: Readonly<(string | number)[]>;
+  breakpointsLimited: Readonly<(string | number)[]>;
 
   // Tooltip
-  tooltipPositions: (string | number)[];
+  tooltipPositions: Readonly<(string | number)[]>;
 
   // Typography
-  textAlignments: (string | number)[];
-  textSizes: (string | number)[];
-  textTransforms: (string | number)[];
-  textWeights: (string | number)[];
+  textAlignments: Readonly<(string | number)[]>;
+  textSizes: Readonly<(string | number)[]>;
+  textTransforms: Readonly<(string | number)[]>;
+  textWeights: Readonly<(string | number)[]>;
 
   // Visibility
-  displays: (string | number)[];
+  displays: Readonly<(string | number)[]>;
 };
 
 export const DEFAULTS = {
-  colors: tuple(
+  colors: [
     "primary",
     "success",
     "info",
@@ -40,8 +39,8 @@ export const DEFAULTS = {
     "white",
     "black",
     "link",
-  ),
-  shades: tuple(
+  ] as const,
+  shades: [
     "black-bis",
     "black-ter",
     "grey-darker",
@@ -51,41 +50,41 @@ export const DEFAULTS = {
     "grey-lighter",
     "white-ter",
     "white-bis",
-  ),
+  ] as const,
 
   // Badge
-  badgeSizes: tuple("small", "medium", "large"),
+  badgeSizes: ["small", "medium", "large"] as const,
 
   // Float
-  floatPulledAlignments: tuple("left", "right"),
+  floatPulledAlignments: ["left", "right"] as const,
 
   // Responsive
-  breakpoints: tuple(
+  breakpoints: [
     "mobile", // up to 768px
     "tablet", // between 769px and 1023px
     "desktop", // between 1024px and 1215px
     "widescreen", // between 1216px and 1407px
     "fullhd", // 1408px and above
     "touch", // mobile or tablet
-  ),
+  ] as const,
   /**
    * Breakpoints that are limited don't support the `only` option, e.g.:
    *   `is-hidden-mobile`: supported
    *   `is-hidden-mobile-only`: unsupported
    */
-  breakpointsLimited: tuple("mobile", "fullhd", "touch"),
+  breakpointsLimited: ["mobile", "fullhd", "touch"] as const,
 
   // Tooltips:
-  tooltipPositions: tuple("top", "right", "bottom", "left"),
+  tooltipPositions: ["top", "right", "bottom", "left"] as const,
 
   // Typography
-  textAlignments: tuple("centered", "justified", "left", "right"),
-  textSizes: tuple(1, 2, 3, 4, 5, 6, 7),
-  textTransforms: tuple("capitalized", "lowercase", "uppercase"),
-  textWeights: tuple("light", "medium", "normal", "semibold", "bold"),
+  textAlignments: ["centered", "justified", "left", "right"] as const,
+  textSizes: [1, 2, 3, 4, 5, 6, 7] as const,
+  textTransforms: ["capitalized", "lowercase", "uppercase"] as const,
+  textWeights: ["light", "medium", "normal", "semibold", "bold"] as const,
 
   // Visibility
-  displays: tuple("block", "flex", "inline", "inline-block", "inline-flex"),
+  displays: ["block", "flex", "inline", "inline-block", "inline-flex"] as const,
 };
 
 // tslint:disable-next-line: no-empty-interface

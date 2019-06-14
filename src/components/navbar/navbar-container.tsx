@@ -5,11 +5,11 @@ import { Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { canUseDOM, tuple } from "../../utils";
+import { canUseDOM } from "../../utils";
 import { NavbarContext } from "./navbar-context";
 
 export const NAVBAR_DEFAULTS = {
-  fixedAlignments: tuple("top", "bottom"),
+  fixedAlignments: ["top", "bottom"] as const,
 };
 
 export interface NavbarVariablesOverrides {}

@@ -1,6 +1,5 @@
 import { makePropTypes, makeValidatingTransform } from "src/base/helpers/badge";
 import { DEFAULTS } from "src/base/helpers/variables";
-import { tuple } from "../../../utils";
 
 import {
   validateBoolPropType,
@@ -32,7 +31,7 @@ describe("Badge helpers", () => {
     });
 
     describe("custom", () => {
-      const customBadgeSizes = tuple("a", "b");
+      const customBadgeSizes = ["a", "b"] as const;
       const customPropTypes = makePropTypes({
         badgeSizes: customBadgeSizes,
       });

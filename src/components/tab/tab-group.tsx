@@ -5,12 +5,11 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const TAB_GROUP_DEFAULTS = {
-  alignments: tuple("centered", "right"),
-  sizes: tuple("small", "medium", "large"),
-  kinds: tuple("boxed", "toggle", "toggle-rounded"),
+  alignments: ["centered", "right"] as const,
+  sizes: ["small", "medium", "large"] as const,
+  kinds: ["boxed", "toggle", "toggle-rounded"] as const,
 };
 
 export interface TabGroupVariablesOverrides {}

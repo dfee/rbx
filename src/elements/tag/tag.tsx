@@ -6,11 +6,10 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { TagGroup } from "./tag-group";
 
 export const TAG_DEFAULTS = {
-  sizes: tuple("normal", "medium", "large"),
+  sizes: ["normal", "medium", "large"] as const,
 };
 
 export interface TagVariablesOverrides {}

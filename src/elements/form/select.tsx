@@ -6,12 +6,11 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 import { SelectOption } from "./select-option";
 
 export const SELECT_CONTAINER_DEFAULTS = {
-  sizes: tuple("small", "medium", "large"),
-  states: tuple("focused", "hovered", "loading"),
+  sizes: ["small", "medium", "large"] as const,
+  states: ["focused", "hovered", "loading"] as const,
 };
 
 export interface SelectContainerVariablesOverrides {}

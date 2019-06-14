@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
-import { tuple } from "../../utils";
 
 export const PAGE_LOADER_DEFAULTS = {
-  directions: tuple("right-to-left", "left-to-right"),
+  directions: ["right-to-left", "left-to-right"] as const,
 };
 
 export type PageLoaderModifierProps = Partial<{

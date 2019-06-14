@@ -17,7 +17,8 @@ const LOC = "prop";
 
 /** these sizes support the `only` prop. */
 const checkIsLimited = (breakpoint: string) =>
-  (DEFAULTS.breakpointsLimited as string[]).indexOf(breakpoint) !== -1;
+  (DEFAULTS.breakpointsLimited as Readonly<string[]>).indexOf(breakpoint) !==
+  -1;
 
 describe("Responsive modifiers", () => {
   const propTypes = makePropTypes();

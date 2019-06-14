@@ -5,10 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
-import { tuple } from "../../utils";
 
 export const MEDIA_ITEM_DEFAULTS = {
-  alignments: tuple("content", "left", "right"),
+  alignments: ["content", "left", "right"] as const,
 };
 
 export interface MediaItemVariablesOverrides {}
