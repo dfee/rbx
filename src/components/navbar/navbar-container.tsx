@@ -58,13 +58,11 @@ export class NavbarContainer extends React.PureComponent<
   }
 
   public componentWillUnmount() {
-    if (canUseDOM()) {
-      const { fixed } = this.props;
-      const html = this.document.querySelector("html");
-      /* istanbul ignore else: typeguard */
-      if (html !== null) {
-        html.classList.remove(`has-navbar-fixed-${fixed}`);
-      }
+    const { fixed } = this.props;
+    const html = this.document.querySelector("html");
+    /* istanbul ignore else: typeguard */
+    if (html !== null) {
+      html.classList.remove(`has-navbar-fixed-${fixed}`);
     }
   }
 

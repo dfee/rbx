@@ -33,20 +33,16 @@ export class ModalContainer extends React.PureComponent<ModalContainerProps> {
   }
 
   public componentDidMount() {
-    if (canUseDOM()) {
-      /* istanbul ignore else: typescript typeguard */
-      if (this.el !== undefined) {
-        this.document.body.appendChild(this.el);
-      }
+    /* istanbul ignore else: typescript typeguard */
+    if (this.el !== undefined) {
+      this.document.body.appendChild(this.el);
     }
   }
 
   public componentWillUnmount() {
-    if (canUseDOM()) {
-      /* istanbul ignore else: typescript typeguard */
-      if (this.el !== undefined) {
-        this.document.body.removeChild(this.el);
-      }
+    /* istanbul ignore else: typescript typeguard */
+    if (this.el !== undefined) {
+      this.document.body.removeChild(this.el);
     }
   }
 

@@ -11,8 +11,12 @@ import {
   ModalContextValue,
 } from "src/components/modal/modal-context";
 import { ModalPortal } from "src/components/modal/modal-portal";
+import { canUseDOM } from "src/utils";
 
-import { withEnzymeMount, withWindow } from "src/__tests__/testing";
+import { withEnzymeMount } from "src/__tests__/testing";
+import { MockCanUseDomFunction } from "src/__mocks__/utils";
+
+jest.mock("src/utils");
 
 // const COMPONENT = ModalContainer;
 const DISPLAY_NAME = "Modal.Container";
@@ -24,16 +28,19 @@ const makeNode = (props: ModalContainerProps) => {
 };
 
 describe(`${DISPLAY_NAME} component`, () => {
+  beforeEach(() => {
+    (canUseDOM as MockCanUseDomFunction).__set(true);
+  });
+
   describe("ssr", () => {
     it("should render without window being available (ssr)", () => {
-      withWindow({}, () => {
-        const ref = React.createRef<HTMLDivElement>();
-        const wrapper = Enzyme.shallow(
-          <ModalContainer innerRef={ref} onClose={jest.fn()} active />,
-        );
-        wrapper.unmount();
-        expect(wrapper.type()).toBeNull();
-      });
+      (canUseDOM as MockCanUseDomFunction).__set(false);
+      const ref = React.createRef<HTMLDivElement>();
+      const wrapper = Enzyme.shallow(
+        <ModalContainer innerRef={ref} onClose={jest.fn()} active />,
+      );
+      wrapper.unmount();
+      expect(wrapper.type()).toBeNull();
     });
   });
 

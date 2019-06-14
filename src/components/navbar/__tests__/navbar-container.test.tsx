@@ -16,13 +16,16 @@ import {
   NavbarContext,
   NavbarContextValue,
 } from "src/components/navbar/navbar-context";
+import { canUseDOM } from "src/utils";
 
 import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   withEnzymeMount,
-  withWindow,
 } from "src/__tests__/testing";
+import { MockCanUseDomFunction } from "src/__mocks__/utils";
+
+jest.mock("src/utils");
 
 const COMPONENT = NavbarContainer;
 const DISPLAY_NAME = "Navbar.Container";
@@ -52,6 +55,10 @@ const makeGenericHOCShallowWrapperInContextConsumer = (
 };
 
 describe(`${DISPLAY_NAME} component`, () => {
+  beforeEach(() => {
+    (canUseDOM as MockCanUseDomFunction).__set(true);
+  });
+
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
@@ -66,13 +73,12 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("ssr", () => {
     it("should render without window being available (ssr)", () => {
-      withWindow({}, () => {
-        const ref = React.createRef<HTMLDivElement>();
-        const wrapper = Enzyme.shallow(<NavbarContainer innerRef={ref} />);
-        expect(wrapper.children().hasClass("navbar")).toBe(true);
-        wrapper.unmount();
-        expect(wrapper.type()).toBeNull();
-      });
+      (canUseDOM as MockCanUseDomFunction).__set(false);
+      const ref = React.createRef<HTMLDivElement>();
+      const wrapper = Enzyme.shallow(<NavbarContainer innerRef={ref} />);
+      expect(wrapper.children().hasClass("navbar")).toBe(true);
+      wrapper.unmount();
+      expect(wrapper.type()).toBeNull();
     });
   });
 
