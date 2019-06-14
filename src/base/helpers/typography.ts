@@ -32,6 +32,7 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 export const transform: TransformFunction<TypographyHelpersProps> = props => {
   const {
     backgroundColor,
+    className,
     italic,
     textAlign,
     textColor,
@@ -41,20 +42,21 @@ export const transform: TransformFunction<TypographyHelpersProps> = props => {
     ...rest
   } = props;
 
-  rest.className = classNames(
-    {
-      [`has-background-${backgroundColor}`]: backgroundColor,
-      [`has-text-${textColor}`]: textColor,
-      "is-italic": italic,
-      [`is-${textTransform}`]: textTransform,
-      [`has-text-${textAlign}`]: textAlign,
-      [`has-text-weight-${textWeight}`]: textWeight,
-      [`is-size-${textSize}`]: textSize,
-    },
-    rest.className,
-  );
-
-  return rest;
+  return {
+    className: classNames(
+      {
+        [`has-background-${backgroundColor}`]: backgroundColor,
+        [`has-text-${textColor}`]: textColor,
+        "is-italic": italic,
+        [`is-${textTransform}`]: textTransform,
+        [`has-text-${textAlign}`]: textAlign,
+        [`has-text-weight-${textWeight}`]: textWeight,
+        [`is-size-${textSize}`]: textSize,
+      },
+      className,
+    ),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

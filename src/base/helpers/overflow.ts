@@ -18,11 +18,12 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 }));
 
 export const transform: TransformFunction<OverflowHelpersProps> = props => {
-  const { clipped, ...rest } = props;
+  const { className, clipped, ...rest } = props;
 
-  rest.className = classNames({ "is-clipped": clipped }, rest.className);
-
-  return rest;
+  return {
+    className: classNames({ "is-clipped": clipped }, className),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

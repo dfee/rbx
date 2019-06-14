@@ -108,50 +108,55 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 }));
 
 export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
-  const { responsive, ...rest } = props;
-  rest.className = classNames(
-    responsive !== undefined
-      ? Object.keys(responsive)
-          .filter(breakpoint => responsive[breakpoint] !== undefined)
-          .map(breakpoint => {
-            const names = {};
-            const { display, hide, textAlign, textSize } = responsive[
-              breakpoint
-            ] as ResponsiveBreakpointProps | LimitedResponsiveBreakpointProps;
-            if (display !== undefined) {
-              const value = display.value;
-              const only = "only" in display ? display.only === true : false;
-              names[`is-${value}-${breakpoint}${only ? "-only" : ""}`] = value;
-            }
-            if (hide !== undefined) {
-              const value = hide.value;
-              const only = "only" in hide ? hide.only === true : false;
-              names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
-            }
-            if (textAlign !== undefined) {
-              const value = textAlign.value;
-              const only =
-                "only" in textAlign ? textAlign.only === true : false;
-              names[
-                `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
-              ] = value;
-            }
-            if (textSize !== undefined) {
-              const value = textSize.value;
-              const only = "only" in textSize ? textSize.only === true : false;
-              names[
-                `is-size-${value}-${breakpoint}${only ? "-only" : ""}`
-              ] = value;
-            }
+  const { className, responsive, ...rest } = props;
 
-            return names;
-          })
-          .reduce((acc, cv) => ({ ...acc, ...cv }), {})
-      : undefined,
-    rest.className,
-  );
+  return {
+    className: classNames(
+      responsive !== undefined
+        ? Object.keys(responsive)
+            .filter(breakpoint => responsive[breakpoint] !== undefined)
+            .map(breakpoint => {
+              const names = {};
+              const { display, hide, textAlign, textSize } = responsive[
+                breakpoint
+              ] as ResponsiveBreakpointProps | LimitedResponsiveBreakpointProps;
+              if (display !== undefined) {
+                const value = display.value;
+                const only = "only" in display ? display.only === true : false;
+                names[
+                  `is-${value}-${breakpoint}${only ? "-only" : ""}`
+                ] = value;
+              }
+              if (hide !== undefined) {
+                const value = hide.value;
+                const only = "only" in hide ? hide.only === true : false;
+                names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
+              }
+              if (textAlign !== undefined) {
+                const value = textAlign.value;
+                const only =
+                  "only" in textAlign ? textAlign.only === true : false;
+                names[
+                  `has-text-${value}-${breakpoint}${only ? "-only" : ""}`
+                ] = value;
+              }
+              if (textSize !== undefined) {
+                const value = textSize.value;
+                const only =
+                  "only" in textSize ? textSize.only === true : false;
+                names[
+                  `is-size-${value}-${breakpoint}${only ? "-only" : ""}`
+                ] = value;
+              }
 
-  return rest;
+              return names;
+            })
+            .reduce((acc, cv) => ({ ...acc, ...cv }), {})
+        : undefined,
+      className,
+    ),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

@@ -29,8 +29,12 @@ export const makePropTypes = makePropTypesFactory(vars => ({
   tooltipResponsive: PropTypes.objectOf(PropTypes.oneOf(vars.tooltipPositions)),
 }));
 
-export const transform: TransformFunction<TooltipHelpersProps> = props => {
+export const transform: TransformFunction<
+  TooltipHelpersProps,
+  { "data-tooltip"?: string | number }
+> = props => {
   const {
+    className,
     tooltip,
     tooltipActive,
     tooltipColor,
@@ -40,25 +44,24 @@ export const transform: TransformFunction<TooltipHelpersProps> = props => {
     ...rest
   } = props;
 
-  rest.className = classNames(
-    {
-      "is-tooltip-active": tooltipActive,
-      [`is-tooltip-${tooltipColor}`]: tooltipColor,
-      "is-tooltip-multiline": tooltipMultiline,
-      [`is-tooltip-${tooltipPosition}`]: tooltipPosition,
-      tooltip,
-    },
-    ...Object.keys(tooltipResponsive).map(
-      breakpoint => `is-tooltip-${tooltipResponsive[breakpoint]}-${breakpoint}`,
+  return {
+    className: classNames(
+      {
+        "is-tooltip-active": tooltipActive,
+        [`is-tooltip-${tooltipColor}`]: tooltipColor,
+        "is-tooltip-multiline": tooltipMultiline,
+        [`is-tooltip-${tooltipPosition}`]: tooltipPosition,
+        tooltip,
+      },
+      ...Object.keys(tooltipResponsive).map(
+        breakpoint =>
+          `is-tooltip-${tooltipResponsive[breakpoint]}-${breakpoint}`,
+      ),
+      className,
     ),
-    rest.className,
-  );
-
-  if (tooltip !== undefined) {
-    rest["data-tooltip"] = tooltip;
-  }
-
-  return rest;
+    ...(tooltip !== undefined ? { "data-tooltip": tooltip } : {}),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

@@ -103,7 +103,9 @@ describe("Responsive modifiers", () => {
                     LOC,
                   ),
                 ).toEqual({
-                  className: `is-${value}-${breakpoint}${isOnly ? "-only" : ""}`,
+                  className: `is-${value}-${breakpoint}${
+                    isOnly ? "-only" : ""
+                  }`,
                 });
               });
             }),
@@ -119,7 +121,11 @@ describe("Responsive modifiers", () => {
               }`, () => {
                 const hide = isOnly ? { only, value } : { value };
                 expect(
-                  vtfunc({ responsive: { [breakpoint]: { hide } } }, CNAME, LOC),
+                  vtfunc(
+                    { responsive: { [breakpoint]: { hide } } },
+                    CNAME,
+                    LOC,
+                  ),
                 ).toEqual({
                   className: value
                     ? `is-hidden-${breakpoint}${isOnly ? "-only" : ""}`

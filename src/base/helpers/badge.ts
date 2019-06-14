@@ -2,9 +2,9 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import {
+  TransformFunction,
   makePropTypesFactory,
   makeValidatingTransformFactory,
-  TransformFunction,
 } from "./factory";
 import { DEFAULTS, Variables } from "./variables";
 
@@ -25,32 +25,34 @@ export const makePropTypes = makePropTypesFactory(vars => ({
   badgeSize: PropTypes.oneOf(vars.badgeSizes),
 }));
 
-export const transform: TransformFunction<BadgeHelpersProps> = props => {
+export const transform: TransformFunction<
+  BadgeHelpersProps,
+  { "data-badge"?: string | number }
+> = props => {
   const {
     badge,
     badgeColor,
     badgeOutlined,
     badgeRounded,
     badgeSize,
+    className,
     ...rest
   } = props;
 
-  rest.className = classNames(
-    {
-      badge,
-      [`has-badge-${badgeColor}`]: badgeColor,
-      "has-badge-outlined": badgeOutlined,
-      "has-badge-rounded": badgeRounded,
-      [`has-badge-${badgeSize}`]: badgeSize,
-    },
-    rest.className,
-  );
-
-  if (badge !== undefined) {
-    rest["data-badge"] = badge;
-  }
-
-  return rest;
+  return {
+    className: classNames(
+      {
+        badge,
+        [`has-badge-${badgeColor}`]: badgeColor,
+        "has-badge-outlined": badgeOutlined,
+        "has-badge-rounded": badgeRounded,
+        [`has-badge-${badgeSize}`]: badgeSize,
+      },
+      className,
+    ),
+    ...(badge !== undefined ? { "data-badge": badge } : {}),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

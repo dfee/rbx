@@ -27,18 +27,19 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 }));
 
 export const transform: TransformFunction<VisibilityHelpersProps> = props => {
-  const { hidden, invisible, srOnly, ...rest } = props;
+  const { className, hidden, invisible, srOnly, ...rest } = props;
 
-  rest.className = classNames(
-    {
-      "is-hidden": hidden,
-      "is-invisible": invisible,
-      "is-sr-only": srOnly,
-    },
-    rest.className,
-  );
-
-  return rest;
+  return {
+    className: classNames(
+      {
+        "is-hidden": hidden,
+        "is-invisible": invisible,
+        "is-sr-only": srOnly,
+      },
+      className,
+    ),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

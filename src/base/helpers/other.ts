@@ -34,6 +34,7 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 
 export const transform: TransformFunction<OtherHelpersProps> = props => {
   const {
+    className,
     marginless,
     paddingless,
     radiusless,
@@ -42,19 +43,21 @@ export const transform: TransformFunction<OtherHelpersProps> = props => {
     unselectable,
     ...rest
   } = props;
-  rest.className = classNames(
-    {
-      "is-marginless": marginless,
-      "is-paddingless": paddingless,
-      "is-radiusless": radiusless,
-      "is-relative": relative,
-      "is-shadowless": shadowless,
-      "is-unselectable": unselectable,
-    },
-    rest.className,
-  );
 
-  return rest;
+  return {
+    className: classNames(
+      {
+        "is-marginless": marginless,
+        "is-paddingless": paddingless,
+        "is-radiusless": radiusless,
+        "is-relative": relative,
+        "is-shadowless": shadowless,
+        "is-unselectable": unselectable,
+      },
+      className,
+    ),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

@@ -5,13 +5,14 @@ import {
   testItShouldPreserveCustomClassName,
   testItShouldPreserveUnknown,
 } from "./testing";
+import { DEFAULTS } from "../variables";
 
 const CNAME = "foo";
 const LOC = "prop";
 
 describe("Modifiers", () => {
   describe("transform", () => {
-    const rvtfunc = makeRootValidatingTransform();
+    const rvtfunc = makeRootValidatingTransform(DEFAULTS);
 
     testItShouldPreserveUnknown(rvtfunc);
     testItShouldNotSetClassNameOnEmpty(rvtfunc);

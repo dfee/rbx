@@ -1,13 +1,17 @@
 import React from "react";
 import { HelpersProps, makeRootValidatingTransform } from "./helpers";
 import { ValidatingTransformFunction } from "./helpers/factory";
+import { DEFAULTS } from "./helpers/variables";
 
-export interface ThemeContextValue<T = HelpersProps> {
-  transform: ValidatingTransformFunction<T>;
+export interface ThemeContextValue<
+  TTransformProps extends {} = HelpersProps,
+  TNewProps extends {} = {}
+> {
+  transform: ValidatingTransformFunction<TTransformProps, TNewProps>;
 }
 
 export const initialValue: ThemeContextValue = {
-  transform: makeRootValidatingTransform(),
+  transform: makeRootValidatingTransform(DEFAULTS),
 };
 
 export const ThemeContext = React.createContext(initialValue);

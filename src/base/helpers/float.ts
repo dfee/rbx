@@ -22,17 +22,18 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 }));
 
 export const transform: TransformFunction<FloatHelpersProps> = props => {
-  const { clearfix, pull, ...rest } = props;
+  const { className, clearfix, pull, ...rest } = props;
 
-  rest.className = classNames(
-    {
-      "is-clearfix": clearfix,
-      [`is-pulled-${pull}`]: pull,
-    },
-    rest.className,
-  );
-
-  return rest;
+  return {
+    className: classNames(
+      {
+        "is-clearfix": clearfix,
+        [`is-pulled-${pull}`]: pull,
+      },
+      className,
+    ),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(

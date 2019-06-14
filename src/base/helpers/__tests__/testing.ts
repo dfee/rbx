@@ -7,7 +7,7 @@ const LOC = "prop";
 
 export const testItShouldPreserveUnknown = (
   // tslint:disable-next-line:no-any
-  tfunc: ValidatingTransformFunction<any>,
+  tfunc: ValidatingTransformFunction<any, any>,
 ) => {
   it("should preserve unknown props", () => {
     const props = { foo: "bar" };
@@ -17,7 +17,7 @@ export const testItShouldPreserveUnknown = (
 
 export const testItShouldNotSetClassNameOnEmpty = (
   // tslint:disable-next-line:no-any
-  tfunc: ValidatingTransformFunction<any>,
+  tfunc: ValidatingTransformFunction<any, any>,
 ) => {
   it("should not set className on empty", () => {
     expect(tfunc({}, CNAME, LOC)).toEqual({ className: "" });
@@ -26,7 +26,7 @@ export const testItShouldNotSetClassNameOnEmpty = (
 
 export const testItShouldPreserveCustomClassName = (
   // tslint:disable-next-line:no-any
-  tfunc: ValidatingTransformFunction<any>,
+  tfunc: ValidatingTransformFunction<any, any>,
 ) => {
   it("should preserve custom className", () => {
     const className = "foo";
@@ -36,7 +36,7 @@ export const testItShouldPreserveCustomClassName = (
 
 export const testItShouldUseDefaultLocationProp = (
   // tslint:disable-next-line:no-any
-  tfunc: ValidatingTransformFunction<any>,
+  tfunc: ValidatingTransformFunction<any, any>,
   // tslint:disable-next-line:no-any
   props: any,
 ) => {

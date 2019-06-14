@@ -122,7 +122,7 @@ export const makeRandomString = (length: number = 8) =>
 
 export const validatePropType = <T extends {}>(
   propTypes: React.WeakValidationMap<T>,
-  propName: string,
+  propName: string | number,
   options: {
     descriptor?: string;
     error?: RegExp;
@@ -432,7 +432,7 @@ export const testThemeIntegration = (
         foo: PropTypes.oneOf(["bar", "baz"]),
       };
 
-      const transform: ValidatingTransformFunction<CustomHelpersProps> = (
+      const transform: ValidatingTransformFunction<CustomHelpersProps, {}> = (
         props,
         componentName,
         location = "prop",

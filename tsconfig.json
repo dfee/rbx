@@ -8,7 +8,7 @@
     "isolatedModules": true,
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
-    "noErrorTruncation": false,
+    "noErrorTruncation": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "plugins": [{ "name": "typescript-tslint-plugin" }],

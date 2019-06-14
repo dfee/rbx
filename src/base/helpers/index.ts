@@ -55,9 +55,7 @@ export type HelpersProps = Prefer<
     ResponsiveHelpersProps & { className?: string }
 >;
 
-export const makeRootValidatingTransform = makeRootValidatingTransformFactory<
-  HelpersProps
->(
+export const makeRootValidatingTransform = makeRootValidatingTransformFactory(
   badgeMVT,
   floatMVT,
   overflowMVT,

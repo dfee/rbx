@@ -18,10 +18,12 @@ export const makePropTypes = makePropTypesFactory(vars => ({
 }));
 
 export const transform: TransformFunction<OverlayHelpersProps> = props => {
-  const { overlay, ...rest } = props;
-  rest.className = classNames({ "is-overlay": overlay }, rest.className);
+  const { className, overlay, ...rest } = props;
 
-  return rest;
+  return {
+    className: classNames({ "is-overlay": overlay }, className),
+    ...rest,
+  };
 };
 
 export const makeValidatingTransform = makeValidatingTransformFactory(
