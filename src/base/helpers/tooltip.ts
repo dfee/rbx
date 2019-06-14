@@ -8,16 +8,16 @@ import {
 } from "./factory";
 import { DEFAULTS, Variables } from "./variables";
 
-export type TooltipHelpersProps = Partial<{
-  tooltip: number | string;
-  tooltipActive: boolean;
-  tooltipColor: Variables["colors"];
-  tooltipMultiline: boolean;
-  tooltipPosition: (typeof DEFAULTS["tooltipPositions"])[number];
-  tooltipResponsive: {
+export type TooltipHelpersProps = {
+  tooltip?: number | string;
+  tooltipActive?: boolean;
+  tooltipColor?: Variables["colors"];
+  tooltipMultiline?: boolean;
+  tooltipPosition?: (typeof DEFAULTS["tooltipPositions"])[number];
+  tooltipResponsive?: {
     [K in Variables["breakpoints"]]?: (typeof DEFAULTS["tooltipPositions"])[number];
   };
-}>;
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

@@ -5,10 +5,10 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 
-export type MenuListItemModifierProps = Partial<{
-  active: boolean;
-  menu: React.ReactNode;
-}>;
+export type MenuListItemModifierProps = {
+  active?: boolean;
+  menu?: React.ReactNode;
+};
 
 export type MenuListItemProps = HelpersProps & MenuListItemModifierProps;
 

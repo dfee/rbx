@@ -11,13 +11,13 @@ import { TableHead } from "./table-head";
 import { TableHeading } from "./table-heading";
 import { TableRow } from "./table-row";
 
-export type TableModifierProps = Partial<{
-  bordered: boolean;
-  fullwidth: boolean;
-  hoverable: boolean;
-  narrow: boolean;
-  striped: boolean;
-}>;
+export type TableModifierProps = {
+  bordered?: boolean;
+  fullwidth?: boolean;
+  hoverable?: boolean;
+  narrow?: boolean;
+  striped?: boolean;
+};
 
 export type TableProps = HelpersProps & TableModifierProps;
 

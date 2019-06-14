@@ -25,13 +25,13 @@ export type SelectContainerVariables = Prefer<
   SelectContainerVariablesDefaults
 >;
 
-export type SelectContainerModifierProps = Partial<{
-  color: Variables["colors"];
-  fullwidth: boolean;
-  rounded: boolean;
-  size: SelectContainerVariables["sizes"];
-  state: SelectContainerVariables["states"];
-}>;
+export type SelectContainerModifierProps = {
+  color?: Variables["colors"];
+  fullwidth?: boolean;
+  rounded?: boolean;
+  size?: SelectContainerVariables["sizes"];
+  state?: SelectContainerVariables["states"];
+};
 
 export type SelectContainerProps = HelpersProps & SelectContainerModifierProps;
 

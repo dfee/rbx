@@ -22,12 +22,12 @@ export type ProgressVariables = Prefer<
   ProgressVariablesDefaults
 >;
 
-export type ProgressModifierProps = Partial<{
-  color: Variables["colors"];
-  max: number;
-  size: ProgressVariables["sizes"];
-  value: number;
-}>;
+export type ProgressModifierProps = {
+  color?: Variables["colors"];
+  max?: number;
+  size?: ProgressVariables["sizes"];
+  value?: number;
+};
 
 export type ProgressProps = HelpersProps & ProgressModifierProps;
 

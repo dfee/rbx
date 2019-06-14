@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { NavbarContext, NavbarContextValue } from "./navbar-context";
 
-export type NavbarBurgerModifierProps = Partial<{
-  onClick: React.MouseEventHandler;
-}>;
+export type NavbarBurgerModifierProps = {
+  onClick?: React.MouseEventHandler;
+};
 
 export type NavbarBurgerProps = HelpersProps & NavbarBurgerModifierProps;
 

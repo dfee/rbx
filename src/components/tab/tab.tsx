@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { TabGroup } from "./tab-group";
 
-export type TabModifierProps = Partial<{
-  active: boolean;
-}>;
+export type TabModifierProps = {
+  active?: boolean;
+};
 
 export type TabProps = HelpersProps & TabModifierProps;
 

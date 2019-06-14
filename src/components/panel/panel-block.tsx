@@ -5,9 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 
-export type PanelBlockModifierProps = Partial<{
-  active: boolean;
-}>;
+export type PanelBlockModifierProps = {
+  active?: boolean;
+};
 
 export type PanelBlockProps = HelpersProps & PanelBlockModifierProps;
 

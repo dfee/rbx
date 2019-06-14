@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { ModalContext, ModalContextValue } from "./modal-context";
 
-export type ModalBackgroundModifierProps = Partial<{
-  onClick: React.MouseEventHandler;
-}>;
+export type ModalBackgroundModifierProps = {
+  onClick?: React.MouseEventHandler;
+};
 
 export type ModalBackgroundProps = HelpersProps & ModalBackgroundModifierProps;
 

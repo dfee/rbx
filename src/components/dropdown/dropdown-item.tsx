@@ -6,10 +6,10 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { DropdownContext, DropdownContextValue } from "./dropdown-context";
 
-export type DropdownItemModifierProps = Partial<{
-  active: boolean;
-  onClick: React.MouseEventHandler;
-}>;
+export type DropdownItemModifierProps = {
+  active?: boolean;
+  onClick?: React.MouseEventHandler;
+};
 
 export type DropdownItemProps = HelpersProps & DropdownItemModifierProps;
 

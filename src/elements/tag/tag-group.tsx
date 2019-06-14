@@ -21,10 +21,10 @@ export type TagGroupVariables = Prefer<
   TagGroupVariablesDefaults
 >;
 
-export type TagGroupModifierProps = Partial<{
-  gapless: boolean;
-  size: TagGroupVariables["sizes"];
-}>;
+export type TagGroupModifierProps = {
+  gapless?: boolean;
+  size?: TagGroupVariables["sizes"];
+};
 
 export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 

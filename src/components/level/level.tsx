@@ -7,9 +7,9 @@ import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { LevelItem } from "./level-item";
 
-export type LevelModifierProps = Partial<{
-  breakpoint: Variables["breakpoints"];
-}>;
+export type LevelModifierProps = {
+  breakpoint?: Variables["breakpoints"];
+};
 
 export type LevelProps = HelpersProps & LevelModifierProps;
 

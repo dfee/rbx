@@ -5,9 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 
-export type ListItemModifierProps = Partial<{
-  active: boolean;
-}>;
+export type ListItemModifierProps = {
+  active?: boolean;
+};
 
 export type ListItemProps = HelpersProps & ListItemModifierProps;
 

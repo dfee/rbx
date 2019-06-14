@@ -4,15 +4,16 @@ import React from "react";
 import { Generic } from "../../base";
 import { initialValue, ModalContext, ModalContextValue } from "./modal-context";
 
-export type ModalPortalModifierProps = Partial<{
-  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  className: string;
-  clipped: boolean;
-  closeOnBlur: ModalContextValue["closeOnBlur"];
-  closeOnEsc: ModalContextValue["closeOnEsc"];
-  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
-  onClose: ModalContextValue["close"];
-}> & { document: Document };
+export type ModalPortalModifierProps = {
+  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
+  className?: string;
+  clipped?: boolean;
+  closeOnBlur?: ModalContextValue["closeOnBlur"];
+  closeOnEsc?: ModalContextValue["closeOnEsc"];
+  document: Document;
+  innerRef?: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
+  onClose?: ModalContextValue["close"];
+};
 
 export type ModalPortalProps = ModalPortalModifierProps;
 

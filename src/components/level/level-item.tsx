@@ -21,9 +21,9 @@ export type LevelItemVariables = Prefer<
   LevelItemVariablesDefaults
 >;
 
-export type LevelItemModifierProps = Partial<{
-  align: LevelItemVariables["alignments"];
-}>;
+export type LevelItemModifierProps = {
+  align?: LevelItemVariables["alignments"];
+};
 
 export type LevelItemProps = HelpersProps & LevelItemModifierProps;
 

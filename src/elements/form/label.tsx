@@ -23,10 +23,10 @@ export type LabelVariables = Prefer<
   LabelVariablesDefaults
 >;
 
-export type LabelModifierProps = Partial<{
-  disabled: boolean;
-  size: LabelVariables["sizes"];
-}>;
+export type LabelModifierProps = {
+  disabled?: boolean;
+  size?: LabelVariables["sizes"];
+};
 
 export type LabelProps = HelpersProps & LabelModifierProps;
 

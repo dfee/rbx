@@ -8,15 +8,15 @@ import {
 } from "./factory";
 import { Variables } from "./variables";
 
-export type TypographyHelpersProps = Partial<{
-  backgroundColor: Variables["colors"] | Variables["shades"];
-  italic: boolean;
-  textAlign: Variables["textAlignments"];
-  textColor: Variables["colors"] | Variables["shades"];
-  textSize: Variables["textSizes"];
-  textTransform: Variables["textTransforms"];
-  textWeight: Variables["textWeights"];
-}>;
+export type TypographyHelpersProps = {
+  backgroundColor?: Variables["colors"] | Variables["shades"];
+  italic?: boolean;
+  textAlign?: Variables["textAlignments"];
+  textColor?: Variables["colors"] | Variables["shades"];
+  textSize?: Variables["textSizes"];
+  textTransform?: Variables["textTransforms"];
+  textWeight?: Variables["textWeights"];
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

@@ -21,10 +21,10 @@ export type NavbarDropdownVariables = Prefer<
   NavbarDropdownVariablesDefaults
 >;
 
-export type NavbarDropdownModifierProps = Partial<{
-  align: NavbarDropdownVariables["alignments"];
-  boxed: boolean;
-}>;
+export type NavbarDropdownModifierProps = {
+  align?: NavbarDropdownVariables["alignments"];
+  boxed?: boolean;
+};
 
 export type NavbarDropdownProps = HelpersProps & NavbarDropdownModifierProps;
 

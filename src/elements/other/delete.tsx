@@ -21,9 +21,9 @@ export type DeleteVariables = Prefer<
   DeleteVariablesDefaults
 >;
 
-export type DeleteModifierProps = Partial<{
-  size: DeleteVariables["sizes"];
-}>;
+export type DeleteModifierProps = {
+  size?: DeleteVariables["sizes"];
+};
 
 export type DeleteProps = HelpersProps & DeleteModifierProps;
 

@@ -24,11 +24,11 @@ export type IconVariables = Prefer<
   IconVariablesDefaults
 >;
 
-export type IconModifierProps = Partial<{
-  align: IconVariables["alignments"];
-  color: Variables["colors"];
-  size: IconVariables["sizes"];
-}>;
+export type IconModifierProps = {
+  align?: IconVariables["alignments"];
+  color?: Variables["colors"];
+  size?: IconVariables["sizes"];
+};
 
 export type IconProps = HelpersProps & IconModifierProps;
 

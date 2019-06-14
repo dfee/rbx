@@ -9,18 +9,18 @@ import {
   NavbarItemContextValue,
 } from "./navbar-item-context";
 
-export type NavbarItemContainerModifierProps = Partial<{
-  active: boolean;
-  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  dropdown: boolean;
-  expanded: boolean;
-  hoverable: boolean;
-  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
-  managed: boolean;
-  onClick: React.MouseEventHandler;
-  tab: boolean;
-  up: boolean;
-}>;
+export type NavbarItemContainerModifierProps = {
+  active?: boolean;
+  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
+  dropdown?: boolean;
+  expanded?: boolean;
+  hoverable?: boolean;
+  innerRef?: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
+  managed?: boolean;
+  onClick?: React.MouseEventHandler;
+  tab?: boolean;
+  up?: boolean;
+};
 
 export type NavbarItemContainerProps = HelpersProps &
   NavbarItemContainerModifierProps;

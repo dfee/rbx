@@ -22,9 +22,9 @@ export type ContentVariables = Prefer<
   ContentVariablesDefaults
 >;
 
-export type ContentModifierProps = Partial<{
-  size: ContentVariables["sizes"];
-}>;
+export type ContentModifierProps = {
+  size?: ContentVariables["sizes"];
+};
 
 export type ContentProps = HelpersProps & ContentModifierProps;
 

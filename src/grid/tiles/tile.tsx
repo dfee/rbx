@@ -23,11 +23,11 @@ export type TileVariables = Prefer<
   TileVariablesDefaults
 >;
 
-export type TileModifierProps = Partial<{
-  kind: TileVariables["kinds"];
-  size: TileVariables["sizes"];
-  vertical: boolean;
-}>;
+export type TileModifierProps = {
+  kind?: TileVariables["kinds"];
+  size?: TileVariables["sizes"];
+  vertical?: boolean;
+};
 
 export type TileProps = HelpersProps & TileModifierProps;
 

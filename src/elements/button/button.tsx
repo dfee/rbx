@@ -25,18 +25,18 @@ export type ButtonVariables = Prefer<
   ButtonVariablesDefaults
 >;
 
-export type ButtonModifierProps = Partial<{
-  color: Variables["colors"];
-  fullwidth: boolean;
-  inverted: boolean;
-  outlined: boolean;
-  rounded: boolean;
-  selected: boolean;
-  size: ButtonVariables["sizes"];
-  state: ButtonVariables["states"];
-  static: boolean; // tslint:disable-line:no-reserved-keywords
-  text: boolean;
-}>;
+export type ButtonModifierProps = {
+  color?: Variables["colors"];
+  fullwidth?: boolean;
+  inverted?: boolean;
+  outlined?: boolean;
+  rounded?: boolean;
+  selected?: boolean;
+  size?: ButtonVariables["sizes"];
+  state?: ButtonVariables["states"];
+  static?: boolean; // tslint:disable-line:no-reserved-keywords
+  text?: boolean;
+};
 
 export type ButtonProps = HelpersProps & ButtonModifierProps;
 

@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { DropdownContext, DropdownContextValue } from "./dropdown-context";
 
-export type DropdownTriggerModifierProps = Partial<{
-  onClick: React.MouseEventHandler;
-}>;
+export type DropdownTriggerModifierProps = {
+  onClick?: React.MouseEventHandler;
+};
 
 export type DropdownTriggerProps = HelpersProps & DropdownTriggerModifierProps;
 

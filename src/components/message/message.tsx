@@ -24,10 +24,10 @@ export type MessageVariables = Prefer<
   MessageVariablesDefaults
 >;
 
-export type MessageModifierProps = Partial<{
-  color: Variables["colors"];
-  size: MessageVariables["sizes"];
-}>;
+export type MessageModifierProps = {
+  color?: Variables["colors"];
+  size?: MessageVariables["sizes"];
+};
 
 export type MessageProps = HelpersProps & MessageModifierProps;
 

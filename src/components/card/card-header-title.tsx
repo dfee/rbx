@@ -21,9 +21,9 @@ export type CardHeaderTitleVariables = Prefer<
   CardHeaderTitleVariablesDefaults
 >;
 
-export type CardHeaderTitleModifierProps = Partial<{
-  align: CardHeaderTitleVariables["alignments"];
-}>;
+export type CardHeaderTitleModifierProps = {
+  align?: CardHeaderTitleVariables["alignments"];
+};
 
 export type CardHeaderTitleProps = HelpersProps & CardHeaderTitleModifierProps;
 

@@ -25,13 +25,13 @@ export type TabGroupVariables = Prefer<
   TabGroupVariablesDefaults
 >;
 
-export type TabGroupModifierProps = Partial<{
-  align: TabGroupVariables["alignments"];
-  fullwidth: boolean;
+export type TabGroupModifierProps = {
+  align?: TabGroupVariables["alignments"];
+  fullwidth?: boolean;
   /** This is called style on Bulma documentation */
-  kind: TabGroupVariables["kinds"];
-  size: TabGroupVariables["sizes"];
-}>;
+  kind?: TabGroupVariables["kinds"];
+  size?: TabGroupVariables["sizes"];
+};
 
 export type TabGroupProps = HelpersProps & TabGroupModifierProps;
 

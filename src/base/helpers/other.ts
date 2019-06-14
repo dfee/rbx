@@ -7,20 +7,20 @@ import {
   TransformFunction,
 } from "./factory";
 
-export type OtherHelpersProps = Partial<{
+export type OtherHelpersProps = {
   /** Removes any margin */
-  marginless: boolean;
+  marginless?: boolean;
   /** Removes any padding */
-  paddingless: boolean;
+  paddingless?: boolean;
   /** Removes any radius */
-  radiusless: boolean;
-  /** Applies position: relative to the element */
-  relative: boolean;
+  radiusless?: boolean;
+  /** Applies position?: relative to the element */
+  relative?: boolean;
   /** Removes any shadow */
-  shadowless: boolean;
+  shadowless?: boolean;
   /** Prevents the text from being selectable */
-  unselectable: boolean;
-}>;
+  unselectable?: boolean;
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

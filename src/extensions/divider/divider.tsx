@@ -6,11 +6,11 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 
-export type DividerModifierProps = Partial<{
-  children: string | number;
-  color: Variables["colors"];
-  vertical: boolean;
-}>;
+export type DividerModifierProps = {
+  children?: string | number;
+  color?: Variables["colors"];
+  vertical?: boolean;
+};
 
 export type DividerProps = HelpersProps & DividerModifierProps;
 

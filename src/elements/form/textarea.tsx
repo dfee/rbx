@@ -24,12 +24,12 @@ export type TextareaVariables = Prefer<
   TextareaVariablesDefaults
 >;
 
-export type TextareaModifierProps = Partial<{
-  color: Variables["colors"];
-  fixedSize: boolean;
-  size: TextareaVariables["sizes"];
-  state: TextareaVariables["states"];
-}>;
+export type TextareaModifierProps = {
+  color?: Variables["colors"];
+  fixedSize?: boolean;
+  size?: TextareaVariables["sizes"];
+  state?: TextareaVariables["states"];
+};
 
 export type TextareaProps = HelpersProps & TextareaModifierProps;
 

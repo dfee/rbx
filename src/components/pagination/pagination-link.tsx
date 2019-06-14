@@ -5,9 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 
-export type PaginationLinkModifiers = Partial<{
-  current: boolean;
-}>;
+export type PaginationLinkModifiers = {
+  current?: boolean;
+};
 
 export type PaginationLinkProps = HelpersProps & PaginationLinkModifiers;
 

@@ -5,18 +5,18 @@ import { canUseDOM } from "../../utils";
 import { ModalContextValue } from "./modal-context";
 import { ModalPortal } from "./modal-portal";
 
-export type ModalContainerProps = Partial<{
-  active: boolean;
-  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  children: React.ReactNode;
-  clipped: boolean;
-  closeOnBlur: ModalContextValue["closeOnBlur"];
-  closeOnEsc: ModalContextValue["closeOnEsc"];
-  containerClassName: string;
-  document: Document;
-  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
-  onClose(): void;
-}>;
+export type ModalContainerProps = {
+  active?: boolean;
+  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
+  children?: React.ReactNode;
+  clipped?: boolean;
+  closeOnBlur?: ModalContextValue["closeOnBlur"];
+  closeOnEsc?: ModalContextValue["closeOnEsc"];
+  containerClassName?: string;
+  document?: Document;
+  innerRef?: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
+  onClose?: () => void;
+};
 
 export class ModalContainer extends React.PureComponent<ModalContainerProps> {
   public static displayName = "Modal.Container";

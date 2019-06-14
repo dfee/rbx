@@ -7,17 +7,17 @@ import {
   TransformFunction,
 } from "./factory";
 
-export type VisibilityHelpersProps = Partial<{
+export type VisibilityHelpersProps = {
   /** Hides an element (unclear on where this is documented in Bulma) */
-  hidden: boolean;
+  hidden?: boolean;
   /** Adds visibility hidden */
-  invisible: boolean;
+  invisible?: boolean;
   /**
    * Hide elements visually but keep the element available to be announced by a
    * screen reader
    */
-  srOnly: boolean;
-}>;
+  srOnly?: boolean;
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

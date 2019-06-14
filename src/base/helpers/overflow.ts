@@ -7,10 +7,10 @@ import {
   TransformFunction,
 } from "./factory";
 
-export type OverflowHelpersProps = Partial<{
+export type OverflowHelpersProps = {
   /** Adds overflow hidden */
-  clipped: boolean;
-}>;
+  clipped?: boolean;
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

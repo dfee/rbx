@@ -7,10 +7,10 @@ import {
   TransformFunction,
 } from "./factory";
 
-export type OverlayHelpersProps = Partial<{
+export type OverlayHelpersProps = {
   /** Completely covers the first positioned parent */
-  overlay: boolean;
-}>;
+  overlay?: boolean;
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

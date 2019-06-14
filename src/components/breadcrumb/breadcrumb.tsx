@@ -26,11 +26,11 @@ export type BreadcrumbVariables = Prefer<
   BreadcrumbVariablesDefaults
 >;
 
-export type BreadcrumbModifierProps = Partial<{
-  align: BreadcrumbVariables["alignments"];
-  separator: BreadcrumbVariables["separators"];
-  size: BreadcrumbVariables["sizes"];
-}>;
+export type BreadcrumbModifierProps = {
+  align?: BreadcrumbVariables["alignments"];
+  separator?: BreadcrumbVariables["separators"];
+  size?: BreadcrumbVariables["sizes"];
+};
 
 export type BreadcrumbProps = HelpersProps & BreadcrumbModifierProps;
 

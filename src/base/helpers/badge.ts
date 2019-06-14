@@ -8,13 +8,13 @@ import {
 } from "./factory";
 import { DEFAULTS, Variables } from "./variables";
 
-export type BadgeHelpersProps = Partial<{
-  badge: number | string;
-  badgeColor: Variables["colors"];
-  badgeOutlined: boolean;
-  badgeRounded: boolean;
-  badgeSize: (typeof DEFAULTS["badgeSizes"])[number];
-}>;
+export type BadgeHelpersProps = {
+  badge?: number | string;
+  badgeColor?: Variables["colors"];
+  badgeOutlined?: boolean;
+  badgeRounded?: boolean;
+  badgeSize?: (typeof DEFAULTS["badgeSizes"])[number];
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

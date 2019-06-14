@@ -21,9 +21,9 @@ export type MediaItemVariables = Prefer<
   MediaItemVariablesDefaults
 >;
 
-export type MediaItemModifierProps = Partial<{
-  align: MediaItemVariables["alignments"];
-}>;
+export type MediaItemModifierProps = {
+  align?: MediaItemVariables["alignments"];
+};
 
 export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 

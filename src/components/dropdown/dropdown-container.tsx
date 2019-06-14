@@ -22,15 +22,15 @@ export type DropdownVariables = Prefer<
   DropdownVariablesDefaults
 >;
 
-export type DropdownContainerModifierProps = Partial<{
-  active: boolean;
-  align: DropdownVariables["alignments"];
-  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  hoverable: boolean;
-  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
-  managed: boolean;
-  up: boolean;
-}>;
+export type DropdownContainerModifierProps = {
+  active?: boolean;
+  align?: DropdownVariables["alignments"];
+  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
+  hoverable?: boolean;
+  innerRef?: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
+  managed?: boolean;
+  up?: boolean;
+};
 
 export type DropdownContainerProps = HelpersProps &
   DropdownContainerModifierProps;

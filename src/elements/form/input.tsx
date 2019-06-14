@@ -36,15 +36,15 @@ export type InputVariables = Prefer<
   InputVariablesDefaults
 >;
 
-export type InputModifierProps = Partial<{
-  color: Variables["colors"];
-  readOnly: React.InputHTMLAttributes<HTMLInputElement>["readOnly"];
-  rounded: boolean;
-  size: InputVariables["sizes"];
-  state: InputVariables["states"];
-  static: boolean; // tslint:disable-line:no-reserved-keywords
-  type: InputVariables["types"]; // tslint:disable-line:no-reserved-keywords
-}>;
+export type InputModifierProps = {
+  color?: Variables["colors"];
+  readOnly?: React.InputHTMLAttributes<HTMLInputElement>["readOnly"];
+  rounded?: boolean;
+  size?: InputVariables["sizes"];
+  state?: InputVariables["states"];
+  static?: boolean; // tslint:disable-line:no-reserved-keywords
+  type?: InputVariables["types"]; // tslint:disable-line:no-reserved-keywords
+};
 
 export type InputProps = HelpersProps & InputModifierProps;
 

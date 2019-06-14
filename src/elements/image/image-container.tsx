@@ -41,9 +41,9 @@ export type ImageContainerVariables = Prefer<
   ImageContainerVariablesDefaults
 >;
 
-export type ImageContainerModifierProps = Partial<{
-  size: ImageContainerVariables["sizes"];
-}>;
+export type ImageContainerModifierProps = {
+  size?: ImageContainerVariables["sizes"];
+};
 
 export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 

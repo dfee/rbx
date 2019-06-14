@@ -21,11 +21,11 @@ export type TitleVariables = Prefer<
   TitleVariablesDefaults
 >;
 
-export type TitleModifierProps = Partial<{
-  size: TitleVariables["sizes"];
-  spaced: boolean;
-  subtitle: boolean;
-}>;
+export type TitleModifierProps = {
+  size?: TitleVariables["sizes"];
+  spaced?: boolean;
+  subtitle?: boolean;
+};
 
 export type TitleProps = HelpersProps & TitleModifierProps;
 

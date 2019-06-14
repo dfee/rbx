@@ -23,17 +23,17 @@ export type NavbarVariables = Prefer<
   NavbarVariablesDefaults
 >;
 
-export type NavbarContainerModifierProps = Partial<{
+export type NavbarContainerModifierProps = {
   /** * Determines whether the menu is displayed on mobile */
-  active: boolean;
-  as: React.ReactType; // tslint:disable-line:no-reserved-keywords
-  color: Variables["colors"];
-  document: Document;
-  fixed: NavbarVariables["fixedAlignments"];
-  innerRef: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
-  managed: boolean;
-  transparent: boolean;
-}>;
+  active?: boolean;
+  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
+  color?: Variables["colors"];
+  document?: Document;
+  fixed?: NavbarVariables["fixedAlignments"];
+  innerRef?: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
+  managed?: boolean;
+  transparent?: boolean;
+};
 
 export type NavbarContainerProps = HelpersProps & NavbarContainerModifierProps;
 

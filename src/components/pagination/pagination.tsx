@@ -27,11 +27,11 @@ export type PaginationVariables = Prefer<
   PaginationVariablesDefaults
 >;
 
-export type PaginationModifiers = Partial<{
-  align: PaginationVariables["alignments"];
-  rounded: boolean;
-  size: PaginationVariables["sizes"];
-}>;
+export type PaginationModifiers = {
+  align?: PaginationVariables["alignments"];
+  rounded?: boolean;
+  size?: PaginationVariables["sizes"];
+};
 
 export type PaginationProps = HelpersProps & PaginationModifiers;
 

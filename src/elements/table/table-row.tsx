@@ -5,9 +5,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 
-export type TableRowHelperProps = Partial<{
-  selected: boolean;
-}>;
+export type TableRowHelperProps = {
+  selected?: boolean;
+};
 
 export type TableRowProps = HelpersProps & TableRowHelperProps;
 

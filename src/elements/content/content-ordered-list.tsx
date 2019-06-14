@@ -22,9 +22,9 @@ export type ContentOrderedListVariables = Prefer<
   ContentOrderedListVariablesDefaults
 >;
 
-export type ContentOrderedListModifierProps = Partial<{
-  type: ContentOrderedListVariables["types"]; // tslint:disable-line:no-reserved-keywords
-}>;
+export type ContentOrderedListModifierProps = {
+  type?: ContentOrderedListVariables["types"]; // tslint:disable-line:no-reserved-keywords
+};
 
 export type ContentOrderedListProps = HelpersProps &
   ContentOrderedListModifierProps;

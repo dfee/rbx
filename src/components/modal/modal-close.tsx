@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { ModalContext, ModalContextValue } from "./modal-context";
 
-export type ModalCloseModifierProps = Partial<{
-  onClick: React.MouseEventHandler;
-}>;
+export type ModalCloseModifierProps = {
+  onClick?: React.MouseEventHandler;
+};
 
 export type ModalCloseProps = HelpersProps & ModalCloseModifierProps;
 

@@ -8,12 +8,12 @@ import {
 } from "./factory";
 import { Variables } from "./variables";
 
-export type FloatHelpersProps = Partial<{
+export type FloatHelpersProps = {
   /** Fixes an element's floating children */
-  clearfix: boolean;
+  clearfix?: boolean;
   /** Moves an element to the left or right */
-  pull: Variables["floatPulledAlignments"];
-}>;
+  pull?: Variables["floatPulledAlignments"];
+};
 
 // Factories
 export const makePropTypes = makePropTypesFactory(vars => ({

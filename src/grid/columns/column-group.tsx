@@ -22,38 +22,38 @@ export type ColumnGroupVariables = Prefer<
   ColumnGroupVariablesDefaults
 >;
 
-export type ColumnGroupBreakpointOptions = Partial<{
+export type ColumnGroupBreakpointOptions = {
   /**
    * The column gap size for a breakapoint
    */
-  gapSize: ColumnGroupVariables["gapSizes"];
-}>;
+  gapSize?: ColumnGroupVariables["gapSizes"];
+};
 
-type ColumnGroupModifierProps = Partial<
-  { [B in Variables["breakpoints"]]: ColumnGroupBreakpointOptions } & {
-    /**
-     * Breakpoint where columns become stacked.
-     */
-    breakpoint: Variables["breakpoints"];
-    /**
-     * `true` you want the columns inside to be horizontaly centered
-     */
-    centered: boolean;
-    /**
-     * `true` to remove space between columns
-     */
-    gapless: boolean;
-    /**
-     * `true` if you want to use more than one line if you add more column
-     * elements that would fit in a single row.
-     */
-    multiline: boolean;
-    /**
-     * `true` if you want the columns to be vertically centered.
-     */
-    vcentered: boolean;
-  } & ColumnGroupBreakpointOptions
->;
+type ColumnGroupModifierProps = {
+  [B in Variables["breakpoints"]]?: ColumnGroupBreakpointOptions;
+} & {
+  /**
+   * Breakpoint where columns become stacked.
+   */
+  breakpoint?: Variables["breakpoints"];
+  /**
+   * `true` you want the columns inside to be horizontaly centered
+   */
+  centered?: boolean;
+  /**
+   * `true` to remove space between columns
+   */
+  gapless?: boolean;
+  /**
+   * `true` if you want to use more than one line if you add more column
+   * elements that would fit in a single row.
+   */
+  multiline?: boolean;
+  /**
+   * `true` if you want the columns to be vertically centered.
+   */
+  vcentered?: boolean;
+} & ColumnGroupBreakpointOptions;
 
 export type ColumnGroupProps = HelpersProps & ColumnGroupModifierProps;
 

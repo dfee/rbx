@@ -10,11 +10,11 @@ export const PAGE_LOADER_DEFAULTS = {
   directions: ["right-to-left", "left-to-right"] as const,
 };
 
-export type PageLoaderModifierProps = Partial<{
-  active: boolean;
-  color: Variables["colors"];
-  direction: (typeof PAGE_LOADER_DEFAULTS["directions"])[number];
-}>;
+export type PageLoaderModifierProps = {
+  active?: boolean;
+  color?: Variables["colors"];
+  direction?: (typeof PAGE_LOADER_DEFAULTS["directions"])[number];
+};
 
 export type PageLoaderProps = HelpersProps & PageLoaderModifierProps;
 

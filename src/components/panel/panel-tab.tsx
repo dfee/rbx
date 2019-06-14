@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { PanelTabGroup } from "./panel-tab-group";
 
-export type PanelTabModifierProps = Partial<{
-  active: boolean;
-}>;
+export type PanelTabModifierProps = {
+  active?: boolean;
+};
 
 export type PanelTabProps = HelpersProps & PanelTabModifierProps;
 

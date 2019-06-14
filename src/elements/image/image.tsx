@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { ImageContainer } from "./image-container";
 
-export type ImageModifierProps = Partial<{
-  rounded: boolean;
-}>;
+export type ImageModifierProps = {
+  rounded?: boolean;
+};
 
 export type ImageProps = HelpersProps & ImageModifierProps;
 

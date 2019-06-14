@@ -21,13 +21,13 @@ export type ControlVariables = Prefer<
   ControlVariablesDefaults
 >;
 
-export type ControlModifierProps = Partial<{
-  expanded: boolean;
-  iconLeft: boolean;
-  iconRight: boolean;
-  loading: boolean;
-  size: ControlVariables["sizes"];
-}>;
+export type ControlModifierProps = {
+  expanded?: boolean;
+  iconLeft?: boolean;
+  iconRight?: boolean;
+  loading?: boolean;
+  size?: ControlVariables["sizes"];
+};
 
 export type ControlProps = HelpersProps & ControlModifierProps;
 

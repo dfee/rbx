@@ -30,14 +30,14 @@ export type FileVariables = Prefer<
   FileVariablesDefaults
 >;
 
-export type FileModifierProps = Partial<{
-  align: FileVariables["alignments"];
-  boxed: boolean;
-  color: Variables["colors"];
-  fullwidth: boolean;
-  hasName: boolean;
-  size: FileVariables["sizes"];
-}>;
+export type FileModifierProps = {
+  align?: FileVariables["alignments"];
+  boxed?: boolean;
+  color?: Variables["colors"];
+  fullwidth?: boolean;
+  hasName?: boolean;
+  size?: FileVariables["sizes"];
+};
 
 export type FileProps = HelpersProps & FileModifierProps;
 

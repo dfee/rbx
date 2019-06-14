@@ -9,10 +9,10 @@ import {
   NavbarItemContextValue,
 } from "./navbar-item-context";
 
-export type NavbarLinkModifierProps = Partial<{
-  arrowless: boolean;
-  onClick: React.MouseEventHandler;
-}>;
+export type NavbarLinkModifierProps = {
+  arrowless?: boolean;
+  onClick?: React.MouseEventHandler;
+};
 
 export type NavbarLinkProps = HelpersProps & NavbarLinkModifierProps;
 

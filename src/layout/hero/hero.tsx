@@ -31,11 +31,11 @@ export type HeroVariables = Prefer<
   HeroVariablesDefaults
 >;
 
-export type HeroModifierProps = Partial<{
-  color: Variables["colors"];
-  gradient: boolean;
-  size: HeroVariables["sizes"];
-}>;
+export type HeroModifierProps = {
+  color?: Variables["colors"];
+  gradient?: boolean;
+  size?: HeroVariables["sizes"];
+};
 
 export type HeroProps = HelpersProps & HeroModifierProps;
 

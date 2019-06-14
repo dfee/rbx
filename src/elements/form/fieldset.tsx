@@ -4,9 +4,9 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 
-export type FieldsetModifierProps = Partial<{
-  disabled: boolean;
-}>;
+export type FieldsetModifierProps = {
+  disabled?: boolean;
+};
 
 export type FieldsetProps = HelpersProps & FieldsetModifierProps;
 

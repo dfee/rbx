@@ -21,9 +21,9 @@ export type SectionVariables = Prefer<
   SectionVariablesDefaults
 >;
 
-export type SectionModifierProps = Partial<{
-  size: SectionVariables["sizes"];
-}>;
+export type SectionModifierProps = {
+  size?: SectionVariables["sizes"];
+};
 
 export type SectionProps = HelpersProps & SectionModifierProps;
 

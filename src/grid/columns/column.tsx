@@ -47,26 +47,26 @@ export type ColumnVariables = Prefer<
   ColumnVariablesDefaults
 >;
 
-export type ColumnBreakpointOptions = Partial<{
+export type ColumnBreakpointOptions = {
   /**
    * If you want a column to only take the space it needs, use the narrow
    * modifier. The other column(s) will fill up the remaining space.
    */
-  narrow: boolean;
+  narrow?: boolean;
   /**
    * Create horizontal space around Column elements
    */
-  offset: ColumnVariables["sizes"];
+  offset?: ColumnVariables["sizes"];
   /**
    * The size of the column. the maximun size of a row is 12
    */
-  size: ColumnVariables["sizes"];
-}>;
+  size?: ColumnVariables["sizes"];
+};
 
-export type ColumnModifierProps = Partial<
-  { [B in Variables["breakpoints"]]: ColumnBreakpointOptions } &
-    ColumnBreakpointOptions
->;
+export type ColumnModifierProps = {
+  [B in Variables["breakpoints"]]?: ColumnBreakpointOptions
+} &
+  ColumnBreakpointOptions;
 
 export type ColumnProps = HelpersProps & ColumnModifierProps;
 

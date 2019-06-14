@@ -8,53 +8,51 @@ import {
 } from "./factory";
 import { Variables } from "./variables";
 
-export type LimitedResponsiveBreakpointProps = Partial<{
-  display: {
+export type LimitedResponsiveBreakpointProps = {
+  display?: {
     value: Variables["displays"];
   };
-  hide: {
+  hide?: {
     value: boolean;
   };
-  textAlign: {
+  textAlign?: {
     value: Variables["textAlignments"];
   };
-  textSize: {
+  textSize?: {
     value: Variables["textSizes"];
   };
-}>;
+};
 
-export type ResponsiveBreakpointProps = Partial<{
-  display: {
+export type ResponsiveBreakpointProps = {
+  display?: {
     only?: boolean;
     value: Variables["displays"];
   };
-  hide: {
+  hide?: {
     only?: boolean;
     value: boolean;
   };
-  textAlign: {
+  textAlign?: {
     only?: boolean;
     value: Variables["textAlignments"];
   };
-  textSize: {
+  textSize?: {
     only?: boolean;
     value: Variables["textSizes"];
   };
-}>;
+};
 
-export type ResponsiveHelpersProps = Partial<{
-  responsive: Partial<
+export type ResponsiveHelpersProps = {
+  responsive?: {
+    [B in Variables["breakpointsLimited"]]?: LimitedResponsiveBreakpointProps;
+  } &
     {
-      [B in Variables["breakpointsLimited"]]: LimitedResponsiveBreakpointProps;
-    } &
-      {
-        [B in Exclude<
-          Variables["breakpoints"],
-          Variables["breakpointsLimited"]
-        >]: ResponsiveBreakpointProps;
-      }
-  >;
-}>;
+      [B in Exclude<
+        Variables["breakpoints"],
+        Variables["breakpointsLimited"]
+      >]?: ResponsiveBreakpointProps;
+    };
+};
 
 export const makeResponsiveBreakpointPropTypes = makePropTypesFactory(vars => ({
   display: PropTypes.shape({

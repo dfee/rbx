@@ -21,9 +21,9 @@ export type FieldLabelVariables = Prefer<
   FieldLabelVariablesDefaults
 >;
 
-export type FieldLabelModifierProps = Partial<{
-  size: FieldLabelVariables["sizes"];
-}>;
+export type FieldLabelModifierProps = {
+  size?: FieldLabelVariables["sizes"];
+};
 
 export type FieldLabelProps = HelpersProps & FieldLabelModifierProps;
 

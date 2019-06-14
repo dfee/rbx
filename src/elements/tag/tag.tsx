@@ -20,12 +20,12 @@ export interface TagVariablesDefaults {
 
 export type TagVariables = Prefer<TagVariablesOverrides, TagVariablesDefaults>;
 
-export type TagModifierProps = Partial<{
-  color: Variables["colors"];
-  delete: boolean; // tslint:disable-line:no-reserved-keywords
-  rounded: boolean;
-  size: TagVariables["sizes"];
-}>;
+export type TagModifierProps = {
+  color?: Variables["colors"];
+  delete?: boolean; // tslint:disable-line:no-reserved-keywords
+  rounded?: boolean;
+  size?: TagVariables["sizes"];
+};
 
 export type TagProps = HelpersProps & TagModifierProps;
 

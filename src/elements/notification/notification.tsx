@@ -6,9 +6,9 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 
-export type NotificationModifierProps = Partial<{
-  color: Variables["colors"];
-}>;
+export type NotificationModifierProps = {
+  color?: Variables["colors"];
+};
 
 export type NotificationProps = HelpersProps & NotificationModifierProps;
 

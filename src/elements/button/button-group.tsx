@@ -23,11 +23,11 @@ export type ButtonGroupVariables = Prefer<
   ButtonGroupVariablesDefaults
 >;
 
-export type ButtonGroupModifierProps = Partial<{
-  align: ButtonGroupVariables["alignments"];
-  hasAddons: boolean;
-  size: ButtonGroupVariables["sizes"];
-}>;
+export type ButtonGroupModifierProps = {
+  align?: ButtonGroupVariables["alignments"];
+  hasAddons?: boolean;
+  size?: ButtonGroupVariables["sizes"];
+};
 
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 

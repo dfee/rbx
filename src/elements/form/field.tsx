@@ -25,14 +25,14 @@ export type FieldVariables = Prefer<
   FieldVariablesDefaults
 >;
 
-export type FieldModifierProps = Partial<{
-  align: FieldVariables["alignments"];
-  expanded: boolean;
-  horizontal: boolean;
-  kind: FieldVariables["kinds"];
-  multiline: boolean;
-  narrow: boolean;
-}>;
+export type FieldModifierProps = {
+  align?: FieldVariables["alignments"];
+  expanded?: boolean;
+  horizontal?: boolean;
+  kind?: FieldVariables["kinds"];
+  multiline?: boolean;
+  narrow?: boolean;
+};
 
 export type FieldProps = HelpersProps & FieldModifierProps;
 
