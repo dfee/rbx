@@ -259,6 +259,20 @@ Object {
     },
     "render": [Function],
   },
+  "Divider": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "div",
+      "children": "",
+    },
+    "displayName": "Divider",
+    "propTypes": Object {
+      "children": [Function],
+      "color": [Function],
+      "vertical": [Function],
+    },
+    "render": [Function],
+  },
   "Dropdown": Object {
     "$$typeof": Symbol(react.forward_ref),
     "Container": [Function],
@@ -991,6 +1005,19 @@ Object {
       "as": "p",
     },
     "displayName": "Numeric",
+    "render": [Function],
+  },
+  "PageLoader": Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "as": "div",
+    },
+    "displayName": "PageLoader",
+    "propTypes": Object {
+      "active": [Function],
+      "color": [Function],
+      "direction": [Function],
+    },
     "render": [Function],
   },
   "Pagination": Object {

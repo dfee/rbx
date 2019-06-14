@@ -19,6 +19,7 @@ export { Icon } from "./icon";
 export { Image } from "./image";
 export { Notification } from "./notification";
 export { Block, Delete, Heading, Highlight, Loader, Numeric } from "./other";
+export { PageLoader } from "./page-loader";
 export { Progress } from "./progress";
 export { Table } from "./table";
 export { Tag } from "./tag";

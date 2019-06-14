@@ -1,10 +1,7 @@
 import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
-import {
-  PAGE_LOADER_DEFAULTS,
-  PageLoader,
-} from "src/extensions/page-loader/page-loader";
+import { Divider } from "src/layout/divider/divider";
 
 import {
   hasProperties,
@@ -15,14 +12,17 @@ import {
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
 
-const COMPONENT = PageLoader;
-const DISPLAY_NAME = "PageLoader";
+const COMPONENT = Divider;
+const DISPLAY_NAME = "Divider";
 const DEFAULT_ELEMENT = "div";
-const BULMA_CLASS_NAME = "pageloader";
+const BULMA_CLASS_NAME = "is-divider";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    defaultProps: { as: DEFAULT_ELEMENT },
+    defaultProps: {
+      as: DEFAULT_ELEMENT,
+      children: "",
+    },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
@@ -36,15 +36,17 @@ describe(`${DISPLAY_NAME} component`, () => {
   describe("props", () => {
     const { propTypes } = COMPONENT;
 
-    describe("active", () => {
-      validateBoolPropType(propTypes, "active");
+    describe("children", () => {
+      validateStringOrNumberPropType(propTypes, "children");
 
-      [false, true].map(active => {
-        it(`should ${active ? "" : "not "}be active`, () => {
-          const node = <PageLoader active={active} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass("is-active")).toBe(active);
-        });
+      it(`should have proper content`, () => {
+        const node = <Divider children="foo" />;
+        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+        expect(
+          (wrapper.props() as React.HTMLAttributes<HTMLDivElement>)[
+            "data-content"
+          ],
+        ).toBe("foo");
       });
     });
 
@@ -53,21 +55,21 @@ describe(`${DISPLAY_NAME} component`, () => {
 
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
-          const node = <PageLoader color={color} />;
+          const node = <Divider color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
     });
 
-    describe("direction", () => {
-      validateStringOrNumberPropType(propTypes, "direction");
+    describe("vertical", () => {
+      validateBoolPropType(propTypes, "vertical");
 
-      PAGE_LOADER_DEFAULTS.directions.map(direction => {
-        it(`should be ${direction}`, () => {
-          const node = <PageLoader direction={direction} />;
+      [false, true].map(vertical => {
+        it(`should ${vertical ? "" : "not "}be vertical`, () => {
+          const node = <Divider vertical={vertical} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
-          expect(wrapper.hasClass(`is-${direction}`)).toBe(true);
+          expect(wrapper.hasClass(`is-divider-vertical`)).toBe(vertical);
         });
       });
     });
