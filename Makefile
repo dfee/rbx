@@ -83,27 +83,27 @@ examples-test: \
 .PHONY: examples-test
 
 examples-test-with-create-react-app:
-	@cd examples/with-create-react-app/ && npm ci
+	@cd examples/with-create-react-app/ && npm i
 	@cd examples/with-create-react-app/ && CI=true npm run test
 .PHONY: examples-test-with-create-react-app
 
 examples-test-with-create-react-app-typescript:
-	@cd examples/with-create-react-app-typescript/ && npm ci
+	@cd examples/with-create-react-app-typescript/ && npm i
 	@cd examples/with-create-react-app-typescript/ && CI=true npm run test
 .PHONY: examples-test-with-create-react-app-typescript
 
 examples-test-with-customization:
-	@cd examples/with-customization/ && npm ci
+	@cd examples/with-customization/ && npm i
 	@cd examples/with-customization/ && CI=true npm run test
 .PHONY: examples-test-with-customization
 
 examples-test-with-nextjs:
-	@cd examples/with-nextjs/ && npm ci
+	@cd examples/with-nextjs/ && npm i
 	@cd examples/with-nextjs/ && CI=true npm run test
 .PHONY: examples-test-with-nextjs
 
 examples-test-with-script:
-	@cd examples/with-script/ && npm ci
+	@cd examples/with-script/ && npm i
 	@cd examples/with-script/ && { npm run start & echo $$! > /tmp/example-with-script.pid; }
 	@cd examples/with-script/ && CI=true npm run test
 	@cat /tmp/example-with-script.pid | xargs kill
