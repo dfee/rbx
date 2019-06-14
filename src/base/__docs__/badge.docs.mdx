@@ -11,55 +11,43 @@ import {
   mapEnumerable,
   OptionBlock,
 } from "src/__docs__/components";
+import { Generic } from "src/base";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Button, Title } from "src/elements";
 
-```
 # Badge
 
 Display a **badge** element in front of another component.
 
-By default, it renders as a `span`.
-It can display number or strings.
+_This is available on every component as it's handled by the `Generic` component._
+
+It can display a `number` or a `string` on any component using `Generic`.
 
 <Playground>
-  <Badge badgeContent="pending" badgeColor="warning">
+  <Generic as="span" badge="pending" badgeColor="warning">
     Notifications
-  </Badge>
+  </Generic>
 </Playground>
 
-But you can use the `as` prop to render any component or JSX element, like a `<Button>`.
+Or, you can use any other `rbx` component (e.g. `<Button>`) and use the same API.
 
 <Playground>
-  <Badge as={Button} badgeContent={8} badgeColor="danger">
+  <Button badge={8} badgeColor="danger" badgeOutlined color="danger" outlined>
     Button
-  </Badge>
-</Playground>
-
-Because the props are prefixed with `badge`, you can use `<Badge>` as a wrapping component using the `as` prop – without interferring with the props.
-
-<Playground>
-  <Badge
-    as={Button}
-    badgeContent={8}
-    badgeColor="danger"
-    badgeOutlined
-    color="danger"
-    outlined
-  >
-    Button
-  </Badge>
+  </Button>
 </Playground>
 
 ### Colors
 
-Use the `badgeColor` prop on `<Badge>` to specify the color.
+Use the `badgeColor` prop to specify the color.
 
 <Playground>
   {() =>
-    DEFAULTS.colors.map((color, i) => (
-      <OptionBlock props={{ color }} index={i} key={i}>
-        <Badge badgeColor={color}>Notifications</Badge>
+    DEFAULTS.colors.map((badgeColor, i) => (
+      <OptionBlock props={{ badgeColor }} index={i} key={i}>
+        <Button badge={badgeColor} badgeColor={badgeColor}>
+          {badgeColor} badge
+        </Button>
       </OptionBlock>
     ))
   }
@@ -67,16 +55,18 @@ Use the `badgeColor` prop on `<Badge>` to specify the color.
 
 ### Sizes
 
-Use the `badgeSize` prop on `<Badge>` to change the size.
+Use the `badgeSize` prop to change the size.
 
 <Playground>
   {() => {
-    const sizes = BADGE_DEFAULTS.sizes.map(size => ({ name: size, size }));
+    const sizes = DEFAULTS.badgeSizes.map(size => ({ name: size, size }));
     sizes.splice(1,0, { name: 'normal', size: undefined});
 
-    return sizes.map(({ name, size }, i) => (
-      <OptionBlock props={{ size }} index={i} key={i}>
-        <Badge badgeSize={size}>{name} badge</Badge>
+    return sizes.map(({ name, badgeSize }, i) => (
+      <OptionBlock props={{ badgeSize }} index={i} key={i}>
+        <Button badge='notifications' badgeSize={badgeSize}>
+          {name} size
+        </Button>
       </OptionBlock>
     ))
 
@@ -86,58 +76,56 @@ Use the `badgeSize` prop on `<Badge>` to change the size.
 
 ### Styles
 
-Use the `badgeOutlined` prop of `<Badge>` to use an outlined badge.
+Use the `badgeOutlined` prop to use an outlined badge.
 
 <Playground>
   <Block>
     <Title as="p" size={4}>
       Span
     </Title>
-    <Badge badgeOutlined badgeContent={50}>
+    <Generic as="span" badgeOutlined badge={50}>
       Notifications
-    </Badge>
+    </Generic>
   </Block>
   <Block>
     <Title as="p" size={4}>
       Button
     </Title>
-    <Button.Group>
-      <Badge as={Button} badgeOutlined badgeContent={50}>
-        Button
-      </Badge>
-    </Button.Group>
+    <Button badgeOutlined badge={50}>
+      Button
+    </Button>
   </Block>
 </Playground>
 
-Use the `badgeRounded` prop of `<Badge>` to round a badge.
+Use the `badgeRounded` prop to round a badge.
 
 <Playground>
   <Block>
     <Title as="p" size={4}>
       Span
     </Title>
-    <Badge badgeRounded badgeContent={50}>
+    <Generic as="span" badgeRounded badge={50}>
       Notifications
-    </Badge>
+    </Generic>
   </Block>
   <Block>
     <Title as="p" size={4}>
       Button
     </Title>
-    <Button.Group>
-      <Badge as={Button} badgeRounded badgeContent={50}>
-        Button
-      </Badge>
-    </Button.Group>
+    <Button as={Button} badgeRounded badge={50}>
+      Button
+    </Button>
   </Block>
 </Playground>
 
 ## API
 
+The `badge` API is built into the `<Generic>` component, so these props can be used by any `rbx` component.
+
 <ForwardRefAsExoticComponentDoc
-  component={Badge}
+  component={Generic}
   customize
-  docUrl="https://wikiki.github.io/elements/badge/"
+  docPath="https://wikiki.github.io/elements/badge/"
   docProvider="Bulma-Extensions"
   props={{
     badge: {
@@ -156,8 +144,7 @@ Use the `badgeRounded` prop of `<Badge>` to round a badge.
     badgeSize: {
       description: "the size of the badge",
       typeName: "string (literal)",
-      typeTip: mapEnumerable(BADGE_DEFAULTS.sizes),
+      typeTip: mapEnumerable(DEFAULTS.badgeSizes),
     },
   }}
 />
-```

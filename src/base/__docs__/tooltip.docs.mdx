@@ -11,6 +11,7 @@ import {
   mapEnumerable,
   OptionBlock,
 } from "src/__docs__/components";
+import { Generic } from "src/base";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Block, Button, Title } from "src/elements";
 
@@ -18,10 +19,134 @@ import { Block, Button, Title } from "src/elements";
 
 Display a **tooltip** attached to any kind of element with different positioning.
 
-It can display number or strings.
+_This is available on every component as it's handled by the `Generic` component._
+
+It can display a `number` or a `string` on any component using `Generic`.
 
 <Playground>
-  <Button badgeContent="pending" badgeColor="warning" tooltip="Tooltip Text">
-    Notifications
+  <Generic as="span" tooltip="pending" textColor="primary">
+    Tooltip
+  </Generic>
+</Playground>
+
+Or, you can use any other `rbx` component (e.g. `<Button>`) and use the same API.
+
+<Playground>
+  <Button tooltip="pending" color="primary">
+    Tooltip
   </Button>
 </Playground>
+
+### Colors
+
+Use the `tooltipColor` prop to specify the color.
+
+<Playground>
+  {() =>
+    DEFAULTS.colors.map((tooltipColor, i) => (
+      <OptionBlock props={{ tooltipColor }} index={i} key={i}>
+        <Button tooltip={tooltipColor} tooltipColor={tooltipColor}>
+          {tooltipColor} tooltip
+        </Button>
+      </OptionBlock>
+    ))
+  }
+</Playground>
+
+### Positioning
+
+Use the `tooltipPosition` prop to specify the position of the tooltip.
+
+<Playground>
+  {() =>
+    DEFAULTS.tooltipPositions.map((tooltipPosition, i) => (
+      <OptionBlock props={{ tooltipPosition }} index={i} key={i}>
+        <Button
+          color="primary"
+          tooltip={tooltipPosition}
+          tooltipPosition={tooltipPosition}
+        >
+          {tooltipPosition} tooltip
+        </Button>
+      </OptionBlock>
+    ))
+  }
+</Playground>
+
+### Responsive positioning
+
+You can position the tooltip at differently depending on the screen size.
+
+<Playground>
+  <Button
+    color="primary"
+    tooltip="Hi! I'm on top and bottom."
+    tooltipPosition="top"
+    tooltipResponsive={{ desktop: "bottom" }}
+  >
+    Top and bottom
+  </Button>
+</Playground>
+
+If you resize your browser window around `1024px` (the `touch` breakpoint), then the tooltip will change position.
+
+### Styles
+
+Use the `tooltipActive` prop to force the tooltip to be visible.
+
+<Playground>
+  <Button tooltip="pending" color="primary" tooltipActive>
+    Tooltip
+  </Button>
+</Playground>
+
+Use the `tooltipMultiline` prop to allow for the tooltip to flow to multiple lines.
+
+<Playground>
+  <Button
+    tooltip="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    color="primary"
+    tooltipMultiline
+  >
+    Tooltip
+  </Button>
+</Playground>
+
+## API
+
+The `tooltip` API is built into the `<Generic>` component, so these props can be used by any `rbx` component.
+
+<ForwardRefAsExoticComponentDoc
+  component={Generic}
+  customize
+  docPath="https://wikiki.github.io/elements/tooltip/"
+  docProvider="Bulma-Extensions"
+  props={{
+    tooltip: {
+      description: "the contents of the tooltip",
+      typeName: "number | string",
+    },
+    tooltipActive: {
+      description: "force the tooltip to be displayed",
+      typeName: "boolean",
+    },
+    tooltipColor: {
+      description: "the color of the tooltip",
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
+    },
+    tooltipActive: {
+      description: "allow the tooltip text to flow over multipe lines",
+      typeName: "boolean",
+    },
+    tooltipPosition: {
+      description: "the position of the tooltip",
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.tooltipPositions),
+    },
+    tooltipResponsive: {
+      description: "the responsive positioning of the tooltip",
+      typeName: "{ [Breakpoint]: <tooltipPosition value> }",
+    },
+  }}
+/>

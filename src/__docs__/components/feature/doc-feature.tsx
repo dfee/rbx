@@ -1,18 +1,29 @@
 import React from "react";
 
 import { Feature } from "./feature";
+import { Variables } from "../../../base/helpers/variables";
 
 export type DocFeatureProps = {
   docPath?: string;
 };
 
 export const DocFeature: React.FC<DocFeatureProps> = ({ docPath }) => {
-  const url =
-    docPath !== undefined
-      ? `https://bulma.io/documentation${docPath}`
-      : undefined;
-  const secondaryName = docPath !== undefined ? "Bulma" : "n/a";
-  const secondaryColor = docPath !== undefined ? "primary" : "dark";
+  const isBulmaPath = docPath !== undefined ? !/^http.+/.test(docPath) : false;
+  const isRemoteUrl = docPath !== undefined && !isBulmaPath;
+
+  let url: string | undefined;
+  let secondaryName: string = "n/a";
+  let secondaryColor: Variables["colors"] = "dark";
+
+  if (isBulmaPath) {
+    url = `https://bulma.io/documentation${docPath}`;
+    secondaryName = "Bulma";
+    secondaryColor = "primary";
+  } else if (isRemoteUrl) {
+    url = docPath;
+    secondaryName = "Third Party";
+    secondaryColor = "info";
+  }
 
   return (
     <Feature
