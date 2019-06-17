@@ -6,7 +6,7 @@ import { ColumnGroup } from "src/grid/columns/column-group";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -35,13 +35,15 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
+
     describe("narrow", () => {
       validateBoolPropType(propTypes, "narrow");
 
       [false, true].map(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = <Column narrow={narrow} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         });
       });
@@ -68,9 +70,10 @@ describe(`${DISPLAY_NAME} component`, () => {
             it(`should ${narrow ? "" : "not "}be narrow`, () => {
               const props = { [breakpoint]: { narrow } };
               const node = <Column {...props} />;
-              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+              const wrapper = makeShallowWrapper({
+                Component: COMPONENT,
                 node,
-              );
+              });
               expect(wrapper.hasClass(`is-narrow-${breakpoint}`)).toBe(narrow);
             });
           });
@@ -84,7 +87,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       COLUMN_DEFAULTS.sizes.map(offset => {
         it(`should be ${offset}`, () => {
           const node = <Column offset={offset} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-offset-${offset}`)).toBe(true);
         });
       });
@@ -111,9 +114,10 @@ describe(`${DISPLAY_NAME} component`, () => {
             it(`should be offset ${offset}`, () => {
               const props = { [breakpoint]: { offset } };
               const node = <Column {...props} />;
-              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+              const wrapper = makeShallowWrapper({
+                Component: COMPONENT,
                 node,
-              );
+              });
               expect(
                 wrapper.hasClass(`is-offset-${offset}-${breakpoint}`),
               ).toBe(true);
@@ -129,7 +133,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       COLUMN_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Column size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -156,9 +160,10 @@ describe(`${DISPLAY_NAME} component`, () => {
             it(`should be ${size}`, () => {
               const props = { [breakpoint]: { size } };
               const node = <Column {...props} />;
-              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+              const wrapper = makeShallowWrapper({
+                Component: COMPONENT,
                 node,
-              );
+              });
               expect(wrapper.hasClass(`is-${size}-${breakpoint}`)).toBe(true);
             });
           });

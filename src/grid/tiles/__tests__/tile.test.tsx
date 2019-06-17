@@ -4,7 +4,7 @@ import { Tile, TILE_DEFAULTS } from "src/grid/tiles/tile";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -31,6 +31,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("kind", () => {
       validateStringOrNumberPropType(propTypes, "kind");
@@ -38,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TILE_DEFAULTS.kinds.map(kind => {
         it(`should be ${kind}`, () => {
           const node = <Tile kind={kind} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
         });
       });
@@ -50,7 +51,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Tile size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -62,7 +63,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = <Tile vertical={vertical} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-vertical")).toBe(vertical);
         });
       });

@@ -8,7 +8,7 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -36,6 +36,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("breakpoints", () => {
       validateStringOrNumberPropType(propTypes, "breakpoint");
@@ -43,7 +44,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should have breakpoint ${breakpoint}`, () => {
           const node = <ColumnGroup breakpoint={breakpoint} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
           expect(wrapper.hasClass("is-variable")).toBe(false);
         });
@@ -56,7 +57,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(centered => {
         it(`should ${centered ? "" : "not "}be centered`, () => {
           const node = <ColumnGroup centered={centered} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-centered")).toBe(centered);
           expect(wrapper.hasClass("is-variable")).toBe(false);
         });
@@ -69,7 +70,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
           const node = <ColumnGroup gapless={gapless} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-gapless")).toBe(gapless);
           expect(wrapper.hasClass("is-variable")).toBe(false);
         });
@@ -82,7 +83,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => {
         it(`should have gapSize ${gapSize}`, () => {
           const node = <ColumnGroup gapSize={gapSize} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${gapSize}`)).toBe(true);
           expect(wrapper.hasClass("is-variable")).toBe(true);
         });
@@ -110,9 +111,10 @@ describe(`${DISPLAY_NAME} component`, () => {
             it(`should have gapSize ${gapSize}`, () => {
               const props = { [breakpoint]: { gapSize } };
               const node = <ColumnGroup {...props} />;
-              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
+              const wrapper = makeShallowWrapper({
+                Component: COMPONENT,
                 node,
-              );
+              });
               expect(wrapper.hasClass(`is-${gapSize}-${breakpoint}`)).toBe(
                 true,
               );
@@ -129,7 +131,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(multiline => {
         it(`should ${multiline ? "" : "not "}be multiline`, () => {
           const node = <ColumnGroup multiline={multiline} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-multiline")).toBe(multiline);
           expect(wrapper.hasClass("is-variable")).toBe(false);
         });
@@ -142,7 +144,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(vcentered => {
         it(`should ${vcentered ? "" : "not "}be vertically centered`, () => {
           const node = <ColumnGroup vcentered={vcentered} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-vcentered")).toBe(vcentered);
           expect(wrapper.hasClass("is-variable")).toBe(false);
         });
