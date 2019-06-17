@@ -4,7 +4,7 @@ import { Title, TITLE_DEFAULTS } from "src/elements/title/title";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -31,6 +31,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("spaced", () => {
       validateBoolPropType(propTypes, "spaced");
@@ -42,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             isSpaced ? "" : "not "
           }be spaced when spaced ${spaced} and subtitle ${subtitle}`, () => {
             const node = <Title spaced={spaced} />;
-            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+            const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
             expect(wrapper.hasClass("is-spaced")).toBe(spaced);
           });
         }),
@@ -55,7 +56,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(subtitle => {
         it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
           const node = <Title subtitle={subtitle} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("subtitle")).toBe(subtitle);
           expect(wrapper.hasClass("title")).toBe(!subtitle);
         });
@@ -68,7 +69,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TITLE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Title size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

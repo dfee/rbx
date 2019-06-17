@@ -6,7 +6,7 @@ import { TagGroup } from "src/elements/tag/tag-group";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -34,6 +34,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
@@ -41,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Tag color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -54,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         it(`should ${isDelete ? "" : "not "}be delete`, () => {
           const children = "foo";
           const node = <Tag children={children} delete={isDelete} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-delete")).toBe(isDelete);
           expect(
             (wrapper.props() as React.ComponentProps<"div">).children,
@@ -69,7 +70,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Tag rounded={rounded} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
       });
@@ -81,7 +82,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TAG_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Tag size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

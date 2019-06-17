@@ -7,7 +7,7 @@ import { Radio } from "src/elements/form/radio";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -34,6 +34,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("disabled", () => {
       validateBoolPropType(propTypes, "disabled");
@@ -41,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(disabled => {
         it(`should ${disabled ? "" : "not "}be disabled`, () => {
           const node = <Label disabled={disabled} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-disabled")).toBe(disabled);
         });
       });
@@ -89,7 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             children = discriminator;
           }
           const node = <Label children={children} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(className)).toBe(true);
         });
       });
@@ -101,7 +102,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       LABEL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Label size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

@@ -8,7 +8,7 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -34,6 +34,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
@@ -44,7 +45,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       ].map(size => {
         it(`should be ${size}`, () => {
           const node = <ImageContainer size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           if (typeof size === "number") {
             expect(wrapper.hasClass(`is-${size}x${size}`)).toBe(true);
           } else {
@@ -89,9 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
               expectHasRatio ? "" : "not "
             }have class 'has-ratio' for ${JSON.stringify(childType)}`, () => {
               const node = <ImageContainer size={size} children={children} />;
-              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
-                node,
-              );
+              const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
               const childWrapper = wrapper.children();
               if (childType === null || childType === undefined) {
                 expect(childWrapper.length).toBe(0);

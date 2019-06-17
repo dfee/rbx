@@ -4,7 +4,7 @@ import { Delete, DELETE_DEFAULTS } from "src/elements/other/delete";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -30,6 +30,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
@@ -37,7 +38,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DELETE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Delete size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

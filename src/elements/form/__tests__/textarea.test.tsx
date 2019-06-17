@@ -5,7 +5,7 @@ import { Textarea, TEXTAREA_DEFAULTS } from "src/elements/form/textarea";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -35,6 +35,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
@@ -42,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Textarea color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -54,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fixedSize => {
         it(`should ${fixedSize ? "" : "not "}be fixed size`, () => {
           const node = <Textarea fixedSize={fixedSize} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
         });
       });
@@ -66,7 +67,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TEXTAREA_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Textarea size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -78,7 +79,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TEXTAREA_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
           const node = <Textarea state={state} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         });
       });

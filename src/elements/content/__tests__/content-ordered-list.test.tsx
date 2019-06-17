@@ -7,7 +7,7 @@ import { ContentOrderedListItem } from "src/elements/content/content-ordered-lis
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -34,6 +34,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("type", () => {
       validateStringOrNumberPropType(propTypes, "type");
@@ -41,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       CONTENT_ORDERED_LIST_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
           const node = <ContentOrderedList type={isType} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${isType}`)).toBe(true);
         });
       });

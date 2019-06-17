@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HelpersProps, makeRootValidatingTransform } from "./helpers";
 import { ValidatingTransformFunction } from "./helpers/factory";
 import { DEFAULTS } from "./helpers/variables";
@@ -15,3 +15,5 @@ export const initialValue: ThemeContextValue = {
 };
 
 export const ThemeContext = React.createContext(initialValue);
+
+export const useTheme = () => useContext(ThemeContext);

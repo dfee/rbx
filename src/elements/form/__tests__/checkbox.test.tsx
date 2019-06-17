@@ -4,7 +4,7 @@ import { Checkbox } from "src/elements/form/checkbox";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
@@ -28,8 +28,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   testThemeIntegration(COMPONENT);
 
   it("should be a checkbox", () => {
+    const makeShallowWrapper = makeShallowWrapperFactory();
     const node = <Checkbox />;
-    const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+    const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
     expect(
       (wrapper.props() as React.InputHTMLAttributes<Element>).type,
     ).toEqual("checkbox");

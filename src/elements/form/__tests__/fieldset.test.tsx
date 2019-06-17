@@ -4,7 +4,7 @@ import { Fieldset } from "src/elements/form/fieldset";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -29,6 +29,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("disabled", () => {
       validateBoolPropType(propTypes, "disabled");
@@ -36,7 +37,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(disabled => {
         it(`should be ${disabled}`, () => {
           const node = <Fieldset disabled={disabled} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.prop("disabled")).toEqual(disabled);
         });
       });

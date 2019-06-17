@@ -5,7 +5,7 @@ import { Input, INPUT_DEFAULTS } from "src/elements/form/input";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -32,6 +32,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
@@ -39,7 +40,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Input color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -51,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(readOnly => {
         it(`should ${readOnly ? "" : "not "}be readOnly`, () => {
           const node = <Input readOnly={readOnly} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.prop("readOnly")).toBe(readOnly);
         });
       });
@@ -63,7 +64,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Input rounded={rounded} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
       });
@@ -75,7 +76,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       INPUT_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Input size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -87,7 +88,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       INPUT_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
           const node = <Input state={state} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         });
       });
@@ -99,7 +100,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(isStatic => {
         it(`should ${isStatic ? "" : "not "}be static`, () => {
           const node = <Input static={isStatic} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-static")).toBe(isStatic);
           expect(wrapper.prop("readOnly")).toBe(isStatic);
         });
@@ -112,7 +113,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       INPUT_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
           const node = <Input type={isType} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(
             (wrapper.props() as React.InputHTMLAttributes<Element>).type,
           ).toEqual(isType);

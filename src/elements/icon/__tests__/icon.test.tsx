@@ -5,7 +5,7 @@ import { Icon, ICON_DEFAULTS } from "src/elements/icon/icon";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -31,6 +31,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
@@ -38,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Icon color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`has-text-${color}`)).toBe(true);
         });
       });
@@ -50,7 +51,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       ICON_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
           const node = <Icon align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -62,7 +63,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       ICON_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Icon size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

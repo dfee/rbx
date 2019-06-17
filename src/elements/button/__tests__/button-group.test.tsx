@@ -7,7 +7,7 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -34,6 +34,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("hasAddons", () => {
       validateBoolPropType(propTypes, "hasAddons");
@@ -41,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(hasAddons => {
         it(`should ${hasAddons ? "" : "not "}have addons`, () => {
           const node = <ButtonGroup hasAddons={hasAddons} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("has-addons")).toBe(hasAddons);
         });
       });
@@ -53,7 +54,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BUTTON_GROUP_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <ButtonGroup align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -65,7 +66,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BUTTON_GROUP_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <ButtonGroup size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`are-${size}`)).toBe(true);
         });
       });

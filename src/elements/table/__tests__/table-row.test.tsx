@@ -3,7 +3,8 @@ import { TableRow } from "src/elements/table/table-row";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
+  makeReactWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -14,6 +15,20 @@ const DISPLAY_NAME = "Table.Row";
 const DEFAULT_ELEMENT = "tr";
 const BULMA_CLASS_NAME = undefined;
 
+const makeNode = (props: any) => (
+  <table>
+    <tbody>
+      <TableRow {...props} />
+    </tbody>
+  </table>
+);
+
+const makeWrappingNode = (node: React.ReactNode) => (
+  <table>
+    <tbody children={node} />
+  </table>
+);
+
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
@@ -23,17 +38,17 @@ describe(`${DISPLAY_NAME} component`, () => {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeWrappingNode: node => (
-      <table>
-        <tbody children={node} />
-      </table>
-    ),
+    makeWrappingNode,
   });
 
-  testThemeIntegration(COMPONENT);
+  testThemeIntegration(COMPONENT, {
+    makeNode,
+    makeReactWrapper: makeReactWrapperFactory(4),
+  });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("selected", () => {
       validateBoolPropType(propTypes, "selected");
@@ -41,7 +56,10 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(selected => {
         it(`should ${selected ? "" : "not "}be selected`, () => {
           const node = <TableRow selected={selected} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({
+            Component: COMPONENT,
+            node,
+          });
           expect(wrapper.hasClass("is-selected")).toBe(selected);
         });
       });

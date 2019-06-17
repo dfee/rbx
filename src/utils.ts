@@ -9,20 +9,18 @@ export const canUseDOM = () =>
 
 export const combineRefs = <T>(
   ...refs: (React.Ref<T> | null | undefined)[]
-) => {
-  return (instance: T | null) => {
-    for (const item of refs) {
-      if (item === null || item === undefined) {
-        continue;
-      }
-
-      if (typeof item === "object") {
-        (item as React.MutableRefObject<T | null>).current = instance;
-      } else {
-        item(instance);
-      }
+) => (instance: T | null) => {
+  for (const item of refs) {
+    if (item === null || item === undefined) {
+      continue;
     }
-  };
+
+    if (typeof item === "object") {
+      (item as React.MutableRefObject<T | null>).current = instance;
+    } else {
+      item(instance);
+    }
+  }
 };
 
 export const noop = () => {}; // tslint:disable-line:no-empty

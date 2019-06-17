@@ -3,6 +3,7 @@ import { TableCell } from "src/elements/table/table-cell";
 
 import {
   hasProperties,
+  makeReactWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
@@ -11,6 +12,24 @@ const COMPONENT = TableCell;
 const DISPLAY_NAME = "Table.Cell";
 const DEFAULT_ELEMENT = "td";
 const BULMA_CLASS_NAME = undefined;
+
+const makeNode = (props: any) => (
+  <table>
+    <tbody>
+      <tr>
+        <TableCell {...props} />
+      </tr>
+    </tbody>
+  </table>
+);
+
+const makeWrappingNode = (node: React.ReactNode) => (
+  <table>
+    <tbody>
+      <tr>{node}</tr>
+    </tbody>
+  </table>
+);
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -21,14 +40,11 @@ describe(`${DISPLAY_NAME} component`, () => {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeWrappingNode: node => (
-      <table>
-        <tbody>
-          <tr children={node} />
-        </tbody>
-      </table>
-    ),
+    makeWrappingNode,
   });
 
-  testThemeIntegration(COMPONENT);
+  testThemeIntegration(COMPONENT, {
+    makeNode,
+    makeReactWrapper: makeReactWrapperFactory(5),
+  });
 });

@@ -4,7 +4,7 @@ import { Control, CONTROL_DEFAULTS } from "src/elements/form/control";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -31,6 +31,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("expanded", () => {
       validateBoolPropType(propTypes, "expanded");
@@ -38,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(expanded => {
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
           const node = <Control expanded={expanded} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-expanded")).toBe(expanded);
         });
       });
@@ -50,7 +51,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(iconLeft => {
         it(`should ${iconLeft ? "" : "not "}have left icon`, () => {
           const node = <Control iconLeft={iconLeft} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("has-icons-left")).toBe(iconLeft);
         });
       });
@@ -62,7 +63,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(iconRight => {
         it(`should ${iconRight ? "" : "not "}have right icon`, () => {
           const node = <Control iconRight={iconRight} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("has-icons-right")).toBe(iconRight);
         });
       });
@@ -74,7 +75,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(loading => {
         it(`should ${loading ? "" : "not "}be loading`, () => {
           const node = <Control loading={loading} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-loading")).toBe(loading);
         });
       });
@@ -86,7 +87,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       CONTROL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Control size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

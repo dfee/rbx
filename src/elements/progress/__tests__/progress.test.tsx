@@ -5,7 +5,7 @@ import { Progress, PROGRESS_DEFAULTS } from "src/elements/progress/progress";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateNumberPropType,
@@ -35,6 +35,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
@@ -42,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Progress color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -54,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       it("should have max", () => {
         const max = 20;
         const node = <Progress max={max} />;
-        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+        const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
         expect(
           (wrapper.props() as React.ProgressHTMLAttributes<Element>).max,
         ).toBe(max);
@@ -67,7 +68,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       PROGRESS_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Progress size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -79,7 +80,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       it("should have value", () => {
         const value = 0;
         const node = <Progress value={value} />;
-        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+        const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
         expect(
           (wrapper.props() as React.ProgressHTMLAttributes<Element>).value,
         ).toBe(value);

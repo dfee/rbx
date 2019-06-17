@@ -4,7 +4,7 @@ import { Radio } from "src/elements/form/radio";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
 } from "src/__tests__/testing";
@@ -29,7 +29,8 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   it("should be a radio", () => {
     const node = <Radio />;
-    const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+    const makeShallowWrapper = makeShallowWrapperFactory();
+    const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
     expect(
       (wrapper.props() as React.InputHTMLAttributes<Element>).type,
     ).toEqual("radio");

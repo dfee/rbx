@@ -5,7 +5,7 @@ import { Container } from "src/elements/container/container";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -32,6 +32,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("breakpoint", () => {
       validateStringOrNumberPropType(propTypes, "breakpoint");
@@ -39,7 +40,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = <Container breakpoint={breakpoint} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
         });
       });
@@ -51,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fluid => {
         it(`should ${fluid ? "" : "not "}be fluid`, () => {
           const node = <Container fluid={fluid} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-fluid")).toBe(fluid);
         });
       });

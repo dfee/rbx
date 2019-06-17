@@ -9,7 +9,7 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -36,6 +36,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
@@ -43,7 +44,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <SelectContainer color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -55,7 +56,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <SelectContainer fullwidth={fullwidth} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
       });
@@ -67,7 +68,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <SelectContainer rounded={rounded} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
       });
@@ -79,7 +80,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       SELECT_CONTAINER_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <SelectContainer size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -104,7 +105,7 @@ describe(`${DISPLAY_NAME} component`, () => {
               children = discriminator;
             }
             const node = <SelectContainer children={children} state={state} />;
-            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+            const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
             if (state === "loading") {
               expect(wrapper.hasClass("is-loading")).toBe(true);
             } else {
@@ -169,9 +170,7 @@ describe(`${DISPLAY_NAME} component`, () => {
                 children = childType;
               }
               const node = <SelectContainer children={children} />;
-              const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
-                node,
-              );
+              const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
               expect(wrapper.hasClass("is-multiple")).toBe(isMultiple);
             });
           });

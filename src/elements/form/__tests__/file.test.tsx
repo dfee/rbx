@@ -5,7 +5,7 @@ import { File, FILE_DEFAULTS } from "src/elements/form/file";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -32,6 +32,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -39,7 +40,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       FILE_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <File align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -51,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
           const node = <File boxed={boxed} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
         });
       });
@@ -63,7 +64,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <File color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -75,7 +76,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <File fullwidth={fullwidth} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
       });
@@ -87,7 +88,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(hasName => {
         it(`should ${hasName ? "" : "not "}have name`, () => {
           const node = <File hasName={hasName} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("has-name")).toBe(hasName);
         });
       });
@@ -99,7 +100,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       FILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <File size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

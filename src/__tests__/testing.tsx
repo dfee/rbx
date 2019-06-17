@@ -10,6 +10,7 @@ import { ValidatingTransformFunction } from "src/base/helpers/factory";
 import {
   initialValue as themeInitialValue,
   ThemeContextValue,
+  ThemeContext,
 } from "src/base/theme";
 
 export const contextManager = <
@@ -227,52 +228,53 @@ export const validateStringOrNumberPropType = <T extends {}>(
     { value: {}, valid: false, extras, descriptor: "obj" },
   ]);
 
-export type MakeShallowWrapperFunction = (
-  node: JSX.Element,
-  contextValue?: ThemeContextValue,
-) => Enzyme.ShallowWrapper<React.ReactType>;
+export const makeNodeFactory = <P extends {}>(
+  Component: React.ComponentType<P>,
+) => (props: P) => React.createElement(Component, props);
 
-// tslint:disable-next-line: no-any
-export const makeNodeFactory = <T extends React.ComponentType<any>>(
-  Component: T,
-) => (props: React.ComponentProps<T>) => React.createElement(Component, props);
+export type MakeShallowWrapperFunction = (options: {
+  Component: React.ComponentType<any>;
+  node: JSX.Element;
+  contextValue?: ThemeContextValue;
+}) => Enzyme.ShallowWrapper<React.ReactType>;
 
-/**
- * This function makes a shallow wrapper of a "generic" component in the Theme
- * Context.Consumer.
- * A "generic" component is one that simply does a transform of its props and
- * returns a <Generic /> function.
- *
- * For example:
- *     const MyComponent = forwardRefAs<{}, 'div'>((props, ref) => (
- *         <Generic ref={ref} {...props} />
- *       ),
- *       { as: 'div' },
- *     );
- *
- * Because a Context.Consumer, as produced by Enzyme.shallow, produces a
- * wrapper that must be 'dive'd into to retrieve the Child, it accepts a
- * contextValue for the Theme Context.
- */
-export const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-) => {
-  const forwardRefWrapper = Enzyme.shallow(node);
-  const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
+export const makeShallowWrapperFactory = (
+  depth: number = 2,
+): MakeShallowWrapperFunction => ({
+  Component,
+  node,
+  contextValue = themeInitialValue,
+}) => {
+  let wrapper = Enzyme.shallow(
+    <ThemeContext.Provider value={contextValue}>{node}</ThemeContext.Provider>,
+  ).find(Component);
+  for (let i = 0; i < depth; i += 1) {
+    wrapper = wrapper.dive();
+  }
+  return wrapper;
+};
 
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
+export type MakeReactWrapperFunction = (options: {
+  node: JSX.Element;
+  contextValue?: ThemeContextValue;
+}) => Enzyme.ReactWrapper<React.ReactType>;
+
+export const makeReactWrapperFactory = (
+  depth: number = 2,
+): MakeReactWrapperFunction => ({ node, contextValue = themeInitialValue }) => {
+  let wrapper = Enzyme.mount(
+    <ThemeContext.Provider value={contextValue}>{node}</ThemeContext.Provider>,
   );
+  for (let i = 0; i < depth; i += 1) {
+    wrapper = wrapper.children();
+  }
+  return wrapper;
 };
 
 // tslint:disable-next-line: max-func-body-length
 export const testForwardRefAsExoticComponentIntegration = (
   //tslint:disable:no-any
-  component: React.ComponentType<any>,
+  Component: React.ComponentType<any>,
   options: {
     bulmaClassName?: string;
     defaultElement: keyof React.ReactHTML;
@@ -293,27 +295,27 @@ export const testForwardRefAsExoticComponentIntegration = (
     makeWrappingNode,
     refProp,
   } = {
-    makeNode: makeNodeFactory(component),
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeNode: makeNodeFactory(Component),
+    makeShallowWrapper: makeShallowWrapperFactory(),
     refProp: "ref",
     ...options,
   };
 
   describe("ForwardRefAsExoticComponent [integration]", () => {
     it(`should have displayName: ${displayName}`, () => {
-      expect(component.displayName).toEqual(displayName);
+      expect(Component.displayName).toEqual(displayName);
     });
 
     it("should render as the default element", () => {
       const node = makeNode({});
-      const wrapper = makeShallowWrapper(node);
+      const wrapper = makeShallowWrapper({ Component, node });
       expect(wrapper.is(defaultElement)).toBe(true);
     });
 
     it("should render as a custom component", () => {
       const asType = "span" as React.ReactType;
       const node = makeNode({ as: asType });
-      const wrapper = makeShallowWrapper(node);
+      const wrapper = makeShallowWrapper({ Component, node });
       expect(wrapper.is(asType)).toBe(true);
     });
 
@@ -335,7 +337,7 @@ export const testForwardRefAsExoticComponentIntegration = (
     if (bulmaClassName !== undefined) {
       it("should have bulma className", () => {
         const node = makeNode({});
-        const wrapper = makeShallowWrapper(node);
+        const wrapper = makeShallowWrapper({ Component, node });
         expect(wrapper.hasClass(bulmaClassName)).toBe(true);
       });
     }
@@ -343,25 +345,22 @@ export const testForwardRefAsExoticComponentIntegration = (
     it("should preserve custom className", () => {
       const className = "foo";
       const node = makeNode({ className });
-      const wrapper = makeShallowWrapper(node);
+      const wrapper = makeShallowWrapper({ Component, node });
       expect(wrapper.hasClass(className)).toBe(true);
     });
 
     describe("props", () => {
       describe("as", () => {
         const FC: React.FC = () => React.createElement("div");
-
         /** test class */
         class CC extends React.Component {
           public render() {
             return React.createElement("div");
           }
         }
-
         const FRC = React.forwardRef((props, ref) =>
           React.createElement("div", { ref, ...props }),
         );
-
         [
           { as: "div", descriptor: "HTMLElement", valid: true },
           { as: FC, descriptor: "function component", valid: true },
@@ -372,7 +371,7 @@ export const testForwardRefAsExoticComponentIntegration = (
           it(`should ${valid ? "" : "not "}allow ${descriptor}`, () => {
             withMockError({}, ({ context: { error } }) => {
               const node = makeNode({ as });
-              const wrapper = makeShallowWrapper(node);
+              const wrapper = makeShallowWrapper({ Component, node });
               expect(wrapper.exists()).toBe(true);
               if (valid) {
                 expect(error.mock.calls).toHaveLength(0);
@@ -395,16 +394,18 @@ export const testForwardRefAsExoticComponentIntegration = (
 
 export const testThemeIntegration = (
   // tslint:disable:no-any
-  component: React.ComponentType<any>,
+  Component: React.ComponentType<any>,
   options?: {
+    makeReactWrapper?: MakeReactWrapperFunction;
     makeShallowWrapper?: MakeShallowWrapperFunction;
     makeNode?(props: any): JSX.Element;
   },
   // tslint:enable:no-any
 ) => {
-  const { makeNode, makeShallowWrapper } = {
-    makeNode: makeNodeFactory(component),
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+  const { makeNode, makeReactWrapper, makeShallowWrapper } = {
+    makeNode: makeNodeFactory(Component),
+    makeReactWrapper: makeReactWrapperFactory(),
+    makeShallowWrapper: makeShallowWrapperFactory(),
     ...options,
   };
 
@@ -414,7 +415,7 @@ export const testThemeIntegration = (
         const node = makeNode({
           pull: "__UNKNOWN" as HelpersProps["pull"],
         });
-        const wrapper = makeShallowWrapper(node);
+        const wrapper = makeShallowWrapper({ Component, node });
         expect(wrapper.hasClass("is-pulled-__UNKNOWN")).toBe(true);
         expect(error.mock.calls).toHaveLength(1);
         expect(error.mock.calls[0][0]).toMatch(
@@ -453,14 +454,17 @@ export const testThemeIntegration = (
 
       it("should transform prop", () => {
         const node = makeNode({ foo: "bar" });
-        const wrapper = makeShallowWrapper(node, { transform });
+        const wrapper = makeReactWrapper({ node, contextValue: { transform } });
         expect(wrapper.hasClass("foo-bar")).toBe(true);
       });
 
       it("should warn on invalid prop transform", () => {
         withMockError({}, ({ context }) => {
           const node = makeNode({ foo: "qux" });
-          const wrapper = makeShallowWrapper(node, { transform });
+          const wrapper = makeReactWrapper({
+            node,
+            contextValue: { transform },
+          });
           expect(wrapper.hasClass("foo-qux")).toBe(true);
           expect(context.error.mock.calls).toHaveLength(1);
           expect(context.error.mock.calls[0][0]).toMatch(
