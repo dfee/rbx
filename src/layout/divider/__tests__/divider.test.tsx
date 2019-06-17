@@ -5,7 +5,7 @@ import { Divider } from "src/layout/divider/divider";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -35,13 +35,14 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("children", () => {
       validateStringOrNumberPropType(propTypes, "children");
 
       it(`should have proper content`, () => {
         const node = <Divider children="foo" />;
-        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+        const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
         expect(
           (wrapper.props() as React.HTMLAttributes<HTMLDivElement>)[
             "data-content"
@@ -56,7 +57,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Divider color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -68,7 +69,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = <Divider vertical={vertical} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-divider-vertical`)).toBe(vertical);
         });
       });

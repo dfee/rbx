@@ -8,7 +8,7 @@ import { HeroHead } from "src/layout/hero/hero-head";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -38,6 +38,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
@@ -45,7 +46,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Hero color={color} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -57,7 +58,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(gradient => {
         it(`should ${gradient ? "" : "not "}have gradient`, () => {
           const node = <Hero gradient={gradient} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-bold")).toBe(gradient);
         });
       });
@@ -69,7 +70,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       HERO_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Hero size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
