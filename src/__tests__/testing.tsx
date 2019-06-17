@@ -254,6 +254,29 @@ export const makeShallowWrapperFactory = (
   return wrapper;
 };
 
+export type GetInnerShallowWrapperFunction = (
+  wrapper: Enzyme.ShallowWrapper,
+) => Enzyme.ShallowWrapper<React.ReactType>;
+
+export const makeShallowWrapperFactory2 = (
+  getInnerWrapper: GetInnerShallowWrapperFunction = wrapper =>
+    wrapper // Component
+      .dive() // Generic
+      .dive(), // Leaf ("as")
+): MakeShallowWrapperFunction => ({
+  node,
+  contextValue = themeInitialValue,
+}) => {
+  const wrapper = Enzyme.shallow(
+    <ThemeContext.Provider value={contextValue}>{node}</ThemeContext.Provider>,
+  );
+  return getInnerWrapper(wrapper);
+};
+
+export type GetInnerReactWrapperFunction = (
+  wrapper: Enzyme.ReactWrapper<React.ReactType>,
+) => Enzyme.ReactWrapper<React.ReactType>;
+
 export type MakeReactWrapperFunction = (options: {
   node: JSX.Element;
   contextValue?: ThemeContextValue;
@@ -270,6 +293,20 @@ export const makeReactWrapperFactory = (
   }
   return wrapper;
 };
+
+export const makeReactWrapperFactory2 = (
+  getInnerWrapper: GetInnerReactWrapperFunction = wrapper =>
+    wrapper // Component
+      .children() // Generic
+      .children(), // Leaf ("as")
+): MakeReactWrapperFunction => ({ node, contextValue = themeInitialValue }) =>
+  getInnerWrapper(
+    Enzyme.mount(
+      <ThemeContext.Provider value={contextValue}>
+        {node}
+      </ThemeContext.Provider>,
+    ),
+  );
 
 // tslint:disable-next-line: max-func-body-length
 export const testForwardRefAsExoticComponentIntegration = (
@@ -476,6 +513,7 @@ export const testThemeIntegration = (
   });
 };
 
+// todo: can probably remove on migration to hooks
 export const makeTestPropForwarding = (
   component: React.ComponentType<any>, // tslint:disable-line:no-any
 ) => {

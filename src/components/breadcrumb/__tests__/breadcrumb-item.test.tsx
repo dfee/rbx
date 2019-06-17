@@ -1,17 +1,17 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
 import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 
 import {
   hasProperties,
+  makeShallowWrapperFactory2,
+  makeReactWrapperFactory2,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
+  GetInnerShallowWrapperFunction,
+  GetInnerReactWrapperFunction,
 } from "src/__tests__/testing";
 
 const COMPONENT = BreadcrumbItem;
@@ -19,23 +19,21 @@ const DISPLAY_NAME = "Breadcrumb.Item";
 const DEFAULT_ELEMENT = "a";
 const BULMA_CLASS_NAME = undefined;
 
-const makeShallowWrapper = (node: JSX.Element) => Enzyme.shallow(node);
+const getWrappingLIShallowWrapper: GetInnerShallowWrapperFunction = wrapper =>
+  wrapper // Component
+    .dive(); // Wrapping LI
 
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-) => {
-  const rootWrapper = makeShallowWrapper(node);
-  const forwardRefWrapper = rootWrapper.children();
-  const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
+const getLeafShallowWrapper: GetInnerShallowWrapperFunction = wrapper =>
+  wrapper // Component
+    .dive() // Wrapping LI
+    .children() // Generic
+    .dive(); // Leaf ("as")
 
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
+const getLeafReactWrapper: GetInnerReactWrapperFunction = wrapper =>
+  wrapper // Component
+    .children() // Wrapping LI
+    .children() // Generic
+    .children(); // Leaf ("as")
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -46,17 +44,18 @@ describe(`${DISPLAY_NAME} component`, () => {
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
     displayName: DISPLAY_NAME,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory2(getLeafShallowWrapper),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory2(getLeafShallowWrapper),
+    makeReactWrapper: makeReactWrapperFactory2(getLeafReactWrapper),
   });
 
   describe("root", () => {
     it("should be li element", () => {
       const node = <BreadcrumbItem />;
-      const wrapper = makeShallowWrapper(node);
+      const wrapper = Enzyme.shallow(node);
       expect(wrapper.is("li")).toBe(true);
     });
   });
@@ -69,8 +68,11 @@ describe(`${DISPLAY_NAME} component`, () => {
 
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
+          const makeShallowWrapper = makeShallowWrapperFactory2(
+            getWrappingLIShallowWrapper,
+          );
           const node = <BreadcrumbItem active={active} />;
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
       });
