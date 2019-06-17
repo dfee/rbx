@@ -43,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = <Column narrow={narrow} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         });
       });
@@ -70,10 +70,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             it(`should ${narrow ? "" : "not "}be narrow`, () => {
               const props = { [breakpoint]: { narrow } };
               const node = <Column {...props} />;
-              const wrapper = makeShallowWrapper({
-                Component: COMPONENT,
-                node,
-              });
+              const wrapper = makeShallowWrapper({ node });
               expect(wrapper.hasClass(`is-narrow-${breakpoint}`)).toBe(narrow);
             });
           });
@@ -87,7 +84,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       COLUMN_DEFAULTS.sizes.map(offset => {
         it(`should be ${offset}`, () => {
           const node = <Column offset={offset} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-offset-${offset}`)).toBe(true);
         });
       });
@@ -114,10 +111,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             it(`should be offset ${offset}`, () => {
               const props = { [breakpoint]: { offset } };
               const node = <Column {...props} />;
-              const wrapper = makeShallowWrapper({
-                Component: COMPONENT,
-                node,
-              });
+              const wrapper = makeShallowWrapper({ node });
               expect(
                 wrapper.hasClass(`is-offset-${offset}-${breakpoint}`),
               ).toBe(true);
@@ -133,7 +127,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       COLUMN_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Column size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -160,10 +154,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             it(`should be ${size}`, () => {
               const props = { [breakpoint]: { size } };
               const node = <Column {...props} />;
-              const wrapper = makeShallowWrapper({
-                Component: COMPONENT,
-                node,
-              });
+              const wrapper = makeShallowWrapper({ node });
               expect(wrapper.hasClass(`is-${size}-${breakpoint}`)).toBe(true);
             });
           });

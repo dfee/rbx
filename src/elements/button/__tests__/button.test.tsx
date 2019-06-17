@@ -42,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Button color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -54,7 +54,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <Button fullwidth={fullwidth} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
       });
@@ -66,7 +66,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(inverted => {
         it(`should ${inverted ? "" : "not "}be inverted`, () => {
           const node = <Button inverted={inverted} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-inverted")).toBe(inverted);
         });
       });
@@ -78,7 +78,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(outlined => {
         it(`should ${outlined ? "" : "not "}be outlined`, () => {
           const node = <Button outlined={outlined} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-outlined")).toBe(outlined);
         });
       });
@@ -90,7 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Button rounded={rounded} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
       });
@@ -102,7 +102,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(selected => {
         it(`should ${selected ? "" : "not "}be selected`, () => {
           const node = <Button selected={selected} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-selected")).toBe(selected);
         });
       });
@@ -114,7 +114,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BUTTON_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
           const node = <Button state={state} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         });
       });
@@ -126,7 +126,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(isStatic => {
         it(`should ${isStatic ? "" : "not "}be static`, () => {
           const node = <Button static={isStatic} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-static")).toBe(isStatic);
         });
       });
@@ -138,7 +138,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(text => {
         it(`should ${text ? "" : "not "}be text`, () => {
           const node = <Button text={text} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-text")).toBe(text);
         });
       });
@@ -150,7 +150,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BUTTON_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Button size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

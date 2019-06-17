@@ -42,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(disabled => {
         it(`should ${disabled ? "" : "not "}be disabled`, () => {
           const node = <Label disabled={disabled} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-disabled")).toBe(disabled);
         });
       });
@@ -90,7 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             children = discriminator;
           }
           const node = <Label children={children} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(className)).toBe(true);
         });
       });
@@ -102,7 +102,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       LABEL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Label size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

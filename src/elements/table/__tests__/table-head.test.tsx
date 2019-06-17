@@ -3,6 +3,7 @@ import { TableHead } from "src/elements/table/table-head";
 
 import {
   hasProperties,
+  makeShallowWrapperFactory,
   makeReactWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
@@ -35,6 +36,19 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   testThemeIntegration(COMPONENT, {
     makeNode,
-    makeReactWrapper: makeReactWrapperFactory(3),
+    makeReactWrapper: makeReactWrapperFactory(
+      wrapper =>
+        wrapper // table
+          .children() // Component
+          .children() // Generic
+          .children(), // Leaf ("as")
+    ),
+    makeShallowWrapper: makeShallowWrapperFactory(
+      wrapper =>
+        wrapper // table
+          .children() // Component
+          .dive() // Generic
+          .dive(), // Leaf ("as")
+    ),
   });
 });

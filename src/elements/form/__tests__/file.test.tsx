@@ -40,7 +40,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       FILE_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <File align={align} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -52,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
           const node = <File boxed={boxed} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
         });
       });
@@ -64,7 +64,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <File color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -76,7 +76,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <File fullwidth={fullwidth} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
       });
@@ -88,7 +88,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(hasName => {
         it(`should ${hasName ? "" : "not "}have name`, () => {
           const node = <File hasName={hasName} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("has-name")).toBe(hasName);
         });
       });
@@ -100,7 +100,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       FILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <File size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

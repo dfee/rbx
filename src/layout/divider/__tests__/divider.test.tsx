@@ -42,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
       it(`should have proper content`, () => {
         const node = <Divider children="foo" />;
-        const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+        const wrapper = makeShallowWrapper({ node });
         expect(
           (wrapper.props() as React.HTMLAttributes<HTMLDivElement>)[
             "data-content"
@@ -57,7 +57,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Divider color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -69,7 +69,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = <Divider vertical={vertical} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-divider-vertical`)).toBe(vertical);
         });
       });

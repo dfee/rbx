@@ -43,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Progress color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -55,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       it("should have max", () => {
         const max = 20;
         const node = <Progress max={max} />;
-        const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+        const wrapper = makeShallowWrapper({ node });
         expect(
           (wrapper.props() as React.ProgressHTMLAttributes<Element>).max,
         ).toBe(max);
@@ -68,7 +68,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       PROGRESS_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Progress size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -80,7 +80,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       it("should have value", () => {
         const value = 0;
         const node = <Progress value={value} />;
-        const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+        const wrapper = makeShallowWrapper({ node });
         expect(
           (wrapper.props() as React.ProgressHTMLAttributes<Element>).value,
         ).toBe(value);

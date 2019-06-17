@@ -38,7 +38,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       SECTION_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Section size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

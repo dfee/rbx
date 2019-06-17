@@ -38,7 +38,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DELETE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Delete size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

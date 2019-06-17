@@ -41,7 +41,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       FIELD_LABEL_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <FieldLabel size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

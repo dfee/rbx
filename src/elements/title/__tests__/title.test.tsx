@@ -43,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             isSpaced ? "" : "not "
           }be spaced when spaced ${spaced} and subtitle ${subtitle}`, () => {
             const node = <Title spaced={spaced} />;
-            const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+            const wrapper = makeShallowWrapper({ node });
             expect(wrapper.hasClass("is-spaced")).toBe(spaced);
           });
         }),
@@ -56,7 +56,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(subtitle => {
         it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
           const node = <Title subtitle={subtitle} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("subtitle")).toBe(subtitle);
           expect(wrapper.hasClass("title")).toBe(!subtitle);
         });
@@ -69,7 +69,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TITLE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Title size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

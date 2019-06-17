@@ -39,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Help color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });

@@ -43,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Textarea color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -55,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fixedSize => {
         it(`should ${fixedSize ? "" : "not "}be fixed size`, () => {
           const node = <Textarea fixedSize={fixedSize} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("has-fixed-size")).toBe(fixedSize);
         });
       });
@@ -67,7 +67,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TEXTAREA_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Textarea size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -79,7 +79,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TEXTAREA_DEFAULTS.states.map(state => {
         it(`should be ${state}`, () => {
           const node = <Textarea state={state} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${state}`)).toBe(true);
         });
       });

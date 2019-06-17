@@ -30,7 +30,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   it("should be a file", () => {
     const node = <FileInput />;
     const makeShallowWrapper = makeShallowWrapperFactory();
-    const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+    const wrapper = makeShallowWrapper({ node });
     expect(
       (wrapper.props() as React.InputHTMLAttributes<Element>).type,
     ).toEqual("file");

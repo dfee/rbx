@@ -40,7 +40,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Image rounded={rounded} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
       });

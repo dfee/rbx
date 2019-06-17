@@ -40,7 +40,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = <Container breakpoint={breakpoint} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
         });
       });
@@ -52,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fluid => {
         it(`should ${fluid ? "" : "not "}be fluid`, () => {
           const node = <Container fluid={fluid} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-fluid")).toBe(fluid);
         });
       });

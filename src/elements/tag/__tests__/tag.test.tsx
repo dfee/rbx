@@ -42,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Tag color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -55,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         it(`should ${isDelete ? "" : "not "}be delete`, () => {
           const children = "foo";
           const node = <Tag children={children} delete={isDelete} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-delete")).toBe(isDelete);
           expect(
             (wrapper.props() as React.ComponentProps<"div">).children,
@@ -70,7 +70,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Tag rounded={rounded} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
       });
@@ -82,7 +82,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TAG_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Tag size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

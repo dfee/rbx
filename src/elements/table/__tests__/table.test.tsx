@@ -50,7 +50,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(bordered => {
         it(`should ${bordered ? "" : "not "}be bordered`, () => {
           const node = <Table bordered={bordered} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-bordered")).toBe(bordered);
         });
       });
@@ -62,7 +62,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <Table fullwidth={fullwidth} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
       });
@@ -74,7 +74,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = <Table hoverable={hoverable} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-hoverable")).toBe(hoverable);
         });
       });
@@ -86,7 +86,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = <Table narrow={narrow} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
         });
       });
@@ -98,7 +98,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(striped => {
         it(`should ${striped ? "" : "not "}be striped`, () => {
           const node = <Table striped={striped} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-striped")).toBe(striped);
         });
       });

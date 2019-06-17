@@ -6,12 +6,22 @@ import {
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   makeReactWrapperFactory,
+  GetInnerShallowWrapperFunction,
+  GetInnerReactWrapperFunction,
 } from "src/__tests__/testing";
 
 const COMPONENT = Generic;
 const DISPLAY_NAME = "Generic";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = undefined;
+
+const getShallowInnerWrapper: GetInnerShallowWrapperFunction = wrapper =>
+  wrapper // Component
+    .dive(); // Leaf ("as");
+
+const getReactInnerWrapper: GetInnerReactWrapperFunction = wrapper =>
+  wrapper // Component
+    .children(); // Leaf ("as");
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -22,11 +32,11 @@ describe(`${DISPLAY_NAME} component`, () => {
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
     displayName: DISPLAY_NAME,
-    makeShallowWrapper: makeShallowWrapperFactory(1),
+    makeShallowWrapper: makeShallowWrapperFactory(getShallowInnerWrapper),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeShallowWrapperFactory(1),
-    makeReactWrapper: makeReactWrapperFactory(1),
+    makeShallowWrapper: makeShallowWrapperFactory(getShallowInnerWrapper),
+    makeReactWrapper: makeReactWrapperFactory(getReactInnerWrapper),
   });
 });

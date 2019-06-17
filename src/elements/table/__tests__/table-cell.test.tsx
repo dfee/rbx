@@ -3,6 +3,7 @@ import { TableCell } from "src/elements/table/table-cell";
 
 import {
   hasProperties,
+  makeShallowWrapperFactory,
   makeReactWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
@@ -45,6 +46,23 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   testThemeIntegration(COMPONENT, {
     makeNode,
-    makeReactWrapper: makeReactWrapperFactory(5),
+    makeReactWrapper: makeReactWrapperFactory(
+      wrapper =>
+        wrapper // table
+          .children() // tbody
+          .children() // tr
+          .children() // Component
+          .children() // Generic
+          .children(), // Leaf ("as")
+    ),
+    makeShallowWrapper: makeShallowWrapperFactory(
+      wrapper =>
+        wrapper // table
+          .children() // tbody
+          .children() // tr
+          .children() // Component
+          .dive() // Generic
+          .dive(), // Leaf ("as")
+    ),
   });
 });

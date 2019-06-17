@@ -39,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Icon color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`has-text-${color}`)).toBe(true);
         });
       });
@@ -51,7 +51,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       ICON_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
           const node = <Icon align={align} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -63,7 +63,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       ICON_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Icon size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

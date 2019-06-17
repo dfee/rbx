@@ -8,7 +8,7 @@ import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 
 import {
   hasProperties,
-  makeShallowWrapperFactory2,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -35,7 +35,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
-    const makeShallowWrapper = makeShallowWrapperFactory2();
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -43,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BREADCRUMB_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <Breadcrumb align={align} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -53,7 +53,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       it("should wrap children in ul element", () => {
         const children = <li>foo</li>;
         const node = <Breadcrumb children={children} />;
-        const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+        const wrapper = makeShallowWrapper({ node });
         expect(wrapper.children().is("ul")).toBe(true);
         expect(
           wrapper
@@ -76,7 +76,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BREADCRUMB_DEFAULTS.separators.map(separator => {
         it(`should be ${separator}`, () => {
           const node = <Breadcrumb separator={separator} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`has-${separator}-separator`)).toBe(true);
         });
       });
@@ -88,7 +88,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BREADCRUMB_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Breadcrumb size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

@@ -233,32 +233,15 @@ export const makeNodeFactory = <P extends {}>(
 ) => (props: P) => React.createElement(Component, props);
 
 export type MakeShallowWrapperFunction = (options: {
-  Component: React.ComponentType<any>;
   node: JSX.Element;
   contextValue?: ThemeContextValue;
 }) => Enzyme.ShallowWrapper<React.ReactType>;
-
-export const makeShallowWrapperFactory = (
-  depth: number = 2,
-): MakeShallowWrapperFunction => ({
-  Component,
-  node,
-  contextValue = themeInitialValue,
-}) => {
-  let wrapper = Enzyme.shallow(
-    <ThemeContext.Provider value={contextValue}>{node}</ThemeContext.Provider>,
-  ).find(Component);
-  for (let i = 0; i < depth; i += 1) {
-    wrapper = wrapper.dive();
-  }
-  return wrapper;
-};
 
 export type GetInnerShallowWrapperFunction = (
   wrapper: Enzyme.ShallowWrapper,
 ) => Enzyme.ShallowWrapper<React.ReactType>;
 
-export const makeShallowWrapperFactory2 = (
+export const makeShallowWrapperFactory = (
   getInnerWrapper: GetInnerShallowWrapperFunction = wrapper =>
     wrapper // Component
       .dive() // Generic
@@ -283,18 +266,6 @@ export type MakeReactWrapperFunction = (options: {
 }) => Enzyme.ReactWrapper<React.ReactType>;
 
 export const makeReactWrapperFactory = (
-  depth: number = 2,
-): MakeReactWrapperFunction => ({ node, contextValue = themeInitialValue }) => {
-  let wrapper = Enzyme.mount(
-    <ThemeContext.Provider value={contextValue}>{node}</ThemeContext.Provider>,
-  );
-  for (let i = 0; i < depth; i += 1) {
-    wrapper = wrapper.children();
-  }
-  return wrapper;
-};
-
-export const makeReactWrapperFactory2 = (
   getInnerWrapper: GetInnerReactWrapperFunction = wrapper =>
     wrapper // Component
       .children() // Generic
@@ -345,14 +316,14 @@ export const testForwardRefAsExoticComponentIntegration = (
 
     it("should render as the default element", () => {
       const node = makeNode({});
-      const wrapper = makeShallowWrapper({ Component, node });
+      const wrapper = makeShallowWrapper({ node });
       expect(wrapper.is(defaultElement)).toBe(true);
     });
 
     it("should render as a custom component", () => {
       const asType = "span" as React.ReactType;
       const node = makeNode({ as: asType });
-      const wrapper = makeShallowWrapper({ Component, node });
+      const wrapper = makeShallowWrapper({ node });
       expect(wrapper.is(asType)).toBe(true);
     });
 
@@ -374,7 +345,7 @@ export const testForwardRefAsExoticComponentIntegration = (
     if (bulmaClassName !== undefined) {
       it("should have bulma className", () => {
         const node = makeNode({});
-        const wrapper = makeShallowWrapper({ Component, node });
+        const wrapper = makeShallowWrapper({ node });
         expect(wrapper.hasClass(bulmaClassName)).toBe(true);
       });
     }
@@ -382,7 +353,7 @@ export const testForwardRefAsExoticComponentIntegration = (
     it("should preserve custom className", () => {
       const className = "foo";
       const node = makeNode({ className });
-      const wrapper = makeShallowWrapper({ Component, node });
+      const wrapper = makeShallowWrapper({ node });
       expect(wrapper.hasClass(className)).toBe(true);
     });
 
@@ -408,7 +379,7 @@ export const testForwardRefAsExoticComponentIntegration = (
           it(`should ${valid ? "" : "not "}allow ${descriptor}`, () => {
             withMockError({}, ({ context: { error } }) => {
               const node = makeNode({ as });
-              const wrapper = makeShallowWrapper({ Component, node });
+              const wrapper = makeShallowWrapper({ node });
               expect(wrapper.exists()).toBe(true);
               if (valid) {
                 expect(error.mock.calls).toHaveLength(0);
@@ -452,7 +423,7 @@ export const testThemeIntegration = (
         const node = makeNode({
           pull: "__UNKNOWN" as HelpersProps["pull"],
         });
-        const wrapper = makeShallowWrapper({ Component, node });
+        const wrapper = makeShallowWrapper({ node });
         expect(wrapper.hasClass("is-pulled-__UNKNOWN")).toBe(true);
         expect(error.mock.calls).toHaveLength(1);
         expect(error.mock.calls[0][0]).toMatch(

@@ -46,7 +46,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <Hero color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -58,7 +58,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(gradient => {
         it(`should ${gradient ? "" : "not "}have gradient`, () => {
           const node = <Hero gradient={gradient} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-bold")).toBe(gradient);
         });
       });
@@ -70,7 +70,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       HERO_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Hero size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

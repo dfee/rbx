@@ -43,7 +43,22 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   testThemeIntegration(COMPONENT, {
     makeNode,
-    makeReactWrapper: makeReactWrapperFactory(4),
+    makeReactWrapper: makeReactWrapperFactory(
+      wrapper =>
+        wrapper // table
+          .children() // tbody
+          .children() // Component
+          .children() // Generic
+          .children(), // Leaf ("as")
+    ),
+    makeShallowWrapper: makeShallowWrapperFactory(
+      wrapper =>
+        wrapper // table
+          .children() // tbody
+          .children() // Component
+          .dive() // Generic
+          .dive(), // Leaf ("as")
+    ),
   });
 
   describe("props", () => {
@@ -56,10 +71,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(selected => {
         it(`should ${selected ? "" : "not "}be selected`, () => {
           const node = <TableRow selected={selected} />;
-          const wrapper = makeShallowWrapper({
-            Component: COMPONENT,
-            node,
-          });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-selected")).toBe(selected);
         });
       });

@@ -45,7 +45,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       ].map(size => {
         it(`should be ${size}`, () => {
           const node = <ImageContainer size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           if (typeof size === "number") {
             expect(wrapper.hasClass(`is-${size}x${size}`)).toBe(true);
           } else {
@@ -90,7 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
               expectHasRatio ? "" : "not "
             }have class 'has-ratio' for ${JSON.stringify(childType)}`, () => {
               const node = <ImageContainer size={size} children={children} />;
-              const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+              const wrapper = makeShallowWrapper({ node });
               const childWrapper = wrapper.children();
               if (childType === null || childType === undefined) {
                 expect(childWrapper.length).toBe(0);

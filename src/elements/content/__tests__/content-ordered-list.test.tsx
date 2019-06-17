@@ -42,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       CONTENT_ORDERED_LIST_DEFAULTS.types.map(isType => {
         it(`should be ${isType}`, () => {
           const node = <ContentOrderedList type={isType} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${isType}`)).toBe(true);
         });
       });

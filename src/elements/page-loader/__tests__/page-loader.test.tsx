@@ -43,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <PageLoader active={active} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
       });
@@ -55,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.colors.map(color => {
         it(`should be ${color}`, () => {
           const node = <PageLoader color={color} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${color}`)).toBe(true);
         });
       });
@@ -67,7 +67,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       PAGE_LOADER_DEFAULTS.directions.map(direction => {
         it(`should be ${direction}`, () => {
           const node = <PageLoader direction={direction} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${direction}`)).toBe(true);
         });
       });

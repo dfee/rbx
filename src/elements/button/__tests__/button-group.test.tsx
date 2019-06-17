@@ -42,7 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(hasAddons => {
         it(`should ${hasAddons ? "" : "not "}have addons`, () => {
           const node = <ButtonGroup hasAddons={hasAddons} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("has-addons")).toBe(hasAddons);
         });
       });
@@ -54,7 +54,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BUTTON_GROUP_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <ButtonGroup align={align} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -66,7 +66,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       BUTTON_GROUP_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <ButtonGroup size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`are-${size}`)).toBe(true);
         });
       });

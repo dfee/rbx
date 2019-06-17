@@ -39,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TILE_DEFAULTS.kinds.map(kind => {
         it(`should be ${kind}`, () => {
           const node = <Tile kind={kind} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
         });
       });
@@ -51,7 +51,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TILE_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Tile size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });
@@ -63,7 +63,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = <Tile vertical={vertical} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-vertical")).toBe(vertical);
         });
       });

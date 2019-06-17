@@ -37,7 +37,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(disabled => {
         it(`should be ${disabled}`, () => {
           const node = <Fieldset disabled={disabled} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.prop("disabled")).toEqual(disabled);
         });
       });

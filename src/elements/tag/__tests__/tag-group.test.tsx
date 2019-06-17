@@ -39,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
           const node = <TagGroup gapless={gapless} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("has-addons")).toBe(gapless);
         });
       });
@@ -51,7 +51,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TAG_GROUP_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <TagGroup size={size} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`are-${size}`)).toBe(true);
         });
       });

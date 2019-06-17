@@ -5,8 +5,8 @@ import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 
 import {
   hasProperties,
-  makeShallowWrapperFactory2,
-  makeReactWrapperFactory2,
+  makeShallowWrapperFactory,
+  makeReactWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -44,12 +44,12 @@ describe(`${DISPLAY_NAME} component`, () => {
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
     displayName: DISPLAY_NAME,
-    makeShallowWrapper: makeShallowWrapperFactory2(getLeafShallowWrapper),
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeShallowWrapperFactory2(getLeafShallowWrapper),
-    makeReactWrapper: makeReactWrapperFactory2(getLeafReactWrapper),
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
+    makeReactWrapper: makeReactWrapperFactory(getLeafReactWrapper),
   });
 
   describe("root", () => {
@@ -68,11 +68,11 @@ describe(`${DISPLAY_NAME} component`, () => {
 
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
-          const makeShallowWrapper = makeShallowWrapperFactory2(
+          const makeShallowWrapper = makeShallowWrapperFactory(
             getWrappingLIShallowWrapper,
           );
           const node = <BreadcrumbItem active={active} />;
-          const wrapper = makeShallowWrapper({ Component: COMPONENT, node });
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
       });
