@@ -8,7 +8,7 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -44,6 +44,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -51,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       PAGINATION_STEP_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`pagination-${align}`)).toBe(true);
         });
       });

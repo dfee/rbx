@@ -1,14 +1,5 @@
-import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
-import {
-  DropdownContextValue,
-  initialValue as dropdownInitialValue,
-} from "src/components/dropdown/dropdown-context";
 import { DropdownTrigger } from "src/components/dropdown/dropdown-trigger";
 
 import {
@@ -18,43 +9,16 @@ import {
   validatePropType,
 } from "src/__tests__/testing";
 
+import {
+  makeReactWrapperFactory,
+  makeShallowWrapperFactory,
+  getInnerReactWrapper,
+} from "./testing";
+
 const COMPONENT = DropdownTrigger;
 const DISPLAY_NAME = "Dropdown.Trigger";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "dropdown-trigger";
-
-const makeShallowWrapperInDropdownContextConsumer = (
-  node: JSX.Element,
-  dropdownContextValue: DropdownContextValue = dropdownInitialValue,
-) => {
-  const dropdownContextConsumerWrapper = Enzyme.shallow(node);
-  const DropdownContextConsumerChildren = (dropdownContextConsumerWrapper.props() as {
-    children: React.FC<DropdownContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <DropdownContextConsumerChildren {...dropdownContextValue} />,
-  );
-};
-
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-  dropdownContextValue: DropdownContextValue = dropdownInitialValue,
-) => {
-  const dropdownContextConsumerChildrenWrapper = makeShallowWrapperInDropdownContextConsumer(
-    node,
-    dropdownContextValue,
-  );
-  const themeContextConsumerWrapper = dropdownContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -65,11 +29,12 @@ describe(`${DISPLAY_NAME} component`, () => {
     bulmaClassName: BULMA_CLASS_NAME,
     displayName: DISPLAY_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory(),
+    makeReactWrapper: makeReactWrapperFactory(),
   });
 
   describe("props", () => {
@@ -87,15 +52,14 @@ describe(`${DISPLAY_NAME} component`, () => {
         }`, () => {
           const onClick = hasOnClick ? jest.fn() : undefined;
           const setActive = jest.fn();
+
           const node = <DropdownTrigger onClick={onClick} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
-            node,
-            themeInitialValue,
-            {
-              active: false,
-              setActive,
-            },
+          const makeReactWrapper = makeReactWrapperFactory(
+            getInnerReactWrapper,
+            { active: false, setActive },
           );
+          const wrapper = makeReactWrapper({ node });
+
           wrapper.simulate("click");
           if (onClick !== undefined) {
             expect(onClick.mock.calls).toHaveLength(1);

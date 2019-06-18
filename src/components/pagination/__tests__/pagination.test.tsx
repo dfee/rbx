@@ -11,7 +11,7 @@ import { PaginationStep } from "src/components/pagination/pagination-step";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -42,6 +42,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -49,7 +50,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       PAGINATION_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <Pagination align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -61,7 +62,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Pagination rounded={rounded} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-rounded")).toBe(rounded);
         });
       });
@@ -73,7 +74,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       PAGINATION_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <Pagination size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

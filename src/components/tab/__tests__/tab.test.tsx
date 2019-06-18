@@ -1,14 +1,13 @@
-import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
 import { Tab } from "src/components/tab/tab";
 import { TabGroup } from "src/components/tab/tab-group";
 
 import {
+  GetInnerReactWrapperFunction,
+  GetInnerShallowWrapperFunction,
+  makeReactWrapperFactory,
+  makeShallowWrapperFactory,
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
@@ -20,23 +19,21 @@ const DISPLAY_NAME = "Tab";
 const DEFAULT_ELEMENT = "a";
 const BULMA_CLASS_NAME = undefined;
 
-const makeShallowWrapper = (node: JSX.Element) => Enzyme.shallow(node);
+const getWrappingLIShallowWrapper: GetInnerShallowWrapperFunction = wrapper =>
+  wrapper // Component
+    .dive(); // Wrapping LI
 
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-) => {
-  const rootWrapper = makeShallowWrapper(node);
-  const forwardRefWrapper = rootWrapper.children();
-  const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
+const getLeafShallowWrapper: GetInnerShallowWrapperFunction = wrapper =>
+  wrapper // Component
+    .dive() // Wrapping LI
+    .children() // Generic
+    .dive(); // Leaf ("as")
 
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
+const getLeafReactWrapper: GetInnerReactWrapperFunction = wrapper =>
+  wrapper // Component
+    .children() // Wrapping LI
+    .children() // Generic
+    .children(); // Leaf ("as")
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -48,23 +45,30 @@ describe(`${DISPLAY_NAME} component`, () => {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeReactWrapper: makeReactWrapperFactory(getLeafReactWrapper),
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
   describe("root", () => {
     it("should be li element", () => {
       const node = <Tab />;
-      const wrapper = makeShallowWrapper(node);
+      const makeShallowWrapper = makeShallowWrapperFactory(
+        getWrappingLIShallowWrapper,
+      );
+      const wrapper = makeShallowWrapper({ node });
       expect(wrapper.is("li")).toBe(true);
     });
   });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeWrappingLIShallowWrapper = makeShallowWrapperFactory(
+      getWrappingLIShallowWrapper,
+    );
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
@@ -72,7 +76,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <Tab active={active} />;
-          const wrapper = makeShallowWrapper(node);
+          const wrapper = makeWrappingLIShallowWrapper({ node });
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
       });

@@ -256,14 +256,14 @@ export const makeShallowWrapperFactory = (
   return getInnerWrapper(wrapper);
 };
 
-export type GetInnerReactWrapperFunction = (
-  wrapper: Enzyme.ReactWrapper<React.ReactType>,
-) => Enzyme.ReactWrapper<React.ReactType>;
-
 export type MakeReactWrapperFunction = (options: {
   node: JSX.Element;
   contextValue?: ThemeContextValue;
 }) => Enzyme.ReactWrapper<React.ReactType>;
+
+export type GetInnerReactWrapperFunction = (
+  wrapper: Enzyme.ReactWrapper<React.ReactType>,
+) => Enzyme.ReactWrapper<React.ReactType>;
 
 export const makeReactWrapperFactory = (
   getInnerWrapper: GetInnerReactWrapperFunction = wrapper =>

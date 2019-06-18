@@ -7,7 +7,7 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -33,6 +33,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -40,7 +41,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       LEVEL_ITEM_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <LevelItem align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(BULMA_CLASS_NAME)).not.toBe(true);
           expect(wrapper.hasClass(`level-${align}`)).toBe(true);
         });

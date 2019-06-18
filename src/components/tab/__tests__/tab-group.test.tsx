@@ -4,7 +4,7 @@ import { TAB_GROUP_DEFAULTS, TabGroup } from "src/components/tab/tab-group";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -31,6 +31,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -38,7 +39,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TAB_GROUP_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <TabGroup align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -47,7 +48,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("children", () => {
       it("should wrap children in an ul element", () => {
         const node = <TabGroup children={<div className="foo" />} />;
-        const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+        const wrapper = makeShallowWrapper({ node });
         const children = wrapper.children();
         expect(children.is("ul")).toBe(true);
         expect(children.children().is("div")).toBe(true);
@@ -61,7 +62,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <TabGroup fullwidth={fullwidth} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-fullwidth")).toBe(fullwidth);
         });
       });
@@ -73,7 +74,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TAB_GROUP_DEFAULTS.kinds.map(kind => {
         it(`should be ${kind}`, () => {
           const node = <TabGroup kind={kind} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${kind}`)).toBe(true);
         });
       });
@@ -85,7 +86,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       TAB_GROUP_DEFAULTS.sizes.map(size => {
         it(`should be ${size}`, () => {
           const node = <TabGroup size={size} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${size}`)).toBe(true);
         });
       });

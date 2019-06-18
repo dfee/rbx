@@ -6,7 +6,7 @@ import { LevelItem } from "src/components/level/level-item";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -33,6 +33,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("breakpoint", () => {
       validateStringOrNumberPropType(propTypes, "breakpoint");
@@ -40,7 +41,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       DEFAULTS.breakpoints.map(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = <Level breakpoint={breakpoint} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${breakpoint}`)).toBe(true);
         });
       });

@@ -4,7 +4,7 @@ import { ListItem } from "src/components/list/list-item";
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
@@ -30,6 +30,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
@@ -37,7 +38,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <ListItem active={active} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-active")).toBe(active);
         });
       });

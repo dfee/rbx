@@ -7,7 +7,7 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
+  makeShallowWrapperFactory,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
@@ -36,6 +36,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("propTypes", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -43,7 +44,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       MEDIA_ITEM_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = <MediaItem align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`media-${align}`)).toBe(true);
         });
       });
