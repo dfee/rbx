@@ -1,87 +1,80 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 
-import { Generic } from "../../base";
+import { Generic, forwardRefAs } from "../../base";
 import { initialValue, ModalContext, ModalContextValue } from "./modal-context";
 
 export type ModalPortalModifierProps = {
-  as?: React.ReactType; // tslint:disable-line:no-reserved-keywords
   className?: string;
   clipped?: boolean;
   closeOnBlur?: ModalContextValue["closeOnBlur"];
   closeOnEsc?: ModalContextValue["closeOnEsc"];
   document: Document;
-  innerRef?: React.Ref<HTMLElement | SVGElement | React.ComponentType>;
   onClose?: ModalContextValue["close"];
 };
 
 export type ModalPortalProps = ModalPortalModifierProps;
 
-export class ModalPortal extends React.PureComponent<ModalPortalProps> {
-  public static defaultProps = {
-    closeOnBlur: initialValue.closeOnBlur,
-    closeOnEsc: initialValue.closeOnEsc,
-  };
-  public static displayName = "Modal.Portal";
+export const ModalPortal = forwardRefAs<ModalPortalProps>(
+  (
+    {
+      className,
+      clipped,
+      closeOnBlur = initialValue.closeOnBlur,
+      closeOnEsc = initialValue.closeOnEsc,
+      document,
+      onClose,
+      ...rest
+    },
+    ref,
+  ) => {
+    const handleClose = useCallback(() => {
+      if (onClose !== undefined) {
+        onClose();
+      }
+    }, [onClose]);
 
-  public componentDidMount() {
-    const { clipped, document } = this.props;
-    document.addEventListener("keydown", this.handleKeydown);
-    const html = document.querySelector("html");
-    /* istanbul ignore else: typeguard */
-    if (html !== null) {
+    useEffect(() => {
+      const handleKeydown = (event: KeyboardEvent) => {
+        if (closeOnEsc === true && event.code === "Escape") {
+          handleClose();
+        }
+      };
+
+      document.addEventListener("keydown", handleKeydown);
+      const html = document.querySelector("html");
+      /* istanbul ignore if: typeguard */
+      if (html === null) {
+        return undefined;
+      }
+
       if (clipped === true) {
         html.classList.add("is-clipped");
       }
-    }
-  }
 
-  public componentWillUnmount() {
-    const { document } = this.props;
-    document.removeEventListener("keydown", this.handleKeydown);
-    const html = document.querySelector("html");
-    /* istanbul ignore else: typeguard */
-    if (html !== null) {
-      html.classList.remove("is-clipped");
-    }
-  }
-
-  public render() {
-    const {
-      className,
-      closeOnBlur,
-      closeOnEsc,
-      innerRef,
-      onClose,
-      ...rest
-    } = this.props;
+      return () => {
+        document.removeEventListener("keydown", handleKeydown);
+        html.classList.remove("is-clipped");
+      };
+    }, [closeOnEsc, handleClose]);
 
     return (
       <ModalContext.Provider
         value={{
-          close: this.close,
-          closeOnBlur: closeOnBlur === true,
-          closeOnEsc: closeOnEsc === true,
+          close: handleClose,
+          closeOnBlur: Boolean(closeOnBlur),
+          closeOnEsc: Boolean(closeOnEsc),
         }}
       >
         <Generic
           className={classNames("modal", "is-active", className)}
-          ref={innerRef}
+          ref={ref}
           {...rest}
         />
       </ModalContext.Provider>
     );
-  }
+  },
+  { as: "div" },
+);
 
-  private readonly close = () => {
-    if (this.props.onClose !== undefined) {
-      this.props.onClose();
-    }
-  };
-
-  private readonly handleKeydown = (event: KeyboardEvent) => {
-    if (this.props.closeOnEsc === true && event.code === "Escape") {
-      this.close();
-    }
-  };
-}
+ModalPortal.displayName = "Modal.Portal";

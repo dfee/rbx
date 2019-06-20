@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { noop } from "../../utils";
 
@@ -17,3 +17,5 @@ export const initialValue: ModalContextValue = {
 export const ModalContext = React.createContext<ModalContextValue>(
   initialValue,
 );
+
+export const useModal = () => useContext(ModalContext);

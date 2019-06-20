@@ -4,7 +4,7 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Delete } from "../../elements";
-import { ModalContext, ModalContextValue } from "./modal-context";
+import { ModalContextValue, useModal } from "./modal-context";
 
 export type ModalCardHeadProps = HelpersProps;
 
@@ -12,7 +12,7 @@ const mapChildren = (
   children: React.ReactNode,
   close: ModalContextValue["close"],
 ) =>
-  React.Children.map(children, (child, i) => {
+  React.Children.map(children, child => {
     if (typeof child === "object" && child !== null && "type" in child) {
       if (child.type === Delete) {
         const onClick = (child.props as React.HTMLAttributes<Element>).onClick;
@@ -43,18 +43,17 @@ const mapChildren = (
   });
 
 export const ModalCardHead = forwardRefAs<ModalCardHeadProps>(
-  ({ className, children, ...rest }, ref) => (
-    <ModalContext.Consumer>
-      {({ close }) => (
-        <Generic
-          children={mapChildren(children, close)}
-          className={classNames("modal-card-head", className)}
-          ref={ref}
-          {...rest}
-        />
-      )}
-    </ModalContext.Consumer>
-  ),
+  ({ className, children, ...rest }, ref) => {
+    const { close } = useModal();
+    return (
+      <Generic
+        children={mapChildren(children, close)}
+        className={classNames("modal-card-head", className)}
+        ref={ref}
+        {...rest}
+      />
+    );
+  },
   { as: "header" },
 );
 

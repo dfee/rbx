@@ -1,15 +1,7 @@
-import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
-import {
-  initialValue as navbarInitialValue,
-  NavbarContextValue,
-} from "src/components/navbar/navbar-context";
 import { NavbarLink } from "src/components/navbar/navbar-link";
+import { initialValue as navbarInitialValue } from "src/components/navbar/navbar-context";
 
 import {
   hasProperties,
@@ -19,43 +11,16 @@ import {
   validatePropType,
 } from "src/__tests__/testing";
 
+import {
+  makeReactWrapperInNavbarItemContextFactory,
+  makeShallowWrapperInNavbarItemContextFactory,
+  getInnerReactWrapperInNavbarItemContext,
+} from "./testing";
+
 const COMPONENT = NavbarLink;
 const DISPLAY_NAME = "Navbar.Link";
 const DEFAULT_ELEMENT = "span";
 const BULMA_CLASS_NAME = "navbar-link";
-
-const makeShallowWrapperInNavbarContextConsumer = (
-  node: JSX.Element,
-  navbarContextValue: NavbarContextValue = navbarInitialValue,
-) => {
-  const navbarContextConsumerWrapper = Enzyme.shallow(node);
-  const NavbarContextConsumerChildren = (navbarContextConsumerWrapper.props() as {
-    children: React.FC<NavbarContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <NavbarContextConsumerChildren {...navbarContextValue} />,
-  );
-};
-
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-  navbarContextValue: NavbarContextValue = navbarInitialValue,
-) => {
-  const navbarContextConsumerChildrenWrapper = makeShallowWrapperInNavbarContextConsumer(
-    node,
-    navbarContextValue,
-  );
-  const themeContextConsumerWrapper = navbarContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -66,15 +31,17 @@ describe(`${DISPLAY_NAME} component`, () => {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperInNavbarItemContextFactory(),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeReactWrapper: makeReactWrapperInNavbarItemContextFactory(),
+    makeShallowWrapper: makeShallowWrapperInNavbarItemContextFactory(),
   });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperInNavbarItemContextFactory();
 
     describe("arrowless", () => {
       validateBoolPropType(propTypes, "arrowless");
@@ -82,7 +49,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(arrowless => {
         it(`should ${arrowless ? "" : "not "}be arrowless`, () => {
           const node = <NavbarLink arrowless={arrowless} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-arrowless")).toBe(arrowless);
         });
       });
@@ -100,15 +67,15 @@ describe(`${DISPLAY_NAME} component`, () => {
         }`, () => {
           const onClick = hasOnClick ? jest.fn() : undefined;
           const setActive = jest.fn();
-          const node = <NavbarLink onClick={onClick} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
-            node,
-            themeInitialValue,
-            {
-              active: false,
-              setActive,
-            },
+
+          const makeReactWrapper = makeReactWrapperInNavbarItemContextFactory(
+            getInnerReactWrapperInNavbarItemContext,
+            navbarInitialValue,
+            { active: false, setActive },
           );
+          const node = <NavbarLink onClick={onClick} />;
+          const wrapper = makeReactWrapper({ node });
+
           wrapper.simulate("click");
           if (onClick !== undefined) {
             expect(onClick.mock.calls).toHaveLength(1);

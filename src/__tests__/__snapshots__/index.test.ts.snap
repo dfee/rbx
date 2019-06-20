@@ -275,7 +275,6 @@ Object {
   },
   "Dropdown": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "Container": [Function],
     "Content": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -807,7 +806,6 @@ Object {
       },
       "render": [Function],
     },
-    "Container": [Function],
     "Content": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -842,11 +840,19 @@ Object {
       },
       "_threadCount": 0,
     },
-    "Portal": [Function],
+    "Portal": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "div",
+      },
+      "displayName": "Modal.Portal",
+      "render": [Function],
+    },
     "defaultProps": Object {
       "as": "div",
       "clipped": true,
     },
+    "displayName": "Modal",
     "propTypes": Object {
       "active": [Function],
       "clipped": [Function],
@@ -879,7 +885,6 @@ Object {
       },
       "render": [Function],
     },
-    "Container": [Function],
     "Context": Object {
       "$$typeof": Symbol(react.context),
       "Consumer": Object {
@@ -926,7 +931,6 @@ Object {
     },
     "Item": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "Container": [Function],
       "defaultProps": Object {
         "as": "a",
       },

@@ -1,15 +1,6 @@
-import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
 import { NavbarBurger } from "src/components/navbar/navbar-burger";
-import {
-  initialValue as navbarInitialValue,
-  NavbarContextValue,
-} from "src/components/navbar/navbar-context";
 
 import {
   hasProperties,
@@ -18,43 +9,16 @@ import {
   validatePropType,
 } from "src/__tests__/testing";
 
+import {
+  makeShallowWrapperInNavbarContextFactory,
+  makeReactWrapperInNavbarContextFactory,
+  getInnerReactWrapperInNavbarContext,
+} from "./testing";
+
 const COMPONENT = NavbarBurger;
 const DISPLAY_NAME = "Navbar.Burger";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "navbar-burger";
-
-const makeShallowWrapperInNavbarContextConsumer = (
-  node: JSX.Element,
-  navbarContextValue: NavbarContextValue = navbarInitialValue,
-) => {
-  const navbarContextConsumerWrapper = Enzyme.shallow(node);
-  const NavbarContextConsumerChildren = (navbarContextConsumerWrapper.props() as {
-    children: React.FC<NavbarContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <NavbarContextConsumerChildren {...navbarContextValue} />,
-  );
-};
-
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-  navbarContextValue: NavbarContextValue = navbarInitialValue,
-) => {
-  const navbarContextConsumerChildrenWrapper = makeShallowWrapperInNavbarContextConsumer(
-    node,
-    navbarContextValue,
-  );
-  const themeContextConsumerWrapper = navbarContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -65,15 +29,17 @@ describe(`${DISPLAY_NAME} component`, () => {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeReactWrapper: makeReactWrapperInNavbarContextFactory(),
+    makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
   });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperInNavbarContextFactory();
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
@@ -87,15 +53,14 @@ describe(`${DISPLAY_NAME} component`, () => {
         }`, () => {
           const onClick = hasOnClick ? jest.fn() : undefined;
           const setActive = jest.fn();
-          const node = <NavbarBurger onClick={onClick} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
-            node,
-            themeInitialValue,
-            {
-              active: false,
-              setActive,
-            },
+
+          const makeReactWrapper = makeReactWrapperInNavbarContextFactory(
+            getInnerReactWrapperInNavbarContext,
+            { active: false, setActive },
           );
+          const node = <NavbarBurger onClick={onClick} />;
+          const wrapper = makeReactWrapper({ node });
+
           wrapper.simulate("click");
           if (onClick !== undefined) {
             expect(onClick.mock.calls).toHaveLength(1);
@@ -109,7 +74,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("role", () => {
       it("should have role: button", () => {
         const node = <NavbarBurger />;
-        const wrapper = makeShallowWrapperInNavbarContextConsumer(node);
+        const wrapper = makeShallowWrapper({ node });
         expect(wrapper.prop("role")).toEqual("button");
       });
     });

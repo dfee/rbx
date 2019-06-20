@@ -8,11 +8,15 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
+
+import {
+  makeShallowWrapperInNavbarContextFactory,
+  makeReactWrapperInNavbarContextFactory,
+} from "./testing";
 
 const COMPONENT = NavbarSegment;
 const DISPLAY_NAME = "Navbar.Segment";
@@ -38,12 +42,18 @@ describe(`${DISPLAY_NAME} component`, () => {
     bulmaClassName: "navbar-start",
     defaultElement: DEFAULT_ELEMENT,
     makeNode,
+    makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
   });
 
-  testThemeIntegration(COMPONENT, { makeNode });
+  testThemeIntegration(COMPONENT, {
+    makeNode,
+    makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
+    makeReactWrapper: makeReactWrapperInNavbarContextFactory(),
+  });
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperInNavbarContextFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -51,7 +61,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       NAVBAR_SEGMENT_DEFAULTS.alignments.map(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`navbar-${align}`)).toBe(true);
         });
       });

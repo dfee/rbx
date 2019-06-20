@@ -4,7 +4,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
-import { ModalContext, ModalContextValue } from "./modal-context";
+import { ModalContextValue, useModal } from "./modal-context";
 
 export type ModalBackgroundModifierProps = {
   onClick?: React.MouseEventHandler;
@@ -25,19 +25,18 @@ const onClickHandler = (
 };
 
 export const ModalBackground = forwardRefAs<ModalBackgroundProps>(
-  ({ className, onClick, ...rest }, ref) => (
-    <ModalContext.Consumer>
-      {ctx => (
-        <Generic
-          className={classNames("modal-background", className)}
-          onClick={onClickHandler(onClick, ctx)}
-          ref={ref}
-          role="presentation"
-          {...rest}
-        />
-      )}
-    </ModalContext.Consumer>
-  ),
+  ({ className, onClick, ...rest }, ref) => {
+    const ctx = useModal();
+    return (
+      <Generic
+        className={classNames("modal-background", className)}
+        onClick={onClickHandler(onClick, ctx)}
+        ref={ref}
+        role="presentation"
+        {...rest}
+      />
+    );
+  },
   { as: "div" },
 );
 

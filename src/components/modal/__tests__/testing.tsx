@@ -6,10 +6,10 @@ import {
   ThemeContext,
 } from "src/base/theme";
 import {
-  DropdownContext,
-  DropdownContextValue,
-  initialValue as dropdownInitialValue,
-} from "src/components/dropdown/dropdown-context";
+  ModalContext,
+  ModalContextValue,
+  initialValue as modalInitialValue,
+} from "src/components/modal/modal-context";
 import {
   GetInnerReactWrapperFunction,
   GetInnerShallowWrapperFunction,
@@ -26,16 +26,16 @@ export const getInnerShallowWrapper: GetInnerShallowWrapperFunction = wrapper =>
 export const makeShallowWrapperFactory = (
   // todo: rename getInnerWrapper => getInnerShallowWrapper
   getInnerWrapper: GetInnerShallowWrapperFunction = getInnerShallowWrapper,
-  dropdownContextValue: DropdownContextValue = dropdownInitialValue,
+  modalContextValue: ModalContextValue = modalInitialValue,
 ): MakeShallowWrapperFunction => ({
   node,
   contextValue = themeInitialValue,
 }) => {
   const wrapper = Enzyme.shallow(
     <ThemeContext.Provider value={contextValue}>
-      <DropdownContext.Provider value={dropdownContextValue}>
+      <ModalContext.Provider value={modalContextValue}>
         {node}
-      </DropdownContext.Provider>
+      </ModalContext.Provider>
     </ThemeContext.Provider>,
   );
   return getInnerWrapper(wrapper);
@@ -49,14 +49,14 @@ export const getInnerReactWrapper: GetInnerReactWrapperFunction = wrapper =>
 export const makeReactWrapperFactory = (
   // todo: rename getInnerWrapper => getInnerReactWrapper
   getInnerWrapper: GetInnerReactWrapperFunction = getInnerReactWrapper,
-  dropdownContextValue: DropdownContextValue = dropdownInitialValue,
+  modalContextValue: ModalContextValue = modalInitialValue,
 ): MakeReactWrapperFunction => ({ node, contextValue = themeInitialValue }) =>
   getInnerWrapper(
     Enzyme.mount(
       <ThemeContext.Provider value={contextValue}>
-        <DropdownContext.Provider value={dropdownContextValue}>
+        <ModalContext.Provider value={modalContextValue}>
           {node}
-        </DropdownContext.Provider>
+        </ModalContext.Provider>
       </ThemeContext.Provider>,
     ),
   );

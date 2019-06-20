@@ -1,12 +1,6 @@
-import Enzyme from "enzyme";
 import { JSDOM } from "jsdom";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
-import { initialValue as modalInitialValue } from "src/components/modal/modal-context";
 import {
   ModalPortal,
   ModalPortalProps,
@@ -16,42 +10,31 @@ import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
+  GetInnerShallowWrapperFunction,
   withEnzymeMount,
 } from "src/__tests__/testing";
+
+import { makeShallowWrapperFactory, makeReactWrapperFactory } from "./testing";
 
 const COMPONENT = ModalPortal;
 const DISPLAY_NAME = "Modal.Portal";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "modal";
 
-const makeNode = (props: ModalPortalProps) => {
-  const withDefaults = { document, ...props };
+const makeNode = (props: ModalPortalProps) => (
+  <ModalPortal document={document} {...props} />
+);
 
-  return <ModalPortal {...withDefaults} />;
-};
-
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-) => {
-  const modalContextProviderWrapper = Enzyme.shallow(node);
-  const forwardRefWrapper = modalContextProviderWrapper.children();
-  const themeContextConsumerWrapper = forwardRefWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
+const getLeafShallowWrappper: GetInnerShallowWrapperFunction = wrapper =>
+  wrapper // ContextProvider
+    .dive() //  Modal.Portal
+    .dive() // ContextProvider
+    .dive() // Generic
+    .dive(); // Leaf ("as")
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(ModalPortal, {
-    defaultProps: {
-      closeOnBlur: modalInitialValue.closeOnBlur,
-      closeOnEsc: modalInitialValue.closeOnEsc,
-    },
+    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
@@ -59,13 +42,12 @@ describe(`${DISPLAY_NAME} component`, () => {
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
     makeNode,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
-    refProp: "innerRef",
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrappper),
   });
 
   testThemeIntegration(COMPONENT, {
     makeNode,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrappper),
   });
 
   describe("extra", () => {
@@ -75,22 +57,24 @@ describe(`${DISPLAY_NAME} component`, () => {
       }call the context's onClose on ESC keydown when closeOnEsc is ${closeOnEsc}`, () => {
         const close = jest.fn();
         const ref = React.createRef<HTMLDivElement>();
-        const wrapper = Enzyme.mount(
+
+        const makeReactWrapper = makeReactWrapperFactory();
+        const node = (
           <ModalPortal
             document={document}
             closeOnEsc={closeOnEsc}
-            innerRef={ref}
+            ref={ref}
             onClose={close}
-          />,
+          />
         );
-
-        try {
-          const escEvent = new KeyboardEvent("keydown", { code: "Escape" });
-          document.dispatchEvent(escEvent);
-          expect(close.mock.calls).toHaveLength(closeOnEsc ? 1 : 0);
-        } finally {
-          wrapper.unmount();
+        const wrapper = makeReactWrapper({ node });
+        if (wrapper === undefined) {
+          throw new Error("todo: replace with teardown");
         }
+
+        const escEvent = new KeyboardEvent("keydown", { code: "Escape" });
+        document.dispatchEvent(escEvent);
+        expect(close.mock.calls).toHaveLength(closeOnEsc ? 1 : 0);
       });
     });
   });

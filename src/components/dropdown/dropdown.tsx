@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { Generic, forwardRefAs } from "../../base";
 import { HelpersProps } from "../../base/helpers";
@@ -49,8 +49,8 @@ export const Dropdown = Object.assign(
       );
       const innerRef = useRef<HTMLElement>(null);
 
-      const setActive = useMemo(
-        () => (active: boolean) => {
+      const setActive = useCallback(
+        (active: boolean) => {
           if (managed !== true) {
             _setActive(active);
           }
@@ -79,12 +79,7 @@ export const Dropdown = Object.assign(
       }, [active, managed, ref]);
 
       return (
-        <DropdownContext.Provider
-          value={{
-            active,
-            setActive,
-          }}
-        >
+        <DropdownContext.Provider value={{ active, setActive }}>
           <Generic
             className={classNames(
               "dropdown",

@@ -1,15 +1,6 @@
-import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
 import { ModalBackground } from "src/components/modal/modal-background";
-import {
-  initialValue as modalInitialValue,
-  ModalContextValue,
-} from "src/components/modal/modal-context";
 
 import {
   hasProperties,
@@ -18,43 +9,16 @@ import {
   validatePropType,
 } from "src/__tests__/testing";
 
+import {
+  makeReactWrapperFactory,
+  makeShallowWrapperFactory,
+  getInnerReactWrapper,
+} from "./testing";
+
 const COMPONENT = ModalBackground;
 const DISPLAY_NAME = "Modal.Background";
 const DEFAULT_ELEMENT = "div";
 const BULMA_CLASS_NAME = "modal-background";
-
-const makeShallowWrapperInModalContextConsumer = (
-  node: JSX.Element,
-  modalContextValue: ModalContextValue = modalInitialValue,
-) => {
-  const modalContextConsumerWrapper = Enzyme.shallow(node);
-  const ModalContextConsumerChildren = (modalContextConsumerWrapper.props() as {
-    children: React.FC<ModalContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ModalContextConsumerChildren {...modalContextValue} />,
-  );
-};
-
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-  modalContextValue: ModalContextValue = modalInitialValue,
-) => {
-  const modalContextConsumerChildrenWrapper = makeShallowWrapperInModalContextConsumer(
-    node,
-    modalContextValue,
-  );
-  const themeContextConsumerWrapper = modalContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -65,11 +29,12 @@ describe(`${DISPLAY_NAME} component`, () => {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeReactWrapper: makeReactWrapperFactory(),
+    makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
   describe("props", () => {
@@ -88,16 +53,14 @@ describe(`${DISPLAY_NAME} component`, () => {
           }`, () => {
             const onClick = hasOnClick ? jest.fn() : undefined;
             const close = jest.fn();
-            const node = <ModalBackground onClick={onClick} />;
-            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
-              node,
-              themeInitialValue,
-              {
-                close,
-                closeOnBlur,
-                closeOnEsc: true,
-              },
+
+            const makeReactWrapper = makeReactWrapperFactory(
+              getInnerReactWrapper,
+              { close, closeOnBlur, closeOnEsc: true },
             );
+            const node = <ModalBackground onClick={onClick} />;
+            const wrapper = makeReactWrapper({ node });
+
             wrapper.simulate("click");
             if (onClick !== undefined) {
               expect(onClick.mock.calls).toHaveLength(1);

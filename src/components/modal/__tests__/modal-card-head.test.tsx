@@ -1,15 +1,8 @@
 import Enzyme from "enzyme";
 import React from "react";
 
-import {
-  initialValue as themeInitialValue,
-  ThemeContextValue,
-} from "src/base/theme";
+import { initialValue as modalInitialValue } from "src/components/modal/modal-context";
 import { ModalCardHead } from "src/components/modal/modal-card-head";
-import {
-  initialValue as modalInitialValue,
-  ModalContextValue,
-} from "src/components/modal/modal-context";
 import { Delete } from "src/elements";
 
 import {
@@ -18,43 +11,16 @@ import {
   testThemeIntegration,
 } from "src/__tests__/testing";
 
+import {
+  makeReactWrapperFactory,
+  makeShallowWrapperFactory,
+  getInnerReactWrapper,
+} from "./testing";
+
 const COMPONENT = ModalCardHead;
 const DISPLAY_NAME = "Modal.Card.Head";
 const DEFAULT_ELEMENT = "header";
 const BULMA_CLASS_NAME = "modal-card-head";
-
-const makeShallowWrapperInModalContextConsumer = (
-  node: JSX.Element,
-  modalContextValue: ModalContextValue = modalInitialValue,
-) => {
-  const modalContextConsumerWrapper = Enzyme.shallow(node);
-  const ModalContextConsumerChildren = (modalContextConsumerWrapper.props() as {
-    children: React.FC<ModalContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ModalContextConsumerChildren {...modalContextValue} />,
-  );
-};
-
-const makeGenericHOCShallowWrapperInContextConsumer = (
-  node: JSX.Element,
-  themeContextValue: ThemeContextValue = themeInitialValue,
-  modalContextValue: ModalContextValue = modalInitialValue,
-) => {
-  const modalContextConsumerChildrenWrapper = makeShallowWrapperInModalContextConsumer(
-    node,
-    modalContextValue,
-  );
-  const themeContextConsumerWrapper = modalContextConsumerChildrenWrapper.dive();
-  const ThemeContextConsumerChildren = (themeContextConsumerWrapper.props() as {
-    children: React.FC<ThemeContextValue>;
-  }).children;
-
-  return Enzyme.shallow(
-    <ThemeContextConsumerChildren {...themeContextValue} />,
-  );
-};
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
@@ -65,11 +31,12 @@ describe(`${DISPLAY_NAME} component`, () => {
     displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeGenericHOCShallowWrapperInContextConsumer,
+    makeReactWrapper: makeReactWrapperFactory(),
+    makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
   describe("props", () => {
@@ -78,7 +45,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         {
           descriptor: "string",
           factory: (onClick: React.MouseEventHandler | undefined) => "string",
-          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
+          getDelete: (wrapper: Enzyme.ReactWrapper<React.ReactType>) =>
             undefined,
         },
         {
@@ -86,16 +53,16 @@ describe(`${DISPLAY_NAME} component`, () => {
           factory: (onClick: React.MouseEventHandler | undefined) => (
             <Delete onClick={onClick} />
           ),
-          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
-            wrapper.children().dive(),
+          getDelete: (wrapper: Enzyme.ReactWrapper<React.ReactType>) =>
+            wrapper.children().children(),
         },
         {
           descriptor: "delete button in fragment",
           factory: (onClick: React.MouseEventHandler | undefined) => (
             <React.Fragment children={<Delete onClick={onClick} />} />
           ),
-          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
-            wrapper.children().dive(),
+          getDelete: (wrapper: Enzyme.ReactWrapper<React.ReactType>) =>
+            wrapper.children().children(),
         },
         {
           descriptor: "compound children with delete button",
@@ -103,11 +70,11 @@ describe(`${DISPLAY_NAME} component`, () => {
             <Delete key={0} onClick={onClick} />,
             <div key={1} />,
           ],
-          getDelete: (wrapper: Enzyme.ShallowWrapper<React.ReactType>) =>
+          getDelete: (wrapper: Enzyme.ReactWrapper<React.ReactType>) =>
             wrapper
               .children()
               .at(0)
-              .dive(),
+              .children(),
         },
       ];
 
@@ -118,16 +85,18 @@ describe(`${DISPLAY_NAME} component`, () => {
           }for children: <${descriptor}>`, () => {
             const onClick = jest.fn();
             const close = jest.fn();
+
+            const makeReactWrapper = makeReactWrapperFactory(
+              getInnerReactWrapper,
+              { ...modalInitialValue, close },
+            );
             const node = (
               <ModalCardHead
                 children={factory(hasOnClick ? onClick : undefined)}
               />
             );
-            const wrapper = makeGenericHOCShallowWrapperInContextConsumer(
-              node,
-              themeInitialValue,
-              { ...modalInitialValue, close },
-            );
+            const wrapper = makeReactWrapper({ node });
+
             const button = getDelete(wrapper);
             if (button !== undefined) {
               button.simulate("click");

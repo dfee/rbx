@@ -7,12 +7,13 @@ import {
 
 import {
   hasProperties,
-  makeGenericHOCShallowWrapperInContextConsumer,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
   validateBoolPropType,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
+
+import { makeShallowWrapperInNavbarContextFactory } from "./testing";
 
 const COMPONENT = NavbarDropdown;
 const DISPLAY_NAME = "Navbar.Dropdown";
@@ -34,6 +35,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     const { propTypes } = COMPONENT;
+    const makeShallowWrapper = makeShallowWrapperInNavbarContextFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
@@ -41,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       NAVBAR_DROPDOWN_DEFAULTS.alignments.map(align => {
         it(`should be aligned ${align}`, () => {
           const node = <NavbarDropdown align={align} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass(`is-${align}`)).toBe(true);
         });
       });
@@ -53,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [false, true].map(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
           const node = <NavbarDropdown boxed={boxed} />;
-          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          const wrapper = makeShallowWrapper({ node });
           expect(wrapper.hasClass("is-boxed")).toBe(boxed);
         });
       });
