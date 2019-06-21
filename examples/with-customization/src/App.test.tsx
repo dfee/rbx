@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Container, Delete, Notification } from "rbx";
 import { ThemeContext } from "rbx/base/theme";
 
-import App, { HelloWorldNotification } from "./App";
+import { App, HelloWorldNotification } from "./App";
 
 describe("app", () => {
   it("renders without crashing", () => {

@@ -1,4 +1,4 @@
-describe("with-cdn", () => {
+describe("with-script", () => {
   it("should load", async () => {
     await page.goto("http://localhost:3000");
     await page.waitForSelector(".notification");

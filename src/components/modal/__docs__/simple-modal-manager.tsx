@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Button } from "src/elements/button";
 import { Modal, ModalProps } from "../modal";
@@ -8,39 +8,18 @@ interface SimpleModalManagerProps {
   children: React.ReactNode;
 }
 
-interface SimpleModalManagerState {
-  active: boolean;
-}
+export const SimpleModalManager = ({
+  modalProps,
+  children,
+}: SimpleModalManagerProps) => {
+  const [active, setActive] = useState(false);
 
-export class SimpleModalManager extends React.Component<
-  SimpleModalManagerProps,
-  SimpleModalManagerState
-> {
-  public static defaultProps = {
-    modalProps: {},
-  };
-
-  public readonly state: SimpleModalManagerState = { active: false };
-
-  public render() {
-    return (
-      <div>
-        <Button onClick={this.open}>Open modal</Button>
-        <Modal
-          active={this.state.active}
-          onClose={this.close}
-          {...this.props.modalProps}
-        >
-          {this.props.children}
-        </Modal>
-      </div>
-    );
-  }
-
-  private readonly close = () => {
-    this.setState({ active: false });
-  };
-  private readonly open = () => {
-    this.setState({ active: true });
-  };
-}
+  return (
+    <div>
+      <Button onClick={() => setActive(true)}>Open modal</Button>
+      <Modal active={active} onClose={() => setActive(false)} {...modalProps}>
+        {children}
+      </Modal>
+    </div>
+  );
+};

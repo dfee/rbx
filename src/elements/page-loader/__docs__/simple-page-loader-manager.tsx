@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import { Button } from "src/elements/button/button";
 import { PageLoader, PageLoaderProps } from "../page-loader";
@@ -7,34 +7,31 @@ export type SimplePageLoaderManagerProps = Omit<PageLoaderProps, "active"> & {
   children: React.ReactNode;
   button: React.ReactElement<React.ComponentProps<typeof Button>>;
 };
-export type SimplePageLoaderManagerState = { active: boolean };
 
-export class SimplePageLoaderManager extends React.Component<
-  SimplePageLoaderManagerProps,
-  SimplePageLoaderManagerState
-> {
-  public readonly state: SimplePageLoaderManagerState = { active: false };
+export const SimplePageLoaderManager = ({
+  button,
+  ...rest
+}: SimplePageLoaderManagerProps) => {
+  const [active, setActive] = useState(false);
 
-  public render() {
-    const { button, ...rest } = this.props;
+  const handleClick = useCallback(() => setActive(true), [setActive]);
 
-    const managedButton = React.cloneElement(button, {
-      onClick: this.handleClick,
-    });
+  useEffect(() => {
+    if (!active) {
+      return undefined;
+    }
+    const timeout = setTimeout(() => setActive(false), 3000);
+    return () => clearTimeout(timeout);
+  }, [active, setActive]);
 
-    return (
-      <React.Fragment>
-        {managedButton}
-        <PageLoader {...rest} active={this.state.active} />
-      </React.Fragment>
-    );
-  }
+  const managedButton = React.cloneElement(button, {
+    onClick: handleClick,
+  });
 
-  private readonly handleClick = () => {
-    this.setState({ active: true }, () => {
-      setTimeout(() => {
-        this.setState({ active: false });
-      }, 3000);
-    });
-  };
-}
+  return (
+    <React.Fragment>
+      {managedButton}
+      <PageLoader {...rest} active={active} />
+    </React.Fragment>
+  );
+};
