@@ -288,7 +288,6 @@ export const testForwardRefAsExoticComponentIntegration = (
     defaultElement: keyof React.ReactHTML;
     displayName: string;
     makeShallowWrapper?: MakeShallowWrapperFunction;
-    refProp?: string;
     makeNode?(props: any): JSX.Element;
     makeWrappingNode?(node: React.ReactNode): JSX.Element;
     //tslint:enable:no-any
@@ -301,11 +300,9 @@ export const testForwardRefAsExoticComponentIntegration = (
     makeNode,
     makeShallowWrapper,
     makeWrappingNode,
-    refProp,
   } = {
     makeNode: makeNodeFactory(Component),
     makeShallowWrapper: makeShallowWrapperFactory(),
-    refProp: "ref",
     ...options,
   };
 
@@ -329,7 +326,7 @@ export const testForwardRefAsExoticComponentIntegration = (
 
     it("should forward ref", () => {
       const ref = React.createRef<HTMLElement>();
-      const node = makeNode({ [refProp]: ref });
+      const node = makeNode({ ref });
       withEnzymeMount(
         { node, makeWrappingNode },
         ({ context: { wrapper } }) => {
