@@ -42,19 +42,6 @@ export type ButtonModifierProps = {
 
 export type ButtonProps = HelpersProps & ButtonModifierProps;
 
-const propTypes = {
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  fullwidth: PropTypes.bool,
-  inverted: PropTypes.bool,
-  outlined: PropTypes.bool,
-  rounded: PropTypes.bool,
-  selected: PropTypes.bool,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  static: PropTypes.bool,
-  text: PropTypes.bool,
-};
-
 export const Button = Object.assign(
   forwardRefAs<ButtonProps>(
     (
@@ -101,4 +88,15 @@ export const Button = Object.assign(
 );
 
 Button.displayName = "Button";
-Button.propTypes = propTypes;
+Button.propTypes = {
+  color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fullwidth: PropTypes.bool,
+  inverted: PropTypes.bool,
+  outlined: PropTypes.bool,
+  rounded: PropTypes.bool,
+  selected: PropTypes.bool,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  state: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  static: PropTypes.bool,
+  text: PropTypes.bool,
+};

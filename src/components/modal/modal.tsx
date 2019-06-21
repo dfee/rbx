@@ -22,16 +22,6 @@ export type ModalProps = {
   onClose?: () => void;
 };
 
-const propTypes = {
-  active: PropTypes.bool,
-  clipped: PropTypes.bool,
-  closeOnBlur: PropTypes.bool,
-  closeOnEsc: PropTypes.bool,
-  containerClassName: PropTypes.string,
-  document: PropTypes.object,
-  onClose: PropTypes.func,
-};
-
 export const Modal = Object.assign(
   forwardRefAs<ModalProps>(
     ({ active, containerClassName, document: _document, ...rest }, ref) => {
@@ -75,8 +65,16 @@ export const Modal = Object.assign(
     Content: ModalContent,
     Context: ModalContext,
     Portal: ModalPortal,
-    propTypes,
   },
 );
 
 Modal.displayName = "Modal";
+Modal.propTypes = {
+  active: PropTypes.bool,
+  clipped: PropTypes.bool,
+  closeOnBlur: PropTypes.bool,
+  closeOnEsc: PropTypes.bool,
+  containerClassName: PropTypes.string,
+  document: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  onClose: PropTypes.func,
+};
