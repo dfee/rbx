@@ -7,7 +7,6 @@ import { Column, ColumnProps } from "src/grid/columns/column";
 export type RbxFeatureProps = {
   children: React.ReactNode;
   imageSrc: string;
-  // tslint:disable-next-line: react-unused-props-and-state
   size?: ColumnProps["size"]; // false positive
   title: string;
   to: string;
@@ -23,9 +22,9 @@ export const RbxFeature = ({
   const size = colSize !== undefined ? colSize : "half";
 
   return (
-    <Column size={size} mobile={{ size: "full" }}>
+    <Column mobile={{ size: "full" }} size={size}>
       <Media>
-        <Media.Item as="figure" align="left">
+        <Media.Item align="left" as="figure">
           <Image.Container as="a" href={to} size={64} target="_blank">
             <Image src={imageSrc} />
           </Image.Container>

@@ -1,6 +1,6 @@
 import { makePropTypes, makeValidatingTransform } from "src/base/helpers/other";
-
 import { validateBoolPropType } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -30,7 +30,7 @@ describe("Other helpers", () => {
     testItShouldNotSetClassNameOnEmpty(vtfunc);
     testItShouldPreserveCustomClassName(vtfunc);
 
-    [false, true].map(marginless => {
+    [false, true].forEach(marginless => {
       it(`should ${marginless ? "" : "not "}be marginless`, () => {
         expect(vtfunc({ marginless }, CNAME, LOC)).toEqual({
           className: marginless ? "is-marginless" : "",
@@ -38,7 +38,7 @@ describe("Other helpers", () => {
       });
     });
 
-    [false, true].map(paddingless => {
+    [false, true].forEach(paddingless => {
       it(`should ${paddingless ? "" : "not "}be paddingless`, () => {
         expect(vtfunc({ paddingless }, CNAME, LOC)).toEqual({
           className: paddingless ? "is-paddingless" : "",
@@ -46,7 +46,7 @@ describe("Other helpers", () => {
       });
     });
 
-    [false, true].map(radiusless => {
+    [false, true].forEach(radiusless => {
       it(`should ${radiusless ? "" : "not "}be radiusless`, () => {
         expect(vtfunc({ radiusless }, CNAME, LOC)).toEqual({
           className: radiusless ? "is-radiusless" : "",
@@ -54,7 +54,7 @@ describe("Other helpers", () => {
       });
     });
 
-    [false, true].map(relative => {
+    [false, true].forEach(relative => {
       it(`should ${relative ? "" : "not "}be relative`, () => {
         expect(vtfunc({ relative }, CNAME, LOC)).toEqual({
           className: relative ? "is-relative" : "",
@@ -62,7 +62,7 @@ describe("Other helpers", () => {
       });
     });
 
-    [false, true].map(shadowless => {
+    [false, true].forEach(shadowless => {
       it(`should ${shadowless ? "" : "not "}be shadowless`, () => {
         expect(vtfunc({ shadowless }, CNAME, LOC)).toEqual({
           className: shadowless ? "is-shadowless" : "",
@@ -70,7 +70,7 @@ describe("Other helpers", () => {
       });
     });
 
-    [false, true].map(unselectable => {
+    [false, true].forEach(unselectable => {
       it(`should ${unselectable ? "" : "not "}be unselectable`, () => {
         expect(vtfunc({ unselectable }, CNAME, LOC)).toEqual({
           className: unselectable ? "is-unselectable" : "",

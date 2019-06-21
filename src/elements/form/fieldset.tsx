@@ -12,7 +12,7 @@ export type FieldsetProps = HelpersProps & FieldsetModifierProps;
 
 export const Fieldset = forwardRefAs<FieldsetProps>(
   ({ disabled, ...rest }, ref) => (
-    <Generic disabled={disabled} ref={ref} {...rest} />
+    <Generic ref={ref} disabled={disabled} {...rest} />
   ),
   { as: "fieldset" },
 );

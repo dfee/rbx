@@ -3,8 +3,8 @@ import {
   makeValidatingTransform,
 } from "src/base/helpers/responsive";
 import { DEFAULTS } from "src/base/helpers/variables";
-
 import { validatePropType } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -17,8 +17,7 @@ const LOC = "prop";
 
 /** these sizes support the `only` prop. */
 const checkIsLimited = (breakpoint: string) =>
-  (DEFAULTS.breakpointsLimited as Readonly<string[]>).indexOf(breakpoint) !==
-  -1;
+  (DEFAULTS.breakpointsLimited as Readonly<string[]>).includes(breakpoint);
 
 describe("Responsive modifiers", () => {
   const propTypes = makePropTypes();
@@ -26,11 +25,11 @@ describe("Responsive modifiers", () => {
 
   describe("propTypes", () => {
     validatePropType(propTypes, "responsive", [
-      { value: {}, valid: true },
-      { value: "string", valid: false },
+      { valid: true, value: {} },
+      { valid: false, value: "string" },
     ]);
 
-    DEFAULTS.breakpoints.map(breakpoint => {
+    DEFAULTS.breakpoints.forEach(breakpoint => {
       const isLimited = checkIsLimited(breakpoint);
 
       validatePropType(propTypes, "responsive", [
@@ -59,7 +58,7 @@ describe("Responsive modifiers", () => {
           ...[false, true].map(value => ({
             valid: true,
             value: {
-              [breakpoint]: { display: { value: "block", only: value } },
+              [breakpoint]: { display: { only: value, value: "block" } },
             },
           })),
           {
@@ -68,7 +67,7 @@ describe("Responsive modifiers", () => {
             ),
             valid: false,
             value: {
-              [breakpoint]: { display: { value: "block", only: "string" } },
+              [breakpoint]: { display: { only: "string", value: "block" } },
             },
           },
         ]);
@@ -83,15 +82,14 @@ describe("Responsive modifiers", () => {
     testItShouldNotSetClassNameOnEmpty(vtfunc);
     testItShouldPreserveCustomClassName(vtfunc);
 
-    // tslint:disable-next-line:max-func-body-length
-    DEFAULTS.breakpoints.map(breakpoint => {
+    DEFAULTS.breakpoints.forEach(breakpoint => {
       const isLimited = checkIsLimited(breakpoint);
 
       describe(`for ${breakpoint}`, () => {
         DEFAULTS.displays.map(value =>
           [undefined, false, true]
             .filter(() => !isLimited)
-            .map(only => {
+            .forEach(only => {
               const isOnly = only === true;
               it(`should be display ${value} ${isOnly ? "only" : ""}`, () => {
                 const display = isOnly ? { only, value } : { value };
@@ -115,7 +113,7 @@ describe("Responsive modifiers", () => {
         [false, true].map(value =>
           [undefined, false, true]
             .filter(() => !isLimited)
-            .map(only => {
+            .forEach(only => {
               const isOnly = only === true;
               it(`should ${value ? "" : "not "}be hidden ${
                 isOnly ? "only" : ""
@@ -139,7 +137,7 @@ describe("Responsive modifiers", () => {
         DEFAULTS.textAlignments.map(value =>
           [undefined, false, true]
             .filter(() => !isLimited)
-            .map(only => {
+            .forEach(only => {
               const isOnly = only === true;
               it(`should have text aligned ${value} ${
                 isOnly ? "only" : ""
@@ -163,7 +161,7 @@ describe("Responsive modifiers", () => {
         DEFAULTS.textSizes.map(value =>
           [undefined, false, true]
             .filter(() => !isLimited)
-            .map(only => {
+            .forEach(only => {
               const isOnly = only === true;
               it(`should have text size ${value} ${
                 isOnly ? "only" : ""

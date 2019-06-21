@@ -5,7 +5,6 @@ import {
   PAGE_LOADER_DEFAULTS,
   PageLoader,
 } from "src/elements/page-loader/page-loader";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -26,21 +25,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <PageLoader active={active} />;
           const wrapper = makeShallowWrapper({ node });
@@ -52,7 +53,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <PageLoader color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -64,7 +65,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("direction", () => {
       validateStringOrNumberPropType(propTypes, "direction");
 
-      PAGE_LOADER_DEFAULTS.directions.map(direction => {
+      PAGE_LOADER_DEFAULTS.directions.forEach(direction => {
         it(`should be ${direction}`, () => {
           const node = <PageLoader direction={direction} />;
           const wrapper = makeShallowWrapper({ node });

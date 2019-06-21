@@ -2,8 +2,8 @@ import {
   makePropTypes,
   makeValidatingTransform,
 } from "src/base/helpers/overlay";
-
 import { validateBoolPropType } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -28,7 +28,7 @@ describe("Overlay helpers", () => {
     testItShouldNotSetClassNameOnEmpty(vtfunc);
     testItShouldPreserveCustomClassName(vtfunc);
 
-    [false, true].map(overlay => {
+    [false, true].forEach(overlay => {
       it(`should ${overlay ? "" : "not "}be overlay`, () => {
         expect(vtfunc({ overlay }, CNAME, LOC)).toEqual({
           className: overlay ? "is-overlay" : "",

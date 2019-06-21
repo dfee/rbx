@@ -3,7 +3,6 @@ import React from "react";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Button, BUTTON_DEFAULTS } from "src/elements/button/button";
 import { ButtonGroup } from "src/elements/button/button-group";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -20,26 +19,28 @@ const BULMA_CLASS_NAME = "button";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Group: ButtonGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Group: ButtonGroup,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Button color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -51,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 
-      [false, true].map(fullwidth => {
+      [false, true].forEach(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <Button fullwidth={fullwidth} />;
           const wrapper = makeShallowWrapper({ node });
@@ -63,7 +64,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("inverted", () => {
       validateBoolPropType(propTypes, "inverted");
 
-      [false, true].map(inverted => {
+      [false, true].forEach(inverted => {
         it(`should ${inverted ? "" : "not "}be inverted`, () => {
           const node = <Button inverted={inverted} />;
           const wrapper = makeShallowWrapper({ node });
@@ -75,7 +76,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("outlined", () => {
       validateBoolPropType(propTypes, "outlined");
 
-      [false, true].map(outlined => {
+      [false, true].forEach(outlined => {
         it(`should ${outlined ? "" : "not "}be outlined`, () => {
           const node = <Button outlined={outlined} />;
           const wrapper = makeShallowWrapper({ node });
@@ -87,7 +88,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("rounded", () => {
       validateBoolPropType(propTypes, "rounded");
 
-      [false, true].map(rounded => {
+      [false, true].forEach(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Button rounded={rounded} />;
           const wrapper = makeShallowWrapper({ node });
@@ -99,7 +100,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("selected", () => {
       validateBoolPropType(propTypes, "selected");
 
-      [false, true].map(selected => {
+      [false, true].forEach(selected => {
         it(`should ${selected ? "" : "not "}be selected`, () => {
           const node = <Button selected={selected} />;
           const wrapper = makeShallowWrapper({ node });
@@ -111,7 +112,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("state", () => {
       validateStringOrNumberPropType(propTypes, "state");
 
-      BUTTON_DEFAULTS.states.map(state => {
+      BUTTON_DEFAULTS.states.forEach(state => {
         it(`should be ${state}`, () => {
           const node = <Button state={state} />;
           const wrapper = makeShallowWrapper({ node });
@@ -123,7 +124,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("static", () => {
       validateBoolPropType(propTypes, "static");
 
-      [false, true].map(isStatic => {
+      [false, true].forEach(isStatic => {
         it(`should ${isStatic ? "" : "not "}be static`, () => {
           const node = <Button static={isStatic} />;
           const wrapper = makeShallowWrapper({ node });
@@ -135,7 +136,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("text", () => {
       validateBoolPropType(propTypes, "text");
 
-      [false, true].map(text => {
+      [false, true].forEach(text => {
         it(`should ${text ? "" : "not "}be text`, () => {
           const node = <Button text={text} />;
           const wrapper = makeShallowWrapper({ node });
@@ -147,7 +148,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      BUTTON_DEFAULTS.sizes.map(size => {
+      BUTTON_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Button size={size} />;
           const wrapper = makeShallowWrapper({ node });

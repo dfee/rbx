@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { useCallback, useEffect } from "react";
 
 import { Generic, forwardRefAs } from "../../base";
+
 import { initialValue, ModalContext, ModalContextValue } from "./modal-context";
 
 export type ModalPortalModifierProps = {
@@ -56,7 +57,7 @@ export const ModalPortal = forwardRefAs<ModalPortalProps>(
         document.removeEventListener("keydown", handleKeydown);
         html.classList.remove("is-clipped");
       };
-    }, [closeOnEsc, handleClose]);
+    }, [clipped, closeOnEsc, document, handleClose]);
 
     return (
       <ModalContext.Provider
@@ -67,8 +68,8 @@ export const ModalPortal = forwardRefAs<ModalPortalProps>(
         }}
       >
         <Generic
-          className={classNames("modal", "is-active", className)}
           ref={ref}
+          className={classNames("modal", "is-active", className)}
           {...rest}
         />
       </ModalContext.Provider>

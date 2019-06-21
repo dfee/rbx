@@ -2,7 +2,6 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Input, INPUT_DEFAULTS } from "src/elements/form/input";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -23,21 +22,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Input color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -49,7 +50,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("readOnly", () => {
       validateBoolPropType(propTypes, "readOnly");
 
-      [false, true].map(readOnly => {
+      [false, true].forEach(readOnly => {
         it(`should ${readOnly ? "" : "not "}be readOnly`, () => {
           const node = <Input readOnly={readOnly} />;
           const wrapper = makeShallowWrapper({ node });
@@ -61,7 +62,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("rounded", () => {
       validateBoolPropType(propTypes, "rounded");
 
-      [false, true].map(rounded => {
+      [false, true].forEach(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Input rounded={rounded} />;
           const wrapper = makeShallowWrapper({ node });
@@ -73,7 +74,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      INPUT_DEFAULTS.sizes.map(size => {
+      INPUT_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Input size={size} />;
           const wrapper = makeShallowWrapper({ node });
@@ -85,7 +86,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("state", () => {
       validateStringOrNumberPropType(propTypes, "state");
 
-      INPUT_DEFAULTS.states.map(state => {
+      INPUT_DEFAULTS.states.forEach(state => {
         it(`should be ${state}`, () => {
           const node = <Input state={state} />;
           const wrapper = makeShallowWrapper({ node });
@@ -97,7 +98,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("static", () => {
       validateBoolPropType(propTypes, "static");
 
-      [false, true].map(isStatic => {
+      [false, true].forEach(isStatic => {
         it(`should ${isStatic ? "" : "not "}be static`, () => {
           const node = <Input static={isStatic} />;
           const wrapper = makeShallowWrapper({ node });
@@ -110,7 +111,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("type", () => {
       validateStringOrNumberPropType(propTypes, "type");
 
-      INPUT_DEFAULTS.types.map(isType => {
+      INPUT_DEFAULTS.types.forEach(isType => {
         it(`should be ${isType}`, () => {
           const node = <Input type={isType} />;
           const wrapper = makeShallowWrapper({ node });

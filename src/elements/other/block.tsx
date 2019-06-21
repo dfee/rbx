@@ -8,7 +8,7 @@ export type BlockProps = HelpersProps;
 
 export const Block = forwardRefAs<BlockProps>(
   ({ className, ...rest }, ref) => (
-    <Generic className={classNames("block", className)} ref={ref} {...rest} />
+    <Generic ref={ref} className={classNames("block", className)} {...rest} />
   ),
   { as: "div" },
 );

@@ -5,7 +5,6 @@ import {
   ModalPortal,
   ModalPortalProps,
 } from "src/components/modal/modal-portal";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -38,9 +37,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeNode,
     makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrappper),
   });
@@ -51,7 +50,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("extra", () => {
-    [false, true].map(closeOnEsc => {
+    [false, true].forEach(closeOnEsc => {
       it(`should ${
         closeOnEsc ? "" : "not "
       }call the context's onClose on ESC keydown when closeOnEsc is ${closeOnEsc}`, () => {
@@ -61,9 +60,9 @@ describe(`${DISPLAY_NAME} component`, () => {
         const makeReactWrapper = makeReactWrapperFactory();
         const node = (
           <ModalPortal
-            document={document}
-            closeOnEsc={closeOnEsc}
             ref={ref}
+            closeOnEsc={closeOnEsc}
+            document={document}
             onClose={close}
           />
         );
@@ -81,14 +80,14 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props", () => {
     describe("clipped", () => {
-      [false, true].map(clipped => {
-        ["global", "provided"].map(docOpt => {
+      [false, true].forEach(clipped => {
+        ["global", "provided"].forEach(docOpt => {
           const doc =
             docOpt === "global" ? window.document : new JSDOM().window.document;
           it(`should ${
             clipped ? "" : "not "
           }set clipped on ${docOpt} document`, () => {
-            const node = <ModalPortal document={doc} clipped={clipped} />;
+            const node = <ModalPortal clipped={clipped} document={doc} />;
             withEnzymeMount({ node }, () => {
               const docHtml = doc.querySelector("html");
               if (docHtml === null) {

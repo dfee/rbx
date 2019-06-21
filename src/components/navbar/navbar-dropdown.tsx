@@ -10,6 +10,7 @@ export const NAVBAR_DROPDOWN_DEFAULTS = {
   alignments: ["right"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NavbarDropdownVariablesOverrides {}
 
 export interface NavbarDropdownVariablesDefaults {
@@ -31,6 +32,7 @@ export type NavbarDropdownProps = HelpersProps & NavbarDropdownModifierProps;
 export const NavbarDropdown = forwardRefAs<NavbarDropdownProps>(
   ({ align, boxed, className, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "navbar-dropdown",
         {
@@ -39,7 +41,6 @@ export const NavbarDropdown = forwardRefAs<NavbarDropdownProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

@@ -6,6 +6,7 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
+
 import { HeroBody } from "./hero-body";
 import { HeroFoot } from "./hero-foot";
 import { HeroHead } from "./hero-head";
@@ -20,6 +21,7 @@ export const HERO_DEFAULTS = {
   ] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface HeroVariablesOverrides {}
 
 export interface HeroVariablesDefaults {
@@ -43,6 +45,7 @@ export const Hero = Object.assign(
   forwardRefAs<HeroProps>(
     ({ className, color, gradient, size, ...rest }, ref) => (
       <Generic
+        ref={ref}
         className={classNames(
           "hero",
           {
@@ -52,7 +55,6 @@ export const Hero = Object.assign(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     ),

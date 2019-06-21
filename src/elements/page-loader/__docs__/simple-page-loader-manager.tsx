@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 
 import { Button } from "src/elements/button/button";
+
 import { PageLoader, PageLoaderProps } from "../page-loader";
 
 export type SimplePageLoaderManagerProps = Omit<PageLoaderProps, "active"> & {
@@ -29,9 +30,9 @@ export const SimplePageLoaderManager = ({
   });
 
   return (
-    <React.Fragment>
+    <>
       {managedButton}
       <PageLoader {...rest} active={active} />
-    </React.Fragment>
+    </>
   );
 };

@@ -4,7 +4,6 @@ import {
   FIELD_LABEL_DEFAULTS,
   FieldLabel,
 } from "src/elements/form/field-label";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -24,21 +23,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      FIELD_LABEL_DEFAULTS.sizes.map(size => {
+      FIELD_LABEL_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <FieldLabel size={size} />;
           const wrapper = makeShallowWrapper({ node });

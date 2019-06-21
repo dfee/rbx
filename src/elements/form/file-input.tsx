@@ -9,8 +9,8 @@ export type FileInputProps = HelpersProps;
 export const FileInput = forwardRefAs<FileInputProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("file-input", className)}
       ref={ref}
+      className={classNames("file-input", className)}
       type="file"
       {...rest}
     />

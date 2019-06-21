@@ -9,8 +9,8 @@ export type CardContentProps = HelpersProps;
 export const CardContent = forwardRefAs<CardContentProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("card-content", className)}
       ref={ref}
+      className={classNames("card-content", className)}
       {...rest}
     />
   ),

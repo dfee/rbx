@@ -3,11 +3,11 @@ import {
   makeValidatingTransform,
 } from "src/base/helpers/typography";
 import { DEFAULTS } from "src/base/helpers/variables";
-
 import {
   validateBoolPropType,
   validateOneOfPropType,
 } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -44,7 +44,7 @@ describe("Typography modifiers", () => {
     testItShouldNotSetClassNameOnEmpty(vtfunc);
     testItShouldPreserveCustomClassName(vtfunc);
 
-    [...DEFAULTS.colors, ...DEFAULTS.shades].map(color => {
+    [...DEFAULTS.colors, ...DEFAULTS.shades].forEach(color => {
       it(`should make background-color ${color}`, () => {
         expect(vtfunc({ backgroundColor: color }, CNAME, LOC)).toEqual({
           className: `has-background-${color}`,
@@ -52,7 +52,7 @@ describe("Typography modifiers", () => {
       });
     });
 
-    [false, true].map(italic => {
+    [false, true].forEach(italic => {
       it(`should ${italic ? "" : "not "}be italic`, () => {
         expect(vtfunc({ italic }, CNAME, LOC)).toEqual({
           className: italic ? "is-italic" : "",
@@ -60,7 +60,7 @@ describe("Typography modifiers", () => {
       });
     });
 
-    DEFAULTS.textAlignments.map(align => {
+    DEFAULTS.textAlignments.forEach(align => {
       it(`should align ${align}`, () => {
         expect(vtfunc({ textAlign: align }, CNAME, LOC)).toEqual({
           className: `has-text-${align}`,
@@ -68,7 +68,7 @@ describe("Typography modifiers", () => {
       });
     });
 
-    [...DEFAULTS.colors, ...DEFAULTS.shades].map(color => {
+    [...DEFAULTS.colors, ...DEFAULTS.shades].forEach(color => {
       it(`should make text-color ${color}`, () => {
         expect(vtfunc({ textColor: color }, CNAME, LOC)).toEqual({
           className: `has-text-${color}`,
@@ -76,7 +76,7 @@ describe("Typography modifiers", () => {
       });
     });
 
-    DEFAULTS.textSizes.map(size => {
+    DEFAULTS.textSizes.forEach(size => {
       it(`should be size ${size}`, () => {
         expect(vtfunc({ textSize: size }, CNAME, LOC)).toEqual({
           className: `is-size-${size}`,
@@ -84,15 +84,15 @@ describe("Typography modifiers", () => {
       });
     });
 
-    DEFAULTS.textTransforms.map(textTransform => {
+    DEFAULTS.textTransforms.forEach(textTransform => {
       it(`should be ${textTransform}`, () => {
-        expect(vtfunc({ textTransform: textTransform }, CNAME, LOC)).toEqual({
+        expect(vtfunc({ textTransform }, CNAME, LOC)).toEqual({
           className: `is-${textTransform}`,
         });
       });
     });
 
-    DEFAULTS.textWeights.map(weight => {
+    DEFAULTS.textWeights.forEach(weight => {
       it(`should be ${weight}`, () => {
         expect(vtfunc({ textWeight: weight }, CNAME, LOC)).toEqual({
           className: `has-text-weight-${weight}`,

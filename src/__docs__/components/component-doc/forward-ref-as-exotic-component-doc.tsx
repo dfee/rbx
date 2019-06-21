@@ -1,16 +1,16 @@
-// tslint:disable:no-submodule-imports
 import React from "react";
 
 import { ForwardRefAsExoticComponent } from "src/base/exotic";
 
 import { ComponentFeaturesProps } from "../feature/component-features";
 import { SimplePropsTableProps } from "../simple-props-table/simple-props-table";
+
 import { ComponentDoc, ComponentDocProps } from "./component-doc";
 import { asDoc } from "./as-doc";
 import { refDoc } from "./ref-doc";
 
 export type ForwardRefAsExoticComponentDocProps = {
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: ForwardRefAsExoticComponent<any, any>;
   customize: ComponentDocProps["customize"];
   docPath?: ComponentFeaturesProps["docPath"];
@@ -24,12 +24,15 @@ export const ForwardRefAsExoticComponentDoc = ({
   props,
 }: ForwardRefAsExoticComponentDocProps) => {
   const asType = component.defaultProps.as as React.ReactType;
-  const asTypeString =
-    typeof asType === "string"
-      ? asType
-      : asType.displayName !== undefined
-      ? asType.displayName
-      : JSON.stringify(asType);
+  let asTypeString: string;
+
+  if (typeof asType === "string") {
+    asTypeString = asType;
+  } else if (asType.displayName !== undefined) {
+    asTypeString = asType.displayName;
+  } else {
+    asTypeString = JSON.stringify(asType);
+  }
 
   const extendedProps: SimplePropsTableProps["props"] = {
     as: asDoc,

@@ -1,5 +1,4 @@
 import { ModalCardTitle } from "src/components/modal/modal-card-title";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -17,9 +16,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);

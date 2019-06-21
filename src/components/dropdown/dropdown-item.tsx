@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { useDropdown } from "./dropdown-context";
 
 export type DropdownItemModifierProps = {
@@ -29,13 +30,13 @@ export const DropdownItem = forwardRefAs<DropdownItemProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames(
           "dropdown-item",
           { "is-active": active },
           className,
         )}
         onClick={handleClick}
-        ref={ref}
         {...rest}
       />
     );

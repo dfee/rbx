@@ -8,20 +8,20 @@ import pkg from "./package.json";
 const env = process.env.NODE_ENV;
 
 export default {
-  input: "dist/index.js",
   external: [
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.peerDependencies || {}),
   ],
+  input: "dist/index.js",
   output: [
     {
       file: "dist/rbx.umd.js",
       format: "umd",
       globals: {
         classnames: "classNames",
+        "prop-types": "PropTypes",
         react: "React",
         "react-dom": "ReactDOM",
-        "prop-types": "PropTypes",
       },
       name: "rbx",
       sourcemap: true,

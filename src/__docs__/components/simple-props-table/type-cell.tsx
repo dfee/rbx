@@ -12,7 +12,7 @@ export type TypeCellProps = {
 
 export const TypeCell = ({ typeName, typeTip }: TypeCellProps) => (
   <Table.Cell>
-    <Generic as="code" tooltip={typeTip} tooltipMultiline>
+    <Generic tooltipMultiline as="code" tooltip={typeTip}>
       {typeName}
     </Generic>
   </Table.Cell>

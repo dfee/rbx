@@ -2,7 +2,6 @@ import React from "react";
 
 import { Tab } from "src/components/tab/tab";
 import { TabGroup } from "src/components/tab/tab-group";
-
 import {
   GetInnerReactWrapperFunction,
   GetInnerShallowWrapperFunction,
@@ -37,14 +36,14 @@ const getLeafReactWrapper: GetInnerReactWrapperFunction = wrapper =>
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Group: TabGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Group: TabGroup,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
@@ -65,7 +64,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeWrappingLIShallowWrapper = makeShallowWrapperFactory(
       getWrappingLIShallowWrapper,
     );
@@ -73,7 +74,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <Tab active={active} />;
           const wrapper = makeWrappingLIShallowWrapper({ node });

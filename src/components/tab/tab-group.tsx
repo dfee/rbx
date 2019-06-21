@@ -8,10 +8,11 @@ import { Prefer } from "../../types";
 
 export const TAB_GROUP_DEFAULTS = {
   alignments: ["centered", "right"] as const,
-  sizes: ["small", "medium", "large"] as const,
   kinds: ["boxed", "toggle", "toggle-rounded"] as const,
+  sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TabGroupVariablesOverrides {}
 
 export interface TabGroupVariablesDefaults {
@@ -38,6 +39,7 @@ export type TabGroupProps = HelpersProps & TabGroupModifierProps;
 export const TabGroup = forwardRefAs<TabGroupProps>(
   ({ align, children, className, fullwidth, kind, size, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "tabs",
         {
@@ -50,10 +52,10 @@ export const TabGroup = forwardRefAs<TabGroupProps>(
         },
         className,
       )}
-      children={<ul>{children}</ul>}
-      ref={ref}
       {...rest}
-    />
+    >
+      <ul>{children}</ul>
+    </Generic>
   ),
   { as: "div" },
 );

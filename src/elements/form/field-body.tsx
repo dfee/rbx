@@ -9,8 +9,8 @@ export type FieldBodyProps = HelpersProps;
 export const FieldBody = forwardRefAs<FieldBodyProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("field-body", className)}
       ref={ref}
+      className={classNames("field-body", className)}
       {...rest}
     />
   ),

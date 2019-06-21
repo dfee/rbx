@@ -4,6 +4,7 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Delete } from "../../elements";
+
 import { ModalContextValue, useModal } from "./modal-context";
 
 export type ModalCardHeadProps = HelpersProps;
@@ -11,11 +12,11 @@ export type ModalCardHeadProps = HelpersProps;
 const mapChildren = (
   children: React.ReactNode,
   close: ModalContextValue["close"],
-) =>
+): React.ReactNode =>
   React.Children.map(children, child => {
     if (typeof child === "object" && child !== null && "type" in child) {
       if (child.type === Delete) {
-        const onClick = (child.props as React.HTMLAttributes<Element>).onClick;
+        const { onClick } = child.props as React.HTMLAttributes<Element>;
 
         return React.cloneElement(child, {
           onClick: (event: React.MouseEvent) => {
@@ -25,16 +26,17 @@ const mapChildren = (
             close();
           },
         });
-      } else if (child.type === React.Fragment) {
+      }
+      if (child.type === React.Fragment) {
         return (
-          <React.Fragment
-            children={mapChildren(
+          <>
+            {mapChildren(
               (child.props as React.ComponentPropsWithoutRef<
                 typeof React.Fragment
               >).children,
               close,
             )}
-          />
+          </>
         );
       }
     }
@@ -47,11 +49,12 @@ export const ModalCardHead = forwardRefAs<ModalCardHeadProps>(
     const { close } = useModal();
     return (
       <Generic
-        children={mapChildren(children, close)}
-        className={classNames("modal-card-head", className)}
         ref={ref}
+        className={classNames("modal-card-head", className)}
         {...rest}
-      />
+      >
+        {mapChildren(children, close)}
+      </Generic>
     );
   },
   { as: "header" },

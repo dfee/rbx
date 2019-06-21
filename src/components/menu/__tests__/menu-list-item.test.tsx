@@ -2,7 +2,6 @@ import React from "react";
 
 import { Menu } from "src/components/menu/menu";
 import { MenuListItem } from "src/components/menu/menu-list-item";
-
 import {
   GetInnerReactWrapperFunction,
   GetInnerShallowWrapperFunction,
@@ -53,19 +52,21 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
     makeReactWrapper: makeReactWrapperFactory(getLeafReactWrapper),
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeWrappingLIShallowWrapper = makeShallowWrapperFactory(
       getWrappingLIShallowWrapper,
     );
@@ -76,7 +77,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <MenuListItem active={active} />;
           const wrapper = makeLeafShallowWrapper({ node });
@@ -87,14 +88,14 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("menu", () => {
       const validMenu = <Menu />;
-      const invalidMenu = { title: "string", items: [1, 2, 3] };
+      const invalidMenu = { items: [1, 2, 3], title: "string" };
 
       validatePropType(propTypes, "menu", [
-        { value: validMenu, valid: true, descriptor: "node" },
-        { value: invalidMenu, valid: false, descriptor: "object" },
+        { descriptor: "node", valid: true, value: validMenu },
+        { descriptor: "object", valid: false, value: invalidMenu },
       ]);
 
-      [<Menu key={1} className="foo" />, undefined].map(menu => {
+      [<Menu key={1} className="foo" />, undefined].forEach(menu => {
         const isMenu = menu !== undefined;
         it(`should ${isMenu ? "" : "not "}have menu`, () => {
           const node = <MenuListItem menu={menu} />;

@@ -4,7 +4,6 @@ import React from "react";
 import { initialValue as modalInitialValue } from "src/components/modal/modal-context";
 import { ModalCardHead } from "src/components/modal/modal-card-head";
 import { Delete } from "src/elements";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -28,9 +27,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
@@ -59,7 +58,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         {
           descriptor: "delete button in fragment",
           factory: (onClick: React.MouseEventHandler | undefined) => (
-            <React.Fragment children={<Delete onClick={onClick} />} />
+            <>{<Delete onClick={onClick} />}</>
           ),
           getDelete: (wrapper: Enzyme.ReactWrapper<React.ReactType>) =>
             wrapper.children().children(),
@@ -78,8 +77,8 @@ describe(`${DISPLAY_NAME} component`, () => {
         },
       ];
 
-      permutations.map(({ descriptor, factory, getDelete }) => {
-        [false, true].map(hasOnClick => {
+      permutations.forEach(({ descriptor, factory, getDelete }) => {
+        [false, true].forEach(hasOnClick => {
           it(`should update context ${
             hasOnClick ? "and call onClick " : ""
           }for children: <${descriptor}>`, () => {
@@ -91,9 +90,9 @@ describe(`${DISPLAY_NAME} component`, () => {
               { ...modalInitialValue, close },
             );
             const node = (
-              <ModalCardHead
-                children={factory(hasOnClick ? onClick : undefined)}
-              />
+              <ModalCardHead>
+                {factory(hasOnClick ? onClick : undefined)}
+              </ModalCardHead>
             );
             const wrapper = makeReactWrapper({ node });
 

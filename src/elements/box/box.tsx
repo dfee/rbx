@@ -8,7 +8,7 @@ export type BoxProps = HelpersProps;
 
 export const Box = forwardRefAs<BoxProps>(
   ({ className, ...rest }, ref) => (
-    <Generic className={classNames("box", className)} ref={ref} {...rest} />
+    <Generic ref={ref} className={classNames("box", className)} {...rest} />
   ),
   { as: "div" },
 );

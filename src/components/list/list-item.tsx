@@ -14,8 +14,8 @@ export type ListItemProps = HelpersProps & ListItemModifierProps;
 export const ListItem = forwardRefAs<ListItemProps>(
   ({ active, className, ...rest }, ref) => (
     <Generic
-      className={classNames("list-item", { "is-active": active }, className)}
       ref={ref}
+      className={classNames("list-item", { "is-active": active }, className)}
       {...rest}
     />
   ),

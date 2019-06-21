@@ -43,7 +43,8 @@ test: lint test-unit
 
 lint:
 	@echo "Running linter"
-	@npx tslint --project .
+	@npx eslint . --ext .js,.jsx,.ts,.tsx -c .eslintrc.js
+
 .PHONY: lint
 
 test-unit:

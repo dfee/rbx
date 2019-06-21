@@ -9,8 +9,8 @@ export type FileCTAProps = HelpersProps;
 export const FileCTA = forwardRefAs<FileCTAProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("file-cta", className)}
       ref={ref}
+      className={classNames("file-cta", className)}
       {...rest}
     />
   ),

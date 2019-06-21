@@ -1,6 +1,5 @@
 import { List } from "src/components/list/list";
 import { ListItem } from "src/components/list/list-item";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -14,14 +13,14 @@ const BULMA_CLASS_NAME = "list";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Item: ListItem,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Item: ListItem,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);

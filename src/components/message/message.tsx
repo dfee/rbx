@@ -6,6 +6,7 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
+
 import { MessageBody } from "./message-body";
 import { MessageHeader } from "./message-header";
 
@@ -13,6 +14,7 @@ export const MESSAGE_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface MessageVariablesOverrides {}
 
 export interface MessageVariablesDefaults {
@@ -35,6 +37,7 @@ export const Message = Object.assign(
   forwardRefAs<MessageProps>(
     ({ className, color, size, ...rest }, ref) => (
       <Generic
+        ref={ref}
         className={classNames(
           "message",
           {
@@ -43,7 +46,6 @@ export const Message = Object.assign(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     ),

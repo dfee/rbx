@@ -11,6 +11,7 @@ export const COLUMN_GROUP_DEFAULTS = {
   gapSizes: [0, 1, 2, 3, 4, 5, 6, 7, 8] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ColumnGroupVariablesOverrides {}
 
 export interface ColumnGroupVariablesDefaults {
@@ -101,6 +102,7 @@ export const ColumnGroup = forwardRefAs<ColumnGroupProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames(
           "columns",
           {
@@ -114,7 +116,6 @@ export const ColumnGroup = forwardRefAs<ColumnGroupProps>(
           gapSizeClassNames,
           className,
         )}
-        ref={ref}
         {...rest}
       />
     );

@@ -9,8 +9,8 @@ export type HighlightProps = HelpersProps;
 export const Highlight = forwardRefAs<HighlightProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("highlight", className)}
       ref={ref}
+      className={classNames("highlight", className)}
       {...rest}
     />
   ),

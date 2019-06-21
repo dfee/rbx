@@ -11,6 +11,7 @@ export const BUTTON_GROUP_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ButtonGroupVariablesOverrides {}
 
 export interface ButtonGroupVariablesDefaults {
@@ -34,6 +35,7 @@ export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 export const ButtonGroup = forwardRefAs<ButtonGroupProps>(
   ({ align, className, hasAddons, size, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "buttons",
         {
@@ -43,7 +45,6 @@ export const ButtonGroup = forwardRefAs<ButtonGroupProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

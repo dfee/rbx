@@ -2,8 +2,8 @@ import {
   makePropTypes,
   makeValidatingTransform,
 } from "src/base/helpers/visibility";
-
 import { validateBoolPropType } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -30,7 +30,7 @@ describe("Visibility helpers", () => {
     testItShouldNotSetClassNameOnEmpty(vtfunc);
     testItShouldPreserveCustomClassName(vtfunc);
 
-    [false, true].map(hidden => {
+    [false, true].forEach(hidden => {
       it(`should ${hidden ? "" : "not "}be hidden`, () => {
         expect(vtfunc({ hidden }, CNAME, LOC)).toEqual({
           className: hidden ? "is-hidden" : "",
@@ -38,7 +38,7 @@ describe("Visibility helpers", () => {
       });
     });
 
-    [false, true].map(invisible => {
+    [false, true].forEach(invisible => {
       it(`should ${invisible ? "" : "not "}be invisible`, () => {
         expect(vtfunc({ invisible }, CNAME, LOC)).toEqual({
           className: invisible ? "is-invisible" : "",
@@ -46,7 +46,7 @@ describe("Visibility helpers", () => {
       });
     });
 
-    [false, true].map(srOnly => {
+    [false, true].forEach(srOnly => {
       it(`should ${srOnly ? "" : "not "}be srOnly`, () => {
         expect(vtfunc({ srOnly }, CNAME, LOC)).toEqual({
           className: srOnly ? "is-sr-only" : "",

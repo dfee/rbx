@@ -8,7 +8,7 @@ export type LoaderProps = HelpersProps;
 
 export const Loader = forwardRefAs<LoaderProps>(
   ({ className, ...rest }, ref) => (
-    <Generic className={classNames("loader", className)} ref={ref} {...rest} />
+    <Generic ref={ref} className={classNames("loader", className)} {...rest} />
   ),
   {
     as: "div",

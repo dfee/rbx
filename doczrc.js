@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+/* eslint-enable @typescript-eslint/no-require-imports */
+/* eslint-enable @typescript-eslint/no-var-requires */
 
 // https://www.docz.site/documentation/project-configuration
 export default {
@@ -16,7 +20,9 @@ export default {
   },
   indexHtml: "src/__docs__/index.html",
   modifyBundlerConfig: config => {
-    config.resolve.alias["src"] = path.join(__dirname, "./src");
+    // eslint-disable-next-line no-param-reassign
+    config.resolve.alias.src = path.join(__dirname, "./src");
+    // eslint-disable-next-line no-param-reassign
     config.resolve.plugins = [
       new TsconfigPathsPlugin({ configFile: "./tsconfig.json" }),
     ];
@@ -34,6 +40,7 @@ export default {
   public: "src/__docs__/public",
   themeConfig: {
     colors: {
+      /* eslint-disable sort-keys */
       white: "#FFFFFF",
       grayExtraLight: "#dbdbdb",
       grayLight: "#b5b5b5",
@@ -50,6 +57,7 @@ export default {
       sidebarBg: "#f5f5f5",
       text: "#4a4a4a",
       link: "#3273dc",
+      /* eslint-enable sort-keys */
     },
     logo: {
       src: "/rbx/public/logo-wide.svg",

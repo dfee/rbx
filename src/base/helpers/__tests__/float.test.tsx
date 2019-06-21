@@ -1,10 +1,10 @@
 import { makePropTypes, makeValidatingTransform } from "src/base/helpers/float";
 import { DEFAULTS } from "src/base/helpers/variables";
-
 import {
   validateBoolPropType,
   validateOneOfPropType,
 } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -43,7 +43,7 @@ describe("Float helpers", () => {
     testItShouldNotSetClassNameOnEmpty(vtfunc);
     testItShouldPreserveCustomClassName(vtfunc);
 
-    [false, true].map(clearfix => {
+    [false, true].forEach(clearfix => {
       it(`should ${clearfix ? "" : "not "}be clearfix`, () => {
         expect(vtfunc({ clearfix }, CNAME, LOC)).toEqual({
           className: clearfix ? "is-clearfix" : "",
@@ -51,7 +51,7 @@ describe("Float helpers", () => {
       });
     });
 
-    DEFAULTS.floatPulledAlignments.map(align => {
+    DEFAULTS.floatPulledAlignments.forEach(align => {
       it(`should pull ${align}`, () => {
         expect(vtfunc({ pull: align }, CNAME, LOC)).toEqual({
           className: `is-pulled-${align}`,

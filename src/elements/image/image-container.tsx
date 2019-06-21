@@ -28,6 +28,7 @@ export const IMAGE_CONTAINER_DEFAULTS = {
   ] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ImageContainerVariablesOverrides {}
 
 export interface ImageContainerVariablesDefaults {
@@ -50,7 +51,7 @@ export type ImageContainerProps = HelpersProps & ImageContainerModifierProps;
 const mapImageContainerChildren = (
   children: React.ReactNode,
   size?: ImageContainerVariables["sizes"],
-) => {
+): React.ReactNode => {
   // Check if size is a "ratio", but also support user overrides;
   //   i.e.can't use IMAGE_CONTAINER_DEFAULTS["ratios"]
   // ...assume that if it's a string, it's a ratio.
@@ -67,15 +68,14 @@ const mapImageContainerChildren = (
             (child.props as React.HTMLAttributes<Element>).className,
           ),
         });
-      } else {
-        const fragmentMapped = mapImageContainerChildren(
-          (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
-            .children,
-          size,
-        );
-
-        return <React.Fragment children={fragmentMapped} />;
       }
+      const fragmentMapped = mapImageContainerChildren(
+        (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
+          .children,
+        size,
+      );
+
+      return <>{fragmentMapped}</>;
     }
 
     return child;
@@ -93,11 +93,12 @@ export const ImageContainer = forwardRefAs<ImageContainerProps>(
 
     return (
       <Generic
-        children={mapImageContainerChildren(children, size)}
-        className={classNames("image", { [`is-${s}`]: s }, className)}
         ref={ref}
+        className={classNames("image", { [`is-${s}`]: s }, className)}
         {...rest}
-      />
+      >
+        {mapImageContainerChildren(children, size)}
+      </Generic>
     );
   },
   { as: "figure" },

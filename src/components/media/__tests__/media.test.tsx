@@ -1,6 +1,5 @@
 import { Media } from "src/components/media/media";
 import { MediaItem } from "src/components/media/media-item";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -14,14 +13,14 @@ const BULMA_CLASS_NAME = "media";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Item: MediaItem,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Item: MediaItem,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);

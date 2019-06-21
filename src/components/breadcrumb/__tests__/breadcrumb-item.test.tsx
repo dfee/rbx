@@ -2,7 +2,6 @@ import Enzyme from "enzyme";
 import React from "react";
 
 import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -48,8 +47,8 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
     makeReactWrapper: makeReactWrapperFactory(getLeafReactWrapper),
+    makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
   describe("root", () => {
@@ -61,12 +60,13 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const makeShallowWrapper = makeShallowWrapperFactory(
             getWrappingLIShallowWrapper,

@@ -1,6 +1,6 @@
 import React from "react";
-import { TableCell } from "src/elements/table/table-cell";
 
+import { TableCell } from "src/elements/table/table-cell";
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -14,6 +14,8 @@ const DISPLAY_NAME = "Table.Cell";
 const DEFAULT_ELEMENT = "td";
 const BULMA_CLASS_NAME = undefined;
 
+// todo
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const makeNode = (props: any) => (
   <table>
     <tbody>
@@ -38,9 +40,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeWrappingNode,
   });
 

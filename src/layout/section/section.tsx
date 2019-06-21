@@ -10,6 +10,7 @@ export const SECTION_DEFAULTS = {
   sizes: ["medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SectionVariablesOverrides {}
 
 export interface SectionVariablesDefaults {
@@ -30,8 +31,8 @@ export type SectionProps = HelpersProps & SectionModifierProps;
 export const Section = forwardRefAs<SectionProps>(
   ({ className, size, ...rest }, ref) => (
     <Generic
-      className={classNames("section", { [`is-${size}`]: size }, className)}
       ref={ref}
+      className={classNames("section", { [`is-${size}`]: size }, className)}
       {...rest}
     />
   ),

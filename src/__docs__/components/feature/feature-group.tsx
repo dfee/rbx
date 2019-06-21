@@ -7,5 +7,5 @@ export type FeatureGroupProps = {
 };
 
 export const FeatureGroup: React.FC<FeatureGroupProps> = ({ children }) => (
-  <Field kind="group" children={children} />
+  <Field kind="group">{children}</Field>
 );

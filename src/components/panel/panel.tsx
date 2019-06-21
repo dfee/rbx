@@ -3,6 +3,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { PanelBlock } from "./panel-block";
 import { PanelHeading } from "./panel-heading";
 import { PanelIcon } from "./panel-icon";
@@ -13,7 +14,7 @@ export type PanelProps = HelpersProps;
 export const Panel = Object.assign(
   forwardRefAs<PanelProps>(
     ({ className, ...rest }, ref) => (
-      <Generic className={classNames("panel", className)} ref={ref} {...rest} />
+      <Generic ref={ref} className={classNames("panel", className)} {...rest} />
     ),
     { as: "nav" },
   ),

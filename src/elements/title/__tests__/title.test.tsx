@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Title, TITLE_DEFAULTS } from "src/elements/title/title";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -22,22 +21,24 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("spaced", () => {
       validateBoolPropType(propTypes, "spaced");
 
-      [false, true].map(spaced =>
-        [false, true].map(subtitle => {
+      [false, true].forEach(spaced =>
+        [false, true].forEach(subtitle => {
           const isSpaced = spaced && !subtitle;
           it(`should ${
             isSpaced ? "" : "not "
@@ -53,7 +54,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("subtitle", () => {
       validateBoolPropType(propTypes, "subtitle");
 
-      [false, true].map(subtitle => {
+      [false, true].forEach(subtitle => {
         it(`should ${subtitle ? "" : "not "}be subtitle`, () => {
           const node = <Title subtitle={subtitle} />;
           const wrapper = makeShallowWrapper({ node });
@@ -66,7 +67,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      TITLE_DEFAULTS.sizes.map(size => {
+      TITLE_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Title size={size} />;
           const wrapper = makeShallowWrapper({ node });

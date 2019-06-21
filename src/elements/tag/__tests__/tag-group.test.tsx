@@ -1,7 +1,6 @@
 import React from "react";
 
 import { TAG_GROUP_DEFAULTS, TagGroup } from "src/elements/tag/tag-group";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -22,21 +21,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("gapless", () => {
       validateBoolPropType(propTypes, "gapless");
 
-      [false, true].map(gapless => {
+      [false, true].forEach(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
           const node = <TagGroup gapless={gapless} />;
           const wrapper = makeShallowWrapper({ node });
@@ -48,7 +49,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      TAG_GROUP_DEFAULTS.sizes.map(size => {
+      TAG_GROUP_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <TagGroup size={size} />;
           const wrapper = makeShallowWrapper({ node });

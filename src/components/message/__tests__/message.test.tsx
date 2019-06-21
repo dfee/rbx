@@ -4,7 +4,6 @@ import { DEFAULTS } from "src/base/helpers/variables";
 import { Message, MESSAGE_DEFAULTS } from "src/components/message/message";
 import { MessageBody } from "src/components/message/message-body";
 import { MessageHeader } from "src/components/message/message-header";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -21,26 +20,28 @@ const BULMA_CLASS_NAME = "message";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Body: MessageBody,
-    Header: MessageHeader,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Header: MessageHeader,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Message color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -52,7 +53,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      MESSAGE_DEFAULTS.sizes.map(size => {
+      MESSAGE_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Message size={size} />;
           const wrapper = makeShallowWrapper({ node });

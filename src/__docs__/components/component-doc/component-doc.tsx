@@ -1,4 +1,3 @@
-// tslint:disable:no-submodule-imports
 import React from "react";
 
 import { Title } from "src/elements";
@@ -30,12 +29,12 @@ export const ComponentDoc = ({
   const componentFeaturesProps = { asType, customize, docPath };
 
   return (
-    <React.Fragment>
+    <>
       <Title as="h4" size={4}>
         {name}
       </Title>
       <ComponentFeatures {...componentFeaturesProps} />
       <SimplePropsTable props={props} />
-    </React.Fragment>
+    </>
   );
 };

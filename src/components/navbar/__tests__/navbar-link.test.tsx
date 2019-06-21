@@ -2,7 +2,6 @@ import React from "react";
 
 import { NavbarLink } from "src/components/navbar/navbar-link";
 import { initialValue as navbarInitialValue } from "src/components/navbar/navbar-context";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -28,9 +27,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperInNavbarItemContextFactory(),
   });
 
@@ -40,13 +39,15 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperInNavbarItemContextFactory();
 
     describe("arrowless", () => {
       validateBoolPropType(propTypes, "arrowless");
 
-      [false, true].map(arrowless => {
+      [false, true].forEach(arrowless => {
         it(`should ${arrowless ? "" : "not "}be arrowless`, () => {
           const node = <NavbarLink arrowless={arrowless} />;
           const wrapper = makeShallowWrapper({ node });
@@ -57,11 +58,11 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
-        { value: () => undefined, valid: true, descriptor: "func" },
-        { value: "string", valid: false },
+        { descriptor: "func", valid: true, value: () => undefined },
+        { valid: false, value: "string" },
       ]);
 
-      [false, true].map(hasOnClick => {
+      [false, true].forEach(hasOnClick => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {

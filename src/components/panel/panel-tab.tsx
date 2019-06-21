@@ -4,6 +4,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { PanelTabGroup } from "./panel-tab-group";
 
 export type PanelTabModifierProps = {
@@ -16,8 +17,8 @@ export const PanelTab = Object.assign(
   forwardRefAs<PanelTabProps>(
     ({ active, className, ...rest }, ref) => (
       <Generic
-        className={classNames({ "is-active": active }, className)}
         ref={ref}
+        className={classNames({ "is-active": active }, className)}
         {...rest}
       />
     ),

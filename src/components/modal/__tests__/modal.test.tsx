@@ -11,7 +11,6 @@ import {
   ModalContextValue,
 } from "src/components/modal/modal-context";
 import { ModalPortal } from "src/components/modal/modal-portal";
-
 import {
   hasProperties,
   validateBoolPropType,
@@ -32,11 +31,11 @@ describe(`${DISPLAY_NAME} component`, () => {
     Close: ModalClose,
     Content: ModalContent,
     Context: ModalContext,
-    Portal: ModalPortal,
     defaultProps: {
       as: DEFAULT_ELEMENT,
       clipped: true,
     },
+    Portal: ModalPortal,
   });
 
   describe("ForwardRefAsExoticComponent [integration]", () => {
@@ -49,14 +48,16 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const CONTAINER_CLASS_NAME = "modal-container";
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active =>
-        ["DEFAULT", "span"].map(asType => {
+      [false, true].forEach(active =>
+        ["DEFAULT", "span"].forEach(asType => {
           it(`should ${active ? "" : "not "}render as the ${
             asType === "DEFAULT" ? "default" : "custom"
           } element when ${active ? "" : "not "}active`, () => {
@@ -92,7 +93,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("clipped", () => {
       validateBoolPropType(propTypes, "clipped");
 
-      [false, true].map(clipped => {
+      [false, true].forEach(clipped => {
         it(`should passthrough clipped as ${clipped}`, () => {
           const node = <Modal active clipped={clipped} />;
           withEnzymeMount({ node }, ({ context: { wrapper } }) => {
@@ -106,7 +107,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("closeOnBlur", () => {
       validateBoolPropType(propTypes, "closeOnBlur");
 
-      [false, true].map(closeOnBlur => {
+      [false, true].forEach(closeOnBlur => {
         it(`should passthrough closeOnBlur as ${closeOnBlur}`, () => {
           const node = <Modal active closeOnBlur={closeOnBlur} />;
           withEnzymeMount({ node }, ({ context: { wrapper } }) => {
@@ -120,7 +121,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("closeOnEsc", () => {
       validateBoolPropType(propTypes, "closeOnEsc");
 
-      [false, true].map(closeOnEsc => {
+      [false, true].forEach(closeOnEsc => {
         it(`should passthrough closeOnEsc as ${closeOnEsc}`, () => {
           const node = <Modal active closeOnEsc={closeOnEsc} />;
           withEnzymeMount({ node }, ({ context: { wrapper } }) => {
@@ -137,16 +138,16 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("document", () => {
       validatePropType(propTypes, "document", [
-        { value: document, valid: true, descriptor: "obj" },
-        { value: "string", valid: false },
+        { descriptor: "obj", valid: true, value: document },
+        { valid: false, value: "string" },
       ]);
 
-      ["global", "provided"].map(docOpt => {
+      ["global", "provided"].forEach(docOpt => {
         it(`should use the ${docOpt} document`, () => {
           const ref = React.createRef<HTMLDivElement>();
           const doc =
             docOpt === "global" ? window.document : new JSDOM().window.document;
-          const node = <Modal active document={doc} ref={ref} />;
+          const node = <Modal ref={ref} active document={doc} />;
           withEnzymeMount({ node }, () => {
             if (docOpt === "provided") {
               // make sure we're doing this right.
@@ -163,11 +164,11 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("onClose", () => {
       validatePropType(propTypes, "onClose", [
-        { value: () => undefined, valid: true, descriptor: "func" },
-        { value: "string", valid: false },
+        { descriptor: "func", valid: true, value: () => undefined },
+        { valid: false, value: "string" },
       ]);
 
-      [false, true].map(hasOnClose => {
+      [false, true].forEach(hasOnClose => {
         it(`should ${hasOnClose ? "" : "not "}call onClose when closed`, () => {
           let contextValue: ModalContextValue | undefined;
           const onClose = jest.fn();
@@ -202,7 +203,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("ref", () => {
       it("should forward ref", () => {
         const ref = createRef<HTMLDivElement>();
-        const node = <Modal active ref={ref} />;
+        const node = <Modal ref={ref} active />;
         withEnzymeMount({ node }, ({ context: { wrapper } }) => {
           expect(ref.current).toBe(
             wrapper.find(`${DEFAULT_ELEMENT}.${BULMA_CLASS_NAME}`).instance(),

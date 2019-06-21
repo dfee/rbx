@@ -1,7 +1,6 @@
 import { Menu } from "src/components/menu/menu";
 import { MenuLabel } from "src/components/menu/menu-label";
 import { MenuList } from "src/components/menu/menu-list";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -15,15 +14,15 @@ const BULMA_CLASS_NAME = "menu";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
+    defaultProps: { as: DEFAULT_ELEMENT },
     Label: MenuLabel,
     List: MenuList,
-    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);

@@ -15,12 +15,12 @@ export const PaginationLink = forwardRefAs<PaginationLinkProps>(
   ({ className, current, ...rest }, ref) => (
     <li>
       <Generic
+        ref={ref}
         className={classNames(
           "pagination-link",
           { "is-current": current },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     </li>

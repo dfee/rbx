@@ -3,6 +3,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { MediaItem } from "./media-item";
 
 export type MediaProps = HelpersProps;
@@ -10,7 +11,7 @@ export type MediaProps = HelpersProps;
 export const Media = Object.assign(
   forwardRefAs<MediaProps>(
     ({ className, ...rest }, ref) => (
-      <Generic className={classNames("media", className)} ref={ref} {...rest} />
+      <Generic ref={ref} className={classNames("media", className)} {...rest} />
     ),
     { as: "article" },
   ),

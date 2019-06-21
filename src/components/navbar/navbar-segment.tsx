@@ -10,6 +10,7 @@ export const NAVBAR_SEGMENT_DEFAULTS = {
   alignments: ["start", "end"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NavbarSegmentVariablesOverrides {}
 
 export interface NavbarSegmentVariablesDefaults {
@@ -30,13 +31,13 @@ export type NavbarSegmentProps = HelpersProps & NavbarSegmentModifierProps;
 export const NavbarSegment = forwardRefAs<NavbarSegmentProps>(
   ({ align, className, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         {
           [`navbar-${align}`]: align,
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

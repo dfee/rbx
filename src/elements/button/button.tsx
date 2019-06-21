@@ -6,6 +6,7 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
+
 import { ButtonGroup } from "./button-group";
 
 export const BUTTON_DEFAULTS = {
@@ -13,6 +14,7 @@ export const BUTTON_DEFAULTS = {
   states: ["hovered", "focused", "active", "loading"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ButtonVariablesOverrides {}
 
 export interface ButtonVariablesDefaults {
@@ -34,7 +36,7 @@ export type ButtonModifierProps = {
   selected?: boolean;
   size?: ButtonVariables["sizes"];
   state?: ButtonVariables["states"];
-  static?: boolean; // tslint:disable-line:no-reserved-keywords
+  static?: boolean;
   text?: boolean;
 };
 
@@ -73,6 +75,7 @@ export const Button = Object.assign(
       ref,
     ) => (
       <Generic
+        ref={ref}
         className={classNames(
           "button",
           {
@@ -89,7 +92,6 @@ export const Button = Object.assign(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     ),

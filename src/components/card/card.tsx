@@ -3,6 +3,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { CardContent } from "./card-content";
 import { CardFooter } from "./card-footer";
 import { CardHeader } from "./card-header";
@@ -13,7 +14,7 @@ export type CardProps = HelpersProps;
 export const Card = Object.assign(
   forwardRefAs<CardProps>(
     ({ className, ...rest }, ref) => (
-      <Generic className={classNames("card", className)} ref={ref} {...rest} />
+      <Generic ref={ref} className={classNames("card", className)} {...rest} />
     ),
     { as: "div" },
   ),

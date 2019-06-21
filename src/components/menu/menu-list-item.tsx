@@ -16,8 +16,8 @@ export const MenuListItem = forwardRefAs<MenuListItemProps>(
   ({ active, className, menu, ...rest }, ref) => (
     <li>
       <Generic
-        className={classNames({ "is-active": active }, className)}
         ref={ref}
+        className={classNames({ "is-active": active }, className)}
         {...rest}
       />
       {menu}

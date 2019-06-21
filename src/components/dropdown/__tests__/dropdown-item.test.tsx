@@ -1,7 +1,6 @@
 import React from "react";
 
 import { DropdownItem } from "src/components/dropdown/dropdown-item";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -27,26 +26,27 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
     bulmaClassName: BULMA_CLASS_NAME,
-    displayName: DISPLAY_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeShallowWrapperFactory(),
     makeReactWrapper: makeReactWrapperFactory(),
+    makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
-        { value: () => undefined, valid: true, descriptor: "func" },
-        { value: "string", valid: false },
+        { descriptor: "func", valid: true, value: () => undefined },
+        { valid: false, value: "string" },
       ]);
 
-      [false, true].map(hasOnClick => {
+      [false, true].forEach(hasOnClick => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {

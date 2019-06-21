@@ -1,12 +1,11 @@
 import { ValidatingTransformFunction } from "src/base/helpers/factory";
-
 import { withMockError } from "src/__tests__/testing";
 
 const CNAME = "foo";
 const LOC = "prop";
 
 export const testItShouldPreserveUnknown = (
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tfunc: ValidatingTransformFunction<any, any>,
 ) => {
   it("should preserve unknown props", () => {
@@ -16,7 +15,7 @@ export const testItShouldPreserveUnknown = (
 };
 
 export const testItShouldNotSetClassNameOnEmpty = (
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tfunc: ValidatingTransformFunction<any, any>,
 ) => {
   it("should not set className on empty", () => {
@@ -25,7 +24,7 @@ export const testItShouldNotSetClassNameOnEmpty = (
 };
 
 export const testItShouldPreserveCustomClassName = (
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tfunc: ValidatingTransformFunction<any, any>,
 ) => {
   it("should preserve custom className", () => {
@@ -35,9 +34,9 @@ export const testItShouldPreserveCustomClassName = (
 };
 
 export const testItShouldUseDefaultLocationProp = (
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tfunc: ValidatingTransformFunction<any, any>,
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: any,
 ) => {
   it("should use propTypes location = 'prop' as default", () => {

@@ -5,6 +5,7 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
+
 import { FieldBody } from "./field-body";
 import { FieldLabel } from "./field-label";
 
@@ -13,6 +14,7 @@ export const FIELD_DEFAULTS = {
   kinds: ["addons", "group"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FieldVariablesOverrides {}
 
 export interface FieldVariablesDefaults {

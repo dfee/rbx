@@ -12,6 +12,7 @@ export const ICON_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IconVariablesOverrides {}
 
 export interface IconVariablesDefaults {
@@ -35,6 +36,7 @@ export type IconProps = HelpersProps & IconModifierProps;
 export const Icon = forwardRefAs<IconProps>(
   ({ align, className, color, size, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "icon",
         {
@@ -44,7 +46,6 @@ export const Icon = forwardRefAs<IconProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

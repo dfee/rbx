@@ -1,6 +1,6 @@
 import React from "react";
-import { TableFoot } from "src/elements/table/table-foot";
 
+import { TableFoot } from "src/elements/table/table-foot";
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -14,6 +14,8 @@ const DISPLAY_NAME = "Table.Foot";
 const DEFAULT_ELEMENT = "tfoot";
 const BULMA_CLASS_NAME = undefined;
 
+// todo
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const makeNode = (props: any) => (
   <table>
     <TableFoot {...props} />
@@ -28,9 +30,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeWrappingNode,
   });
 

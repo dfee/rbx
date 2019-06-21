@@ -17,7 +17,7 @@ export const DefaultValueCell = ({ defaultValue }: DefaultValueCellProps) => {
     );
   }
   const stringDefaultValue =
-    defaultValue === "''" ? "[Empty String]" : defaultValue.replace(/\'/g, "");
+    defaultValue === "''" ? "[Empty String]" : defaultValue.replace(/'/g, "");
 
   return (
     <Table.Cell>

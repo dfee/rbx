@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Tile, TILE_DEFAULTS } from "src/grid/tiles/tile";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -22,21 +21,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("kind", () => {
       validateStringOrNumberPropType(propTypes, "kind");
 
-      TILE_DEFAULTS.kinds.map(kind => {
+      TILE_DEFAULTS.kinds.forEach(kind => {
         it(`should be ${kind}`, () => {
           const node = <Tile kind={kind} />;
           const wrapper = makeShallowWrapper({ node });
@@ -48,7 +49,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      TILE_DEFAULTS.sizes.map(size => {
+      TILE_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Tile size={size} />;
           const wrapper = makeShallowWrapper({ node });
@@ -60,7 +61,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("vertical", () => {
       validateBoolPropType(propTypes, "vertical");
 
-      [false, true].map(vertical => {
+      [false, true].forEach(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = <Tile vertical={vertical} />;
           const wrapper = makeShallowWrapper({ node });

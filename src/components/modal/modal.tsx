@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import { forwardRefAs } from "../../base";
+
 import { ModalBackground } from "./modal-background";
 import { ModalCard } from "./modal-card";
 import { ModalClose } from "./modal-close";
@@ -23,9 +24,9 @@ export type ModalProps = {
 
 const propTypes = {
   active: PropTypes.bool,
+  clipped: PropTypes.bool,
   closeOnBlur: PropTypes.bool,
   closeOnEsc: PropTypes.bool,
-  clipped: PropTypes.bool,
   containerClassName: PropTypes.string,
   document: PropTypes.object,
   onClose: PropTypes.func,
@@ -51,7 +52,7 @@ export const Modal = Object.assign(
         return () => {
           _doc.body.removeChild(_el);
         };
-      }, [_document]);
+      }, [_document, containerClassName]);
 
       if (doc === undefined || el === undefined || active !== true) {
         return null;

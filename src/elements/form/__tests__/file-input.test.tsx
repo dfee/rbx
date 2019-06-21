@@ -1,7 +1,6 @@
 import React from "react";
 
 import { FileInput } from "src/elements/form/file-input";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -20,9 +19,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);

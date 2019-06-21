@@ -2,7 +2,6 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { File, FILE_DEFAULTS } from "src/elements/form/file";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -23,21 +22,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      FILE_DEFAULTS.alignments.map(align => {
+      FILE_DEFAULTS.alignments.forEach(align => {
         it(`should be ${align}`, () => {
           const node = <File align={align} />;
           const wrapper = makeShallowWrapper({ node });
@@ -49,7 +50,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("boxed", () => {
       validateBoolPropType(propTypes, "boxed");
 
-      [false, true].map(boxed => {
+      [false, true].forEach(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
           const node = <File boxed={boxed} />;
           const wrapper = makeShallowWrapper({ node });
@@ -61,7 +62,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <File color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -73,7 +74,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 
-      [false, true].map(fullwidth => {
+      [false, true].forEach(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <File fullwidth={fullwidth} />;
           const wrapper = makeShallowWrapper({ node });
@@ -85,7 +86,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("hasName", () => {
       validateBoolPropType(propTypes, "hasName");
 
-      [false, true].map(hasName => {
+      [false, true].forEach(hasName => {
         it(`should ${hasName ? "" : "not "}have name`, () => {
           const node = <File hasName={hasName} />;
           const wrapper = makeShallowWrapper({ node });
@@ -97,7 +98,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      FILE_DEFAULTS.sizes.map(size => {
+      FILE_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <File size={size} />;
           const wrapper = makeShallowWrapper({ node });

@@ -1,4 +1,3 @@
-// tslint:disable:no-submodule-imports
 import React from "react";
 
 import { Table } from "src/elements";
@@ -27,7 +26,7 @@ export const SimplePropsTable = ({ props }: SimplePropsTableProps) => {
   );
 
   return (
-    <Table bordered narrow hoverable fullwidth>
+    <Table bordered fullwidth hoverable narrow>
       <Table.Head>
         <Table.Row>
           <Table.Heading>Property</Table.Heading>

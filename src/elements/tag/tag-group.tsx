@@ -10,6 +10,7 @@ export const TAG_GROUP_DEFAULTS = {
   sizes: ["medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TagGroupVariablesOverrides {}
 
 export interface TagGroupVariablesDefaults {
@@ -31,6 +32,7 @@ export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 export const TagGroup = forwardRefAs<TagGroupProps>(
   ({ className, gapless, size, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "tags",
         {
@@ -39,7 +41,6 @@ export const TagGroup = forwardRefAs<TagGroupProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

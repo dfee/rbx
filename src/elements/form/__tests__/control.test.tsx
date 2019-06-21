@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Control, CONTROL_DEFAULTS } from "src/elements/form/control";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -22,21 +21,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("expanded", () => {
       validateBoolPropType(propTypes, "expanded");
 
-      [false, true].map(expanded => {
+      [false, true].forEach(expanded => {
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
           const node = <Control expanded={expanded} />;
           const wrapper = makeShallowWrapper({ node });
@@ -48,7 +49,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("iconLeft", () => {
       validateBoolPropType(propTypes, "iconLeft");
 
-      [false, true].map(iconLeft => {
+      [false, true].forEach(iconLeft => {
         it(`should ${iconLeft ? "" : "not "}have left icon`, () => {
           const node = <Control iconLeft={iconLeft} />;
           const wrapper = makeShallowWrapper({ node });
@@ -60,7 +61,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("iconRight", () => {
       validateBoolPropType(propTypes, "iconRight");
 
-      [false, true].map(iconRight => {
+      [false, true].forEach(iconRight => {
         it(`should ${iconRight ? "" : "not "}have right icon`, () => {
           const node = <Control iconRight={iconRight} />;
           const wrapper = makeShallowWrapper({ node });
@@ -72,7 +73,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("loading", () => {
       validateBoolPropType(propTypes, "loading");
 
-      [false, true].map(loading => {
+      [false, true].forEach(loading => {
         it(`should ${loading ? "" : "not "}be loading`, () => {
           const node = <Control loading={loading} />;
           const wrapper = makeShallowWrapper({ node });
@@ -84,7 +85,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      CONTROL_DEFAULTS.sizes.map(size => {
+      CONTROL_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Control size={size} />;
           const wrapper = makeShallowWrapper({ node });

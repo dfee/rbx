@@ -9,8 +9,8 @@ export type PanelIconProps = HelpersProps;
 export const PanelIcon = forwardRefAs<PanelIconProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("panel-icon", className)}
       ref={ref}
+      className={classNames("panel-icon", className)}
       {...rest}
     />
   ),

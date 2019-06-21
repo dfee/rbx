@@ -5,6 +5,7 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
+
 import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
 
@@ -12,6 +13,7 @@ export const LABEL_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LabelVariablesOverrides {}
 
 export interface LabelVariablesDefaults {
@@ -66,6 +68,7 @@ export const Label = forwardRefAs<LabelProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames(
           {
             [`${discriminator}`]: discriminator,
@@ -74,7 +77,6 @@ export const Label = forwardRefAs<LabelProps>(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     );

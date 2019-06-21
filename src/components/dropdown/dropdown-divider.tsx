@@ -9,8 +9,8 @@ export type DropdownDividerProps = HelpersProps;
 export const DropdownDivider = forwardRefAs<DropdownDividerProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("dropdown-divider", className)}
       ref={ref}
+      className={classNames("dropdown-divider", className)}
       {...rest}
     />
   ),

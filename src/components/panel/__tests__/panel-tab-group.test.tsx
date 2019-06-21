@@ -1,5 +1,4 @@
 import { PanelTabGroup } from "src/components/panel/panel-tab-group";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -17,9 +16,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);

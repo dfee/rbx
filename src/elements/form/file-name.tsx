@@ -9,8 +9,8 @@ export type FileNameProps = HelpersProps;
 export const FileName = forwardRefAs<FileNameProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("file-name", className)}
       ref={ref}
+      className={classNames("file-name", className)}
       {...rest}
     />
   ),

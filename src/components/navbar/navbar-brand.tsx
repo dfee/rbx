@@ -9,8 +9,8 @@ export type NavbarBrandProps = HelpersProps;
 export const NavbarBrand = forwardRefAs<NavbarBrandProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("navbar-brand", className)}
       ref={ref}
+      className={classNames("navbar-brand", className)}
       {...rest}
     />
   ),

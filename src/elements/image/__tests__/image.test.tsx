@@ -2,7 +2,6 @@ import React from "react";
 
 import { Image } from "src/elements/image/image";
 import { ImageContainer } from "src/elements/image/image-container";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -23,21 +22,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("rounded", () => {
       validateBoolPropType(propTypes, "rounded");
 
-      [false, true].map(rounded => {
+      [false, true].forEach(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <Image rounded={rounded} />;
           const wrapper = makeShallowWrapper({ node });

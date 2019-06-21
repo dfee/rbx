@@ -23,6 +23,8 @@ export const Feature = Object.assign(
     url,
   }: FeatureProps) => {
     const tagGroupProps =
+      // todo
+      // eslint-disable-next-line no-nested-ternary
       url === undefined
         ? {}
         : /^\/[a-z]/.test(url) // Local path, e.g. '/somewhere'

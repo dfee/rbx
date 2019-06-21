@@ -16,6 +16,7 @@ export type ContainerProps = HelpersProps & ContainerModifierProps;
 export const Container = forwardRefAs<ContainerProps>(
   ({ className, fluid, breakpoint, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "container",
         {
@@ -24,7 +25,6 @@ export const Container = forwardRefAs<ContainerProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

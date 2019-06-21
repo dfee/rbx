@@ -4,7 +4,6 @@ import {
   LEVEL_ITEM_DEFAULTS,
   LevelItem,
 } from "src/components/level/level-item";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -24,21 +23,22 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      LEVEL_ITEM_DEFAULTS.alignments.map(align => {
+      LEVEL_ITEM_DEFAULTS.alignments.forEach(align => {
         it(`should be ${align}`, () => {
           const node = <LevelItem align={align} />;
           const wrapper = makeShallowWrapper({ node });

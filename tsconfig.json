@@ -11,7 +11,6 @@
     "noErrorTruncation": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "plugins": [{ "name": "typescript-tslint-plugin" }],
     "removeComments": true,
     "sourceMap": true,
     "strict": true,

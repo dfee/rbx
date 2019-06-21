@@ -18,6 +18,7 @@ export const FILE_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FileVariablesOverrides {}
 
 export interface FileVariablesDefaults {
@@ -48,6 +49,7 @@ export const File = Object.assign(
       ref,
     ) => (
       <Generic
+        ref={ref}
         className={classNames(
           "file",
           {
@@ -60,7 +62,6 @@ export const File = Object.assign(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     ),

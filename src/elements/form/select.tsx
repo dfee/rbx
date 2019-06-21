@@ -6,6 +6,7 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
+
 import { SelectOption } from "./select-option";
 
 export const SELECT_CONTAINER_DEFAULTS = {
@@ -13,6 +14,7 @@ export const SELECT_CONTAINER_DEFAULTS = {
   states: ["focused", "hovered", "loading"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface SelectContainerVariablesOverrides {}
 
 export interface SelectContainerVariablesDefaults {
@@ -38,11 +40,10 @@ export type SelectContainerProps = HelpersProps & SelectContainerModifierProps;
 const mapSelectContainerChildren = (
   children: React.ReactNode,
   state?: SelectContainerVariables["states"],
-) => {
+): { children: React.ReactNode; classNameExtension: string | undefined } => {
   let classNameExtension: string | undefined;
   const mapped = React.Children.map(children, (child, i) => {
     if (typeof child === "object" && child !== null && "type" in child) {
-      // tslint:disable-next-line:no-use-before-declare
       if (child.type === "select" || child.type === Select) {
         classNameExtension = classNames({
           "is-multiple": (child.props as React.SelectHTMLAttributes<Element>)
@@ -58,7 +59,8 @@ const mapSelectContainerChildren = (
         }
 
         return child;
-      } else if (child.type === React.Fragment) {
+      }
+      if (child.type === React.Fragment) {
         const fragmentMapped = mapSelectContainerChildren(
           (child.props as React.ComponentPropsWithoutRef<typeof React.Fragment>)
             .children,
@@ -69,7 +71,7 @@ const mapSelectContainerChildren = (
           fragmentMapped.classNameExtension,
         );
 
-        return <React.Fragment children={fragmentMapped.children} />;
+        return <>{fragmentMapped.children}</>;
       }
     }
 
@@ -88,6 +90,7 @@ export const SelectContainer = forwardRefAs<SelectContainerProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames(
           "select",
           {
@@ -100,10 +103,10 @@ export const SelectContainer = forwardRefAs<SelectContainerProps>(
           mapped.classNameExtension,
           className,
         )}
-        children={mapped.children}
-        ref={ref}
         {...rest}
-      />
+      >
+        {mapped.children}
+      </Generic>
     );
   },
   { as: "div" },

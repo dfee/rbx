@@ -10,6 +10,7 @@ export const CARD_HEADER_TITLE_DEFAULTS = {
   alignments: ["centered"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CardHeaderTitleVariablesOverrides {}
 
 export interface CardHeaderTitleVariablesDefaults {
@@ -30,12 +31,12 @@ export type CardHeaderTitleProps = HelpersProps & CardHeaderTitleModifierProps;
 export const CardHeaderTitle = forwardRefAs<CardHeaderTitleProps>(
   ({ align, className, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "card-header-title",
         { [`is-${align}`]: align },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

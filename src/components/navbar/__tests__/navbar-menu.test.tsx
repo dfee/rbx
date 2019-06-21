@@ -2,7 +2,6 @@ import React from "react";
 
 import { NavbarMenu } from "src/components/navbar/navbar-menu";
 import { initialValue as navbarInitialValue } from "src/components/navbar/navbar-context";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -26,9 +25,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
   });
 
@@ -39,7 +38,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("context", () => {
     describe("active", () => {
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <NavbarMenu />;
           const makeReactWrapper = makeReactWrapperInNavbarContextFactory(

@@ -9,8 +9,8 @@ export type FileIconProps = HelpersProps;
 export const FileIcon = forwardRefAs<FileIconProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("file-icon", className)}
       ref={ref}
+      className={classNames("file-icon", className)}
       {...rest}
     />
   ),

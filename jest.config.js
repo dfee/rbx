@@ -18,8 +18,8 @@ module.exports = {
   moduleDirectories: ["node_modules", "<rootDir>"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
   moduleNameMapper: {
-    "\\.(css|less|s(c|a)ss)$": "<rootDir>/src/__mocks__/style.ts",
     "@/(.*)": "<rootDir>/$1",
+    "\\.(css|less|s(c|a)ss)$": "<rootDir>/src/__mocks__/style.ts",
   },
   rootDir: ".",
   setupFiles: ["raf/polyfill"],

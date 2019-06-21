@@ -2,8 +2,6 @@ import React from "react";
 
 import { Prefer } from "../types";
 
-// tslint:disable:no-reserved-keywords
-
 /**
  * Maps a keyof JSX.IntrinsicElement (e.g. 'div' or 'svg') or a
  * React.ComponentType to it's type.
@@ -56,8 +54,8 @@ export type ForwardRefAsExoticComponent<
       [k in
         | "as"
         | keyof TOwnProps
-        // tslint:disable-next-line:no-any
-        | keyof React.ComponentPropsWithoutRef<TDefaultComponent>]: any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        | keyof React.ComponentPropsWithoutRef<TDefaultComponent>]: any;
     }
   >;
 };
@@ -79,6 +77,7 @@ export function forwardRefAs<
   >,
 ) {
   const forward = React.forwardRef(factory);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (forward as any).defaultProps = defaultProps;
 
   return forward as ForwardRefAsExoticComponent<TOwnProps, TDefaultComponent>;

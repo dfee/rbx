@@ -9,8 +9,8 @@ export type PanelTabGroupProps = HelpersProps;
 export const PanelTabGroup = forwardRefAs<PanelTabGroupProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("panel-tabs", className)}
       ref={ref}
+      className={classNames("panel-tabs", className)}
       {...rest}
     />
   ),

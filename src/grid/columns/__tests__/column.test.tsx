@@ -3,7 +3,6 @@ import React from "react";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Column, COLUMN_DEFAULTS } from "src/grid/columns/column";
 import { ColumnGroup } from "src/grid/columns/column-group";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -21,26 +20,28 @@ const BULMA_CLASS_NAME = "column";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Group: ColumnGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Group: ColumnGroup,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("narrow", () => {
       validateBoolPropType(propTypes, "narrow");
 
-      [false, true].map(narrow => {
+      [false, true].forEach(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = <Column narrow={narrow} />;
           const wrapper = makeShallowWrapper({ node });
@@ -48,7 +49,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         });
       });
 
-      DEFAULTS.breakpoints.map(breakpoint => {
+      DEFAULTS.breakpoints.forEach(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
             ...[false, true].map(value => ({
@@ -66,7 +67,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             },
           ]);
 
-          [false, true].map(narrow => {
+          [false, true].forEach(narrow => {
             it(`should ${narrow ? "" : "not "}be narrow`, () => {
               const props = { [breakpoint]: { narrow } };
               const node = <Column {...props} />;
@@ -81,7 +82,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("offset", () => {
       validateStringOrNumberPropType(propTypes, "offset");
 
-      COLUMN_DEFAULTS.sizes.map(offset => {
+      COLUMN_DEFAULTS.sizes.forEach(offset => {
         it(`should be ${offset}`, () => {
           const node = <Column offset={offset} />;
           const wrapper = makeShallowWrapper({ node });
@@ -89,7 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         });
       });
 
-      DEFAULTS.breakpoints.map(breakpoint => {
+      DEFAULTS.breakpoints.forEach(breakpoint => {
         validatePropType(propTypes, breakpoint, [
           ...["string", 1].map(value => ({
             descriptor: `offset = ${value}`,
@@ -107,7 +108,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         ]);
 
         describe(breakpoint, () => {
-          COLUMN_DEFAULTS.sizes.map(offset => {
+          COLUMN_DEFAULTS.sizes.forEach(offset => {
             it(`should be offset ${offset}`, () => {
               const props = { [breakpoint]: { offset } };
               const node = <Column {...props} />;
@@ -124,7 +125,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      COLUMN_DEFAULTS.sizes.map(size => {
+      COLUMN_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Column size={size} />;
           const wrapper = makeShallowWrapper({ node });
@@ -132,7 +133,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         });
       });
 
-      DEFAULTS.breakpoints.map(breakpoint => {
+      DEFAULTS.breakpoints.forEach(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
             ...["string", 1].map(value => ({
@@ -150,7 +151,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             },
           ]);
 
-          COLUMN_DEFAULTS.sizes.map(size => {
+          COLUMN_DEFAULTS.sizes.forEach(size => {
             it(`should be ${size}`, () => {
               const props = { [breakpoint]: { size } };
               const node = <Column {...props} />;

@@ -8,7 +8,7 @@ export type NumericProps = HelpersProps;
 
 export const Numeric = forwardRefAs<NumericProps>(
   ({ className, ...rest }, ref) => (
-    <Generic className={classNames("number", className)} ref={ref} {...rest} />
+    <Generic ref={ref} className={classNames("number", className)} {...rest} />
   ),
   { as: "p" },
 );

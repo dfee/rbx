@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { useNavbarItem } from "./navbar-item-context";
 
 export type NavbarLinkModifierProps = {
@@ -29,13 +30,13 @@ export const NavbarLink = forwardRefAs<NavbarLinkProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames(
           "navbar-link",
           { "is-arrowless": arrowless },
           className,
         )}
         onClick={handleClick}
-        ref={ref}
         {...rest}
       />
     );

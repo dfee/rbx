@@ -49,10 +49,9 @@ export const contextManager = <
 };
 
 export const withWindow = contextManager(
-  // tslint:disable:no-any
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   ({ value }: { value?: undefined } = {}) => {
-    const window = (global as any).window;
-    // delete (global as any).window;
+    const { window } = global as any;
 
     if (value !== undefined) {
       (global as any).window = value;
@@ -63,7 +62,7 @@ export const withWindow = contextManager(
   ({ state: { window } }) => {
     (global as any).window = window;
   },
-  // tslint:enable:no-any
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 );
 
 export const withMockError = contextManager(
@@ -96,7 +95,7 @@ export const withEnzymeMount = contextManager(
       makeWrappingNode !== undefined ? (
         makeWrappingNode(node)
       ) : (
-        <div children={node} />
+        <div>{node}</div>
       );
     const outer = Enzyme.mount(wrappingNode, options);
 
@@ -107,10 +106,11 @@ export const withEnzymeMount = contextManager(
 
 export const hasProperties = <T extends object>(
   component: T,
-  obj: { [s: string]: any }, // tslint:disable-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  obj: { [s: string]: any },
 ) => {
   describe("properties", () => {
-    Object.keys(obj).map(key => {
+    Object.keys(obj).forEach(key => {
       it(`should have property ${key}`, () => {
         expect(component[key]).toEqual(obj[key]);
       });
@@ -129,16 +129,18 @@ export const validatePropType = <T extends {}>(
     error?: RegExp;
     extras?: Partial<T>;
     valid: boolean;
-    value: any; // tslint:disable-line:no-any
+    value: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   }[],
 ) =>
-  options.map(({ value, valid, error, descriptor, extras }) => {
-    const descriptorString: string =
-      descriptor !== undefined
-        ? descriptor
-        : value === undefined
-        ? "undefined"
-        : String(value);
+  options.forEach(({ value, valid, error, descriptor, extras }) => {
+    let descriptorString: string;
+    if (descriptor !== undefined) {
+      descriptorString = descriptor;
+    } else if (value === undefined) {
+      descriptorString = "undefined";
+    } else {
+      descriptorString = String(value);
+    }
     it(`should ${
       valid ? "not warn on valid" : "warn on invalid"
     } ${propName} [${descriptorString}]`, () => {
@@ -171,8 +173,8 @@ export const validateBoolPropType = <T extends {}>(
   extras?: Partial<T>,
 ) =>
   validatePropType(propTypes, propName, [
-    ...[false, true].map(value => ({ value, valid: true, extras })),
-    { value: "string", valid: false, extras },
+    ...[false, true].map(value => ({ extras, valid: true, value })),
+    { extras, valid: false, value: "string" },
   ]);
 
 export const validateNumberPropType = <T extends {}>(
@@ -181,8 +183,8 @@ export const validateNumberPropType = <T extends {}>(
   extras?: Partial<T>,
 ) =>
   validatePropType(propTypes, propName, [
-    { value: 1, valid: true, extras },
-    { value: "string", valid: false, extras },
+    { extras, valid: true, value: 1 },
+    { extras, valid: false, value: "string" },
   ]);
 
 export const validateOneOfPropType = <T extends {}>(
@@ -192,8 +194,8 @@ export const validateOneOfPropType = <T extends {}>(
   extras?: Partial<T>,
 ) =>
   validatePropType(propTypes, propName, [
-    ...choices.map(value => ({ value, valid: true, extras })),
-    { value: "__UNKNOWN", valid: false, extras },
+    ...choices.map(value => ({ extras, valid: true, value })),
+    { extras, valid: false, value: "__UNKNOWN" },
   ]);
 
 export const validateRefPropType = <T extends {}>(
@@ -202,9 +204,9 @@ export const validateRefPropType = <T extends {}>(
   extras?: Partial<T>,
 ) =>
   validatePropType(propTypes, propName, [
-    { value: () => undefined, valid: true, descriptor: "func", extras },
-    { value: React.createRef(), valid: true, descriptor: "ref", extras },
-    { value: "string", valid: false, extras }, // deprecated, won't support
+    { descriptor: "func", extras, valid: true, value: () => undefined },
+    { descriptor: "ref", extras, valid: true, value: React.createRef() },
+    { extras, valid: false, value: "string" }, // deprecated, won't support
   ]);
 
 export const validateStringPropType = <T extends {}>(
@@ -213,8 +215,8 @@ export const validateStringPropType = <T extends {}>(
   extras?: Partial<T>,
 ) =>
   validatePropType(propTypes, propName, [
-    { value: "string", valid: true, extras },
-    { value: 1, valid: false, extras },
+    { extras, valid: true, value: "string" },
+    { extras, valid: false, value: 1 },
   ]);
 
 export const validateStringOrNumberPropType = <T extends {}>(
@@ -223,9 +225,9 @@ export const validateStringOrNumberPropType = <T extends {}>(
   extras?: Partial<T>,
 ) =>
   validatePropType(propTypes, propName, [
-    { value: "string", valid: true, extras },
-    { value: 1, valid: true, extras },
-    { value: {}, valid: false, extras, descriptor: "obj" },
+    { extras, valid: true, value: "string" },
+    { extras, valid: true, value: 1 },
+    { descriptor: "obj", extras, valid: false, value: {} },
   ]);
 
 export const makeNodeFactory = <P extends {}>(
@@ -279,18 +281,17 @@ export const makeReactWrapperFactory = (
     ),
   );
 
-// tslint:disable-next-line: max-func-body-length
 export const testForwardRefAsExoticComponentIntegration = (
-  //tslint:disable:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Component: React.ComponentType<any>,
   options: {
     bulmaClassName?: string;
     defaultElement: keyof React.ReactHTML;
     displayName: string;
     makeShallowWrapper?: MakeShallowWrapperFunction;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     makeNode?(props: any): JSX.Element;
     makeWrappingNode?(node: React.ReactNode): JSX.Element;
-    //tslint:enable:no-any
   },
 ) => {
   const {
@@ -328,7 +329,7 @@ export const testForwardRefAsExoticComponentIntegration = (
       const ref = React.createRef<HTMLElement>();
       const node = makeNode({ ref });
       withEnzymeMount(
-        { node, makeWrappingNode },
+        { makeWrappingNode, node },
         ({ context: { wrapper } }) => {
           const selector =
             bulmaClassName !== undefined
@@ -358,6 +359,7 @@ export const testForwardRefAsExoticComponentIntegration = (
       describe("as", () => {
         const FC: React.FC = () => React.createElement("div");
         /** test class */
+        // eslint-disable-next-line react/prefer-stateless-function
         class CC extends React.Component {
           public render() {
             return React.createElement("div");
@@ -372,7 +374,7 @@ export const testForwardRefAsExoticComponentIntegration = (
           { as: CC, descriptor: "class component", valid: true },
           { as: FRC, descriptor: "forwardRef component", valid: true },
           { as: true, descriptor: "invalid type", valid: false },
-        ].map(({ as, descriptor, valid }) => {
+        ].forEach(({ as, descriptor, valid }) => {
           it(`should ${valid ? "" : "not "}allow ${descriptor}`, () => {
             withMockError({}, ({ context: { error } }) => {
               const node = makeNode({ as });
@@ -398,14 +400,14 @@ export const testForwardRefAsExoticComponentIntegration = (
 };
 
 export const testThemeIntegration = (
-  // tslint:disable:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Component: React.ComponentType<any>,
   options?: {
     makeReactWrapper?: MakeReactWrapperFunction;
     makeShallowWrapper?: MakeShallowWrapperFunction;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     makeNode?(props: any): JSX.Element;
   },
-  // tslint:enable:no-any
 ) => {
   const { makeNode, makeReactWrapper, makeShallowWrapper } = {
     makeNode: makeNodeFactory(Component),
@@ -459,7 +461,7 @@ export const testThemeIntegration = (
 
       it("should transform prop", () => {
         const node = makeNode({ foo: "bar" });
-        const wrapper = makeReactWrapper({ node, contextValue: { transform } });
+        const wrapper = makeReactWrapper({ contextValue: { transform }, node });
         expect(wrapper.hasClass("foo-bar")).toBe(true);
       });
 
@@ -467,8 +469,8 @@ export const testThemeIntegration = (
         withMockError({}, ({ context }) => {
           const node = makeNode({ foo: "qux" });
           const wrapper = makeReactWrapper({
-            node,
             contextValue: { transform },
+            node,
           });
           expect(wrapper.hasClass("foo-qux")).toBe(true);
           expect(context.error.mock.calls).toHaveLength(1);
@@ -479,25 +481,4 @@ export const testThemeIntegration = (
       });
     });
   });
-};
-
-// todo: can probably remove on migration to hooks
-export const makeTestPropForwarding = (
-  component: React.ComponentType<any>, // tslint:disable-line:no-any
-) => {
-  const makeNode = makeNodeFactory(component);
-
-  return (
-    propName: string,
-    propValue: any, // tslint:disable-line:no-any
-    mappedPropName?: string,
-  ) => {
-    it(`forwards ${propName}: ${propValue}`, () => {
-      const node = makeNode({ [propName]: propValue });
-      const wrapper = Enzyme.shallow(node);
-      expect(
-        wrapper.prop(mappedPropName !== undefined ? mappedPropName : propName),
-      ).toBe(propValue);
-    });
-  };
 };

@@ -1,11 +1,11 @@
 import { makePropTypes, makeValidatingTransform } from "src/base/helpers/badge";
 import { DEFAULTS } from "src/base/helpers/variables";
-
 import {
   validateBoolPropType,
   validateOneOfPropType,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -52,7 +52,7 @@ describe("Badge helpers", () => {
       });
     });
 
-    DEFAULTS.colors.map(color => {
+    DEFAULTS.colors.forEach(color => {
       it(`should be ${color}`, () => {
         expect(vtfunc({ badgeColor: color }, CNAME, LOC)).toEqual({
           className: `has-badge-${color}`,
@@ -60,7 +60,7 @@ describe("Badge helpers", () => {
       });
     });
 
-    [false, true].map(badgeOutlined => {
+    [false, true].forEach(badgeOutlined => {
       it(`should ${badgeOutlined ? "" : "not "}be badgeOutlined`, () => {
         expect(vtfunc({ badgeOutlined }, CNAME, LOC)).toEqual({
           className: badgeOutlined ? "has-badge-outlined" : "",
@@ -68,7 +68,7 @@ describe("Badge helpers", () => {
       });
     });
 
-    [false, true].map(badgeRounded => {
+    [false, true].forEach(badgeRounded => {
       it(`should ${badgeRounded ? "" : "not "}be badgeRounded`, () => {
         expect(vtfunc({ badgeRounded }, CNAME, LOC)).toEqual({
           className: badgeRounded ? "has-badge-rounded" : "",
@@ -76,7 +76,7 @@ describe("Badge helpers", () => {
       });
     });
 
-    DEFAULTS.badgeSizes.map(badgeSize => {
+    DEFAULTS.badgeSizes.forEach(badgeSize => {
       it(`should be size ${badgeSize}`, () => {
         expect(vtfunc({ badgeSize }, CNAME, LOC)).toEqual({
           className: `has-badge-${badgeSize}`,

@@ -7,7 +7,7 @@ import { withWindow } from "./testing";
 describe("Utils", () => {
   describe("canUseDOM", () => {
     it("should return true with createElement", () => {
-      // tslint:disable-next-line:no-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect((global as any).window).toBeDefined();
       expect(window.document).toBeTruthy();
       expect(window.document.createElement).toBeTruthy();
@@ -17,13 +17,15 @@ describe("Utils", () => {
     it("should return false without window (SSR)", () => {
       const initialWindow = window;
       try {
-        delete (global as any).window; // tslint:disable-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        delete (global as any).window;
         expect(() => window).toThrow(
           new ReferenceError("window is not defined"),
         );
         expect(canUseDOM()).toBe(false);
       } catch {
-        (global as any).window = initialWindow; // tslint:disable-line:no-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (global as any).window = initialWindow;
       }
     });
 
@@ -55,8 +57,7 @@ describe("Utils", () => {
       expect(refObj.current).toBe(div);
     });
 
-    // tslint:disable-next-line:no-null-keyword
-    [undefined, null].map(refMissing => {
+    [undefined, null].forEach(refMissing => {
       it(`should handle ${
         refMissing === undefined ? "undefined" : "null"
       }`, () => {

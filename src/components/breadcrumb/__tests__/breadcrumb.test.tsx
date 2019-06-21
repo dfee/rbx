@@ -5,7 +5,6 @@ import {
   BREADCRUMB_DEFAULTS,
 } from "src/components/breadcrumb/breadcrumb";
 import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -21,8 +20,8 @@ const BULMA_CLASS_NAME = "breadcrumb";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Item: BreadcrumbItem,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Item: BreadcrumbItem,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
@@ -34,13 +33,14 @@ describe(`${DISPLAY_NAME} component`, () => {
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      BREADCRUMB_DEFAULTS.alignments.map(align => {
+      BREADCRUMB_DEFAULTS.alignments.forEach(align => {
         it(`should be ${align}`, () => {
           const node = <Breadcrumb align={align} />;
           const wrapper = makeShallowWrapper({ node });
@@ -52,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("children", () => {
       it("should wrap children in ul element", () => {
         const children = <li>foo</li>;
-        const node = <Breadcrumb children={children} />;
+        const node = <Breadcrumb>{children}</Breadcrumb>;
         const wrapper = makeShallowWrapper({ node });
         expect(wrapper.children().is("ul")).toBe(true);
         expect(
@@ -73,7 +73,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("separator", () => {
       validateStringOrNumberPropType(propTypes, "separator");
 
-      BREADCRUMB_DEFAULTS.separators.map(separator => {
+      BREADCRUMB_DEFAULTS.separators.forEach(separator => {
         it(`should be ${separator}`, () => {
           const node = <Breadcrumb separator={separator} />;
           const wrapper = makeShallowWrapper({ node });
@@ -85,7 +85,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      BREADCRUMB_DEFAULTS.sizes.map(size => {
+      BREADCRUMB_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Breadcrumb size={size} />;
           const wrapper = makeShallowWrapper({ node });

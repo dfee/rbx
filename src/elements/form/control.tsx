@@ -10,6 +10,7 @@ export const CONTROL_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ControlVariablesOverrides {}
 
 export interface ControlVariablesDefaults {
@@ -37,6 +38,7 @@ export const Control = forwardRefAs<ControlProps>(
     ref,
   ) => (
     <Generic
+      ref={ref}
       className={classNames(
         "control",
         {
@@ -48,7 +50,6 @@ export const Control = forwardRefAs<ControlProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

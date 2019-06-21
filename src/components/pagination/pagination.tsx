@@ -5,6 +5,7 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
+
 import { PaginationEllipsis } from "./pagination-ellipsis";
 import { PaginationLink } from "./pagination-link";
 import { PaginationList } from "./pagination-list";
@@ -15,6 +16,7 @@ export const PAGINATION_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface PaginationVariablesOverrides {}
 
 export interface PaginationVariablesDefaults {
@@ -39,6 +41,7 @@ export const Pagination = Object.assign(
   forwardRefAs<PaginationProps>(
     ({ align, className, rounded, size, ...rest }, ref) => (
       <Generic
+        ref={ref}
         className={classNames(
           "pagination",
           {
@@ -48,7 +51,6 @@ export const Pagination = Object.assign(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     ),

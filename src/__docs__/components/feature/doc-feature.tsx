@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Feature } from "./feature";
 import { Variables } from "../../../base/helpers/variables";
+
+import { Feature } from "./feature";
 
 export type DocFeatureProps = {
   docPath?: string;
@@ -12,7 +13,7 @@ export const DocFeature: React.FC<DocFeatureProps> = ({ docPath }) => {
   const isRemoteUrl = docPath !== undefined && !isBulmaPath;
 
   let url: string | undefined;
-  let secondaryName: string = "n/a";
+  let secondaryName = "n/a";
   let secondaryColor: Variables["colors"] = "dark";
 
   if (isBulmaPath) {
@@ -27,10 +28,10 @@ export const DocFeature: React.FC<DocFeatureProps> = ({ docPath }) => {
 
   return (
     <Feature
-      primaryName="docs"
       primaryColor="light"
-      secondaryName={secondaryName}
+      primaryName="docs"
       secondaryColor={secondaryColor}
+      secondaryName={secondaryName}
       url={url}
     />
   );

@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import { Generic, forwardRefAs } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { combineRefs } from "../../utils";
+
 import { NavbarItemContext, useNavbarItem } from "./navbar-item-context";
 
 export type NavbarItemModifierProps = {
@@ -38,13 +39,11 @@ export const NavbarItem = Object.assign(
       },
       ref,
     ) => {
-      const [active, _setActive] = useState(
-        Boolean(managed) ? Boolean(_active) : false,
-      );
+      const [active, _setActive] = useState(managed ? Boolean(_active) : false);
       const setActive = useCallback(
-        (active: boolean) => {
+        (v: boolean) => {
           if (managed !== true) {
-            _setActive(active);
+            _setActive(v);
           }
         },
         [managed],

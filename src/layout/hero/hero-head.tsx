@@ -9,8 +9,8 @@ export type HeroHeadProps = HelpersProps;
 export const HeroHead = forwardRefAs<HeroHeadProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("hero-head", className)}
       ref={ref}
+      className={classNames("hero-head", className)}
       {...rest}
     />
   ),

@@ -1,6 +1,7 @@
 // import Enzyme from "enzyme";
 import { JSDOM } from "jsdom";
 import React from "react";
+import { act } from "react-dom/test-utils";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Navbar, NAVBAR_DEFAULTS } from "src/components/navbar/navbar";
@@ -16,7 +17,6 @@ import { NavbarItem } from "src/components/navbar/navbar-item";
 import { NavbarLink } from "src/components/navbar/navbar-link";
 import { NavbarMenu } from "src/components/navbar/navbar-menu";
 import { NavbarSegment } from "src/components/navbar/navbar-segment";
-
 import {
   GetInnerShallowWrapperFunction,
   hasProperties,
@@ -29,7 +29,6 @@ import {
   withEnzymeMount,
   // makeReactWrapperFactory,
 } from "src/__tests__/testing";
-import { act } from "react-dom/test-utils";
 
 const COMPONENT = Navbar;
 const DISPLAY_NAME = "Navbar";
@@ -47,19 +46,19 @@ describe(`${DISPLAY_NAME} component`, () => {
     Brand: NavbarBrand,
     Burger: NavbarBurger,
     Context: NavbarContext,
+    defaultProps: { as: DEFAULT_ELEMENT },
     Divider: NavbarDivider,
     Dropdown: NavbarDropdown,
     Item: NavbarItem,
     Link: NavbarLink,
     Menu: NavbarMenu,
     Segment: NavbarSegment,
-    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(getLeafInnerShallowWrapper),
   });
 
@@ -68,7 +67,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory(
       getLeafInnerShallowWrapper,
     );
@@ -76,7 +77,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should set active: ${active} in context`, () => {
           let contextValue: NavbarContextValue | undefined;
           const node = (
@@ -104,7 +105,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Navbar color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -115,16 +116,16 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("document", () => {
       validatePropType(propTypes, "document", [
-        { value: document, valid: true, descriptor: "obj" },
-        { value: "string", valid: false },
+        { descriptor: "obj", valid: true, value: document },
+        { valid: false, value: "string" },
       ]);
 
-      ["global", "provided"].map(docOpt => {
+      ["global", "provided"].forEach(docOpt => {
         it(`should use the ${docOpt} document`, () => {
           const ref = React.createRef<HTMLElement>();
           const doc =
             docOpt === "global" ? window.document : new JSDOM().window.document;
-          const node = <Navbar document={doc} ref={ref} fixed="top" />;
+          const node = <Navbar ref={ref} document={doc} fixed="top" />;
           withEnzymeMount({ node }, () => {
             if (docOpt === "provided") {
               // make sure we're doing this right.
@@ -146,7 +147,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("fixed", () => {
       validateStringOrNumberPropType(propTypes, "fixed");
 
-      NAVBAR_DEFAULTS.fixedAlignments.map(fixed => {
+      NAVBAR_DEFAULTS.fixedAlignments.forEach(fixed => {
         it(`should be ${fixed}`, () => {
           const node = <Navbar fixed={fixed} />;
           const wrapper = makeShallowWrapper({ node });
@@ -158,8 +159,8 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("managed", () => {
       validateBoolPropType(propTypes, "managed");
 
-      [undefined, false, true].map(initialActive =>
-        [undefined, false, true].map(managed => {
+      [undefined, false, true].forEach(initialActive =>
+        [undefined, false, true].forEach(managed => {
           const initialActiveAsBool = initialActive === true;
           it(`should ${
             managed === true ? "" : "not "
@@ -168,7 +169,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             const ref = React.createRef<HTMLDivElement>();
 
             const node = (
-              <Navbar active={initialActive} managed={managed} ref={ref}>
+              <Navbar ref={ref} active={initialActive} managed={managed}>
                 <NavbarContext.Consumer>
                   {context => {
                     contextState = context;
@@ -202,7 +203,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("transparent", () => {
       validateBoolPropType(propTypes, "transparent");
 
-      [false, true].map(transparent => {
+      [false, true].forEach(transparent => {
         it(`should ${transparent ? "" : "not "}be transparent`, () => {
           const node = <Navbar transparent={transparent} />;
           const wrapper = makeShallowWrapper({ node });

@@ -14,10 +14,10 @@ export const CustomizeFeature: React.FC<CustomizeFeatureProps> = ({
 
   return (
     <Feature
-      primaryName="customize"
       primaryColor="light"
-      secondaryName={name}
+      primaryName="customize"
       secondaryColor={color}
+      secondaryName={name}
       url="/architecture/customize"
     />
   );

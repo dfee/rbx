@@ -1,6 +1,6 @@
 import React from "react";
-import { TableRow } from "src/elements/table/table-row";
 
+import { TableRow } from "src/elements/table/table-row";
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -15,6 +15,8 @@ const DISPLAY_NAME = "Table.Row";
 const DEFAULT_ELEMENT = "tr";
 const BULMA_CLASS_NAME = undefined;
 
+// todo
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const makeNode = (props: any) => (
   <table>
     <tbody>
@@ -25,7 +27,7 @@ const makeNode = (props: any) => (
 
 const makeWrappingNode = (node: React.ReactNode) => (
   <table>
-    <tbody children={node} />
+    <tbody>{node}</tbody>
   </table>
 );
 
@@ -35,9 +37,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeWrappingNode,
   });
 
@@ -62,13 +64,15 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("selected", () => {
       validateBoolPropType(propTypes, "selected");
 
-      [false, true].map(selected => {
+      [false, true].forEach(selected => {
         it(`should ${selected ? "" : "not "}be selected`, () => {
           const node = <TableRow selected={selected} />;
           const wrapper = makeShallowWrapper({ node });

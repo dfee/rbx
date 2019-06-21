@@ -5,7 +5,6 @@ import { Hero, HERO_DEFAULTS } from "src/layout/hero/hero";
 import { HeroBody } from "src/layout/hero/hero-body";
 import { HeroFoot } from "src/layout/hero/hero-foot";
 import { HeroHead } from "src/layout/hero/hero-head";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -23,27 +22,29 @@ const BULMA_CLASS_NAME = "hero";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Body: HeroBody,
+    defaultProps: { as: DEFAULT_ELEMENT },
     Foot: HeroFoot,
     Head: HeroHead,
-    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Hero color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -55,7 +56,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("gradient", () => {
       validateBoolPropType(propTypes, "gradient");
 
-      [false, true].map(gradient => {
+      [false, true].forEach(gradient => {
         it(`should ${gradient ? "" : "not "}have gradient`, () => {
           const node = <Hero gradient={gradient} />;
           const wrapper = makeShallowWrapper({ node });
@@ -67,7 +68,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      HERO_DEFAULTS.sizes.map(size => {
+      HERO_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Hero size={size} />;
           const wrapper = makeShallowWrapper({ node });

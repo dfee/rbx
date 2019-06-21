@@ -5,6 +5,7 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
+
 import { BreadcrumbItem } from "./breadcrumb-item";
 
 export const BREADCRUMB_DEFAULTS = {
@@ -13,6 +14,7 @@ export const BREADCRUMB_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface BreadcrumbVariablesOverrides {}
 
 export interface BreadcrumbVariablesDefaults {
@@ -38,6 +40,7 @@ export const Breadcrumb = Object.assign(
   forwardRefAs<BreadcrumbProps>(
     ({ align, children, className, separator, size, ...rest }, ref) => (
       <Generic
+        ref={ref}
         className={classNames(
           "breadcrumb",
           {
@@ -47,7 +50,6 @@ export const Breadcrumb = Object.assign(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       >
         <ul>{children}</ul>

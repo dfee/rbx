@@ -1,7 +1,6 @@
 import React from "react";
 
 import { ListItem } from "src/components/list/list-item";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -21,21 +20,22 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <ListItem active={active} />;
           const wrapper = makeShallowWrapper({ node });

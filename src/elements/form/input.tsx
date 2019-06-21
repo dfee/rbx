@@ -23,6 +23,7 @@ export const INPUT_DEFAULTS = {
   ] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface InputVariablesOverrides {}
 
 export interface InputVariablesDefaults {
@@ -42,8 +43,8 @@ export type InputModifierProps = {
   rounded?: boolean;
   size?: InputVariables["sizes"];
   state?: InputVariables["states"];
-  static?: boolean; // tslint:disable-line:no-reserved-keywords
-  type?: InputVariables["types"]; // tslint:disable-line:no-reserved-keywords
+  static?: boolean;
+  type?: InputVariables["types"];
 };
 
 export type InputProps = HelpersProps & InputModifierProps;
@@ -66,6 +67,7 @@ export const Input = forwardRefAs<InputProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames(
           "input",
           {
@@ -78,7 +80,6 @@ export const Input = forwardRefAs<InputProps>(
           className,
         )}
         readOnly={isReadOnly}
-        ref={ref}
         {...rest}
       />
     );

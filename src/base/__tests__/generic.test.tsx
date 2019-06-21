@@ -1,5 +1,4 @@
 import { Generic } from "src/base/generic";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -36,7 +35,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testThemeIntegration(COMPONENT, {
-    makeShallowWrapper: makeShallowWrapperFactory(getShallowInnerWrapper),
     makeReactWrapper: makeReactWrapperFactory(getReactInnerWrapper),
+    makeShallowWrapper: makeShallowWrapperFactory(getShallowInnerWrapper),
   });
 });

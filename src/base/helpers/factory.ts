@@ -1,16 +1,19 @@
 import PropTypes from "prop-types";
 
 import { UnionToIntersection } from "../../types";
+
 import { DEFAULTS, VariablesDefinitions } from "./variables";
 
 type MakePropTypesFunction = (
   variables?: Partial<VariablesDefinitions>,
-) => PropTypes.ValidationMap<any>; // tslint:disable-line:no-any
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+PropTypes.ValidationMap<any>;
 
 type MakePropTypesFactoryFunction = (
   makePropTypes: (
     variables: VariablesDefinitions,
-  ) => PropTypes.ValidationMap<any>, // tslint:disable-line:no-any
+  ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  PropTypes.ValidationMap<any>,
 ) => MakePropTypesFunction;
 
 export const makePropTypesFactory: MakePropTypesFactoryFunction = makePropTypes => variables =>
@@ -62,20 +65,20 @@ export const makeValidatingTransformFactory = <
   };
 };
 
-// tslint: disable:no-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type ExtractTTransformProps<
   T extends MakeValidatingTransformFunction<any, any>
 > = T extends MakeValidatingTransformFunction<infer U, any> ? U : never;
-// tslint: enable:no-any
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
-// tslint: disable:no-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type ExtractTNewProps<
   T extends MakeValidatingTransformFunction<any, any>
 > = T extends MakeValidatingTransformFunction<any, infer U> ? U : never;
-// tslint: enable:no-any
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export const makeRootValidatingTransformFactory = <
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends MakeValidatingTransformFunction<any, any>[]
 >(
   ...mvtfs: T
@@ -92,6 +95,6 @@ export const makeRootValidatingTransformFactory = <
   ): Omit<P, keyof UnionToIntersection<ExtractTTransformProps<T[number]>>> & {
     className: string | undefined;
   } & UnionToIntersection<ExtractTNewProps<T[number]>> =>
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vtfs.reduce((acc, vtf) => vtf(acc, componentName, location), props) as any;
 };

@@ -9,8 +9,8 @@ export type DropdownMenuProps = HelpersProps;
 export const DropdownMenu = forwardRefAs<DropdownMenuProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("dropdown-menu", className)}
       ref={ref}
+      className={classNames("dropdown-menu", className)}
       {...rest}
     />
   ),

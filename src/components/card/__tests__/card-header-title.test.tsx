@@ -4,7 +4,6 @@ import {
   CARD_HEADER_TITLE_DEFAULTS,
   CardHeaderTitle,
 } from "src/components/card/card-header-title";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -24,21 +23,22 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      CARD_HEADER_TITLE_DEFAULTS.alignments.map(align => {
+      CARD_HEADER_TITLE_DEFAULTS.alignments.forEach(align => {
         it(`should be ${align}`, () => {
           const node = <CardHeaderTitle align={align} />;
           const wrapper = makeShallowWrapper({ node });

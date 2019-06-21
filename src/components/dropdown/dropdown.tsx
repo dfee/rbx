@@ -6,6 +6,7 @@ import { Generic, forwardRefAs } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
 import { combineRefs } from "../../utils";
+
 import { DropdownContent } from "./dropdown-content";
 import { DropdownContext } from "./dropdown-context";
 import { DropdownDivider } from "./dropdown-divider";
@@ -17,6 +18,7 @@ export const DROPDOWN_DEFAULTS = {
   alignments: ["right"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DropdownVariablesOverrides {}
 
 export interface DropdownVariablesDefaults {
@@ -44,15 +46,13 @@ export const Dropdown = Object.assign(
       { active: _active, align, className, hoverable, managed, up, ...rest },
       ref,
     ) => {
-      const [active, _setActive] = useState(
-        Boolean(managed) ? Boolean(_active) : false,
-      );
+      const [active, _setActive] = useState(managed ? Boolean(_active) : false);
       const innerRef = useRef<HTMLElement>(null);
 
       const setActive = useCallback(
-        (active: boolean) => {
+        (v: boolean) => {
           if (managed !== true) {
-            _setActive(active);
+            _setActive(v);
           }
         },
         [managed],
@@ -60,7 +60,7 @@ export const Dropdown = Object.assign(
 
       useEffect(() => {
         setActive(Boolean(_active));
-      }, [_active]);
+      }, [_active, setActive]);
 
       useEffect(() => {
         const handleClick = (event: MouseEvent) => {
@@ -76,11 +76,12 @@ export const Dropdown = Object.assign(
 
         document.addEventListener("click", handleClick);
         return () => document.removeEventListener("click", handleClick);
-      }, [active, managed, ref]);
+      }, [active, managed, ref, setActive]);
 
       return (
         <DropdownContext.Provider value={{ active, setActive }}>
           <Generic
+            ref={combineRefs(ref, innerRef)}
             className={classNames(
               "dropdown",
               {
@@ -91,7 +92,6 @@ export const Dropdown = Object.assign(
               },
               className,
             )}
-            ref={combineRefs(ref, innerRef)}
             {...rest}
           />
         </DropdownContext.Provider>

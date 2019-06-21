@@ -5,12 +5,14 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
+
 import { ContentOrderedListItem } from "./content-ordered-list-item";
 
 export const CONTENT_ORDERED_LIST_DEFAULTS = {
   types: ["lower-alpha", "lower-roman", "upper-alpha", "upper-roman"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ContentOrderedListVariablesOverrides {}
 
 export interface ContentOrderedListVariablesDefaults {
@@ -23,7 +25,7 @@ export type ContentOrderedListVariables = Prefer<
 >;
 
 export type ContentOrderedListModifierProps = {
-  type?: ContentOrderedListVariables["types"]; // tslint:disable-line:no-reserved-keywords
+  type?: ContentOrderedListVariables["types"];
 };
 
 export type ContentOrderedListProps = HelpersProps &
@@ -33,8 +35,8 @@ export const ContentOrderedList = Object.assign(
   forwardRefAs<ContentOrderedListProps>(
     ({ className, type, ...rest }, ref) => (
       <Generic
-        className={classNames({ [`is-${type}`]: type }, className)}
         ref={ref}
+        className={classNames({ [`is-${type}`]: type }, className)}
         {...rest}
       />
     ),

@@ -10,6 +10,7 @@ export const PAGINATION_STEP_DEFAULTS = {
   alignments: ["next", "previous"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface PaginationStepVariablesOverrides {}
 
 export interface PaginationStepVariablesDefaults {
@@ -30,8 +31,8 @@ export type PaginationStepProps = HelpersProps & PaginationStepModifierProps;
 export const PaginationStep = forwardRefAs<PaginationStepProps>(
   ({ align, className, ...rest }, ref) => (
     <Generic
-      className={classNames({ [`pagination-${align}`]: align }, className)}
       ref={ref}
+      className={classNames({ [`pagination-${align}`]: align }, className)}
       {...rest}
     />
   ),

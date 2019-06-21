@@ -9,8 +9,8 @@ export type CardHeaderIconProps = HelpersProps;
 export const CardHeaderIcon = forwardRefAs<CardHeaderIconProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("card-header-icon", className)}
       ref={ref}
+      className={classNames("card-header-icon", className)}
       {...rest}
     />
   ),

@@ -5,7 +5,6 @@ import {
   NavbarSegment,
   NavbarSegmentProps,
 } from "src/components/navbar/navbar-segment";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -38,27 +37,29 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: "navbar-start",
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeNode,
     makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
   });
 
   testThemeIntegration(COMPONENT, {
     makeNode,
-    makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
     makeReactWrapper: makeReactWrapperInNavbarContextFactory(),
+    makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperInNavbarContextFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      NAVBAR_SEGMENT_DEFAULTS.alignments.map(align => {
+      NAVBAR_SEGMENT_DEFAULTS.alignments.forEach(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeShallowWrapper({ node });

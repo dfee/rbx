@@ -2,7 +2,6 @@ import React from "react";
 
 import { PanelTab } from "src/components/panel/panel-tab";
 import { PanelTabGroup } from "src/components/panel/panel-tab-group";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -18,26 +17,28 @@ const BULMA_CLASS_NAME = undefined;
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Group: PanelTabGroup,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Group: PanelTabGroup,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <PanelTab active={active} />;
           const wrapper = makeShallowWrapper({ node });

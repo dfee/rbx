@@ -5,7 +5,6 @@ import {
   COLUMN_GROUP_DEFAULTS,
   ColumnGroup,
 } from "src/grid/columns/column-group";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -27,21 +26,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("breakpoints", () => {
       validateStringOrNumberPropType(propTypes, "breakpoint");
 
-      DEFAULTS.breakpoints.map(breakpoint => {
+      DEFAULTS.breakpoints.forEach(breakpoint => {
         it(`should have breakpoint ${breakpoint}`, () => {
           const node = <ColumnGroup breakpoint={breakpoint} />;
           const wrapper = makeShallowWrapper({ node });
@@ -54,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("centered", () => {
       validateBoolPropType(propTypes, "centered");
 
-      [false, true].map(centered => {
+      [false, true].forEach(centered => {
         it(`should ${centered ? "" : "not "}be centered`, () => {
           const node = <ColumnGroup centered={centered} />;
           const wrapper = makeShallowWrapper({ node });
@@ -67,7 +68,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("gapless", () => {
       validateBoolPropType(propTypes, "gapless");
 
-      [false, true].map(gapless => {
+      [false, true].forEach(gapless => {
         it(`should ${gapless ? "" : "not "}be gapless`, () => {
           const node = <ColumnGroup gapless={gapless} />;
           const wrapper = makeShallowWrapper({ node });
@@ -80,7 +81,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("gapSize", () => {
       validateStringOrNumberPropType(propTypes, "gapSize");
 
-      COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => {
+      COLUMN_GROUP_DEFAULTS.gapSizes.forEach(gapSize => {
         it(`should have gapSize ${gapSize}`, () => {
           const node = <ColumnGroup gapSize={gapSize} />;
           const wrapper = makeShallowWrapper({ node });
@@ -89,7 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         });
       });
 
-      DEFAULTS.breakpoints.map(breakpoint => {
+      DEFAULTS.breakpoints.forEach(breakpoint => {
         describe(breakpoint, () => {
           validatePropType(propTypes, breakpoint, [
             ...["string", 1].map(value => ({
@@ -107,7 +108,7 @@ describe(`${DISPLAY_NAME} component`, () => {
             },
           ]);
 
-          COLUMN_GROUP_DEFAULTS.gapSizes.map(gapSize => {
+          COLUMN_GROUP_DEFAULTS.gapSizes.forEach(gapSize => {
             it(`should have gapSize ${gapSize}`, () => {
               const props = { [breakpoint]: { gapSize } };
               const node = <ColumnGroup {...props} />;
@@ -125,7 +126,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("multiline", () => {
       validateBoolPropType(propTypes, "multiline");
 
-      [false, true].map(multiline => {
+      [false, true].forEach(multiline => {
         it(`should ${multiline ? "" : "not "}be multiline`, () => {
           const node = <ColumnGroup multiline={multiline} />;
           const wrapper = makeShallowWrapper({ node });
@@ -138,7 +139,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("vcentered", () => {
       validateBoolPropType(propTypes, "vcentered");
 
-      [false, true].map(vcentered => {
+      [false, true].forEach(vcentered => {
         it(`should ${vcentered ? "" : "not "}be vertically centered`, () => {
           const node = <ColumnGroup vcentered={vcentered} />;
           const wrapper = makeShallowWrapper({ node });

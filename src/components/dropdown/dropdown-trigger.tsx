@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { useDropdown } from "./dropdown-context";
 
 export type DropdownTriggerModifierProps = {
@@ -28,9 +29,9 @@ export const DropdownTrigger = forwardRefAs<DropdownTriggerProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames("dropdown-trigger", className)}
         onClick={handleClick}
-        ref={ref}
         {...rest}
       />
     );

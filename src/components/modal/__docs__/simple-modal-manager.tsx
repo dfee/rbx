@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Button } from "src/elements/button";
+
 import { Modal, ModalProps } from "../modal";
 
 interface SimpleModalManagerProps {

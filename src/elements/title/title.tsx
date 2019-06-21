@@ -10,6 +10,7 @@ export const TITLE_DEFAULTS = {
   sizes: [1, 2, 3, 4, 5, 6] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TitleVariablesOverrides {}
 
 export interface TitleVariablesDefaults {
@@ -32,6 +33,7 @@ export type TitleProps = HelpersProps & TitleModifierProps;
 export const Title = forwardRefAs<TitleProps>(
   ({ className, size, spaced, subtitle, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         {
           [`is-${size}`]: size !== undefined,
@@ -41,7 +43,6 @@ export const Title = forwardRefAs<TitleProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

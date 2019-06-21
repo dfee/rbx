@@ -2,7 +2,6 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Divider } from "src/layout/divider/divider";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -26,22 +25,24 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("children", () => {
       validateStringOrNumberPropType(propTypes, "children");
 
       it(`should have proper content`, () => {
-        const node = <Divider children="foo" />;
+        const node = <Divider>foo</Divider>;
         const wrapper = makeShallowWrapper({ node });
         expect(
           (wrapper.props() as React.HTMLAttributes<HTMLDivElement>)[
@@ -54,7 +55,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Divider color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -66,7 +67,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("vertical", () => {
       validateBoolPropType(propTypes, "vertical");
 
-      [false, true].map(vertical => {
+      [false, true].forEach(vertical => {
         it(`should ${vertical ? "" : "not "}be vertical`, () => {
           const node = <Divider vertical={vertical} />;
           const wrapper = makeShallowWrapper({ node });

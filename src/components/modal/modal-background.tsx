@@ -4,6 +4,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { ModalContextValue, useModal } from "./modal-context";
 
 export type ModalBackgroundModifierProps = {
@@ -29,10 +30,10 @@ export const ModalBackground = forwardRefAs<ModalBackgroundProps>(
     const ctx = useModal();
     return (
       <Generic
-        className={classNames("modal-background", className)}
-        onClick={onClickHandler(onClick, ctx)}
         ref={ref}
+        className={classNames("modal-background", className)}
         role="presentation"
+        onClick={onClickHandler(onClick, ctx)}
         {...rest}
       />
     );

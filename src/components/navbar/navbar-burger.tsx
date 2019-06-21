@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { useNavbar } from "./navbar-context";
 
 export type NavbarBurgerModifierProps = {
@@ -28,14 +29,14 @@ export const NavbarBurger = forwardRefAs<NavbarBurgerProps>(
 
     return (
       <Generic
+        ref={ref}
         className={classNames(
           "navbar-burger",
           { "is-active": active },
           className,
         )}
-        onClick={handleClick}
-        ref={ref}
         role="button"
+        onClick={handleClick}
         {...rest}
       >
         <span />

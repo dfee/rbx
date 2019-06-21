@@ -12,7 +12,6 @@ import { DropdownDivider } from "src/components/dropdown/dropdown-divider";
 import { DropdownItem } from "src/components/dropdown/dropdown-item";
 import { DropdownMenu } from "src/components/dropdown/dropdown-menu";
 import { DropdownTrigger } from "src/components/dropdown/dropdown-trigger";
-
 import {
   GetInnerShallowWrapperFunction,
   hasProperties,
@@ -23,6 +22,7 @@ import {
   validateStringOrNumberPropType,
   withEnzymeMount,
 } from "src/__tests__/testing";
+
 import { makeReactWrapperFactory } from "./testing";
 
 const COMPONENT = Dropdown;
@@ -40,11 +40,11 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Content: DropdownContent,
     Context: DropdownContext,
+    defaultProps: { as: DEFAULT_ELEMENT },
     Divider: DropdownDivider,
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
-    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
@@ -59,13 +59,14 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeReactWrapper = makeReactWrapperFactory();
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [false, true].map(active => {
+      [false, true].forEach(active => {
         it(`should ${active ? "" : "not "}be active`, () => {
           const node = <Dropdown active={active} />;
           const wrapper = makeReactWrapper({ node });
@@ -77,7 +78,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      DROPDOWN_DEFAULTS.alignments.map(align => {
+      DROPDOWN_DEFAULTS.alignments.forEach(align => {
         it(`should be aligned ${align}`, () => {
           const node = <Dropdown align={align} />;
           const wrapper = makeReactWrapper({ node });
@@ -89,7 +90,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("hoverable", () => {
       validateBoolPropType(propTypes, "hoverable");
 
-      [false, true].map(hoverable => {
+      [false, true].forEach(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = <Dropdown hoverable={hoverable} />;
           const wrapper = makeReactWrapper({ node });
@@ -101,8 +102,8 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("managed", () => {
       validateBoolPropType(propTypes, "managed");
 
-      [false, true].map(managed =>
-        [false, true].map(active => {
+      [false, true].forEach(managed =>
+        [false, true].forEach(active => {
           const isToggleable = managed && active;
           it(`should ${
             isToggleable ? "" : "not "
@@ -130,7 +131,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         document.body.appendChild(root);
 
         const ref = React.createRef<HTMLDivElement>();
-        const node = <Dropdown active ref={ref} />;
+        const node = <Dropdown ref={ref} active />;
 
         withEnzymeMount(
           { node, options: { attachTo: root } },
@@ -146,8 +147,8 @@ describe(`${DISPLAY_NAME} component`, () => {
         );
       });
 
-      [undefined, false, true].map(initialActive =>
-        [undefined, false, true].map(managed => {
+      [undefined, false, true].forEach(initialActive =>
+        [undefined, false, true].forEach(managed => {
           const isManaged = managed === true;
           const initialActiveAsBool = initialActive === true;
           it(`should ${
@@ -157,10 +158,10 @@ describe(`${DISPLAY_NAME} component`, () => {
             const ref = React.createRef<HTMLDivElement>();
             const wrapper = Enzyme.mount(
               <Dropdown
-                active={initialActive}
-                managed={managed}
                 ref={ref}
+                active={initialActive}
                 as="div"
+                managed={managed}
               >
                 <DropdownContext.Consumer>
                   {context => {
@@ -204,7 +205,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("up", () => {
       validateBoolPropType(propTypes, "up");
 
-      [false, true].map(up => {
+      [false, true].forEach(up => {
         it(`should ${up ? "" : "not "}be up`, () => {
           const node = <Dropdown up={up} />;
           const wrapper = makeReactWrapper({ node });

@@ -12,6 +12,7 @@ export const TEXTAREA_DEFAULTS = {
   states: ["focused", "hovered"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TextareaVariablesOverrides {}
 
 export interface TextareaVariablesDefaults {
@@ -36,6 +37,7 @@ export type TextareaProps = HelpersProps & TextareaModifierProps;
 export const Textarea = forwardRefAs<TextareaProps>(
   ({ className, color, fixedSize, size, state, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "textarea",
         {
@@ -46,7 +48,6 @@ export const Textarea = forwardRefAs<TextareaProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

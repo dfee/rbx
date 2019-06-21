@@ -6,6 +6,7 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { DEFAULTS, Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
+
 import { ColumnGroup } from "./column-group";
 
 export const COLUMN_DEFAULTS = {
@@ -36,6 +37,7 @@ export const COLUMN_DEFAULTS = {
   ] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ColumnVariablesOverrides {}
 
 export interface ColumnVariablesDefaults {
@@ -64,7 +66,7 @@ export type ColumnBreakpointOptions = {
 };
 
 export type ColumnModifierProps = {
-  [B in Variables["breakpoints"]]?: ColumnBreakpointOptions
+  [B in Variables["breakpoints"]]?: ColumnBreakpointOptions;
 } &
   ColumnBreakpointOptions;
 
@@ -99,6 +101,7 @@ export const Column = Object.assign(
 
       return (
         <Generic
+          ref={ref}
           className={classNames(
             "column",
             {
@@ -124,7 +127,6 @@ export const Column = Object.assign(
               .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
             className,
           )}
-          ref={ref}
           {...rest}
         />
       );

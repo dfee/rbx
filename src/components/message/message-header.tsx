@@ -9,8 +9,8 @@ export type MessageHeaderProps = HelpersProps;
 export const MessageHeader = forwardRefAs<MessageHeaderProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("message-header", className)}
       ref={ref}
+      className={classNames("message-header", className)}
       {...rest}
     />
   ),

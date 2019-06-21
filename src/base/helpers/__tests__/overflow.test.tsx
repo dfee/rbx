@@ -2,8 +2,8 @@ import {
   makePropTypes,
   makeValidatingTransform,
 } from "src/base/helpers/overflow";
-
 import { validateBoolPropType } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -28,7 +28,7 @@ describe("Overflow helpers", () => {
     testItShouldNotSetClassNameOnEmpty(vtfunc);
     testItShouldPreserveCustomClassName(vtfunc);
 
-    [false, true].map(clipped => {
+    [false, true].forEach(clipped => {
       it(`should ${clipped ? "" : "not "}be clipped`, () => {
         expect(vtfunc({ clipped }, CNAME, LOC)).toEqual({
           className: clipped ? "is-clipped" : "",

@@ -1,0 +1,5 @@
+**/*.min.js
+dist
+.docz
+.vscode
+examples

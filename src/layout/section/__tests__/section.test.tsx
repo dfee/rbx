@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Section, SECTION_DEFAULTS } from "src/layout/section/section";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -21,21 +20,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      SECTION_DEFAULTS.sizes.map(size => {
+      SECTION_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Section size={size} />;
           const wrapper = makeShallowWrapper({ node });

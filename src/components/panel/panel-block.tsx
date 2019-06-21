@@ -14,8 +14,8 @@ export type PanelBlockProps = HelpersProps & PanelBlockModifierProps;
 export const PanelBlock = forwardRefAs<PanelBlockProps>(
   ({ active, className, ...rest }, ref) => (
     <Generic
-      className={classNames("panel-block", { "is-active": active }, className)}
       ref={ref}
+      className={classNames("panel-block", { "is-active": active }, className)}
       {...rest}
     />
   ),

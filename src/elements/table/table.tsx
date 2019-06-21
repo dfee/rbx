@@ -4,6 +4,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { TableBody } from "./table-body";
 import { TableCell } from "./table-cell";
 import { TableFoot } from "./table-foot";
@@ -28,6 +29,7 @@ export const Table = Object.assign(
       ref,
     ) => (
       <Generic
+        ref={ref}
         className={classNames(
           "table",
           {
@@ -39,7 +41,6 @@ export const Table = Object.assign(
           },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     ),

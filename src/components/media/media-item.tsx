@@ -10,6 +10,7 @@ export const MEDIA_ITEM_DEFAULTS = {
   alignments: ["content", "left", "right"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface MediaItemVariablesOverrides {}
 
 export interface MediaItemVariablesDefaults {
@@ -30,8 +31,8 @@ export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 export const MediaItem = forwardRefAs<MediaItemProps>(
   ({ align, className, ...rest }, ref) => (
     <Generic
-      className={classNames({ [`media-${align}`]: align }, className)}
       ref={ref}
+      className={classNames({ [`media-${align}`]: align }, className)}
       {...rest}
     />
   ),

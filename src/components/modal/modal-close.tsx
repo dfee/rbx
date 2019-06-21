@@ -4,6 +4,7 @@ import React, { useCallback } from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { useModal } from "./modal-context";
 
 export type ModalCloseModifierProps = {
@@ -28,10 +29,10 @@ export const ModalClose = forwardRefAs<ModalCloseProps>(
 
     return (
       <Generic
+        ref={ref}
         aria-label="close"
         className={classNames("modal-close", "is-large", className)}
         onClick={handleClick}
-        ref={ref}
         {...rest}
       />
     );

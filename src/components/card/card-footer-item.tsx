@@ -9,8 +9,8 @@ export type CardFooterItemProps = HelpersProps;
 export const CardFooterItem = forwardRefAs<CardFooterItemProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("card-footer-item", className)}
       ref={ref}
+      className={classNames("card-footer-item", className)}
       {...rest}
     />
   ),

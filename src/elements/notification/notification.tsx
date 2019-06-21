@@ -15,12 +15,12 @@ export type NotificationProps = HelpersProps & NotificationModifierProps;
 export const Notification = forwardRefAs<NotificationProps>(
   ({ className, color, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "notification",
         { [`is-${color}`]: color },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

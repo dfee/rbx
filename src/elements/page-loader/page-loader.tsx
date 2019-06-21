@@ -21,6 +21,7 @@ export type PageLoaderProps = HelpersProps & PageLoaderModifierProps;
 export const PageLoader = forwardRefAs<PageLoaderProps>(
   ({ active, className, color, direction, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "pageloader",
         {
@@ -30,7 +31,6 @@ export const PageLoader = forwardRefAs<PageLoaderProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

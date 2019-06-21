@@ -6,6 +6,7 @@ import { Generic, forwardRefAs } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
+
 import { NavbarBrand } from "./navbar-brand";
 import { NavbarBurger } from "./navbar-burger";
 import { NavbarContext } from "./navbar-context";
@@ -20,6 +21,7 @@ export const NAVBAR_DEFAULTS = {
   fixedAlignments: ["top", "bottom"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NavbarVariablesOverrides {}
 
 export interface NavbarVariablesDefaults {
@@ -58,13 +60,11 @@ export const Navbar = Object.assign(
       },
       ref,
     ) => {
-      const [active, _setActive] = useState(
-        Boolean(managed) ? Boolean(_active) : false,
-      );
+      const [active, _setActive] = useState(managed ? Boolean(_active) : false);
       const setActive = useCallback(
-        (active: boolean) => {
+        (v: boolean) => {
           if (managed !== true) {
-            _setActive(active);
+            _setActive(v);
           }
         },
         [managed],
@@ -86,11 +86,12 @@ export const Navbar = Object.assign(
         }
 
         return () => html.classList.remove(`has-navbar-fixed-${fixed}`);
-      }, [_document]);
+      }, [_document, fixed]);
 
       return (
         <NavbarContext.Provider value={{ active, setActive }}>
           <Generic
+            ref={ref}
             className={classNames(
               "navbar",
               {
@@ -100,7 +101,6 @@ export const Navbar = Object.assign(
               },
               className,
             )}
-            ref={ref}
             role="navigation"
             {...rest}
           />
@@ -126,7 +126,7 @@ Navbar.displayName = "Navbar";
 Navbar.propTypes = {
   active: PropTypes.bool,
   color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  document: PropTypes.object,
+  document: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   managed: PropTypes.bool,
   transparent: PropTypes.bool,

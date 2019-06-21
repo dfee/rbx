@@ -10,6 +10,7 @@ export const DELETE_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DeleteVariablesOverrides {}
 
 export interface DeleteVariablesDefaults {
@@ -30,8 +31,8 @@ export type DeleteProps = HelpersProps & DeleteModifierProps;
 export const Delete = forwardRefAs<DeleteProps>(
   ({ className, size, ...rest }, ref) => (
     <Generic
-      className={classNames("delete", { [`is-${size}`]: size }, className)}
       ref={ref}
+      className={classNames("delete", { [`is-${size}`]: size }, className)}
       {...rest}
     />
   ),

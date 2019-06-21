@@ -1,6 +1,6 @@
 import { Prefer } from "../../types";
-import { makeRootValidatingTransformFactory } from "./factory";
 
+import { makeRootValidatingTransformFactory } from "./factory";
 import {
   BadgeHelpersProps,
   makeValidatingTransform as badgeMVT,
@@ -39,7 +39,7 @@ import {
 } from "./visibility";
 
 /** Union of Helpers */
-// tslint:disable-next-line: no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface HelpersPropsOverrides {}
 
 export type HelpersProps = Prefer<

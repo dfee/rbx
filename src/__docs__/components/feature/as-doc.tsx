@@ -8,10 +8,10 @@ export type AsDocProps = {
 
 export const AsDoc: React.FC<AsDocProps> = ({ asType }) => (
   <Feature
-    primaryName="as"
     primaryColor="light"
-    secondaryName={asType}
+    primaryName="as"
     secondaryColor="warning"
+    secondaryName={asType}
     url="/architecture/inversion-of-control"
   />
 );

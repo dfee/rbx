@@ -4,7 +4,6 @@ import {
   NAVBAR_DROPDOWN_DEFAULTS,
   NavbarDropdown,
 } from "src/components/navbar/navbar-dropdown";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -26,21 +25,22 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeShallowWrapper = makeShallowWrapperInNavbarContextFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      NAVBAR_DROPDOWN_DEFAULTS.alignments.map(align => {
+      NAVBAR_DROPDOWN_DEFAULTS.alignments.forEach(align => {
         it(`should be aligned ${align}`, () => {
           const node = <NavbarDropdown align={align} />;
           const wrapper = makeShallowWrapper({ node });
@@ -52,7 +52,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("boxed", () => {
       validateBoolPropType(propTypes, "boxed");
 
-      [false, true].map(boxed => {
+      [false, true].forEach(boxed => {
         it(`should ${boxed ? "" : "not "}be boxed`, () => {
           const node = <NavbarDropdown boxed={boxed} />;
           const wrapper = makeShallowWrapper({ node });

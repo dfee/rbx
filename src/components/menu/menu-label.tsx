@@ -9,8 +9,8 @@ export type MenuLabelProps = HelpersProps;
 export const MenuLabel = forwardRefAs<MenuLabelProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("menu-label", className)}
       ref={ref}
+      className={classNames("menu-label", className)}
       {...rest}
     />
   ),

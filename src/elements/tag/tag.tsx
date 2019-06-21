@@ -6,12 +6,14 @@ import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
 import { Prefer } from "../../types";
+
 import { TagGroup } from "./tag-group";
 
 export const TAG_DEFAULTS = {
   sizes: ["normal", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TagVariablesOverrides {}
 
 export interface TagVariablesDefaults {
@@ -22,7 +24,7 @@ export type TagVariables = Prefer<TagVariablesOverrides, TagVariablesDefaults>;
 
 export type TagModifierProps = {
   color?: Variables["colors"];
-  delete?: boolean; // tslint:disable-line:no-reserved-keywords
+  delete?: boolean;
   rounded?: boolean;
   size?: TagVariables["sizes"];
 };
@@ -39,6 +41,7 @@ export const Tag = Object.assign(
 
       return (
         <Generic
+          ref={ref}
           className={classNames(
             "tag",
             {
@@ -49,10 +52,10 @@ export const Tag = Object.assign(
             },
             className,
           )}
-          children={allowedChildren}
-          ref={ref}
           {...rest}
-        />
+        >
+          {allowedChildren}
+        </Generic>
       );
     },
     { as: "span" },

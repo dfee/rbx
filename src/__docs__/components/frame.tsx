@@ -20,70 +20,38 @@ export class Frame extends React.Component<FrameProps> {
     updateHeightDelay: 200,
   };
 
-  private readonly ref = React.createRef<HTMLIFrameElement>();
-  private updateHeightEnabled = false;
-  private updateHeightTimeout: NodeJS.Timeout | undefined;
-  private iframeRoot: HTMLElement | undefined;
+  private readonly _ref = React.createRef<HTMLIFrameElement>();
+  private _updateHeightEnabled = false;
+  private _updateHeightTimeout: NodeJS.Timeout | undefined;
+  private _iframeRoot: HTMLElement | undefined;
 
   public componentDidMount() {
-    if (this.ref.current !== null) {
-      this.ref.current.addEventListener("load", this.handleLoad);
+    if (this._ref.current !== null) {
+      this._ref.current.addEventListener("load", this._handleLoad);
     }
   }
 
   public componentWillUnmount() {
-    if (this.ref.current !== null) {
-      this.ref.current.removeEventListener("load", this.handleLoad);
-      if (this.updateHeightEnabled) {
-        this.updateHeightEnabled = false;
+    if (this._ref.current !== null) {
+      this._ref.current.removeEventListener("load", this._handleLoad);
+      if (this._updateHeightEnabled) {
+        this._updateHeightEnabled = false;
       }
-      if (this.updateHeightTimeout !== undefined) {
-        clearTimeout(this.updateHeightTimeout);
+      if (this._updateHeightTimeout !== undefined) {
+        clearTimeout(this._updateHeightTimeout);
       }
     }
   }
 
-  public render() {
-    const { children } = this.props;
-
-    // tslint:disable:react-a11y-iframes
-    return (
-      <iframe
-        ref={this.ref}
-        sandbox="allow-same-origin"
-        srcDoc={"<!DOCTYPE html>"}
-        style={{
-          height: "0px",
-          width: "100%",
-          ...this.props.style,
-        }}
-      >
-        {this.iframeRoot !== undefined &&
-        this.ref.current !== null &&
-        this.ref.current.contentDocument !== null
-          ? typeof children === "function"
-            ? ReactDOM.createPortal(
-                (children as RenderFunction)({
-                  document: this.ref.current.contentDocument,
-                }),
-                this.iframeRoot,
-              )
-            : ReactDOM.createPortal(children, this.iframeRoot)
-          : undefined}
-      </iframe>
-    );
-    // tslint:enable:react-a11y-iframes
-  }
-
-  private readonly cloneStyles = () => {
+  private readonly _cloneStyles = () => {
     if (
-      this.ref.current !== null &&
-      this.ref.current.contentDocument !== null
+      this._ref.current !== null &&
+      this._ref.current.contentDocument !== null
     ) {
       const links = Array.from(document.getElementsByTagName("link"));
       for (const link of links) {
         if (link.rel === "stylesheet") {
-          this.ref.current.contentDocument.head.appendChild(
+          this._ref.current.contentDocument.head.appendChild(
             link.cloneNode(true),
           );
         }
@@ -91,50 +59,87 @@ export class Frame extends React.Component<FrameProps> {
 
       const styles = Array.from(document.head.getElementsByTagName("style"));
       for (const style of styles) {
-        this.ref.current.contentDocument.head.appendChild(
+        this._ref.current.contentDocument.head.appendChild(
           style.cloneNode(true),
         );
       }
     }
   };
 
-  private readonly handleLoad = () => {
+  private readonly _handleLoad = () => {
     if (
-      this.ref.current !== null &&
-      this.ref.current.contentDocument !== null &&
-      this.ref.current.contentDocument.body !== null
+      this._ref.current !== null &&
+      this._ref.current.contentDocument !== null &&
+      this._ref.current.contentDocument.body !== null
     ) {
-      this.iframeRoot = this.ref.current.contentDocument.body;
-      this.cloneStyles();
+      this._iframeRoot = this._ref.current.contentDocument.body;
+      this._cloneStyles();
       this.forceUpdate();
-      this.doUpdateHeight();
+      this._doUpdateHeight();
     }
   };
 
-  private readonly doUpdateHeight = () => {
+  private readonly _doUpdateHeight = () => {
+    const { forceHeight } = this.props;
     if (
-      this.props.forceHeight !== true &&
-      this.ref.current !== null &&
-      this.ref.current.contentDocument !== null &&
-      this.ref.current.contentDocument.body !== null
+      forceHeight !== true &&
+      this._ref.current !== null &&
+      this._ref.current.contentDocument !== null &&
+      this._ref.current.contentDocument.body !== null
     ) {
-      this.ref.current.style.height = `${
-        this.ref.current.contentDocument.body.scrollHeight
-      }px`;
+      this._ref.current.style.height = `${this._ref.current.contentDocument.body.scrollHeight}px`;
     }
-    this.updateHeight();
+    this._updateHeight();
   };
 
-  private readonly updateHeight = () => {
+  private readonly _updateHeight = () => {
     const { updateHeightDelay } = this.props;
     if (updateHeightDelay !== 0 && updateHeightDelay !== undefined) {
-      this.updateHeightEnabled = true;
-      this.updateHeightTimeout = setTimeout(
-        this.doUpdateHeight,
+      this._updateHeightEnabled = true;
+      this._updateHeightTimeout = setTimeout(
+        this._doUpdateHeight,
         updateHeightDelay,
       );
     } else {
-      this.updateHeightEnabled = false;
+      this._updateHeightEnabled = false;
     }
   };
+
+  public render() {
+    const { children, style } = this.props;
+
+    let node: React.ReactNode = null;
+    if (
+      this._iframeRoot !== undefined &&
+      this._ref.current !== null &&
+      this._ref.current.contentDocument !== null
+    ) {
+      if (typeof children === "function") {
+        node = ReactDOM.createPortal(
+          (children as RenderFunction)({
+            document: this._ref.current.contentDocument,
+          }),
+          this._iframeRoot,
+        );
+      } else {
+        node = ReactDOM.createPortal(children, this._iframeRoot);
+      }
+    }
+
+    return (
+      <iframe
+        ref={this._ref}
+        sandbox="allow-same-origin"
+        srcDoc={"<!DOCTYPE html>"}
+        style={{
+          height: "0px",
+          width: "100%",
+          ...style,
+        }}
+        title="docs iframe"
+      >
+        {node}
+      </iframe>
+    );
+  }
 }

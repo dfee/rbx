@@ -2,7 +2,6 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Icon, ICON_DEFAULTS } from "src/elements/icon/icon";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -22,21 +21,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Icon color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -48,7 +49,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      ICON_DEFAULTS.alignments.map(align => {
+      ICON_DEFAULTS.alignments.forEach(align => {
         it(`should be aligned ${align}`, () => {
           const node = <Icon align={align} />;
           const wrapper = makeShallowWrapper({ node });
@@ -60,7 +61,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      ICON_DEFAULTS.sizes.map(size => {
+      ICON_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Icon size={size} />;
           const wrapper = makeShallowWrapper({ node });

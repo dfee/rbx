@@ -9,8 +9,8 @@ export type PaginationListProps = HelpersProps;
 export const PaginationList = forwardRefAs<PaginationListProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("pagination-list", className)}
       ref={ref}
+      className={classNames("pagination-list", className)}
       {...rest}
     />
   ),

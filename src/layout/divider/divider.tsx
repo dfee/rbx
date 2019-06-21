@@ -17,16 +17,16 @@ export type DividerProps = HelpersProps & DividerModifierProps;
 export const Divider = forwardRefAs<DividerProps>(
   ({ children, className, color, vertical, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "is-divider",
         {
           [`is-${color}`]: color,
-          ["is-divider-vertical"]: vertical,
+          "is-divider-vertical": vertical,
         },
         className,
       )}
       data-content={children}
-      ref={ref}
       {...rest}
     />
   ),

@@ -2,7 +2,6 @@ import React from "react";
 
 import { Content, CONTENT_DEFAULTS } from "src/elements/content/content";
 import { ContentOrderedList } from "src/elements/content/content-ordered-list";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -18,26 +17,28 @@ const BULMA_CLASS_NAME = "content";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    OrderedList: ContentOrderedList,
     defaultProps: { as: DEFAULT_ELEMENT },
+    OrderedList: ContentOrderedList,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      CONTENT_DEFAULTS.sizes.map(size => {
+      CONTENT_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Content size={size} />;
           const wrapper = makeShallowWrapper({ node });

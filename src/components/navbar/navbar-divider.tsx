@@ -9,8 +9,8 @@ export type NavbarDividerProps = HelpersProps;
 export const NavbarDivider = forwardRefAs<NavbarDividerProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("navbar-divider", className)}
       ref={ref}
+      className={classNames("navbar-divider", className)}
       {...rest}
     />
   ),

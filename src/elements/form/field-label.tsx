@@ -10,6 +10,7 @@ export const FIELD_LABEL_DEFAULTS = {
   sizes: ["small", "normal", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FieldLabelVariablesOverrides {}
 
 export interface FieldLabelVariablesDefaults {
@@ -30,8 +31,8 @@ export type FieldLabelProps = HelpersProps & FieldLabelModifierProps;
 export const FieldLabel = forwardRefAs<FieldLabelProps>(
   ({ className, size, ...rest }, ref) => (
     <Generic
-      className={classNames("field-label", { [`is-${size}`]: size }, className)}
       ref={ref}
+      className={classNames("field-label", { [`is-${size}`]: size }, className)}
       {...rest}
     />
   ),

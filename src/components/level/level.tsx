@@ -5,6 +5,7 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Variables } from "../../base/helpers/variables";
+
 import { LevelItem } from "./level-item";
 
 export type LevelModifierProps = {
@@ -17,12 +18,12 @@ export const Level = Object.assign(
   forwardRefAs<LevelProps>(
     ({ breakpoint, className, ...rest }, ref) => (
       <Generic
+        ref={ref}
         className={classNames(
           "level",
           { [`is-${breakpoint}`]: breakpoint },
           className,
         )}
-        ref={ref}
         {...rest}
       />
     ),

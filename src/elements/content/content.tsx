@@ -5,12 +5,14 @@ import React from "react";
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
 import { Prefer } from "../../types";
+
 import { ContentOrderedList } from "./content-ordered-list";
 
 export const CONTENT_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ContentVariablesOverrides {}
 
 export interface ContentVariablesDefaults {
@@ -32,8 +34,8 @@ export const Content = Object.assign(
   forwardRefAs<ContentProps>(
     ({ className, size, ...rest }, ref) => (
       <Generic
-        className={classNames("content", { [`is-${size}`]: size }, className)}
         ref={ref}
+        className={classNames("content", { [`is-${size}`]: size }, className)}
         {...rest}
       />
     ),

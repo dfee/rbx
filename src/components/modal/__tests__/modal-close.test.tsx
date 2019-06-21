@@ -1,7 +1,6 @@
 import React from "react";
 
 import { ModalClose } from "src/components/modal/modal-close";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -26,9 +25,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(),
   });
 
@@ -55,16 +54,17 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
-        { value: () => undefined, valid: true, descriptor: "func" },
-        { value: "string", valid: false },
+        { descriptor: "func", valid: true, value: () => undefined },
+        { valid: false, value: "string" },
       ]);
 
-      [false, true].map(hasOnClick =>
-        [false, true].map(closeOnBlur => {
+      [false, true].forEach(hasOnClick =>
+        [false, true].forEach(closeOnBlur => {
           it(`should ${closeOnBlur ? "" : "not "}update context ${
             hasOnClick ? "and call onClick" : ""
           }`, () => {

@@ -2,7 +2,6 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Textarea, TEXTAREA_DEFAULTS } from "src/elements/form/textarea";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -26,21 +25,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Textarea color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -52,7 +53,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("fixedSize", () => {
       validateBoolPropType(propTypes, "fixedSize");
 
-      [false, true].map(fixedSize => {
+      [false, true].forEach(fixedSize => {
         it(`should ${fixedSize ? "" : "not "}be fixed size`, () => {
           const node = <Textarea fixedSize={fixedSize} />;
           const wrapper = makeShallowWrapper({ node });
@@ -64,7 +65,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      TEXTAREA_DEFAULTS.sizes.map(size => {
+      TEXTAREA_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Textarea size={size} />;
           const wrapper = makeShallowWrapper({ node });
@@ -76,7 +77,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("state", () => {
       validateStringOrNumberPropType(propTypes, "state");
 
-      TEXTAREA_DEFAULTS.states.map(state => {
+      TEXTAREA_DEFAULTS.states.forEach(state => {
         it(`should be ${state}`, () => {
           const node = <Textarea state={state} />;
           const wrapper = makeShallowWrapper({ node });

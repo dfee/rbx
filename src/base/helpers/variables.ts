@@ -28,6 +28,7 @@ export type VariablesDefinitions = {
 };
 
 export const DEFAULTS = {
+  /* eslint-disable sort-keys */
   colors: [
     "primary",
     "success",
@@ -85,9 +86,10 @@ export const DEFAULTS = {
 
   // Visibility
   displays: ["block", "flex", "inline", "inline-block", "inline-flex"] as const,
+  /* eslint-enable sort-keys */
 };
 
-// tslint:disable-next-line: no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface VariablesOverrides {}
 
 export interface VariablesDefaults {

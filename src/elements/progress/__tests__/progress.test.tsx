@@ -2,7 +2,6 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Progress, PROGRESS_DEFAULTS } from "src/elements/progress/progress";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -26,21 +25,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <Progress color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -65,7 +66,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      PROGRESS_DEFAULTS.sizes.map(size => {
+      PROGRESS_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <Progress size={size} />;
           const wrapper = makeShallowWrapper({ node });

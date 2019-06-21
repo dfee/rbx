@@ -3,7 +3,6 @@ import React from "react";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Level } from "src/components/level/level";
 import { LevelItem } from "src/components/level/level-item";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -19,26 +18,27 @@ const BULMA_CLASS_NAME = "level";
 
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
-    Item: LevelItem,
     defaultProps: { as: DEFAULT_ELEMENT },
+    Item: LevelItem,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("breakpoint", () => {
       validateStringOrNumberPropType(propTypes, "breakpoint");
 
-      DEFAULTS.breakpoints.map(breakpoint => {
+      DEFAULTS.breakpoints.forEach(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = <Level breakpoint={breakpoint} />;
           const wrapper = makeShallowWrapper({ node });

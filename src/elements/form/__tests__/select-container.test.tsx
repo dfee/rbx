@@ -6,7 +6,6 @@ import {
   SELECT_CONTAINER_DEFAULTS,
   SelectContainer,
 } from "src/elements/form/select";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -27,21 +26,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.forEach(color => {
         it(`should be ${color}`, () => {
           const node = <SelectContainer color={color} />;
           const wrapper = makeShallowWrapper({ node });
@@ -53,7 +54,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 
-      [false, true].map(fullwidth => {
+      [false, true].forEach(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <SelectContainer fullwidth={fullwidth} />;
           const wrapper = makeShallowWrapper({ node });
@@ -65,7 +66,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("rounded", () => {
       validateBoolPropType(propTypes, "rounded");
 
-      [false, true].map(rounded => {
+      [false, true].forEach(rounded => {
         it(`should ${rounded ? "" : "not "}be rounded`, () => {
           const node = <SelectContainer rounded={rounded} />;
           const wrapper = makeShallowWrapper({ node });
@@ -77,7 +78,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("size", () => {
       validateStringOrNumberPropType(propTypes, "size");
 
-      SELECT_CONTAINER_DEFAULTS.sizes.map(size => {
+      SELECT_CONTAINER_DEFAULTS.sizes.forEach(size => {
         it(`should be ${size}`, () => {
           const node = <SelectContainer size={size} />;
           const wrapper = makeShallowWrapper({ node });
@@ -89,12 +90,12 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("state", () => {
       validateStringOrNumberPropType(propTypes, "state");
 
-      SELECT_CONTAINER_DEFAULTS.states.map(state => {
+      SELECT_CONTAINER_DEFAULTS.states.forEach(state => {
         [
           { discriminator: "select" },
           { discriminator: "component" },
           { discriminator: "string" },
-        ].map(({ discriminator }) => {
+        ].forEach(({ discriminator }) => {
           it(`should have state ${state} for discriminator ${discriminator}`, () => {
             let children: JSX.Element | string;
             if (discriminator === "select") {
@@ -104,14 +105,17 @@ describe(`${DISPLAY_NAME} component`, () => {
             } else {
               children = discriminator;
             }
-            const node = <SelectContainer children={children} state={state} />;
+            const node = (
+              <SelectContainer state={state}>{children}</SelectContainer>
+            );
             const wrapper = makeShallowWrapper({ node });
             if (state === "loading") {
               expect(wrapper.hasClass("is-loading")).toBe(true);
-            } else {
-              if (discriminator === "select" || discriminator === "component") {
-                expect(wrapper.children().hasClass(`is-${state}`)).toBe(true);
-              }
+            } else if (
+              discriminator === "select" ||
+              discriminator === "component"
+            ) {
+              expect(wrapper.children().hasClass(`is-${state}`)).toBe(true);
             }
           });
         });
@@ -119,7 +123,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     });
 
     describe("multiple", () => {
-      [false, true].map(multiple => {
+      [false, true].forEach(multiple => {
         [
           { childType: "select" },
           { childType: "component" },
@@ -132,15 +136,15 @@ describe(`${DISPLAY_NAME} component`, () => {
           .filter(
             ({ childType }) =>
               !(
-                ["string", "fragment-empty", "empty"].indexOf(childType) !==
-                  -1 && multiple
+                ["string", "fragment-empty", "empty"].includes(childType) &&
+                multiple
               ),
           )
-          .map(({ childType }) => {
+          .forEach(({ childType }) => {
             const isMultiple =
-              ["select", "component", "compound", "fragment"].indexOf(
+              ["select", "component", "compound", "fragment"].includes(
                 childType,
-              ) !== -1 && multiple;
+              ) && multiple;
 
             it(`should ${
               isMultiple ? "" : "not "
@@ -157,19 +161,19 @@ describe(`${DISPLAY_NAME} component`, () => {
                 ];
               } else if (childType === "fragment") {
                 children = (
-                  <React.Fragment>
+                  <>
                     <div />
                     <Select multiple={multiple} />;
-                  </React.Fragment>
+                  </>
                 );
               } else if (childType === "fragment-empty") {
-                children = <React.Fragment />;
+                children = <></>;
               } else if (childType === "empty") {
                 children = undefined;
               } else {
                 children = childType;
               }
-              const node = <SelectContainer children={children} />;
+              const node = <SelectContainer>{children}</SelectContainer>;
               const wrapper = makeShallowWrapper({ node });
               expect(wrapper.hasClass("is-multiple")).toBe(isMultiple);
             });

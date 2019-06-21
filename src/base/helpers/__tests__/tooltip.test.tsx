@@ -3,13 +3,13 @@ import {
   makeValidatingTransform,
 } from "src/base/helpers/tooltip";
 import { DEFAULTS } from "src/base/helpers/variables";
-
 import {
   validateBoolPropType,
   validateOneOfPropType,
   validatePropType,
   validateStringOrNumberPropType,
 } from "src/__tests__/testing";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
@@ -85,7 +85,7 @@ describe("Tooltip helpers", () => {
       });
     });
 
-    [false, true].map(tooltipActive => {
+    [false, true].forEach(tooltipActive => {
       it(`should ${tooltipActive ? "" : "not "}be tooltipActive`, () => {
         expect(vtfunc({ tooltipActive }, CNAME, LOC)).toEqual({
           className: tooltipActive ? "is-tooltip-active" : "",
@@ -93,7 +93,7 @@ describe("Tooltip helpers", () => {
       });
     });
 
-    DEFAULTS.colors.map(color => {
+    DEFAULTS.colors.forEach(color => {
       it(`should be ${color}`, () => {
         expect(vtfunc({ tooltipColor: color }, CNAME, LOC)).toEqual({
           className: `is-tooltip-${color}`,
@@ -101,7 +101,7 @@ describe("Tooltip helpers", () => {
       });
     });
 
-    [false, true].map(tooltipMultiline => {
+    [false, true].forEach(tooltipMultiline => {
       it(`should ${tooltipMultiline ? "" : "not "}be tooltipMultiline`, () => {
         expect(vtfunc({ tooltipMultiline }, CNAME, LOC)).toEqual({
           className: tooltipMultiline ? "is-tooltip-multiline" : "",
@@ -109,7 +109,7 @@ describe("Tooltip helpers", () => {
       });
     });
 
-    DEFAULTS.tooltipPositions.map(tooltipPosition => {
+    DEFAULTS.tooltipPositions.forEach(tooltipPosition => {
       it(`should be position ${tooltipPosition}`, () => {
         expect(vtfunc({ tooltipPosition }, CNAME, LOC)).toEqual({
           className: `is-tooltip-${tooltipPosition}`,
@@ -117,8 +117,8 @@ describe("Tooltip helpers", () => {
       });
     });
 
-    DEFAULTS.breakpoints.map(breakpoint => {
-      DEFAULTS.tooltipPositions.map(tooltipPosition => {
+    DEFAULTS.breakpoints.forEach(breakpoint => {
+      DEFAULTS.tooltipPositions.forEach(tooltipPosition => {
         it(`should be position ${breakpoint}-${tooltipPosition}`, () => {
           expect(
             vtfunc(

@@ -11,6 +11,7 @@ export const TILE_DEFAULTS = {
   sizes: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface TileVariablesOverrides {}
 
 export interface TileVariablesDefaults {
@@ -34,6 +35,7 @@ export type TileProps = HelpersProps & TileModifierProps;
 export const Tile = forwardRefAs<TileProps>(
   ({ className, kind, size, vertical, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "tile",
         {
@@ -43,7 +45,6 @@ export const Tile = forwardRefAs<TileProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

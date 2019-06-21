@@ -10,6 +10,7 @@ export const LEVEL_ITEM_DEFAULTS = {
   alignments: ["left", "right"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LevelItemVariablesOverrides {}
 
 export interface LevelItemVariablesDefaults {
@@ -30,6 +31,7 @@ export type LevelItemProps = HelpersProps & LevelItemModifierProps;
 export const LevelItem = forwardRefAs<LevelItemProps>(
   ({ align, className, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         {
           "level-item": align === undefined,
@@ -37,7 +39,6 @@ export const LevelItem = forwardRefAs<LevelItemProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

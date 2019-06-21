@@ -1,7 +1,6 @@
 import React from "react";
 
 import { PaginationLink } from "src/components/pagination/pagination-link";
-
 import {
   GetInnerReactWrapperFunction,
   GetInnerShallowWrapperFunction,
@@ -40,9 +39,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 
@@ -63,13 +62,15 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory(getLeafShallowWrapper);
 
     describe("current", () => {
       validateBoolPropType(propTypes, "current");
 
-      [false, true].map(current => {
+      [false, true].forEach(current => {
         it(`should ${current ? "" : "not "}be current`, () => {
           const node = <PaginationLink current={current} />;
           const wrapper = makeShallowWrapper({ node });

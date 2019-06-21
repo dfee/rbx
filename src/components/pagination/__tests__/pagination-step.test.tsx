@@ -5,7 +5,6 @@ import {
   PaginationStep,
   PaginationStepProps,
 } from "src/components/pagination/pagination-step";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -34,22 +33,24 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: "pagination-next",
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeNode,
   });
 
   testThemeIntegration(COMPONENT, { makeNode });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      PAGINATION_STEP_DEFAULTS.alignments.map(align => {
+      PAGINATION_STEP_DEFAULTS.alignments.forEach(align => {
         it(`should be ${align}`, () => {
           const node = makeNode({ align });
           const wrapper = makeShallowWrapper({ node });

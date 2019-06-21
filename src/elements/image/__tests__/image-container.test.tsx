@@ -5,7 +5,6 @@ import {
   IMAGE_CONTAINER_DEFAULTS,
   ImageContainer,
 } from "src/elements/image/image-container";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -25,15 +24,17 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("size", () => {
@@ -42,7 +43,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       [
         ...IMAGE_CONTAINER_DEFAULTS.dimmensions,
         ...IMAGE_CONTAINER_DEFAULTS.ratios,
-      ].map(size => {
+      ].forEach(size => {
         it(`should be ${size}`, () => {
           const node = <ImageContainer size={size} />;
           const wrapper = makeShallowWrapper({ node });
@@ -54,10 +55,9 @@ describe(`${DISPLAY_NAME} component`, () => {
         });
       });
 
-      ["dimmension", "ratio"].map(sizeType => {
+      ["dimmension", "ratio"].forEach(sizeType => {
         const size = sizeType === "dimmension" ? 16 : "square";
-        // tslint:disable-next-line: no-null-keyword
-        [undefined, null, "Image", "img", "div", "Fragment", "text"].map(
+        [undefined, null, "Image", "img", "div", "Fragment", "text"].forEach(
           childType => {
             const expectHasRatio =
               childType !== null &&
@@ -75,21 +75,23 @@ describe(`${DISPLAY_NAME} component`, () => {
             } else if (childType === "Image") {
               children = <Image />;
             } else if (childType === "img") {
-              children = <img role="presentation" alt="" />;
+              children = <img alt="" role="presentation" />;
             } else if (childType === "div") {
               children = <div />;
             } else if (childType === "Fragment") {
               children = (
-                <React.Fragment>
+                <>
                   <div />
-                </React.Fragment>
+                </>
               );
             }
 
             it(`should ${
               expectHasRatio ? "" : "not "
             }have class 'has-ratio' for ${JSON.stringify(childType)}`, () => {
-              const node = <ImageContainer size={size} children={children} />;
+              const node = (
+                <ImageContainer size={size}>{children}</ImageContainer>
+              );
               const wrapper = makeShallowWrapper({ node });
               const childWrapper = wrapper.children();
               if (childType === null || childType === undefined) {

@@ -1,7 +1,6 @@
 import React from "react";
 
 import { PaginationEllipsis } from "src/components/pagination/pagination-ellipsis";
-
 import {
   GetInnerReactWrapperFunction,
   GetInnerShallowWrapperFunction,
@@ -42,9 +41,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperFactory(getLeafShallowWrapper),
   });
 

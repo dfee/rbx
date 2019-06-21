@@ -9,8 +9,8 @@ export type FileLabelProps = HelpersProps;
 export const FileLabel = forwardRefAs<FileLabelProps>(
   ({ className, ...rest }, ref) => (
     <Generic
-      className={classNames("file-label", className)}
       ref={ref}
+      className={classNames("file-label", className)}
       {...rest}
     />
   ),

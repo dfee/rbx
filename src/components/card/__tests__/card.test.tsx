@@ -3,7 +3,6 @@ import { CardContent } from "src/components/card/card-content";
 import { CardFooter } from "src/components/card/card-footer";
 import { CardHeader } from "src/components/card/card-header";
 import { CardImage } from "src/components/card/card-image";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -18,16 +17,16 @@ const BULMA_CLASS_NAME = "card";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Content: CardContent,
+    defaultProps: { as: DEFAULT_ELEMENT },
     Footer: CardFooter,
     Header: CardHeader,
     Image: CardImage,
-    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);

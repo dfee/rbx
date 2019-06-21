@@ -4,6 +4,7 @@ import React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
+
 import { ImageContainer } from "./image-container";
 
 export type ImageModifierProps = {
@@ -16,8 +17,8 @@ export const Image = Object.assign(
   forwardRefAs<ImageProps>(
     ({ className, rounded, ...rest }, ref) => (
       <Generic
-        className={classNames({ "is-rounded": rounded }, className)}
         ref={ref}
+        className={classNames({ "is-rounded": rounded }, className)}
         {...rest}
       />
     ),

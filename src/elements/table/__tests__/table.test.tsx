@@ -7,7 +7,6 @@ import { TableFoot } from "src/elements/table/table-foot";
 import { TableHead } from "src/elements/table/table-head";
 import { TableHeading } from "src/elements/table/table-heading";
 import { TableRow } from "src/elements/table/table-row";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -25,29 +24,31 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Body: TableBody,
     Cell: TableCell,
+    defaultProps: { as: DEFAULT_ELEMENT },
     Foot: TableFoot,
     Head: TableHead,
     Heading: TableHeading,
     Row: TableRow,
-    defaultProps: { as: DEFAULT_ELEMENT },
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("bordered", () => {
       validateBoolPropType(propTypes, "bordered");
 
-      [false, true].map(bordered => {
+      [false, true].forEach(bordered => {
         it(`should ${bordered ? "" : "not "}be bordered`, () => {
           const node = <Table bordered={bordered} />;
           const wrapper = makeShallowWrapper({ node });
@@ -59,7 +60,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("fullwidth", () => {
       validateBoolPropType(propTypes, "fullwidth");
 
-      [false, true].map(fullwidth => {
+      [false, true].forEach(fullwidth => {
         it(`should ${fullwidth ? "" : "not "}be fullwidth`, () => {
           const node = <Table fullwidth={fullwidth} />;
           const wrapper = makeShallowWrapper({ node });
@@ -71,7 +72,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("hoverable", () => {
       validateBoolPropType(propTypes, "hoverable");
 
-      [false, true].map(hoverable => {
+      [false, true].forEach(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = <Table hoverable={hoverable} />;
           const wrapper = makeShallowWrapper({ node });
@@ -83,7 +84,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("narrow", () => {
       validateBoolPropType(propTypes, "narrow");
 
-      [false, true].map(narrow => {
+      [false, true].forEach(narrow => {
         it(`should ${narrow ? "" : "not "}be narrow`, () => {
           const node = <Table narrow={narrow} />;
           const wrapper = makeShallowWrapper({ node });
@@ -95,7 +96,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("striped", () => {
       validateBoolPropType(propTypes, "striped");
 
-      [false, true].map(striped => {
+      [false, true].forEach(striped => {
         it(`should ${striped ? "" : "not "}be striped`, () => {
           const node = <Table striped={striped} />;
           const wrapper = makeShallowWrapper({ node });

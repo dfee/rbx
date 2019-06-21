@@ -2,7 +2,6 @@ import React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Container } from "src/elements/container/container";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -23,21 +22,23 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("breakpoint", () => {
       validateStringOrNumberPropType(propTypes, "breakpoint");
 
-      DEFAULTS.breakpoints.map(breakpoint => {
+      DEFAULTS.breakpoints.forEach(breakpoint => {
         it(`should be ${breakpoint}`, () => {
           const node = <Container breakpoint={breakpoint} />;
           const wrapper = makeShallowWrapper({ node });
@@ -49,7 +50,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("fluid", () => {
       validateBoolPropType(propTypes, "fluid");
 
-      [false, true].map(fluid => {
+      [false, true].forEach(fluid => {
         it(`should ${fluid ? "" : "not "}be fluid`, () => {
           const node = <Container fluid={fluid} />;
           const wrapper = makeShallowWrapper({ node });

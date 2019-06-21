@@ -1,4 +1,5 @@
 import React from "react";
+import { act } from "react-dom/test-utils";
 
 import { NavbarItem } from "src/components/navbar/navbar-item";
 import { initialValue as navbarInitialValue } from "src/components/navbar/navbar-context";
@@ -6,7 +7,6 @@ import {
   NavbarItemContext,
   NavbarItemContextValue,
 } from "src/components/navbar/navbar-item-context";
-
 import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
@@ -24,7 +24,6 @@ import {
   getInnerReactWrapperInNavbarItemContext,
   // makeShallowWrapperInNavbarItemContextFactory,
 } from "./testing";
-import { act } from "react-dom/test-utils";
 
 const COMPONENT = NavbarItem;
 const DISPLAY_NAME = "Navbar.Item";
@@ -37,9 +36,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
     makeShallowWrapper: makeShallowWrapperInNavbarContextFactory(),
   });
 
@@ -49,14 +48,16 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   describe("props", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperInNavbarContextFactory();
 
     describe("active", () => {
       validateBoolPropType(propTypes, "active");
 
-      [undefined, false, true].map(active => {
-        [undefined, false, true].map(managed => {
+      [undefined, false, true].forEach(active => {
+        [undefined, false, true].forEach(managed => {
           const expected = Boolean(managed) && Boolean(active);
           it(`should ${
             expected ? "" : "not "
@@ -74,7 +75,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("expanded", () => {
       validateBoolPropType(propTypes, "expanded");
 
-      [false, true].map(expanded => {
+      [false, true].forEach(expanded => {
         it(`should ${expanded ? "" : "not "}be expanded`, () => {
           const node = <NavbarItem expanded={expanded} />;
           const wrapper = makeShallowWrapper({ node });
@@ -89,11 +90,11 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("onClick", () => {
       validatePropType(propTypes, "onClick", [
-        { value: () => undefined, valid: true, descriptor: "func" },
-        { value: "string", valid: false },
+        { descriptor: "func", valid: true, value: () => undefined },
+        { valid: false, value: "string" },
       ]);
 
-      [false, true].map(hasOnClick => {
+      [false, true].forEach(hasOnClick => {
         it(`should update context ${
           hasOnClick ? "and call provided onClick" : ""
         }`, () => {
@@ -122,7 +123,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("tab", () => {
       validateBoolPropType(propTypes, "tab");
 
-      [false, true].map(tab => {
+      [false, true].forEach(tab => {
         it(`should ${tab ? "" : "not "}be tab`, () => {
           const node = <NavbarItem tab={tab} />;
           const wrapper = makeShallowWrapper({ node });
@@ -134,7 +135,9 @@ describe(`${DISPLAY_NAME} component`, () => {
 
   describe("props [for dropdown]", () => {
     // this creates a NavbarItemContextFactory
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
+
     const makeShallowWrapper = makeShallowWrapperInNavbarContextFactory(
       wrapper =>
         wrapper // Navbar ContextProvider
@@ -165,8 +168,8 @@ describe(`${DISPLAY_NAME} component`, () => {
           .children()
           .children();
 
-      [false, true].map(managed =>
-        [false, true].map(active => {
+      [false, true].forEach(managed =>
+        [false, true].forEach(active => {
           const isToggleable = managed && active;
           it(`should ${
             isToggleable ? "" : "not "
@@ -191,7 +194,7 @@ describe(`${DISPLAY_NAME} component`, () => {
         root.setAttribute("id", "root");
         document.body.appendChild(root);
         const ref = React.createRef<HTMLDivElement>();
-        const node = <NavbarItem dropdown active ref={ref} />;
+        const node = <NavbarItem ref={ref} active dropdown />;
         withEnzymeMount(
           { node, options: { attachTo: root } },
           ({ state: { outer } }) => {
@@ -203,8 +206,8 @@ describe(`${DISPLAY_NAME} component`, () => {
         );
       });
 
-      [undefined, false, true].map(initialActive =>
-        [undefined, false, true].map(managed => {
+      [undefined, false, true].forEach(initialActive =>
+        [undefined, false, true].forEach(managed => {
           const initialActiveAsBool = initialActive === true;
           it(`should ${
             managed === true ? "" : "not "
@@ -214,10 +217,10 @@ describe(`${DISPLAY_NAME} component`, () => {
             const ref = React.createRef<HTMLDivElement>();
             const node = (
               <NavbarItem
+                ref={ref}
                 dropdown
                 active={initialActive}
                 managed={managed}
-                ref={ref}
               >
                 <NavbarItemContext.Consumer>
                   {context => {
@@ -262,7 +265,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("hoverable", () => {
       validateBoolPropType(propTypes, "hoverable");
 
-      [false, true].map(hoverable => {
+      [false, true].forEach(hoverable => {
         it(`should ${hoverable ? "" : "not "}be hoverable`, () => {
           const node = <NavbarItem dropdown hoverable={hoverable} />;
           const wrapper = makeShallowWrapper({ node });
@@ -274,7 +277,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("up", () => {
       validateBoolPropType(propTypes, "up");
 
-      [false, true].map(up => {
+      [false, true].forEach(up => {
         it(`should ${up ? "" : "not "}have dropdown-up`, () => {
           const node = <NavbarItem dropdown up={up} />;
           const wrapper = makeShallowWrapper({ node });

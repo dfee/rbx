@@ -10,8 +10,8 @@ export const PaginationEllipsis = forwardRefAs<PaginationEllipsisProps>(
   ({ className, ...rest }, ref) => (
     <li>
       <Generic
-        className={classNames("pagination-ellipsis", className)}
         ref={ref}
+        className={classNames("pagination-ellipsis", className)}
         {...rest}
       />
     </li>

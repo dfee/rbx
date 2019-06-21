@@ -1,11 +1,12 @@
 import { makeRootValidatingTransform } from "src/base/helpers";
 
+import { DEFAULTS } from "../variables";
+
 import {
   testItShouldNotSetClassNameOnEmpty,
   testItShouldPreserveCustomClassName,
   testItShouldPreserveUnknown,
 } from "./testing";
-import { DEFAULTS } from "../variables";
 
 const CNAME = "foo";
 const LOC = "prop";

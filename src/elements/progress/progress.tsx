@@ -11,6 +11,7 @@ export const PROGRESS_DEFAULTS = {
   sizes: ["small", "medium", "large"] as const,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ProgressVariablesOverrides {}
 
 export interface ProgressVariablesDefaults {
@@ -34,6 +35,7 @@ export type ProgressProps = HelpersProps & ProgressModifierProps;
 export const Progress = forwardRefAs<ProgressProps>(
   ({ className, color, size, ...rest }, ref) => (
     <Generic
+      ref={ref}
       className={classNames(
         "progress",
         {
@@ -42,7 +44,6 @@ export const Progress = forwardRefAs<ProgressProps>(
         },
         className,
       )}
-      ref={ref}
       {...rest}
     />
   ),

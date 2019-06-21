@@ -4,7 +4,6 @@ import {
   MEDIA_ITEM_DEFAULTS,
   MediaItem,
 } from "src/components/media/media-item";
-
 import {
   hasProperties,
   makeShallowWrapperFactory,
@@ -27,21 +26,22 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {
-    displayName: DISPLAY_NAME,
     bulmaClassName: BULMA_CLASS_NAME,
     defaultElement: DEFAULT_ELEMENT,
+    displayName: DISPLAY_NAME,
   });
 
   testThemeIntegration(COMPONENT);
 
   describe("propTypes", () => {
+    // eslint-disable-next-line react/forbid-foreign-prop-types
     const { propTypes } = COMPONENT;
     const makeShallowWrapper = makeShallowWrapperFactory();
 
     describe("align", () => {
       validateStringOrNumberPropType(propTypes, "align");
 
-      MEDIA_ITEM_DEFAULTS.alignments.map(align => {
+      MEDIA_ITEM_DEFAULTS.alignments.forEach(align => {
         it(`should be ${align}`, () => {
           const node = <MediaItem align={align} />;
           const wrapper = makeShallowWrapper({ node });
