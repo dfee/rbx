@@ -16,7 +16,7 @@
     "@zeit/next-css": "^1.0.1",
     "classnames": "^2.2.6",
     "next": "^8.1.0",
-    "rbx": "file:../../dist",
+    "rbx": "file:../../release.tgz",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },

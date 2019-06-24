@@ -1,7 +1,7 @@
 build_dir = ./dist
 
 ### Build
-all: clean esm cjs styles
+all: clean esm cjs styles pack
 	@sed 's/"dist\//"/g' package.json > $(build_dir)/package.json
 	@sed -E 's/\[A quick look\]\(.+ "/[A quick look](https:\/\/raw.githubusercontent.com\/dfee\/rbx\/v2.0.0-beta.0\/src\/__docs__\/public\/demo.png "/' README.md > $(build_dir)/README.md
 .PHONY: all
@@ -30,6 +30,10 @@ clean:
 	@echo "Deleting $(build_dir)"
 	@rm -rf $(build_dir)
 .PHONY: clean
+
+pack: ${build_dir}
+	@echo "Packing to release.tgz"
+	@cd ${build_dir} && npm pack | xargs -I % mv % ../release.tgz
 
 ### Publish
 publish:
