@@ -69,11 +69,11 @@ export const File = Object.assign(
   ),
   {
     CTA: FileCTA,
+    DEFAULTS: FILE_DEFAULTS,
     Icon: FileIcon,
     Input: FileInput,
     Label: FileLabel,
     Name: FileName,
-    VARIABLE_DEFAULTS: FILE_DEFAULTS,
   },
 );
 

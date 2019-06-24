@@ -102,11 +102,11 @@ export const Dropdown = Object.assign(
   {
     Content: DropdownContent,
     Context: DropdownContext,
+    DEFAULTS: DROPDOWN_DEFAULTS,
     Divider: DropdownDivider,
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
-    VARIABLE_DEFAULTS: DROPDOWN_DEFAULTS,
   },
 );
 

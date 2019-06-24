@@ -52,7 +52,7 @@ export const ButtonGroup = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: BUTTON_GROUP_DEFAULTS,
+    DEFAULTS: BUTTON_GROUP_DEFAULTS,
   },
 );
 

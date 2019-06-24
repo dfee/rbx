@@ -134,8 +134,8 @@ export const Column = Object.assign(
     { as: "div" },
   ),
   {
+    DEFAULTS: COLUMN_DEFAULTS,
     Group: ColumnGroup,
-    VARIABLE_DEFAULTS: COLUMN_DEFAULTS,
   },
 );
 

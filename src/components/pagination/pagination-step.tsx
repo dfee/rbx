@@ -40,7 +40,7 @@ export const PaginationStep = Object.assign(
     { as: "a" },
   ),
   {
-    VARIABLE_DEFAULTS: PAGINATION_STEP_DEFAULTS,
+    DEFAULTS: PAGINATION_STEP_DEFAULTS,
   },
 );
 

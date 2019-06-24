@@ -18,8 +18,8 @@ const BULMA_CLASS_NAME = "content";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: CONTENT_DEFAULTS,
     OrderedList: ContentOrderedList,
-    VARIABLE_DEFAULTS: CONTENT_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

@@ -17,7 +17,7 @@ const BULMA_CLASS_NAME = "section";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: SECTION_DEFAULTS,
+    DEFAULTS: SECTION_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

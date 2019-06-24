@@ -43,8 +43,8 @@ export const ContentOrderedList = Object.assign(
     { as: "ol" },
   ),
   {
+    DEFAULTS: CONTENT_ORDERED_LIST_DEFAULTS,
     Item: ContentOrderedListItem,
-    VARIABLE_DEFAULTS: CONTENT_ORDERED_LIST_DEFAULTS,
   },
 );
 

@@ -105,7 +105,7 @@ export const ImageContainer = Object.assign(
     { as: "figure" },
   ),
   {
-    VARIABLE_DEFAULTS: IMAGE_CONTAINER_DEFAULTS,
+    DEFAULTS: IMAGE_CONTAINER_DEFAULTS,
   },
 );
 

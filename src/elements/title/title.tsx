@@ -50,7 +50,7 @@ export const Title = Object.assign(
     { as: "h1" },
   ),
   {
-    VARIABLE_DEFAULTS: TITLE_DEFAULTS,
+    DEFAULTS: TITLE_DEFAULTS,
   },
 );
 

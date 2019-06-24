@@ -62,9 +62,9 @@ export const Hero = Object.assign(
   ),
   {
     Body: HeroBody,
+    DEFAULTS: HERO_DEFAULTS,
     Foot: HeroFoot,
     Head: HeroHead,
-    VARIABLE_DEFAULTS: HERO_DEFAULTS,
   },
 );
 

@@ -22,7 +22,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       as: DEFAULT_ELEMENT,
       rows: 4,
     },
-    VARIABLE_DEFAULTS: TEXTAREA_DEFAULTS,
+    DEFAULTS: TEXTAREA_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

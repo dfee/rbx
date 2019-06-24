@@ -18,7 +18,7 @@ const BULMA_CLASS_NAME = "tags";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: TAG_GROUP_DEFAULTS,
+    DEFAULTS: TAG_GROUP_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

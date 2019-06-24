@@ -1,7 +1,6 @@
-import { makeRootValidatingTransform } from "rbx/base/helpers";
-import { DEFAULTS } from "rbx/base/helpers/variables";
+import { Generic, makeRootValidatingTransform } from "rbx";
 
-const COLORS = [...DEFAULTS.colors, "react"] as const;
+const COLORS = [...Generic.DEFAULTS.colors, "react"] as const;
 
 export const themeValue = {
   transform: makeRootValidatingTransform({ colors: COLORS }),

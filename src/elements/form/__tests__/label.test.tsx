@@ -21,7 +21,7 @@ const BULMA_CLASS_NAME = "label";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: LABEL_DEFAULTS,
+    DEFAULTS: LABEL_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

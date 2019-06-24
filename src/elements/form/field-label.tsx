@@ -44,7 +44,7 @@ export const FieldLabel = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: FIELD_LABEL_DEFAULTS,
+    DEFAULTS: FIELD_LABEL_DEFAULTS,
   },
 );
 

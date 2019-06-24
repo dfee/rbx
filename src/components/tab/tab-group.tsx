@@ -61,7 +61,7 @@ export const TabGroup = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: TAB_GROUP_DEFAULTS,
+    DEFAULTS: TAB_GROUP_DEFAULTS,
   },
 );
 

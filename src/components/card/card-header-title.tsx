@@ -44,7 +44,7 @@ export const CardHeaderTitle = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: CARD_HEADER_TITLE_DEFAULTS,
+    DEFAULTS: CARD_HEADER_TITLE_DEFAULTS,
   },
 );
 

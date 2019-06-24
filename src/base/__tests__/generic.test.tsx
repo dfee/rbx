@@ -8,6 +8,7 @@ import {
   GetInnerShallowWrapperFunction,
   GetInnerReactWrapperFunction,
 } from "src/__tests__/testing";
+import { DEFAULTS } from "src/base/helpers/variables";
 
 const COMPONENT = Generic;
 const DISPLAY_NAME = "Generic";
@@ -25,6 +26,7 @@ const getReactInnerWrapper: GetInnerReactWrapperFunction = wrapper =>
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: "div" },
+    DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

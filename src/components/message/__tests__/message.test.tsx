@@ -21,8 +21,8 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Body: MessageBody,
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: MESSAGE_DEFAULTS,
     Header: MessageHeader,
-    VARIABLE_DEFAULTS: MESSAGE_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

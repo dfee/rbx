@@ -40,7 +40,7 @@ export const Section = Object.assign(
     { as: "section" },
   ),
   {
-    VARIABLE_DEFAULTS: SECTION_DEFAULTS,
+    DEFAULTS: SECTION_DEFAULTS,
   },
 );
 

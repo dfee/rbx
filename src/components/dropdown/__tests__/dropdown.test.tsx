@@ -41,11 +41,11 @@ describe(`${DISPLAY_NAME} component`, () => {
     Content: DropdownContent,
     Context: DropdownContext,
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: DROPDOWN_DEFAULTS,
     Divider: DropdownDivider,
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
-    VARIABLE_DEFAULTS: DROPDOWN_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

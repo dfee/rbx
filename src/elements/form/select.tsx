@@ -113,7 +113,7 @@ export const SelectContainer = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: SELECT_CONTAINER_DEFAULTS,
+    DEFAULTS: SELECT_CONTAINER_DEFAULTS,
   },
 );
 

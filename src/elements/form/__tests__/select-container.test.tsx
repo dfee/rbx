@@ -23,7 +23,7 @@ const BULMA_CLASS_NAME = "select";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: SELECT_CONTAINER_DEFAULTS,
+    DEFAULTS: SELECT_CONTAINER_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

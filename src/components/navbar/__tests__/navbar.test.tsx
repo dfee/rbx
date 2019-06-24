@@ -47,13 +47,13 @@ describe(`${DISPLAY_NAME} component`, () => {
     Burger: NavbarBurger,
     Context: NavbarContext,
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: NAVBAR_DEFAULTS,
     Divider: NavbarDivider,
     Dropdown: NavbarDropdown,
     Item: NavbarItem,
     Link: NavbarLink,
     Menu: NavbarMenu,
     Segment: NavbarSegment,
-    VARIABLE_DEFAULTS: NAVBAR_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

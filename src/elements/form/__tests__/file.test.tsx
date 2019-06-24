@@ -19,7 +19,7 @@ const BULMA_CLASS_NAME = "file";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: FILE_DEFAULTS,
+    DEFAULTS: FILE_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

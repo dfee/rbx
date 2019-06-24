@@ -48,7 +48,7 @@ export const NavbarDropdown = Object.assign(
     { as: "span" },
   ),
   {
-    VARIABLE_DEFAULTS: NAVBAR_DROPDOWN_DEFAULTS,
+    DEFAULTS: NAVBAR_DROPDOWN_DEFAULTS,
   },
 );
 

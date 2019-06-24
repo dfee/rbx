@@ -52,7 +52,7 @@ export const Tile = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: TILE_DEFAULTS,
+    DEFAULTS: TILE_DEFAULTS,
   },
 );
 

@@ -1,8 +1,7 @@
 import Enzyme from "enzyme";
 import React from "react";
 import ReactDOM from "react-dom";
-import { Container, Delete, Notification } from "rbx";
-// import { ThemeContext } from "rbx/base/theme";
+import { Container, Delete, Notification, ThemeContext } from "rbx";
 
 import { App, HelloWorldNotification } from "./App";
 
@@ -16,7 +15,7 @@ describe("app", () => {
   it("renders a HelloWorldNotification", () => {
     const node = <App />;
     const wrapper = Enzyme.shallow(node);
-    // expect(wrapper.is(ThemeContext.Provider)).toBe(true);
+    expect(wrapper.is(ThemeContext.Provider)).toBe(true);
     expect(wrapper.children().is(Container)).toBe(true);
     expect(
       wrapper

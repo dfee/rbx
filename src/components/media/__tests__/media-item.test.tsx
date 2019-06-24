@@ -23,7 +23,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       align: "content",
       as: DEFAULT_ELEMENT,
     },
-    VARIABLE_DEFAULTS: MEDIA_ITEM_DEFAULTS,
+    DEFAULTS: MEDIA_ITEM_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

@@ -43,7 +43,7 @@ export const MediaItem = Object.assign(
     },
   ),
   {
-    VARIABLE_DEFAULTS: MEDIA_ITEM_DEFAULTS,
+    DEFAULTS: MEDIA_ITEM_DEFAULTS,
   },
 );
 

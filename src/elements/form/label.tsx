@@ -85,7 +85,7 @@ export const Label = Object.assign(
     { as: "label" },
   ),
   {
-    VARIABLE_DEFAULTS: LABEL_DEFAULTS,
+    DEFAULTS: LABEL_DEFAULTS,
   },
 );
 

@@ -53,7 +53,7 @@ export const Icon = Object.assign(
     { as: "span" },
   ),
   {
-    VARIABLE_DEFAULTS: ICON_DEFAULTS,
+    DEFAULTS: ICON_DEFAULTS,
   },
 );
 

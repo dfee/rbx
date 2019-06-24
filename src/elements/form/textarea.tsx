@@ -58,7 +58,7 @@ export const Textarea = Object.assign(
     },
   ),
   {
-    VARIABLE_DEFAULTS: TEXTAREA_DEFAULTS,
+    DEFAULTS: TEXTAREA_DEFAULTS,
   },
 );
 

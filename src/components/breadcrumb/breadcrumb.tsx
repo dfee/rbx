@@ -58,8 +58,8 @@ export const Breadcrumb = Object.assign(
     { as: "nav" },
   ),
   {
+    DEFAULTS: BREADCRUMB_DEFAULTS,
     Item: BreadcrumbItem,
-    VARIABLE_DEFAULTS: BREADCRUMB_DEFAULTS,
   },
 );
 

@@ -85,8 +85,8 @@ export const Button = Object.assign(
     { as: "button" },
   ),
   {
+    DEFAULTS: BUTTON_DEFAULTS,
     Group: ButtonGroup,
-    VARIABLE_DEFAULTS: BUTTON_DEFAULTS,
   },
 );
 

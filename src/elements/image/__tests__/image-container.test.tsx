@@ -21,7 +21,7 @@ const BULMA_CLASS_NAME = "image";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: IMAGE_CONTAINER_DEFAULTS,
+    DEFAULTS: IMAGE_CONTAINER_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

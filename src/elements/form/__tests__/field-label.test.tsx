@@ -20,7 +20,7 @@ const BULMA_CLASS_NAME = "field-label";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: FIELD_LABEL_DEFAULTS,
+    DEFAULTS: FIELD_LABEL_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

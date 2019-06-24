@@ -53,8 +53,8 @@ export const Message = Object.assign(
   ),
   {
     Body: MessageBody,
+    DEFAULTS: MESSAGE_DEFAULTS,
     Header: MessageHeader,
-    VARIABLE_DEFAULTS: MESSAGE_DEFAULTS,
   },
 );
 

@@ -42,8 +42,8 @@ export const Content = Object.assign(
     { as: "div" },
   ),
   {
+    DEFAULTS: CONTENT_DEFAULTS,
     OrderedList: ContentOrderedList,
-    VARIABLE_DEFAULTS: CONTENT_DEFAULTS,
   },
 );
 

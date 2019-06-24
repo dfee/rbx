@@ -48,7 +48,7 @@ export const TagGroup = Object.assign(
     { as: "span" },
   ),
   {
-    VARIABLE_DEFAULTS: TAG_GROUP_DEFAULTS,
+    DEFAULTS: TAG_GROUP_DEFAULTS,
   },
 );
 

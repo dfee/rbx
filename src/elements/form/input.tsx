@@ -88,7 +88,7 @@ export const Input = Object.assign(
     { as: "input" },
   ),
   {
-    VARIABLE_DEFAULTS: INPUT_DEFAULTS,
+    DEFAULTS: INPUT_DEFAULTS,
   },
 );
 

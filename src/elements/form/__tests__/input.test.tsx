@@ -19,7 +19,7 @@ const BULMA_CLASS_NAME = "input";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: INPUT_DEFAULTS,
+    DEFAULTS: INPUT_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

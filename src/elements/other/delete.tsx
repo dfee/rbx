@@ -40,7 +40,7 @@ export const Delete = Object.assign(
     { as: "a" },
   ),
   {
-    VARIABLE_DEFAULTS: DELETE_DEFAULTS,
+    DEFAULTS: DELETE_DEFAULTS,
   },
 );
 

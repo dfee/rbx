@@ -54,7 +54,7 @@ export const Progress = Object.assign(
     },
   ),
   {
-    VARIABLE_DEFAULTS: PROGRESS_DEFAULTS,
+    DEFAULTS: PROGRESS_DEFAULTS,
   },
 );
 

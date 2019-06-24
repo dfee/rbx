@@ -20,7 +20,7 @@ const BULMA_CLASS_NAME = "level-item";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: LEVEL_ITEM_DEFAULTS,
+    DEFAULTS: LEVEL_ITEM_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

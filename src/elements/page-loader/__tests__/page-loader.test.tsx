@@ -22,7 +22,7 @@ const BULMA_CLASS_NAME = "pageloader";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: PAGE_LOADER_DEFAULTS,
+    DEFAULTS: PAGE_LOADER_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

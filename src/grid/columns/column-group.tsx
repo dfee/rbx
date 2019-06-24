@@ -124,7 +124,7 @@ export const ColumnGroup = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: COLUMN_GROUP_DEFAULTS,
+    DEFAULTS: COLUMN_GROUP_DEFAULTS,
   },
 );
 

@@ -23,9 +23,9 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Body: HeroBody,
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: HERO_DEFAULTS,
     Foot: HeroFoot,
     Head: HeroHead,
-    VARIABLE_DEFAULTS: HERO_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

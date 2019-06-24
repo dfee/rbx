@@ -25,11 +25,11 @@ const BULMA_CLASS_NAME = "pagination";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: PAGINATION_DEFAULTS,
     Ellipsis: PaginationEllipsis,
     Link: PaginationLink,
     List: PaginationList,
     Step: PaginationStep,
-    VARIABLE_DEFAULTS: PAGINATION_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

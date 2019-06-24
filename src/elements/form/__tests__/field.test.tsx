@@ -21,8 +21,8 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     Body: FieldBody,
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: FIELD_DEFAULTS,
     Label: FieldLabel,
-    VARIABLE_DEFAULTS: FIELD_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

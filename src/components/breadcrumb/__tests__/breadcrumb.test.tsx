@@ -21,8 +21,8 @@ const BULMA_CLASS_NAME = "breadcrumb";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: BREADCRUMB_DEFAULTS,
     Item: BreadcrumbItem,
-    VARIABLE_DEFAULTS: BREADCRUMB_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

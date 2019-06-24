@@ -20,8 +20,8 @@ const BULMA_CLASS_NAME = "button";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    DEFAULTS: BUTTON_DEFAULTS,
     Group: ButtonGroup,
-    VARIABLE_DEFAULTS: BUTTON_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

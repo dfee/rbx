@@ -113,13 +113,13 @@ export const Navbar = Object.assign(
     Brand: NavbarBrand,
     Burger: NavbarBurger,
     Context: NavbarContext,
+    DEFAULTS: NAVBAR_DEFAULTS,
     Divider: NavbarDivider,
     Dropdown: NavbarDropdown,
     Item: NavbarItem,
     Link: NavbarLink,
     Menu: NavbarMenu,
     Segment: NavbarSegment,
-    VARIABLE_DEFAULTS: NAVBAR_DEFAULTS,
   },
 );
 

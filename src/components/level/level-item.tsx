@@ -46,7 +46,7 @@ export const LevelItem = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: LEVEL_ITEM_DEFAULTS,
+    DEFAULTS: LEVEL_ITEM_DEFAULTS,
   },
 );
 

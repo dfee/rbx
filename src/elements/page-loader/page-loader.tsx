@@ -38,7 +38,7 @@ export const PageLoader = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: PAGE_LOADER_DEFAULTS,
+    DEFAULTS: PAGE_LOADER_DEFAULTS,
   },
 );
 

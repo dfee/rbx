@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Container, Notification } from "rbx";
-import { Delete } from "rbx/elements/other/delete";
-// import { ThemeContext } from "rbx/base/theme";
+import { Container, Delete, Notification, ThemeContext } from "rbx";
 
-// import { themeValue } from "./theme";
+import { themeValue } from "./theme";
 import "./App.sass";
 
 export const HelloWorldNotification = () => {
@@ -33,9 +31,9 @@ export const HelloWorldNotification = () => {
 };
 
 export const App = () => (
-  // <ThemeContext.Provider value={themeValue}>
-  <Container>
-    <HelloWorldNotification />
-  </Container>
-  // </ThemeContext.Provider>
+  <ThemeContext.Provider value={themeValue}>
+    <Container>
+      <HelloWorldNotification />
+    </Container>
+  </ThemeContext.Provider>
 );

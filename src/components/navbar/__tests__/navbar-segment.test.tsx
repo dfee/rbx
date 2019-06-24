@@ -34,7 +34,7 @@ const makeNode = (props: Partial<NavbarSegmentProps>) => {
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: NAVBAR_SEGMENT_DEFAULTS,
+    DEFAULTS: NAVBAR_SEGMENT_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

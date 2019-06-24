@@ -30,7 +30,7 @@ const makeNode = (props: Partial<PaginationStepProps>) => {
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
-    VARIABLE_DEFAULTS: PAGINATION_STEP_DEFAULTS,
+    DEFAULTS: PAGINATION_STEP_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

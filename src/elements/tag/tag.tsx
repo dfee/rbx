@@ -61,8 +61,8 @@ export const Tag = Object.assign(
     { as: "span" },
   ),
   {
+    DEFAULTS: TAG_DEFAULTS,
     Group: TagGroup,
-    VARIABLE_DEFAULTS: TAG_DEFAULTS,
   },
 );
 

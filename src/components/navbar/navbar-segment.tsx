@@ -45,7 +45,7 @@ export const NavbarSegment = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: NAVBAR_SEGMENT_DEFAULTS,
+    DEFAULTS: NAVBAR_SEGMENT_DEFAULTS,
   },
 );
 

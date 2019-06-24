@@ -57,7 +57,7 @@ export const Control = Object.assign(
     { as: "div" },
   ),
   {
-    VARIABLE_DEFAULTS: CONTROL_DEFAULTS,
+    DEFAULTS: CONTROL_DEFAULTS,
   },
 );
 
