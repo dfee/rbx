@@ -25,6 +25,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     defaultProps: { as: DEFAULT_ELEMENT },
     Foot: HeroFoot,
     Head: HeroHead,
+    VARIABLE_DEFAULTS: HERO_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

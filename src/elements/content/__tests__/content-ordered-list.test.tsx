@@ -22,6 +22,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
     Item: ContentOrderedListItem,
+    VARIABLE_DEFAULTS: CONTENT_ORDERED_LIST_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

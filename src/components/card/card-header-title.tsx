@@ -28,19 +28,24 @@ export type CardHeaderTitleModifierProps = {
 
 export type CardHeaderTitleProps = HelpersProps & CardHeaderTitleModifierProps;
 
-export const CardHeaderTitle = forwardRefAs<CardHeaderTitleProps>(
-  ({ align, className, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "card-header-title",
-        { [`is-${align}`]: align },
-        className,
-      )}
-      {...rest}
-    />
+export const CardHeaderTitle = Object.assign(
+  forwardRefAs<CardHeaderTitleProps>(
+    ({ align, className, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "card-header-title",
+          { [`is-${align}`]: align },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: CARD_HEADER_TITLE_DEFAULTS,
+  },
 );
 
 CardHeaderTitle.displayName = "Card.Header.Title";

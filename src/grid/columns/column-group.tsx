@@ -58,69 +58,74 @@ type ColumnGroupModifierProps = {
 
 export type ColumnGroupProps = HelpersProps & ColumnGroupModifierProps;
 
-export const ColumnGroup = forwardRefAs<ColumnGroupProps>(
-  (
-    {
-      className,
-      breakpoint,
-      centered,
-      desktop,
-      fullhd,
-      gapless,
-      gapSize,
-      mobile,
-      multiline,
-      tablet,
-      widescreen,
-      touch,
-      vcentered,
-      ...rest
+export const ColumnGroup = Object.assign(
+  forwardRefAs<ColumnGroupProps>(
+    (
+      {
+        className,
+        breakpoint,
+        centered,
+        desktop,
+        fullhd,
+        gapless,
+        gapSize,
+        mobile,
+        multiline,
+        tablet,
+        widescreen,
+        touch,
+        vcentered,
+        ...rest
+      },
+      ref,
+    ) => {
+      const breakpoints = {
+        desktop,
+        fullhd,
+        mobile,
+        tablet,
+        touch,
+        widescreen,
+      };
+
+      const gapSizeClassNames = classNames(
+        { [`is-${gapSize}`]: typeof gapSize === "number" },
+        Object.keys(breakpoints)
+          .map(key => {
+            const value = breakpoints[key as Variables["breakpoints"]];
+
+            return value === undefined
+              ? {}
+              : { [`is-${value.gapSize}-${key}`]: value.gapSize !== undefined };
+          })
+          .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
+      );
+
+      return (
+        <Generic
+          ref={ref}
+          className={classNames(
+            "columns",
+            {
+              [`is-${breakpoint}`]: breakpoint,
+              "is-centered": centered,
+              "is-gapless": gapless,
+              "is-multiline": multiline,
+              "is-variable ": gapSizeClassNames !== "",
+              "is-vcentered": vcentered,
+            },
+            gapSizeClassNames,
+            className,
+          )}
+          {...rest}
+        />
+      );
     },
-    ref,
-  ) => {
-    const breakpoints = {
-      desktop,
-      fullhd,
-      mobile,
-      tablet,
-      touch,
-      widescreen,
-    };
-
-    const gapSizeClassNames = classNames(
-      { [`is-${gapSize}`]: typeof gapSize === "number" },
-      Object.keys(breakpoints)
-        .map(key => {
-          const value = breakpoints[key as Variables["breakpoints"]];
-
-          return value === undefined
-            ? {}
-            : { [`is-${value.gapSize}-${key}`]: value.gapSize !== undefined };
-        })
-        .reduce((acc, cv) => ({ ...acc, ...cv }), {}),
-    );
-
-    return (
-      <Generic
-        ref={ref}
-        className={classNames(
-          "columns",
-          {
-            [`is-${breakpoint}`]: breakpoint,
-            "is-centered": centered,
-            "is-gapless": gapless,
-            "is-multiline": multiline,
-            "is-variable ": gapSizeClassNames !== "",
-            "is-vcentered": vcentered,
-          },
-          gapSizeClassNames,
-          className,
-        )}
-        {...rest}
-      />
-    );
+    { as: "div" },
+  ),
+  {
+    VARIABLE_DEFAULTS: COLUMN_GROUP_DEFAULTS,
   },
-  { as: "div" },
 );
 
 ColumnGroup.displayName = "Column.Group";

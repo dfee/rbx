@@ -42,7 +42,10 @@ export const ContentOrderedList = Object.assign(
     ),
     { as: "ol" },
   ),
-  { Item: ContentOrderedListItem },
+  {
+    Item: ContentOrderedListItem,
+    VARIABLE_DEFAULTS: CONTENT_ORDERED_LIST_DEFAULTS,
+  },
 );
 
 ContentOrderedList.displayName = "Content.OrderedList";

@@ -28,15 +28,20 @@ export type SectionModifierProps = {
 
 export type SectionProps = HelpersProps & SectionModifierProps;
 
-export const Section = forwardRefAs<SectionProps>(
-  ({ className, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames("section", { [`is-${size}`]: size }, className)}
-      {...rest}
-    />
+export const Section = Object.assign(
+  forwardRefAs<SectionProps>(
+    ({ className, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames("section", { [`is-${size}`]: size }, className)}
+        {...rest}
+      />
+    ),
+    { as: "section" },
   ),
-  { as: "section" },
+  {
+    VARIABLE_DEFAULTS: SECTION_DEFAULTS,
+  },
 );
 
 Section.displayName = "Section";

@@ -61,6 +61,7 @@ export const Pagination = Object.assign(
     Link: PaginationLink,
     List: PaginationList,
     Step: PaginationStep,
+    VARIABLE_DEFAULTS: PAGINATION_DEFAULTS,
   },
 );
 

@@ -23,6 +23,7 @@ const BULMA_CLASS_NAME = "columns";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: COLUMN_GROUP_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

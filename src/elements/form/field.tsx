@@ -78,6 +78,7 @@ export const Field = Object.assign(
   {
     Body: FieldBody,
     Label: FieldLabel,
+    VARIABLE_DEFAULTS: FIELD_DEFAULTS,
   },
 );
 

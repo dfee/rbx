@@ -41,7 +41,10 @@ export const Content = Object.assign(
     ),
     { as: "div" },
   ),
-  { OrderedList: ContentOrderedList },
+  {
+    OrderedList: ContentOrderedList,
+    VARIABLE_DEFAULTS: CONTENT_DEFAULTS,
+  },
 );
 
 Content.displayName = "Content";

@@ -32,24 +32,29 @@ export type ProgressModifierProps = {
 
 export type ProgressProps = HelpersProps & ProgressModifierProps;
 
-export const Progress = forwardRefAs<ProgressProps>(
-  ({ className, color, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "progress",
-        {
-          [`is-${color}`]: color,
-          [`is-${size}`]: size,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const Progress = Object.assign(
+  forwardRefAs<ProgressProps>(
+    ({ className, color, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "progress",
+          {
+            [`is-${color}`]: color,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    {
+      as: "progress",
+      max: 100,
+    },
   ),
   {
-    as: "progress",
-    max: 100,
+    VARIABLE_DEFAULTS: PROGRESS_DEFAULTS,
   },
 );
 

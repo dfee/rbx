@@ -73,6 +73,7 @@ export const File = Object.assign(
     Input: FileInput,
     Label: FileLabel,
     Name: FileName,
+    VARIABLE_DEFAULTS: FILE_DEFAULTS,
   },
 );
 

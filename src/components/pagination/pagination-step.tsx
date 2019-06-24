@@ -28,15 +28,20 @@ export type PaginationStepModifierProps = {
 
 export type PaginationStepProps = HelpersProps & PaginationStepModifierProps;
 
-export const PaginationStep = forwardRefAs<PaginationStepProps>(
-  ({ align, className, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames({ [`pagination-${align}`]: align }, className)}
-      {...rest}
-    />
+export const PaginationStep = Object.assign(
+  forwardRefAs<PaginationStepProps>(
+    ({ align, className, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames({ [`pagination-${align}`]: align }, className)}
+        {...rest}
+      />
+    ),
+    { as: "a" },
   ),
-  { as: "a" },
+  {
+    VARIABLE_DEFAULTS: PAGINATION_STEP_DEFAULTS,
+  },
 );
 
 PaginationStep.displayName = "Pagination.Step";

@@ -29,6 +29,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     Link: PaginationLink,
     List: PaginationList,
     Step: PaginationStep,
+    VARIABLE_DEFAULTS: PAGINATION_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

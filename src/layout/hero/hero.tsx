@@ -64,6 +64,7 @@ export const Hero = Object.assign(
     Body: HeroBody,
     Foot: HeroFoot,
     Head: HeroHead,
+    VARIABLE_DEFAULTS: HERO_DEFAULTS,
   },
 );
 

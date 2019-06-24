@@ -28,15 +28,20 @@ export type DeleteModifierProps = {
 
 export type DeleteProps = HelpersProps & DeleteModifierProps;
 
-export const Delete = forwardRefAs<DeleteProps>(
-  ({ className, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames("delete", { [`is-${size}`]: size }, className)}
-      {...rest}
-    />
+export const Delete = Object.assign(
+  forwardRefAs<DeleteProps>(
+    ({ className, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames("delete", { [`is-${size}`]: size }, className)}
+        {...rest}
+      />
+    ),
+    { as: "a" },
   ),
-  { as: "a" },
+  {
+    VARIABLE_DEFAULTS: DELETE_DEFAULTS,
+  },
 );
 
 Delete.displayName = "Delete";

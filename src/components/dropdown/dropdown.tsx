@@ -106,6 +106,7 @@ export const Dropdown = Object.assign(
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
+    VARIABLE_DEFAULTS: DROPDOWN_DEFAULTS,
   },
 );
 

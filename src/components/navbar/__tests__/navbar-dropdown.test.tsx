@@ -22,6 +22,7 @@ const BULMA_CLASS_NAME = "navbar-dropdown";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: NAVBAR_DROPDOWN_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

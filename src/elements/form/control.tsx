@@ -32,28 +32,33 @@ export type ControlModifierProps = {
 
 export type ControlProps = HelpersProps & ControlModifierProps;
 
-export const Control = forwardRefAs<ControlProps>(
-  (
-    { className, expanded, iconLeft, iconRight, loading, size, ...rest },
-    ref,
-  ) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "control",
-        {
-          "has-icons-left": iconLeft,
-          "has-icons-right": iconRight,
-          "is-expanded": expanded,
-          "is-loading": loading,
-          [`is-${size}`]: size,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const Control = Object.assign(
+  forwardRefAs<ControlProps>(
+    (
+      { className, expanded, iconLeft, iconRight, loading, size, ...rest },
+      ref,
+    ) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "control",
+          {
+            "has-icons-left": iconLeft,
+            "has-icons-right": iconRight,
+            "is-expanded": expanded,
+            "is-loading": loading,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: CONTROL_DEFAULTS,
+  },
 );
 
 Control.displayName = "Control";

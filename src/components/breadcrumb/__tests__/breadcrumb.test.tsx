@@ -22,6 +22,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
     Item: BreadcrumbItem,
+    VARIABLE_DEFAULTS: BREADCRUMB_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

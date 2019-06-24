@@ -28,21 +28,26 @@ export type LevelItemModifierProps = {
 
 export type LevelItemProps = HelpersProps & LevelItemModifierProps;
 
-export const LevelItem = forwardRefAs<LevelItemProps>(
-  ({ align, className, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        {
-          "level-item": align === undefined,
-          [`level-${align}`]: align,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const LevelItem = Object.assign(
+  forwardRefAs<LevelItemProps>(
+    ({ align, className, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          {
+            "level-item": align === undefined,
+            [`level-${align}`]: align,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: LEVEL_ITEM_DEFAULTS,
+  },
 );
 
 LevelItem.displayName = "Level.Item";

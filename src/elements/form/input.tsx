@@ -49,42 +49,47 @@ export type InputModifierProps = {
 
 export type InputProps = HelpersProps & InputModifierProps;
 
-export const Input = forwardRefAs<InputProps>(
-  (
-    {
-      className,
-      color,
-      readOnly,
-      rounded,
-      size,
-      state,
-      static: isStatic,
-      ...rest
-    },
-    ref,
-  ) => {
-    const isReadOnly = readOnly === true || isStatic === true;
+export const Input = Object.assign(
+  forwardRefAs<InputProps>(
+    (
+      {
+        className,
+        color,
+        readOnly,
+        rounded,
+        size,
+        state,
+        static: isStatic,
+        ...rest
+      },
+      ref,
+    ) => {
+      const isReadOnly = readOnly === true || isStatic === true;
 
-    return (
-      <Generic
-        ref={ref}
-        className={classNames(
-          "input",
-          {
-            [`is-${color}`]: color,
-            "is-rounded": rounded,
-            [`is-${size}`]: size,
-            "is-static": isStatic,
-            [`is-${state}`]: state,
-          },
-          className,
-        )}
-        readOnly={isReadOnly}
-        {...rest}
-      />
-    );
+      return (
+        <Generic
+          ref={ref}
+          className={classNames(
+            "input",
+            {
+              [`is-${color}`]: color,
+              "is-rounded": rounded,
+              [`is-${size}`]: size,
+              "is-static": isStatic,
+              [`is-${state}`]: state,
+            },
+            className,
+          )}
+          readOnly={isReadOnly}
+          {...rest}
+        />
+      );
+    },
+    { as: "input" },
+  ),
+  {
+    VARIABLE_DEFAULTS: INPUT_DEFAULTS,
   },
-  { as: "input" },
 );
 
 Input.displayName = "Input";

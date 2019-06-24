@@ -21,6 +21,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
     Group: ButtonGroup,
+    VARIABLE_DEFAULTS: BUTTON_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

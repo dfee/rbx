@@ -30,23 +30,28 @@ export type TitleModifierProps = {
 
 export type TitleProps = HelpersProps & TitleModifierProps;
 
-export const Title = forwardRefAs<TitleProps>(
-  ({ className, size, spaced, subtitle, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        {
-          [`is-${size}`]: size !== undefined,
-          "is-spaced": spaced === true && subtitle !== true,
-          subtitle,
-          title: subtitle !== true,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const Title = Object.assign(
+  forwardRefAs<TitleProps>(
+    ({ className, size, spaced, subtitle, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          {
+            [`is-${size}`]: size !== undefined,
+            "is-spaced": spaced === true && subtitle !== true,
+            subtitle,
+            title: subtitle !== true,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "h1" },
   ),
-  { as: "h1" },
+  {
+    VARIABLE_DEFAULTS: TITLE_DEFAULTS,
+  },
 );
 
 Title.displayName = "Title";

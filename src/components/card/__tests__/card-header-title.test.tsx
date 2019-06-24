@@ -20,6 +20,7 @@ const BULMA_CLASS_NAME = "card-header-title";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: CARD_HEADER_TITLE_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

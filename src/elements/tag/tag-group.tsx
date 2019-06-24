@@ -29,22 +29,27 @@ export type TagGroupModifierProps = {
 
 export type TagGroupProps = HelpersProps & TagGroupModifierProps;
 
-export const TagGroup = forwardRefAs<TagGroupProps>(
-  ({ className, gapless, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "tags",
-        {
-          [`are-${size}`]: size,
-          "has-addons": gapless,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const TagGroup = Object.assign(
+  forwardRefAs<TagGroupProps>(
+    ({ className, gapless, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "tags",
+          {
+            [`are-${size}`]: size,
+            "has-addons": gapless,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "span" },
   ),
-  { as: "span" },
+  {
+    VARIABLE_DEFAULTS: TAG_GROUP_DEFAULTS,
+  },
 );
 
 TagGroup.displayName = "Tag.Group";

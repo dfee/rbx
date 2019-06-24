@@ -81,35 +81,40 @@ const mapSelectContainerChildren = (
   return { children: mapped, classNameExtension };
 };
 
-export const SelectContainer = forwardRefAs<SelectContainerProps>(
-  (
-    { className, children, color, fullwidth, rounded, size, state, ...rest },
-    ref,
-  ) => {
-    const mapped = mapSelectContainerChildren(children, state);
+export const SelectContainer = Object.assign(
+  forwardRefAs<SelectContainerProps>(
+    (
+      { className, children, color, fullwidth, rounded, size, state, ...rest },
+      ref,
+    ) => {
+      const mapped = mapSelectContainerChildren(children, state);
 
-    return (
-      <Generic
-        ref={ref}
-        className={classNames(
-          "select",
-          {
-            [`is-${color}`]: color,
-            "is-fullwidth": fullwidth,
-            "is-loading": state === "loading",
-            "is-rounded": rounded,
-            [`is-${size}`]: size,
-          },
-          mapped.classNameExtension,
-          className,
-        )}
-        {...rest}
-      >
-        {mapped.children}
-      </Generic>
-    );
+      return (
+        <Generic
+          ref={ref}
+          className={classNames(
+            "select",
+            {
+              [`is-${color}`]: color,
+              "is-fullwidth": fullwidth,
+              "is-loading": state === "loading",
+              "is-rounded": rounded,
+              [`is-${size}`]: size,
+            },
+            mapped.classNameExtension,
+            className,
+          )}
+          {...rest}
+        >
+          {mapped.children}
+        </Generic>
+      );
+    },
+    { as: "div" },
+  ),
+  {
+    VARIABLE_DEFAULTS: SELECT_CONTAINER_DEFAULTS,
   },
-  { as: "div" },
 );
 
 SelectContainer.displayName = "Select.Container";

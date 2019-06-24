@@ -17,6 +17,7 @@ const BULMA_CLASS_NAME = "delete";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: DELETE_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

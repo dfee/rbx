@@ -53,6 +53,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     Link: NavbarLink,
     Menu: NavbarMenu,
     Segment: NavbarSegment,
+    VARIABLE_DEFAULTS: NAVBAR_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

@@ -28,17 +28,22 @@ export type MediaItemModifierProps = {
 
 export type MediaItemProps = HelpersProps & MediaItemModifierProps;
 
-export const MediaItem = forwardRefAs<MediaItemProps>(
-  ({ align, className, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames({ [`media-${align}`]: align }, className)}
-      {...rest}
-    />
+export const MediaItem = Object.assign(
+  forwardRefAs<MediaItemProps>(
+    ({ align, className, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames({ [`media-${align}`]: align }, className)}
+        {...rest}
+      />
+    ),
+    {
+      align: "content",
+      as: "div",
+    },
   ),
   {
-    align: "content",
-    as: "div",
+    VARIABLE_DEFAULTS: MEDIA_ITEM_DEFAULTS,
   },
 );
 

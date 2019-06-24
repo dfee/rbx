@@ -82,26 +82,31 @@ const mapImageContainerChildren = (
   });
 };
 
-export const ImageContainer = forwardRefAs<ImageContainerProps>(
-  ({ children, className, size, ...rest }, ref) => {
-    let s: string | undefined;
-    if (typeof size === "string") {
-      s = size;
-    } else if (typeof size === "number") {
-      s = `${size}x${size}`;
-    }
+export const ImageContainer = Object.assign(
+  forwardRefAs<ImageContainerProps>(
+    ({ children, className, size, ...rest }, ref) => {
+      let s: string | undefined;
+      if (typeof size === "string") {
+        s = size;
+      } else if (typeof size === "number") {
+        s = `${size}x${size}`;
+      }
 
-    return (
-      <Generic
-        ref={ref}
-        className={classNames("image", { [`is-${s}`]: s }, className)}
-        {...rest}
-      >
-        {mapImageContainerChildren(children, size)}
-      </Generic>
-    );
+      return (
+        <Generic
+          ref={ref}
+          className={classNames("image", { [`is-${s}`]: s }, className)}
+          {...rest}
+        >
+          {mapImageContainerChildren(children, size)}
+        </Generic>
+      );
+    },
+    { as: "figure" },
+  ),
+  {
+    VARIABLE_DEFAULTS: IMAGE_CONTAINER_DEFAULTS,
   },
-  { as: "figure" },
 );
 
 ImageContainer.displayName = "Image.Container";

@@ -18,6 +18,7 @@ const BULMA_CLASS_NAME = "title";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: TITLE_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

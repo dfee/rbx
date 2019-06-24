@@ -28,15 +28,24 @@ export type FieldLabelModifierProps = {
 
 export type FieldLabelProps = HelpersProps & FieldLabelModifierProps;
 
-export const FieldLabel = forwardRefAs<FieldLabelProps>(
-  ({ className, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames("field-label", { [`is-${size}`]: size }, className)}
-      {...rest}
-    />
+export const FieldLabel = Object.assign(
+  forwardRefAs<FieldLabelProps>(
+    ({ className, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "field-label",
+          { [`is-${size}`]: size },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: FIELD_LABEL_DEFAULTS,
+  },
 );
 
 FieldLabel.displayName = "Field.Label";

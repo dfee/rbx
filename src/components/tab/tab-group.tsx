@@ -36,28 +36,33 @@ export type TabGroupModifierProps = {
 
 export type TabGroupProps = HelpersProps & TabGroupModifierProps;
 
-export const TabGroup = forwardRefAs<TabGroupProps>(
-  ({ align, children, className, fullwidth, kind, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "tabs",
-        {
-          [`is-${align}`]: align,
-          [`is-${size}`]: size,
-          "is-fullwidth": fullwidth,
-          [`is-${kind}`]: kind,
-          "is-toggle": kind === "toggle" || kind === "toggle-rounded",
-          "is-toggle-rounded": kind === "toggle-rounded",
-        },
-        className,
-      )}
-      {...rest}
-    >
-      <ul>{children}</ul>
-    </Generic>
+export const TabGroup = Object.assign(
+  forwardRefAs<TabGroupProps>(
+    ({ align, children, className, fullwidth, kind, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "tabs",
+          {
+            [`is-${align}`]: align,
+            [`is-${size}`]: size,
+            "is-fullwidth": fullwidth,
+            [`is-${kind}`]: kind,
+            "is-toggle": kind === "toggle" || kind === "toggle-rounded",
+            "is-toggle-rounded": kind === "toggle-rounded",
+          },
+          className,
+        )}
+        {...rest}
+      >
+        <ul>{children}</ul>
+      </Generic>
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: TAB_GROUP_DEFAULTS,
+  },
 );
 
 TabGroup.displayName = "Tab.Group";

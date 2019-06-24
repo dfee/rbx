@@ -133,7 +133,10 @@ export const Column = Object.assign(
     },
     { as: "div" },
   ),
-  { Group: ColumnGroup },
+  {
+    Group: ColumnGroup,
+    VARIABLE_DEFAULTS: COLUMN_DEFAULTS,
+  },
 );
 
 Column.displayName = "Column";

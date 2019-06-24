@@ -32,23 +32,28 @@ export type ButtonGroupModifierProps = {
 
 export type ButtonGroupProps = HelpersProps & ButtonGroupModifierProps;
 
-export const ButtonGroup = forwardRefAs<ButtonGroupProps>(
-  ({ align, className, hasAddons, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "buttons",
-        {
-          [`are-${size}`]: size,
-          "has-addons": hasAddons,
-          [`is-${[align]}`]: align,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const ButtonGroup = Object.assign(
+  forwardRefAs<ButtonGroupProps>(
+    ({ align, className, hasAddons, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "buttons",
+          {
+            [`are-${size}`]: size,
+            "has-addons": hasAddons,
+            [`is-${[align]}`]: align,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: BUTTON_GROUP_DEFAULTS,
+  },
 );
 
 ButtonGroup.displayName = "Button.Group";

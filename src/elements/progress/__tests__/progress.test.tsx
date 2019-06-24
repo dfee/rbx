@@ -22,6 +22,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       as: DEFAULT_ELEMENT,
       max: 100,
     },
+    VARIABLE_DEFAULTS: PROGRESS_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

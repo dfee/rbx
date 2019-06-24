@@ -45,6 +45,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     Item: DropdownItem,
     Menu: DropdownMenu,
     Trigger: DropdownTrigger,
+    VARIABLE_DEFAULTS: DROPDOWN_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

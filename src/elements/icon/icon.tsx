@@ -33,23 +33,28 @@ export type IconModifierProps = {
 
 export type IconProps = HelpersProps & IconModifierProps;
 
-export const Icon = forwardRefAs<IconProps>(
-  ({ align, className, color, size, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "icon",
-        {
-          [`has-text-${color}`]: color,
-          [`is-${align}`]: align,
-          [`is-${size}`]: size,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const Icon = Object.assign(
+  forwardRefAs<IconProps>(
+    ({ align, className, color, size, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "icon",
+          {
+            [`has-text-${color}`]: color,
+            [`is-${align}`]: align,
+            [`is-${size}`]: size,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "span" },
   ),
-  { as: "span" },
+  {
+    VARIABLE_DEFAULTS: ICON_DEFAULTS,
+  },
 );
 
 Icon.displayName = "Icon";

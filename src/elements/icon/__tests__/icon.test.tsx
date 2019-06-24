@@ -18,6 +18,7 @@ const BULMA_CLASS_NAME = "icon";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: ICON_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

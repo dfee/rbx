@@ -18,6 +18,7 @@ const BULMA_CLASS_NAME = "tabs";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: TAB_GROUP_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

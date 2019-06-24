@@ -60,7 +60,10 @@ export const Tag = Object.assign(
     },
     { as: "span" },
   ),
-  { Group: TagGroup },
+  {
+    Group: TagGroup,
+    VARIABLE_DEFAULTS: TAG_DEFAULTS,
+  },
 );
 
 Tag.displayName = "Tag";

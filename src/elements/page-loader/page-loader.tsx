@@ -18,23 +18,28 @@ export type PageLoaderModifierProps = {
 
 export type PageLoaderProps = HelpersProps & PageLoaderModifierProps;
 
-export const PageLoader = forwardRefAs<PageLoaderProps>(
-  ({ active, className, color, direction, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "pageloader",
-        {
-          "is-active": active,
-          [`is-${color}`]: color,
-          [`is-${direction}`]: direction,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const PageLoader = Object.assign(
+  forwardRefAs<PageLoaderProps>(
+    ({ active, className, color, direction, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "pageloader",
+          {
+            "is-active": active,
+            [`is-${color}`]: color,
+            [`is-${direction}`]: direction,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: PAGE_LOADER_DEFAULTS,
+  },
 );
 
 PageLoader.displayName = "PageLoader";

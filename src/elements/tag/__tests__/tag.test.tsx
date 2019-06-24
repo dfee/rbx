@@ -21,6 +21,7 @@ describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
     Group: TagGroup,
+    VARIABLE_DEFAULTS: TAG_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

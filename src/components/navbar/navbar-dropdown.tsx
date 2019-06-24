@@ -29,22 +29,27 @@ export type NavbarDropdownModifierProps = {
 
 export type NavbarDropdownProps = HelpersProps & NavbarDropdownModifierProps;
 
-export const NavbarDropdown = forwardRefAs<NavbarDropdownProps>(
-  ({ align, boxed, className, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "navbar-dropdown",
-        {
-          [`is-${align}`]: align,
-          "is-boxed": boxed,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const NavbarDropdown = Object.assign(
+  forwardRefAs<NavbarDropdownProps>(
+    ({ align, boxed, className, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "navbar-dropdown",
+          {
+            [`is-${align}`]: align,
+            "is-boxed": boxed,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "span" },
   ),
-  { as: "span" },
+  {
+    VARIABLE_DEFAULTS: NAVBAR_DROPDOWN_DEFAULTS,
+  },
 );
 
 NavbarDropdown.displayName = "Navbar.Dropdown";

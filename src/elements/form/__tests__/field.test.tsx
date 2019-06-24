@@ -22,6 +22,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     Body: FieldBody,
     defaultProps: { as: DEFAULT_ELEMENT },
     Label: FieldLabel,
+    VARIABLE_DEFAULTS: FIELD_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

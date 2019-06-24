@@ -28,20 +28,25 @@ export type NavbarSegmentModifierProps = {
 
 export type NavbarSegmentProps = HelpersProps & NavbarSegmentModifierProps;
 
-export const NavbarSegment = forwardRefAs<NavbarSegmentProps>(
-  ({ align, className, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        {
-          [`navbar-${align}`]: align,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const NavbarSegment = Object.assign(
+  forwardRefAs<NavbarSegmentProps>(
+    ({ align, className, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          {
+            [`navbar-${align}`]: align,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: NAVBAR_SEGMENT_DEFAULTS,
+  },
 );
 
 NavbarSegment.displayName = "Navbar.Segment";

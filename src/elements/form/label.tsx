@@ -62,26 +62,31 @@ const identifyLabelDiscriminator = (children: React.ReactNode) => {
   return discriminator;
 };
 
-export const Label = forwardRefAs<LabelProps>(
-  ({ className, disabled, size, ...rest }, ref) => {
-    const discriminator = identifyLabelDiscriminator(rest.children);
+export const Label = Object.assign(
+  forwardRefAs<LabelProps>(
+    ({ className, disabled, size, ...rest }, ref) => {
+      const discriminator = identifyLabelDiscriminator(rest.children);
 
-    return (
-      <Generic
-        ref={ref}
-        className={classNames(
-          {
-            [`${discriminator}`]: discriminator,
-            "is-disabled": disabled,
-            [`is-${size}`]: size,
-          },
-          className,
-        )}
-        {...rest}
-      />
-    );
+      return (
+        <Generic
+          ref={ref}
+          className={classNames(
+            {
+              [`${discriminator}`]: discriminator,
+              "is-disabled": disabled,
+              [`is-${size}`]: size,
+            },
+            className,
+          )}
+          {...rest}
+        />
+      );
+    },
+    { as: "label" },
+  ),
+  {
+    VARIABLE_DEFAULTS: LABEL_DEFAULTS,
   },
-  { as: "label" },
 );
 
 Label.displayName = "Label";

@@ -32,23 +32,28 @@ export type TileModifierProps = {
 
 export type TileProps = HelpersProps & TileModifierProps;
 
-export const Tile = forwardRefAs<TileProps>(
-  ({ className, kind, size, vertical, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "tile",
-        {
-          [`is-${kind}`]: kind,
-          [`is-${size}`]: size !== undefined,
-          "is-vertical": vertical,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const Tile = Object.assign(
+  forwardRefAs<TileProps>(
+    ({ className, kind, size, vertical, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "tile",
+          {
+            [`is-${kind}`]: kind,
+            [`is-${size}`]: size !== undefined,
+            "is-vertical": vertical,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    { as: "div" },
   ),
-  { as: "div" },
+  {
+    VARIABLE_DEFAULTS: TILE_DEFAULTS,
+  },
 );
 
 Tile.displayName = "Tile";

@@ -84,7 +84,10 @@ export const Button = Object.assign(
     ),
     { as: "button" },
   ),
-  { Group: ButtonGroup },
+  {
+    Group: ButtonGroup,
+    VARIABLE_DEFAULTS: BUTTON_DEFAULTS,
+  },
 );
 
 Button.displayName = "Button";

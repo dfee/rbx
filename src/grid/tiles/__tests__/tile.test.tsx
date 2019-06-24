@@ -18,6 +18,7 @@ const BULMA_CLASS_NAME = "tile";
 describe(`${DISPLAY_NAME} component`, () => {
   hasProperties(COMPONENT, {
     defaultProps: { as: DEFAULT_ELEMENT },
+    VARIABLE_DEFAULTS: TILE_DEFAULTS,
   });
 
   testForwardRefAsExoticComponentIntegration(COMPONENT, {

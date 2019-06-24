@@ -57,7 +57,10 @@ export const Breadcrumb = Object.assign(
     ),
     { as: "nav" },
   ),
-  { Item: BreadcrumbItem },
+  {
+    Item: BreadcrumbItem,
+    VARIABLE_DEFAULTS: BREADCRUMB_DEFAULTS,
+  },
 );
 
 Breadcrumb.displayName = "Breadcrumb";

@@ -34,26 +34,31 @@ export type TextareaModifierProps = {
 
 export type TextareaProps = HelpersProps & TextareaModifierProps;
 
-export const Textarea = forwardRefAs<TextareaProps>(
-  ({ className, color, fixedSize, size, state, ...rest }, ref) => (
-    <Generic
-      ref={ref}
-      className={classNames(
-        "textarea",
-        {
-          "has-fixed-size": fixedSize,
-          [`is-${color}`]: color,
-          [`is-${size}`]: size,
-          [`is-${state}`]: state,
-        },
-        className,
-      )}
-      {...rest}
-    />
+export const Textarea = Object.assign(
+  forwardRefAs<TextareaProps>(
+    ({ className, color, fixedSize, size, state, ...rest }, ref) => (
+      <Generic
+        ref={ref}
+        className={classNames(
+          "textarea",
+          {
+            "has-fixed-size": fixedSize,
+            [`is-${color}`]: color,
+            [`is-${size}`]: size,
+            [`is-${state}`]: state,
+          },
+          className,
+        )}
+        {...rest}
+      />
+    ),
+    {
+      as: "textarea",
+      rows: 4,
+    },
   ),
   {
-    as: "textarea",
-    rows: 4,
+    VARIABLE_DEFAULTS: TEXTAREA_DEFAULTS,
   },
 );
 
