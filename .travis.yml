@@ -1,4 +1,6 @@
 language: node_js
+node_js:
+  - "lts/*"
 script:
   - make # ensure pkg builds
   - make test # run tests
