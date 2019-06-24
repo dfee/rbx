@@ -1,0 +1,2 @@
+# interferes w/ integrity (due to release.tgz)
+package-lock.json
