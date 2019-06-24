@@ -20,18 +20,7 @@ Object {
   },
   "Breadcrumb": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "Item": Object {
-      "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "as": "a",
-      },
-      "displayName": "Breadcrumb.Item",
-      "propTypes": Object {
-        "active": [Function],
-      },
-      "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "alignments": Array [
         "centered",
         "right",
@@ -48,6 +37,17 @@ Object {
         "large",
       ],
     },
+    "Item": Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "defaultProps": Object {
+        "as": "a",
+      },
+      "displayName": "Breadcrumb.Item",
+      "propTypes": Object {
+        "active": [Function],
+      },
+      "render": [Function],
+    },
     "defaultProps": Object {
       "as": "nav",
     },
@@ -61,9 +61,23 @@ Object {
   },
   "Button": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "DEFAULTS": Object {
+      "sizes": Array [
+        "small",
+        "normal",
+        "medium",
+        "large",
+      ],
+      "states": Array [
+        "hovered",
+        "focused",
+        "active",
+        "loading",
+      ],
+    },
     "Group": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "alignments": Array [
           "centered",
           "right",
@@ -84,20 +98,6 @@ Object {
         "size": [Function],
       },
       "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
-      "sizes": Array [
-        "small",
-        "normal",
-        "medium",
-        "large",
-      ],
-      "states": Array [
-        "hovered",
-        "focused",
-        "active",
-        "loading",
-      ],
     },
     "defaultProps": Object {
       "as": "button",
@@ -155,7 +155,7 @@ Object {
       },
       "Title": Object {
         "$$typeof": Symbol(react.forward_ref),
-        "VARIABLE_DEFAULTS": Object {
+        "DEFAULTS": Object {
           "alignments": Array [
             "centered",
           ],
@@ -199,9 +199,36 @@ Object {
   },
   "Column": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "DEFAULTS": Object {
+      "sizes": Array [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        "one-third",
+        "two-thirds",
+        "one-quarter",
+        "half",
+        "three-quarters",
+        "one-fifth",
+        "two-fifths",
+        "three-fifths",
+        "four-fifths",
+        "full",
+      ],
+    },
     "Group": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "gapSizes": Array [
           0,
           1,
@@ -234,33 +261,6 @@ Object {
       },
       "render": [Function],
     },
-    "VARIABLE_DEFAULTS": Object {
-      "sizes": Array [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        "one-third",
-        "two-thirds",
-        "one-quarter",
-        "half",
-        "three-quarters",
-        "one-fifth",
-        "two-fifths",
-        "three-fifths",
-        "four-fifths",
-        "full",
-      ],
-    },
     "defaultProps": Object {
       "as": "div",
     },
@@ -292,8 +292,23 @@ Object {
   },
   "Content": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "DEFAULTS": Object {
+      "sizes": Array [
+        "small",
+        "medium",
+        "large",
+      ],
+    },
     "OrderedList": Object {
       "$$typeof": Symbol(react.forward_ref),
+      "DEFAULTS": Object {
+        "types": Array [
+          "lower-alpha",
+          "lower-roman",
+          "upper-alpha",
+          "upper-roman",
+        ],
+      },
       "Item": Object {
         "$$typeof": Symbol(react.forward_ref),
         "defaultProps": Object {
@@ -301,14 +316,6 @@ Object {
         },
         "displayName": "Content.OrderedList.Item",
         "render": [Function],
-      },
-      "VARIABLE_DEFAULTS": Object {
-        "types": Array [
-          "lower-alpha",
-          "lower-roman",
-          "upper-alpha",
-          "upper-roman",
-        ],
       },
       "defaultProps": Object {
         "as": "ol",
@@ -318,13 +325,6 @@ Object {
         "type": [Function],
       },
       "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
-      "sizes": Array [
-        "small",
-        "medium",
-        "large",
-      ],
     },
     "defaultProps": Object {
       "as": "div",
@@ -337,7 +337,7 @@ Object {
   },
   "Control": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         "small",
         "medium",
@@ -359,7 +359,7 @@ Object {
   },
   "Delete": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         "small",
         "medium",
@@ -423,6 +423,11 @@ Object {
       },
       "_threadCount": 0,
     },
+    "DEFAULTS": Object {
+      "alignments": Array [
+        "right",
+      ],
+    },
     "Divider": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -462,11 +467,6 @@ Object {
       },
       "render": [Function],
     },
-    "VARIABLE_DEFAULTS": Object {
-      "alignments": Array [
-        "right",
-      ],
-    },
     "defaultProps": Object {
       "as": "div",
     },
@@ -490,9 +490,19 @@ Object {
       "displayName": "Field.Body",
       "render": [Function],
     },
+    "DEFAULTS": Object {
+      "alignments": Array [
+        "centered",
+        "right",
+      ],
+      "kinds": Array [
+        "addons",
+        "group",
+      ],
+    },
     "Label": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "sizes": Array [
           "small",
           "normal",
@@ -508,16 +518,6 @@ Object {
         "size": [Function],
       },
       "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
-      "alignments": Array [
-        "centered",
-        "right",
-      ],
-      "kinds": Array [
-        "addons",
-        "group",
-      ],
     },
     "defaultProps": Object {
       "as": "div",
@@ -554,6 +554,17 @@ Object {
       "displayName": "File.CTA",
       "render": [Function],
     },
+    "DEFAULTS": Object {
+      "alignments": Array [
+        "centered",
+        "right",
+      ],
+      "sizes": Array [
+        "small",
+        "medium",
+        "large",
+      ],
+    },
     "Icon": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -586,17 +597,6 @@ Object {
       "displayName": "File.Name",
       "render": [Function],
     },
-    "VARIABLE_DEFAULTS": Object {
-      "alignments": Array [
-        "centered",
-        "right",
-      ],
-      "sizes": Array [
-        "small",
-        "medium",
-        "large",
-      ],
-    },
     "defaultProps": Object {
       "as": "div",
     },
@@ -621,6 +621,93 @@ Object {
   },
   "Generic": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "DEFAULTS": Object {
+      "badgeSizes": Array [
+        "small",
+        "medium",
+        "large",
+      ],
+      "breakpoints": Array [
+        "mobile",
+        "tablet",
+        "desktop",
+        "widescreen",
+        "fullhd",
+        "touch",
+      ],
+      "breakpointsLimited": Array [
+        "mobile",
+        "fullhd",
+        "touch",
+      ],
+      "colors": Array [
+        "primary",
+        "success",
+        "info",
+        "warning",
+        "danger",
+        "light",
+        "dark",
+        "white",
+        "black",
+        "link",
+      ],
+      "displays": Array [
+        "block",
+        "flex",
+        "inline",
+        "inline-block",
+        "inline-flex",
+      ],
+      "floatPulledAlignments": Array [
+        "left",
+        "right",
+      ],
+      "shades": Array [
+        "black-bis",
+        "black-ter",
+        "grey-darker",
+        "grey-dark",
+        "grey",
+        "grey-light",
+        "grey-lighter",
+        "white-ter",
+        "white-bis",
+      ],
+      "textAlignments": Array [
+        "centered",
+        "justified",
+        "left",
+        "right",
+      ],
+      "textSizes": Array [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+      ],
+      "textTransforms": Array [
+        "capitalized",
+        "lowercase",
+        "uppercase",
+      ],
+      "textWeights": Array [
+        "light",
+        "medium",
+        "normal",
+        "semibold",
+        "bold",
+      ],
+      "tooltipPositions": Array [
+        "top",
+        "right",
+        "bottom",
+        "left",
+      ],
+    },
     "defaultProps": Object {
       "as": "div",
     },
@@ -659,6 +746,15 @@ Object {
       "displayName": "Hero.Body",
       "render": [Function],
     },
+    "DEFAULTS": Object {
+      "sizes": Array [
+        "small",
+        "medium",
+        "large",
+        "fullheight",
+        "fullheight-with-navbar",
+      ],
+    },
     "Foot": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -674,15 +770,6 @@ Object {
       },
       "displayName": "Hero.Head",
       "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
-      "sizes": Array [
-        "small",
-        "medium",
-        "large",
-        "fullheight",
-        "fullheight-with-navbar",
-      ],
     },
     "defaultProps": Object {
       "as": "section",
@@ -705,7 +792,7 @@ Object {
   },
   "Icon": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "alignments": Array [
         "left",
         "right",
@@ -731,7 +818,7 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "Container": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "dimmensions": Array [
           16,
           24,
@@ -780,7 +867,7 @@ Object {
   },
   "Input": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         "small",
         "medium",
@@ -819,7 +906,7 @@ Object {
   },
   "Label": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         "small",
         "medium",
@@ -840,7 +927,7 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "Item": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "alignments": Array [
           "left",
           "right",
@@ -896,7 +983,7 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "Item": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "alignments": Array [
           "content",
           "left",
@@ -965,6 +1052,13 @@ Object {
       "displayName": "Message.Body",
       "render": [Function],
     },
+    "DEFAULTS": Object {
+      "sizes": Array [
+        "small",
+        "medium",
+        "large",
+      ],
+    },
     "Header": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -972,13 +1066,6 @@ Object {
       },
       "displayName": "Message.Header",
       "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
-      "sizes": Array [
-        "small",
-        "medium",
-        "large",
-      ],
     },
     "defaultProps": Object {
       "as": "article",
@@ -1157,6 +1244,12 @@ Object {
       },
       "_threadCount": 0,
     },
+    "DEFAULTS": Object {
+      "fixedAlignments": Array [
+        "top",
+        "bottom",
+      ],
+    },
     "Divider": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -1167,7 +1260,7 @@ Object {
     },
     "Dropdown": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "alignments": Array [
           "right",
         ],
@@ -1222,7 +1315,7 @@ Object {
     },
     "Segment": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "alignments": Array [
           "start",
           "end",
@@ -1236,12 +1329,6 @@ Object {
         "align": [Function],
       },
       "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
-      "fixedAlignments": Array [
-        "top",
-        "bottom",
-      ],
     },
     "defaultProps": Object {
       "as": "nav",
@@ -1278,7 +1365,7 @@ Object {
   },
   "PageLoader": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "directions": Array [
         "right-to-left",
         "left-to-right",
@@ -1297,6 +1384,17 @@ Object {
   },
   "Pagination": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "DEFAULTS": Object {
+      "alignments": Array [
+        "centered",
+        "right",
+      ],
+      "sizes": Array [
+        "small",
+        "medium",
+        "large",
+      ],
+    },
     "Ellipsis": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
@@ -1327,7 +1425,7 @@ Object {
     },
     "Step": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "alignments": Array [
           "next",
           "previous",
@@ -1341,17 +1439,6 @@ Object {
         "align": [Function],
       },
       "render": [Function],
-    },
-    "VARIABLE_DEFAULTS": Object {
-      "alignments": Array [
-        "centered",
-        "right",
-      ],
-      "sizes": Array [
-        "small",
-        "medium",
-        "large",
-      ],
     },
     "defaultProps": Object {
       "as": "nav",
@@ -1420,7 +1507,7 @@ Object {
   },
   "Progress": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         "small",
         "medium",
@@ -1450,7 +1537,7 @@ Object {
   },
   "Section": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         "medium",
         "large",
@@ -1469,7 +1556,7 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "Container": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "sizes": Array [
           "small",
           "medium",
@@ -1512,7 +1599,7 @@ Object {
     "$$typeof": Symbol(react.forward_ref),
     "Group": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "alignments": Array [
           "centered",
           "right",
@@ -1617,9 +1704,16 @@ Object {
   },
   "Tag": Object {
     "$$typeof": Symbol(react.forward_ref),
+    "DEFAULTS": Object {
+      "sizes": Array [
+        "normal",
+        "medium",
+        "large",
+      ],
+    },
     "Group": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "VARIABLE_DEFAULTS": Object {
+      "DEFAULTS": Object {
         "sizes": Array [
           "medium",
           "large",
@@ -1635,13 +1729,6 @@ Object {
       },
       "render": [Function],
     },
-    "VARIABLE_DEFAULTS": Object {
-      "sizes": Array [
-        "normal",
-        "medium",
-        "large",
-      ],
-    },
     "defaultProps": Object {
       "as": "span",
     },
@@ -1656,7 +1743,7 @@ Object {
   },
   "Textarea": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         "small",
         "medium",
@@ -1680,9 +1767,31 @@ Object {
     },
     "render": [Function],
   },
+  "ThemeContext": Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": Object {
+      "$$typeof": Symbol(react.context),
+      "_calculateChangedBits": null,
+      "_context": [Circular],
+    },
+    "Provider": Object {
+      "$$typeof": Symbol(react.provider),
+      "_context": [Circular],
+    },
+    "_calculateChangedBits": null,
+    "_currentRenderer": null,
+    "_currentRenderer2": null,
+    "_currentValue": Object {
+      "transform": [Function],
+    },
+    "_currentValue2": Object {
+      "transform": [Function],
+    },
+    "_threadCount": 0,
+  },
   "Tile": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "kinds": Array [
         "ancestor",
         "parent",
@@ -1716,7 +1825,7 @@ Object {
   },
   "Title": Object {
     "$$typeof": Symbol(react.forward_ref),
-    "VARIABLE_DEFAULTS": Object {
+    "DEFAULTS": Object {
       "sizes": Array [
         1,
         2,
@@ -1738,5 +1847,6 @@ Object {
     "render": [Function],
   },
   "forwardRefAs": [Function],
+  "makeRootValidatingTransform": [Function],
 }
 `;
