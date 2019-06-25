@@ -1,6 +1,7 @@
 import React from "react";
 
 import { renderablePropType } from "../prop-types-extensions";
+import { canReceiveRef } from "../utils";
 
 import { forwardRefAs } from "./exotic";
 import { HelpersProps } from "./helpers";
@@ -13,7 +14,10 @@ export const Generic = Object.assign(
   forwardRefAs<GenericProps>(
     ({ as, ...rest }, ref) => {
       const { transform } = useTheme();
-      return React.createElement(as, { ref, ...transform(rest, "Generic") });
+      return React.createElement(as, {
+        ...transform(rest, "Generic"),
+        ...(canReceiveRef(as) ? { ref } : {}),
+      });
     },
     { as: "div" },
   ),

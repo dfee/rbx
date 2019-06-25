@@ -1,4 +1,23 @@
-import React from "react";
+import React, { Component as _Component } from "react";
+
+export const canReceiveRef = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Component: keyof JSX.IntrinsicElements | React.ComponentType<any>,
+) => {
+  // JSX Element (e.g. 'div', 'span', 'svg', etc.)
+  if (typeof Component === "string") {
+    return true;
+  }
+  // React Component Class
+  if (Object.getPrototypeOf(Component) === _Component) {
+    return true;
+  }
+  // ForwardRef func (has render function property)
+  if (typeof Component === "object" && "render" in Component) {
+    return true;
+  }
+  return false;
+};
 
 export const canUseDOM = () =>
   !(

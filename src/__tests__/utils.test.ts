@@ -1,10 +1,48 @@
 import React from "react";
 
-import { canUseDOM, combineRefs, noop } from "src/utils";
+import { canUseDOM, combineRefs, noop, canReceiveRef } from "src/utils";
 
 import { withWindow } from "./testing";
 
 describe("Utils", () => {
+  describe("canReceiveRef", () => {
+    it("should return false for function components", () => {
+      const FC = () => null;
+      expect(canReceiveRef(FC)).toBe(false);
+    });
+
+    it("should return false for memo components", () => {
+      const MC = React.memo(() => null);
+      expect(canReceiveRef(MC)).toBe(false);
+    });
+
+    it("should return false for unknown components", () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const UC = true as any;
+      expect(canReceiveRef(UC)).toBe(false);
+    });
+
+    it("should return true for class components", () => {
+      // eslint-disable-next-line react/prefer-stateless-function
+      class CC extends React.Component {
+        render() {
+          return null;
+        }
+      }
+      expect(canReceiveRef(CC)).toBe(true);
+    });
+
+    it("should return true for forwardRef components", () => {
+      const FRC = React.forwardRef(() => null);
+      expect(canReceiveRef(FRC)).toBe(true);
+    });
+
+    it("should return true for JSX elements", () => {
+      const el: keyof JSX.IntrinsicElements = "div";
+      expect(canReceiveRef(el)).toBe(true);
+    });
+  });
+
   describe("canUseDOM", () => {
     it("should return true with createElement", () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

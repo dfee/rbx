@@ -81,8 +81,8 @@
     "gzipped": 9217
   },
   "dist/rbx.umd.js": {
-    "bundled": 101271,
-    "minified": 48902,
-    "gzipped": 10358
+    "bundled": 101662,
+    "minified": 49009,
+    "gzipped": 10405
   }
 }
