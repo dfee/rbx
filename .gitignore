@@ -76,3 +76,6 @@ lib
 out*
 .cache
 .rpt2_cache
+
+# Development utils
+bin

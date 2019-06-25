@@ -19,7 +19,7 @@ export const HelloWorldNotification = () => {
   }
 
   return (
-    <Notification color="primary">
+    <Notification color="react">
       Welcome to{" "}
       <span role="img" aria-label="shoe">
         👟
