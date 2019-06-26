@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DEFAULTS } from "src/base/helpers/variables";
+import { DEFAULTS, Variables } from "src/base/helpers/variables";
 import { Notification } from "src/elements/notification/notification";
 
 import {
@@ -35,7 +35,7 @@ describe(`${DISPLAY_NAME} component`, () => {
     describe("color", () => {
       validateStringOrNumberPropType(propTypes, "color");
 
-      DEFAULTS.colors.map(color => {
+      DEFAULTS.colors.map((color: Variables["colors"]) => {
         it(`should be ${color}`, () => {
           const node = <Notification color={color} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
