@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { DEFAULTS } from "src/base/helpers/variables";
+import { DEFAULTS, Variables } from "src/base/helpers/variables";
 import { Notification } from "src/elements/notification/notification";
 import {
   hasProperties,
