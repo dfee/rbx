@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactChild, ReactNode } from "react";
+import React from "react";
 
 import { Prefer } from "../../types";
 import { Delete } from "../other/delete";
@@ -42,7 +42,7 @@ export const defaultNotificationToastProps = Object.freeze({
 
 export type NotificationToastProps = typeof defaultNotificationToastProps &
   NotificationProps & {
-    children: ReactChild | string;
+    children: React.ReactChild | string;
     onClose?: () => void;
   };
 
@@ -50,7 +50,7 @@ export interface State {
   progressValue: number;
 }
 
-export class NotificationToast extends PureComponent<
+export class NotificationToast extends React.PureComponent<
   NotificationToastProps,
   State
 > {
@@ -98,7 +98,7 @@ export class NotificationToast extends PureComponent<
     this.timer.resume();
   };
 
-  public render(): ReactNode {
+  public render(): React.ReactNode {
     const notificationProps: NotificationProps = {};
     const { ...props } = this.props;
     Object.keys(this.props).forEach(key => {

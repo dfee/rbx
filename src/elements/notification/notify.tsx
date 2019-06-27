@@ -1,4 +1,4 @@
-import React, { ReactChild } from "react";
+import React from "react";
 import { render } from "react-dom";
 
 import {
@@ -13,7 +13,7 @@ const isNotificationToastProps = (arg: any): arg is NotificationToastProps => {
 };
 
 export const notify = (
-  props: Partial<NotificationToastProps> | ReactChild | string,
+  props: Partial<NotificationToastProps> | React.ReactChild | string,
   position: NotificationToastVariables["positions"] = "top-right",
 ): void => {
   const notifyContainerId = `rbx-notification-toast-container-${position}`;
@@ -37,7 +37,9 @@ export const notify = (
   if (isNotificationToastProps(props)) {
     finalProps = props;
   } else {
-    const children: ReactChild | string = props as ReactChild | string;
+    const children: React.ReactChild | string = props as
+      | React.ReactChild
+      | string;
     finalProps = { children };
   }
   notifyContainer.dispatchEvent(

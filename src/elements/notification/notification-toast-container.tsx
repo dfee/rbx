@@ -1,4 +1,4 @@
-import React, { PureComponent, ReactNode, CSSProperties } from "react";
+import React from "react";
 
 import {
   NotificationToast,
@@ -16,7 +16,7 @@ type State = {
   notifications: UniqueNotificationToastProps[];
 };
 
-export class NotificationToastContainer extends PureComponent<
+export class NotificationToastContainer extends React.PureComponent<
   NotificationToastContainerProps,
   State
 > {
@@ -51,7 +51,7 @@ export class NotificationToastContainer extends PureComponent<
   };
 
   // eslint-disable-next-line consistent-return
-  private _getPositionStyles(): CSSProperties {
+  private _getPositionStyles(): React.CSSProperties {
     const { position } = this.props;
     switch (position) {
       case "top-left":
@@ -111,9 +111,9 @@ export class NotificationToastContainer extends PureComponent<
     }
   }
 
-  private _renderToastNotifications(): ReactNode[] {
+  private _renderToastNotifications(): React.ReactNode[] {
     const { notifications } = this.state;
-    const toastNotifications: ReactNode[] = [];
+    const toastNotifications: React.ReactNode[] = [];
 
     for (const notificationProps of notifications) {
       const props = notificationProps;
@@ -156,7 +156,7 @@ export class NotificationToastContainer extends PureComponent<
     }-${hash}-${new Date().valueOf()}`;
   }
 
-  public render(): ReactNode {
+  public render(): React.ReactNode {
     const { id } = this.props;
     return (
       <div
