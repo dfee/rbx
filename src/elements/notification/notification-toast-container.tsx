@@ -1,43 +1,14 @@
-import React from "react";
+import * as React from "react";
 
 import {
-  NotificationToastProps,
   NotificationToast,
+  NotificationToastProps,
+  NotificationToastVariables,
 } from "./notification-toast";
-import { Prefer } from "../../types";
-
-export const NOTIFICATION_TOAST_DEFAULTS = {
-  positions: [
-    "top-left",
-    "top-right",
-    "top-center",
-    "bottom-left",
-    "bottom-right",
-    "bottom-center",
-    "center",
-  ] as const,
-};
-
-export interface NotificationToastVariablesOverrides {}
-export interface NotificationToastVariablesDefaults {
-  positions: (typeof NOTIFICATION_TOAST_DEFAULTS["positions"])[number];
-}
-
-export type NotificationToastVariables = Prefer<
-  NotificationToastVariablesOverrides,
-  NotificationToastVariablesDefaults
->;
 
 export type NotificationToastContainerProps = {
   id: string;
-  position:
-    | "top-left"
-    | "top-right"
-    | "top-center"
-    | "bottom-left"
-    | "bottom-right"
-    | "bottom-center"
-    | "center";
+  position: NotificationToastVariables["positions"];
 };
 
 type UniqueNotificationToastProps = NotificationToastProps & { id: string };
@@ -55,44 +26,28 @@ export class NotificationToastContainer extends React.PureComponent<
     notifications: [],
   };
 
+  node?: HTMLDivElement | null;
+
   public componentDidMount() {
-    const element = ReactDOM.findDOMNode(this) as HTMLDivElement;
-    element.addEventListener("notify", this.handleNotify as EventListener);
+    this.node &&
+      this.node.addEventListener("notify", this._handleNotify as EventListener);
   }
 
   public componentWillUnmount() {
-    const element = ReactDOM.findDOMNode(this) as HTMLDivElement;
-    element.removeEventListener("notify", this.handleNotify as EventListener);
+    this.node &&
+      this.node.removeEventListener("notify", this
+        ._handleNotify as EventListener);
   }
 
-  public render(): ReactNode {
-    return (
-      <div
-        id={this.props.id}
-        style={Object.assign(this.getPositionStyles(), {
-          width: "100%",
-          zIndex: 99999,
-          position: "fixed",
-          pointerEvents: "none",
-          display: "flex",
-          flexDirection: "column",
-          padding: "15px",
-        })}
-      >
-        {this.renderToastNotifications()}
-      </div>
-    );
-  }
-
-  public handleNotify = (evt: CustomEvent<NotificationToastProps>): void => {
-    const id = this.uniqueId(evt.detail);
-    const props: UniqueNotificationToastProps = Object.assign(
-      { id },
-      evt.detail,
-    );
-    this.setState({
-      notifications: [...this.state.notifications, props],
-    });
+  private _handleNotify = (evt: CustomEvent<NotificationToastProps>): void => {
+    const id = this._uniqueId(evt.detail);
+    const props: UniqueNotificationToastProps = {
+      id,
+      ...evt.detail,
+    };
+    this.setState(state => ({
+      notifications: [...state.notifications, props],
+    }));
   };
 
   // eslint-disable-next-line consistent-return
@@ -100,48 +55,58 @@ export class NotificationToastContainer extends React.PureComponent<
     const { position } = this.props;
     switch (position) {
       case "top-left":
-        return { left: 0, top: 0, textAlign: "left", alignItems: "flex-start" };
+        return {
+          alignItems: "flex-start",
+          left: 0,
+          textAlign: "left",
+          top: 0,
+        };
       case "top-right":
-        return { right: 0, top: 0, textAlign: "right", alignItems: "flex-end" };
+        return {
+          alignItems: "flex-end",
+          right: 0,
+          textAlign: "right",
+          top: 0,
+        };
       case "top-center":
         return {
-          top: 0,
+          alignItems: "center",
           left: 0,
           right: 0,
           textAlign: "center",
-          alignItems: "center",
+          top: 0,
         };
       case "bottom-left":
         return {
-          left: 0,
-          bottom: 0,
-          textAlign: "left",
           alignItems: "flex-start",
+          bottom: 0,
+          left: 0,
+          textAlign: "left",
         };
       case "bottom-right":
         return {
-          right: 0,
-          bottom: 0,
-          textAlign: "right",
           alignItems: "flex-end",
+          bottom: 0,
+          right: 0,
+          textAlign: "right",
         };
       case "bottom-center":
         return {
+          alignItems: "center",
           bottom: 0,
           left: 0,
           right: 0,
           textAlign: "center",
-          alignItems: "center",
         };
       case "center":
         return {
-          top: 0,
-          left: 0,
-          right: 0,
+          alignItems: "center",
           bottom: 0,
           flexFlow: "column",
           justifyContent: "center",
-          alignItems: "center",
+          left: 0,
+          right: 0,
+          top: 0,
         };
     }
   }
@@ -171,14 +136,16 @@ export class NotificationToastContainer extends React.PureComponent<
     return toastNotifications;
   }
 
-  private uniqueId(props: NotificationToastProps): string {
+  private _uniqueId(props: NotificationToastProps): string {
     const value = JSON.stringify(props);
-    let hash = 0,
-      i,
-      chr;
-    for (i = 0; i < value.length; i++) {
+    let hash = 0;
+    let i;
+    let chr;
+    for (i = 0; i < value.length; i += 1) {
       chr = value.charCodeAt(i);
+      // eslint-disable-next-line no-bitwise
       hash = (hash << 5) - hash + chr;
+      // eslint-disable-next-line no-bitwise
       hash |= 0; // Convert to 32bit integer
     }
 
@@ -192,12 +159,23 @@ export class NotificationToastContainer extends React.PureComponent<
   public render(): React.ReactNode {
     const { id } = this.props;
     return (
-      "toast-notification-" +
-      this.state.notifications.length +
-      "-" +
-      hash +
-      "-" +
-      new Date().valueOf()
+      <div
+        ref={node => {
+          this.node = node;
+        }}
+        id={id}
+        style={Object.assign(this._getPositionStyles(), {
+          display: "flex",
+          flexDirection: "column",
+          padding: "15px",
+          pointerEvents: "none",
+          position: "fixed",
+          width: "100%",
+          zIndex: 99999,
+        })}
+      >
+        {this._renderToastNotifications()}
+      </div>
     );
   }
 }
