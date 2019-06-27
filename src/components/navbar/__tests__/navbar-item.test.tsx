@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { act } from "react-dom/test-utils";
 
 import { NavbarItem } from "src/components/navbar/navbar-item";

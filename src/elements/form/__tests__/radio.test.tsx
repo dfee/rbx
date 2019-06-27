@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Radio } from "src/elements/form/radio";
 import {

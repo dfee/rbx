@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import * as React from "react";
 
 import { noop } from "../../utils";
 
@@ -16,4 +16,4 @@ export const DropdownContext = React.createContext<DropdownContextValue>(
   initialValue,
 );
 
-export const useDropdown = () => useContext(DropdownContext);
+export const useDropdown = () => React.useContext(DropdownContext);

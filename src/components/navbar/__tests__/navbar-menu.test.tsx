@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { NavbarMenu } from "src/components/navbar/navbar-menu";
 import { initialValue as navbarInitialValue } from "src/components/navbar/navbar-context";

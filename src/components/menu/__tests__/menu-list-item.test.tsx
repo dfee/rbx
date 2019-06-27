@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Menu } from "src/components/menu/menu";
 import { MenuListItem } from "src/components/menu/menu-list-item";

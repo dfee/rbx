@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Content, CONTENT_DEFAULTS } from "src/elements/content/content";
 import { ContentOrderedList } from "src/elements/content/content-ordered-list";

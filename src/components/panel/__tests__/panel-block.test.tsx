@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { PanelBlock } from "src/components/panel/panel-block";
 import {

@@ -1,5 +1,5 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import { initialValue as modalInitialValue } from "src/components/modal/modal-context";
 import { ModalCardHead } from "src/components/modal/modal-card-head";

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Delete, DELETE_DEFAULTS } from "src/elements/other/delete";
 import {

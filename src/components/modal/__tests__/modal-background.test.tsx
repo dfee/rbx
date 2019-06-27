@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { ModalBackground } from "src/components/modal/modal-background";
 import {

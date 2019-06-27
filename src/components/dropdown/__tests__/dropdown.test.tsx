@@ -1,5 +1,5 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 import { act } from "react-dom/test-utils";
 
 import { Dropdown, DROPDOWN_DEFAULTS } from "src/components/dropdown/dropdown";

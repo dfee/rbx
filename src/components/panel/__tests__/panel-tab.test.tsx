@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { PanelTab } from "src/components/panel/panel-tab";
 import { PanelTabGroup } from "src/components/panel/panel-tab-group";

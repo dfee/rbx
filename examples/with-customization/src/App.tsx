@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { Container, Delete, Notification, ThemeContext } from "rbx";
 
 import { themeValue } from "./theme";
 import "./App.sass";
 
 export const HelloWorldNotification = () => {
-  const [active, setActive] = useState(true);
+  const [active, setActive] = React.useState(true);
 
   if (!active) {
     return (

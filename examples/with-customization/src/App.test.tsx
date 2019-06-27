@@ -1,6 +1,6 @@
-import Enzyme from "enzyme";
-import React from "react";
-import ReactDOM from "react-dom";
+import * as Enzyme from "enzyme";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Container, Delete, Notification, ThemeContext } from "rbx";
 
 import { App, HelloWorldNotification } from "./App";

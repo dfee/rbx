@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Generic } from "src/base";
 import { Table } from "src/elements";

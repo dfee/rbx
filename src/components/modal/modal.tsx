@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import * as PropTypes from "prop-types";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 import { forwardRefAs } from "../../base";
 
@@ -25,10 +25,10 @@ export type ModalProps = {
 export const Modal = Object.assign(
   forwardRefAs<ModalProps>(
     ({ active, containerClassName, document: _document, ...rest }, ref) => {
-      const [el, setEl] = useState<HTMLDivElement | undefined>(undefined);
-      const [doc, setDoc] = useState<Document | undefined>(undefined);
+      const [el, setEl] = React.useState<HTMLDivElement | undefined>(undefined);
+      const [doc, setDoc] = React.useState<Document | undefined>(undefined);
 
-      useEffect(() => {
+      React.useEffect(() => {
         const _doc = _document !== undefined ? _document : document;
         const _el = _doc.createElement("div");
         setDoc(_doc);

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import PropTypes from "prop-types";
+import * as PropTypes from "prop-types";
 
 import {
   makePropTypesFactory,
@@ -119,19 +119,19 @@ export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
                 breakpoint
               ] as ResponsiveBreakpointProps | LimitedResponsiveBreakpointProps;
               if (display !== undefined) {
-                const {value} = display;
+                const { value } = display;
                 const only = "only" in display ? display.only === true : false;
                 names[
                   `is-${value}-${breakpoint}${only ? "-only" : ""}`
                 ] = value;
               }
               if (hide !== undefined) {
-                const {value} = hide;
+                const { value } = hide;
                 const only = "only" in hide ? hide.only === true : false;
                 names[`is-hidden-${breakpoint}${only ? "-only" : ""}`] = value;
               }
               if (textAlign !== undefined) {
-                const {value} = textAlign;
+                const { value } = textAlign;
                 const only =
                   "only" in textAlign ? textAlign.only === true : false;
                 names[
@@ -139,7 +139,7 @@ export const transform: TransformFunction<ResponsiveHelpersProps> = props => {
                 ] = value;
               }
               if (textSize !== undefined) {
-                const {value} = textSize;
+                const { value } = textSize;
                 const only =
                   "only" in textSize ? textSize.only === true : false;
                 names[

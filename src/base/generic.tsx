@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { renderablePropType } from "../prop-types-extensions";
 import { canReceiveRef } from "../utils";

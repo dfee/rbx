@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { NavbarBurger } from "src/components/navbar/navbar-burger";
 import {

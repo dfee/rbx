@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { FileInput } from "src/elements/form/file-input";
 import {

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { PaginationLink } from "src/components/pagination/pagination-link";
 import {

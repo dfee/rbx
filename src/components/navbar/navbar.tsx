@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState } from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
 import { Generic, forwardRefAs } from "../../base";
 import { HelpersProps } from "../../base/helpers";
@@ -60,8 +60,10 @@ export const Navbar = Object.assign(
       },
       ref,
     ) => {
-      const [active, _setActive] = useState(managed ? Boolean(_active) : false);
-      const setActive = useCallback(
+      const [active, _setActive] = React.useState(
+        managed ? Boolean(_active) : false,
+      );
+      const setActive = React.useCallback(
         (v: boolean) => {
           if (managed !== true) {
             _setActive(v);
@@ -69,9 +71,9 @@ export const Navbar = Object.assign(
         },
         [managed],
       );
-      useEffect(() => setActive(Boolean(_active)), [_active, setActive]);
+      React.useEffect(() => setActive(Boolean(_active)), [_active, setActive]);
 
-      useEffect(() => {
+      React.useEffect(() => {
         const doc = _document !== undefined ? _document : document;
         const html = doc.querySelector("html");
         /* istanbul ignore if: typeguard */

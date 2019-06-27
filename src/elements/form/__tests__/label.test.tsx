@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Checkbox } from "src/elements/form/checkbox";
 import { Input } from "src/elements/form/input";

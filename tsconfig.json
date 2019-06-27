@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "esModuleInterop": true,
     "jsx": "react",
     "importHelpers": true,
     "isolatedModules": true,

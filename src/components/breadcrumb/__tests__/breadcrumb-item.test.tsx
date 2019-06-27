@@ -1,5 +1,5 @@
-import Enzyme from "enzyme";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as React from "react";
 
 import { BreadcrumbItem } from "src/components/breadcrumb/breadcrumb-item";
 import {

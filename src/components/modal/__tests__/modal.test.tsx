@@ -1,5 +1,5 @@
 import { JSDOM } from "jsdom";
-import React, { createRef } from "react";
+import * as React from "react";
 
 import { Modal } from "src/components/modal/modal";
 import { ModalBackground } from "src/components/modal/modal-background";
@@ -202,7 +202,7 @@ describe(`${DISPLAY_NAME} component`, () => {
 
     describe("ref", () => {
       it("should forward ref", () => {
-        const ref = createRef<HTMLDivElement>();
+        const ref = React.createRef<HTMLDivElement>();
         const node = <Modal ref={ref} active />;
         withEnzymeMount({ node }, ({ context: { wrapper } }) => {
           expect(ref.current).toBe(

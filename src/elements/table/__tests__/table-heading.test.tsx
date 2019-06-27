@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { TableHeading } from "src/elements/table/table-heading";
 import {

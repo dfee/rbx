@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";
@@ -18,7 +18,7 @@ export const DropdownItem = forwardRefAs<DropdownItemProps>(
   ({ active, className, onClick, ...rest }, ref) => {
     const ctx = useDropdown();
 
-    const handleClick = useCallback(
+    const handleClick = React.useCallback(
       (event: React.MouseEvent) => {
         if (onClick !== undefined) {
           onClick(event);

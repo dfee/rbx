@@ -1,6 +1,6 @@
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useCallback, useState } from "react";
+import * as React from "react";
 
 import { Control, File } from "src/elements";
 import { FileProps } from "src/elements/form/file";
@@ -16,9 +16,9 @@ export const SimpleFileManager = ({
   onChange,
   ...rest
 }: SimpleFileManagerProps) => {
-  const [filename, setFilename] = useState<string | undefined>(undefined);
+  const [filename, setFilename] = React.useState<string | undefined>(undefined);
 
-  const select = useCallback(
+  const select = React.useCallback(
     (event: React.FormEvent<HTMLInputElement>) => {
       const { files } = event.currentTarget;
       setFilename(

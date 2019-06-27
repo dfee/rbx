@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState, useRef } from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
 import { Generic, forwardRefAs } from "../../base";
 import { HelpersProps } from "../../base/helpers";
@@ -39,8 +39,10 @@ export const NavbarItem = Object.assign(
       },
       ref,
     ) => {
-      const [active, _setActive] = useState(managed ? Boolean(_active) : false);
-      const setActive = useCallback(
+      const [active, _setActive] = React.useState(
+        managed ? Boolean(_active) : false,
+      );
+      const setActive = React.useCallback(
         (v: boolean) => {
           if (managed !== true) {
             _setActive(v);
@@ -48,13 +50,13 @@ export const NavbarItem = Object.assign(
         },
         [managed],
       );
-      useEffect(() => setActive(Boolean(_active)), [_active, setActive]);
+      React.useEffect(() => setActive(Boolean(_active)), [_active, setActive]);
 
-      const innerRef = useRef<HTMLElement>(null);
+      const innerRef = React.useRef<HTMLElement>(null);
 
       const { active: ctxActive, setActive: ctxSetActive } = useNavbarItem();
 
-      const handleClick = useCallback(
+      const handleClick = React.useCallback(
         (event: React.MouseEvent) => {
           if (onClick !== undefined) {
             onClick(event);
@@ -64,7 +66,7 @@ export const NavbarItem = Object.assign(
         [ctxActive, ctxSetActive, onClick],
       );
 
-      useEffect(() => {
+      React.useEffect(() => {
         if (dropdown !== true) {
           return undefined;
         }

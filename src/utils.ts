@@ -1,4 +1,4 @@
-import React, { Component as _Component } from "react";
+import * as React from "react";
 
 export const canReceiveRef = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,7 +9,7 @@ export const canReceiveRef = (
     return true;
   }
   // React Component Class
-  if (Object.getPrototypeOf(Component) === _Component) {
+  if (Object.getPrototypeOf(Component) === React.Component) {
     return true;
   }
   // ForwardRef func (has render function property)

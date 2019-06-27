@@ -1,6 +1,6 @@
-// import Enzyme from "enzyme";
+// import * as Enzyme from "enzyme";
 import { JSDOM } from "jsdom";
-import React from "react";
+import * as React from "react";
 import { act } from "react-dom/test-utils";
 
 import { DEFAULTS } from "src/base/helpers/variables";

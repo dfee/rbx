@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import * as React from "react";
 
 import { Button } from "src/elements/button/button";
 
@@ -13,11 +13,11 @@ export const SimplePageLoaderManager = ({
   button,
   ...rest
 }: SimplePageLoaderManagerProps) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = React.useState(false);
 
-  const handleClick = useCallback(() => setActive(true), [setActive]);
+  const handleClick = React.useCallback(() => setActive(true), [setActive]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!active) {
       return undefined;
     }

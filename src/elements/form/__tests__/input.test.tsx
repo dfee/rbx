@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Input, INPUT_DEFAULTS } from "src/elements/form/input";

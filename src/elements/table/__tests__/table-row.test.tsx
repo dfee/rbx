@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { TableRow } from "src/elements/table/table-row";
 import {

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Tile, TILE_DEFAULTS } from "src/grid/tiles/tile";
 import {

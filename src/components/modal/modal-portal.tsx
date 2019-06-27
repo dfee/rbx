@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { useCallback, useEffect } from "react";
+import * as React from "react";
 
 import { Generic, forwardRefAs } from "../../base";
 
@@ -29,13 +29,13 @@ export const ModalPortal = forwardRefAs<ModalPortalProps>(
     },
     ref,
   ) => {
-    const handleClose = useCallback(() => {
+    const handleClose = React.useCallback(() => {
       if (onClose !== undefined) {
         onClose();
       }
     }, [onClose]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       const handleKeydown = (event: KeyboardEvent) => {
         if (closeOnEsc === true && event.code === "Escape") {
           handleClose();

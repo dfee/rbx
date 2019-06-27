@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { forwardRefAs, Generic } from "../../base";
 import { HelpersProps } from "../../base/helpers";

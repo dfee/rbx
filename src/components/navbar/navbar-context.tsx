@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import * as React from "react";
 
 import { noop } from "../../utils";
 
@@ -16,4 +16,4 @@ export const NavbarContext = React.createContext<NavbarContextValue>(
   initialValue,
 );
 
-export const useNavbar = () => useContext(NavbarContext);
+export const useNavbar = () => React.useContext(NavbarContext);

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Column, COLUMN_DEFAULTS } from "src/grid/columns/column";

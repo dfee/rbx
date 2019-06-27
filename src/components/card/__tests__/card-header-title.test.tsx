@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import {
   CARD_HEADER_TITLE_DEFAULTS,

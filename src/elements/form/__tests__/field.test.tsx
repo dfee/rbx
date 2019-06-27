@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Field, FIELD_DEFAULTS } from "src/elements/form/field";
 import { FieldBody } from "src/elements/form/field-body";

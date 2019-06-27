@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { ModalClose } from "src/components/modal/modal-close";
 import {

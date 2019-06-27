@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { ListItem } from "src/components/list/list-item";
 import {

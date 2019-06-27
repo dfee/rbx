@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { canUseDOM, combineRefs, noop, canReceiveRef } from "src/utils";
 

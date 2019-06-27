@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 
 import { Button } from "src/elements/button";
 
@@ -13,7 +13,7 @@ export const SimpleModalManager = ({
   modalProps,
   children,
 }: SimpleModalManagerProps) => {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = React.useState(false);
 
   return (
     <div>

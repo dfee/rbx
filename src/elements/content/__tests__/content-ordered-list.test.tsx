@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import {
   CONTENT_ORDERED_LIST_DEFAULTS,

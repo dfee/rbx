@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
 import { Generic, forwardRefAs } from "../../base";
 import { HelpersProps } from "../../base/helpers";
@@ -46,10 +46,12 @@ export const Dropdown = Object.assign(
       { active: _active, align, className, hoverable, managed, up, ...rest },
       ref,
     ) => {
-      const [active, _setActive] = useState(managed ? Boolean(_active) : false);
-      const innerRef = useRef<HTMLElement>(null);
+      const [active, _setActive] = React.useState(
+        managed ? Boolean(_active) : false,
+      );
+      const innerRef = React.useRef<HTMLElement>(null);
 
-      const setActive = useCallback(
+      const setActive = React.useCallback(
         (v: boolean) => {
           if (managed !== true) {
             _setActive(v);
@@ -58,11 +60,11 @@ export const Dropdown = Object.assign(
         [managed],
       );
 
-      useEffect(() => {
+      React.useEffect(() => {
         setActive(Boolean(_active));
       }, [_active, setActive]);
 
-      useEffect(() => {
+      React.useEffect(() => {
         const handleClick = (event: MouseEvent) => {
           if (managed !== true && active && innerRef.current !== null) {
             if (

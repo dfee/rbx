@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { HelpersProps } from "src/base/helpers";
 import { Table } from "src/elements";

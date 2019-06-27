@@ -1,5 +1,5 @@
 import { Link } from "docz";
-import React from "react";
+import * as React from "react";
 
 import { Variables } from "src/base/helpers/variables";
 import { Control, Tag } from "src/elements";

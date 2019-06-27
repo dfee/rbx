@@ -1,9 +1,9 @@
-import crypto from "crypto";
+import { randomBytes } from "crypto";
 
 import classNames from "classnames";
-import Enzyme from "enzyme";
-import PropTypes from "prop-types";
-import React from "react";
+import * as Enzyme from "enzyme";
+import * as PropTypes from "prop-types";
+import * as React from "react";
 
 import { HelpersProps } from "src/base/helpers";
 import { ValidatingTransformFunction } from "src/base/helpers/factory";
@@ -119,7 +119,7 @@ export const hasProperties = <T extends object>(
 };
 
 export const makeRandomString = (length: number = 8) =>
-  crypto.randomBytes(length).toString("hex");
+  randomBytes(length).toString("hex");
 
 export const validatePropType = <T extends {}>(
   propTypes: React.WeakValidationMap<T>,

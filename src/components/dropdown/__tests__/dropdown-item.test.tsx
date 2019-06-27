@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { DropdownItem } from "src/components/dropdown/dropdown-item";
 import {

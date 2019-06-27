@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Section, SECTION_DEFAULTS } from "src/layout/section/section";
 import {

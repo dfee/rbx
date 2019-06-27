@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { PaginationEllipsis } from "src/components/pagination/pagination-ellipsis";
 import {

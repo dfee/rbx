@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { Media } from "src/components";
 import { Image, Title } from "src/elements";
