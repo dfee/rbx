@@ -8,12 +8,20 @@ import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
+  ComponentDoc,
   mapEnumerable,
+  Frame,
   OptionBlock,
 } from "src/__docs__/components";
+
+import { SimplePropsTable } from "src/__docs__/components/simple-props-table/simple-props-table";
+
 import { DEFAULTS } from "src/base/helpers/variables";
-import { Delete } from "src/elements";
+import { Button, Delete } from "src/elements";
+import { Title } from "src/elements";
 import { Notification } from "../notification";
+import { notify } from "../notify";
+import { NotificationToast, NOTIFICATION_TOAST_DEFAULTS } from "../notification-toast";
 
 # Notification
 
@@ -51,6 +59,26 @@ Use the `color` prop to specfiy the color of the `<Notification>`.
   }
 </Playground>
 
+### Notify
+
+Use the notify helper to display toast notification
+
+#### Simple string, default options
+<Playground><Button color="info" onClick={() => notify("Hello World")}>Notify</Button></Playground>
+
+#### ReactChild, default options
+<Playground><Button color="info" onClick={() => notify(<p>Hello <strong>World</strong></p>)}>Notify</Button></Playground>
+
+#### Simple string, default options, centered
+<Playground><Button color="info" onClick={() => notify("Hello World", "center")}>Notify</Button></Playground>
+
+#### Custom options, centered
+<Playground><Button color="danger" onClick={() => notify({ 
+  "children": <p>Hello <strong>World</strong></p>,
+  "color": "danger",
+  "close": false,
+}, "center")}>Notify</Button></Playground>
+
 ## API
 
 <ForwardRefAsExoticComponentDoc
@@ -65,3 +93,63 @@ Use the `color` prop to specfiy the color of the `<Notification>`.
     },
   }}
 />
+
+<React.Fragment>
+  <Title as="h4" size={4}>notify</Title>
+  <p>The <code>notify</code> function is an helper to display toast notifications</p>
+
+  <Title as="h5" size={5}>notification toast</Title>
+  <SimplePropsTable props={{
+    "All Notification properties": {},
+    color: {
+      description: "the color of the toast notification and progress bar if any",
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(DEFAULTS.colors),
+      defaultValue: "\"info\"",
+    },
+    children: {
+      typeName: "ReactChild",
+      description: "the content of the notification",
+    },
+    closeOnClick: {
+      description: "whether the notification is closed on click",
+      typeName: "boolean",
+      defaultValue: "true",
+    },
+    pauseOnHover: {
+      description: "keep the display timer running or not on hover",
+      typeName: "boolean",
+      defaultValue: "true",
+    },
+    close: {
+      description: "whether the notification has a \"close\" button",
+      typeName: "boolean",
+      defaultValue: "true",
+    },
+    progress: {
+      description: "whether the notification has a remaining time \"progress\" bar",
+      typeName: "boolean",
+      defaultValue: "true",
+    },
+    duration: {
+      description: "whether hover on notification pauses pauses the end of the notification display",
+      typeName: "number",
+      defaultValue: "2000",
+    },
+    opacity: {
+      description: "the notification's container opacity",
+      typeName: "number",
+      defaultValue: "1",
+    },
+  }}/>
+  
+  <Title as="h5" size={5}>position</Title>
+  <SimplePropsTable props={{
+    "": {
+      description: "whether the notification is closed on click",
+      defaultValue: "\"top-right\"",
+      typeName: "string (literal)",
+      typeTip: mapEnumerable(NOTIFICATION_TOAST_DEFAULTS.positions),
+    },
+  }}/>
+</React.Fragment>
