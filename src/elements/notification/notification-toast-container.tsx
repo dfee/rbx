@@ -1,5 +1,5 @@
-import React, { PureComponent, ReactNode, CSSProperties } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
+
 import {
   NotificationToastProps,
   NotificationToast,
@@ -45,7 +45,7 @@ type State = {
   notifications: UniqueNotificationToastProps[];
 };
 
-export class NotificationToastContainer extends PureComponent<
+export class NotificationToastContainer extends React.PureComponent<
   NotificationToastContainerProps,
   State
 > {
@@ -95,8 +95,10 @@ export class NotificationToastContainer extends PureComponent<
     });
   };
 
-  private getPositionStyles(): CSSProperties {
-    switch (this.props.position) {
+  // eslint-disable-next-line consistent-return
+  private _getPositionStyles(): React.CSSProperties {
+    const { position } = this.props;
+    switch (position) {
       case "top-left":
         return { left: 0, top: 0, textAlign: "left", alignItems: "flex-start" };
       case "top-right":
@@ -144,24 +146,29 @@ export class NotificationToastContainer extends PureComponent<
     }
   }
 
-  private renderToastNotifications(): ReactNode[] {
-    return this.state.notifications
-      .map(props => {
-        const originalOnClose = props.onClose;
-        props.onClose = () => {
-          if (originalOnClose) {
-            originalOnClose();
-          }
-          this.setState({
-            notifications: this.state.notifications.filter(
-              tmp => tmp.id !== props.id,
-            ),
-          });
-        };
+  private _renderToastNotifications(): React.ReactNode[] {
+    const { notifications } = this.state;
+    const toastNotifications: React.ReactNode[] = [];
 
-        return <NotificationToast key={props.id} {...props} />;
-      })
-      .filter(value => value) as JSX.Element[];
+    for (const notificationProps of notifications) {
+      const props = notificationProps;
+      const originalOnClose = notificationProps.onClose;
+      props.onClose = () => {
+        if (originalOnClose) {
+          originalOnClose();
+        }
+        this.setState(state => ({
+          notifications: state.notifications.filter(
+            tmp => tmp.id !== notificationProps.id,
+          ),
+        }));
+      };
+
+      toastNotifications.push(
+        <NotificationToast key={notificationProps.id} {...props} />,
+      );
+    }
+    return toastNotifications;
   }
 
   private uniqueId(props: NotificationToastProps): string {
@@ -175,6 +182,15 @@ export class NotificationToastContainer extends PureComponent<
       hash |= 0; // Convert to 32bit integer
     }
 
+    const { notifications } = this.state;
+
+    return `toast-notification-${
+      notifications.length
+    }-${hash}-${new Date().valueOf()}`;
+  }
+
+  public render(): React.ReactNode {
+    const { id } = this.props;
     return (
       "toast-notification-" +
       this.state.notifications.length +
