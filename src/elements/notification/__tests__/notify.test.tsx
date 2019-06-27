@@ -32,7 +32,7 @@ describe(`notify`, () => {
   });
 
   NOTIFICATION_TOAST_DEFAULTS.positions.map(
-    (position: NotificationToastVariables["positions"]): void => {
+    (position: NotificationToastVariables["positions"]): void =>
       it(`Should display two toast notifications in "${position}" container`, () => {
         notify(`${position} 1`, position);
         notify(`${position} 2`, position);
@@ -51,7 +51,6 @@ describe(`notify`, () => {
 
         jest.runAllTimers();
         expect(container.children).toHaveLength(0);
-      });
-    },
+      }),
   );
 });
