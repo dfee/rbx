@@ -20,8 +20,8 @@ import { DEFAULTS } from "src/base/helpers/variables";
 import { Button, Delete } from "src/elements";
 import { Title } from "src/elements";
 import { Notification } from "../notification";
-import { NotificationToast, notify } from "../notification-toast";
-import { NOTIFICATION_TOAST_DEFAULTS } from "../notification-toast-container";
+import { notify } from "../notify";
+import { NotificationToast, NOTIFICATION_TOAST_DEFAULTS } from "../notification-toast";
 
 # Notification
 
@@ -76,7 +76,7 @@ Use the notify helper to display toast notification
 <Playground><Button color="danger" onClick={() => notify({ 
   "children": <p>Hello <strong>World</strong></p>,
   "color": "danger",
-  "delete": false,
+  "close": false,
 }, "center")}>Notify</Button></Playground>
 
 ## API
@@ -121,8 +121,8 @@ Use the notify helper to display toast notification
       typeName: "boolean",
       defaultValue: "true",
     },
-    delete: {
-      description: "whether the notification has a \"delete\" button",
+    close: {
+      description: "whether the notification has a \"close\" button",
       typeName: "boolean",
       defaultValue: "true",
     },
