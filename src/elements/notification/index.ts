@@ -1,2 +1,2 @@
 export { Notification } from "./notification";
-export { notify } from "./notification-toast";
+export { notify } from "./notify";

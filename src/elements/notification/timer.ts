@@ -1,41 +1,44 @@
 export default class Timer {
-  private timer?: number;
-  private remaining: number = 0;
+  private _timer?: number;
+  private _remaining: number = 0;
 
   constructor(
-    private duration: number,
-    private onEnd: () => void,
-    private onProgress?: (progressValue: number) => void,
+    // eslint-disable-next-line @typescript-eslint/no-parameter-properties
+    private readonly _duration: number,
+    // eslint-disable-next-line @typescript-eslint/no-parameter-properties
+    private readonly _onEnd: () => void,
+    // eslint-disable-next-line @typescript-eslint/no-parameter-properties
+    private readonly _onProgress?: (progressValue: number) => void,
   ) {
-    this.remaining = duration;
+    this._remaining = _duration;
     this.resume();
   }
 
-  pause = () => {
-    window.clearTimeout(this.timer);
+  pause = (): void => {
+    window.clearTimeout(this._timer);
   };
 
-  resume = () => {
-    window.clearTimeout(this.timer);
-    this.timer = window.setInterval(this.handleProgress, this.duration / 10);
+  resume = (): void => {
+    window.clearTimeout(this._timer);
+    this._timer = window.setInterval(this.handleProgress, this._duration / 10);
   };
 
-  end = () => {
-    window.clearTimeout(this.timer);
-    this.timer = undefined;
-    this.remaining = 0;
+  end = (): void => {
+    window.clearTimeout(this._timer);
+    this._timer = undefined;
+    this._remaining = 0;
   };
 
-  handleProgress = () => {
-    this.remaining = this.remaining - this.duration / 10;
+  handleProgress = (): void => {
+    this._remaining = this._remaining - this._duration / 10;
 
-    if (this.onProgress) {
-      this.onProgress((this.remaining / this.duration) * 100);
+    if (this._onProgress) {
+      this._onProgress((this._remaining / this._duration) * 100);
     }
 
-    if (this.remaining <= 0) {
-      this.onEnd();
-      return this.end();
+    if (this._remaining <= 0) {
+      this._onEnd();
+      this.end();
     }
   };
 }

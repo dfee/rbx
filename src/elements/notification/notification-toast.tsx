@@ -1,29 +1,51 @@
 import React, { PureComponent, ReactChild, ReactNode } from "react";
-import { render } from "react-dom";
+
+import { Prefer } from "../../types";
 import { Delete } from "../other/delete";
 import { Progress } from "../progress/progress";
-import {
-  NotificationToastContainer,
-  NotificationToastVariables,
-} from "./notification-toast-container";
+
 import Timer from "./timer";
 import { NotificationProps, Notification } from "./notification";
 
-const defaultProps = Object.freeze({
+export const NOTIFICATION_TOAST_DEFAULTS = {
+  positions: [
+    "top-left",
+    "top-right",
+    "top-center",
+    "bottom-left",
+    "bottom-right",
+    "bottom-center",
+    "center",
+  ] as const,
+};
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface NotificationToastVariablesOverrides {}
+export interface NotificationToastVariablesDefaults {
+  positions: (typeof NOTIFICATION_TOAST_DEFAULTS["positions"])[number];
+}
+
+export type NotificationToastVariables = Prefer<
+  NotificationToastVariablesOverrides,
+  NotificationToastVariablesDefaults
+>;
+
+export const defaultNotificationToastProps = Object.freeze({
+  close: true,
   closeOnClick: true,
-  pauseOnHover: true,
-  duration: 2000,
-  delete: true,
-  progress: true,
-  opacity: 1,
   color: "info",
+  duration: 2000,
+  opacity: 1,
+  pauseOnHover: true,
+  progress: true,
 });
 
-export type NotificationToastProps = typeof defaultProps &
+export type NotificationToastProps = typeof defaultNotificationToastProps &
   NotificationProps & {
     children: ReactChild | string;
     onClose?: () => void;
   };
+
 export interface State {
   progressValue: number;
 }
@@ -33,17 +55,19 @@ export class NotificationToast extends PureComponent<
   State
 > {
   public static displayName = "Notification.Toast";
-  static readonly defaultProps = defaultProps;
+  static readonly defaultProps = defaultNotificationToastProps;
 
   state: State = {
     progressValue: 100,
   };
 
   timer: Timer = new Timer(
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.duration,
     () => {
-      this.close();
+      this._close();
     },
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.progress
       ? (progressValue: number) => {
           this.setState({ progressValue });
@@ -51,95 +75,72 @@ export class NotificationToast extends PureComponent<
       : undefined,
   );
 
+  private _close = () => {
+    const { onClose } = this.props;
+    if (onClose) {
+      onClose();
+    }
+  };
+
+  public handleClick = () => {
+    const { closeOnClick } = this.props;
+    if (closeOnClick) {
+      this.timer.end();
+      this._close();
+    }
+  };
+
+  public handleMouseEnter = () => {
+    this.timer.pause();
+  };
+
+  public handleMouseLeave = () => {
+    this.timer.resume();
+  };
+
   public render(): ReactNode {
     const notificationProps: NotificationProps = {};
+    const { ...props } = this.props;
     Object.keys(this.props).forEach(key => {
-      if (!(key in defaultProps)) {
-        notificationProps[key] = this.props[key];
+      if (!(key in defaultNotificationToastProps)) {
+        notificationProps[key] = props[key];
       }
     });
 
+    const { color, opacity, close, progress, children } = this.props;
+    const { progressValue } = this.state;
+
     return (
       <Notification
-        onClick={this.handleClick}
-        onMouseEnter={this.timer.pause}
-        onMouseLeave={this.timer.resume}
+        color={color}
         style={{
-          width: "auto",
-          pointerEvents: "auto",
           display: "inline-flex",
-          opacity: this.props.opacity,
+          opacity,
+          pointerEvents: "auto",
+          width: "auto",
         }}
-        color={this.props.color}
+        onClick={this.handleClick}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         {...notificationProps}
       >
-        {this.props.delete && <Delete as="button" />}
-        {this.props.children}
-        {this.props.progress && (
+        {close && <Delete as="button" />}
+        {children}
+        {progress && (
           <Progress
-            value={this.state.progressValue}
+            color={color}
             max={100}
-            color={this.props.color}
             style={{
-              height: "0.25rem",
-              position: "absolute",
               bottom: "0.1rem",
+              height: "0.25rem",
               left: "2%",
+              position: "absolute",
               width: "96%",
             }}
+            value={progressValue}
           />
         )}
       </Notification>
     );
   }
-
-  private close = () => {
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
-  };
-
-  private handleClick = () => {
-    if (this.props.closeOnClick) {
-      this.timer.end();
-      this.close();
-    }
-  };
 }
-
-export const notify = (
-  props: Partial<NotificationToastProps> | ReactChild | string,
-  position: NotificationToastVariables["positions"] = "top-right",
-): void => {
-  const notifyContainerId = "rbx-notification-toast-container-" + position;
-  let notifyContainer = document.getElementById(notifyContainerId);
-
-  if (!notifyContainer) {
-    const container = document.createElement("div");
-    document.body.appendChild(container);
-    const toastNotificationContainer = (
-      <NotificationToastContainer id={notifyContainerId} position={position} />
-    );
-
-    render(toastNotificationContainer, container);
-    notifyContainer = document.getElementById(
-      notifyContainerId,
-    ) as HTMLDivElement;
-  }
-
-  let finalProps: Partial<NotificationToastProps>;
-  if (isNotificationToastProps(props)) {
-    finalProps = props;
-  } else {
-    const children: ReactChild | string = props as ReactChild | string;
-    finalProps = { children };
-  }
-
-  notifyContainer.dispatchEvent(
-    new CustomEvent("notify", { detail: finalProps }),
-  );
-};
-
-const isNotificationToastProps = (arg: any): arg is NotificationToastProps => {
-  return arg.children !== undefined;
-};
