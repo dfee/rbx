@@ -1,6 +1,5 @@
 import { canUseDOM as _canUseDom } from "../utils";
 
-// tslint:disable-next-line:variable-name
 let __canUseDom = true;
 
 export type MockCanUseDomFunction = typeof _canUseDom & {

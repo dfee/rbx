@@ -21,7 +21,7 @@ export const canReceiveRef = (
 
 export const canUseDOM = () =>
   !(
-    typeof window === "undefined" || // tslint:disable-line:no-typeof-undefined
+    typeof window === "undefined" ||
     window.document === undefined ||
     window.document.createElement === undefined
   );
@@ -42,4 +42,4 @@ export const combineRefs = <T>(
   }
 };
 
-export const noop = () => {}; // tslint:disable-line:no-empty
+export const noop = () => {};
