@@ -21,7 +21,7 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.5",
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^24.8.0",
     "enzyme": "3.10.0",
