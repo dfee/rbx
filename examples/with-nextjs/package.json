@@ -17,7 +17,7 @@
     "classnames": "^2.2.6",
     "next": "^8.1.0",
     "rbx": "file:../../dist",
-    "react": "^16.8.6",
+    "react": "^16.9.0",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
