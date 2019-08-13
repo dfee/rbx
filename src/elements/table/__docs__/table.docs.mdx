@@ -8,7 +8,7 @@ import { Playground } from "docz";
 
 import {
   ForwardRefAsExoticComponentDoc,
-  mapEnumerable
+  mapEnumerable,
 } from "src/__docs__/components";
 import { DEFAULTS } from "src/base/helpers/variables";
 import { Content } from "src/elements";
@@ -659,7 +659,7 @@ Use the `striped` prop on `<Table>` to add stripes to alternating rows to make r
         ["Five", "Six"],
         ["Seven", "Eight"],
         ["Nine", "Ten"],
-        ["Eleven", "Twelve"]
+        ["Eleven", "Twelve"],
       ].map(([v1, v2], i) => (
         <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
@@ -688,7 +688,7 @@ Use the `narrow` prop on `<Table>` to make the cells narrower.
         ["Five", "Six"],
         ["Seven", "Eight"],
         ["Nine", "Ten"],
-        ["Eleven", "Twelve"]
+        ["Eleven", "Twelve"],
       ].map(([v1, v2], i) => (
         <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
@@ -717,7 +717,7 @@ Use the `hover` prop on `<Table>` to highlight the cells on hover.
         ["Five", "Six"],
         ["Seven", "Eight"],
         ["Nine", "Ten"],
-        ["Eleven", "Twelve"]
+        ["Eleven", "Twelve"],
       ].map(([v1, v2], i) => (
         <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
@@ -746,7 +746,7 @@ Use the `fullwidth` prop on `<Table>` to expand it to occupy all available horiz
         ["Five", "Six"],
         ["Seven", "Eight"],
         ["Nine", "Ten"],
-        ["Eleven", "Twelve"]
+        ["Eleven", "Twelve"],
       ].map(([v1, v2], i) => (
         <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
@@ -773,7 +773,7 @@ You can combine any and all the props for expressive tables.
         ["Five", "Six"],
         ["Seven", "Eight"],
         ["Nine", "Ten"],
-        ["Eleven", "Twelve"]
+        ["Eleven", "Twelve"],
       ].map(([v1, v2], i) => (
         <Table.Row key={i}>
           <Table.Cell>{v1}</Table.Cell>
@@ -792,24 +792,24 @@ You can combine any and all the props for expressive tables.
   props={{
     bordered: {
       description: "add borders to all the cells",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     fullwidth: {
       description: "expand the table to consume all available horizontal space",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     hoverable: {
       description: "add a hover effect on each row",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     narrow: {
       description: "make the cells narrower",
-      typeName: "boolean"
+      typeName: "boolean",
     },
     striped: {
       description: "add stripes to the table for scanability",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />
 
@@ -821,6 +821,16 @@ You can combine any and all the props for expressive tables.
 <ForwardRefAsExoticComponentDoc
   component={Table.Cell}
   docPath="/elements/table"
+  props={{
+    selected: {
+      description: "add selection to a cell",
+      typeName: "boolean",
+    },
+    narrow: {
+      description: "makes a cell narrower",
+      typeName: "boolean",
+    },
+  }}
 />
 
 <ForwardRefAsExoticComponentDoc
@@ -844,7 +854,7 @@ You can combine any and all the props for expressive tables.
   props={{
     selected: {
       description: "mark the row as selected",
-      typeName: "boolean"
-    }
+      typeName: "boolean",
+    },
   }}
 />

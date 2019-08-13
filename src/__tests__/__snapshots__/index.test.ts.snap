@@ -1232,6 +1232,10 @@ Object {
         "as": "td",
       },
       "displayName": "Table.Cell",
+      "propTypes": Object {
+        "narrow": [Function],
+        "selected": [Function],
+      },
       "render": [Function],
     },
     "Foot": Object {
