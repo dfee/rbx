@@ -5,6 +5,8 @@ import {
   hasProperties,
   testForwardRefAsExoticComponentIntegration,
   testThemeIntegration,
+  validateBoolPropType,
+  makeGenericHOCShallowWrapperInContextConsumer,
 } from "src/__tests__/testing";
 
 const COMPONENT = TableCell;
@@ -31,4 +33,32 @@ describe(`${DISPLAY_NAME} component`, () => {
   });
 
   testThemeIntegration(COMPONENT);
+
+  describe("props", () => {
+    const { propTypes } = COMPONENT;
+
+    describe("narrow", () => {
+      validateBoolPropType(propTypes, "narrow");
+
+      [false, true].map(narrow => {
+        it(`should ${narrow ? "" : "not "} be bordered`, () => {
+          const node = <TableCell narrow={narrow} />;
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("is-narrow")).toBe(narrow);
+        });
+      });
+    });
+
+    describe("selected", () => {
+      validateBoolPropType(propTypes, "selected");
+
+      [false, true].map(selected => {
+        it(`should ${selected ? "" : "not "} be bordered`, () => {
+          const node = <TableCell selected={selected} />;
+          const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
+          expect(wrapper.hasClass("is-selected")).toBe(selected);
+        });
+      });
+    });
+  });
 });
