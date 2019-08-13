@@ -41,7 +41,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       validateBoolPropType(propTypes, "narrow");
 
       [false, true].map(narrow => {
-        it(`should ${narrow ? "" : "not "} be bordered`, () => {
+        it(`should ${narrow ? "" : "not "} be narrow`, () => {
           const node = <TableCell narrow={narrow} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-narrow")).toBe(narrow);
@@ -53,7 +53,7 @@ describe(`${DISPLAY_NAME} component`, () => {
       validateBoolPropType(propTypes, "selected");
 
       [false, true].map(selected => {
-        it(`should ${selected ? "" : "not "} be bordered`, () => {
+        it(`should ${selected ? "" : "not "} be selected`, () => {
           const node = <TableCell selected={selected} />;
           const wrapper = makeGenericHOCShallowWrapperInContextConsumer(node);
           expect(wrapper.hasClass("is-selected")).toBe(selected);
