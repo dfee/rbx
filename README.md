@@ -29,15 +29,15 @@
 ```tsx
 import "rbx/index.css";
 import React from "react";
-import { Columns } from "rbx";
+import { Column } from "rbx";
 
 export const MyPage = () => (
-  <Columns>
-    <Columns.Column>First Column</Columns.Column>
-    <Columns.Column>Second Column</Columns.Column>
-    <Columns.Column>Third Column</Columns.Column>
-    <Columns.Column>Fourth Column</Columns.Column>
-  </Columns>
+  <Column.Group>
+      <Column>First Column</Column>
+      <Column>Second Column</Column>
+      <Column>Third Column</Column>
+      <Column>Fourth Column</Column>
+    </Column.Group>
 );
 ```
 
