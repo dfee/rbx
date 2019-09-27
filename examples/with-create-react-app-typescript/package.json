@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "rbx": "file:../../dist",
-    "react": "^16.8.6",
+    "react": "^16.10.0",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
   },
