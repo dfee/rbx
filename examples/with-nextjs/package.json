@@ -18,7 +18,7 @@
     "next": "^8.1.0",
     "rbx": "file:../../dist",
     "react": "^16.10.1",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
