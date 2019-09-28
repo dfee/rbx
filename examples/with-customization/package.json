@@ -6,7 +6,7 @@
     "bulma": "^0.7.5",
     "rbx": "file:../../dist",
     "react": "^16.10.1",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.10.1",
     "react-scripts": "3.0.1"
   },
   "scripts": {
