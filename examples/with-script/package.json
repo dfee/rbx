@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "rbx": "file:../../dist",
-    "react": "^16.8.6",
+    "react": "^16.10.2",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
