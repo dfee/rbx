@@ -33,7 +33,7 @@
     "bulma-badge": "^3.0.1",
     "bulma-divider": "^0.2.0",
     "bulma-pageloader": "^2.1.0",
-    "bulma-tooltip": "^2.0.2",
+    "bulma-tooltip": "^3.0.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2"
   },
