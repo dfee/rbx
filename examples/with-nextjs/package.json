@@ -25,7 +25,7 @@
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^24.8.0",
     "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.14.0",
+    "enzyme-adapter-react-16": "1.15.1",
     "jest": "^24.8.0",
     "react-addons-test-utils": "15.6.2",
     "react-test-renderer": "16.8.6"
