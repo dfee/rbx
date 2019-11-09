@@ -73,7 +73,6 @@ export class NavbarItemContainer extends React.PureComponent<
       {
         "has-dropdown": dropdown,
         "has-dropdown-up": up,
-        "is-active": this.active,
         "is-expanded": expanded,
         "is-hoverable": hoverable,
         "is-tab": tab,
@@ -93,7 +92,12 @@ export class NavbarItemContainer extends React.PureComponent<
             setActive: (value: boolean) => (this.active = value),
           }}
         >
-          <Generic as={asOverride} className={className} ref={ref} {...rest} />
+          <Generic
+            as={asOverride}
+            className={classNames(className, { "is-active": this.active })}
+            ref={ref}
+            {...rest}
+          />
         </NavbarItemContext.Provider>
       );
     }
@@ -103,7 +107,9 @@ export class NavbarItemContainer extends React.PureComponent<
         {ctx => (
           <Generic
             as={as}
-            className={className}
+            className={classNames(className, {
+              "is-active": this.props.active,
+            })}
             onClick={this.handleOnClick(ctx)}
             ref={ref}
             {...rest}
