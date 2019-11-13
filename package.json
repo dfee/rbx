@@ -72,7 +72,7 @@
     "husky": "^2.4.1",
     "jest": "24.8.0",
     "jsdom": "15.1.1",
-    "lint-staged": "^8.2.1",
+    "lint-staged": "^9.4.3",
     "node-sass": "^4.12.0",
     "node-sass-tilde-importer": "^1.0.2",
     "react": "16.8.6",
