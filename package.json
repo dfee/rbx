@@ -76,7 +76,7 @@
     "node-sass": "^4.12.0",
     "node-sass-tilde-importer": "^1.0.2",
     "react": "16.12.0",
-    "react-dom": "16.8.6",
+    "react-dom": "16.12.0",
     "react-test-renderer": "16.8.6",
     "rollup": "^1.15.5",
     "rollup-plugin-node-resolve": "^5.0.2",
