@@ -64,7 +64,7 @@
     "@types/react-test-renderer": "^16.8.2",
     "coveralls": "3.0.4",
     "css-loader": "^3.0.0",
-    "docz": "^1.2.0",
+    "docz": "^2.1.0",
     "docz-theme-default": "^1.2.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
