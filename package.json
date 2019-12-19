@@ -46,7 +46,7 @@
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-env": "^7.7.7",
     "@babel/preset-typescript": "^7.3.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-brands-svg-icons": "^5.9.0",
