@@ -26,7 +26,7 @@
   "devDependencies": {
     "@types/react": "^16.8.19",
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "typescript": "^3.5.1"
   }
 }
