@@ -19,7 +19,7 @@ import { Notification, Table, Title } from "src/elements";
 
 # Generic
 
-This component apples standard _Bulma_ theming to any element or component.
+This component applies standard _Bulma_ theming to any element or component.
 
 <Playground>
   <Generic>
@@ -168,7 +168,7 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
     },
     srOnly: {
       description:
-        "Hide elements visually but keeps the element available to be announced by a screen reader",
+        "hides the element visually but keeps the element available to be announced by a screen reader",
       typeName: "boolean",
     },
   }}
@@ -361,8 +361,8 @@ Here is an example of rendering as a `<Notification>` component, and passing thr
   <br />
   <Generic as="p" textColor="info">
     The only difference between the <strong>Responsive Object</strong> and the{" "}
-    <strong>LimitedResponsive Object</strong>, is that the latter does not permit
-    the <code>only</code> property, as it semantically does not apply.
+    <strong>LimitedResponsive Object</strong> is that the latter does not permit
+    the <code>only</code> property (as it semantically does not apply).
   </Generic>
 
 </Notification>
