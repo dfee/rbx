@@ -59,7 +59,7 @@
     "@types/jest-diff": "^20.0.1",
     "@types/jsdom": "^12.2.3",
     "@types/prop-types": "^15.7.1",
-    "@types/react": "^16.8.20",
+    "@types/react": "^16.9.33",
     "@types/react-dom": "^16.8.4",
     "@types/react-test-renderer": "^16.8.2",
     "coveralls": "3.0.4",
