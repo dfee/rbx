@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/dfee/rbx#readme",
   "dependencies": {
-    "bulma": "0.7.5",
+    "bulma": "0.8.2",
     "bulma-badge": "^3.0.1",
     "bulma-divider": "^0.2.0",
     "bulma-pageloader": "^2.1.0",
